@@ -88,11 +88,11 @@ const NumberFieldInput = React.forwardRef<
   <BaseNumberField.Input
     ref={ref}
     className={cx(
-      "flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm",
-      "placeholder:text-gray-500",
+      "flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm",
+      "placeholder:text-zinc-500",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
       "disabled:cursor-not-allowed disabled:opacity-50",
-      "dark:border-gray-800 dark:bg-gray-950 dark:placeholder:text-gray-400 dark:focus-visible:ring-blue-400",
+      "dark:border-zinc-800 dark:bg-zinc-950 dark:placeholder:text-zinc-400 dark:focus-visible:ring-blue-400",
       className
     )}
     {...props}
@@ -107,11 +107,11 @@ const NumberFieldDecrement = React.forwardRef<
   <BaseNumberField.Decrement
     ref={ref}
     className={cx(
-      "inline-flex h-10 w-10 items-center justify-center rounded-l-md border border-r-0 border-gray-200 bg-gray-50 text-gray-900 transition-colors",
-      "hover:bg-gray-100 active:bg-gray-100",
+      "inline-flex h-10 w-10 items-center justify-center rounded-l-md border border-r-0 border-zinc-200 bg-zinc-50 text-zinc-900 transition-colors",
+      "hover:bg-zinc-100 active:bg-zinc-100",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
-      "dark:border-gray-800 dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:active:bg-gray-800",
+      "dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-800 dark:active:bg-zinc-800",
       className
     )}
     {...props}
@@ -128,11 +128,11 @@ const NumberFieldIncrement = React.forwardRef<
   <BaseNumberField.Increment
     ref={ref}
     className={cx(
-      "inline-flex h-10 w-10 items-center justify-center rounded-r-md border border-l-0 border-gray-200 bg-gray-50 text-gray-900 transition-colors",
-      "hover:bg-gray-100 active:bg-gray-100",
+      "inline-flex h-10 w-10 items-center justify-center rounded-r-md border border-l-0 border-zinc-200 bg-zinc-50 text-zinc-900 transition-colors",
+      "hover:bg-zinc-100 active:bg-zinc-100",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
-      "dark:border-gray-800 dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:active:bg-gray-800",
+      "dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-800 dark:active:bg-zinc-800",
       className
     )}
     {...props}
@@ -149,7 +149,7 @@ const NumberFieldLabel = React.forwardRef<
   <label
     ref={ref}
     className={cx(
-      "text-sm font-medium leading-none text-gray-900 dark:text-gray-50",
+      "text-sm font-medium leading-none text-zinc-900 dark:text-zinc-50",
       "peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
       className
     )}
@@ -190,7 +190,7 @@ const NumberFieldScrubAreaCursor = React.forwardRef<
     className={cx("drop-shadow-[0_1px_1px_#0008] filter", className)}
     {...props}
   >
-    <ArrowLeftRight className="h-4 w-4 text-gray-900 dark:text-gray-50" />
+    <ArrowLeftRight className="h-4 w-4 text-zinc-900 dark:text-zinc-50" />
   </BaseNumberField.ScrubAreaCursor>
 ));
 NumberFieldScrubAreaCursor.displayName = "NumberFieldScrubAreaCursor";

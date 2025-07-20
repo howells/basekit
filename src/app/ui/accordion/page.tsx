@@ -30,7 +30,7 @@ const AccordionPage = () => {
 
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
           Installation
         </h2>
         <CodeBlock language="bash">
@@ -40,7 +40,7 @@ const AccordionPage = () => {
 
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
           Usage
         </h2>
         <CodeBlock>
@@ -55,7 +55,7 @@ const AccordionPage = () => {
 
       {/* Examples */}
       <div className="space-y-8">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
           Examples
         </h2>
 
@@ -238,13 +238,13 @@ const AccordionPage = () => {
 
       {/* API Reference */}
       <div className="space-y-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
           API Reference
         </h2>
 
         {/* Accordion Root */}
         <div className="space-y-4">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">
+          <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">
             Accordion
           </h3>
           <Text>The root container for accordion items.</Text>
@@ -252,73 +252,73 @@ const AccordionPage = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-800">
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Prop
                   </th>
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Type
                   </th>
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Default
                   </th>
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Description
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-100 dark:border-gray-900">
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-100 dark:border-zinc-900">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     type
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     &quot;single&quot; | &quot;multiple&quot;
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">-</td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">-</td>
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     Determines whether one or multiple items can be opened at
                     the same time.
                   </td>
                 </tr>
-                <tr className="border-b border-gray-100 dark:border-gray-900">
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-100 dark:border-zinc-900">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     collapsible
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     boolean
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     false
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     When type is &quot;single&quot;, allows closing content when
                     clicking trigger for an open item.
                   </td>
                 </tr>
-                <tr className="border-b border-gray-100 dark:border-gray-900">
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-100 dark:border-zinc-900">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     value
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     string | string[]
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">-</td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">-</td>
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     The controlled value of the item to expand when type is
                     &quot;single&quot; or the items when type is
                     &quot;multiple&quot;.
                   </td>
                 </tr>
-                <tr className="border-b border-gray-100 dark:border-gray-900">
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-100 dark:border-zinc-900">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     defaultValue
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     string | string[]
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">-</td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">-</td>
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     The value of the item to expand when initially rendered.
                   </td>
                 </tr>
@@ -329,7 +329,7 @@ const AccordionPage = () => {
 
         {/* Accordion Item */}
         <div className="space-y-4">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">
+          <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">
             AccordionItem
           </h3>
           <Text>Contains all the parts of a collapsible section.</Text>
@@ -337,45 +337,45 @@ const AccordionPage = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-800">
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Prop
                   </th>
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Type
                   </th>
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Default
                   </th>
-                  <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                  <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                     Description
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-100 dark:border-gray-900">
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-100 dark:border-zinc-900">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     value
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     string
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">-</td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">-</td>
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     A unique value for the item.
                   </td>
                 </tr>
-                <tr className="border-b border-gray-100 dark:border-gray-900">
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                <tr className="border-b border-zinc-100 dark:border-zinc-900">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     disabled
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     boolean
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     false
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     When true, prevents the user from interacting with the item.
                   </td>
                 </tr>
@@ -387,7 +387,7 @@ const AccordionPage = () => {
 
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
           Accessibility
         </h2>
         <div className="space-y-3">
@@ -403,52 +403,52 @@ const AccordionPage = () => {
             </a>
             .
           </Text>
-          <ul className="list-disc list-inside space-y-2 ml-4 text-sm text-gray-600 dark:text-gray-400">
+          <ul className="list-disc list-inside space-y-2 ml-4 text-sm text-zinc-600 dark:text-zinc-400">
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 Space
               </kbd>{" "}
               - When focus is on an accordion trigger, activates the trigger.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 Enter
               </kbd>{" "}
               - When focus is on an accordion trigger, activates the trigger.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 Tab
               </kbd>{" "}
               - Moves focus to the next focusable element.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 Shift + Tab
               </kbd>{" "}
               - Moves focus to the previous focusable element.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 ArrowDown
               </kbd>{" "}
               - Moves focus to the next accordion trigger.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 ArrowUp
               </kbd>{" "}
               - Moves focus to the previous accordion trigger.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 Home
               </kbd>{" "}
               - When focus is on an accordion trigger, moves focus to the first
               accordion trigger.
             </li>
             <li>
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded dark:bg-gray-800">
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 rounded dark:bg-zinc-800">
                 End
               </kbd>{" "}
               - When focus is on an accordion trigger, moves focus to the last

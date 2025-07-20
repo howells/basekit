@@ -23,25 +23,25 @@ export const DocExample = React.forwardRef<HTMLDivElement, DocExampleProps>(
       <div ref={ref} className={cx("space-y-4", className)}>
         {title && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+            <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
               {title}
             </h3>
             {description && (
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                 {description}
               </p>
             )}
           </div>
         )}
 
-        <div className="rounded-lg border border-gray-200 dark:border-gray-800">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-800">
           {/* Preview */}
-          <div className="border-b border-gray-200 bg-gray-50/50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
+          <div className="border-b border-zinc-200 bg-zinc-50/50 p-6 dark:border-zinc-800 dark:bg-zinc-900/50">
             <div className="flex items-center justify-center">{preview}</div>
           </div>
 
           {/* Code toggle */}
-          <div className="border-b border-gray-200 px-4 py-2 dark:border-gray-800">
+          <div className="border-b border-zinc-200 px-4 py-2 dark:border-zinc-800">
             <Button
               variant="ghost"
               onClick={() => setShowCode(!showCode)}

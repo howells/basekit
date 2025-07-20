@@ -97,11 +97,11 @@ const FormLabel = React.forwardRef<
         // base
         "block text-sm font-medium leading-6",
         // text color
-        "text-gray-900 dark:text-gray-50",
+        "text-zinc-900 dark:text-zinc-50",
         // error state
         error && "text-red-600 dark:text-red-400",
         // disabled
-        "data-disabled:text-gray-400 dark:data-disabled:text-gray-600",
+        "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
         className
       )}
       htmlFor={formItemId}
@@ -148,7 +148,7 @@ const FormDescription = React.forwardRef<
         // base
         "text-sm leading-6",
         // text color
-        "text-gray-600 dark:text-gray-400",
+        "text-zinc-600 dark:text-zinc-400",
         className
       )}
       {...props}

@@ -13,11 +13,11 @@ const AlertDialogTrigger = React.forwardRef<
   <BaseAlertDialog.Trigger
     ref={ref}
     className={cx(
-      "inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium transition-colors",
-      "hover:bg-gray-50 hover:text-gray-900",
+      "inline-flex h-10 items-center justify-center rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium transition-colors",
+      "hover:bg-zinc-50 hover:text-zinc-900",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
-      "dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50",
+      "dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
       className
     )}
     {...props}
@@ -53,10 +53,10 @@ const AlertDialogContent = React.forwardRef<
     <BaseAlertDialog.Popup
       ref={ref}
       className={cx(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-gray-200 bg-white p-6 shadow-lg duration-200 rounded-lg",
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-zinc-200 bg-white p-6 shadow-lg duration-200 rounded-lg",
         "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
         "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
-        "dark:border-gray-800 dark:bg-gray-950",
+        "dark:border-zinc-800 dark:bg-zinc-950",
         className
       )}
       {...props}
@@ -102,7 +102,7 @@ const AlertDialogTitle = React.forwardRef<
   <BaseAlertDialog.Title
     ref={ref}
     className={cx(
-      "text-lg font-semibold text-gray-900 dark:text-gray-50",
+      "text-lg font-semibold text-zinc-900 dark:text-zinc-50",
       className
     )}
     {...props}
@@ -116,7 +116,7 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <BaseAlertDialog.Description
     ref={ref}
-    className={cx("text-sm text-gray-500 dark:text-gray-400", className)}
+    className={cx("text-sm text-zinc-500 dark:text-zinc-400", className)}
     {...props}
   />
 ));
@@ -135,12 +135,12 @@ const AlertDialogAction = React.forwardRef<
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
       variant === "default" && [
-        "bg-gray-900 text-gray-50 hover:bg-gray-900/90",
-        "dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90",
+        "bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90",
+        "dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90",
       ],
       variant === "destructive" && [
-        "bg-red-500 text-gray-50 hover:bg-red-500/90",
-        "dark:bg-red-900 dark:text-gray-50 dark:hover:bg-red-900/90",
+        "bg-red-500 text-zinc-50 hover:bg-red-500/90",
+        "dark:bg-red-900 dark:text-zinc-50 dark:hover:bg-red-900/90",
       ],
       className
     )}
@@ -156,11 +156,11 @@ const AlertDialogCancel = React.forwardRef<
   <BaseAlertDialog.Close
     ref={ref}
     className={cx(
-      "mt-2 inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-transparent px-4 py-2 text-sm font-medium transition-colors",
-      "hover:bg-gray-100 hover:text-gray-900",
+      "mt-2 inline-flex h-10 items-center justify-center rounded-md border border-zinc-200 bg-transparent px-4 py-2 text-sm font-medium transition-colors",
+      "hover:bg-zinc-100 hover:text-zinc-900",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
-      "dark:border-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-50",
+      "dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
       "sm:mt-0",
       className
     )}

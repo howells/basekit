@@ -22,7 +22,7 @@ const tabsVariants = tv({
       // base
       "absolute transition-all duration-200 ease-out",
       // background
-      "bg-white shadow-sm dark:bg-gray-950",
+      "bg-white shadow-sm dark:bg-zinc-950",
       // border radius
       "rounded-sm",
     ],
@@ -40,7 +40,7 @@ const tabsVariants = tv({
           // base
           "inline-flex items-center justify-center rounded-md p-1",
           // background color
-          "bg-gray-100 dark:bg-gray-900",
+          "bg-zinc-100 dark:bg-zinc-900",
           // position for indicator
           "relative",
         ],
@@ -48,13 +48,13 @@ const tabsVariants = tv({
           // base
           "relative inline-flex items-center justify-center rounded-sm px-3 py-1 text-sm font-medium whitespace-nowrap transition-all",
           // text color
-          "text-gray-500 dark:text-gray-400",
+          "text-zinc-500 dark:text-zinc-400",
           // hover
-          "hover:text-gray-700 dark:hover:text-gray-200",
+          "hover:text-zinc-700 dark:hover:text-zinc-200",
           // selected
-          "data-[selected]:text-gray-900 dark:data-[selected]:text-gray-50",
+          "data-[selected]:text-zinc-900 dark:data-[selected]:text-zinc-50",
           // disabled
-          "data-[disabled]:pointer-events-none data-[disabled]:text-gray-400 data-[disabled]:opacity-50 dark:data-[disabled]:text-gray-600",
+          "data-[disabled]:pointer-events-none data-[disabled]:text-zinc-400 data-[disabled]:opacity-50 dark:data-[disabled]:text-zinc-600",
           // focus
           focusRing,
         ],
@@ -67,7 +67,7 @@ const tabsVariants = tv({
           // base
           "flex items-center justify-start border-b",
           // border color
-          "border-gray-200 dark:border-gray-800",
+          "border-zinc-200 dark:border-zinc-800",
           // position for indicator
           "relative",
         ],
@@ -75,13 +75,13 @@ const tabsVariants = tv({
           // base
           "relative -mb-px items-center justify-center px-3 pb-2 text-sm font-medium whitespace-nowrap transition-all",
           // text color
-          "text-gray-500 dark:text-gray-500",
+          "text-zinc-500 dark:text-zinc-500",
           // hover
-          "hover:text-gray-700 dark:hover:text-gray-400",
+          "hover:text-zinc-700 dark:hover:text-zinc-400",
           // selected
           "data-[selected]:text-blue-500 dark:data-[selected]:text-blue-500",
           // disabled
-          "data-[disabled]:pointer-events-none data-[disabled]:text-gray-300 dark:data-[disabled]:text-gray-700",
+          "data-[disabled]:pointer-events-none data-[disabled]:text-zinc-300 dark:data-[disabled]:text-zinc-700",
           // focus
           focusRing,
         ],

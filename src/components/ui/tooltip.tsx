@@ -13,9 +13,9 @@ const tooltipVariants = tv({
       // base
       "max-w-60 select-none rounded-md px-2.5 py-1.5 text-sm leading-5 shadow-md z-50",
       // text color
-      "text-gray-50 dark:text-gray-900",
+      "text-zinc-50 dark:text-zinc-900",
       // background color
-      "bg-gray-900 dark:bg-gray-50",
+      "bg-zinc-900 dark:bg-zinc-50",
       // transitions
       "will-change-[transform,opacity] transition-all duration-150",
       // animations
@@ -28,18 +28,18 @@ const tooltipVariants = tv({
     ],
     arrow: [
       // base
-      "fill-gray-900 dark:fill-gray-50",
+      "fill-zinc-900 dark:fill-zinc-50",
     ],
   },
   variants: {
     variant: {
       default: {
-        popup: "bg-gray-900 text-gray-50 dark:bg-gray-50 dark:text-gray-900",
-        arrow: "fill-gray-900 dark:fill-gray-50",
+        popup: "bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-900",
+        arrow: "fill-zinc-900 dark:fill-zinc-50",
       },
       inverse: {
-        popup: "bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-50",
-        arrow: "fill-gray-50 dark:fill-gray-900",
+        popup: "bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50",
+        arrow: "fill-zinc-50 dark:fill-zinc-900",
       },
     },
     size: {

@@ -16,9 +16,9 @@ const FieldLabel = React.forwardRef<
       // base
       "block text-sm font-medium leading-6",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // disabled
-      "data-disabled:text-gray-400 dark:data-disabled:text-gray-600",
+      "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
       className
     )}
     {...props}
@@ -36,19 +36,19 @@ const FieldControl = React.forwardRef<
       // base
       "block w-full appearance-none rounded-md border px-2.5 py-2 shadow-xs outline-hidden transition sm:text-sm",
       // border color
-      "border-gray-300 dark:border-gray-800",
+      "border-zinc-300 dark:border-zinc-800",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // placeholder color
-      "placeholder-gray-400 dark:placeholder-gray-500",
+      "placeholder-zinc-400 dark:placeholder-zinc-500",
       // background color
-      "bg-white dark:bg-gray-950",
+      "bg-white dark:bg-zinc-950",
       // disabled
-      "data-disabled:border-gray-300 data-disabled:bg-gray-100 data-disabled:text-gray-400",
-      "dark:data-disabled:border-gray-700 dark:data-disabled:bg-gray-800 dark:data-disabled:text-gray-500",
+      "data-disabled:border-zinc-300 data-disabled:bg-zinc-100 data-disabled:text-zinc-400",
+      "dark:data-disabled:border-zinc-700 dark:data-disabled:bg-zinc-800 dark:data-disabled:text-zinc-500",
       // focus
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
-      "dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-gray-950",
+      "dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-zinc-950",
       // invalid
       "data-invalid:ring-2 data-invalid:ring-red-200 data-invalid:border-red-500 dark:data-invalid:ring-red-400/20",
       className
@@ -68,9 +68,9 @@ const FieldDescription = React.forwardRef<
       // base
       "text-sm leading-6",
       // text color
-      "text-gray-600 dark:text-gray-400",
+      "text-zinc-600 dark:text-zinc-400",
       // disabled
-      "data-disabled:text-gray-400 dark:data-disabled:text-gray-600",
+      "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
       className
     )}
     {...props}
@@ -90,7 +90,7 @@ const FieldError = React.forwardRef<
       // text color
       "text-red-600 dark:text-red-400",
       // disabled
-      "data-disabled:text-gray-400 dark:data-disabled:text-gray-600",
+      "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
       className
     )}
     {...props}

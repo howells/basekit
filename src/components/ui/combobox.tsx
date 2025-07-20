@@ -65,7 +65,7 @@ export function Combobox({
           className={cx(
             width,
             "justify-between",
-            !selectedOption && "text-gray-500 dark:text-gray-400",
+            !selectedOption && "text-zinc-500 dark:text-zinc-400",
             buttonClassName
           )}
         >

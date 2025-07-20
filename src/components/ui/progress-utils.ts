@@ -11,10 +11,10 @@ export const sharedProgressVariants = {
     darkBg: "blue-500/30",
   },
   neutral: {
-    light: "gray-500",
-    lightBg: "gray-200",
-    dark: "gray-500",
-    darkBg: "gray-500/40",
+    light: "zinc-500",
+    lightBg: "zinc-200",
+    dark: "zinc-500",
+    darkBg: "zinc-500/40",
   },
   warning: {
     light: "yellow-500",
@@ -65,7 +65,7 @@ export const progressLabelVariants = tv({
     // base
     "text-sm font-medium leading-none",
     // text color
-    "text-gray-900 dark:text-gray-50",
+    "text-zinc-900 dark:text-zinc-50",
   ],
 });
 
@@ -75,7 +75,7 @@ export const progressValueVariants = tv({
     // base
     "text-sm font-medium leading-none",
     // text color
-    "text-gray-900 dark:text-gray-50",
+    "text-zinc-900 dark:text-zinc-50",
   ],
 });
 

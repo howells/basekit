@@ -22,9 +22,9 @@ const radioVariants = tv({
       // base
       "flex shrink-0 items-center justify-center rounded-full border shadow-xs",
       // border color
-      "border-gray-300 dark:border-gray-800",
+      "border-zinc-300 dark:border-zinc-800",
       // background color
-      "bg-white dark:bg-gray-950",
+      "bg-white dark:bg-zinc-950",
     ],
     dot: [
       // base
@@ -57,12 +57,12 @@ const radioVariants = tv({
           // checked
           "group-data-[checked]:border-0 group-data-[checked]:border-transparent group-data-[checked]:bg-blue-500",
           // disabled
-          "group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-gray-100 group-data-[disabled]:text-gray-400",
-          "dark:group-data-[disabled]:border-gray-700 dark:group-data-[disabled]:bg-gray-800",
+          "group-data-[disabled]:border-zinc-300 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
+          "dark:group-data-[disabled]:border-zinc-700 dark:group-data-[disabled]:bg-zinc-800",
         ],
         dot: [
           // disabled
-          "group-data-[disabled]:bg-gray-400 dark:group-data-[disabled]:bg-gray-500",
+          "group-data-[disabled]:bg-zinc-400 dark:group-data-[disabled]:bg-zinc-500",
         ],
       },
       card: {
@@ -70,12 +70,12 @@ const radioVariants = tv({
           // checked
           "group-data-[checked]:border-0 group-data-[checked]:border-transparent group-data-[checked]:bg-blue-500",
           // disabled
-          "group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-gray-100 group-data-[disabled]:text-gray-400",
-          "dark:group-data-[disabled]:border-gray-700 dark:group-data-[disabled]:bg-gray-800",
+          "group-data-[disabled]:border-zinc-300 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
+          "dark:group-data-[disabled]:border-zinc-700 dark:group-data-[disabled]:bg-zinc-800",
         ],
         dot: [
           // disabled
-          "group-data-[disabled]:bg-gray-400 dark:group-data-[disabled]:bg-gray-500",
+          "group-data-[disabled]:bg-zinc-400 dark:group-data-[disabled]:bg-zinc-500",
         ],
       },
     },
@@ -92,9 +92,9 @@ const radioLabelVariants = tv({
     // base
     "flex items-center gap-2 cursor-pointer",
     // text
-    "text-sm font-medium text-gray-900 dark:text-gray-50",
+    "text-sm font-medium text-zinc-900 dark:text-zinc-50",
     // disabled
-    "has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:text-gray-400 dark:has-[[data-disabled]]:text-gray-600",
+    "has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:text-zinc-400 dark:has-[[data-disabled]]:text-zinc-600",
   ],
   variants: {
     size: {
@@ -114,14 +114,14 @@ const radioCardVariants = tv({
     // base
     "group relative w-full rounded-md border p-4 text-left shadow-xs transition cursor-pointer",
     // background color
-    "bg-white dark:bg-gray-950",
+    "bg-white dark:bg-zinc-950",
     // border color
-    "border-gray-300 dark:border-gray-800",
+    "border-zinc-300 dark:border-zinc-800",
     // checked
     "data-[checked]:border-blue-500 dark:data-[checked]:border-blue-500",
     // disabled
-    "data-[disabled]:border-gray-100 dark:data-[disabled]:border-gray-800",
-    "data-[disabled]:bg-gray-50 data-[disabled]:shadow-none dark:data-[disabled]:bg-gray-900",
+    "data-[disabled]:border-zinc-100 dark:data-[disabled]:border-zinc-800",
+    "data-[disabled]:bg-zinc-50 data-[disabled]:shadow-none dark:data-[disabled]:bg-zinc-900",
     "data-[disabled]:cursor-not-allowed",
     // focus
     "focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2",
@@ -246,7 +246,7 @@ const RadioOption = React.forwardRef<
     <div className="flex flex-col">
       <span>{label}</span>
       {description && (
-        <span className="text-xs text-gray-500 dark:text-gray-400">
+        <span className="text-xs text-zinc-500 dark:text-zinc-400">
           {description}
         </span>
       )}
@@ -289,11 +289,11 @@ const RadioCardOption = React.forwardRef<
       {...props}
     >
       <div className="flex flex-col gap-1">
-        <div className="font-medium text-gray-900 dark:text-gray-50">
+        <div className="font-medium text-zinc-900 dark:text-zinc-50">
           {title}
         </div>
         {description && (
-          <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="text-sm text-zinc-600 dark:text-zinc-400">
             {description}
           </div>
         )}

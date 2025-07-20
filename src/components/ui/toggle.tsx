@@ -13,17 +13,17 @@ const toggleVariants = tv({
     // base
     "group inline-flex h-9 min-w-9 items-center justify-center gap-2 rounded-md border px-2 text-sm font-medium shadow-xs transition-all duration-100 ease-in-out",
     // border
-    "border-gray-300 dark:border-gray-800",
+    "border-zinc-300 dark:border-zinc-800",
     // text color
-    "text-gray-700 dark:text-gray-300",
+    "text-zinc-700 dark:text-zinc-300",
     // background color
-    "bg-white dark:bg-gray-950",
+    "bg-white dark:bg-zinc-950",
     // hover color
-    "hover:bg-gray-50 dark:hover:bg-gray-900/60",
+    "hover:bg-zinc-50 dark:hover:bg-zinc-900/60",
     // disabled
-    "disabled:pointer-events-none disabled:text-gray-400 dark:disabled:text-gray-600",
+    "disabled:pointer-events-none disabled:text-zinc-400 dark:disabled:text-zinc-600",
     // pressed state
-    "data-[pressed]:bg-gray-100 data-[pressed]:text-gray-900 dark:data-[pressed]:bg-gray-800 dark:data-[pressed]:text-gray-50",
+    "data-[pressed]:bg-zinc-100 data-[pressed]:text-zinc-900 dark:data-[pressed]:bg-zinc-800 dark:data-[pressed]:text-zinc-50",
     // focus
     focusRing,
   ],
@@ -36,7 +36,7 @@ const toggleVariants = tv({
       ],
       ghost: [
         "border-transparent",
-        "hover:border-gray-200 dark:hover:border-gray-700",
+        "hover:border-zinc-200 dark:hover:border-zinc-700",
       ],
     },
     size: {

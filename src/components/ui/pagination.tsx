@@ -157,7 +157,7 @@ export function PaginationGap({
       aria-hidden="true"
       {...props}
       className={cx(
-        "flex h-9 w-9 items-center justify-center text-gray-500 dark:text-gray-400",
+        "flex h-9 w-9 items-center justify-center text-zinc-500 dark:text-zinc-400",
         className
       )}
     >

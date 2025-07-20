@@ -98,8 +98,8 @@ const AvatarFallback = React.forwardRef<
   <BaseAvatar.Fallback
     ref={ref}
     className={cx(
-      "flex h-full w-full items-center justify-center rounded-full bg-gray-100 text-sm font-medium text-gray-900",
-      "dark:bg-gray-800 dark:text-gray-50",
+      "flex h-full w-full items-center justify-center rounded-full bg-zinc-100 text-sm font-medium text-zinc-900",
+      "dark:bg-zinc-800 dark:text-zinc-50",
       className
     )}
     {...props}

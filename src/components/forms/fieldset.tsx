@@ -32,13 +32,13 @@ const FieldsetLegend = React.forwardRef<
       // base
       "text-lg font-medium leading-6",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // border
-      "border-b border-gray-200 dark:border-gray-800",
+      "border-b border-zinc-200 dark:border-zinc-800",
       // spacing
       "pb-3",
       // disabled
-      "data-disabled:text-gray-400 dark:data-disabled:text-gray-600",
+      "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
       className
     )}
     {...props}

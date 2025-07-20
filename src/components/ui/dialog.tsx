@@ -53,7 +53,7 @@ const DialogContent = React.forwardRef<
           // base
           "fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border p-6 shadow-lg",
           // border color
-          "border-gray-200 dark:border-gray-900",
+          "border-zinc-200 dark:border-zinc-900",
           // background color
           "bg-white dark:bg-[#090E1A]",
           // transition - Base UI uses different data attributes
@@ -88,7 +88,7 @@ const DialogTitle = React.forwardRef<
       // base
       "text-lg font-semibold",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       className
     )}
     {...props}
@@ -103,7 +103,7 @@ const DialogDescription = React.forwardRef<
   return (
     <BaseDialog.Description
       ref={forwardedRef}
-      className={cx("text-gray-500 dark:text-gray-500", className)}
+      className={cx("text-zinc-500 dark:text-zinc-500", className)}
       {...props}
     />
   );

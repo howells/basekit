@@ -16,7 +16,7 @@ const breadcrumbVariants = tv({
       // base
       "flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
       // text color
-      "text-gray-500 dark:text-gray-400",
+      "text-zinc-500 dark:text-zinc-400",
     ],
     item: [
       // base
@@ -26,27 +26,27 @@ const breadcrumbVariants = tv({
       // base
       "transition-colors",
       // hover
-      "hover:text-gray-900 dark:hover:text-gray-50",
+      "hover:text-zinc-900 dark:hover:text-zinc-50",
       // focus
-      "focus:outline-none focus:text-gray-900 dark:focus:text-gray-50",
+      "focus:outline-none focus:text-zinc-900 dark:focus:text-zinc-50",
     ],
     page: [
       // base
       "font-normal",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
     ],
     separator: [
       // base
       "[&>svg]:size-3.5",
       // text color
-      "text-gray-400 dark:text-gray-500",
+      "text-zinc-400 dark:text-zinc-500",
     ],
     ellipsis: [
       // base
       "flex size-9 items-center justify-center",
       // text color
-      "text-gray-400 dark:text-gray-500",
+      "text-zinc-400 dark:text-zinc-500",
     ],
   },
   variants: {

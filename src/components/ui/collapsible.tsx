@@ -16,14 +16,14 @@ const CollapsibleTrigger = React.forwardRef<
       // base
       "group flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-medium transition-colors",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // background color
-      "bg-gray-50 hover:bg-gray-100 active:bg-gray-100",
-      "dark:bg-gray-800 dark:hover:bg-gray-700 dark:active:bg-gray-700",
+      "bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-100",
+      "dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:bg-zinc-700",
       // disabled
       "data-disabled:cursor-not-allowed data-disabled:opacity-50",
-      "data-disabled:bg-gray-50 data-disabled:text-gray-400",
-      "dark:data-disabled:bg-gray-800 dark:data-disabled:text-gray-600",
+      "data-disabled:bg-zinc-50 data-disabled:text-zinc-400",
+      "dark:data-disabled:bg-zinc-800 dark:data-disabled:text-zinc-600",
       // focus
       focusRing,
       className
@@ -34,7 +34,7 @@ const CollapsibleTrigger = React.forwardRef<
     <ChevronIcon
       className={cx(
         "size-4 shrink-0 transition-transform duration-200 ease-out",
-        "text-gray-400 dark:text-gray-500",
+        "text-zinc-400 dark:text-zinc-500",
         "group-data-[panel-open]:rotate-90"
       )}
     />
@@ -60,7 +60,7 @@ const CollapsibleContent = React.forwardRef<
         // base
         "pt-2 text-sm",
         // text color
-        "text-gray-700 dark:text-gray-300",
+        "text-zinc-700 dark:text-zinc-300",
         className
       )}
     >

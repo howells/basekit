@@ -13,21 +13,21 @@ const toolbarVariants = tv({
       // base
       "flex items-center gap-px rounded-md border p-0.5",
       // colors
-      "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800",
+      "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800",
     ],
     button: [
       // base
       "flex items-center justify-center rounded-sm font-medium select-none transition-all duration-100 ease-in-out",
       // colors
-      "text-gray-600 dark:text-gray-400",
+      "text-zinc-600 dark:text-zinc-400",
       // hover
-      "hover:bg-gray-100 dark:hover:bg-gray-700",
+      "hover:bg-zinc-100 dark:hover:bg-zinc-700",
       // active
-      "active:bg-gray-200 dark:active:bg-gray-600",
+      "active:bg-zinc-200 dark:active:bg-zinc-600",
       // highlighted (keyboard navigation)
-      "data-[highlighted]:bg-gray-100 dark:data-[highlighted]:bg-gray-700",
+      "data-[highlighted]:bg-zinc-100 dark:data-[highlighted]:bg-zinc-700",
       // pressed (for toggle buttons)
-      "data-[pressed]:bg-gray-100 data-[pressed]:text-gray-900 dark:data-[pressed]:bg-gray-700 dark:data-[pressed]:text-gray-100",
+      "data-[pressed]:bg-zinc-100 data-[pressed]:text-zinc-900 dark:data-[pressed]:bg-zinc-700 dark:data-[pressed]:text-zinc-100",
       // disabled
       "disabled:pointer-events-none disabled:opacity-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       // focus
@@ -38,7 +38,7 @@ const toolbarVariants = tv({
       // base
       "flex items-center justify-center rounded-sm font-medium select-none transition-all duration-100 ease-in-out no-underline",
       // colors
-      "text-gray-500 dark:text-gray-400",
+      "text-zinc-500 dark:text-zinc-400",
       // hover
       "hover:text-blue-600 dark:hover:text-blue-400",
       // highlighted
@@ -51,11 +51,11 @@ const toolbarVariants = tv({
       // base
       "flex items-center justify-center rounded-sm font-medium transition-all duration-100 ease-in-out",
       // colors
-      "text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-950",
+      "text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-950",
       // border
-      "border border-gray-300 dark:border-gray-600",
+      "border border-zinc-300 dark:border-zinc-600",
       // hover
-      "hover:border-gray-400 dark:hover:border-gray-500",
+      "hover:border-zinc-400 dark:hover:border-zinc-500",
       // highlighted
       "data-[highlighted]:border-blue-500 dark:data-[highlighted]:border-blue-400",
       // focus
@@ -71,16 +71,16 @@ const toolbarVariants = tv({
       // base
       "mx-1 h-4 w-px",
       // colors
-      "bg-gray-300 dark:bg-gray-600",
+      "bg-zinc-300 dark:bg-zinc-600",
     ],
   },
   variants: {
     variant: {
       default: {
-        root: "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800",
+        root: "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800",
       },
       outline: {
-        root: "border-gray-300 bg-transparent dark:border-gray-600",
+        root: "border-zinc-300 bg-transparent dark:border-zinc-600",
       },
       ghost: {
         root: "border-transparent bg-transparent",

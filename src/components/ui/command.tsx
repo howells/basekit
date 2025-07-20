@@ -14,15 +14,15 @@ const commandVariants = tv({
       // base
       "flex h-full w-full flex-col overflow-hidden rounded-md",
       // background
-      "bg-white dark:bg-gray-950",
+      "bg-white dark:bg-zinc-950",
       // border
-      "border border-gray-200 dark:border-gray-800",
+      "border border-zinc-200 dark:border-zinc-800",
       // text
-      "text-gray-950 dark:text-gray-50",
+      "text-zinc-950 dark:text-zinc-50",
     ],
     input: [
       // base
-      "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 disabled:cursor-not-allowed disabled:opacity-50",
+      "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-zinc-500 dark:placeholder:text-zinc-400 disabled:cursor-not-allowed disabled:opacity-50",
       // padding
       "px-3",
       // focus
@@ -32,47 +32,47 @@ const commandVariants = tv({
       // base
       "max-h-[300px] overflow-y-auto overflow-x-hidden",
       // scrollbar styling
-      "scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-800 dark:scrollbar-thumb-gray-600",
+      "scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-300 dark:scrollbar-track-zinc-800 dark:scrollbar-thumb-zinc-600",
     ],
     empty: [
       // base
       "py-6 text-center text-sm",
       // text color
-      "text-gray-500 dark:text-gray-400",
+      "text-zinc-500 dark:text-zinc-400",
     ],
     group: [
       // base
       "overflow-hidden p-1",
       // text
-      "text-gray-950 dark:text-gray-50",
+      "text-zinc-950 dark:text-zinc-50",
     ],
     groupHeading: [
       // base
       "px-2 py-1.5 text-xs font-medium",
       // text color
-      "text-gray-500 dark:text-gray-400",
+      "text-zinc-500 dark:text-zinc-400",
     ],
     item: [
       // base
       "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors",
       // hover/focus
-      "hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-800 dark:focus:bg-gray-800",
+      "hover:bg-zinc-100 focus:bg-zinc-100 dark:hover:bg-zinc-800 dark:focus:bg-zinc-800",
       // disabled
       "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       // selected
-      "data-[selected=true]:bg-gray-100 dark:data-[selected=true]:bg-gray-800",
+      "data-[selected=true]:bg-zinc-100 dark:data-[selected=true]:bg-zinc-800",
     ],
     shortcut: [
       // base
       "ml-auto text-xs tracking-widest",
       // text color
-      "text-gray-500 dark:text-gray-400",
+      "text-zinc-500 dark:text-zinc-400",
     ],
     separator: [
       // base
       "-mx-1 h-px",
       // background
-      "bg-gray-200 dark:bg-gray-800",
+      "bg-zinc-200 dark:bg-zinc-800",
     ],
     dialog: [
       // base
@@ -82,9 +82,9 @@ const commandVariants = tv({
       // base
       "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
       // background
-      "bg-white dark:bg-gray-950",
+      "bg-white dark:bg-zinc-950",
       // border
-      "border-gray-200 dark:border-gray-800",
+      "border-zinc-200 dark:border-zinc-800",
     ],
   },
   variants: {
@@ -133,7 +133,7 @@ const CommandDialog = ({
     <CommandPrimitive.Dialog {...props}>
       <div className={dialog()}>
         <div className={dialogContent()}>
-          <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-gray-500 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+          <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-zinc-500 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
             {children}
           </Command>
         </div>
@@ -149,10 +149,10 @@ const CommandInput = React.forwardRef<
   const { input } = commandVariants();
   return (
     <div
-      className="flex items-center border-b border-gray-200 px-3 dark:border-gray-800"
+      className="flex items-center border-b border-zinc-200 px-3 dark:border-zinc-800"
       cmdk-input-wrapper=""
     >
-      <Search className="mr-2 h-4 w-4 shrink-0 text-gray-500 dark:text-gray-400" />
+      <Search className="mr-2 h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400" />
       <CommandPrimitive.Input
         ref={ref}
         className={cx(input(), className)}

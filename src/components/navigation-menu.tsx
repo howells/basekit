@@ -53,11 +53,11 @@ const NavigationMenuTrigger = React.forwardRef<
     ref={ref}
     className={cx(
       "group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors",
-      "hover:bg-gray-100 hover:text-gray-900",
-      "focus:bg-gray-100 focus:text-gray-900 focus:outline-none",
+      "hover:bg-zinc-100 hover:text-zinc-900",
+      "focus:bg-zinc-100 focus:text-zinc-900 focus:outline-none",
       "disabled:pointer-events-none disabled:opacity-50",
-      "data-[popup-open]:bg-gray-100/50",
-      "dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[popup-open]:bg-gray-800/50",
+      "data-[popup-open]:bg-zinc-100/50",
+      "dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50 dark:data-[popup-open]:bg-zinc-800/50",
       className
     )}
     {...props}
@@ -91,10 +91,10 @@ const NavigationMenuLink = React.forwardRef<
     ref={ref}
     className={cx(
       "group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors",
-      "hover:bg-gray-100 hover:text-gray-900",
-      "focus:bg-gray-100 focus:text-gray-900 focus:outline-none",
+      "hover:bg-zinc-100 hover:text-zinc-900",
+      "focus:bg-zinc-100 focus:text-zinc-900 focus:outline-none",
       "disabled:pointer-events-none disabled:opacity-50",
-      "dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50",
+      "dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50",
       className
     )}
     {...props}
@@ -114,7 +114,7 @@ const NavigationMenuViewport = React.forwardRef<
       collisionPadding={{ top: 5, bottom: 5, left: 20, right: 20 }}
       {...props}
     >
-      <BaseNavigationMenu.Popup className="relative mt-1.5 h-[var(--popup-height)] w-full overflow-hidden rounded-md border border-gray-200 bg-white text-gray-950 shadow-lg data-[starting-style]:animate-in data-[ending-style]:animate-out data-[ending-style]:zoom-out-95 data-[starting-style]:zoom-in-90 md:w-[var(--popup-width)] dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50">
+      <BaseNavigationMenu.Popup className="relative mt-1.5 h-[var(--popup-height)] w-full overflow-hidden rounded-md border border-zinc-200 bg-white text-zinc-950 shadow-lg data-[starting-style]:animate-in data-[ending-style]:animate-out data-[ending-style]:zoom-out-95 data-[starting-style]:zoom-in-90 md:w-[var(--popup-width)] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">
         <NavigationMenuArrow />
         <BaseNavigationMenu.Viewport className="relative h-full w-full overflow-hidden" />
       </BaseNavigationMenu.Popup>
@@ -135,7 +135,7 @@ const NavigationMenuIndicator = React.forwardRef<
     )}
     {...props}
   >
-    <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-gray-200 shadow-md dark:bg-gray-800" />
+    <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-zinc-200 shadow-md dark:bg-zinc-800" />
   </div>
 ));
 NavigationMenuIndicator.displayName = "NavigationMenuIndicator";
@@ -194,15 +194,15 @@ function ArrowSvg(props: React.ComponentProps<"svg">) {
     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" {...props}>
       <path
         d="M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V10H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z"
-        className="fill-white dark:fill-gray-950"
+        className="fill-white dark:fill-zinc-950"
       />
       <path
         d="M8.99542 1.85876C9.75604 1.17425 10.9106 1.17422 11.6713 1.85878L16.5281 6.22989C17.0789 6.72568 17.7938 7.00001 18.5349 7.00001L15.89 7L11.0023 2.60207C10.622 2.2598 10.0447 2.2598 9.66436 2.60207L4.77734 7L2.13171 7.00001C2.87284 7.00001 3.58774 6.72568 4.13861 6.22989L8.99542 1.85876Z"
-        className="fill-gray-200 dark:fill-gray-800"
+        className="fill-zinc-200 dark:fill-zinc-800"
       />
       <path
         d="M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z"
-        className="fill-gray-300 dark:fill-gray-700"
+        className="fill-zinc-300 dark:fill-zinc-700"
       />
     </svg>
   );

@@ -21,14 +21,14 @@ const CheckboxGroup = React.forwardRef<
     ref={ref}
     aria-labelledby={labelId}
     className={cx(
-      "flex flex-col items-start gap-2 text-gray-900 dark:text-gray-50",
+      "flex flex-col items-start gap-2 text-zinc-900 dark:text-zinc-50",
       className
     )}
     {...props}
   >
     {label && (
       <div
-        className="font-medium text-sm text-gray-900 dark:text-gray-50"
+        className="font-medium text-sm text-zinc-900 dark:text-zinc-50"
         id={labelId}
       >
         {label}

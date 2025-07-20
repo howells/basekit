@@ -13,13 +13,13 @@ const toastVariants = tv({
     // base
     "group pointer-events-auto relative flex w-full items-center justify-between space-x-2 overflow-hidden rounded-md border p-4 pr-6 shadow-lg transition-all",
     // background
-    "bg-white dark:bg-gray-950",
+    "bg-white dark:bg-zinc-950",
     // border
-    "border-gray-200 dark:border-gray-800",
+    "border-zinc-200 dark:border-zinc-800",
   ],
   variants: {
     variant: {
-      default: "border-gray-200 dark:border-gray-800",
+      default: "border-zinc-200 dark:border-zinc-800",
       success:
         "border-green-200 bg-green-50 text-green-900 dark:border-green-800 dark:bg-green-950 dark:text-green-50",
       error:

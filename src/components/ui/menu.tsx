@@ -33,13 +33,13 @@ const MenuSubmenuTrigger = React.forwardRef<
       // base
       "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-1 outline-hidden transition-colors data-checked:font-semibold sm:text-sm",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // disabled
-      "data-disabled:pointer-events-none data-disabled:text-gray-400 data-disabled:hover:bg-none dark:data-disabled:text-gray-600",
+      "data-disabled:pointer-events-none data-disabled:text-zinc-400 data-disabled:hover:bg-none dark:data-disabled:text-zinc-600",
       // focus
-      "focus-visible:bg-gray-100 data-[popup-open]:bg-gray-100 dark:focus-visible:bg-gray-900 dark:data-[popup-open]:bg-gray-900",
+      "focus-visible:bg-zinc-100 data-[popup-open]:bg-zinc-100 dark:focus-visible:bg-zinc-900 dark:data-[popup-open]:bg-zinc-900",
       // hover
-      "hover:bg-gray-100 dark:hover:bg-gray-900",
+      "hover:bg-zinc-100 dark:hover:bg-zinc-900",
       className
     )}
     {...props}
@@ -66,11 +66,11 @@ const MenuSubmenuContent = React.forwardRef<
           // heights
           "max-h-[var(--menu-available-height)]",
           // background color
-          "bg-white dark:bg-gray-950",
+          "bg-white dark:bg-zinc-950",
           // text color
-          "text-gray-900 dark:text-gray-50",
+          "text-zinc-900 dark:text-zinc-50",
           // border color
-          "border-gray-200 dark:border-gray-800",
+          "border-zinc-200 dark:border-zinc-800",
           // transition
           "will-change-[transform,opacity]",
           "data-[starting-style]:animate-hide",
@@ -119,11 +119,11 @@ const MenuContent = React.forwardRef<
             // heights
             "max-h-[var(--menu-available-height)]",
             // background color
-            "bg-white dark:bg-gray-950",
+            "bg-white dark:bg-zinc-950",
             // text color
-            "text-gray-900 dark:text-gray-50",
+            "text-zinc-900 dark:text-zinc-50",
             // border color
-            "border-gray-200 dark:border-gray-800",
+            "border-zinc-200 dark:border-zinc-800",
             // transition
             "will-change-[transform,opacity]",
             "data-[starting-style]:animate-hide",
@@ -152,13 +152,13 @@ const MenuItem = React.forwardRef<
       // base
       "group/MenuItem relative flex cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-1 outline-hidden transition-colors sm:text-sm",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // disabled
-      "data-disabled:pointer-events-none data-disabled:text-gray-400 data-disabled:hover:bg-none dark:data-disabled:text-gray-600",
+      "data-disabled:pointer-events-none data-disabled:text-zinc-400 data-disabled:hover:bg-none dark:data-disabled:text-zinc-600",
       // focus
-      "focus-visible:bg-gray-100 dark:focus-visible:bg-gray-900",
+      "focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900",
       // hover
-      "data-highlighted:bg-gray-100 dark:data-highlighted:bg-gray-900",
+      "data-highlighted:bg-zinc-100 dark:data-highlighted:bg-zinc-900",
       className
     )}
     tremor-id="tremor-raw"
@@ -167,14 +167,14 @@ const MenuItem = React.forwardRef<
     {children}
     {hint && (
       <span
-        className={cx("ml-auto pl-2 text-sm text-gray-400 dark:text-gray-600")}
+        className={cx("ml-auto pl-2 text-sm text-zinc-400 dark:text-zinc-600")}
       >
         {hint}
       </span>
     )}
     {shortcut && (
       <span
-        className={cx("ml-auto pl-2 text-sm text-gray-400 dark:text-gray-600")}
+        className={cx("ml-auto pl-2 text-sm text-zinc-400 dark:text-zinc-600")}
       >
         {shortcut}
       </span>
@@ -200,13 +200,13 @@ const MenuCheckboxItem = React.forwardRef<
         // base
         "relative flex cursor-pointer select-none items-center gap-x-2 rounded-sm py-1.5 pl-8 pr-1 outline-hidden transition-colors data-checked:font-semibold sm:text-sm",
         // text color
-        "text-gray-900 dark:text-gray-50",
+        "text-zinc-900 dark:text-zinc-50",
         // disabled
-        "data-disabled:pointer-events-none data-disabled:text-gray-400 data-disabled:hover:bg-none dark:data-disabled:text-gray-600",
+        "data-disabled:pointer-events-none data-disabled:text-zinc-400 data-disabled:hover:bg-none dark:data-disabled:text-zinc-600",
         // focus
-        "focus-visible:bg-gray-100 dark:focus-visible:bg-gray-900",
+        "focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900",
         // hover
-        "data-highlighted:bg-gray-100 dark:data-highlighted:bg-gray-900",
+        "data-highlighted:bg-zinc-100 dark:data-highlighted:bg-zinc-900",
         className
       )}
       checked={checked}
@@ -216,7 +216,7 @@ const MenuCheckboxItem = React.forwardRef<
         <BaseMenu.CheckboxItemIndicator>
           <Check
             aria-hidden="true"
-            className="size-full shrink-0 text-gray-800 dark:text-gray-200"
+            className="size-full shrink-0 text-zinc-800 dark:text-zinc-200"
           />
         </BaseMenu.CheckboxItemIndicator>
       </span>
@@ -224,7 +224,7 @@ const MenuCheckboxItem = React.forwardRef<
       {hint && (
         <span
           className={cx(
-            "ml-auto text-sm font-normal text-gray-400 dark:text-gray-600"
+            "ml-auto text-sm font-normal text-zinc-400 dark:text-zinc-600"
           )}
         >
           {hint}
@@ -233,7 +233,7 @@ const MenuCheckboxItem = React.forwardRef<
       {shortcut && (
         <span
           className={cx(
-            "ml-auto text-sm font-normal tracking-widest text-gray-400 dark:border-gray-800 dark:text-gray-600"
+            "ml-auto text-sm font-normal tracking-widest text-zinc-400 dark:border-zinc-800 dark:text-zinc-600"
           )}
         >
           {shortcut}
@@ -257,13 +257,13 @@ const MenuRadioItem = React.forwardRef<
       // base
       "group/MenuRadioItem relative flex cursor-pointer select-none items-center gap-x-2 rounded-sm py-1.5 pl-8 pr-1 outline-hidden transition-colors data-checked:font-semibold sm:text-sm",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // disabled
-      "data-disabled:pointer-events-none data-disabled:text-gray-400 data-disabled:hover:bg-none dark:data-disabled:text-gray-600",
+      "data-disabled:pointer-events-none data-disabled:text-zinc-400 data-disabled:hover:bg-none dark:data-disabled:text-zinc-600",
       // focus
-      "focus-visible:bg-gray-100 dark:focus-visible:bg-gray-900",
+      "focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900",
       // hover
-      "data-highlighted:bg-gray-100 dark:data-highlighted:bg-gray-900",
+      "data-highlighted:bg-zinc-100 dark:data-highlighted:bg-zinc-900",
       className
     )}
     {...props}
@@ -278,7 +278,7 @@ const MenuRadioItem = React.forwardRef<
       <span className="data-checked:hidden">
         <Circle
           aria-hidden="true"
-          className="size-full shrink-0 text-gray-300 dark:text-gray-700"
+          className="size-full shrink-0 text-zinc-300 dark:text-zinc-700"
         />
       </span>
     </span>
@@ -286,7 +286,7 @@ const MenuRadioItem = React.forwardRef<
     {hint && (
       <span
         className={cx(
-          "ml-auto text-sm font-normal text-gray-400 dark:text-gray-600"
+          "ml-auto text-sm font-normal text-zinc-400 dark:text-zinc-600"
         )}
       >
         {hint}
@@ -295,7 +295,7 @@ const MenuRadioItem = React.forwardRef<
     {shortcut && (
       <span
         className={cx(
-          "ml-auto text-sm font-normal tracking-widest text-gray-400 dark:border-gray-800 dark:text-gray-600"
+          "ml-auto text-sm font-normal tracking-widest text-zinc-400 dark:border-zinc-800 dark:text-zinc-600"
         )}
       >
         {shortcut}
@@ -315,7 +315,7 @@ const MenuLabel = React.forwardRef<
       // base
       "px-2 py-2 text-xs font-medium tracking-wide",
       // text color
-      "text-gray-500 dark:text-gray-500",
+      "text-zinc-500 dark:text-zinc-500",
       className
     )}
     {...props}
@@ -330,7 +330,7 @@ const MenuSeparator = React.forwardRef<
   <BaseMenu.Separator
     ref={forwardedRef}
     className={cx(
-      "-mx-1 my-1 h-px border-t border-gray-200 dark:border-gray-800",
+      "-mx-1 my-1 h-px border-t border-zinc-200 dark:border-zinc-800",
       className
     )}
     {...props}
@@ -346,9 +346,9 @@ const MenuIconWrapper = ({
     <div
       className={cx(
         // text color
-        "text-gray-600 dark:text-gray-400",
+        "text-zinc-600 dark:text-zinc-400",
         // disabled
-        "group-data-disabled/MenuItem:text-gray-400 dark:group-data-disabled/MenuItem:text-gray-700",
+        "group-data-disabled/MenuItem:text-zinc-400 dark:group-data-disabled/MenuItem:text-zinc-700",
         className
       )}
       {...props}

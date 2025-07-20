@@ -12,22 +12,22 @@ const inputStyles = tv({
     // base
     "relative block w-full appearance-none rounded-md border px-2.5 py-2 shadow-xs outline-hidden transition sm:text-sm",
     // border color
-    "border-gray-300 dark:border-gray-800",
+    "border-zinc-300 dark:border-zinc-800",
     // text color
-    "text-gray-900 dark:text-gray-50",
+    "text-zinc-900 dark:text-zinc-50",
     // placeholder color
-    "placeholder-gray-400 dark:placeholder-gray-500",
+    "placeholder-zinc-400 dark:placeholder-zinc-500",
     // background color
-    "bg-white dark:bg-gray-950",
+    "bg-white dark:bg-zinc-950",
     // disabled
-    "data-disabled:border-gray-300 data-disabled:bg-gray-100 data-disabled:text-gray-400",
-    "dark:data-disabled:border-gray-700 dark:data-disabled:bg-gray-800 dark:data-disabled:text-gray-500",
+    "data-disabled:border-zinc-300 data-disabled:bg-zinc-100 data-disabled:text-zinc-400",
+    "dark:data-disabled:border-zinc-700 dark:data-disabled:bg-zinc-800 dark:data-disabled:text-zinc-500",
     // file
     [
       "file:-my-2 file:-ml-2.5 file:cursor-pointer file:rounded-l-[5px] file:rounded-r-none file:border-0 file:px-3 file:py-2 file:outline-hidden focus:outline-hidden data-disabled:pointer-events-none file:data-disabled:pointer-events-none",
-      "file:border-solid file:border-gray-300 file:bg-gray-50 file:text-gray-500 file:hover:bg-gray-100 dark:file:border-gray-800 dark:file:bg-gray-950 dark:file:hover:bg-gray-900/20 dark:file:data-disabled:border-gray-700",
+      "file:border-solid file:border-zinc-300 file:bg-zinc-50 file:text-zinc-500 file:hover:bg-zinc-100 dark:file:border-zinc-800 dark:file:bg-zinc-950 dark:file:hover:bg-zinc-900/20 dark:file:data-disabled:border-zinc-700",
       "file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem]",
-      "file:data-disabled:bg-gray-100 file:data-disabled:text-gray-500 dark:file:data-disabled:bg-gray-800",
+      "file:data-disabled:bg-zinc-100 file:data-disabled:text-zinc-500 dark:file:data-disabled:bg-zinc-800",
     ],
     // focus
     focusInput,
@@ -93,7 +93,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
               // base
               "pointer-events-none absolute bottom-0 left-2 flex h-full items-center justify-center",
               // text color
-              "text-gray-400 dark:text-gray-600"
+              "text-zinc-400 dark:text-zinc-600"
             )}
           >
             <Search className="size-[1.125rem] shrink-0" aria-hidden="true" />
@@ -111,9 +111,9 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
                 // base
                 "h-fit w-fit rounded-xs outline-hidden transition-all",
                 // text
-                "text-gray-400 dark:text-gray-600",
+                "text-zinc-400 dark:text-zinc-600",
                 // hover
-                "hover:text-gray-500 dark:hover:text-gray-500",
+                "hover:text-zinc-500 dark:hover:text-zinc-500",
                 focusRing
               )}
               type="button"

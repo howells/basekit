@@ -84,7 +84,7 @@ const NumberFieldLabel = React.forwardRef<
             // base
             "cursor-ew-resize text-sm font-medium leading-6",
             // text color
-            "text-gray-900 dark:text-gray-50",
+            "text-zinc-900 dark:text-zinc-50",
             className
           )}
           {...props}
@@ -100,7 +100,7 @@ const NumberFieldLabel = React.forwardRef<
           // base
           "text-sm font-medium leading-6",
           // text color
-          "text-gray-900 dark:text-gray-50",
+          "text-zinc-900 dark:text-zinc-50",
           className
         )}
         {...props}
@@ -148,13 +148,13 @@ const NumberFieldInput = React.forwardRef<
       // base
       "h-10 w-24 border text-center text-sm tabular-nums transition-colors",
       // border color
-      "border-gray-300 dark:border-gray-700",
+      "border-zinc-300 dark:border-zinc-700",
       // background color
-      "bg-white dark:bg-gray-950",
+      "bg-white dark:bg-zinc-950",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // placeholder color
-      "placeholder-gray-400 dark:placeholder-gray-500",
+      "placeholder-zinc-400 dark:placeholder-zinc-500",
       // focus
       focusRing,
       // disabled
@@ -178,15 +178,15 @@ const NumberFieldIncrement = React.forwardRef<
       // base
       "flex h-10 w-10 items-center justify-center rounded-tr-md rounded-br-md border border-l-0 bg-clip-padding text-sm font-medium transition-colors",
       // border color
-      "border-gray-300 dark:border-gray-700",
+      "border-zinc-300 dark:border-zinc-700",
       // background color
-      "bg-gray-50 hover:bg-gray-100 active:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:active:bg-gray-700",
+      "bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:bg-zinc-700",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // focus
       focusRing,
       // disabled
-      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-50 dark:disabled:hover:bg-gray-800",
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-zinc-50 dark:disabled:hover:bg-zinc-800",
       className
     )}
     {...props}
@@ -206,15 +206,15 @@ const NumberFieldDecrement = React.forwardRef<
       // base
       "flex h-10 w-10 items-center justify-center rounded-tl-md rounded-bl-md border border-r-0 bg-clip-padding text-sm font-medium transition-colors",
       // border color
-      "border-gray-300 dark:border-gray-700",
+      "border-zinc-300 dark:border-zinc-700",
       // background color
-      "bg-gray-50 hover:bg-gray-100 active:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:active:bg-gray-700",
+      "bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:bg-zinc-700",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "text-zinc-900 dark:text-zinc-50",
       // focus
       focusRing,
       // disabled
-      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-50 dark:disabled:hover:bg-gray-800",
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-zinc-50 dark:disabled:hover:bg-zinc-800",
       className
     )}
     {...props}

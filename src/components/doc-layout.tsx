@@ -36,12 +36,12 @@ export const DocLayout = React.forwardRef<HTMLDivElement, DocLayoutProps>(
         {/* Header */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+            <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">
               {title}
             </h1>
             <Badge variant="neutral">{badge}</Badge>
           </div>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg text-zinc-600 dark:text-zinc-400">
             {description}
           </p>
         </div>
@@ -49,7 +49,7 @@ export const DocLayout = React.forwardRef<HTMLDivElement, DocLayoutProps>(
         {/* Installation */}
         {installCommand && (
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
               Installation
             </h2>
             <CodeBlock language="bash">{installCommand}</CodeBlock>
@@ -59,7 +59,7 @@ export const DocLayout = React.forwardRef<HTMLDivElement, DocLayoutProps>(
         {/* Usage */}
         {importCode && (
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
               Usage
             </h2>
             <CodeBlock>{importCode}</CodeBlock>

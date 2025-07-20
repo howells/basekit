@@ -21,11 +21,11 @@ export const ApiReference = React.forwardRef<HTMLDivElement, ApiReferenceProps>(
   ({ title, description, props, className }, ref) => {
     return (
       <div ref={ref} className={cx("space-y-4", className)}>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">
+        <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-50">
           {title}
         </h3>
         {description && (
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">
             {description}
           </p>
         )}
@@ -33,17 +33,17 @@ export const ApiReference = React.forwardRef<HTMLDivElement, ApiReferenceProps>(
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-gray-800">
-                <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                   Prop
                 </th>
-                <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                   Type
                 </th>
-                <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                   Default
                 </th>
-                <th className="text-left p-3 font-medium text-gray-900 dark:text-gray-50">
+                <th className="text-left p-3 font-medium text-zinc-900 dark:text-zinc-50">
                   Description
                 </th>
               </tr>
@@ -53,20 +53,20 @@ export const ApiReference = React.forwardRef<HTMLDivElement, ApiReferenceProps>(
                 <tr
                   key={prop.name}
                   className={cx(
-                    "border-b border-gray-100 dark:border-gray-900",
+                    "border-b border-zinc-100 dark:border-zinc-900",
                     index === props.length - 1 && "border-b-0"
                   )}
                 >
-                  <td className="p-3 font-mono text-xs text-gray-900 dark:text-gray-50">
+                  <td className="p-3 font-mono text-xs text-zinc-900 dark:text-zinc-50">
                     {prop.name}
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     {prop.type}
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     {prop.default || "-"}
                   </td>
-                  <td className="p-3 text-gray-600 dark:text-gray-400">
+                  <td className="p-3 text-zinc-600 dark:text-zinc-400">
                     {prop.description}
                   </td>
                 </tr>

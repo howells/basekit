@@ -40,14 +40,14 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
           orientation="vertical"
           className={cx(
             "flex h-full w-2.5 touch-none select-none border-l border-l-transparent p-[1px] transition-colors",
-            "hover:bg-gray-100 dark:hover:bg-gray-800",
+            "hover:bg-zinc-100 dark:hover:bg-zinc-800",
             scrollbarClassName
           )}
         >
           <BaseScrollArea.Thumb
             className={cx(
-              "relative flex-1 rounded-full bg-gray-300 dark:bg-gray-600",
-              "hover:bg-gray-400 dark:hover:bg-gray-500",
+              "relative flex-1 rounded-full bg-zinc-300 dark:bg-zinc-600",
+              "hover:bg-zinc-400 dark:hover:bg-zinc-500",
               thumbClassName
             )}
           />
@@ -58,14 +58,14 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
           orientation="horizontal"
           className={cx(
             "flex h-2.5 w-full touch-none select-none border-t border-t-transparent p-[1px] transition-colors",
-            "hover:bg-gray-100 dark:hover:bg-gray-800",
+            "hover:bg-zinc-100 dark:hover:bg-zinc-800",
             scrollbarClassName
           )}
         >
           <BaseScrollArea.Thumb
             className={cx(
-              "relative flex-1 rounded-full bg-gray-300 dark:bg-gray-600",
-              "hover:bg-gray-400 dark:hover:bg-gray-500",
+              "relative flex-1 rounded-full bg-zinc-300 dark:bg-zinc-600",
+              "hover:bg-zinc-400 dark:hover:bg-zinc-500",
               thumbClassName
             )}
           />
@@ -91,12 +91,12 @@ const ScrollBar = React.forwardRef<
         "h-full w-2.5 border-l border-l-transparent p-[1px]",
       orientation === "horizontal" &&
         "h-2.5 w-full border-t border-t-transparent p-[1px]",
-      "hover:bg-gray-100 dark:hover:bg-gray-800",
+      "hover:bg-zinc-100 dark:hover:bg-zinc-800",
       className
     )}
     {...props}
   >
-    <BaseScrollArea.Thumb className="relative flex-1 rounded-full bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500" />
+    <BaseScrollArea.Thumb className="relative flex-1 rounded-full bg-zinc-300 hover:bg-zinc-400 dark:bg-zinc-600 dark:hover:bg-zinc-500" />
   </BaseScrollArea.Scrollbar>
 ));
 

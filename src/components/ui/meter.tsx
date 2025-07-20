@@ -17,8 +17,8 @@ const meterVariants = tv({
         indicator: "bg-blue-500 dark:bg-blue-500",
       },
       neutral: {
-        track: "bg-gray-200 dark:bg-gray-500/40",
-        indicator: "bg-gray-500 dark:bg-gray-500",
+        track: "bg-zinc-200 dark:bg-zinc-500/40",
+        indicator: "bg-zinc-500 dark:bg-zinc-500",
       },
       warning: {
         track: "bg-yellow-200 dark:bg-yellow-500/30",
@@ -103,7 +103,7 @@ const Meter = React.forwardRef<
                     // base
                     "text-sm font-medium leading-6",
                     // text color
-                    "text-gray-900 dark:text-gray-50"
+                    "text-zinc-900 dark:text-zinc-50"
                   )}
                 >
                   {label}
@@ -115,7 +115,7 @@ const Meter = React.forwardRef<
                     // base
                     "text-sm font-medium leading-6 tabular-nums",
                     // text color
-                    "text-gray-900 dark:text-gray-50"
+                    "text-zinc-900 dark:text-zinc-50"
                   )}
                 >
                   {formattedValue}
@@ -131,7 +131,7 @@ const Meter = React.forwardRef<
               // background
               track(),
               // border
-              "shadow-[inset_0_0_0_1px] shadow-gray-200/50 dark:shadow-gray-800/50"
+              "shadow-[inset_0_0_0_1px] shadow-zinc-200/50 dark:shadow-zinc-800/50"
             )}
           >
             <BaseMeter.Indicator
