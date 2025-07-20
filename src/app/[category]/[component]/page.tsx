@@ -1,9 +1,8 @@
-import { ComponentAccessibility } from "@/components/component-accessibility";
 import { ComponentExamples } from "@/components/component-examples";
 import { ComponentHeader } from "@/components/component-header";
-import { ComponentInstallation } from "@/components/component-installation";
-import { ComponentPropExplorer } from "@/components/component-prop-explorer";
-import { ComponentSections } from "@/components/component-sections";
+import { ComponentPreview } from "@/components/component-preview";
+import { PropExplorerProvider } from "@/components/prop-explorer-context";
+import { PropExplorerControls } from "@/components/prop-explorer-controls";
 import { COMPONENT_LIST, getComponentConfig } from "@/lib/component-registry";
 import { createComponentConfig } from "@/lib/config-helpers";
 import { notFound } from "next/navigation";
@@ -137,32 +136,54 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     notFound();
   }
 
+  // Extract default values from prop explorer if available
+  const getDefaultProps = () => {
+    if (!config.propExplorer) return {};
+
+    const defaultProps: Record<string, unknown> = {};
+    config.propExplorer.variants?.forEach(
+      (variant: { name: string; defaultOption?: unknown }) => {
+        if (variant.defaultOption) {
+          defaultProps[variant.name] = variant.defaultOption;
+        }
+      }
+    );
+
+    // Add default values for special props
+    defaultProps.children =
+      config.propExplorer.displayName || config.propExplorer.componentName;
+
+    return defaultProps;
+  };
+
   return (
-    <div className="">
+    <div className="h-screen flex flex-col">
       {/* Header */}
       <ComponentHeader config={config} />
 
-      {/* Lead with Prop Explorer (like Subframe) */}
-      {config.propExplorer && (
-        <ComponentPropExplorer
-          propExplorer={config.propExplorer}
-          componentId={config.componentId}
-          category={category}
-        />
+      {/* Main Content */}
+      {config.propExplorer ? (
+        // Component with interactive props - full height layout
+        <PropExplorerProvider defaultProps={getDefaultProps()}>
+          <div className="flex flex-1 h-0">
+            {/* Main content - Live preview */}
+            <div className="flex-1 p-6">
+              <ComponentPreview
+                componentId={config.componentId || "Unknown"}
+                category={category}
+              />
+            </div>
+
+            {/* Right sidebar - Inspector */}
+            <PropExplorerControls config={config.propExplorer} />
+          </div>
+        </PropExplorerProvider>
+      ) : (
+        // Component without interactive props - show examples
+        <div className="flex-1 p-6">
+          <ComponentExamples examples={config.examples} />
+        </div>
       )}
-
-      {/* Props Table (auto-generated from TypeScript) */}
-      {/* Installation */}
-      <ComponentInstallation installation={config.installation} />
-
-      {/* Examples/Variants */}
-      {!config.propExplorer && <ComponentExamples examples={config.examples} />}
-
-      {/* Custom Sections */}
-      <ComponentSections sections={config.sections} />
-
-      {/* Accessibility */}
-      <ComponentAccessibility accessibility={config.accessibility} />
     </div>
   );
 }

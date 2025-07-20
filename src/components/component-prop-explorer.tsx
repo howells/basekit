@@ -38,7 +38,6 @@ export function ComponentPropExplorer({
         {/* Main content - Live preview */}
         <div className="flex-1">
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Preview</h2>
             <ComponentPreview
               componentId={componentId || "Unknown"}
               category={category}

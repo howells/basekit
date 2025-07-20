@@ -1,27 +1,30 @@
 "use client";
 
-import { Input } from "@/components/inputs/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/inputs/select";
-import { IconSelect, getIconByName } from "@/components/ui/icon-select";
-import { PropExplorerConfig, isVariantProp } from "@/lib/prop-explorer";
+import { Subheading } from "@/components/ui/heading";
+import { ComponentConfig } from "@/lib/component-configs";
 import React from "react";
+import { Field } from "./forms/field";
+import { Input } from "./inputs/input";
 import { usePropExplorer } from "./prop-explorer-context";
+import { Button } from "./ui/button";
+import { IconSelect } from "./ui/icon-select";
+import {
+  Inspector,
+  InspectorBody,
+  InspectorGroup,
+  InspectorHeader,
+  InspectorSection,
+} from "./ui/inspector";
+import { Label } from "./ui/label";
 
 interface PropExplorerControlsProps {
-  config: PropExplorerConfig;
+  config: ComponentConfig["propExplorer"];
 }
 
 export function PropExplorerControls({ config }: PropExplorerControlsProps) {
-  const { props, updateProp } = usePropExplorer();
+  const { props, updateProp, resetProps } = usePropExplorer();
 
-  // Get all configurable props (only variants are configurable)
-  const configurableProps = config.variants || [];
+  if (!config) return null;
 
   // Check if component supports icons
   const supportsIcons =
@@ -31,75 +34,69 @@ export function PropExplorerControls({ config }: PropExplorerControlsProps) {
   const supportsChildren =
     config.props?.some((prop) => prop.name === "children") || false;
 
-  // Render a configurable prop control
-  const renderPropControl = (prop: {
-    name: string;
-    options: Array<{ value: string; label?: string }>;
-    description?: string;
-  }) => {
-    return (
-      <div key={prop.name} className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 capitalize">
-          {prop.name}
-        </label>
-        <Select
-          value={String(props[prop.name] || "")}
-          onValueChange={(value) => updateProp(prop.name, value)}
-        >
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {prop.options.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label || option.value}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        {prop.description && (
-          <p className="text-xs text-gray-500">{prop.description}</p>
-        )}
-      </div>
-    );
-  };
-
   return (
-    <div className="w-80 border-l bg-gray-50/30 p-4">
-      <div className="space-y-4">
-        <h4 className="text-sm font-semibold text-gray-900 mb-3">Properties</h4>
+    <Inspector>
+      <InspectorHeader>
+        <Subheading level={3}>Props</Subheading>
+        <Button onClick={resetProps} variant="ghost">
+          Reset
+        </Button>
+      </InspectorHeader>
 
-        {configurableProps.length === 0 ? (
-          <p className="text-sm text-gray-500">No configurable properties</p>
-        ) : (
-          <div className="space-y-4">
-            {/* Render configurable props */}
-            {configurableProps.map(renderPropControl)}
+      <InspectorBody>
+        <InspectorSection>
+          {/* Variants */}
+          {config.variants?.map((variant) => (
+            <InspectorGroup key={variant.name}>
+              <Field>
+                <Label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  {variant.name}
+                </Label>
+                <select
+                  value={String(props[variant.name] || "")}
+                  onChange={(e) => updateProp(variant.name, e.target.value)}
+                  className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-md bg-white dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
+                >
+                  {variant.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label || option.value}
+                    </option>
+                  ))}
+                </select>
+                {variant.description && (
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                    {variant.description}
+                  </p>
+                )}
+              </Field>
+            </InspectorGroup>
+          ))}
 
-            {/* Icon selector (if supported) */}
-            {supportsIcons && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  icon
-                </label>
+          {/* Icon Selector */}
+          {supportsIcons && (
+            <InspectorGroup>
+              <Field>
+                <Label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  Icon
+                </Label>
                 <IconSelect
                   value={String(props.icon || "")}
                   onValueChange={(value) => updateProp("icon", value)}
-                  placeholder="Select an icon..."
-                  className="w-full"
                 />
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
                   Lucide icon component to display
                 </p>
-              </div>
-            )}
+              </Field>
+            </InspectorGroup>
+          )}
 
-            {/* Children text input (if supported) */}
-            {supportsChildren && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  children
-                </label>
+          {/* Children */}
+          {supportsChildren && (
+            <InspectorGroup>
+              <Field>
+                <Label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  Children
+                </Label>
                 <Input
                   value={String(props.children || "")}
                   onChange={(e) => updateProp("children", e.target.value)}
@@ -107,14 +104,26 @@ export function PropExplorerControls({ config }: PropExplorerControlsProps) {
                     config.displayName || config.componentName
                   } text`}
                 />
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
                   The content to display inside the component
                 </p>
-              </div>
+              </Field>
+            </InspectorGroup>
+          )}
+
+          {/* Show message if no configurable props */}
+          {(!config.variants || config.variants.length === 0) &&
+            !supportsIcons &&
+            !supportsChildren && (
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                No configurable properties available
+              </p>
             )}
-          </div>
-        )}
-      </div>
-    </div>
+        </InspectorSection>
+      </InspectorBody>
+    </Inspector>
   );
 }
+
+// Keep the Inspector export for backward compatibility
+export { Inspector } from "./ui/inspector";
