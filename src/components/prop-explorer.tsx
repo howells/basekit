@@ -47,8 +47,13 @@ export const PropExplorer: React.FC<PropExplorerProps> = ({
       allProps.push(...config.variants);
     }
 
-    // Don't add regular props - they're handled separately as special cases
-    // Only include variant props in the configurable props list
+    // Add regular props that have examples (indicating they're meant to be configurable)
+    if (config.props) {
+      const configurableRegularProps = config.props.filter(
+        (prop) => prop.examples && prop.examples.length > 0
+      );
+      allProps.push(...configurableRegularProps);
+    }
 
     return allProps;
   }, [config]);

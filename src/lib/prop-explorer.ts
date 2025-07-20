@@ -340,3 +340,41 @@ export function searchProps(
       prop.type.toLowerCase().includes(lowercaseQuery)
   );
 }
+
+/**
+ * Utility to create PropExplorerConfig from tailwind-variants configuration
+ */
+export function createPropConfigFromVariants(
+  componentName: string,
+  displayName: string,
+  description: string,
+  variantsConfig: {
+    variants: Record<string, Record<string, unknown>>;
+    defaultVariants: Record<string, string>;
+  },
+  additionalProps: PropMetadata[] = []
+): PropExplorerConfig {
+  const variants = Object.entries(variantsConfig.variants).map(
+    ([variantName, options]) =>
+      createVariantPropMetadata(
+        variantName,
+        Object.keys(options).map((key) =>
+          createVariantOption(key, {
+            label: key,
+          })
+        ),
+        {
+          defaultOption: variantsConfig.defaultVariants[variantName],
+          category: "appearance",
+        }
+      )
+  );
+
+  return {
+    componentName,
+    displayName,
+    description,
+    props: additionalProps,
+    variants,
+  };
+}

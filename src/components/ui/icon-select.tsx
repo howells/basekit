@@ -188,10 +188,23 @@ export function IconSelect({
   disabled = false,
   className,
 }: IconSelectProps) {
+  const selectedIcon = value ? iconMap[value] : null;
+
   return (
     <Select value={value} onValueChange={onValueChange} disabled={disabled}>
       <SelectTrigger className={className}>
-        <SelectValue />
+        <SelectValue>
+          {selectedIcon ? (
+            <div className="flex items-center gap-2">
+              {React.createElement(selectedIcon, {
+                className: "size-4 shrink-0",
+              })}
+              <span>{value}</span>
+            </div>
+          ) : (
+            <span className="text-muted-foreground">{placeholder}</span>
+          )}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         {Object.entries(iconMap).map(([name, IconComponent]) => (

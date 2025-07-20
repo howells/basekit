@@ -1,18 +1,11 @@
-// Tremor Select [v1.0.0] - Base UI
-
 import { cx, focusInput, hasErrorInput } from "@/lib/utils";
 import { Select as BaseSelect } from "@base-ui-components/react/select";
 import { Check, ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
 import * as React from "react";
 
 const Select = BaseSelect.Root;
-Select.displayName = "Select";
-
 const SelectGroup = BaseSelect.Group;
-SelectGroup.displayName = "SelectGroup";
-
 const SelectValue = BaseSelect.Value;
-SelectValue.displayName = "SelectValue";
 
 const selectTriggerStyles = [
   cx(
