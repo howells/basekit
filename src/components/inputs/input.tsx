@@ -139,99 +139,47 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
 
 Input.displayName = "Input";
 
-// Component configuration for documentation
-export const componentConfig = {
-  id: "input",
-  name: "Input",
+// PropExplorer configuration
+export const inputPropConfig = {
+  componentName: "Input",
+  displayName: "Input",
   description:
     "A versatile input field component with various types and states.",
-  category: "inputs" as const,
 
-  importStatement: `import { Input } from "@/components/inputs/input";`,
-
-  examples: [
+  variants: [
     {
-      id: "default",
-      title: "Default",
-      description: "Basic text input field.",
-      preview: <Input placeholder="Enter text..." />,
-      code: `<Input placeholder="Enter text..." />`,
-    },
-    {
-      id: "types",
-      title: "Input Types",
-      description: "Different input types for various data.",
-      preview: (
-        <div className="space-y-3">
-          <Input type="text" placeholder="Text input" />
-          <Input type="email" placeholder="Email input" />
-          <Input type="password" placeholder="Password input" />
-          <Input type="search" placeholder="Search input" />
-        </div>
-      ),
-      code: `<div className="space-y-3">
-  <Input type="text" placeholder="Text input" />
-  <Input type="email" placeholder="Email input" />
-  <Input type="password" placeholder="Password input" />
-  <Input type="search" placeholder="Search input" />
-</div>`,
-    },
-    {
-      id: "states",
-      title: "States",
-      description: "Input with different states.",
-      preview: (
-        <div className="space-y-3">
-          <Input placeholder="Default state" />
-          <Input placeholder="Disabled state" disabled />
-          <Input placeholder="Error state" hasError />
-        </div>
-      ),
-      code: `<div className="space-y-3">
-  <Input placeholder="Default state" />
-  <Input placeholder="Disabled state" disabled />
-  <Input placeholder="Error state" hasError />
-</div>`,
+      name: "type",
+      options: [
+        { value: "text", label: "Text" },
+        { value: "email", label: "Email" },
+        { value: "password", label: "Password" },
+        { value: "search", label: "Search" },
+        { value: "number", label: "Number" },
+        { value: "tel", label: "Telephone" },
+        { value: "url", label: "URL" },
+      ],
+      defaultOption: "text",
+      description: "The type of input field.",
     },
   ],
 
-  api: [
+  props: [
     {
-      name: "Input",
-      description: "The main input component.",
-      properties: [
-        {
-          name: "type",
-          type: '"text" | "email" | "password" | "search" | "number" | ...',
-          default: '"text"',
-          description: "The type of input field.",
-        },
-        {
-          name: "placeholder",
-          type: "string",
-          description: "Placeholder text for the input.",
-        },
-        {
-          name: "hasError",
-          type: "boolean",
-          default: "false",
-          description: "Shows error styling.",
-        },
-        {
-          name: "disabled",
-          type: "boolean",
-          default: "false",
-          description: "Disables the input field.",
-        },
-        {
-          name: "enableStepper",
-          type: "boolean",
-          default: "true",
-          description: "Shows stepper controls for number inputs.",
-        },
-      ],
+      name: "placeholder",
+      type: "string",
+      description: "Placeholder text for the input field.",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "Whether the input is disabled.",
+    },
+    {
+      name: "required",
+      type: "boolean",
+      description: "Whether the input is required.",
     },
   ],
 };
 
-export { Input, inputStyles, type InputProps };
+export { Input, type InputProps };

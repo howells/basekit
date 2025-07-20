@@ -118,6 +118,15 @@ export function ComponentPreview({
       finalProps.icon = iconComponent;
     }
 
+    // Convert string booleans to actual booleans
+    Object.entries(finalProps).forEach(([key, value]) => {
+      if (value === "true") {
+        finalProps[key] = true;
+      } else if (value === "false") {
+        finalProps[key] = false;
+      }
+    });
+
     return finalProps;
   }, [props, iconComponent]);
 
