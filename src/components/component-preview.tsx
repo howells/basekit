@@ -47,6 +47,20 @@ const getComponentImportPath = (
   }
 };
 
+// Map kebab-case component names to their actual exported component names
+const getExportedComponentName = (componentId: string): string => {
+  // Handle kebab-case to PascalCase conversion
+  if (componentId.includes("-")) {
+    return componentId
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join("");
+  }
+
+  // Handle already PascalCase names
+  return componentId.charAt(0).toUpperCase() + componentId.slice(1);
+};
+
 // Create dynamic component based on componentId and category
 const createDynamicComponent = (
   componentId: string,
@@ -60,7 +74,9 @@ const createDynamicComponent = (
         category,
         componentPath
       );
-      return import(importPath).then((mod) => ({ default: mod[componentId] }));
+      const exportedName = getExportedComponentName(componentId);
+
+      return import(importPath).then((mod) => ({ default: mod[exportedName] }));
     },
     {
       loading: () => (

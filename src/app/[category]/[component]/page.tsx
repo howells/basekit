@@ -1,8 +1,12 @@
-import { ComponentExamples } from "@/components/component-examples";
 import { ComponentHeader } from "@/components/component-header";
 import { ComponentPreview } from "@/components/component-preview";
 import { PropExplorerProvider } from "@/components/prop-explorer-context";
-import { PropExplorerControls } from "@/components/prop-explorer-controls";
+import { PropExplorerContent } from "@/components/prop-explorer-controls";
+import {
+  Inspector,
+  InspectorBody,
+  InspectorHeader,
+} from "@/components/ui/inspector";
 import { COMPONENT_LIST, getComponentConfig } from "@/lib/component-registry";
 import { createComponentConfig } from "@/lib/config-helpers";
 import { notFound } from "next/navigation";
@@ -161,29 +165,25 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       {/* Header */}
       <ComponentHeader config={config} />
 
-      {/* Main Content */}
-      {config.propExplorer ? (
-        // Component with interactive props - full height layout
-        <PropExplorerProvider defaultProps={getDefaultProps()}>
-          <div className="flex flex-1 h-0">
-            {/* Main content - Live preview */}
-            <div className="flex-1 p-6">
-              <ComponentPreview
-                componentId={config.componentId || "Unknown"}
-                category={category}
-              />
-            </div>
-
-            {/* Right sidebar - Inspector */}
-            <PropExplorerControls config={config.propExplorer} />
+      {/* Main Content - Always use Inspector layout */}
+      <PropExplorerProvider defaultProps={getDefaultProps()}>
+        <div className="flex flex-1 h-0">
+          {/* Main content - Live preview */}
+          <div className="flex-1 p-6">
+            <ComponentPreview
+              componentId={config.componentId || component}
+              category={category}
+            />
           </div>
-        </PropExplorerProvider>
-      ) : (
-        // Component without interactive props - show examples
-        <div className="flex-1 p-6">
-          <ComponentExamples examples={config.examples} />
+
+          {/* Right sidebar - Inspector */}
+          <Inspector>
+            <InspectorBody>
+              <PropExplorerContent config={config.propExplorer} />
+            </InspectorBody>
+          </Inspector>
         </div>
-      )}
+      </PropExplorerProvider>
     </div>
   );
 }
