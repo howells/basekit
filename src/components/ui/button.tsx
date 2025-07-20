@@ -178,32 +178,73 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             if (!fullWidth) {
               return (
                 <span className={layoutClassName}>
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     {(isLoading || hasLeftIcon) && (
                       <m.div
-                        key={isLoading ? "loading" : "leftIcon"}
-                        className="flex items-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        key="leftIconContainer"
+                        className="flex items-center relative"
+                        initial={{
+                          opacity: 0,
+                          scale: 0.9,
+                          width: 0,
+                          marginRight: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                          width: "auto",
+                          marginRight: effectiveShouldShowChildren ? 6 : 0,
+                        }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0.9,
+                          width: 0,
+                          marginRight: 0,
+                        }}
                         transition={{
                           duration: 0.15,
                           ease: appleEasing.easeOut,
                         }}
-                        style={{
-                          marginRight: effectiveShouldShowChildren ? 6 : 0,
-                        }}
                       >
-                        {isLoading ? (
-                          <Loader
-                            size="sm"
-                            aria-label={loadingText || "Loading"}
-                          />
-                        ) : (
-                          hasLeftIcon && (
-                            <LeftIcon className="size-4 shrink-0" />
-                          )
-                        )}
+                        <div className="relative size-4 flex items-center justify-center">
+                          <AnimatePresence>
+                            {isLoading && (
+                              <m.div
+                                key="loader"
+                                className="absolute inset-0 flex items-center justify-center"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{
+                                  duration: 0.15,
+                                  ease: appleEasing.easeOut,
+                                }}
+                              >
+                                <Loader
+                                  size="sm"
+                                  aria-label={loadingText || "Loading"}
+                                />
+                              </m.div>
+                            )}
+                          </AnimatePresence>
+                          <AnimatePresence>
+                            {!isLoading && hasLeftIcon && (
+                              <m.div
+                                key="leftIcon"
+                                className="absolute inset-0 flex items-center justify-center"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{
+                                  duration: 0.15,
+                                  ease: appleEasing.easeOut,
+                                }}
+                              >
+                                <LeftIcon className="size-4 shrink-0" />
+                              </m.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
                       </m.div>
                     )}
                   </AnimatePresence>
@@ -213,15 +254,27 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       <m.div
                         key="rightIcon"
                         className="flex items-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{
+                          opacity: 0,
+                          scale: 0.9,
+                          width: 0,
+                          marginLeft: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                          width: "auto",
+                          marginLeft: effectiveShouldShowChildren ? 6 : 0,
+                        }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0.9,
+                          width: 0,
+                          marginLeft: 0,
+                        }}
                         transition={{
                           duration: 0.15,
                           ease: appleEasing.easeOut,
-                        }}
-                        style={{
-                          marginLeft: effectiveShouldShowChildren ? 6 : 0,
                         }}
                       >
                         <RightIcon className="size-4 shrink-0" />
@@ -239,40 +292,69 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   <AnimatePresence mode="wait">
                     {(isLoading || hasLeftIcon) && (
                       <m.div
-                        key={isLoading ? "loading" : "leftIcon"}
-                        className="flex items-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        key="leftIconContainer"
+                        className="flex items-center relative"
+                        initial={{ opacity: 0, scale: 0.9, width: 0 }}
+                        animate={{ opacity: 1, scale: 1, width: "auto" }}
+                        exit={{ opacity: 0, scale: 0.9, width: 0 }}
                         transition={{
                           duration: 0.15,
                           ease: appleEasing.easeOut,
                         }}
                       >
-                        {isLoading ? (
-                          <Loader
-                            size="sm"
-                            aria-label={loadingText || "Loading"}
-                          />
-                        ) : (
-                          hasLeftIcon && (
-                            <LeftIcon className="size-4 shrink-0" />
-                          )
-                        )}
+                        <div className="relative size-4 flex items-center justify-center">
+                          <AnimatePresence>
+                            {isLoading && (
+                              <m.div
+                                key="loader"
+                                className="absolute inset-0 flex items-center justify-center"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{
+                                  duration: 0.15,
+                                  ease: appleEasing.easeOut,
+                                }}
+                              >
+                                <Loader
+                                  size="sm"
+                                  aria-label={loadingText || "Loading"}
+                                />
+                              </m.div>
+                            )}
+                          </AnimatePresence>
+                          <AnimatePresence>
+                            {!isLoading && hasLeftIcon && (
+                              <m.div
+                                key="leftIcon"
+                                className="absolute inset-0 flex items-center justify-center"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{
+                                  duration: 0.15,
+                                  ease: appleEasing.easeOut,
+                                }}
+                              >
+                                <LeftIcon className="size-4 shrink-0" />
+                              </m.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
                       </m.div>
                     )}
                   </AnimatePresence>
                   <div className="flex-1 text-center">
                     {effectiveShouldShowChildren && effectiveChildren}
                   </div>
-                  <AnimatePresence>
+                  <AnimatePresence mode="wait">
                     {hasRightIcon && (
                       <m.div
                         key="rightIcon"
                         className="flex items-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{ opacity: 0, scale: 0.9, width: 0 }}
+                        animate={{ opacity: 1, scale: 1, width: "auto" }}
+                        exit={{ opacity: 0, scale: 0.9, width: 0 }}
                         transition={{
                           duration: 0.15,
                           ease: appleEasing.easeOut,
@@ -291,32 +373,73 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               return (
                 <span className={layoutClassName}>
                   <div className="flex items-center">
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence>
                       {(isLoading || hasLeftIcon) && (
                         <m.div
-                          key={isLoading ? "loading" : "leftIcon"}
-                          className="flex items-center"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
+                          key="leftIconContainer"
+                          className="flex items-center relative"
+                          initial={{
+                            opacity: 0,
+                            scale: 0.9,
+                            width: 0,
+                            marginRight: 0,
+                          }}
+                          animate={{
+                            opacity: 1,
+                            scale: 1,
+                            width: "auto",
+                            marginRight: effectiveShouldShowChildren ? 6 : 0,
+                          }}
+                          exit={{
+                            opacity: 0,
+                            scale: 0.9,
+                            width: 0,
+                            marginRight: 0,
+                          }}
                           transition={{
                             duration: 0.15,
                             ease: appleEasing.easeOut,
                           }}
-                          style={{
-                            marginRight: effectiveShouldShowChildren ? 6 : 0,
-                          }}
                         >
-                          {isLoading ? (
-                            <Loader
-                              size="sm"
-                              aria-label={loadingText || "Loading"}
-                            />
-                          ) : (
-                            hasLeftIcon && (
-                              <LeftIcon className="size-4 shrink-0" />
-                            )
-                          )}
+                          <div className="relative size-4 flex items-center justify-center">
+                            <AnimatePresence>
+                              {isLoading && (
+                                <m.div
+                                  key="loader"
+                                  className="absolute inset-0 flex items-center justify-center"
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{
+                                    duration: 0.15,
+                                    ease: appleEasing.easeOut,
+                                  }}
+                                >
+                                  <Loader
+                                    size="sm"
+                                    aria-label={loadingText || "Loading"}
+                                  />
+                                </m.div>
+                              )}
+                            </AnimatePresence>
+                            <AnimatePresence>
+                              {!isLoading && hasLeftIcon && (
+                                <m.div
+                                  key="leftIcon"
+                                  className="absolute inset-0 flex items-center justify-center"
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{
+                                    duration: 0.15,
+                                    ease: appleEasing.easeOut,
+                                  }}
+                                >
+                                  <LeftIcon className="size-4 shrink-0" />
+                                </m.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
                         </m.div>
                       )}
                     </AnimatePresence>
@@ -326,9 +449,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     <m.div
                       key="rightIcon"
                       className="flex items-center"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                      initial={{ opacity: 0, scale: 0.9, width: 0 }}
+                      animate={{ opacity: 1, scale: 1, width: "auto" }}
+                      exit={{ opacity: 0, scale: 0.9, width: 0 }}
                       transition={{ duration: 0.15, ease: appleEasing.easeOut }}
                     >
                       <RightIcon className="size-4 shrink-0" />
@@ -341,27 +464,70 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             // Full width with left/right alignment without right icon: normal flow
             return (
               <span className={layoutClassName}>
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                   {(isLoading || hasLeftIcon) && (
                     <m.div
-                      key={isLoading ? "loading" : "leftIcon"}
-                      className="flex items-center"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15, ease: appleEasing.easeOut }}
-                      style={{
+                      key="leftIconContainer"
+                      className="flex items-center relative"
+                      initial={{
+                        opacity: 0,
+                        scale: 0.9,
+                        width: 0,
+                        marginRight: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        scale: 1,
+                        width: "auto",
                         marginRight: effectiveShouldShowChildren ? 6 : 0,
                       }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.9,
+                        width: 0,
+                        marginRight: 0,
+                      }}
+                      transition={{ duration: 0.15, ease: appleEasing.easeOut }}
                     >
-                      {isLoading ? (
-                        <Loader
-                          size="sm"
-                          aria-label={loadingText || "Loading"}
-                        />
-                      ) : (
-                        hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
-                      )}
+                      <div className="relative size-4 flex items-center justify-center">
+                        <AnimatePresence>
+                          {isLoading && (
+                            <m.div
+                              key="loader"
+                              className="absolute inset-0 flex items-center justify-center"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{
+                                duration: 0.15,
+                                ease: appleEasing.easeOut,
+                              }}
+                            >
+                              <Loader
+                                size="sm"
+                                aria-label={loadingText || "Loading"}
+                              />
+                            </m.div>
+                          )}
+                        </AnimatePresence>
+                        <AnimatePresence>
+                          {!isLoading && hasLeftIcon && (
+                            <m.div
+                              key="leftIcon"
+                              className="absolute inset-0 flex items-center justify-center"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{
+                                duration: 0.15,
+                                ease: appleEasing.easeOut,
+                              }}
+                            >
+                              <LeftIcon className="size-4 shrink-0" />
+                            </m.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     </m.div>
                   )}
                 </AnimatePresence>
@@ -377,10 +543,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className: cx(
         buttonVariants({ variant, size }),
         fullWidth && "w-full max-w-[95vw]",
-        textAlign === "left" && "text-left",
-        textAlign === "center" && "text-center",
-        textAlign === "right" && "text-right",
-        !textAlign && "text-center", // default to center
+        // Only apply text alignment classes when not using fullWidth center (which has its own layout)
+        !(fullWidth && textAlign === "center") &&
+          textAlign === "left" &&
+          "text-left",
+        !(fullWidth && textAlign === "center") &&
+          textAlign === "center" &&
+          "text-center",
+        !(fullWidth && textAlign === "center") &&
+          textAlign === "right" &&
+          "text-right",
+        !(fullWidth && textAlign === "center") && !textAlign && "text-center", // default to center
         className
       ),
       disabled: disabled || isLoading,
