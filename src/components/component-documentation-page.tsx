@@ -56,7 +56,10 @@ export function ComponentDocumentationPage({
       {/* Examples or Prop Explorer */}
       {config.propExplorer ? (
         <div className="space-y-6">
-          <PropExplorer config={config.propExplorer} />
+          <PropExplorer
+            config={config.propExplorer}
+            componentId={config.componentId}
+          />
         </div>
       ) : (
         <div className="space-y-8">

@@ -74,6 +74,7 @@ export function createComponentConfig(
     installation: options.installation,
     api: options.api,
     propExplorer: options.propExplorer,
+    componentId: options.componentId,
     accessibility: options.accessibility,
     sections: options.sections,
   };

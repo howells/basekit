@@ -5,10 +5,10 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 interface ComponentPageProps {
-  params: {
+  params: Promise<{
     category: string;
     component: string;
-  };
+  }>;
 }
 
 // Function to dynamically load component config
@@ -56,6 +56,22 @@ async function loadComponentConfig(componentId: string, category: string) {
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 
+      // Try to extract the component itself
+      // For "badge" componentId, name becomes "Badge", look for exact match
+      const componentName = name.replace(/\s/g, ""); // "Badge"
+
+      // Try multiple extraction strategies
+      let component = componentModule[componentName]; // Try "Badge"
+      if (!component) {
+        component = componentModule.default; // Try default export
+      }
+      if (!component) {
+        // Try the componentId with first letter capitalized
+        const capitalizedId =
+          componentId.charAt(0).toUpperCase() + componentId.slice(1);
+        component = componentModule[capitalizedId]; // Try "Badge" from "badge"
+      }
+
       return createComponentConfig(
         componentId,
         name,
@@ -63,6 +79,7 @@ async function loadComponentConfig(componentId: string, category: string) {
         category as "ui" | "inputs" | "forms" | "charts",
         {
           propExplorer: componentModule[propConfigKey],
+          componentId: componentName, // Pass the component name instead
           examples: componentModule[propConfigKey].examples || [
             {
               id: "basic",
@@ -118,7 +135,7 @@ async function loadComponentConfig(componentId: string, category: string) {
 }
 
 export default async function ComponentPage({ params }: ComponentPageProps) {
-  const { category, component } = params;
+  const { category, component } = await params;
 
   // Load component configuration
   const config = await loadComponentConfig(component, category);

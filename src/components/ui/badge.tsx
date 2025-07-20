@@ -1,5 +1,7 @@
 // Tremor Badge [v1.0.0]
 
+import { mergeProps } from "@base-ui-components/react/merge-props";
+import { useRender } from "@base-ui-components/react/use-render";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
@@ -14,7 +16,7 @@ import { cx } from "@/lib/utils";
 
 const badgeVariants = tv({
   base: cx(
-    "inline-flex items-center gap-x-1 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
+    "inline-flex items-center gap-x-1 whitespace-nowrap rounded-md font-medium ring-1 ring-inset"
   ),
   variants: {
     variant: {
@@ -39,26 +41,76 @@ const badgeVariants = tv({
         "dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20",
       ],
     },
+    size: {
+      sm: "px-1.5 py-0.5 text-xs",
+      base: "px-2 py-1 text-xs",
+      lg: "px-2.5 py-1.5 text-sm",
+    },
   },
   defaultVariants: {
     variant: "default",
+    size: "base",
   },
 });
 
+// Helper function to get icon size based on badge size
+const getIconSize = (size: "sm" | "base" | "lg" = "base") => {
+  switch (size) {
+    case "sm":
+      return "size-3";
+    case "base":
+      return "size-4";
+    case "lg":
+      return "size-5";
+    default:
+      return "size-4";
+  }
+};
+
 interface BadgeProps
-  extends React.ComponentPropsWithoutRef<"span">,
-    VariantProps<typeof badgeVariants> {}
+  extends useRender.ComponentProps<"span">,
+    VariantProps<typeof badgeVariants> {
+  icon?: React.ComponentType<{ className?: string }>;
+  iconPosition?: "left" | "right";
+}
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, variant, ...props }: BadgeProps, forwardedRef) => {
-    return (
-      <span
-        ref={forwardedRef}
-        className={cx(badgeVariants({ variant }), className)}
-        tremor-id="tremor-raw"
-        {...props}
-      />
-    );
+  (
+    {
+      render = <span />,
+      variant,
+      size,
+      icon: Icon,
+      iconPosition = "left",
+      children,
+      ...otherProps
+    }: BadgeProps,
+    forwardedRef
+  ) => {
+    const iconSizeClass = getIconSize(size);
+
+    const defaultProps: useRender.ElementProps<"span"> = {
+      className: cx(badgeVariants({ variant, size })),
+      children: (
+        <>
+          {Icon && iconPosition === "left" && (
+            <Icon className={cx(iconSizeClass, "shrink-0")} />
+          )}
+          {children}
+          {Icon && iconPosition === "right" && (
+            <Icon className={cx(iconSizeClass, "shrink-0")} />
+          )}
+        </>
+      ),
+    };
+
+    const element = useRender({
+      render,
+      ref: forwardedRef,
+      props: mergeProps<"span">(defaultProps, otherProps),
+    });
+
+    return element;
   }
 );
 
@@ -77,6 +129,11 @@ const badgePropConfig: PropExplorerConfig = {
       category: "content",
       required: true,
       examples: ["New", "Beta", "Pro"],
+    }),
+    createPropMetadata("icon", "React.ComponentType", {
+      description: "Lucide icon component to display",
+      category: "appearance",
+      examples: ["Check", "Star", "X", "Heart"],
     }),
     createPropMetadata("className", "string", {
       description: "Additional CSS classes to apply to the badge",
@@ -185,6 +242,54 @@ const badgePropConfig: PropExplorerConfig = {
         category: "appearance",
       }
     ),
+    createVariantPropMetadata(
+      "size",
+      [
+        createVariantOption("sm", {
+          label: "Small",
+          description: "Compact badge for tight spaces",
+          preview: <Badge size="sm">Small</Badge>,
+          classes: ["px-1.5", "py-0.5", "text-xs"],
+        }),
+        createVariantOption("base", {
+          label: "Base",
+          description: "Standard badge size",
+          preview: <Badge size="base">Base</Badge>,
+          classes: ["px-2", "py-1", "text-xs"],
+        }),
+        createVariantOption("lg", {
+          label: "Large",
+          description: "Larger badge for emphasis",
+          preview: <Badge size="lg">Large</Badge>,
+          classes: ["px-2.5", "py-1.5", "text-sm"],
+        }),
+      ],
+      {
+        description: "The size of the badge",
+        defaultOption: "base",
+        category: "appearance",
+      }
+    ),
+    createVariantPropMetadata(
+      "iconPosition",
+      [
+        createVariantOption("left", {
+          label: "Left",
+          description: "Icon appears on the left side",
+          preview: <Badge iconPosition="left">Left</Badge>,
+        }),
+        createVariantOption("right", {
+          label: "Right",
+          description: "Icon appears on the right side",
+          preview: <Badge iconPosition="right">Right</Badge>,
+        }),
+      ],
+      {
+        description: "Position of the icon relative to the text",
+        defaultOption: "left",
+        category: "appearance",
+      }
+    ),
   ],
 
   // Event handlers
@@ -281,6 +386,40 @@ const badgePropConfig: PropExplorerConfig = {
       highlightedProps: ["children"],
     },
     {
+      id: "sizes",
+      title: "Different Sizes",
+      description: "Badge in different sizes",
+      props: { size: "base" },
+      preview: (
+        <div className="flex gap-2 items-center flex-wrap">
+          <Badge size="sm">Small</Badge>
+          <Badge size="base">Base</Badge>
+          <Badge size="lg">Large</Badge>
+        </div>
+      ),
+      code: `<Badge size="sm">Small</Badge>
+<Badge size="base">Base</Badge>
+<Badge size="lg">Large</Badge>`,
+      highlightedProps: ["size"],
+    },
+    {
+      id: "with-icon",
+      title: "With Icon",
+      description: "Badge with left and right positioned icons",
+      props: { variant: "success", children: "Completed" },
+      preview: (
+        <div className="flex gap-2 flex-wrap">
+          <Badge variant="success">Completed</Badge>
+          <Badge variant="error">Failed</Badge>
+        </div>
+      ),
+      code: `import { Check, X } from "lucide-react";
+
+<Badge variant="success" icon={Check} iconPosition="left">Completed</Badge>
+<Badge variant="error" icon={X} iconPosition="right">Failed</Badge>`,
+      highlightedProps: ["icon", "iconPosition"],
+    },
+    {
       id: "variants",
       title: "All Variants",
       description: "Badge in different visual styles",
@@ -300,6 +439,31 @@ const badgePropConfig: PropExplorerConfig = {
 <Badge variant="error">Error</Badge>
 <Badge variant="warning">Warning</Badge>`,
       highlightedProps: ["variant"],
+    },
+    {
+      id: "size-with-icons",
+      title: "Sizes with Icons",
+      description: "Different badge sizes with icons showing proper scaling",
+      props: { size: "base", variant: "success" },
+      preview: (
+        <div className="flex gap-2 items-center flex-wrap">
+          <Badge size="sm" variant="success">
+            Small
+          </Badge>
+          <Badge size="base" variant="success">
+            Base
+          </Badge>
+          <Badge size="lg" variant="success">
+            Large
+          </Badge>
+        </div>
+      ),
+      code: `import { Check } from "lucide-react";
+
+<Badge size="sm" variant="success" icon={Check}>Small</Badge>
+<Badge size="base" variant="success" icon={Check}>Base</Badge>
+<Badge size="lg" variant="success" icon={Check}>Large</Badge>`,
+      highlightedProps: ["size", "icon"],
     },
     {
       id: "interactive",

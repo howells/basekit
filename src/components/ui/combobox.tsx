@@ -3,6 +3,7 @@
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -58,21 +59,24 @@ export function Combobox({
   return (
     <div className={cx(className)}>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger
-          role="combobox"
-          aria-expanded={open}
-          disabled={disabled}
-          className={cx(
-            width,
-            "justify-between",
-            !selectedOption && "text-zinc-500 dark:text-zinc-400",
-            buttonClassName
-          )}
-        >
-          <span className="truncate">
-            {selectedOption ? selectedOption.label : placeholder}
-          </span>
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        <PopoverTrigger>
+          <Button
+            variant="secondary"
+            role="combobox"
+            aria-expanded={open}
+            disabled={disabled}
+            className={cx(
+              width,
+              "justify-between",
+              !selectedOption && "text-zinc-500 dark:text-zinc-400",
+              buttonClassName
+            )}
+          >
+            <span className="truncate">
+              {selectedOption ? selectedOption.label : placeholder}
+            </span>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
         </PopoverTrigger>
         <PopoverContent
           className={cx(width, "p-0", popoverClassName)}

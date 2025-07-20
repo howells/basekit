@@ -56,6 +56,9 @@ export interface ComponentConfig {
   // Prop Explorer Configuration (optional)
   propExplorer?: PropExplorerConfig;
 
+  // Component identifier for prop explorer (optional)
+  componentId?: string;
+
   // Accessibility information
   accessibility?: {
     pattern?: {
