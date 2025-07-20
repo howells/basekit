@@ -1,0 +1,342 @@
+// Prop Explorer System [v1.0.0]
+// Self-documenting, extensible prop exploration for StencilUI components
+
+import { VariantProps } from "tailwind-variants";
+
+/**
+ * Base prop metadata that can be extracted from TypeScript types
+ */
+export interface PropMetadata {
+  /** The prop name */
+  name: string;
+  /** TypeScript type definition */
+  type: string;
+  /** Default value if any */
+  defaultValue?: string | number | boolean;
+  /** Whether the prop is required */
+  required?: boolean;
+  /** Human-readable description */
+  description?: string;
+  /** Category for grouping props in the explorer */
+  category?: PropCategory;
+  /** Whether this prop is deprecated */
+  deprecated?: boolean | string;
+  /** Version when this prop was added */
+  since?: string;
+  /** Examples of valid values */
+  examples?: (string | number | boolean)[];
+  /** Link to related documentation */
+  docLink?: string;
+}
+
+/**
+ * Categories for organizing props in the explorer
+ */
+export type PropCategory =
+  | "appearance"
+  | "behavior"
+  | "content"
+  | "interaction"
+  | "layout"
+  | "accessibility"
+  | "data"
+  | "event"
+  | "advanced";
+
+/**
+ * Variant prop metadata with additional variant-specific information
+ */
+export interface VariantPropMetadata extends PropMetadata {
+  /** Available variant options */
+  options: VariantOption[];
+  /** The default variant */
+  defaultOption?: string;
+}
+
+/**
+ * Individual variant option metadata
+ */
+export interface VariantOption {
+  /** The option value */
+  value: string;
+  /** Display label for the option */
+  label?: string;
+  /** Description of what this option does */
+  description?: string;
+  /** Visual preview or example */
+  preview?: React.ReactNode;
+  /** CSS classes applied by this variant */
+  classes?: string[];
+  /** Whether this option is deprecated */
+  deprecated?: boolean | string;
+}
+
+/**
+ * Event handler prop metadata
+ */
+export interface EventPropMetadata extends PropMetadata {
+  /** Event handler signature */
+  signature: string;
+  /** Parameters passed to the event handler */
+  parameters: EventParameter[];
+  /** When this event is triggered */
+  trigger: string;
+}
+
+/**
+ * Event parameter metadata
+ */
+export interface EventParameter {
+  name: string;
+  type: string;
+  description?: string;
+}
+
+/**
+ * Slot/children prop metadata
+ */
+export interface SlotPropMetadata extends PropMetadata {
+  /** Expected child component types */
+  acceptedChildren?: string[];
+  /** Whether multiple children are allowed */
+  multiple?: boolean;
+  /** Render prop signature if applicable */
+  renderPropSignature?: string;
+}
+
+/**
+ * Complete prop explorer configuration for a component
+ */
+export interface PropExplorerConfig {
+  /** Component name */
+  componentName: string;
+  /** Component display name */
+  displayName?: string;
+  /** Component description */
+  description?: string;
+  /** All props for this component */
+  props: PropMetadata[];
+  /** Variant props (tailwind-variants) */
+  variants?: VariantPropMetadata[];
+  /** Event handler props */
+  events?: EventPropMetadata[];
+  /** Slot/children props */
+  slots?: SlotPropMetadata[];
+  /** Related components */
+  relatedComponents?: string[];
+  /** Component examples showing different prop combinations */
+  examples?: PropExample[];
+}
+
+/**
+ * Example showing specific prop combinations
+ */
+export interface PropExample {
+  id: string;
+  title: string;
+  description?: string;
+  /** Props used in this example */
+  props: Record<string, unknown>;
+  /** React component preview */
+  preview: React.ReactNode;
+  /** Code snippet */
+  code?: string;
+  /** Highlighted props in this example */
+  highlightedProps?: string[];
+}
+
+/**
+ * Utility type to extract variant props from tailwind-variants
+ */
+export type ExtractVariantProps<T> = T extends VariantProps<infer V>
+  ? V
+  : never;
+
+/**
+ * JSDoc-based prop documentation decorator
+ * This allows us to add rich documentation directly in component prop interfaces
+ */
+export interface PropDocumentation {
+  /**
+   * @description Human-readable description of the prop
+   * @category The category this prop belongs to
+   * @defaultValue Default value for the prop
+   * @example Example usage of the prop
+   * @since Version when this prop was added
+   * @deprecated Whether this prop is deprecated and why
+   * @docLink Link to additional documentation
+   */
+  [key: string]: unknown;
+}
+
+/**
+ * Helper to create prop metadata
+ */
+export function createPropMetadata(
+  name: string,
+  type: string,
+  options: Omit<PropMetadata, "name" | "type"> = {}
+): PropMetadata {
+  return {
+    name,
+    type,
+    ...options,
+  };
+}
+
+/**
+ * Helper to create variant prop metadata
+ */
+export function createVariantPropMetadata(
+  name: string,
+  options: VariantOption[],
+  config: Omit<VariantPropMetadata, "name" | "type" | "options"> = {}
+): VariantPropMetadata {
+  return {
+    name,
+    type: options.map((opt) => `"${opt.value}"`).join(" | "),
+    options,
+    category: "appearance",
+    ...config,
+  };
+}
+
+/**
+ * Helper to create variant options
+ */
+export function createVariantOption(
+  value: string,
+  config: Omit<VariantOption, "value"> = {}
+): VariantOption {
+  return {
+    value,
+    label: config.label || value,
+    ...config,
+  };
+}
+
+/**
+ * Helper to create event prop metadata
+ */
+export function createEventPropMetadata(
+  name: string,
+  signature: string,
+  trigger: string,
+  parameters: EventParameter[] = [],
+  config: Omit<
+    EventPropMetadata,
+    "name" | "type" | "signature" | "trigger" | "parameters"
+  > = {}
+): EventPropMetadata {
+  return {
+    name,
+    type: signature,
+    signature,
+    trigger,
+    parameters,
+    category: "event",
+    ...config,
+  };
+}
+
+/**
+ * Type guard to check if prop is a variant prop
+ */
+export function isVariantProp(prop: PropMetadata): prop is VariantPropMetadata {
+  return "options" in prop;
+}
+
+/**
+ * Type guard to check if prop is an event prop
+ */
+export function isEventProp(prop: PropMetadata): prop is EventPropMetadata {
+  return "signature" in prop;
+}
+
+/**
+ * Type guard to check if prop is a slot prop
+ */
+export function isSlotProp(prop: PropMetadata): prop is SlotPropMetadata {
+  return "acceptedChildren" in prop || "renderPropSignature" in prop;
+}
+
+/**
+ * Utility to group props by category
+ */
+export function groupPropsByCategory(
+  props: PropMetadata[]
+): Record<PropCategory, PropMetadata[]> {
+  const grouped: Record<PropCategory, PropMetadata[]> = {
+    appearance: [],
+    behavior: [],
+    content: [],
+    interaction: [],
+    layout: [],
+    accessibility: [],
+    data: [],
+    event: [],
+    advanced: [],
+  };
+
+  props.forEach((prop) => {
+    const category = prop.category || "advanced";
+    grouped[category].push(prop);
+  });
+
+  return grouped;
+}
+
+/**
+ * Registry for all component prop configurations
+ */
+export const propExplorerRegistry: Record<string, PropExplorerConfig> = {};
+
+/**
+ * Register a component's prop explorer configuration
+ */
+export function registerPropExplorer(config: PropExplorerConfig): void {
+  propExplorerRegistry[config.componentName] = config;
+}
+
+/**
+ * Get prop explorer configuration for a component
+ */
+export function getPropExplorerConfig(
+  componentName: string
+): PropExplorerConfig | undefined {
+  return propExplorerRegistry[componentName];
+}
+
+/**
+ * Get all registered component names
+ */
+export function getAllPropExplorerComponents(): string[] {
+  return Object.keys(propExplorerRegistry);
+}
+
+/**
+ * Search props by name or description
+ */
+export function searchProps(
+  componentName: string,
+  query: string
+): PropMetadata[] {
+  const config = getPropExplorerConfig(componentName);
+  if (!config) return [];
+
+  const allProps = [
+    ...config.props,
+    ...(config.variants || []),
+    ...(config.events || []),
+    ...(config.slots || []),
+  ];
+
+  const lowercaseQuery = query.toLowerCase();
+
+  return allProps.filter(
+    (prop) =>
+      prop.name.toLowerCase().includes(lowercaseQuery) ||
+      prop.description?.toLowerCase().includes(lowercaseQuery) ||
+      prop.type.toLowerCase().includes(lowercaseQuery)
+  );
+}

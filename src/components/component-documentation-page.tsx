@@ -4,6 +4,7 @@ import { ComponentConfig } from "@/lib/component-configs";
 import React from "react";
 import { ApiReference } from "./api-reference";
 import { DocExample } from "./doc-example";
+import { PropExplorer } from "./prop-explorer";
 import { Badge } from "./ui/badge";
 import { CodeBlock } from "./ui/code-block";
 import { Heading } from "./ui/heading";
@@ -17,9 +18,9 @@ export function ComponentDocumentationPage({
   config,
 }: ComponentDocumentationPageProps) {
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div className="">
       {/* Header */}
-      <div className="space-y-4">
+      <div className="space-y-2 px-8 py-8 border-b">
         <div className="flex items-center gap-3">
           <Heading level={1}>{config.name}</Heading>
           {config.badge && <Badge variant="neutral">{config.badge}</Badge>}
@@ -52,34 +53,32 @@ export function ComponentDocumentationPage({
         </div>
       )}
 
-      {/* Usage */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-          Usage
-        </h2>
-        <CodeBlock language="tsx">{config.importStatement}</CodeBlock>
-      </div>
+      {/* Examples or Prop Explorer */}
+      {config.propExplorer ? (
+        <div className="space-y-6">
+          <PropExplorer config={config.propExplorer} />
+        </div>
+      ) : (
+        <div className="space-y-8">
+          <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
+            Examples
+          </h2>
 
-      {/* Examples */}
-      <div className="space-y-8">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-          Examples
-        </h2>
+          {config.examples.map((example) => {
+            const ExampleWrapper = example.wrapper || React.Fragment;
 
-        {config.examples.map((example) => {
-          const ExampleWrapper = example.wrapper || React.Fragment;
-
-          return (
-            <DocExample
-              key={example.id}
-              title={example.title}
-              description={example.description}
-              preview={<ExampleWrapper>{example.preview}</ExampleWrapper>}
-              code={example.code}
-            />
-          );
-        })}
-      </div>
+            return (
+              <DocExample
+                key={example.id}
+                title={example.title}
+                description={example.description}
+                preview={<ExampleWrapper>{example.preview}</ExampleWrapper>}
+                code={example.code}
+              />
+            );
+          })}
+        </div>
+      )}
 
       {/* API Reference */}
       {config.api && config.api.length > 0 && (

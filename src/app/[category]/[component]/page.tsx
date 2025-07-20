@@ -45,6 +45,40 @@ async function loadComponentConfig(componentId: string, category: string) {
     if (componentModule.componentConfig) {
       return componentModule.componentConfig;
     }
+
+    // Check if component exports a prop explorer config
+    const propConfigKey = `${componentId.replace(/-/g, "")}PropConfig`;
+
+    if (componentModule[propConfigKey]) {
+      // Create a basic component config with prop explorer
+      const name = componentId
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+      return createComponentConfig(
+        componentId,
+        name,
+        componentModule[propConfigKey].description || `${name} component`,
+        category as "ui" | "inputs" | "forms" | "charts",
+        {
+          propExplorer: componentModule[propConfigKey],
+          examples: componentModule[propConfigKey].examples || [
+            {
+              id: "basic",
+              title: "Basic Usage",
+              description: "Basic component usage",
+              preview: (
+                <div className="p-4 text-center text-zinc-500">
+                  See Props section for interactive examples
+                </div>
+              ),
+              code: `// See Props section for examples`,
+            },
+          ],
+        }
+      );
+    }
   } catch (error) {
     console.warn(`Could not load component: ${componentId}`, error);
   }

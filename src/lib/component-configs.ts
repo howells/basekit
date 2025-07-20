@@ -1,4 +1,5 @@
 import React from "react";
+import { PropExplorerConfig } from "./prop-explorer";
 
 // Base types for component documentation
 export interface ComponentExample {
@@ -51,6 +52,9 @@ export interface ComponentConfig {
 
   // API Reference
   api?: APIComponent[];
+
+  // Prop Explorer Configuration (optional)
+  propExplorer?: PropExplorerConfig;
 
   // Accessibility information
   accessibility?: {

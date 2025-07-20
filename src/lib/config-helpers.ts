@@ -73,6 +73,7 @@ export function createComponentConfig(
     examples: options.examples || [],
     installation: options.installation,
     api: options.api,
+    propExplorer: options.propExplorer,
     accessibility: options.accessibility,
     sections: options.sections,
   };
