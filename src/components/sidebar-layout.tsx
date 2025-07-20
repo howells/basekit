@@ -2,6 +2,7 @@
 
 "use client";
 
+import { COMPONENT_LIST } from "@/lib/component-registry";
 import React from "react";
 import { Heading } from "./ui/heading";
 import {
@@ -45,54 +46,74 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
             <SidebarSection>
               <SidebarHeading>UI Components</SidebarHeading>
-              <SidebarItem href="/ui/accordion" current>
-                <SidebarLabel>Accordion</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/badge">
-                <SidebarLabel>Badge</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/button">
-                <SidebarLabel>Button</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/card">
-                <SidebarLabel>Card</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/dialog">
-                <SidebarLabel>Dialog</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/input">
-                <SidebarLabel>Input</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/select">
-                <SidebarLabel>Select</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/switch">
-                <SidebarLabel>Switch</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/tabs">
-                <SidebarLabel>Tabs</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/ui/tooltip">
-                <SidebarLabel>Tooltip</SidebarLabel>
-              </SidebarItem>
+              {COMPONENT_LIST.ui.map((componentId) => {
+                const name = componentId
+                  .split("-")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+                return (
+                  <SidebarItem key={componentId} href={`/ui/${componentId}`}>
+                    <SidebarLabel>{name}</SidebarLabel>
+                  </SidebarItem>
+                );
+              })}
             </SidebarSection>
 
             <SidebarDivider />
 
             <SidebarSection>
-              <SidebarHeading>Charts</SidebarHeading>
-              <SidebarItem href="/charts/area-chart">
-                <SidebarLabel>Area Chart</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/charts/bar-chart">
-                <SidebarLabel>Bar Chart</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/charts/line-chart">
-                <SidebarLabel>Line Chart</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/charts/donut-chart">
-                <SidebarLabel>Donut Chart</SidebarLabel>
-              </SidebarItem>
+              <SidebarHeading>Input Components</SidebarHeading>
+              {COMPONENT_LIST.inputs.map((componentId) => {
+                const name = componentId
+                  .split("-")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+                return (
+                  <SidebarItem
+                    key={componentId}
+                    href={`/inputs/${componentId}`}
+                  >
+                    <SidebarLabel>{name}</SidebarLabel>
+                  </SidebarItem>
+                );
+              })}
+            </SidebarSection>
+
+            <SidebarDivider />
+
+            <SidebarSection>
+              <SidebarHeading>Form Components</SidebarHeading>
+              {COMPONENT_LIST.forms.map((componentId) => {
+                const name = componentId
+                  .split("-")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+                return (
+                  <SidebarItem key={componentId} href={`/forms/${componentId}`}>
+                    <SidebarLabel>{name}</SidebarLabel>
+                  </SidebarItem>
+                );
+              })}
+            </SidebarSection>
+
+            <SidebarDivider />
+
+            <SidebarSection>
+              <SidebarHeading>Chart Components</SidebarHeading>
+              {COMPONENT_LIST.charts.map((componentId) => {
+                const name = componentId
+                  .split("-")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+                return (
+                  <SidebarItem
+                    key={componentId}
+                    href={`/charts/${componentId}`}
+                  >
+                    <SidebarLabel>{name}</SidebarLabel>
+                  </SidebarItem>
+                );
+              })}
             </SidebarSection>
           </SidebarBody>
         </Sidebar>

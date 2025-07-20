@@ -888,4 +888,128 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
 
 BarChart.displayName = "BarChart";
 
+// Component configuration for documentation
+export const componentConfig = {
+  id: "bar-chart",
+  name: "Bar Chart",
+  description:
+    "A responsive bar chart component for displaying categorical data with customizable styling and interactions.",
+  category: "charts" as const,
+
+  importStatement: `import { BarChart } from "@/components/charts/bar-chart";`,
+
+  examples: [
+    {
+      id: "default",
+      title: "Default",
+      description: "Basic bar chart with sample data.",
+      preview: (
+        <div className="h-80">
+          <BarChart
+            data={[
+              { month: "Jan", sales: 2400 },
+              { month: "Feb", sales: 1398 },
+              { month: "Mar", sales: 9800 },
+              { month: "Apr", sales: 3908 },
+              { month: "May", sales: 4800 },
+              { month: "Jun", sales: 3800 },
+            ]}
+            index="month"
+            categories={["sales"]}
+            valueFormatter={(value) => `$${value.toLocaleString()}`}
+          />
+        </div>
+      ),
+      code: `<BarChart
+  data={[
+    { month: "Jan", sales: 2400 },
+    { month: "Feb", sales: 1398 },
+    { month: "Mar", sales: 9800 },
+    { month: "Apr", sales: 3908 },
+    { month: "May", sales: 4800 },
+    { month: "Jun", sales: 3800 },
+  ]}
+  index="month"
+  categories={["sales"]}
+  valueFormatter={(value) => \`$\${value.toLocaleString()}\`}
+/>`,
+    },
+    {
+      id: "multiple-series",
+      title: "Multiple Series",
+      description: "Bar chart with multiple data series.",
+      preview: (
+        <div className="h-80">
+          <BarChart
+            data={[
+              { month: "Jan", sales: 2400, profit: 1200 },
+              { month: "Feb", sales: 1398, profit: 800 },
+              { month: "Mar", sales: 9800, profit: 4900 },
+              { month: "Apr", sales: 3908, profit: 2000 },
+            ]}
+            index="month"
+            categories={["sales", "profit"]}
+            valueFormatter={(value) => `$${value.toLocaleString()}`}
+          />
+        </div>
+      ),
+      code: `<BarChart
+  data={[
+    { month: "Jan", sales: 2400, profit: 1200 },
+    { month: "Feb", sales: 1398, profit: 800 },
+    { month: "Mar", sales: 9800, profit: 4900 },
+    { month: "Apr", sales: 3908, profit: 2000 },
+  ]}
+  index="month"
+  categories={["sales", "profit"]}
+  valueFormatter={(value) => \`$\${value.toLocaleString()}\`}
+/>`,
+    },
+  ],
+
+  api: [
+    {
+      name: "BarChart",
+      description: "The main bar chart component.",
+      properties: [
+        {
+          name: "data",
+          type: "Record<string, any>[]",
+          description: "Array of data objects to display in the chart.",
+          required: true,
+        },
+        {
+          name: "index",
+          type: "string",
+          description: "Key from data objects to use as the x-axis.",
+          required: true,
+        },
+        {
+          name: "categories",
+          type: "string[]",
+          description: "Keys from data objects to use as data series.",
+          required: true,
+        },
+        {
+          name: "valueFormatter",
+          type: "(value: number) => string",
+          description: "Function to format values in tooltips and labels.",
+        },
+        {
+          name: "showLegend",
+          type: "boolean",
+          default: "true",
+          description: "Whether to show the chart legend.",
+        },
+        {
+          name: "showTooltip",
+          type: "boolean",
+          default: "true",
+          description: "Whether to show tooltips on hover.",
+        },
+      ],
+    },
+  ],
+};
+
 export { BarChart, type BarChartEventProps, type TooltipProps };

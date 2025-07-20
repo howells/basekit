@@ -146,4 +146,96 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
+// Component configuration for documentation
+export const componentConfig = {
+  id: "button",
+  name: "Button",
+  description:
+    "A clickable button component with multiple variants and states.",
+  category: "ui" as const,
+
+  importStatement: `import { Button } from "@/components/ui/button";`,
+
+  examples: [
+    {
+      id: "default",
+      title: "Default",
+      description: "Primary button with default styling.",
+      preview: <Button>Click me</Button>,
+      code: `<Button>Click me</Button>`,
+    },
+    {
+      id: "variants",
+      title: "Variants",
+      description: "Different button variants for various use cases.",
+      preview: (
+        <div className="flex gap-2">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="light">Light</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
+      ),
+      code: `<div className="flex gap-2">
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="light">Light</Button>
+  <Button variant="ghost">Ghost</Button>
+</div>`,
+    },
+    {
+      id: "loading",
+      title: "Loading State",
+      description: "Button with loading indicator.",
+      preview: <Button isLoading>Loading...</Button>,
+      code: `<Button isLoading>Loading...</Button>`,
+    },
+  ],
+
+  api: [
+    {
+      name: "Button",
+      description: "The main button component.",
+      properties: [
+        {
+          name: "variant",
+          type: '"primary" | "secondary" | "light" | "ghost"',
+          default: '"primary"',
+          description: "The visual style variant of the button.",
+        },
+        {
+          name: "isLoading",
+          type: "boolean",
+          default: "false",
+          description: "Shows loading spinner and disables the button.",
+        },
+        {
+          name: "loadingText",
+          type: "string",
+          description: "Text to show when loading.",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          default: "false",
+          description: "Disables the button.",
+        },
+      ],
+    },
+  ],
+
+  accessibility: {
+    keyboardShortcuts: [
+      {
+        key: "Space",
+        description: "Activates the button.",
+      },
+      {
+        key: "Enter",
+        description: "Activates the button.",
+      },
+    ],
+  },
+};
+
 export { Button, buttonVariants, type ButtonProps };

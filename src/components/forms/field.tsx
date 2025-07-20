@@ -100,6 +100,117 @@ FieldError.displayName = "FieldError";
 
 const FieldValidity = BaseField.Validity;
 
+// Component configuration for documentation
+export const componentConfig = {
+  id: "field",
+  name: "Field",
+  description:
+    "A comprehensive form field component with label, control, description, and error handling.",
+  category: "forms" as const,
+
+  importStatement: `import { Field, FieldLabel, FieldControl, FieldDescription, FieldError } from "@/components/forms/field";`,
+
+  examples: [
+    {
+      id: "default",
+      title: "Default",
+      description: "Basic field with label and control.",
+      preview: (
+        <Field>
+          <FieldLabel>Email Address</FieldLabel>
+          <FieldControl placeholder="Enter your email" />
+        </Field>
+      ),
+      code: `<Field>
+  <FieldLabel>Email Address</FieldLabel>
+  <FieldControl placeholder="Enter your email" />
+</Field>`,
+    },
+    {
+      id: "with-description",
+      title: "With Description",
+      description: "Field with helpful description text.",
+      preview: (
+        <Field>
+          <FieldLabel>Username</FieldLabel>
+          <FieldControl placeholder="Choose a username" />
+          <FieldDescription>
+            Your username will be visible to other users.
+          </FieldDescription>
+        </Field>
+      ),
+      code: `<Field>
+  <FieldLabel>Username</FieldLabel>
+  <FieldControl placeholder="Choose a username" />
+  <FieldDescription>
+    Your username will be visible to other users.
+  </FieldDescription>
+</Field>`,
+    },
+    {
+      id: "with-error",
+      title: "With Error",
+      description: "Field showing validation error state.",
+      preview: (
+        <Field>
+          <FieldLabel>Password</FieldLabel>
+          <FieldControl type="password" placeholder="Enter password" />
+          <FieldError>Password must be at least 8 characters long.</FieldError>
+        </Field>
+      ),
+      code: `<Field>
+  <FieldLabel>Password</FieldLabel>
+  <FieldControl type="password" placeholder="Enter password" />
+  <FieldError>Password must be at least 8 characters long.</FieldError>
+</Field>`,
+    },
+  ],
+
+  api: [
+    {
+      name: "Field",
+      description: "The root field container component.",
+      properties: [
+        {
+          name: "children",
+          type: "React.ReactNode",
+          description: "Field components like FieldLabel, FieldControl, etc.",
+          required: true,
+        },
+      ],
+    },
+    {
+      name: "FieldLabel",
+      description: "The field label component.",
+      properties: [
+        {
+          name: "children",
+          type: "React.ReactNode",
+          description: "Label text content.",
+          required: true,
+        },
+      ],
+    },
+    {
+      name: "FieldControl",
+      description: "The field input control component.",
+      properties: [
+        {
+          name: "placeholder",
+          type: "string",
+          description: "Placeholder text for the input.",
+        },
+        {
+          name: "type",
+          type: "string",
+          default: '"text"',
+          description: "Input type (text, email, password, etc.).",
+        },
+      ],
+    },
+  ],
+};
+
 export {
   Field,
   FieldControl,
