@@ -126,3 +126,13 @@
     }
   }
 }
+
+/* Set default border colors */
+@layer base {
+  * {
+    border-color: var(--color-zinc-200);
+  }
+  .dark * {
+    border-color: var(--color-zinc-800);
+  }
+}

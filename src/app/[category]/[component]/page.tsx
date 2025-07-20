@@ -1,5 +1,4 @@
 import { ComponentAccessibility } from "@/components/component-accessibility";
-import { ComponentApiReference } from "@/components/component-api-reference";
 import { ComponentExamples } from "@/components/component-examples";
 import { ComponentHeader } from "@/components/component-header";
 import { ComponentInstallation } from "@/components/component-installation";
@@ -62,21 +61,8 @@ async function loadComponentConfig(componentId: string, category: string) {
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 
-      // Try to extract the component itself
-      // For "badge" componentId, name becomes "Badge", look for exact match
+      // Component name for the prop explorer
       const componentName = name.replace(/\s/g, ""); // "Badge"
-
-      // Try multiple extraction strategies
-      let component = componentModule[componentName]; // Try "Badge"
-      if (!component) {
-        component = componentModule.default; // Try default export
-      }
-      if (!component) {
-        // Try the componentId with first letter capitalized
-        const capitalizedId =
-          componentId.charAt(0).toUpperCase() + componentId.slice(1);
-        component = componentModule[capitalizedId]; // Try "Badge" from "badge"
-      }
 
       return createComponentConfig(
         componentId,
@@ -85,7 +71,7 @@ async function loadComponentConfig(componentId: string, category: string) {
         category as "ui" | "inputs" | "forms" | "charts",
         {
           propExplorer: componentModule[propConfigKey],
-          componentId: componentName, // Pass the component name instead
+          componentId: componentName,
           examples: componentModule[propConfigKey].examples || [
             {
               id: "basic",
@@ -161,16 +147,11 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         <ComponentPropExplorer
           propExplorer={config.propExplorer}
           componentId={config.componentId}
+          category={category}
         />
       )}
 
       {/* Props Table (auto-generated from TypeScript) */}
-      <ComponentApiReference
-        api={config.api}
-        propExplorer={config.propExplorer}
-        componentName={config.name}
-      />
-
       {/* Installation */}
       <ComponentInstallation installation={config.installation} />
 

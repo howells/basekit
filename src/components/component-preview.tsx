@@ -1,0 +1,126 @@
+"use client";
+
+import { Card } from "@/components/ui/card";
+import { getIconByName } from "@/components/ui/icon-select";
+import dynamic from "next/dynamic";
+import React from "react";
+import { usePropExplorer } from "./prop-explorer-context";
+
+interface ComponentPreviewProps {
+  componentId: string;
+  category?: string;
+  componentPath?: string;
+  className?: string;
+}
+
+// Map componentId to import path
+const getComponentImportPath = (
+  componentId: string,
+  category?: string,
+  componentPath?: string
+): string => {
+  // Use provided path if available
+  if (componentPath) {
+    return componentPath;
+  }
+
+  // Handle different component categories based on folder structure
+  if (!category) {
+    return `@/components/ui/${componentId.toLowerCase()}`;
+  }
+
+  switch (category) {
+    case "charts":
+      return `@/components/charts/${componentId
+        .toLowerCase()
+        .replace("chart", "-chart")}`;
+    case "inputs":
+      return `@/components/inputs/${componentId
+        .toLowerCase()
+        .replace(/([A-Z])/g, "-$1")
+        .substring(1)}`;
+    case "forms":
+      return `@/components/forms/${componentId.toLowerCase()}`;
+    case "ui":
+    default:
+      return `@/components/ui/${componentId.toLowerCase()}`;
+  }
+};
+
+// Create dynamic component based on componentId and category
+const createDynamicComponent = (
+  componentId: string,
+  category?: string,
+  componentPath?: string
+) => {
+  return dynamic(
+    () => {
+      const importPath = getComponentImportPath(
+        componentId,
+        category,
+        componentPath
+      );
+      return import(importPath).then((mod) => ({ default: mod[componentId] }));
+    },
+    {
+      loading: () => (
+        <div className="text-zinc-500">Loading {componentId}...</div>
+      ),
+      ssr: false,
+    }
+  ) as React.ComponentType<
+    Record<string, unknown> & { children?: React.ReactNode }
+  >;
+};
+
+export function ComponentPreview({
+  componentId,
+  category,
+  componentPath,
+  className,
+}: ComponentPreviewProps) {
+  const { props } = usePropExplorer();
+
+  // Create dynamic component for this specific componentId
+  const Component = React.useMemo(
+    () => createDynamicComponent(componentId, category, componentPath),
+    [componentId, category, componentPath]
+  );
+
+  // Get the icon component from the selected name
+  const iconComponent =
+    props.icon && typeof props.icon === "string"
+      ? getIconByName(props.icon as string)
+      : undefined;
+
+  // Create final props for the component
+  const componentProps = React.useMemo(() => {
+    const finalProps: Record<string, unknown> = { ...props };
+
+    // Add icon if selected
+    if (iconComponent) {
+      finalProps.icon = iconComponent;
+    }
+
+    return finalProps;
+  }, [props, iconComponent]);
+
+  // Render the component
+  const renderComponent = () => {
+    try {
+      const childrenContent = String(props.children || componentId);
+      return <Component {...componentProps}>{childrenContent}</Component>;
+    } catch (renderError) {
+      console.error("Error rendering component:", renderError);
+      return <div className="text-red-500">Error rendering {componentId}</div>;
+    }
+  };
+
+  return (
+    <Card className="p-8 bg-gray-50/50">
+      <div className="flex items-center justify-center min-h-[120px]">
+        {renderComponent()}
+      </div>
+    </Card>
+  );
+}
