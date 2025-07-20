@@ -61,6 +61,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.2",
+    "knip": "^5.62.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5"
   }

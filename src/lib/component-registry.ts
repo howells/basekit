@@ -1,8 +1,13 @@
+import { accordionConfig } from "@/components/ui/accordion";
+import { buttonConfig } from "@/components/ui/button";
 import { ComponentConfig, ComponentConfigRegistry } from "./component-configs";
 
 // Component registry with all components
 // This will be populated dynamically or with inline configs
-export const componentRegistry: ComponentConfigRegistry = {};
+export const componentRegistry: ComponentConfigRegistry = {
+  accordion: accordionConfig,
+  button: buttonConfig,
+};
 
 // Helper to register a component config
 export function registerComponent(config: ComponentConfig) {
@@ -104,7 +109,7 @@ export const COMPONENT_LIST = {
     "line-chart",
     "spark-chart",
   ],
-} as const;
+};
 
 // Type for component IDs
 export type ComponentId =

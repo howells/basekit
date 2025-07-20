@@ -1,0 +1,27 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/[category]/page.tsx",
+    "src/app/[category]/[component]/page.tsx"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "next.config.ts",
+    "eslint.config.mjs",
+    "postcss.config.mjs"
+  ],
+  "ignoreDependencies": [
+    "@types/node",
+    "@types/react",
+    "@types/react-dom",
+    "eslint",
+    "eslint-config-next",
+    "typescript"
+  ],
+  "ignoreBinaries": [
+    "next",
+    "eslint"
+  ]
+}

@@ -94,3 +94,78 @@ const AccordionItem = React.forwardRef<
 AccordionItem.displayName = "AccordionItem";
 
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };
+
+// Component configuration for documentation
+export const accordionConfig = {
+  id: "accordion",
+  name: "Accordion",
+  description:
+    "A vertically stacked set of interactive headings that each reveal a section of content.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "npm install @base-ui-components/react",
+  },
+  importStatement: `import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";`,
+  componentId: "Accordion",
+  examples: [
+    {
+      id: "default",
+      title: "Default",
+      description: "Basic accordion with multiple items.",
+      preview: (
+        <Accordion>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>What is StencilUI?</AccordionTrigger>
+            <AccordionContent>
+              StencilUI is a modern React component library that combines the
+              best design patterns and developer experience from leading UI
+              libraries while building on a solid, accessible foundation.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>How do I install it?</AccordionTrigger>
+            <AccordionContent>
+              You can install StencilUI components using npm or pnpm. Each
+              component is built on Base UI primitives for excellent
+              accessibility and performance.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>What makes it different?</AccordionTrigger>
+            <AccordionContent>
+              StencilUI curates and adapts the best components from shadcn/ui,
+              Radix UI, Tailwind UI, and other excellent libraries, porting them
+              to Base UI primitives with Tremor-inspired styling.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      ),
+      code: `<Accordion>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>What is StencilUI?</AccordionTrigger>
+    <AccordionContent>
+      StencilUI is a modern React component library that combines the best design patterns and developer experience from leading UI libraries while building on a solid, accessible foundation.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>How do I install it?</AccordionTrigger>
+    <AccordionContent>
+      You can install StencilUI components using npm or pnpm. Each component is built on Base UI primitives for excellent accessibility and performance.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>What makes it different?</AccordionTrigger>
+    <AccordionContent>
+      StencilUI curates and adapts the best components from shadcn/ui, Radix UI, Tailwind UI, and other excellent libraries, porting them to Base UI primitives with Tremor-inspired styling.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`,
+    },
+  ],
+};

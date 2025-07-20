@@ -624,4 +624,29 @@ export const buttonPropConfig = createPropConfig(
   ]
 );
 
+// Component configuration for documentation
+export const buttonConfig = {
+  id: "button",
+  name: "Button",
+  description:
+    "A clickable button component with multiple variants and states.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "npm install @base-ui-components/react",
+  },
+  importStatement: `import { Button } from "@/components/ui/button";`,
+  propExplorer: buttonPropConfig,
+  componentId: "Button",
+  examples: [
+    {
+      id: "default",
+      title: "Default",
+      description: "Basic button with default styling.",
+      preview: <Button>Click me</Button>,
+      code: `<Button>Click me</Button>`,
+    },
+  ],
+};
+
 export { Button, buttonVariants, type ButtonProps };
