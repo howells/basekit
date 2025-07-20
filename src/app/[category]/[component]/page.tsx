@@ -1,4 +1,10 @@
-import { ComponentDocumentationPage } from "@/components/component-documentation-page";
+import { ComponentAccessibility } from "@/components/component-accessibility";
+import { ComponentApiReference } from "@/components/component-api-reference";
+import { ComponentExamples } from "@/components/component-examples";
+import { ComponentHeader } from "@/components/component-header";
+import { ComponentInstallation } from "@/components/component-installation";
+import { ComponentPropExplorer } from "@/components/component-prop-explorer";
+import { ComponentSections } from "@/components/component-sections";
 import { COMPONENT_LIST, getComponentConfig } from "@/lib/component-registry";
 import { createComponentConfig } from "@/lib/config-helpers";
 import { notFound } from "next/navigation";
@@ -145,7 +151,39 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     notFound();
   }
 
-  return <ComponentDocumentationPage config={config} />;
+  return (
+    <div className="">
+      {/* Header */}
+      <ComponentHeader config={config} />
+
+      {/* Lead with Prop Explorer (like Subframe) */}
+      {config.propExplorer && (
+        <ComponentPropExplorer
+          propExplorer={config.propExplorer}
+          componentId={config.componentId}
+        />
+      )}
+
+      {/* Props Table (auto-generated from TypeScript) */}
+      <ComponentApiReference
+        api={config.api}
+        propExplorer={config.propExplorer}
+        componentName={config.name}
+      />
+
+      {/* Installation */}
+      <ComponentInstallation installation={config.installation} />
+
+      {/* Examples/Variants */}
+      {!config.propExplorer && <ComponentExamples examples={config.examples} />}
+
+      {/* Custom Sections */}
+      <ComponentSections sections={config.sections} />
+
+      {/* Accessibility */}
+      <ComponentAccessibility accessibility={config.accessibility} />
+    </div>
+  );
 }
 
 // Generate static paths for all components (optional for performance)

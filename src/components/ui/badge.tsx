@@ -6,18 +6,13 @@ import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 import {
-  PropExplorerConfig,
-  createPropConfigFromVariants,
+  createPropExplorerConfig,
   createPropMetadata,
-  createVariantOption,
-  createVariantPropMetadata,
 } from "@/lib/prop-explorer";
 import { cx } from "@/lib/utils";
 
-const badgeVariants = tv({
-  base: cx(
-    "inline-flex items-center gap-x-1 whitespace-nowrap rounded-md font-medium ring-1 ring-inset"
-  ),
+// Define variants structure once - single source of truth
+const badgeVariantsDefinition = {
   variants: {
     variant: {
       default: [
@@ -46,11 +41,23 @@ const badgeVariants = tv({
       base: "px-2 py-1 text-xs",
       lg: "px-2.5 py-1.5 text-sm",
     },
+    iconPosition: {
+      left: "[&>svg]:order-first",
+      right: "[&>svg]:order-last",
+    },
   },
   defaultVariants: {
     variant: "default",
     size: "base",
+    iconPosition: "left",
   },
+} as const;
+
+const badgeVariants = tv({
+  base: cx(
+    "inline-flex items-center gap-x-1 whitespace-nowrap rounded-md font-medium ring-1 ring-inset"
+  ),
+  ...badgeVariantsDefinition,
 });
 
 // Helper function to get icon size based on badge size
@@ -71,7 +78,6 @@ interface BadgeProps
   extends useRender.ComponentProps<"span">,
     VariantProps<typeof badgeVariants> {
   icon?: React.ComponentType<{ className?: string }>;
-  iconPosition?: "left" | "right";
 }
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
@@ -80,8 +86,8 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       render = <span />,
       variant,
       size,
+      iconPosition,
       icon: Icon,
-      iconPosition = "left",
       children,
       ...otherProps
     }: BadgeProps,
@@ -90,16 +96,11 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const iconSizeClass = getIconSize(size);
 
     const defaultProps: useRender.ElementProps<"span"> = {
-      className: cx(badgeVariants({ variant, size })),
+      className: cx(badgeVariants({ variant, size, iconPosition })),
       children: (
         <>
-          {Icon && iconPosition === "left" && (
-            <Icon className={cx(iconSizeClass, "shrink-0")} />
-          )}
+          {Icon && <Icon className={cx(iconSizeClass, "shrink-0")} />}
           {children}
-          {Icon && iconPosition === "right" && (
-            <Icon className={cx(iconSizeClass, "shrink-0")} />
-          )}
         </>
       ),
     };
@@ -116,17 +117,17 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
 
 Badge.displayName = "Badge";
 
-// Prop Explorer Configuration
-const badgePropConfig: PropExplorerConfig = createPropConfigFromVariants(
-  "Badge",
+// Generate Prop Explorer Configuration - TRUE single source of truth!
+const badgePropConfig = createPropExplorerConfig(
   "Badge",
   "A label used to show a status or category.",
-  badgeVariants,
+  badgeVariantsDefinition,
   [
-    createPropMetadata("children", "React.ReactNode"),
-    createPropMetadata("icon", "React.ComponentType"),
-    createPropMetadata("iconPosition", '"left" | "right"', {
-      examples: ["left", "right"],
+    createPropMetadata("icon", "React.ComponentType<{ className?: string }>", {
+      description: "Icon component to display alongside the text",
+    }),
+    createPropMetadata("children", "React.ReactNode", {
+      description: "The content to display inside the badge",
     }),
   ]
 );

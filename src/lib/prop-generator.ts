@@ -407,6 +407,73 @@ export function generatePropConfig(template: ComponentPropTemplate) {
 }
 
 /**
+ * Generate a complete prop configuration from tailwind-variants
+ */
+export function generatePropConfigFromVariants(
+  componentName: string,
+  displayName: string,
+  description: string,
+  variants: any, // tailwind-variants instance
+  additionalProps: Record<
+    string,
+    { type: string; description: string; optional?: boolean }
+  > = {}
+) {
+  const props: PropMetadata[] = [];
+  const variantProps: VariantPropMetadata[] = [];
+
+  // Extract variants from tailwind-variants
+  const variantsConfig = variants.config?.variants || {};
+  const defaultVariants = variants.config?.defaultVariants || {};
+
+  // Generate variant props
+  Object.entries(variantsConfig).forEach(([variantName, variantOptions]) => {
+    const options: VariantOption[] = Object.keys(
+      variantOptions as Record<string, unknown>
+    ).map((optionKey) =>
+      createVariantOption(optionKey, {
+        label: optionKey.charAt(0).toUpperCase() + optionKey.slice(1),
+        description: `${optionKey} variant`,
+      })
+    );
+
+    variantProps.push(
+      createVariantPropMetadata(variantName, {
+        description: `${
+          variantName.charAt(0).toUpperCase() + variantName.slice(1)
+        } variant`,
+        options,
+        defaultValue: defaultVariants[variantName] || options[0]?.value,
+      })
+    );
+  });
+
+  // Add additional props
+  Object.entries(additionalProps).forEach(([propName, propConfig]) => {
+    props.push(
+      createPropMetadata(propName, propConfig.type, {
+        description: propConfig.description,
+        category: "content",
+        required: !propConfig.optional,
+      })
+    );
+  });
+
+  // Add common HTML props
+  props.push(...generateHTMLProps("span"));
+
+  return {
+    componentName,
+    displayName,
+    description,
+    props,
+    variants: variantProps,
+    events: [],
+    relatedComponents: [],
+  };
+}
+
+/**
  * Common variant configurations for reuse
  */
 export const commonVariants = {

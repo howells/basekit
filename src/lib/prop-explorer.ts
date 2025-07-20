@@ -11,37 +11,17 @@ export interface PropMetadata {
   name: string;
   /** TypeScript type definition */
   type: string;
-  /** Default value if any */
-  defaultValue?: string | number | boolean;
   /** Whether the prop is required */
   required?: boolean;
   /** Human-readable description */
   description?: string;
-  /** Category for grouping props in the explorer */
-  category?: PropCategory;
   /** Whether this prop is deprecated */
   deprecated?: boolean | string;
   /** Version when this prop was added */
   since?: string;
-  /** Examples of valid values */
-  examples?: (string | number | boolean)[];
   /** Link to related documentation */
   docLink?: string;
 }
-
-/**
- * Categories for organizing props in the explorer
- */
-export type PropCategory =
-  | "appearance"
-  | "behavior"
-  | "content"
-  | "interaction"
-  | "layout"
-  | "accessibility"
-  | "data"
-  | "event"
-  | "advanced";
 
 /**
  * Variant prop metadata with additional variant-specific information
@@ -185,37 +165,6 @@ export function createPropMetadata(
 }
 
 /**
- * Helper to create variant prop metadata
- */
-export function createVariantPropMetadata(
-  name: string,
-  options: VariantOption[],
-  config: Omit<VariantPropMetadata, "name" | "type" | "options"> = {}
-): VariantPropMetadata {
-  return {
-    name,
-    type: options.map((opt) => `"${opt.value}"`).join(" | "),
-    options,
-    category: "appearance",
-    ...config,
-  };
-}
-
-/**
- * Helper to create variant options
- */
-export function createVariantOption(
-  value: string,
-  config: Omit<VariantOption, "value"> = {}
-): VariantOption {
-  return {
-    value,
-    label: config.label || value,
-    ...config,
-  };
-}
-
-/**
  * Helper to create event prop metadata
  */
 export function createEventPropMetadata(
@@ -234,7 +183,7 @@ export function createEventPropMetadata(
     signature,
     trigger,
     parameters,
-    category: "event",
+
     ...config,
   };
 }
@@ -258,32 +207,6 @@ export function isEventProp(prop: PropMetadata): prop is EventPropMetadata {
  */
 export function isSlotProp(prop: PropMetadata): prop is SlotPropMetadata {
   return "acceptedChildren" in prop || "renderPropSignature" in prop;
-}
-
-/**
- * Utility to group props by category
- */
-export function groupPropsByCategory(
-  props: PropMetadata[]
-): Record<PropCategory, PropMetadata[]> {
-  const grouped: Record<PropCategory, PropMetadata[]> = {
-    appearance: [],
-    behavior: [],
-    content: [],
-    interaction: [],
-    layout: [],
-    accessibility: [],
-    data: [],
-    event: [],
-    advanced: [],
-  };
-
-  props.forEach((prop) => {
-    const category = prop.category || "advanced";
-    grouped[category].push(prop);
-  });
-
-  return grouped;
 }
 
 /**
@@ -355,19 +278,17 @@ export function createPropConfigFromVariants(
   additionalProps: PropMetadata[] = []
 ): PropExplorerConfig {
   const variants = Object.entries(variantsConfig.variants).map(
-    ([variantName, options]) =>
-      createVariantPropMetadata(
-        variantName,
-        Object.keys(options).map((key) =>
-          createVariantOption(key, {
-            label: key,
-          })
-        ),
-        {
-          defaultOption: variantsConfig.defaultVariants[variantName],
-          category: "appearance",
-        }
-      )
+    ([variantName, options]): VariantPropMetadata => ({
+      name: variantName,
+      type: Object.keys(options)
+        .map((key) => `"${key}"`)
+        .join(" | "),
+      options: Object.keys(options).map((key) => ({
+        value: key,
+        label: key,
+      })),
+      defaultOption: variantsConfig.defaultVariants[variantName],
+    })
   );
 
   return {
@@ -376,5 +297,85 @@ export function createPropConfigFromVariants(
     description,
     props: additionalProps,
     variants,
+  };
+}
+
+/**
+ * Utility to automatically detect union types and convert them to variant props
+ */
+export function createVariantFromUnionType(
+  name: string,
+  type: string,
+  description?: string,
+  defaultValue?: string
+): VariantPropMetadata | null {
+  // Check if the type is a union of string literals (e.g., '"left" | "right"')
+  const unionMatch = type.match(/^"([^"]+)"(\s*\|\s*"([^"]+)")+$/);
+
+  if (!unionMatch) {
+    return null;
+  }
+
+  // Extract all quoted values from the union type
+  const values =
+    type.match(/"([^"]+)"/g)?.map((match) => match.slice(1, -1)) || [];
+
+  if (values.length < 2) {
+    return null;
+  }
+
+  return {
+    name,
+    type,
+    description: description || `${name} option`,
+    options: values.map((value) => ({
+      value,
+      label: value.charAt(0).toUpperCase() + value.slice(1), // Capitalize first letter
+    })),
+    defaultOption: defaultValue || values[0], // Use provided default or first option
+  };
+}
+
+/**
+ * Extract PropExplorerConfig variants from tailwind-variants definition
+ */
+export function extractVariantsFromTailwindVariants(
+  variants: Record<string, Record<string, unknown>>,
+  defaultVariants: Record<string, string>
+): VariantPropMetadata[] {
+  return Object.entries(variants).map(([variantName, options]) => ({
+    name: variantName,
+    type: Object.keys(options)
+      .map((key) => `"${key}"`)
+      .join(" | "),
+    options: Object.keys(options).map((key) => ({
+      value: key,
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+    })),
+    defaultOption: defaultVariants[variantName],
+  }));
+}
+
+/**
+ * Create a complete PropExplorerConfig from tailwind-variants
+ */
+export function createPropExplorerConfig(
+  componentName: string,
+  description: string,
+  variantsDefinition: {
+    variants: Record<string, Record<string, unknown>>;
+    defaultVariants: Record<string, string>;
+  },
+  additionalProps: PropMetadata[] = []
+): PropExplorerConfig {
+  return {
+    componentName,
+    displayName: componentName,
+    description,
+    props: additionalProps,
+    variants: extractVariantsFromTailwindVariants(
+      variantsDefinition.variants,
+      variantsDefinition.defaultVariants
+    ),
   };
 }

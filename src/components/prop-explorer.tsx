@@ -38,24 +38,9 @@ export const PropExplorer: React.FC<PropExplorerProps> = ({
   componentId,
   className,
 }) => {
-  // Get all configurable props (variants + regular props that have examples or are marked as configurable)
+  // Get all configurable props (only variants are configurable)
   const configurableProps = useMemo(() => {
-    const allProps: PropMetadata[] = [];
-
-    // Add variant props (these are always configurable)
-    if (config.variants) {
-      allProps.push(...config.variants);
-    }
-
-    // Add regular props that have examples (indicating they're meant to be configurable)
-    if (config.props) {
-      const configurableRegularProps = config.props.filter(
-        (prop) => prop.examples && prop.examples.length > 0
-      );
-      allProps.push(...configurableRegularProps);
-    }
-
-    return allProps;
+    return config.variants || [];
   }, [config]);
 
   // Resolve component from componentId
@@ -66,16 +51,8 @@ export const PropExplorer: React.FC<PropExplorerProps> = ({
     const initial: Record<string, unknown> = {};
 
     configurableProps.forEach((prop) => {
-      if (isVariantProp(prop)) {
-        // For variant props, use defaultOption or first option
-        initial[prop.name] = prop.defaultOption || prop.options[0]?.value || "";
-      } else if (prop.examples && prop.examples.length > 0) {
-        // For regular props with examples, use first example
-        initial[prop.name] = prop.examples[0];
-      } else if (prop.defaultValue !== undefined) {
-        // Use default value if available
-        initial[prop.name] = prop.defaultValue;
-      }
+      // All configurable props are variant props
+      initial[prop.name] = prop.defaultOption || prop.options[0]?.value || "";
     });
 
     return initial;
@@ -89,13 +66,6 @@ export const PropExplorer: React.FC<PropExplorerProps> = ({
 
   // Get default children value based on component type or config
   function getDefaultChildrenValue(): string {
-    // Check if there's a children prop with examples
-    const childrenProp = config.props?.find((prop) => prop.name === "children");
-    if (childrenProp?.examples && childrenProp.examples.length > 0) {
-      return String(childrenProp.examples[0]);
-    }
-
-    // Fallback based on component name
     return config.displayName || config.componentName;
   }
 
@@ -140,74 +110,36 @@ export const PropExplorer: React.FC<PropExplorerProps> = ({
 
   // Render a configurable prop control
   const renderPropControl = (prop: PropMetadata) => {
-    if (isVariantProp(prop)) {
-      // Render select for variant props
-      return (
-        <div key={prop.name} className="space-y-2">
-          <label className="text-sm font-medium text-gray-700 capitalize">
-            {prop.name}
-          </label>
-          <Select
-            value={String(propValues[prop.name] || "")}
-            onValueChange={(value) =>
-              setPropValues((prev) => ({ ...prev, [prop.name]: value }))
-            }
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {prop.options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label || option.value}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {prop.description && (
-            <p className="text-xs text-gray-500">{prop.description}</p>
-          )}
-        </div>
-      );
-    } else if (prop.examples && prop.examples.length > 0) {
-      // Render select for props with examples
-      return (
-        <div key={prop.name} className="space-y-2">
-          <label className="text-sm font-medium text-gray-700 capitalize">
-            {prop.name}
-          </label>
-          <Select
-            value={String(propValues[prop.name] || "")}
-            onValueChange={(value) => {
-              // Try to parse the value to the correct type
-              let parsedValue: unknown = value;
-              if (prop.type === "number") {
-                parsedValue = Number(value);
-              } else if (prop.type === "boolean") {
-                parsedValue = value === "true";
-              }
-              setPropValues((prev) => ({ ...prev, [prop.name]: parsedValue }));
-            }}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {prop.examples.map((example, index) => (
-                <SelectItem key={index} value={String(example)}>
-                  {String(example)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {prop.description && (
-            <p className="text-xs text-gray-500">{prop.description}</p>
-          )}
-        </div>
-      );
-    }
+    // All configurable props are variant props
+    if (!isVariantProp(prop)) return null;
 
-    return null;
+    return (
+      <div key={prop.name} className="space-y-2">
+        <label className="text-sm font-medium text-gray-700 capitalize">
+          {prop.name}
+        </label>
+        <Select
+          value={String(propValues[prop.name] || "")}
+          onValueChange={(value) =>
+            setPropValues((prev) => ({ ...prev, [prop.name]: value }))
+          }
+        >
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {prop.options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label || option.value}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {prop.description && (
+          <p className="text-xs text-gray-500">{prop.description}</p>
+        )}
+      </div>
+    );
   };
 
   return (
