@@ -23,6 +23,11 @@
     cubic-bezier(0.16, 1, 0.3, 1);
   --animate-drawer-slide-right-and-fade: drawerSlideRightAndFade 150ms ease-in;
 
+  /* Apple easing curves for consistent animations */
+  --ease-apple-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-apple-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-apple-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+
   @keyframes hide {
     from {
       opacity: 1;

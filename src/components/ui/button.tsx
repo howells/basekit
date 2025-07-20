@@ -12,6 +12,8 @@ const buttonVariants = tv({
   base: [
     // base
     "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border text-center text-sm font-medium shadow-xs outline-hidden",
+    // background transition with Apple easing (matches Motion animations)
+    "transition-colors duration-200 ease-[var(--ease-apple-out)]",
     // disabled
     "disabled:pointer-events-none disabled:shadow-none",
     // focus
@@ -33,8 +35,8 @@ const buttonVariants = tv({
         "dark:disabled:bg-zinc-600 dark:disabled:text-zinc-300",
       ],
       secondary: [
-        // border
-        "border-zinc-200 dark:border-zinc-800",
+        // ring instead of border
+        "border-transparent ring-1 ring-zinc-200 dark:ring-zinc-800",
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // background color
@@ -59,8 +61,8 @@ const buttonVariants = tv({
         "dark:disabled:bg-red-950 dark:disabled:text-red-400",
       ],
       outline: [
-        // border
-        "border-zinc-200 dark:border-zinc-800",
+        // ring instead of border
+        "border-transparent ring-1 ring-zinc-200 dark:ring-zinc-800",
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // background color
@@ -68,8 +70,8 @@ const buttonVariants = tv({
         // hover color
         "hover:bg-zinc-100 dark:hover:bg-zinc-800",
         // disabled
-        "disabled:border-zinc-200 disabled:text-zinc-400",
-        "dark:disabled:border-zinc-800 dark:disabled:text-zinc-600",
+        "disabled:ring-zinc-200 disabled:text-zinc-400",
+        "dark:disabled:ring-zinc-800 dark:disabled:text-zinc-600",
       ],
       ghost: [
         // base
@@ -99,9 +101,8 @@ const buttonVariants = tv({
       ],
     },
     size: {
-      default: "h-9 px-3 py-2 has-[>svg]:px-2.5",
-      sm: "h-8 rounded-md gap-1.5 px-2.5 has-[>svg]:px-2",
-      lg: "h-10 rounded-md px-4 has-[>svg]:px-3",
+      default: "h-9 px-3 py-2 text-sm has-[>svg]:px-2.5",
+      sm: "h-8 rounded-md gap-1.5 px-2.5 text-xs has-[>svg]:px-2",
       icon: "size-9",
     },
   },
@@ -143,12 +144,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const hasChildren = children != null && children !== "";
     const hasLeftIcon = LeftIcon != null;
-    const hasRightIcon = RightIcon != null;
+    const hasRightIcon = RightIcon != null && size !== "icon"; // Hide right icon for icon variant
     // For icon-only buttons, don't show text children
     const shouldShowChildren = hasChildren && size !== "icon";
 
     // Check if children is a complex element (custom layout)
     const hasCustomLayout = React.isValidElement(children);
+
+    // Icon size based on button size
+    const iconSize = size === "sm" ? "size-3" : "size-3.5";
+    const iconClassName = `${iconSize} shrink-0`;
 
     // When loading, Loader replaces leftIcon, and we show loadingText or original children
     const effectiveChildren = isLoading && loadingText ? loadingText : children;
@@ -163,10 +168,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Determine layout class
       const layoutClassName = cx(
         "flex items-center w-full",
-        // Full width always uses space-between when there are edge elements
-        fullWidth &&
-          (hasRightIcon ||
-            (textAlign === "center" && (hasLeftIcon || isLoading)))
+        // For icon-only buttons, center everything
+        size === "icon"
+          ? "justify-center"
+          : // Full width always uses space-between when there are edge elements
+          fullWidth &&
+            (hasRightIcon ||
+              (textAlign === "center" && (hasLeftIcon || isLoading)))
           ? "justify-between"
           : "justify-start" // Remove gap, handle spacing in animations
       );
@@ -206,7 +214,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                           ease: appleEasing.easeOut,
                         }}
                       >
-                        <div className="relative size-4 flex items-center justify-center">
+                        <div
+                          className={`relative ${iconSize} flex items-center justify-center`}
+                        >
                           <AnimatePresence>
                             {isLoading && (
                               <m.div
@@ -221,7 +231,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                 }}
                               >
                                 <Loader
-                                  size="sm"
+                                  size={size === "sm" ? "xs" : "sm"}
                                   aria-label={loadingText || "Loading"}
                                 />
                               </m.div>
@@ -240,7 +250,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                   ease: appleEasing.easeOut,
                                 }}
                               >
-                                <LeftIcon className="size-4 shrink-0" />
+                                <LeftIcon className={iconClassName} />
                               </m.div>
                             )}
                           </AnimatePresence>
@@ -277,7 +287,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                           ease: appleEasing.easeOut,
                         }}
                       >
-                        <RightIcon className="size-4 shrink-0" />
+                        <RightIcon className={iconClassName} />
                       </m.div>
                     )}
                   </AnimatePresence>
@@ -302,7 +312,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                           ease: appleEasing.easeOut,
                         }}
                       >
-                        <div className="relative size-4 flex items-center justify-center">
+                        <div
+                          className={`relative ${iconSize} flex items-center justify-center`}
+                        >
                           <AnimatePresence>
                             {isLoading && (
                               <m.div
@@ -317,7 +329,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                 }}
                               >
                                 <Loader
-                                  size="sm"
+                                  size={size === "sm" ? "xs" : "sm"}
                                   aria-label={loadingText || "Loading"}
                                 />
                               </m.div>
@@ -336,7 +348,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                   ease: appleEasing.easeOut,
                                 }}
                               >
-                                <LeftIcon className="size-4 shrink-0" />
+                                <LeftIcon className={iconClassName} />
                               </m.div>
                             )}
                           </AnimatePresence>
@@ -360,7 +372,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                           ease: appleEasing.easeOut,
                         }}
                       >
-                        <RightIcon className="size-4 shrink-0" />
+                        <RightIcon className={iconClassName} />
                       </m.div>
                     )}
                   </AnimatePresence>
@@ -401,7 +413,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                             ease: appleEasing.easeOut,
                           }}
                         >
-                          <div className="relative size-4 flex items-center justify-center">
+                          <div
+                            className={`relative ${iconSize} flex items-center justify-center`}
+                          >
                             <AnimatePresence>
                               {isLoading && (
                                 <m.div
@@ -416,7 +430,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                   }}
                                 >
                                   <Loader
-                                    size="sm"
+                                    size={size === "sm" ? "xs" : "sm"}
                                     aria-label={loadingText || "Loading"}
                                   />
                                 </m.div>
@@ -435,7 +449,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                     ease: appleEasing.easeOut,
                                   }}
                                 >
-                                  <LeftIcon className="size-4 shrink-0" />
+                                  <LeftIcon className={iconClassName} />
                                 </m.div>
                               )}
                             </AnimatePresence>
@@ -454,7 +468,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       exit={{ opacity: 0, scale: 0.9, width: 0 }}
                       transition={{ duration: 0.15, ease: appleEasing.easeOut }}
                     >
-                      <RightIcon className="size-4 shrink-0" />
+                      <RightIcon className={iconClassName} />
                     </m.div>
                   </AnimatePresence>
                 </span>
@@ -489,7 +503,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       }}
                       transition={{ duration: 0.15, ease: appleEasing.easeOut }}
                     >
-                      <div className="relative size-4 flex items-center justify-center">
+                      <div
+                        className={`relative ${iconSize} flex items-center justify-center`}
+                      >
                         <AnimatePresence>
                           {isLoading && (
                             <m.div
@@ -504,7 +520,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                               }}
                             >
                               <Loader
-                                size="sm"
+                                size={size === "sm" ? "xs" : "sm"}
                                 aria-label={loadingText || "Loading"}
                               />
                             </m.div>
@@ -523,7 +539,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                                 ease: appleEasing.easeOut,
                               }}
                             >
-                              <LeftIcon className="size-4 shrink-0" />
+                              <LeftIcon className={iconClassName} />
                             </m.div>
                           )}
                         </AnimatePresence>
