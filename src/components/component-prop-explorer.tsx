@@ -3,7 +3,7 @@
 import { ComponentConfig } from "@/lib/component-configs";
 import { ComponentPreview } from "./component-preview";
 import { PropExplorerProvider } from "./prop-explorer-context";
-import { PropExplorerControls } from "./prop-explorer-controls";
+import { PropExplorerContent } from "./prop-explorer-controls";
 
 interface ComponentPropExplorerProps {
   propExplorer: ComponentConfig["propExplorer"];
@@ -28,6 +28,13 @@ export function ComponentPropExplorer({
     }
   });
 
+  // Extract default values from props
+  propExplorer.props?.forEach((prop) => {
+    if (prop.defaultValue !== undefined) {
+      defaultProps[prop.name] = prop.defaultValue;
+    }
+  });
+
   // Add default values for special props
   defaultProps.children =
     propExplorer.displayName || propExplorer.componentName;
@@ -47,7 +54,7 @@ export function ComponentPropExplorer({
         </div>
 
         {/* Right sidebar - Properties inspector */}
-        <PropExplorerControls config={propExplorer} />
+        <PropExplorerContent config={propExplorer} />
       </div>
     </PropExplorerProvider>
   );

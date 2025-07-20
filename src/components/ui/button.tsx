@@ -5,13 +5,14 @@ import { useRender } from "@base-ui-components/react/use-render";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
+import { createProp, createPropConfig } from "@/lib/prop-explorer";
 import { cx, focusRing } from "@/lib/utils";
 import { Loader } from "./loader";
 
 const buttonVariants = tv({
   base: [
     // base
-    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border text-center text-sm font-medium shadow-xs transition-all duration-100 ease-in-out",
+    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border text-center text-sm font-medium shadow-xs transition-all duration-100 ease-in-out outline-hidden",
     // disabled
     "disabled:pointer-events-none disabled:shadow-none",
     // focus
@@ -92,27 +93,22 @@ const buttonVariants = tv({
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // hover color
-        "bg-transparent hover:underline",
+        "bg-transparent hover:underline hover:underline-offset-3 decoration-current/25",
         // disabled
         "disabled:text-zinc-400",
         "dark:disabled:text-zinc-600",
       ],
     },
     size: {
-      default: "h-9 px-4 py-2 has-[>svg]:px-3",
-      sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-      lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+      default: "h-9 px-3 py-2 has-[>svg]:px-2.5",
+      sm: "h-8 rounded-md gap-1.5 px-2.5 has-[>svg]:px-2",
+      lg: "h-10 rounded-md px-4 has-[>svg]:px-3",
       icon: "size-9",
-    },
-    iconPosition: {
-      left: "",
-      right: "",
     },
   },
   defaultVariants: {
     variant: "default",
     size: "default",
-    iconPosition: "left",
   },
 });
 
@@ -121,7 +117,10 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
   loadingText?: string;
-  icon?: React.ComponentType<{ className?: string }>;
+  leftIcon?: React.ComponentType<{ className?: string }>;
+  rightIcon?: React.ComponentType<{ className?: string }>;
+  fullWidth?: boolean;
+  textAlign?: "left" | "center" | "right";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -134,45 +133,110 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       variant,
       size,
-      iconPosition,
-      icon: Icon,
+      leftIcon: LeftIcon,
+      rightIcon: RightIcon,
       children,
+      fullWidth,
+      textAlign,
       ...props
     }: ButtonProps,
     forwardedRef
   ) => {
     const hasChildren = children != null && children !== "";
-    const hasIcon = Icon != null;
+    const hasLeftIcon = LeftIcon != null;
+    const hasRightIcon = RightIcon != null;
+    // For icon-only buttons, don't show text children
+    const shouldShowChildren = hasChildren && size !== "icon";
+
+    // Check if children is a complex element (custom layout)
+    const hasCustomLayout = React.isValidElement(children);
+
+    // When loading, Loader replaces leftIcon, and we show loadingText or original children
+    const effectiveChildren = isLoading && loadingText ? loadingText : children;
+    const effectiveShouldShowChildren = shouldShowChildren;
 
     const defaultProps: useRender.ElementProps<"button"> = {
-      className: cx(buttonVariants({ variant, size, iconPosition }), className),
+      className: cx(
+        buttonVariants({ variant, size }),
+        fullWidth && "w-full max-w-[95vw]",
+        textAlign === "left" && "text-left",
+        textAlign === "center" && "text-center",
+        textAlign === "right" && "text-right",
+        !textAlign && "text-center", // default to center
+        className
+      ),
       disabled: disabled || isLoading,
       type: "button",
-      children: isLoading ? (
-        <span
-          className={cx(
-            "pointer-events-none flex shrink-0 items-center justify-center",
-            hasChildren && "gap-1.5",
-            iconPosition === "right" && "flex-row-reverse"
-          )}
-        >
-          <Loader
-            size="sm"
-            aria-label={loadingText ? loadingText : "Loading"}
-          />
-          {(loadingText || hasChildren) &&
-            (loadingText ? loadingText : children)}
-        </span>
+      children: hasCustomLayout ? (
+        // If children is a custom React element, render it directly
+        children
       ) : (
         <span
           className={cx(
-            "flex items-center",
-            hasChildren && hasIcon && "gap-1.5",
-            iconPosition === "right" && "flex-row-reverse"
+            "flex items-center w-full",
+            // Full width always uses space-between when there are edge elements
+            fullWidth &&
+              (hasRightIcon ||
+                (textAlign === "center" && (hasLeftIcon || isLoading)))
+              ? "justify-between"
+              : "gap-1.5"
           )}
         >
-          {hasIcon && <Icon className="size-4 shrink-0" />}
-          {hasChildren && children}
+          {fullWidth ? (
+            // Full width: handle all alignment cases
+            textAlign === "center" ? (
+              // Center alignment: spread layout
+              <>
+                <div className="flex items-center">
+                  {isLoading ? (
+                    <Loader size="sm" aria-label={loadingText || "Loading"} />
+                  ) : (
+                    hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
+                  )}
+                </div>
+                <div className="flex-1 text-center">
+                  {effectiveShouldShowChildren && effectiveChildren}
+                </div>
+                <div className="flex items-center">
+                  {hasRightIcon && <RightIcon className="size-4 shrink-0" />}
+                </div>
+              </>
+            ) : hasRightIcon ? (
+              // Left/right alignment with right icon: left group + right icon
+              <>
+                <div className="flex items-center gap-1.5">
+                  {isLoading ? (
+                    <Loader size="sm" aria-label={loadingText || "Loading"} />
+                  ) : (
+                    hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
+                  )}
+                  {effectiveShouldShowChildren && effectiveChildren}
+                </div>
+                <RightIcon className="size-4 shrink-0" />
+              </>
+            ) : (
+              // Left/right alignment without right icon: normal flow
+              <>
+                {isLoading ? (
+                  <Loader size="sm" aria-label={loadingText || "Loading"} />
+                ) : (
+                  hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
+                )}
+                {effectiveShouldShowChildren && effectiveChildren}
+              </>
+            )
+          ) : (
+            // Normal width: simple gap layout
+            <>
+              {isLoading ? (
+                <Loader size="sm" aria-label={loadingText || "Loading"} />
+              ) : (
+                hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
+              )}
+              {effectiveShouldShowChildren && effectiveChildren}
+              {hasRightIcon && <RightIcon className="size-4 shrink-0" />}
+            </>
+          )}
         </span>
       ),
     };
@@ -190,84 +254,38 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 // PropExplorer configuration
-export const buttonPropConfig = {
-  componentName: "Button",
-  displayName: "Button",
-  description:
-    "A clickable button component with multiple variants and states.",
-
-  variants: [
-    {
-      name: "variant",
-      options: [
-        { value: "default", label: "Default" },
-        { value: "secondary", label: "Secondary" },
-        { value: "destructive", label: "Destructive" },
-        { value: "outline", label: "Outline" },
-        { value: "ghost", label: "Ghost" },
-        { value: "link", label: "Link" },
-      ],
-      defaultOption: "default",
-      description: "The visual style variant of the button.",
-    },
-    {
-      name: "size",
-      options: [
-        { value: "sm", label: "Small" },
-        { value: "default", label: "Default" },
-        { value: "lg", label: "Large" },
-        { value: "icon", label: "Icon Only" },
-      ],
-      defaultOption: "default",
-      description: "The size of the button.",
-    },
-    {
-      name: "isLoading",
-      options: [
-        { value: "false", label: "Not Loading" },
-        { value: "true", label: "Loading" },
-      ],
-      defaultOption: "false",
-      description: "Shows loading spinner and disables the button.",
-    },
-    {
-      name: "disabled",
-      options: [
-        { value: "false", label: "Enabled" },
-        { value: "true", label: "Disabled" },
-      ],
-      defaultOption: "false",
-      description: "Disables the button interaction.",
-    },
-    {
-      name: "iconPosition",
-      options: [
-        { value: "left", label: "Left" },
-        { value: "right", label: "Right" },
-      ],
-      defaultOption: "left",
-      description: "Position of the icon relative to the text.",
-    },
-  ],
-
-  props: [
-    {
-      name: "children",
-      type: "React.ReactNode",
-      description: "The content to display inside the button.",
-    },
-    {
-      name: "loadingText",
-      type: "string",
-      description:
-        "Text to show when loading (defaults to button children if not provided).",
-    },
-    {
-      name: "icon",
-      type: "React.ComponentType<{ className?: string }>",
-      description: "Icon component to display alongside the text.",
-    },
-  ],
-};
+export const buttonPropConfig = createPropConfig(
+  "Button",
+  "Button",
+  "A clickable button component with multiple variants and states.",
+  buttonVariants,
+  [
+    createProp.string(
+      "children",
+      "The content to display inside the button.",
+      "Button"
+    ),
+    createProp.boolean(
+      "isLoading",
+      "Shows loading spinner and disables the button.",
+      false
+    ),
+    createProp.boolean("disabled", "Disables the button interaction.", false),
+    createProp.boolean(
+      "fullWidth",
+      "Makes the button take the full width of its container.",
+      false
+    ),
+    createProp.select(
+      "textAlign",
+      "Text alignment within the button.",
+      ["left", "center", "right"],
+      "center"
+    ),
+    createProp.icon("leftIcon", "Icon to display on the left side."),
+    createProp.icon("rightIcon", "Icon to display on the right side."),
+    createProp.string("loadingText", "Text to show when loading (optional)."),
+  ]
+);
 
 export { Button, buttonVariants, type ButtonProps };

@@ -66,13 +66,33 @@ interface SwitchProps
       React.ComponentPropsWithoutRef<typeof BaseSwitch.Root>,
       "children"
     >,
-    VariantProps<typeof switchVariants> {}
+    VariantProps<typeof switchVariants> {
+  label?: string;
+}
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof BaseSwitch.Root>,
   SwitchProps
->(({ className, size, ...props }: SwitchProps, forwardedRef) => {
+>(({ className, size, label, ...props }: SwitchProps, forwardedRef) => {
   const { root, thumb } = switchVariants({ size });
+
+  if (label) {
+    return (
+      <div className="flex items-center space-x-2">
+        <BaseSwitch.Root
+          ref={forwardedRef}
+          className={cx(root(), className)}
+          {...props}
+        >
+          <BaseSwitch.Thumb className={cx(thumb())} />
+        </BaseSwitch.Root>
+        <span className="text-sm text-zinc-900 dark:text-zinc-100">
+          {label}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <BaseSwitch.Root
       ref={forwardedRef}

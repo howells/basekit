@@ -103,19 +103,45 @@ export function ComponentPreview({
     [componentId, category, componentPath]
   );
 
-  // Get the icon component from the selected name
+  // Get the icon components from the selected names
   const iconComponent =
-    props.icon && typeof props.icon === "string"
+    props.icon && typeof props.icon === "string" && props.icon.trim() !== ""
       ? getIconByName(props.icon as string)
+      : undefined;
+
+  const leftIconComponent =
+    props.leftIcon &&
+    typeof props.leftIcon === "string" &&
+    props.leftIcon.trim() !== ""
+      ? getIconByName(props.leftIcon as string)
+      : undefined;
+
+  const rightIconComponent =
+    props.rightIcon &&
+    typeof props.rightIcon === "string" &&
+    props.rightIcon.trim() !== ""
+      ? getIconByName(props.rightIcon as string)
       : undefined;
 
   // Create final props for the component
   const componentProps = React.useMemo(() => {
     const finalProps: Record<string, unknown> = { ...props };
 
-    // Add icon if selected
+    // Add icons if selected
     if (iconComponent) {
       finalProps.icon = iconComponent;
+    } else if (props.icon === "") {
+      delete finalProps.icon;
+    }
+    if (leftIconComponent) {
+      finalProps.leftIcon = leftIconComponent;
+    } else if (props.leftIcon === "") {
+      delete finalProps.leftIcon;
+    }
+    if (rightIconComponent) {
+      finalProps.rightIcon = rightIconComponent;
+    } else if (props.rightIcon === "") {
+      delete finalProps.rightIcon;
     }
 
     // Convert string booleans to actual booleans
@@ -128,7 +154,7 @@ export function ComponentPreview({
     });
 
     return finalProps;
-  }, [props, iconComponent]);
+  }, [props, iconComponent, leftIconComponent, rightIconComponent]);
 
   // Render the component
   const renderComponent = () => {

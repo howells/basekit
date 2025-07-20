@@ -5,7 +5,6 @@ import { Popover as BasePopover } from "@base-ui-components/react/popover";
 import React from "react";
 
 const Popover = BasePopover.Root;
-Popover.displayName = "Popover";
 
 const PopoverTrigger = React.forwardRef<
   React.ElementRef<typeof BasePopover.Trigger>,
@@ -95,7 +94,7 @@ const PopoverContent = React.forwardRef<
             ref={ref}
             className={cx(
               // base
-              "z-50 min-w-60 max-w-sm overflow-hidden rounded-md border p-2.5 text-sm shadow-md",
+              "z-50 min-w-60 max-w-sm overflow-hidden rounded-md border p-2.5 text-sm shadow-xl shadow-black/[2.5%]",
               // border color
               "border-zinc-200 dark:border-zinc-800",
               // text color

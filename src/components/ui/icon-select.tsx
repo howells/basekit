@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/inputs/select";
+import { Combobox, ComboboxOption } from "@/components/ui/combobox";
 import { cx } from "@/lib/utils";
 import {
   AlertCircle,
@@ -173,6 +167,15 @@ const iconMap: Record<string, LucideIcon> = {
   Wind,
 };
 
+// Convert icon map to combobox options with icons
+const iconOptions: ComboboxOption[] = Object.entries(iconMap).map(
+  ([name, IconComponent]) => ({
+    value: name,
+    label: name,
+    leftIcon: IconComponent,
+  })
+);
+
 export interface IconSelectProps {
   value?: string;
   onValueChange?: (value: string) => void;
@@ -188,35 +191,19 @@ export function IconSelect({
   disabled = false,
   className,
 }: IconSelectProps) {
-  const selectedIcon = value ? iconMap[value] : null;
-
   return (
-    <Select value={value} onValueChange={onValueChange} disabled={disabled}>
-      <SelectTrigger className={className}>
-        <SelectValue>
-          {selectedIcon ? (
-            <div className="flex items-center gap-2">
-              {React.createElement(selectedIcon, {
-                className: "size-4 shrink-0",
-              })}
-              <span>{value}</span>
-            </div>
-          ) : (
-            <span className="text-muted-foreground">{placeholder}</span>
-          )}
-        </SelectValue>
-      </SelectTrigger>
-      <SelectContent>
-        {Object.entries(iconMap).map(([name, IconComponent]) => (
-          <SelectItem key={name} value={name}>
-            <div className="flex items-center gap-2">
-              <IconComponent className="size-4 shrink-0" />
-              <span>{name}</span>
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <Combobox
+      options={iconOptions}
+      value={value || ""}
+      onValueChange={onValueChange}
+      placeholder={placeholder}
+      searchPlaceholder="Search icons..."
+      emptyMessage="No icons found."
+      disabled={disabled}
+      className={className}
+      width="w-full"
+      buttonClassName="justify-start"
+    />
   );
 }
 

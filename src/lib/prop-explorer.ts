@@ -21,6 +21,10 @@ export interface PropMetadata {
   since?: string;
   /** Link to related documentation */
   docLink?: string;
+  /** Default value for the prop */
+  defaultValue?: unknown;
+  /** Options for select/enum types - can be simple strings or complex VariantOption objects */
+  options?: string[] | VariantOption[];
 }
 
 /**
@@ -265,40 +269,92 @@ export function searchProps(
 }
 
 /**
- * Utility to create PropExplorerConfig from tailwind-variants configuration
+ * Utility to create PropExplorerConfig from variants definition with additional props
  */
-export function createPropConfigFromVariants(
+export function createPropConfig<
+  T extends Record<string, Record<string, unknown>>
+>(
   componentName: string,
   displayName: string,
   description: string,
-  variantsConfig: {
-    variants: Record<string, Record<string, unknown>>;
-    defaultVariants: Record<string, string>;
+  variantsDefinition: {
+    variants: T;
+    defaultVariants: Partial<{ [K in keyof T]: string }>;
   },
   additionalProps: PropMetadata[] = []
 ): PropExplorerConfig {
-  const variants = Object.entries(variantsConfig.variants).map(
-    ([variantName, options]): VariantPropMetadata => ({
-      name: variantName,
-      type: Object.keys(options)
-        .map((key) => `"${key}"`)
-        .join(" | "),
-      options: Object.keys(options).map((key) => ({
-        value: key,
-        label: key,
-      })),
-      defaultOption: variantsConfig.defaultVariants[variantName],
-    })
-  );
+  // Extract variants from tailwind-variants
+  const variants: VariantPropMetadata[] = Object.entries(
+    variantsDefinition.variants
+  ).map(([variantName, variantOptions]) => ({
+    name: variantName,
+    type: Object.keys(variantOptions)
+      .map((key) => `"${key}"`)
+      .join(" | "),
+    options: Object.keys(variantOptions).map((key) => ({
+      value: key,
+      label: key,
+    })),
+    defaultOption:
+      variantsDefinition.defaultVariants[variantName as keyof T] ||
+      Object.keys(variantOptions)[0],
+    description: `The ${variantName} variant of the component.`,
+  }));
 
   return {
     componentName,
     displayName,
     description,
-    props: additionalProps,
     variants,
+    props: additionalProps,
   };
 }
+
+/**
+ * Type-safe prop metadata builder
+ */
+export const createProp = {
+  string: (
+    name: string,
+    description: string,
+    defaultValue?: string
+  ): PropMetadata => ({
+    name,
+    type: "string",
+    description,
+    defaultValue,
+  }),
+
+  boolean: (
+    name: string,
+    description: string,
+    defaultValue?: boolean
+  ): PropMetadata => ({
+    name,
+    type: "boolean",
+    description,
+    defaultValue,
+  }),
+
+  select: (
+    name: string,
+    description: string,
+    options: string[],
+    defaultValue?: string
+  ): PropMetadata => ({
+    name,
+    type: "select",
+    description,
+    options,
+    defaultValue,
+  }),
+
+  icon: (name: string, description: string): PropMetadata => ({
+    name,
+    type: "icon",
+    description,
+  }),
+};
 
 /**
  * Utility to automatically detect union types and convert them to variant props
