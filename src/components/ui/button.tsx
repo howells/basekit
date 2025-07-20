@@ -1,18 +1,17 @@
-// Tremor Button [v1.0.0] - Base UI
-
+import { createProp, createPropConfig } from "@/lib/prop-explorer";
+import { appleEasing, cx, focusRing } from "@/lib/utils";
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
+import { AnimatePresence, LazyMotion, domAnimation } from "motion/react";
+import * as m from "motion/react-m";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
-
-import { createProp, createPropConfig } from "@/lib/prop-explorer";
-import { cx, focusRing } from "@/lib/utils";
 import { Loader } from "./loader";
 
 const buttonVariants = tv({
   base: [
     // base
-    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border text-center text-sm font-medium shadow-xs transition-all duration-100 ease-in-out outline-hidden",
+    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border text-center text-sm font-medium shadow-xs outline-hidden",
     // disabled
     "disabled:pointer-events-none disabled:shadow-none",
     // focus
@@ -155,6 +154,225 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const effectiveChildren = isLoading && loadingText ? loadingText : children;
     const effectiveShouldShowChildren = shouldShowChildren;
 
+    const renderButtonContent = () => {
+      // If children is a custom React element, render it directly
+      if (hasCustomLayout) {
+        return children;
+      }
+
+      // Determine layout class
+      const layoutClassName = cx(
+        "flex items-center w-full",
+        // Full width always uses space-between when there are edge elements
+        fullWidth &&
+          (hasRightIcon ||
+            (textAlign === "center" && (hasLeftIcon || isLoading)))
+          ? "justify-between"
+          : "justify-start" // Remove gap, handle spacing in animations
+      );
+
+      return (
+        <LazyMotion features={domAnimation}>
+          {(() => {
+            // Normal width: simple gap layout
+            if (!fullWidth) {
+              return (
+                <span className={layoutClassName}>
+                  <AnimatePresence mode="wait">
+                    {(isLoading || hasLeftIcon) && (
+                      <m.div
+                        key={isLoading ? "loading" : "leftIcon"}
+                        className="flex items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          duration: 0.15,
+                          ease: appleEasing.easeOut,
+                        }}
+                        style={{
+                          marginRight: effectiveShouldShowChildren ? 6 : 0,
+                        }}
+                      >
+                        {isLoading ? (
+                          <Loader
+                            size="sm"
+                            aria-label={loadingText || "Loading"}
+                          />
+                        ) : (
+                          hasLeftIcon && (
+                            <LeftIcon className="size-4 shrink-0" />
+                          )
+                        )}
+                      </m.div>
+                    )}
+                  </AnimatePresence>
+                  {effectiveShouldShowChildren && effectiveChildren}
+                  <AnimatePresence>
+                    {hasRightIcon && (
+                      <m.div
+                        key="rightIcon"
+                        className="flex items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          duration: 0.15,
+                          ease: appleEasing.easeOut,
+                        }}
+                        style={{
+                          marginLeft: effectiveShouldShowChildren ? 6 : 0,
+                        }}
+                      >
+                        <RightIcon className="size-4 shrink-0" />
+                      </m.div>
+                    )}
+                  </AnimatePresence>
+                </span>
+              );
+            }
+
+            // Full width with center alignment: spread layout
+            if (textAlign === "center") {
+              return (
+                <span className={layoutClassName}>
+                  <AnimatePresence mode="wait">
+                    {(isLoading || hasLeftIcon) && (
+                      <m.div
+                        key={isLoading ? "loading" : "leftIcon"}
+                        className="flex items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          duration: 0.15,
+                          ease: appleEasing.easeOut,
+                        }}
+                      >
+                        {isLoading ? (
+                          <Loader
+                            size="sm"
+                            aria-label={loadingText || "Loading"}
+                          />
+                        ) : (
+                          hasLeftIcon && (
+                            <LeftIcon className="size-4 shrink-0" />
+                          )
+                        )}
+                      </m.div>
+                    )}
+                  </AnimatePresence>
+                  <div className="flex-1 text-center">
+                    {effectiveShouldShowChildren && effectiveChildren}
+                  </div>
+                  <AnimatePresence>
+                    {hasRightIcon && (
+                      <m.div
+                        key="rightIcon"
+                        className="flex items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          duration: 0.15,
+                          ease: appleEasing.easeOut,
+                        }}
+                      >
+                        <RightIcon className="size-4 shrink-0" />
+                      </m.div>
+                    )}
+                  </AnimatePresence>
+                </span>
+              );
+            }
+
+            // Full width with left/right alignment and right icon: left group + right icon
+            if (hasRightIcon) {
+              return (
+                <span className={layoutClassName}>
+                  <div className="flex items-center">
+                    <AnimatePresence mode="wait">
+                      {(isLoading || hasLeftIcon) && (
+                        <m.div
+                          key={isLoading ? "loading" : "leftIcon"}
+                          className="flex items-center"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{
+                            duration: 0.15,
+                            ease: appleEasing.easeOut,
+                          }}
+                          style={{
+                            marginRight: effectiveShouldShowChildren ? 6 : 0,
+                          }}
+                        >
+                          {isLoading ? (
+                            <Loader
+                              size="sm"
+                              aria-label={loadingText || "Loading"}
+                            />
+                          ) : (
+                            hasLeftIcon && (
+                              <LeftIcon className="size-4 shrink-0" />
+                            )
+                          )}
+                        </m.div>
+                      )}
+                    </AnimatePresence>
+                    {effectiveShouldShowChildren && effectiveChildren}
+                  </div>
+                  <AnimatePresence>
+                    <m.div
+                      key="rightIcon"
+                      className="flex items-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15, ease: appleEasing.easeOut }}
+                    >
+                      <RightIcon className="size-4 shrink-0" />
+                    </m.div>
+                  </AnimatePresence>
+                </span>
+              );
+            }
+
+            // Full width with left/right alignment without right icon: normal flow
+            return (
+              <span className={layoutClassName}>
+                <AnimatePresence mode="wait">
+                  {(isLoading || hasLeftIcon) && (
+                    <m.div
+                      key={isLoading ? "loading" : "leftIcon"}
+                      className="flex items-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15, ease: appleEasing.easeOut }}
+                      style={{
+                        marginRight: effectiveShouldShowChildren ? 6 : 0,
+                      }}
+                    >
+                      {isLoading ? (
+                        <Loader
+                          size="sm"
+                          aria-label={loadingText || "Loading"}
+                        />
+                      ) : (
+                        hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
+                      )}
+                    </m.div>
+                  )}
+                </AnimatePresence>
+                {effectiveShouldShowChildren && effectiveChildren}
+              </span>
+            );
+          })()}
+        </LazyMotion>
+      );
+    };
+
     const defaultProps: useRender.ElementProps<"button"> = {
       className: cx(
         buttonVariants({ variant, size }),
@@ -167,78 +385,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ),
       disabled: disabled || isLoading,
       type: "button",
-      children: hasCustomLayout ? (
-        // If children is a custom React element, render it directly
-        children
-      ) : (
-        <span
-          className={cx(
-            "flex items-center w-full",
-            // Full width always uses space-between when there are edge elements
-            fullWidth &&
-              (hasRightIcon ||
-                (textAlign === "center" && (hasLeftIcon || isLoading)))
-              ? "justify-between"
-              : "gap-1.5"
-          )}
-        >
-          {fullWidth ? (
-            // Full width: handle all alignment cases
-            textAlign === "center" ? (
-              // Center alignment: spread layout
-              <>
-                <div className="flex items-center">
-                  {isLoading ? (
-                    <Loader size="sm" aria-label={loadingText || "Loading"} />
-                  ) : (
-                    hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
-                  )}
-                </div>
-                <div className="flex-1 text-center">
-                  {effectiveShouldShowChildren && effectiveChildren}
-                </div>
-                <div className="flex items-center">
-                  {hasRightIcon && <RightIcon className="size-4 shrink-0" />}
-                </div>
-              </>
-            ) : hasRightIcon ? (
-              // Left/right alignment with right icon: left group + right icon
-              <>
-                <div className="flex items-center gap-1.5">
-                  {isLoading ? (
-                    <Loader size="sm" aria-label={loadingText || "Loading"} />
-                  ) : (
-                    hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
-                  )}
-                  {effectiveShouldShowChildren && effectiveChildren}
-                </div>
-                <RightIcon className="size-4 shrink-0" />
-              </>
-            ) : (
-              // Left/right alignment without right icon: normal flow
-              <>
-                {isLoading ? (
-                  <Loader size="sm" aria-label={loadingText || "Loading"} />
-                ) : (
-                  hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
-                )}
-                {effectiveShouldShowChildren && effectiveChildren}
-              </>
-            )
-          ) : (
-            // Normal width: simple gap layout
-            <>
-              {isLoading ? (
-                <Loader size="sm" aria-label={loadingText || "Loading"} />
-              ) : (
-                hasLeftIcon && <LeftIcon className="size-4 shrink-0" />
-              )}
-              {effectiveShouldShowChildren && effectiveChildren}
-              {hasRightIcon && <RightIcon className="size-4 shrink-0" />}
-            </>
-          )}
-        </span>
-      ),
+      children: renderButtonContent(),
     };
 
     const element = useRender({

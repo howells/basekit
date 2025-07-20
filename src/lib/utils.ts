@@ -1,10 +1,10 @@
 // Tremor Raw cx [v0.0.0]
 
-import clsx, { type ClassValue } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export function cx(...args: ClassValue[]) {
-  return twMerge(clsx(...args));
+export function cx(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
 
 // Tremor focusInput [v0.0.2]
@@ -37,3 +37,31 @@ export const hasErrorInput = [
   // ring color
   "ring-red-200 dark:ring-red-700/30",
 ];
+
+// Apple's signature easing curves
+// These match the easing used in iOS, macOS, and Apple's design guidelines
+export const appleEasing = {
+  // Standard ease-in: slow start, accelerating
+  easeIn: [0.42, 0, 1, 1] as const,
+
+  // Standard ease-out: fast start, decelerating (most common)
+  easeOut: [0, 0, 0.58, 1] as const,
+
+  // Standard ease-in-out: slow start and end, fast middle
+  easeInOut: [0.42, 0, 0.58, 1] as const,
+
+  // Apple's signature "ease" (similar to easeInOut but slightly different)
+  ease: [0.25, 0.1, 0.25, 1] as const,
+
+  // Spring-like easing for more playful animations
+  spring: [0.68, -0.55, 0.265, 1.55] as const,
+} as const;
+
+// CSS cubic-bezier strings for use with Tailwind or CSS
+export const appleEasingCSS = {
+  easeIn: "cubic-bezier(0.42, 0, 1, 1)",
+  easeOut: "cubic-bezier(0, 0, 0.58, 1)",
+  easeInOut: "cubic-bezier(0.42, 0, 0.58, 1)",
+  ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+  spring: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+} as const;

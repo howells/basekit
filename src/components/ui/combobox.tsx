@@ -38,7 +38,6 @@ export interface ComboboxProps {
   className?: string;
   buttonClassName?: string;
   popoverClassName?: string;
-  width?: string;
   renderTrigger?: (selectedOption: ComboboxOption | null) => React.ReactNode;
   renderItem?: (option: ComboboxOption) => React.ReactNode;
 }
@@ -54,7 +53,6 @@ export function Combobox({
   className,
   buttonClassName,
   popoverClassName,
-  width = "w-[200px]",
   renderTrigger,
   renderItem,
 }: ComboboxProps) {
@@ -128,9 +126,8 @@ export function Combobox({
         </PopoverTrigger>
         <PopoverContent
           className={cx(
-            // widths - match Select
-            width,
-            "max-w-[95vw]",
+            // widths - match Select exactly
+            "min-w-[var(--anchor-width)] max-w-[95vw]",
             // heights - match Select
             "max-h-[var(--available-height)]",
             // padding
@@ -139,7 +136,7 @@ export function Combobox({
           )}
           align="start"
         >
-          <Command>
+          <Command className="border-0">
             <CommandInput placeholder={searchPlaceholder} />
             <CommandList>
               <CommandEmpty>{emptyMessage}</CommandEmpty>

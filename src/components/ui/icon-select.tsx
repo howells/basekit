@@ -191,6 +191,26 @@ export function IconSelect({
   disabled = false,
   className,
 }: IconSelectProps) {
+  const renderItem = (option: ComboboxOption) => {
+    const IconComponent = option.leftIcon;
+    const isSelected = value === option.value;
+
+    return (
+      <>
+        <div className="flex items-center gap-2 flex-1">
+          {IconComponent && <IconComponent className="size-4 shrink-0" />}
+          <span className="truncate">{option.label}</span>
+        </div>
+        <Check
+          className={cx(
+            "ml-2 h-4 w-4 shrink-0",
+            isSelected ? "opacity-100" : "opacity-0"
+          )}
+        />
+      </>
+    );
+  };
+
   return (
     <Combobox
       options={iconOptions}
@@ -201,8 +221,8 @@ export function IconSelect({
       emptyMessage="No icons found."
       disabled={disabled}
       className={className}
-      width="w-full"
       buttonClassName="justify-start"
+      renderItem={renderItem}
     />
   );
 }
