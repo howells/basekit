@@ -1,0 +1,215 @@
+---
+alwaysApply: true
+---
+
+# StencilUI Project
+
+## Overview
+
+StencilUI is a modern React component library that combines the best design patterns and developer experience from leading UI libraries while building on a solid, accessible foundation. We curate and adapt components from shadcn/ui, Radix UI, Tailwind UI (Catalyst), and other excellent libraries, porting them to Base UI primitives with Tremor-inspired styling.
+
+## Philosophy
+
+### Best of Breed Approach
+
+Rather than reinventing the wheel, we identify and adapt the best component designs and patterns from the ecosystem:
+
+- **shadcn/ui**: Excellent component composition patterns and developer experience
+- **Radix UI**: Pioneering accessibility and unstyled primitive concepts
+- **Tailwind UI (Catalyst)**: Beautiful, modern design patterns and layouts
+- **Tremor**: Clean, professional styling for data-heavy applications
+- **Base UI**: Modern, performant, and accessible primitive foundation
+
+### Core Principles
+
+1. **Accessibility First**: Built on Base UI primitives that provide robust accessibility out of the box
+2. **Developer Experience**: Copy-paste friendly components with excellent TypeScript support
+3. **Design Consistency**: Cohesive visual language inspired by Tremor's professional aesthetic
+4. **Performance**: Modern React patterns with minimal runtime overhead
+5. **Customization**: Flexible styling with Tailwind CSS and tailwind-variants
+
+## Technical Architecture
+
+### Foundation Stack
+
+- **Base UI**: Provides accessible, unstyled primitives as the foundation
+- **Tailwind CSS**: Utility-first styling framework
+- **tailwind-variants**: Type-safe variant API for component styling
+- **TypeScript**: Full type safety throughout the component library
+- **Next.js**: Modern React framework for development and documentation
+
+### Component Structure
+
+```
+src/components/
+├── ui/           # Core UI primitives (buttons, inputs, etc.)
+├── charts/       # Data visualization components
+├── forms/        # Form-related components
+├── inputs/       # Input components and controls
+└── navigation/   # Navigation and layout components
+```
+
+### Styling Strategy
+
+We use a hybrid approach combining the best of different styling methodologies:
+
+1. **Tremor-Inspired Base Styles**: Professional, clean aesthetic with consistent spacing and typography
+2. **tailwind-variants**: For type-safe component variants and responsive design
+3. **CSS Custom Properties**: For dynamic theming and component-specific styling
+4. **Utility Classes**: Tailwind utilities for rapid customization
+
+## Component Development Process
+
+### 1. Research & Selection
+
+We analyze components from multiple sources:
+
+- shadcn/ui component patterns and APIs
+- Tailwind UI design implementations
+- Radix UI accessibility patterns
+- Tremor styling approaches
+
+### 2. Base UI Integration
+
+Each component is built on appropriate Base UI primitives:
+
+- Ensures accessibility compliance
+- Provides consistent behavior patterns
+- Enables advanced features like portal rendering and collision detection
+
+### 3. Styling Adaptation
+
+Components receive Tremor-inspired styling with:
+
+- Consistent color palettes (grays, blues, semantic colors)
+- Professional spacing and typography scales
+- Dark mode support throughout
+- Focus management and keyboard navigation styles
+
+### 4. API Design
+
+Component APIs prioritize:
+
+- TypeScript-first development
+- Intuitive prop naming
+- Composition over configuration
+- Backward compatibility where possible
+
+## Example Component Evolution
+
+### Carousel Component
+
+**Inspiration**: shadcn/ui Carousel
+**Foundation**: Embla Carousel React + Base UI patterns
+**Styling**: Tremor color palette and spacing
+**Result**: Accessible, performant carousel with professional styling
+
+```tsx
+// shadcn/ui pattern adapted to our architecture
+<Carousel className="w-full max-w-xs">
+  <CarouselContent>
+    <CarouselItem>Content 1</CarouselItem>
+    <CarouselItem>Content 2</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+### Navigation Menu
+
+**Inspiration**: shadcn/ui NavigationMenu + Tailwind UI patterns
+**Foundation**: Base UI NavigationMenu primitives
+**Migration**: Removed Radix-specific APIs, adopted Base UI data attributes
+**Styling**: Tremor professional styling with proper focus states
+
+## Key Differentiators
+
+### vs. shadcn/ui
+
+- **Foundation**: Base UI instead of Radix UI (more modern, better performance)
+- **Styling**: Tremor-inspired professional aesthetic vs. neutral design
+- **Approach**: Curated library vs. copy-paste utilities
+
+### vs. Radix UI
+
+- **Styling**: Fully styled components vs. unstyled primitives
+- **DX**: Ready-to-use vs. requires styling implementation
+- **Foundation**: Base UI (next-generation primitives)
+
+### vs. Tailwind UI (Catalyst)
+
+- **Accessibility**: Base UI primitives ensure robust a11y
+- **Customization**: Programmatic variants vs. static examples
+- **Integration**: React-first vs. multi-framework
+
+### vs. Tremor
+
+- **Scope**: Full component library vs. data visualization focus
+- **Foundation**: Modern Base UI vs. older primitive libraries
+- **Flexibility**: More customization options and variants
+
+## Development Workflow
+
+### Component Creation Process
+
+1. **Identify Source**: Find best-in-class component from shadcn/ui, Catalyst, etc.
+2. **Map Primitives**: Identify corresponding Base UI primitives
+3. **Port Implementation**: Adapt component logic to Base UI APIs
+4. **Apply Styling**: Implement Tremor-inspired design system
+5. **Add Variants**: Create tailwind-variants for different use cases
+6. **Test & Document**: Ensure accessibility and provide usage examples
+
+### Quality Standards
+
+- **TypeScript**: Full type safety with proper generic support
+- **Accessibility**: WCAG AA compliance via Base UI primitives
+- **Performance**: Minimal re-renders and optimal bundle size
+- **Documentation**: Clear examples and API documentation
+- **Testing**: Comprehensive test coverage for critical paths
+
+## Future Roadmap
+
+### Short Term
+
+- Complete core component set (forms, navigation, feedback)
+- Advanced data visualization components
+- Comprehensive theming system
+- Storybook documentation site
+
+### Medium Term
+
+- Advanced composition patterns
+- Animation and motion system
+- Design tokens and theme builder
+- CLI tool for component installation
+
+### Long Term
+
+- Design system documentation
+- Figma design kit integration
+- Advanced customization APIs
+- Framework adapters (Vue, Svelte)
+
+## Contributing
+
+We welcome contributions that align with our philosophy of curating the best patterns from the ecosystem. When proposing new components:
+
+1. Identify the best-in-class reference implementation
+2. Ensure Base UI primitive support exists
+3. Follow our styling and API conventions
+4. Provide comprehensive TypeScript types
+5. Include accessibility considerations
+
+## License
+
+This project builds upon the excellent work of the open-source community. We maintain compatibility with MIT licensing and provide proper attribution to source libraries.
+
+---
+
+_StencilUI: The best of the React ecosystem, unified under Base UI primitives with professional Tremor styling._
+description:
+globs:
+alwaysApply: false
+
+---
