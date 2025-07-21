@@ -11,6 +11,7 @@ interface NumberFieldProps
   placeholder?: string;
   showScrubArea?: boolean;
   showSteppers?: boolean;
+  fullWidth?: boolean;
   className?: string;
   inputClassName?: string;
 }
@@ -25,6 +26,7 @@ const NumberField = React.forwardRef<
       placeholder,
       showScrubArea = true,
       showSteppers = true,
+      fullWidth = false,
       className,
       inputClassName,
       id,
@@ -49,18 +51,22 @@ const NumberField = React.forwardRef<
         )}
 
         {showSteppers ? (
-          <NumberFieldGroup>
+          <NumberFieldGroup className={fullWidth ? "w-full" : undefined}>
             <NumberFieldDecrement />
             <NumberFieldInput
               placeholder={placeholder}
-              className={inputClassName}
+              className={cx(fullWidth ? "flex-1" : undefined, inputClassName)}
             />
             <NumberFieldIncrement />
           </NumberFieldGroup>
         ) : (
           <NumberFieldInput
             placeholder={placeholder}
-            className={cx("rounded-md", inputClassName)}
+            className={cx(
+              "rounded-md",
+              fullWidth ? "w-full" : undefined,
+              inputClassName
+            )}
           />
         )}
       </BaseNumberField.Root>
@@ -146,7 +152,7 @@ const NumberFieldInput = React.forwardRef<
     ref={ref}
     className={cx(
       // base
-      "h-10 w-24 border text-center text-sm tabular-nums transition-colors",
+      "py-2 w-24 border text-center text-sm tabular-nums transition-colors",
       // border color
       "border-zinc-300 dark:border-zinc-700",
       // background color
@@ -176,7 +182,7 @@ const NumberFieldIncrement = React.forwardRef<
     ref={ref}
     className={cx(
       // base
-      "flex h-10 w-10 items-center justify-center rounded-tr-md rounded-br-md border border-l-0 bg-clip-padding text-sm font-medium transition-colors",
+      "flex py-2 w-10 items-center justify-center rounded-tr-md rounded-br-md border border-l-0 bg-clip-padding text-sm font-medium transition-colors",
       // border color
       "border-zinc-300 dark:border-zinc-700",
       // background color
@@ -204,7 +210,7 @@ const NumberFieldDecrement = React.forwardRef<
     ref={ref}
     className={cx(
       // base
-      "flex h-10 w-10 items-center justify-center rounded-tl-md rounded-bl-md border border-r-0 bg-clip-padding text-sm font-medium transition-colors",
+      "flex py-2 w-10 items-center justify-center rounded-tl-md rounded-bl-md border border-r-0 bg-clip-padding text-sm font-medium transition-colors",
       // border color
       "border-zinc-300 dark:border-zinc-700",
       // background color

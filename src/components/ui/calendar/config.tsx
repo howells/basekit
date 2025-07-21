@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "calendar",
   name: "Calendar",
-  description: "A date picker calendar component with support for single date and date range selection.",
+  description:
+    "A date picker calendar component with support for single date and date range selection.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -39,10 +40,12 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "weekStartsOn",
-      type: "select",
-      options: ["0", "1", "2", "3", "4", "5", "6"],
-      defaultValue: "1",
-      description: "Which day of the week to start on (0 = Sunday, 1 = Monday, etc.).",
+      type: "number",
+      defaultValue: 1,
+      min: 0,
+      max: 6,
+      description:
+        "Which day of the week to start on (0 = Sunday, 1 = Monday, etc.).",
     },
     {
       name: "selected",

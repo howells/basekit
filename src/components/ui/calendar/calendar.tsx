@@ -20,54 +20,7 @@ import {
 } from "react-day-picker";
 
 import { cx, focusRing } from "@/lib/utils";
-
-interface NavigationButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
-  onClick: () => void;
-  icon: React.ElementType;
-  disabled?: boolean;
-}
-
-const NavigationButton = React.forwardRef<
-  HTMLButtonElement,
-  NavigationButtonProps
->(
-  (
-    { onClick, icon, disabled, ...props }: NavigationButtonProps,
-    forwardedRef
-  ) => {
-    const Icon = icon;
-    return (
-      <button
-        ref={forwardedRef}
-        type="button"
-        disabled={disabled}
-        className={cx(
-          "flex size-8 shrink-0 select-none items-center justify-center rounded-sm border p-1 outline-hidden transition sm:size-[30px]",
-          // text color
-          "text-zinc-600 hover:text-zinc-800",
-          "dark:text-zinc-400 dark:hover:text-zinc-200",
-          // border color
-          "border-zinc-300 dark:border-zinc-800",
-          // background color
-          "hover:bg-zinc-50 active:bg-zinc-100",
-          "dark:hover:bg-zinc-900 dark:active:bg-zinc-800",
-          // disabled
-          "disabled:pointer-events-none",
-          "disabled:border-zinc-200 dark:disabled:border-zinc-800",
-          "disabled:text-zinc-400 dark:disabled:text-zinc-600",
-          focusRing
-        )}
-        onClick={onClick}
-        {...props}
-      >
-        <Icon className="size-full shrink-0" />
-      </button>
-    );
-  }
-);
-
-NavigationButton.displayName = "NavigationButton";
+import { Button } from "../button/button";
 
 type OmitKeys<T, K extends keyof T> = {
   [P in keyof T as P extends K ? never : P]: T[P];
@@ -191,7 +144,9 @@ const Calendar = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1">
                 {enableYearNavigation && !hidePreviousButton && (
-                  <NavigationButton
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
                     disabled={
                       disableNavigation ||
                       !previousMonth ||
@@ -201,16 +156,20 @@ const Calendar = ({
                     }
                     aria-label="Go to previous year"
                     onClick={goToPreviousYear}
-                    icon={ChevronsLeft}
-                  />
+                  >
+                    <ChevronsLeft className="size-4" />
+                  </Button>
                 )}
                 {!hidePreviousButton && (
-                  <NavigationButton
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
                     disabled={disableNavigation || !previousMonth}
                     aria-label="Go to previous month"
                     onClick={() => previousMonth && goToMonth(previousMonth)}
-                    icon={ChevronLeft}
-                  />
+                  >
+                    <ChevronLeft className="size-4" />
+                  </Button>
                 )}
               </div>
 
@@ -224,15 +183,20 @@ const Calendar = ({
 
               <div className="flex items-center gap-1">
                 {!hideNextButton && (
-                  <NavigationButton
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
                     disabled={disableNavigation || !nextMonth}
                     aria-label="Go to next month"
                     onClick={() => nextMonth && goToMonth(nextMonth)}
-                    icon={ChevronRight}
-                  />
+                  >
+                    <ChevronRight className="size-4" />
+                  </Button>
                 )}
                 {enableYearNavigation && !hideNextButton && (
-                  <NavigationButton
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
                     disabled={
                       disableNavigation ||
                       !nextMonth ||
@@ -241,8 +205,9 @@ const Calendar = ({
                     }
                     aria-label="Go to next year"
                     onClick={goToNextYear}
-                    icon={ChevronsRight}
-                  />
+                  >
+                    <ChevronsRight className="size-4" />
+                  </Button>
                 )}
               </div>
             </div>
@@ -311,4 +276,4 @@ const Calendar = ({
 
 Calendar.displayName = "Calendar";
 
-export { Calendar, type Matcher, type CalendarProps };
+export { Calendar, type CalendarProps, type Matcher };

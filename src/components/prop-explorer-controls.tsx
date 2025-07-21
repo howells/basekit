@@ -164,6 +164,9 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
                         value={currentValue as number}
                         onValueChange={(value) => updateProp(prop.name, value)}
                         placeholder={String(prop.defaultValue || "")}
+                        min={prop.min}
+                        max={prop.max}
+                        fullWidth
                       />
                     )}
                   />

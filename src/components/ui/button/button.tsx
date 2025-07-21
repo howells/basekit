@@ -105,6 +105,7 @@ const buttonVariants = tv({
       default: "h-9 px-3 text-sm has-[>svg]:px-2.5",
       sm: "h-8 px-2.5 text-xs has-[>svg]:px-2",
       icon: "size-9",
+      "icon-sm": "size-8",
     },
   },
   defaultVariants: {

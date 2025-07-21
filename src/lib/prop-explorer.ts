@@ -25,6 +25,10 @@ export interface PropMetadata {
   defaultValue?: unknown;
   /** Options for select/enum types - can be simple strings or complex VariantOption objects */
   options?: string[] | VariantOption[];
+  /** Minimum value for number types */
+  min?: number;
+  /** Maximum value for number types */
+  max?: number;
 }
 
 /**
