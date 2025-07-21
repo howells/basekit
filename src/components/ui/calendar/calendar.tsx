@@ -79,7 +79,7 @@ const Calendar = ({
           "hover:bg-zinc-200 dark:hover:bg-zinc-700",
           focusRing
         ),
-        day_today: "font-semibold",
+        day_today: "font-semibold bg-blue-50 dark:bg-blue-950/50",
         day_selected: cx(
           "rounded-sm",
           "aria-selected:bg-blue-500 aria-selected:text-white",
@@ -216,7 +216,11 @@ const Calendar = ({
         Day: ({ date, displayMonth }: DayProps) => {
           const buttonRef = React.useRef<HTMLButtonElement>(null);
           const { activeModifiers, buttonProps, divProps, isButton, isHidden } =
-            useDayRender(date, displayMonth, buttonRef);
+            useDayRender(
+              date,
+              displayMonth,
+              buttonRef as React.RefObject<HTMLButtonElement>
+            );
 
           const { selected, today, disabled, range_middle } = activeModifiers;
 
@@ -250,21 +254,6 @@ const Calendar = ({
               className={cx("relative", buttonClassName)}
             >
               {buttonChildren}
-              {today && (
-                <span
-                  className={cx(
-                    "absolute inset-x-1/2 bottom-1.5 h-0.5 w-4 -translate-x-1/2 rounded-[2px]",
-                    {
-                      "bg-blue-500 dark:bg-blue-500": !selected,
-                      "bg-white! dark:bg-zinc-950!": selected,
-                      "bg-zinc-400! dark:bg-zinc-600!":
-                        selected && range_middle,
-                      "bg-zinc-400 text-zinc-400 dark:bg-zinc-400 dark:text-zinc-600":
-                        disabled,
-                    }
-                  )}
-                />
-              )}
             </button>
           );
         },

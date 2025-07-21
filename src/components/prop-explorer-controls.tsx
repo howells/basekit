@@ -6,6 +6,7 @@ import { PropMetadata } from "@/lib/prop-explorer";
 import React from "react";
 import { usePropExplorer } from "./prop-explorer-context";
 import { Button } from "./ui/button/button";
+import { DatePicker } from "./ui/date-picker";
 import { Field, FieldControl, FieldDescription, FieldLabel } from "./ui/field";
 import { IconSelect } from "./ui/icon-select";
 import { Input } from "./ui/input";
@@ -167,6 +168,28 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
                         min={prop.min}
                         max={prop.max}
                         fullWidth
+                      />
+                    )}
+                  />
+                </Field>
+              </div>
+            );
+          }
+
+          if (prop.type === "date") {
+            return (
+              <div key={prop.name} className="space-y-2">
+                <Field>
+                  <FieldLabel>{prop.name}</FieldLabel>
+                  {prop.description && (
+                    <FieldDescription>{prop.description}</FieldDescription>
+                  )}
+                  <FieldControl
+                    render={() => (
+                      <DatePicker
+                        value={currentValue as Date | undefined}
+                        onChange={(date) => updateProp(prop.name, date)}
+                        placeholder="Select date"
                       />
                     )}
                   />
