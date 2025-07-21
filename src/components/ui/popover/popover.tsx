@@ -4,8 +4,41 @@ import { cx } from "@/lib/utils";
 import { Popover as BasePopover } from "@base-ui-components/react/popover";
 import React from "react";
 
+/**
+ * An accessible popup anchored to a button, built on Base UI's Popover primitive.
+ * 
+ * Based on Base UI's Popover (https://base-ui.com/react/components/popover),
+ * providing flexible contextual information displays with positioning, arrows,
+ * and proper focus management. Perfect for tooltips, menus, and content overlays.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Popover>
+ *   <PopoverTrigger>Open Popover</PopoverTrigger>
+ *   <PopoverContent>
+ *     <PopoverTitle>Popover Title</PopoverTitle>
+ *     <PopoverDescription>Some helpful information here.</PopoverDescription>
+ *     <PopoverClose>Close</PopoverClose>
+ *   </PopoverContent>
+ * </Popover>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/popover - Base UI documentation
+ */
 const Popover = BasePopover.Root;
 
+/**
+ * Trigger element that opens the popover when activated.
+ * 
+ * Can be any interactive element like a button or link. Provides focus management
+ * and proper ARIA attributes for accessibility.
+ *
+ * @example
+ * ```tsx
+ * <PopoverTrigger>Click me</PopoverTrigger>
+ * ```
+ */
 const PopoverTrigger = React.forwardRef<
   React.ElementRef<typeof BasePopover.Trigger>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Trigger>
@@ -28,6 +61,17 @@ PopoverTrigger.displayName = "PopoverTrigger";
 
 const PopoverPortal = BasePopover.Portal;
 
+/**
+ * Optional backdrop that appears behind the popover.
+ * 
+ * Provides subtle background overlay and can be configured to close
+ * the popover when clicked. Less prominent than dialog backdrops.
+ *
+ * @example
+ * ```tsx
+ * <PopoverBackdrop />
+ * ```
+ */
 const PopoverBackdrop = React.forwardRef<
   React.ElementRef<typeof BasePopover.Backdrop>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Backdrop>
@@ -49,6 +93,12 @@ const PopoverBackdrop = React.forwardRef<
 ));
 PopoverBackdrop.displayName = "PopoverBackdrop";
 
+/**
+ * Positioner component that handles popover placement and collision detection.
+ * 
+ * Automatically positions the popover relative to its trigger with collision avoidance.
+ * Typically used internally by PopoverContent but can be used directly for custom layouts.
+ */
 const PopoverPositioner = React.forwardRef<
   React.ElementRef<typeof BasePopover.Positioner>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Positioner>
@@ -62,6 +112,25 @@ const PopoverPositioner = React.forwardRef<
 ));
 PopoverPositioner.displayName = "PopoverPositioner";
 
+/**
+ * Main popover content container with automatic positioning.
+ * 
+ * Displays the popover content with smart positioning, collision detection,
+ * and smooth animations. Includes portal rendering for proper layering.
+ * Supports wheel event handling for scrollable content.
+ *
+ * @param sideOffset - Distance from the trigger element
+ * @param side - Preferred placement side
+ * @param align - Alignment relative to the trigger
+ * @param collisionPadding - Padding for collision detection
+ *
+ * @example
+ * ```tsx
+ * <PopoverContent side="top" align="start">
+ *   Content goes here
+ * </PopoverContent>
+ * ```
+ */
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof BasePopover.Popup>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Popup> & {
@@ -133,6 +202,21 @@ const PopoverContent = React.forwardRef<
 );
 PopoverContent.displayName = "PopoverContent";
 
+/**
+ * Arrow component that points from the popover to its trigger.
+ * 
+ * Provides visual connection between the trigger and popover content.
+ * Automatically rotates and positions based on the popover's placement side.
+ * Features layered SVG styling for proper contrast in light and dark themes.
+ *
+ * @example
+ * ```tsx
+ * <PopoverContent>
+ *   <PopoverArrow />
+ *   Content here
+ * </PopoverContent>
+ * ```
+ */
 const PopoverArrow = React.forwardRef<
   React.ElementRef<typeof BasePopover.Arrow>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Arrow>
@@ -168,6 +252,17 @@ const PopoverArrow = React.forwardRef<
 ));
 PopoverArrow.displayName = "PopoverArrow";
 
+/**
+ * Title heading for the popover content.
+ * 
+ * Provides semantic heading structure and prominent typography.
+ * Use to establish clear hierarchy within popover content.
+ *
+ * @example
+ * ```tsx
+ * <PopoverTitle>Settings</PopoverTitle>
+ * ```
+ */
 const PopoverTitle = React.forwardRef<
   React.ElementRef<typeof BasePopover.Title>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Title>
@@ -188,6 +283,19 @@ const PopoverTitle = React.forwardRef<
 ));
 PopoverTitle.displayName = "PopoverTitle";
 
+/**
+ * Description text that provides additional context for the popover.
+ * 
+ * Uses muted text styling to create proper visual hierarchy with the title.
+ * Ideal for explanatory content or additional details.
+ *
+ * @example
+ * ```tsx
+ * <PopoverDescription>
+ *   Adjust your account preferences and notification settings.
+ * </PopoverDescription>
+ * ```
+ */
 const PopoverDescription = React.forwardRef<
   React.ElementRef<typeof BasePopover.Description>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Description>
@@ -206,6 +314,19 @@ const PopoverDescription = React.forwardRef<
 ));
 PopoverDescription.displayName = "PopoverDescription";
 
+/**
+ * Close button that dismisses the popover.
+ * 
+ * Typically styled as a small icon button and positioned in the top-right corner.
+ * Automatically handles focus management when the popover closes.
+ *
+ * @example
+ * ```tsx
+ * <PopoverClose>
+ *   <XIcon className="h-4 w-4" />
+ * </PopoverClose>
+ * ```
+ */
 const PopoverClose = React.forwardRef<
   React.ElementRef<typeof BasePopover.Close>,
   React.ComponentPropsWithoutRef<typeof BasePopover.Close>

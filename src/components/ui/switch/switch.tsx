@@ -61,15 +61,52 @@ const switchVariants = tv({
   },
 });
 
+/**
+ * Props for the Switch component.
+ *
+ * @interface SwitchProps
+ * @extends Omit<React.ComponentPropsWithoutRef<typeof BaseSwitch.Root>, "children">
+ * @extends VariantProps<typeof switchVariants>
+ */
 interface SwitchProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof BaseSwitch.Root>,
       "children"
     >,
     VariantProps<typeof switchVariants> {
+  /** Optional label text displayed next to the switch */
   label?: string;
 }
 
+/**
+ * A toggle switch component built on Base UI's Switch primitive.
+ * 
+ * Based on Base UI's Switch (https://base-ui.com/react/components/switch),
+ * providing accessible on/off controls with smooth animations and focus management.
+ * Features multiple sizes and optional label support with Tremor-inspired styling.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic switch
+ * <Switch />
+ * 
+ * // Controlled switch
+ * <Switch checked={enabled} onCheckedChange={setEnabled} />
+ * 
+ * // With label
+ * <Switch label="Enable notifications" />
+ * 
+ * // Different sizes
+ * <Switch size="small" />
+ * <Switch size="default" />
+ * 
+ * // Form integration
+ * <Switch name="newsletter" defaultChecked />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/switch - Base UI documentation
+ */
 const Switch = React.forwardRef<
   React.ElementRef<typeof BaseSwitch.Root>,
   SwitchProps

@@ -1,9 +1,14 @@
 "use client";
 
+import { Grid } from "../grid";
+import { Subheading } from "../heading";
+import { VStack } from "../stack";
+import { Text } from "../text";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuItemLink,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
@@ -16,82 +21,86 @@ export function NavigationMenuExample() {
       <NavigationMenuList className="relative flex">
         <NavigationMenuItem>
           <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
-          <NavigationMenuContent className="w-[400px] h-full p-6 transition-[opacity,transform,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0">
-            <ul className="grid list-none grid-cols-2 gap-3">
-              <li>
-                <NavigationMenuLink href="#quick-start">
-                  <h3 className="m-0 mb-1 text-sm font-medium">Quick Start</h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+          <NavigationMenuContent className="w-[400px]">
+            <Grid
+              columns={2}
+              gap={3}
+              showColumnGuides={false}
+              showRowGuides={false}
+              minHeight="none"
+            >
+              <NavigationMenuLink href="#quick-start">
+                <VStack gap={1}>
+                  <Subheading>Quick Start</Subheading>
+                  <Text size="xs">
                     Install and assemble your first component.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink href="#accessibility">
-                  <h3 className="m-0 mb-1 text-sm font-medium">
-                    Accessibility
-                  </h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+              <NavigationMenuLink href="#accessibility">
+                <VStack gap={1}>
+                  <Subheading>Accessibility</Subheading>
+                  <Text size="xs">
                     Learn how we build accessible components.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink href="#releases">
-                  <h3 className="m-0 mb-1 text-sm font-medium">Releases</h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+              <NavigationMenuLink href="#releases">
+                <VStack gap={1}>
+                  <Subheading>Releases</Subheading>
+                  <Text size="xs">
                     See what&apos;s new in the latest versions.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink href="#about">
-                  <h3 className="m-0 mb-1 text-sm font-medium">About</h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+              <NavigationMenuLink href="#about">
+                <VStack gap={1}>
+                  <Subheading>About</Subheading>
+                  <Text size="xs">
                     Learn more about Base UI and our mission.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-            </ul>
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+            </Grid>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
           <NavigationMenuTrigger>Handbook</NavigationMenuTrigger>
-          <NavigationMenuContent className="w-[300px] h-full p-6 transition-[opacity,transform,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0">
-            <ul className="flex flex-col gap-3">
-              <li>
-                <NavigationMenuLink href="#styling">
-                  <h3 className="m-0 mb-1 text-sm font-medium">Styling</h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+          <NavigationMenuContent className="w-[300px]">
+            <VStack gap={3}>
+              <NavigationMenuLink href="#styling">
+                <VStack gap={1}>
+                  <Subheading>Styling</Subheading>
+                  <Text size="xs">
                     Style components with CSS, Tailwind, or CSS-in-JS.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink href="#animation">
-                  <h3 className="m-0 mb-1 text-sm font-medium">Animation</h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+              <NavigationMenuLink href="#animation">
+                <VStack gap={1}>
+                  <Subheading>Animation</Subheading>
+                  <Text size="xs">
                     Animate with CSS transitions or JavaScript libraries.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink href="#composition">
-                  <h3 className="m-0 mb-1 text-sm font-medium">Composition</h3>
-                  <p className="m-0 text-xs leading-4 text-gray-500">
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+              <NavigationMenuLink href="#composition">
+                <VStack gap={1}>
+                  <Subheading>Composition</Subheading>
+                  <Text size="xs">
                     Compose components with your existing ones.
-                  </p>
-                </NavigationMenuLink>
-              </li>
-            </ul>
+                  </Text>
+                </VStack>
+              </NavigationMenuLink>
+            </VStack>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink href="https://github.com/mui/base-ui">
+          <NavigationMenuItemLink href="https://github.com/mui/base-ui">
             GitHub
-          </NavigationMenuLink>
+          </NavigationMenuItemLink>
         </NavigationMenuItem>
       </NavigationMenuList>
 

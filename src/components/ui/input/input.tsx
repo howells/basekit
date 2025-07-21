@@ -72,24 +72,83 @@ const inputStyles = tv({
   ],
 });
 
+/**
+ * Props for the Input component.
+ *
+ * @interface InputProps
+ * @extends Omit<React.ComponentPropsWithoutRef<typeof BaseInput>, "size" | "prefix">
+ * @extends VariantProps<typeof inputStyles>
+ */
 interface InputProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof BaseInput>,
       "size" | "prefix"
     >,
     VariantProps<typeof inputStyles> {
+  /** Additional CSS classes for the input element */
   inputClassName?: string;
+  /** Input type (text, email, password, etc.) */
   type?: string;
+  /** Custom prefix content */
   prefix?: React.ReactNode;
+  /** Custom suffix content */
   suffix?: React.ReactNode;
+  /** Prefix text content */
   prefixText?: string;
+  /** Prefix icon component */
   prefixIcon?: React.ComponentType<{ className?: string }>;
+  /** Suffix text content */
   suffixText?: string;
+  /** Suffix icon component */
   suffixIcon?: React.ComponentType<{ className?: string }>;
+  /** Whether to apply prefix styling */
   prefixStyling?: boolean;
+  /** Whether to apply suffix styling */
   suffixStyling?: boolean;
 }
 
+/**
+ * A versatile input component built on Base UI's Input primitive.
+ * 
+ * Based on Base UI's Input, providing accessible form inputs with extensive customization
+ * options including prefix/suffix content, icons, validation states, and multiple sizes.
+ * Features comprehensive styling for different input types including file, search, and number inputs.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic input
+ * <Input placeholder="Enter text" />
+ * 
+ * // With validation
+ * <Input hasError placeholder="Required field" />
+ * 
+ * // With icons
+ * <Input prefixIcon={SearchIcon} placeholder="Search..." />
+ * <Input suffixIcon={EyeIcon} type="password" />
+ * 
+ * // Different sizes
+ * <Input size="sm" placeholder="Small" />
+ * <Input size="lg" placeholder="Large" />
+ * 
+ * // With prefix/suffix content
+ * <Input prefixText="$" placeholder="0.00" type="number" />
+ * <Input suffixText="USD" placeholder="Amount" />
+ * 
+ * // Custom prefix/suffix
+ * <Input 
+ *   prefix={<Badge>NEW</Badge>} 
+ *   suffix={<Button size="sm">Send</Button>}
+ *   placeholder="Custom content"
+ * />
+ * 
+ * // File input
+ * <Input type="file" />
+ * 
+ * // Number input without steppers
+ * <Input type="number" enableStepper={false} />
+ * ```
+ */
 const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
   (
     {

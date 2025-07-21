@@ -18,7 +18,7 @@ type ResponsiveValue<T> =
 // Grid variants
 const gridVariants = tv({
   base: [
-    "relative w-full h-full min-h-[200px]",
+    "relative w-full h-full",
     // Grid background pattern
     "bg-[linear-gradient(to_right,_rgb(226_232_240)_1px,_transparent_1px),linear-gradient(to_bottom,_rgb(226_232_240)_1px,_transparent_1px)]",
     "dark:bg-[linear-gradient(to_right,_rgb(51_65_85)_1px,_transparent_1px),linear-gradient(to_bottom,_rgb(51_65_85)_1px,_transparent_1px)]",
@@ -31,6 +31,13 @@ const gridVariants = tv({
     showRowGuides: {
       true: "",
       false: "[background-image:none]",
+    },
+    minHeight: {
+      none: "",
+      sm: "min-h-[100px]",
+      md: "min-h-[200px]",
+      lg: "min-h-[300px]",
+      xl: "min-h-[400px]",
     },
   },
   compoundVariants: [
@@ -55,6 +62,7 @@ const gridVariants = tv({
   defaultVariants: {
     showColumnGuides: true,
     showRowGuides: true,
+    minHeight: "md",
   },
 });
 
@@ -176,6 +184,10 @@ interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
    * Grid content
    */
   children?: React.ReactNode;
+  /**
+   * Minimum height of the grid
+   */
+  minHeight?: "none" | "sm" | "md" | "lg" | "xl";
 }
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
@@ -188,6 +200,7 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       showRowGuides = true,
       className,
       children,
+      minHeight = "md",
       ...props
     },
     ref
@@ -203,6 +216,7 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
           gridVariants({
             showColumnGuides,
             showRowGuides,
+            minHeight,
           }),
           responsiveGridStyles,
           className

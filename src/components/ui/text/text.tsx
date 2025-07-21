@@ -1,18 +1,33 @@
 import clsx from "clsx";
 import Link from "next/link";
+import { tv, type VariantProps } from "tailwind-variants";
 
-export function Text({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"p">) {
+const textVariants = tv({
+  base: "m-0 text-zinc-500 dark:text-zinc-400",
+  variants: {
+    size: {
+      xs: "text-xs/4",
+      sm: "text-sm/5",
+      base: "text-base/6 sm:text-sm/6",
+      lg: "text-lg/7",
+      xl: "text-xl/8",
+    },
+  },
+  defaultVariants: {
+    size: "base",
+  },
+});
+
+interface TextProps
+  extends React.ComponentPropsWithoutRef<"p">,
+    VariantProps<typeof textVariants> {}
+
+export function Text({ className, size, ...props }: TextProps) {
   return (
     <p
       data-slot="text"
       {...props}
-      className={clsx(
-        className,
-        "text-base/6 text-zinc-500 sm:text-sm/6 dark:text-zinc-400"
-      )}
+      className={clsx(textVariants({ size }), className)}
     />
   );
 }

@@ -46,6 +46,7 @@ export const GridExample = ({
         showRowGuides={showRowGuides}
         cellCount={cellCountValue}
         solidCells={solidCells}
+        minHeight="lg"
         className="h-[300px]"
         {...props}
       />
@@ -61,6 +62,7 @@ export const GridExample = ({
         gap={gapValue}
         showColumnGuides={showColumnGuides}
         showRowGuides={showRowGuides}
+        minHeight="lg"
         className="h-[300px]"
         {...props}
       >
@@ -96,6 +98,7 @@ export const GridExample = ({
         gap={gapValue}
         showColumnGuides={showColumnGuides}
         showRowGuides={showRowGuides}
+        minHeight="md"
         className="h-[250px]"
         {...props}
       >
@@ -127,6 +130,7 @@ export const GridExample = ({
       gap={gapValue}
       showColumnGuides={showColumnGuides}
       showRowGuides={showRowGuides}
+      minHeight="lg"
       className="h-[300px]"
       {...props}
     >

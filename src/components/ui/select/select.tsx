@@ -3,8 +3,36 @@ import { Select as BaseSelect } from "@base-ui-components/react/select";
 import { Check, ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
 import * as React from "react";
 
+/**
+ * A select dropdown component built on Base UI's Select primitive.
+ * 
+ * Based on Base UI's Select (https://base-ui.com/react/components/select),
+ * providing accessible dropdown selection with keyboard navigation, search,
+ * and proper focus management. Features Tremor-inspired styling and validation states.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Select>
+ *   <SelectTrigger>
+ *     <SelectValue placeholder="Choose an option" />
+ *   </SelectTrigger>
+ *   <SelectContent>
+ *     <SelectItem value="option1">Option 1</SelectItem>
+ *     <SelectItem value="option2">Option 2</SelectItem>
+ *   </SelectContent>
+ * </Select>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/select - Base UI documentation
+ */
 const Select = BaseSelect.Root;
 const SelectGroup = BaseSelect.Group;
+
+/**
+ * Displays the selected value or placeholder text in the trigger.
+ * Shows the current selection and placeholder when no value is selected.
+ */
 const SelectValue = BaseSelect.Value;
 
 const selectTriggerStyles = [
@@ -30,9 +58,26 @@ const selectTriggerStyles = [
   ),
 ];
 
+/**
+ * Trigger button that opens the select dropdown.
+ * 
+ * Displays the selected value and dropdown indicator icon.
+ * Supports error states for form validation feedback.
+ * Features hover and focus states with proper accessibility.
+ *
+ * @param hasError - Whether to show error styling
+ *
+ * @example
+ * ```tsx
+ * <SelectTrigger hasError={!!errors.field}>
+ *   <SelectValue placeholder="Select option" />
+ * </SelectTrigger>
+ * ```
+ */
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof BaseSelect.Trigger>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> & {
+    /** Whether to display error styling */
     hasError?: boolean;
   }
 >(({ className, hasError, children, ...props }, ref) => {
@@ -65,6 +110,12 @@ const SelectTrigger = React.forwardRef<
 });
 SelectTrigger.displayName = "SelectTrigger";
 
+/**
+ * Scroll up button that appears when there are more options above the visible area.
+ * 
+ * Automatically shows/hides based on scroll position in long option lists.
+ * Provides visual indication and click handler for scrolling upward.
+ */
 const SelectScrollUpButton = React.forwardRef<
   React.ElementRef<typeof BaseSelect.ScrollUpArrow>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.ScrollUpArrow>
@@ -82,6 +133,12 @@ const SelectScrollUpButton = React.forwardRef<
 ));
 SelectScrollUpButton.displayName = "SelectScrollUpButton";
 
+/**
+ * Scroll down button that appears when there are more options below the visible area.
+ * 
+ * Automatically shows/hides based on scroll position in long option lists.
+ * Provides visual indication and click handler for scrolling downward.
+ */
 const SelectScrollDownButton = React.forwardRef<
   React.ElementRef<typeof BaseSelect.ScrollDownArrow>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.ScrollDownArrow>
@@ -99,6 +156,12 @@ const SelectScrollDownButton = React.forwardRef<
 ));
 SelectScrollDownButton.displayName = "SelectScrollDownButton";
 
+/**
+ * Optional backdrop that appears behind the select dropdown.
+ * 
+ * Provides subtle background overlay and can close the dropdown when clicked.
+ * Less prominent than modal backdrops, suitable for dropdown interactions.
+ */
 const SelectBackdrop = React.forwardRef<
   React.ElementRef<typeof BaseSelect.Backdrop>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.Backdrop>
@@ -122,6 +185,12 @@ SelectBackdrop.displayName = "SelectBackdrop";
 
 const SelectPortal = BaseSelect.Portal;
 
+/**
+ * Positioner component that handles dropdown placement and collision detection.
+ * 
+ * Automatically positions the dropdown relative to the trigger with collision avoidance.
+ * Typically used internally by SelectContent.
+ */
 const SelectPositioner = React.forwardRef<
   React.ElementRef<typeof BaseSelect.Positioner>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.Positioner>
@@ -135,12 +204,36 @@ const SelectPositioner = React.forwardRef<
 ));
 SelectPositioner.displayName = "SelectPositioner";
 
+/**
+ * Dropdown content container that holds the select options.
+ * 
+ * Automatically positions relative to the trigger with smart collision detection.
+ * Includes built-in scroll buttons for long option lists and smooth animations.
+ * Features portal rendering for proper layering.
+ *
+ * @param sideOffset - Distance from the trigger element
+ * @param collisionPadding - Padding for collision detection
+ * @param side - Preferred placement side
+ * @param align - Alignment relative to the trigger
+ *
+ * @example
+ * ```tsx
+ * <SelectContent side="top" align="end">
+ *   <SelectItem value="option1">Option 1</SelectItem>
+ *   <SelectItem value="option2">Option 2</SelectItem>
+ * </SelectContent>
+ * ```
+ */
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof BaseSelect.Popup>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.Popup> & {
+    /** Distance from the trigger element */
     sideOffset?: number;
+    /** Padding for collision detection */
     collisionPadding?: number;
+    /** Preferred placement side */
     side?: "top" | "right" | "bottom" | "left";
+    /** Alignment relative to the trigger */
     align?: "start" | "center" | "end";
   }
 >(
@@ -200,6 +293,21 @@ const SelectContent = React.forwardRef<
 );
 SelectContent.displayName = "SelectContent";
 
+/**
+ * Label component for grouping related select options.
+ * 
+ * Provides semantic labeling and visual separation for option groups.
+ * Uses muted styling to distinguish from selectable items.
+ *
+ * @example
+ * ```tsx
+ * <SelectGroup>
+ *   <SelectGroupLabel>Fruits</SelectGroupLabel>
+ *   <SelectItem value="apple">Apple</SelectItem>
+ *   <SelectItem value="banana">Banana</SelectItem>
+ * </SelectGroup>
+ * ```
+ */
 const SelectGroupLabel = React.forwardRef<
   React.ElementRef<typeof BaseSelect.GroupLabel>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.GroupLabel>
@@ -218,6 +326,19 @@ const SelectGroupLabel = React.forwardRef<
 ));
 SelectGroupLabel.displayName = "SelectGroupLabel";
 
+/**
+ * Individual selectable option within the dropdown.
+ * 
+ * Displays option content with selection indicator and proper hover/focus states.
+ * Supports keyboard navigation and shows selected state with checkmark icon.
+ * Features disabled state styling for non-selectable options.
+ *
+ * @example
+ * ```tsx
+ * <SelectItem value="option1">Option 1</SelectItem>
+ * <SelectItem value="option2" disabled>Option 2 (disabled)</SelectItem>
+ * ```
+ */
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof BaseSelect.Item>,
   React.ComponentPropsWithoutRef<typeof BaseSelect.Item>

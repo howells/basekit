@@ -60,24 +60,84 @@ const tooltipVariants = tv({
   },
 });
 
+/**
+ * Props for the Tooltip component.
+ *
+ * @interface TooltipProps
+ * @extends Omit<React.ComponentPropsWithoutRef<typeof BaseTooltip.Root>, "children">
+ * @extends VariantProps<typeof tooltipVariants>
+ */
 interface TooltipProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof BaseTooltip.Root>,
       "children"
     >,
     VariantProps<typeof tooltipVariants> {
+  /** The element that triggers the tooltip */
   children: React.ReactElement;
+  /** Content to display in the tooltip */
   content: React.ReactNode;
+  /** Preferred side for tooltip placement */
   side?: "top" | "bottom" | "left" | "right";
+  /** Distance from the trigger element */
   sideOffset?: number;
+  /** Alignment relative to the trigger */
   align?: "start" | "center" | "end";
+  /** Offset for alignment positioning */
   alignOffset?: number;
+  /** Whether to show the pointing arrow */
   showArrow?: boolean;
+  /** Delay before showing tooltip in milliseconds */
   delayDuration?: number;
+  /** Additional CSS classes */
   className?: string;
+  /** Click handler for the trigger element */
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
+/**
+ * A tooltip component built on Base UI's Tooltip primitive.
+ * 
+ * Based on Base UI's Tooltip (https://base-ui.com/react/components/tooltip),
+ * providing accessible hover/focus-triggered information popups with smart positioning,
+ * customizable delays, and smooth animations. Perfect for providing contextual help.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic tooltip
+ * <Tooltip content="This is a helpful tooltip">
+ *   <Button>Hover me</Button>
+ * </Tooltip>
+ * 
+ * // With custom positioning
+ * <Tooltip content="Bottom tooltip" side="bottom" align="start">
+ *   <Icon>?</Icon>
+ * </Tooltip>
+ * 
+ * // Different variants and sizes
+ * <Tooltip content="Inverse tooltip" variant="inverse" size="sm">
+ *   <span>Small inverse tooltip</span>
+ * </Tooltip>
+ * 
+ * // Without arrow
+ * <Tooltip content="No arrow" showArrow={false}>
+ *   <Button>Clean tooltip</Button>
+ * </Tooltip>
+ * 
+ * // Controlled tooltip
+ * <Tooltip 
+ *   content="Controlled" 
+ *   open={isOpen} 
+ *   onOpenChange={setIsOpen}
+ *   delayDuration={500}
+ * >
+ *   <Button>Controlled</Button>
+ * </Tooltip>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/tooltip - Base UI documentation
+ */
 const Tooltip = React.forwardRef<
   React.ElementRef<typeof BaseTooltip.Popup>,
   TooltipProps
