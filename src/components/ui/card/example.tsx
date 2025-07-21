@@ -10,15 +10,35 @@ export const CardExample = ({
   className,
   ...props
 }: {
-  padding?: number;
+  padding?: string | number;
   children?: string;
   className?: string;
   [key: string]: unknown;
 }) => {
+  // Convert string values from props explorer to proper types
+  const paddingValue = typeof padding === "string" ? Number(padding) : padding;
+
   return (
     <Card
       padding={
-        padding as 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20 | 24
+        paddingValue as
+          | 0
+          | 0.5
+          | 1
+          | 1.5
+          | 2
+          | 2.5
+          | 3
+          | 3.5
+          | 4
+          | 5
+          | 6
+          | 7
+          | 8
+          | 9
+          | 10
+          | 11
+          | 12
       }
       className={className}
       {...props}
