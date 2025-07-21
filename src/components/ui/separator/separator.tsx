@@ -69,11 +69,75 @@ const separatorVariants = tv({
   },
 });
 
+/**
+ * Props for the Separator component.
+ *
+ * @interface SeparatorProps
+ * @extends React.ComponentPropsWithoutRef<typeof BaseSeparator>
+ * @extends VariantProps<typeof separatorVariants>
+ */
 interface SeparatorProps
   extends React.ComponentPropsWithoutRef<typeof BaseSeparator>,
     VariantProps<typeof separatorVariants> {
 }
 
+/**
+ * A visual separator component built on Base UI's Separator primitive.
+ * 
+ * Based on Base UI's Separator (https://base-ui.com/react/components/separator),
+ * providing accessible visual division elements for structuring content and interfaces.
+ * Features horizontal and vertical orientations with multiple styling variants and sizes.
+ *
+ * @param orientation - Direction of the separator (horizontal or vertical)
+ * @param variant - Visual style variant (default, subtle, strong)
+ * @param size - Thickness/size of the separator (sm, md, lg)
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic horizontal separator
+ * <Separator />
+ * 
+ * // Vertical separator
+ * <Separator orientation="vertical" />
+ * 
+ * // Different variants
+ * <Separator variant="subtle" />
+ * <Separator variant="strong" />
+ * 
+ * // Different sizes
+ * <Separator size="sm" />
+ * <Separator size="lg" />
+ * 
+ * // Vertical separator with styling
+ * <Separator 
+ *   orientation="vertical" 
+ *   variant="strong" 
+ *   size="lg"
+ *   className="mx-4"
+ * />
+ * 
+ * // In navigation menus
+ * <nav className="flex items-center space-x-4">
+ *   <a href="/home">Home</a>
+ *   <Separator orientation="vertical" className="h-4" />
+ *   <a href="/about">About</a>
+ *   <Separator orientation="vertical" className="h-4" />
+ *   <a href="/contact">Contact</a>
+ * </nav>
+ * 
+ * // In content sections
+ * <div>
+ *   <h2>Section 1</h2>
+ *   <p>Content here...</p>
+ *   <Separator className="my-4" />
+ *   <h2>Section 2</h2>
+ *   <p>More content...</p>
+ * </div>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/separator - Base UI documentation
+ */
 const Separator = React.forwardRef<
   React.ElementRef<typeof BaseSeparator>,
   SeparatorProps

@@ -49,39 +49,31 @@ export const componentConfig: ComponentConfig = {
       description: "Whether to show horizontal row guide lines.",
     },
     {
-      name: "useAutoGrid",
-      type: "boolean",
-      defaultValue: false,
-      description: "Use GridAuto component for automatically numbered cells.",
+      name: "minHeight",
+      type: "select",
+      defaultValue: "md",
+      options: ["none", "sm", "md", "lg", "xl"],
+      description: "Minimum height of the grid container.",
     },
     {
-      name: "cellCount",
-      type: "number",
-      defaultValue: 9,
-      min: 1,
-      max: 50,
+      name: "cellBordered",
+      type: "boolean",
+      defaultValue: true,
       description:
-        "Number of cells to generate (when using auto grid or basic grid).",
+        "Whether grid cells should have borders (for demo visibility).",
     },
     {
-      name: "solidCells",
+      name: "cellSolid",
       type: "boolean",
       defaultValue: false,
-      description:
-        "Whether cells should have solid backgrounds (occludes guides).",
+      description: "Whether grid cells should have solid backgrounds.",
     },
     {
-      name: "showSpanning",
-      type: "boolean",
-      defaultValue: false,
-      description: "Show example with cells that span multiple columns/rows.",
-    },
-    {
-      name: "showOverlay",
+      name: "cellOverlay",
       type: "boolean",
       defaultValue: false,
       description:
-        "Show example with overlay cells that have elevated styling.",
+        "Whether grid cells should have overlay styling with elevation.",
     },
   ],
   examples: [

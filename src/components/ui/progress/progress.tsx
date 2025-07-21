@@ -59,9 +59,31 @@ const progressVariants = tv({
   },
 });
 
+/**
+ * Root progress component built on Base UI's Progress primitive.
+ * 
+ * Based on Base UI's Progress (https://base-ui.com/react/components/progress),
+ * providing accessible progress indicators that display the completion status
+ * of long-running tasks. Features proper screen reader support and flexible
+ * configuration for different progress visualization needs.
+ *
+ * @see https://base-ui.com/react/components/progress - Base UI documentation
+ */
 const Progress = BaseProgress.Root;
 Progress.displayName = "Progress";
 
+/**
+ * Track container for the progress indicator.
+ * 
+ * Based on Base UI's Progress.Track, providing the background container
+ * for the progress indicator. Features variant-based styling with different
+ * colors and optional animation support.
+ *
+ * @param variant - Color variant for the track background
+ * @param showAnimation - Whether to show animation on progress changes
+ *
+ * @see https://base-ui.com/react/components/progress - Base UI documentation
+ */
 const ProgressTrack = React.forwardRef<
   React.ElementRef<typeof BaseProgress.Track>,
   React.ComponentPropsWithoutRef<typeof BaseProgress.Track> &
@@ -78,6 +100,18 @@ const ProgressTrack = React.forwardRef<
 });
 ProgressTrack.displayName = "ProgressTrack";
 
+/**
+ * Visual indicator showing progress completion.
+ * 
+ * Based on Base UI's Progress.Indicator, providing the filled portion
+ * that visualizes task completion status. Automatically sized based on
+ * the progress value with smooth transitions and variant-based coloring.
+ *
+ * @param variant - Color variant for the indicator
+ * @param showAnimation - Whether to show smooth transition animations
+ *
+ * @see https://base-ui.com/react/components/progress - Base UI documentation
+ */
 const ProgressIndicator = React.forwardRef<
   React.ElementRef<typeof BaseProgress.Indicator>,
   React.ComponentPropsWithoutRef<typeof BaseProgress.Indicator> &
@@ -94,6 +128,21 @@ const ProgressIndicator = React.forwardRef<
 });
 ProgressIndicator.displayName = "ProgressIndicator";
 
+/**
+ * Accessible label for the progress bar.
+ * 
+ * Based on Base UI's Progress.Label, providing semantic labeling
+ * for screen readers and visual context. Essential for accessibility
+ * and helps users understand what task is being tracked.
+ *
+ * @example
+ * ```tsx
+ * <ProgressLabel>Loading data...</ProgressLabel>
+ * <ProgressLabel>Upload progress</ProgressLabel>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/progress - Base UI documentation
+ */
 const ProgressLabel = React.forwardRef<
   React.ElementRef<typeof BaseProgress.Label>,
   React.ComponentPropsWithoutRef<typeof BaseProgress.Label> &
@@ -110,6 +159,21 @@ const ProgressLabel = React.forwardRef<
 });
 ProgressLabel.displayName = "ProgressLabel";
 
+/**
+ * Displays the current progress value.
+ * 
+ * Based on Base UI's Progress.Value, providing formatted display
+ * of current progress values. Supports custom formatting functions
+ * and automatically updates as progress changes.
+ *
+ * @example
+ * ```tsx
+ * <ProgressValue>{(formattedValue, value) => `${value}%`}</ProgressValue>
+ * <ProgressValue>{(formattedValue, value) => `${value}/100 items`}</ProgressValue>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/progress - Base UI documentation
+ */
 const ProgressValue = React.forwardRef<
   React.ElementRef<typeof BaseProgress.Value>,
   React.ComponentPropsWithoutRef<typeof BaseProgress.Value> &
@@ -126,15 +190,70 @@ const ProgressValue = React.forwardRef<
 });
 ProgressValue.displayName = "ProgressValue";
 
-// Composite component for easy usage (backward compatibility)
+/**
+ * Props for the ProgressBar component.
+ *
+ * @interface ProgressBarProps
+ * @extends React.ComponentPropsWithoutRef<typeof BaseProgress.Root>
+ * @extends VariantProps<typeof progressVariants>
+ */
 interface ProgressBarProps
   extends React.ComponentPropsWithoutRef<typeof BaseProgress.Root>,
     VariantProps<typeof progressVariants> {
+  /** Optional label text to display */
   label?: string;
+  /** Whether to show the current value */
   showValue?: boolean;
+  /** Custom function to format the displayed value */
   valueFormatter?: (value: number | null, max: number) => string;
 }
 
+/**
+ * Complete progress bar with all components composed together.
+ * 
+ * Pre-composed progress bar combining all progress sub-components
+ * with sensible defaults. Provides easy-to-use API for common progress
+ * bar use cases while maintaining full customization options.
+ *
+ * @param value - Current progress value
+ * @param max - Maximum progress value
+ * @param label - Optional label text
+ * @param showValue - Whether to display current value
+ * @param valueFormatter - Custom value formatting function
+ * @param variant - Color variant (default, neutral, warning, error, success)
+ * @param showAnimation - Whether to animate progress changes
+ *
+ * @example
+ * ```tsx
+ * // Basic progress bar
+ * <ProgressBar value={75} />
+ * 
+ * // With label and value display
+ * <ProgressBar
+ *   value={45}
+ *   max={100}
+ *   label="Upload progress"
+ *   showValue
+ *   variant="default"
+ * />
+ * 
+ * // Custom value formatting
+ * <ProgressBar
+ *   value={3}
+ *   max={10}
+ *   label="Processing files"
+ *   showValue
+ *   valueFormatter={(value, max) => `${value} of ${max} files`}
+ * />
+ * 
+ * // Different variants
+ * <ProgressBar value={85} variant="success" />
+ * <ProgressBar value={25} variant="warning" />
+ * <ProgressBar value={10} variant="error" />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/progress - Base UI documentation
+ */
 const ProgressBar = React.forwardRef<
   React.ElementRef<typeof BaseProgress.Root>,
   ProgressBarProps

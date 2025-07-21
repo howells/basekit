@@ -3,14 +3,15 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "command",
   name: "Command",
-  description: "Command palette component built on cmdk with search, keyboard navigation, and grouping features.",
+  description:
+    "Command palette component built on cmdk with search, keyboard navigation, and grouping features.",
   category: "ui" as const,
   badge: "UI",
-  importStatement: `import { 
-  Command, 
-  CommandInput, 
-  CommandList, 
-  CommandItem, 
+  importStatement: `import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandItem,
   CommandEmpty,
   CommandGroup,
   CommandSeparator,
@@ -172,7 +173,7 @@ useEffect(() => {
     <CommandInput placeholder="Type a command or search..." />
     <CommandList>
       <CommandEmpty>No results found.</CommandEmpty>
-      
+
       <CommandGroup heading="Quick Actions">
         <CommandItem onSelect={() => {
           setOpen(false);
@@ -189,9 +190,9 @@ useEffect(() => {
           <CommandShortcut>⌘O</CommandShortcut>
         </CommandItem>
       </CommandGroup>
-      
+
       <CommandSeparator />
-      
+
       <CommandGroup heading="Settings">
         <CommandItem>Preferences</CommandItem>
         <CommandItem>Extensions</CommandItem>
@@ -213,7 +214,7 @@ useEffect(() => {
       <CommandItem>Small Item 2</CommandItem>
     </CommandList>
   </Command>
-  
+
   <Command className="rounded-lg border shadow-md max-w-md" size="default">
     <CommandInput placeholder="Default command..." />
     <CommandList>
@@ -221,7 +222,7 @@ useEffect(() => {
       <CommandItem>Default Item 2</CommandItem>
     </CommandList>
   </Command>
-  
+
   <Command className="rounded-lg border shadow-md max-w-lg" size="lg">
     <CommandInput placeholder="Large command..." />
     <CommandList>

@@ -23,37 +23,31 @@ export function CommandExample({
 }: CommandExampleProps) {
   return (
     <div className="flex justify-center">
-      <Command className="rounded-lg border shadow-md max-w-md" size={size}>
+      <Command
+        className="rounded-lg inset-ring-1 inset-ring-black/10 dark:inset-ring-white/10 shadow-md w-72 max-w-2xl"
+        size={size}
+      >
         <CommandInput placeholder={placeholder} />
         <CommandList>
           <CommandEmpty>{emptyMessage}</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <File className="mr-2 h-4 w-4" />
+            <CommandItem leftIcon={File}>
               New File
               <CommandShortcut>⌘N</CommandShortcut>
             </CommandItem>
-            <CommandItem>
-              <Folder className="mr-2 h-4 w-4" />
+            <CommandItem leftIcon={Folder}>
               Open File
               <CommandShortcut>⌘O</CommandShortcut>
             </CommandItem>
-            <CommandItem>
-              <Save className="mr-2 h-4 w-4" />
+            <CommandItem leftIcon={Save}>
               Save File
               <CommandShortcut>⌘S</CommandShortcut>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Settings">
-            <CommandItem>
-              <Settings className="mr-2 h-4 w-4" />
-              Preferences
-            </CommandItem>
-            <CommandItem>
-              <Terminal className="mr-2 h-4 w-4" />
-              Terminal
-            </CommandItem>
+            <CommandItem leftIcon={Settings}>Preferences</CommandItem>
+            <CommandItem leftIcon={Terminal}>Terminal</CommandItem>
           </CommandGroup>
         </CommandList>
       </Command>

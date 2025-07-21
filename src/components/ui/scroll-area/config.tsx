@@ -7,13 +7,38 @@ export const componentConfig: ComponentConfig = {
   description: "A custom scrollable area with styled scrollbars.",
   category: "ui",
   importStatement: 'import { ScrollArea } from "@/components/ui/scroll-area"',
-  componentId: "ScrollArea",
+  componentId: "ScrollAreaExample",
   props: [
     {
       name: "orientation",
-      type: '"vertical" | "horizontal" | "both"',
+      type: "select",
       defaultValue: "vertical",
+      options: ["vertical", "horizontal", "both"],
       description: "The orientation of the scrollable area",
+    },
+    {
+      name: "className",
+      type: "string",
+      defaultValue: "",
+      description: "Additional CSS classes for the scroll area container",
+    },
+    {
+      name: "scrollbarClassName",
+      type: "string",
+      defaultValue: "",
+      description: "Additional CSS classes for the scrollbar",
+    },
+    {
+      name: "thumbClassName",
+      type: "string",
+      defaultValue: "",
+      description: "Additional CSS classes for the scrollbar thumb",
+    },
+    {
+      name: "viewportClassName",
+      type: "string",
+      defaultValue: "",
+      description: "Additional CSS classes for the viewport",
     },
   ],
   examples: [

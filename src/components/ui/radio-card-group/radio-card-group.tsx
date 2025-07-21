@@ -5,7 +5,58 @@ import React from "react";
 import { Radio, RadioIndicator } from "../radio";
 import { RadioGroup } from "../radio-group";
 
-// Re-export RadioGroup as RadioCardGroup for backward compatibility
+/**
+ * A radio group component with card-style presentation.
+ * 
+ * Based on Base UI's RadioGroup with styled card containers for each option.
+ * Provides the same functionality as RadioGroup but with enhanced visual
+ * presentation using card layouts for better prominence and selection clarity.
+ *
+ * @param orientation - Layout direction (vertical or horizontal)
+ * @param size - Spacing size between items
+ * @param value - Currently selected value
+ * @param onValueChange - Callback when selection changes
+ * @param disabled - Whether the entire group is disabled
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic radio card group
+ * <RadioCardGroup value={plan} onValueChange={setPlan}>
+ *   <RadioCardItem value="basic">
+ *     <div className="flex items-center justify-between">
+ *       <div>
+ *         <div className="font-medium">Basic Plan</div>
+ *         <div className="text-sm text-gray-500">$10/month</div>
+ *       </div>
+ *       <RadioCardIndicator />
+ *     </div>
+ *   </RadioCardItem>
+ *   <RadioCardItem value="pro">
+ *     <div className="flex items-center justify-between">
+ *       <div>
+ *         <div className="font-medium">Pro Plan</div>
+ *         <div className="text-sm text-gray-500">$25/month</div>
+ *       </div>
+ *       <RadioCardIndicator />
+ *     </div>
+ *   </RadioCardItem>
+ * </RadioCardGroup>
+ *
+ * // Horizontal layout
+ * <RadioCardGroup 
+ *   orientation="horizontal" 
+ *   value={size} 
+ *   onValueChange={setSize}
+ * >
+ *   <RadioCardItem value="sm">Small</RadioCardItem>
+ *   <RadioCardItem value="md">Medium</RadioCardItem>
+ *   <RadioCardItem value="lg">Large</RadioCardItem>
+ * </RadioCardGroup>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioCardGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
   React.ComponentPropsWithoutRef<typeof RadioGroup>
@@ -14,7 +65,49 @@ const RadioCardGroup = React.forwardRef<
 ));
 RadioCardGroup.displayName = "RadioCardGroup";
 
-// RadioCardItem with proper card styling using Base UI Radio
+/**
+ * Individual radio card item with enhanced styling.
+ * 
+ * Based on Base UI's Radio component with card-style presentation including
+ * padding, borders, shadows, and visual states. Provides a prominent,
+ * clickable area for radio selections with clear visual feedback.
+ *
+ * @param value - The value this radio represents
+ * @param disabled - Whether this option is disabled
+ * @param children - Content to display inside the card
+ *
+ * @example
+ * ```tsx
+ * // Simple card item
+ * <RadioCardItem value="option1">
+ *   Option 1
+ *   <RadioCardIndicator />
+ * </RadioCardItem>
+ *
+ * // Rich content card
+ * <RadioCardItem value="premium">
+ *   <div className="flex items-start gap-3">
+ *     <div className="flex-1">
+ *       <div className="font-semibold">Premium Plan</div>
+ *       <div className="text-sm text-gray-600 mt-1">
+ *         Advanced features, priority support
+ *       </div>
+ *       <div className="text-lg font-bold mt-2">$29/mo</div>
+ *     </div>
+ *     <RadioCardIndicator />
+ *   </div>
+ * </RadioCardItem>
+ *
+ * // Disabled card
+ * <RadioCardItem value="enterprise" disabled>
+ *   <div className="opacity-50">
+ *     Enterprise - Coming Soon
+ *   </div>
+ * </RadioCardItem>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioCardItem = React.forwardRef<
   React.ElementRef<typeof Radio>,
   React.ComponentPropsWithoutRef<typeof Radio>
@@ -45,7 +138,32 @@ const RadioCardItem = React.forwardRef<
 ));
 RadioCardItem.displayName = "RadioCardItem";
 
-// RadioCardIndicator with proper radio button styling
+/**
+ * Visual indicator for radio card selection state.
+ * 
+ * Based on Base UI's RadioIndicator with enhanced styling for card layouts.
+ * Shows a circular radio button indicator that displays selection state
+ * with proper hover, focus, and disabled styling.
+ *
+ * @example
+ * ```tsx
+ * <RadioCardItem value="option1">
+ *   <div className="flex items-center justify-between">
+ *     <span>Select this option</span>
+ *     <RadioCardIndicator />
+ *   </div>
+ * </RadioCardItem>
+ *
+ * // Indicator automatically shows selection state
+ * // No props needed - state comes from parent RadioCardItem
+ * <RadioCardItem value="selected">
+ *   Content here
+ *   <RadioCardIndicator />
+ * </RadioCardItem>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioCardIndicator = React.forwardRef<
   React.ElementRef<typeof RadioIndicator>,
   React.ComponentPropsWithoutRef<typeof RadioIndicator>

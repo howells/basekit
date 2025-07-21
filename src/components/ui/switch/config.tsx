@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "switch",
   name: "Switch",
-  description: "A control that allows the user to toggle between checked and unchecked states.",
+  description:
+    "A control that allows the user to toggle between checked and unchecked states.",
   category: "inputs" as const,
   badge: "Input",
   importStatement: `import { Switch } from "@/components/ui/switch";`,
@@ -21,6 +22,48 @@ export const componentConfig: ComponentConfig = {
       type: "boolean",
       defaultValue: false,
       description: "Whether the switch is disabled.",
+    },
+    {
+      name: "checked",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether the switch is checked.",
+    },
+    {
+      name: "defaultChecked",
+      type: "boolean",
+      defaultValue: false,
+      description: "The default checked state (uncontrolled).",
+    },
+    {
+      name: "label",
+      type: "text",
+      defaultValue: "",
+      description: "Optional label text displayed next to the switch.",
+    },
+    {
+      name: "name",
+      type: "text",
+      defaultValue: "",
+      description: "The name of the form control.",
+    },
+    {
+      name: "value",
+      type: "text",
+      defaultValue: "",
+      description: "The value of the form control.",
+    },
+    {
+      name: "required",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether the switch is required in a form.",
+    },
+    {
+      name: "readOnly",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether the switch is read-only.",
     },
   ],
   examples: [
@@ -59,7 +102,7 @@ const [smallChecked, setSmallChecked] = useState(false);
     />
     <span className="text-sm">Default size</span>
   </div>
-  
+
   <div className="flex items-center space-x-2">
     <Switch
       size="small"
@@ -79,7 +122,7 @@ const [smallChecked, setSmallChecked] = useState(false);
     <Switch disabled checked={false} />
     <span className="text-sm text-zinc-600">Disabled (off)</span>
   </div>
-  
+
   <div className="flex items-center space-x-2">
     <Switch disabled checked={true} />
     <span className="text-sm text-zinc-600">Disabled (on)</span>
@@ -102,7 +145,7 @@ const [smallChecked, setSmallChecked] = useState(false);
       Status: {isEnabled ? "Enabled" : "Disabled"}
     </span>
   </div>
-  
+
   <div className="flex gap-2">
     <Button
       size="sm"
@@ -143,7 +186,7 @@ const [smallChecked, setSmallChecked] = useState(false);
       }
     />
   </div>
-  
+
   <div className="flex items-center justify-between">
     <label className="text-sm font-medium">
       Auto Save
@@ -155,7 +198,7 @@ const [smallChecked, setSmallChecked] = useState(false);
       }
     />
   </div>
-  
+
   <div className="flex items-center justify-between">
     <label className="text-sm font-medium">
       Dark Mode

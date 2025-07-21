@@ -1,22 +1,58 @@
 import React from "react";
 import { cx, focusRing } from "@/lib/utils";
 
+/**
+ * Data item for bar list visualization.
+ * 
+ * Represents a single bar with required name/value and optional metadata.
+ * Can be extended with additional properties via generic type parameter.
+ * 
+ * @template T - Additional properties to include in bar data
+ */
 type Bar<T> = T & {
+  /** Unique identifier for the bar (defaults to name if not provided) */
   key?: string;
+  /** Optional URL to make the bar name clickable */
   href?: string;
+  /** Numeric value for bar length calculation */
   value: number;
+  /** Display name for the bar */
   name: string;
 };
 
+/**
+ * Props for the BarList component.
+ * 
+ * Configuration for horizontal bar list visualization with optional
+ * interactivity, sorting, and formatting options.
+ * 
+ * @template T - Additional properties in bar data items
+ * @interface BarListProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface BarListProps<T = unknown>
   extends React.HTMLAttributes<HTMLDivElement> {
+  /** Array of data items to visualize as bars */
   data: Bar<T>[];
+  /** Function to format displayed values */
   valueFormatter?: (value: number) => string;
+  /** Whether to animate bar width transitions */
   showAnimation?: boolean;
+  /** Callback when a bar is clicked (makes bars interactive) */
   onValueChange?: (payload: Bar<T>) => void;
+  /** How to sort the bars by value */
   sortOrder?: "ascending" | "descending" | "none";
 }
 
+/**
+ * Internal implementation of the bar list component.
+ * 
+ * Renders a horizontal bar chart with proportional bar lengths, optional sorting,
+ * click interactions, and value formatting. Bars are colored and can include
+ * clickable links.
+ *
+ * @template T - Additional properties in bar data
+ */
 function BarListInner<T>(
   {
     data = [],
@@ -160,6 +196,90 @@ function BarListInner<T>(
 
 BarListInner.displayName = "BarList";
 
+/**
+ * A horizontal bar list component for displaying ranked data.
+ * 
+ * Creates a simple horizontal bar chart where bar lengths are proportional
+ * to their values. Supports sorting, click interactions, custom formatting,
+ * and optional animations. Ideal for showing rankings, comparisons, or
+ * progress indicators.
+ *
+ * @template T - Additional properties to include in bar data
+ * @param data - Array of bar data items
+ * @param valueFormatter - Function to format displayed values
+ * @param showAnimation - Whether to animate bar width changes
+ * @param onValueChange - Callback for bar clicks (enables interactivity)
+ * @param sortOrder - How to sort bars (ascending, descending, or none)
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic bar list
+ * <BarList
+ *   data={[
+ *     { name: "Product A", value: 120 },
+ *     { name: "Product B", value: 80 },
+ *     { name: "Product C", value: 200 }
+ *   ]}
+ * />
+ *
+ * // With custom formatting and sorting
+ * <BarList
+ *   data={salesData}
+ *   valueFormatter={(value) => `$${value.toLocaleString()}`}
+ *   sortOrder="ascending"
+ *   showAnimation
+ * />
+ *
+ * // Interactive with click handling
+ * <BarList
+ *   data={categoryData}
+ *   onValueChange={(bar) => {
+ *     console.log('Clicked:', bar.name, bar.value);
+ *     setSelectedCategory(bar.name);
+ *   }}
+ *   sortOrder="descending"
+ * />
+ *
+ * // With clickable links
+ * <BarList
+ *   data={[
+ *     { 
+ *       name: "Documentation", 
+ *       value: 45, 
+ *       href: "/docs" 
+ *     },
+ *     { 
+ *       name: "API Reference", 
+ *       value: 32, 
+ *       href: "/api" 
+ *     }
+ *   ]}
+ *   valueFormatter={(value) => `${value}%`}
+ * />
+ *
+ * // Extended with custom data
+ * <BarList<{ category: string; trend: 'up' | 'down' }>
+ *   data={[
+ *     { 
+ *       name: "Sales", 
+ *       value: 150, 
+ *       category: "revenue", 
+ *       trend: "up" 
+ *     },
+ *     { 
+ *       name: "Marketing", 
+ *       value: 75, 
+ *       category: "expense", 
+ *       trend: "down" 
+ *     }
+ *   ]}
+ *   onValueChange={(bar) => {
+ *     console.log('Trend:', bar.trend, 'Category:', bar.category);
+ *   }}
+ * />
+ * ```
+ */
 const BarList = React.forwardRef(BarListInner) as <T>(
   p: BarListProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof BarListInner>;

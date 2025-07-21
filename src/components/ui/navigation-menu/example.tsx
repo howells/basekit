@@ -1,8 +1,8 @@
 "use client";
 
 import { Grid } from "../grid";
-import { Subheading } from "../heading";
 import { VStack } from "../stack";
+import { Subheading } from "../subheading";
 import { Text } from "../text";
 import {
   NavigationMenu,

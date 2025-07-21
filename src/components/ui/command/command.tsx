@@ -19,6 +19,8 @@ const commandVariants = tv({
       "border border-zinc-200 dark:border-zinc-800",
       // text
       "text-zinc-950 dark:text-zinc-50",
+      // command group heading styles
+      "[&_[cmdk-group-heading]]:px-1.5 [&_[cmdk-group-heading]]:py-1 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-zinc-500 dark:[&_[cmdk-group-heading]]:text-zinc-600",
     ],
     input: [
       // base
@@ -45,12 +47,6 @@ const commandVariants = tv({
       "overflow-hidden p-1",
       // text
       "text-zinc-950 dark:text-zinc-50",
-    ],
-    groupHeading: [
-      // base
-      "px-2 py-1.5 text-xs font-medium",
-      // text color
-      "text-zinc-500 dark:text-zinc-400",
     ],
     item: [
       // base
@@ -111,8 +107,51 @@ const commandVariants = tv({
   },
 });
 
+/**
+ * Variant props for command components.
+ * 
+ * Defines size variants that affect input height, item padding,
+ * and overall component dimensions.
+ */
 type CommandVariants = VariantProps<typeof commandVariants>;
 
+/**
+ * A command palette component built on CMDK.
+ * 
+ * Based on CMDK (https://cmdk.paco.me/), providing a fast, composable command menu
+ * with search functionality. Perfect for command palettes, quick actions, and
+ * searchable lists. Features keyboard navigation, filtering, and grouping.
+ *
+ * @param size - Size variant affecting input and item dimensions
+ * @param className - Additional CSS classes
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic command palette
+ * <Command>
+ *   <CommandInput placeholder="Search commands..." />
+ *   <CommandList>
+ *     <CommandGroup heading="Actions">
+ *       <CommandItem>New File</CommandItem>
+ *       <CommandItem>Save</CommandItem>
+ *       <CommandItem>Exit</CommandItem>
+ *     </CommandGroup>
+ *   </CommandList>
+ * </Command>
+ *
+ * // Large size variant
+ * <Command size="lg">
+ *   <CommandInput placeholder="Type a command" />
+ *   <CommandList>
+ *     <CommandItem leftIcon={FileIcon}>New Document</CommandItem>
+ *     <CommandItem leftIcon={FolderIcon}>New Folder</CommandItem>
+ *   </CommandList>
+ * </Command>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive> & CommandVariants
@@ -124,6 +163,32 @@ const Command = React.forwardRef<
 });
 Command.displayName = CommandPrimitive.displayName;
 
+/**
+ * A modal dialog wrapper for the command palette.
+ * 
+ * Based on CMDK's Dialog component, providing a full-screen modal overlay
+ * for command palette interfaces. Features backdrop blur, animations,
+ * and proper focus management.
+ *
+ * @param children - Command components to render inside dialog
+ * @param open - Whether dialog is open
+ * @param onOpenChange - Callback when dialog open state changes
+ *
+ * @example
+ * ```tsx
+ * <CommandDialog open={open} onOpenChange={setOpen}>
+ *   <CommandInput placeholder="Search..." />
+ *   <CommandList>
+ *     <CommandGroup heading="Quick Actions">
+ *       <CommandItem>Create New</CommandItem>
+ *       <CommandItem>Open Recent</CommandItem>
+ *     </CommandGroup>
+ *   </CommandList>
+ * </CommandDialog>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandDialog = ({
   children,
   ...props
@@ -142,6 +207,28 @@ const CommandDialog = ({
   );
 };
 
+/**
+ * Search input for filtering command items.
+ * 
+ * Based on CMDK's Input component, providing real-time filtering of command items.
+ * Features a search icon, proper focus styling, and matches the design system.
+ * Automatically filters items based on text content.
+ *
+ * @param placeholder - Placeholder text for the input
+ * @param value - Controlled input value
+ * @param onValueChange - Callback when input value changes
+ *
+ * @example
+ * ```tsx
+ * <CommandInput 
+ *   placeholder="Type to search commands..."
+ *   value={search}
+ *   onValueChange={setSearch}
+ * />
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
@@ -175,6 +262,30 @@ const CommandInput = React.forwardRef<
 
 CommandInput.displayName = CommandPrimitive.Input.displayName;
 
+/**
+ * Scrollable container for command groups and items.
+ * 
+ * Based on CMDK's List component, providing a scrollable area for command items
+ * with custom scrollbar styling. Handles keyboard navigation and selection
+ * automatically.
+ *
+ * @example
+ * ```tsx
+ * <CommandList>
+ *   <CommandGroup heading="Files">
+ *     <CommandItem>New File</CommandItem>
+ *     <CommandItem>Open File</CommandItem>
+ *   </CommandGroup>
+ *   <CommandSeparator />
+ *   <CommandGroup heading="Edit">
+ *     <CommandItem>Cut</CommandItem>
+ *     <CommandItem>Copy</CommandItem>
+ *   </CommandGroup>
+ * </CommandList>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandList = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
@@ -191,6 +302,28 @@ const CommandList = React.forwardRef<
 
 CommandList.displayName = CommandPrimitive.List.displayName;
 
+/**
+ * Fallback component displayed when no commands match the search.
+ * 
+ * Based on CMDK's Empty component, shown automatically when no command items
+ * match the current filter. Provides user feedback for empty search results.
+ *
+ * @example
+ * ```tsx
+ * <CommandEmpty>No results found.</CommandEmpty>
+ * 
+ * // Custom empty state
+ * <CommandEmpty>
+ *   <div className="text-center py-8">
+ *     <SearchIcon className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+ *     <p className="text-lg font-medium">No commands found</p>
+ *     <p className="text-gray-500">Try searching for something else</p>
+ *   </div>
+ * </CommandEmpty>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandEmpty = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Empty>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
@@ -207,6 +340,32 @@ const CommandEmpty = React.forwardRef<
 
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
+/**
+ * Grouping component for organizing related commands.
+ * 
+ * Based on CMDK's Group component, providing logical grouping with optional
+ * headings. Groups can be filtered independently and provide visual separation
+ * between different command categories.
+ *
+ * @param heading - Optional heading text for the group
+ *
+ * @example
+ * ```tsx
+ * <CommandGroup heading="File Operations">
+ *   <CommandItem>New File</CommandItem>
+ *   <CommandItem>Open File</CommandItem>
+ *   <CommandItem>Save File</CommandItem>
+ * </CommandGroup>
+ * 
+ * // Group without heading
+ * <CommandGroup>
+ *   <CommandItem>About</CommandItem>
+ *   <CommandItem>Settings</CommandItem>
+ * </CommandGroup>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandGroup = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Group>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
@@ -223,6 +382,27 @@ const CommandGroup = React.forwardRef<
 
 CommandGroup.displayName = CommandPrimitive.Group.displayName;
 
+/**
+ * Visual separator between command groups or items.
+ * 
+ * Based on CMDK's Separator component, providing a subtle divider line
+ * to organize command sections visually.
+ *
+ * @example
+ * ```tsx
+ * <CommandGroup heading="Files">
+ *   <CommandItem>New</CommandItem>
+ *   <CommandItem>Open</CommandItem>
+ * </CommandGroup>
+ * <CommandSeparator />
+ * <CommandGroup heading="Edit">
+ *   <CommandItem>Copy</CommandItem>
+ *   <CommandItem>Paste</CommandItem>
+ * </CommandGroup>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandSeparator = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
@@ -238,22 +418,86 @@ const CommandSeparator = React.forwardRef<
 });
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
+/**
+ * Props for the CommandItem component.
+ * 
+ * @interface CommandItemProps
+ * @extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
+ */
+interface CommandItemProps
+  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> {
+  /** Icon component to display on the left side */
+  leftIcon?: React.ComponentType<{ className?: string }>;
+}
+
+/**
+ * Individual selectable command item.
+ * 
+ * Based on CMDK's Item component, providing keyboard navigation and selection.
+ * Supports optional left icons, keyboard shortcuts, and custom content.
+ * Automatically handles hover, focus, and selection states.
+ *
+ * @param leftIcon - Icon component to show on the left
+ * @param onSelect - Callback when item is selected
+ * @param disabled - Whether the item is disabled
+ * @param value - Search value for filtering (defaults to children text)
+ *
+ * @example
+ * ```tsx
+ * // Basic item
+ * <CommandItem onSelect={() => createNewFile()}>New File</CommandItem>
+ * 
+ * // Item with icon and shortcut
+ * <CommandItem leftIcon={FileIcon} onSelect={handleNew}>
+ *   New File
+ *   <CommandShortcut>⌘N</CommandShortcut>
+ * </CommandItem>
+ * 
+ * // Disabled item
+ * <CommandItem disabled>Unavailable Action</CommandItem>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => {
+  CommandItemProps
+>(({ className, leftIcon: LeftIcon, children, ...props }, ref) => {
   const { item } = commandVariants();
+
   return (
     <CommandPrimitive.Item
       ref={ref}
       className={cx(item(), className)}
       {...props}
-    />
+    >
+      {LeftIcon && <LeftIcon className="mr-2 h-4 w-4 shrink-0" />}
+      {children}
+    </CommandPrimitive.Item>
   );
 });
 
 CommandItem.displayName = CommandPrimitive.Item.displayName;
 
+/**
+ * Keyboard shortcut display component.
+ * 
+ * Displays keyboard shortcuts aligned to the right of command items.
+ * Provides consistent styling for shortcuts across the command palette.
+ *
+ * @example
+ * ```tsx
+ * <CommandItem>
+ *   Save File
+ *   <CommandShortcut>⌘S</CommandShortcut>
+ * </CommandItem>
+ * 
+ * <CommandItem>
+ *   Open File
+ *   <CommandShortcut>⌘O</CommandShortcut>
+ * </CommandItem>
+ * ```
+ */
 const CommandShortcut = ({
   className,
   ...props
@@ -263,6 +507,27 @@ const CommandShortcut = ({
 };
 CommandShortcut.displayName = "CommandShortcut";
 
+/**
+ * Loading state component for async command loading.
+ * 
+ * Based on CMDK's Loading component, displayed when commands are being
+ * loaded asynchronously. Provides user feedback during loading states.
+ *
+ * @example
+ * ```tsx
+ * {isLoading && <CommandLoading>Loading commands...</CommandLoading>}
+ * 
+ * // Custom loading indicator
+ * <CommandLoading>
+ *   <div className="flex items-center gap-2">
+ *     <Spinner className="h-4 w-4" />
+ *     <span>Fetching results...</span>
+ *   </div>
+ * </CommandLoading>
+ * ```
+ *
+ * @see https://cmdk.paco.me/ - CMDK documentation
+ */
 const CommandLoading = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Loading>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Loading>

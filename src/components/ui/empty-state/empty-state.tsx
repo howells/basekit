@@ -1,7 +1,8 @@
 import { cx } from "@/lib/utils";
 import React from "react";
 import { Button } from "../button/button";
-import { Heading, Subheading } from "../heading";
+import { Heading } from "../heading";
+import { Subheading } from "../subheading";
 import { Text } from "../text";
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -71,7 +71,6 @@ const gridCellVariants = tv({
   base: [
     "relative flex items-center justify-center",
     "bg-zinc-100 dark:bg-zinc-800",
-    "border border-zinc-200 dark:border-zinc-700",
     "text-zinc-900 dark:text-zinc-100",
     "font-medium text-sm",
     "transition-all duration-200",
@@ -85,10 +84,15 @@ const gridCellVariants = tv({
       true: "z-10 shadow-lg border-2 border-blue-200 dark:border-blue-800",
       false: "",
     },
+    bordered: {
+      true: "border border-zinc-200 dark:border-zinc-700",
+      false: "",
+    },
   },
   defaultVariants: {
     solid: false,
     overlay: false,
+    bordered: false,
   },
 });
 
@@ -241,6 +245,10 @@ interface GridCellProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   overlay?: boolean;
   /**
+   * Whether the cell should have a border
+   */
+  bordered?: boolean;
+  /**
    * Column span
    */
   colSpan?: number;
@@ -267,6 +275,7 @@ const GridCell = React.forwardRef<HTMLDivElement, GridCellProps>(
     {
       solid = false,
       overlay = false,
+      bordered = false,
       colSpan,
       rowSpan,
       colStart,
@@ -293,6 +302,7 @@ const GridCell = React.forwardRef<HTMLDivElement, GridCellProps>(
           gridCellVariants({
             solid,
             overlay,
+            bordered,
           }),
           spanClasses,
           className
@@ -318,17 +328,30 @@ interface GridAutoProps extends Omit<GridProps, "children"> {
    */
   solidCells?: boolean;
   /**
+   * Whether cells should have borders
+   */
+  borderedCells?: boolean;
+  /**
    * Custom cell renderer
    */
   renderCell?: (index: number) => React.ReactNode;
 }
 
 const GridAuto = React.forwardRef<HTMLDivElement, GridAutoProps>(
-  ({ cellCount = 6, solidCells = false, renderCell, ...gridProps }, ref) => {
+  (
+    {
+      cellCount = 6,
+      solidCells = false,
+      borderedCells = false,
+      renderCell,
+      ...gridProps
+    },
+    ref
+  ) => {
     return (
       <Grid ref={ref} {...gridProps}>
         {Array.from({ length: cellCount }, (_, index) => (
-          <GridCell key={index} solid={solidCells}>
+          <GridCell key={index} solid={solidCells} bordered={borderedCells}>
             {renderCell ? renderCell(index) : index + 1}
           </GridCell>
         ))}

@@ -6,6 +6,12 @@ import React from "react";
 
 import { cx } from "@/lib/utils";
 
+/**
+ * Props for the Card component.
+ *
+ * @interface CardProps
+ * @extends useRender.ComponentProps<"div">
+ */
 interface CardProps extends useRender.ComponentProps<"div"> {
   /**
    * Padding for the card (Tailwind scale).
@@ -31,6 +37,61 @@ interface CardProps extends useRender.ComponentProps<"div"> {
     | 12;
 }
 
+/**
+ * A flexible container component with Tremor-inspired styling.
+ *
+ * Built using Base UI's render prop pattern for maximum flexibility while
+ * maintaining consistent styling. Features configurable padding, subtle borders,
+ * and dark mode support. Perfect for grouping related content and creating
+ * structured layouts.
+ *
+ * @param render - Custom element to render (defaults to div)
+ * @param padding - Padding scale value (0-12, defaults to 6)
+ * @param className - Additional CSS classes
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic card
+ * <Card>
+ *   <h2>Card Title</h2>
+ *   <p>Card content goes here.</p>
+ * </Card>
+ *
+ * // Card with custom padding
+ * <Card padding={4}>
+ *   <h3>Less padding</h3>
+ *   <p>More compact layout.</p>
+ * </Card>
+ *
+ * // Card with no padding (for custom layouts)
+ * <Card padding={0}>
+ *   <img src="/image.jpg" alt="Full width image" />
+ *   <div className="p-6">
+ *     <h3>Custom padding areas</h3>
+ *   </div>
+ * </Card>
+ *
+ * // Card as different element
+ * <Card render={<section />} className="max-w-md mx-auto">
+ *   <h2>Article Card</h2>
+ *   <p>This card is rendered as a section element.</p>
+ * </Card>
+ *
+ * // Nested cards for complex layouts
+ * <Card>
+ *   <h2>Main Content</h2>
+ *   <div className="grid grid-cols-2 gap-4">
+ *     <Card padding={3}>
+ *       <h3>Nested Card 1</h3>
+ *     </Card>
+ *     <Card padding={3}>
+ *       <h3>Nested Card 2</h3>
+ *     </Card>
+ *   </div>
+ * </Card>
+ * ```
+ */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ render = <div />, padding = 6, className, ...props }, forwardedRef) => {
     const defaultProps: useRender.ElementProps<"div"> = {

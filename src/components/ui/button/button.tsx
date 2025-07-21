@@ -246,7 +246,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             (hasRightIcon ||
               (textAlign === "center" && (hasLeftIcon || isLoading)))
           ? "justify-between"
-          : "justify-start gap-1.5"
+          : "justify-start gap-2"
       );
 
       // Normal width: simple gap layout
@@ -322,71 +322,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         return (
           <span className={layoutClassName}>
             {/* Left spacer/icon */}
-            <span
-              className={cx(
-                "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                isLoading || hasLeftIcon
-                  ? "opacity-100 scale-100 w-auto"
-                  : "opacity-0 scale-95 w-0"
-              )}
-            >
-              <div
-                className={`relative ${iconSize} flex items-center justify-center`}
-              >
-                <div
-                  className={cx(
-                    "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
-                    isLoading ? "opacity-100" : "opacity-0"
-                  )}
-                >
-                  <Loader
-                    size={size === "sm" ? "xs" : "sm"}
-                    aria-label={loadingText || "Loading"}
-                  />
-                </div>
-                {hasLeftIcon && (
-                  <div
-                    className={cx(
-                      "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
-                      !isLoading ? "opacity-100" : "opacity-0"
-                    )}
-                  >
-                    <LeftIcon className={iconClassName} />
-                  </div>
-                )}
-              </div>
-            </span>
-
-            <div className="flex-1 text-center">
-              {isIconButton && hasChildren
-                ? iconButtonChildren
-                : effectiveShouldShowChildren && effectiveChildren}
-            </div>
-
-            {/* Right icon */}
-            {hasRightIcon && (
-              <span className="flex items-center">
-                <RightIcon className={iconClassName} />
-              </span>
-            )}
-          </span>
-        );
-      }
-
-      // Full width with left/right alignment and right icon: left group + right icon
-      if (hasRightIcon) {
-        return (
-          <span className={layoutClassName}>
-            <div className="flex items-center gap-1.5">
-              {/* Left icon container */}
-              <span
-                className={cx(
-                  "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                  isLoading || hasLeftIcon
-                    ? "opacity-100 scale-100 w-auto"
-                    : "opacity-0 scale-95 w-0"
-                )}
-              >
+            {(isLoading || hasLeftIcon) && (
+              <span className="flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
                 <div
                   className={`relative ${iconSize} flex items-center justify-center`}
                 >
@@ -413,6 +350,59 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   )}
                 </div>
               </span>
+            )}
+
+            <div className="flex-1 text-center">
+              {isIconButton && hasChildren
+                ? iconButtonChildren
+                : effectiveShouldShowChildren && effectiveChildren}
+            </div>
+
+            {/* Right icon */}
+            {hasRightIcon && (
+              <span className="flex items-center">
+                <RightIcon className={iconClassName} />
+              </span>
+            )}
+          </span>
+        );
+      }
+
+      // Full width with left/right alignment and right icon: left group + right icon
+      if (hasRightIcon) {
+        return (
+          <span className={layoutClassName}>
+            <div className="flex items-center gap-1.5">
+              {/* Left icon container */}
+              {(isLoading || hasLeftIcon) && (
+                <span className="flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
+                  <div
+                    className={`relative ${iconSize} flex items-center justify-center`}
+                  >
+                    <div
+                      className={cx(
+                        "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
+                        isLoading ? "opacity-100" : "opacity-0"
+                      )}
+                    >
+                      <Loader
+                        size={size === "sm" ? "xs" : "sm"}
+                        aria-label={loadingText || "Loading"}
+                      />
+                    </div>
+                    {hasLeftIcon && (
+                      <div
+                        className={cx(
+                          "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
+                          !isLoading ? "opacity-100" : "opacity-0"
+                        )}
+                      >
+                        <LeftIcon className={iconClassName} />
+                      </div>
+                    )}
+                  </div>
+                </span>
+              )}
               {isIconButton && hasChildren
                 ? iconButtonChildren
                 : effectiveShouldShowChildren && effectiveChildren}
@@ -430,40 +420,35 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <span className={layoutClassName}>
           {/* Left icon container */}
-          <span
-            className={cx(
-              "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-              isLoading || hasLeftIcon
-                ? "opacity-100 scale-100 w-auto"
-                : "opacity-0 scale-95 w-0"
-            )}
-          >
-            <div
-              className={`relative ${iconSize} flex items-center justify-center`}
-            >
+          {(isLoading || hasLeftIcon) && (
+            <span className="flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
               <div
-                className={cx(
-                  "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
-                  isLoading ? "opacity-100" : "opacity-0"
-                )}
+                className={`relative ${iconSize} flex items-center justify-center`}
               >
-                <Loader
-                  size={size === "sm" ? "xs" : "sm"}
-                  aria-label={loadingText || "Loading"}
-                />
-              </div>
-              {hasLeftIcon && (
                 <div
                   className={cx(
                     "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
-                    !isLoading ? "opacity-100" : "opacity-0"
+                    isLoading ? "opacity-100" : "opacity-0"
                   )}
                 >
-                  <LeftIcon className={iconClassName} />
+                  <Loader
+                    size={size === "sm" ? "xs" : "sm"}
+                    aria-label={loadingText || "Loading"}
+                  />
                 </div>
-              )}
-            </div>
-          </span>
+                {hasLeftIcon && (
+                  <div
+                    className={cx(
+                      "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
+                      !isLoading ? "opacity-100" : "opacity-0"
+                    )}
+                  >
+                    <LeftIcon className={iconClassName} />
+                  </div>
+                )}
+              </div>
+            </span>
+          )}
           {isIconButton && hasChildren
             ? iconButtonChildren
             : effectiveShouldShowChildren && effectiveChildren}

@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "select-native",
   name: "Select Native",
-  description: "A native HTML select element with enhanced styling and consistent theming.",
+  description:
+    "A native HTML select element with enhanced styling and consistent theming.",
   category: "inputs" as const,
   badge: "Input",
   importStatement: `import { SelectNative } from "@/components/ui/select-native";`,
@@ -20,6 +21,48 @@ export const componentConfig: ComponentConfig = {
       type: "boolean",
       defaultValue: false,
       description: "Whether the select is disabled.",
+    },
+    {
+      name: "multiple",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether multiple options can be selected.",
+    },
+    {
+      name: "size",
+      type: "number",
+      defaultValue: 1,
+      description: "Number of visible options (for multiple selects).",
+    },
+    {
+      name: "value",
+      type: "string",
+      defaultValue: "",
+      description: "The controlled value of the select.",
+    },
+    {
+      name: "defaultValue",
+      type: "string",
+      defaultValue: "",
+      description: "The default selected value (uncontrolled).",
+    },
+    {
+      name: "placeholder",
+      type: "string",
+      defaultValue: "Choose an option",
+      description: "Placeholder text for the first option.",
+    },
+    {
+      name: "required",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether the select is required in a form.",
+    },
+    {
+      name: "name",
+      type: "string",
+      defaultValue: "",
+      description: "The name attribute for form submission.",
     },
   ],
   examples: [
@@ -134,7 +177,7 @@ const hasError = !value;
       <option value="option2">Option 2</option>
     </SelectNative>
   </div>
-  
+
   <div className="space-y-2">
     <label className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
       Disabled (with value)

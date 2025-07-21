@@ -1,159 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider } from "./slider";
 
 interface SliderExampleProps {
   showValue?: boolean;
   orientation?: "horizontal" | "vertical";
   disabled?: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
+  value?: number[];
+  defaultValue?: number[] | string;
+  [key: string]: unknown;
 }
 
 export function SliderExample({
   showValue = false,
   orientation = "horizontal",
   disabled = false,
+  min = 0,
+  max = 100,
+  step = 1,
+  value: controlledValue,
+  defaultValue,
+  ...props
 }: SliderExampleProps) {
-  const [basicValue, setBasicValue] = useState([50]);
-  const [withValueValue, setWithValueValue] = useState([25]);
-  const [rangeValue, setRangeValue] = useState([20, 80]);
-  const [stepValue, setStepValue] = useState([25]);
-  const [verticalValue, setVerticalValue] = useState([40]);
-  const [disabledValue] = useState([60]);
+  // Parse defaultValue if it's a string (from prop explorer)
+  const parsedDefaultValue = React.useMemo(() => {
+    if (typeof defaultValue === "string") {
+      try {
+        return JSON.parse(defaultValue);
+      } catch {
+        return [50];
+      }
+    }
+    return defaultValue || [50];
+  }, [defaultValue]);
 
-  return (
-    <div className="space-y-8">
-      {/* Basic slider */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-medium">Basic Slider</h3>
-        <Slider
-          value={basicValue}
-          onValueChange={(value) =>
-            setBasicValue(Array.isArray(value) ? value : [value])
-          }
-          min={0}
-          max={100}
-          step={1}
-          showValue={showValue}
-          disabled={disabled}
-          orientation={orientation}
-        />
-        <p className="text-sm text-zinc-600">Value: {basicValue[0]}</p>
-      </div>
+  const [internalValue, setInternalValue] = useState(parsedDefaultValue);
 
-      {/* With value display */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-medium">With Value Display</h3>
-        <Slider
-          value={withValueValue}
-          onValueChange={(value) =>
-            setWithValueValue(Array.isArray(value) ? value : [value])
-          }
-          min={0}
-          max={100}
-          step={1}
-          showValue
-          disabled={disabled}
-          orientation={orientation}
-        />
-      </div>
+  // Use controlled value if provided, otherwise use internal state
+  const currentValue =
+    controlledValue !== undefined ? controlledValue : internalValue;
 
-      {/* Range slider */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-medium">Range Slider</h3>
-        <Slider
-          value={rangeValue}
-          onValueChange={(value) =>
-            setRangeValue(Array.isArray(value) ? value : [value])
-          }
-          min={0}
-          max={100}
-          step={1}
-          showValue
-          disabled={disabled}
-          orientation={orientation}
-        />
-        <p className="text-sm text-zinc-600">
-          Range: {rangeValue[0]} - {rangeValue[1]}
-        </p>
-      </div>
+  // Always allow the slider to be moved - update internal state for demo purposes
+  const handleChange = (value: number[]) => {
+    setInternalValue(value);
+  };
 
-      {/* Custom step with formatter */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-medium">Custom Step & Formatter</h3>
-        <Slider
-          value={stepValue}
-          onValueChange={(value) =>
-            setStepValue(Array.isArray(value) ? value : [value])
-          }
-          min={0}
-          max={100}
-          step={5}
-          showValue
-          valueFormatter={(val) => `$${val}`}
-          disabled={disabled}
-          orientation={orientation}
-        />
-        <p className="text-sm text-zinc-600">Value: ${stepValue[0]}</p>
-      </div>
-
-      {/* Vertical slider */}
-      {orientation === "vertical" && (
-        <div className="space-y-2">
-          <h3 className="text-sm font-medium">Vertical Orientation</h3>
-          <div className="h-64 flex items-center">
-            <Slider
-              value={verticalValue}
-              onValueChange={(value) =>
-                setVerticalValue(Array.isArray(value) ? value : [value])
-              }
-              min={0}
-              max={100}
-              step={1}
-              orientation="vertical"
-              showValue
-              disabled={disabled}
-            />
-          </div>
-          <p className="text-sm text-zinc-600">Value: {verticalValue[0]}</p>
-        </div>
-      )}
-
-      {/* Disabled slider */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-medium">Disabled State</h3>
-        <Slider
-          value={disabledValue}
-          min={0}
-          max={100}
-          step={1}
-          disabled
-          showValue
-          orientation={orientation}
-        />
-        <p className="text-sm text-zinc-600">Value: {disabledValue[0]}</p>
-      </div>
-
-      {/* Min/max labels */}
-      <div className="space-y-2">
-        <h3 className="text-sm font-medium">With Min/Max Labels</h3>
-        <div className="space-y-2">
+  if (orientation === "vertical") {
+    return (
+      <div className="h-64 w-full flex items-center justify-center">
+        <div className="flex flex-col items-center">
           <Slider
-            value={[75]}
-            onValueChange={() => {}}
-            min={0}
-            max={100}
-            step={1}
-            showValue
+            value={currentValue}
+            onValueChange={handleChange}
+            min={min}
+            max={max}
+            step={step}
+            showValue={showValue}
             disabled={disabled}
             orientation={orientation}
+            style={{ height: "192px" }}
+            {...props}
           />
-          <div className="flex justify-between text-xs text-zinc-500">
-            <span>0</span>
-            <span>100</span>
-          </div>
         </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <Slider
+      value={currentValue}
+      onValueChange={handleChange}
+      min={min}
+      max={max}
+      step={step}
+      showValue={showValue}
+      disabled={disabled}
+      orientation={orientation}
+      {...props}
+    />
   );
 }

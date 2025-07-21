@@ -30,17 +30,15 @@ export function ComboboxExample({
   ];
 
   return (
-    <div className="flex justify-center">
-      <Combobox
-        options={options}
-        value={value}
-        onValueChange={setValue}
-        placeholder={placeholder}
-        searchPlaceholder={searchPlaceholder}
-        emptyMessage={emptyMessage}
-        disabled={disabled}
-        className="max-w-xs"
-      />
-    </div>
+    <Combobox
+      options={options}
+      value={value}
+      onValueChange={setValue}
+      placeholder={placeholder}
+      searchPlaceholder={searchPlaceholder}
+      emptyMessage={emptyMessage}
+      disabled={disabled}
+      className="max-w-xs"
+    />
   );
 }

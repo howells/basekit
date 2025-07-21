@@ -1,6 +1,6 @@
 "use client";
 
-import { Subheading } from "@/components/ui/heading";
+import { Subheading } from "@/components/ui/subheading";
 import { ComponentConfig } from "@/lib/component-config-types";
 import { PropMetadata } from "@/lib/prop-explorer";
 import React from "react";

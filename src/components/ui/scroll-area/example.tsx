@@ -1,61 +1,106 @@
 "use client";
 
+import { Card } from "../card/card";
+import { Grid, GridCell } from "../grid/grid";
+import { Stack } from "../stack/stack";
+import { Subheading } from "../subheading";
+import { Text } from "../text/text";
 import { ScrollArea } from "./scroll-area";
 
-export function Example({ 
-  orientation = "vertical",
-  ...props 
-}: { 
+interface ScrollAreaExampleProps {
   orientation?: "vertical" | "horizontal" | "both";
-  [key: string]: any;
-}) {
+  className?: string;
+  scrollbarClassName?: string;
+  thumbClassName?: string;
+  viewportClassName?: string;
+}
+
+export function ScrollAreaExample({
+  orientation = "vertical",
+  className,
+  scrollbarClassName,
+  thumbClassName,
+  viewportClassName,
+}: ScrollAreaExampleProps) {
+  const getContainerClassName = () => {
+    switch (orientation) {
+      case "horizontal":
+        return "h-32 w-full max-w-2xl border border-zinc-200 dark:border-zinc-800 rounded-md";
+      case "both":
+        return "h-48 w-80 border border-zinc-200 dark:border-zinc-800 rounded-md";
+      default: // vertical
+        return "h-48 w-full max-w-md border border-zinc-200 dark:border-zinc-800 rounded-md";
+    }
+  };
+
+  const renderContent = () => {
+    if (orientation === "horizontal") {
+      return (
+        <div className="flex gap-3 p-4 min-w-max">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <Card key={i} padding={3} className="w-44 flex-none">
+              <Stack gap={1}>
+                <Subheading level={3}>Item {i + 1}</Subheading>
+                <Text size="xs">Horizontal content.</Text>
+              </Stack>
+            </Card>
+          ))}
+        </div>
+      );
+    }
+
+    if (orientation === "both") {
+      return (
+        <div className="p-4 min-w-[800px] min-h-[600px]">
+          <Grid
+            columns={6}
+            gap={3}
+            showColumnGuides={false}
+            showRowGuides={false}
+          >
+            {Array.from({ length: 36 }).map((_, i) => (
+              <GridCell key={i}>
+                <Card padding={2} className="w-full h-full">
+                  <Stack gap={1}>
+                    <Subheading level={3}>Item {i + 1}</Subheading>
+                    <Text size="xs">
+                      Content that overflows both horizontally and vertically.
+                    </Text>
+                  </Stack>
+                </Card>
+              </GridCell>
+            ))}
+          </Grid>
+        </div>
+      );
+    }
+
+    // Default vertical orientation
+    return (
+      <Stack gap={3} padding={4}>
+        {Array.from({ length: 20 }).map((_, i) => (
+          <Card key={i} padding={3}>
+            <Stack gap={1}>
+              <Subheading level={3}>Item {i + 1}</Subheading>
+              <Text size="xs">
+                Scrollable content item with description text.
+              </Text>
+            </Stack>
+          </Card>
+        ))}
+      </Stack>
+    );
+  };
+
   return (
-    <ScrollArea 
-      orientation={orientation} 
-      className="h-48 w-full max-w-md border border-zinc-200 dark:border-zinc-800 rounded-md"
-      {...props}
+    <ScrollArea
+      orientation={orientation}
+      className={className || getContainerClassName()}
+      scrollbarClassName={scrollbarClassName}
+      thumbClassName={thumbClassName}
+      viewportClassName={viewportClassName}
     >
-      <div className="p-4">
-        {orientation === "horizontal" ? (
-          <div className="flex gap-4 min-w-max">
-            {Array.from({ length: 15 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="flex-none w-32 h-24 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-lg flex items-center justify-center text-sm font-medium border border-blue-200 dark:border-blue-800"
-              >
-                Item {i + 1}
-              </div>
-            ))}
-          </div>
-        ) : orientation === "both" ? (
-          <div className="min-w-max">
-            <div className="grid grid-cols-8 gap-2">
-              {Array.from({ length: 64 }).map((_, i) => (
-                <div 
-                  key={i} 
-                  className="w-20 h-20 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900 rounded-lg flex items-center justify-center text-xs font-medium border border-green-200 dark:border-green-800"
-                >
-                  {i + 1}
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {Array.from({ length: 25 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="p-3 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 rounded-lg border border-purple-200 dark:border-purple-800"
-              >
-                <div className="font-medium text-sm mb-1">List Item {i + 1}</div>
-                <div className="text-xs text-zinc-600 dark:text-zinc-400">
-                  This is scrollable content with a longer description to demonstrate the scroll behavior.
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {renderContent()}
     </ScrollArea>
   );
 }

@@ -28,22 +28,16 @@ export function PaginationPrevious({
   className?: string;
   disabled?: boolean;
 }>) {
-  const content = (
-    <>
-      <ChevronLeft className="h-4 w-4" />
-      <span className="sr-only sm:not-sr-only">{children}</span>
-    </>
-  );
-
   if (disabled || !href) {
     return (
       <Button
         variant="secondary"
         disabled={true}
         aria-label="Previous page"
-        className={cx("gap-1 pl-2.5", className)}
+        leftIcon={ChevronLeft}
+        className={className}
       >
-        {content}
+        <span className="sr-only sm:not-sr-only">{children}</span>
       </Button>
     );
   }
@@ -52,9 +46,10 @@ export function PaginationPrevious({
     <Button
       render={<Link href={href} aria-label="Previous page" />}
       variant="secondary"
-      className={cx("gap-1 pl-2.5", className)}
+      leftIcon={ChevronLeft}
+      className={className}
     >
-      {content}
+      <span className="sr-only sm:not-sr-only">{children}</span>
     </Button>
   );
 }
@@ -69,22 +64,16 @@ export function PaginationNext({
   className?: string;
   disabled?: boolean;
 }>) {
-  const content = (
-    <>
-      <span className="sr-only sm:not-sr-only">{children}</span>
-      <ChevronRight className="h-4 w-4" />
-    </>
-  );
-
   if (disabled || !href) {
     return (
       <Button
         variant="secondary"
         disabled={true}
         aria-label="Next page"
-        className={cx("gap-1 pr-2.5", className)}
+        rightIcon={ChevronRight}
+        className={className}
       >
-        {content}
+        <span className="sr-only sm:not-sr-only">{children}</span>
       </Button>
     );
   }
@@ -93,9 +82,10 @@ export function PaginationNext({
     <Button
       render={<Link href={href} aria-label="Next page" />}
       variant="secondary"
-      className={cx("gap-1 pr-2.5", className)}
+      rightIcon={ChevronRight}
+      className={className}
     >
-      {content}
+      <span className="sr-only sm:not-sr-only">{children}</span>
     </Button>
   );
 }

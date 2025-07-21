@@ -12,7 +12,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible/collapsible";
-import { Subheading } from "./ui/heading";
 import { Input } from "./ui/input/input";
 import {
   Sidebar,
@@ -24,6 +23,7 @@ import {
   SidebarLabel,
   SidebarSection,
 } from "./ui/sidebar";
+import { Subheading } from "./ui/subheading";
 
 interface SidebarLayoutProps {
   children: React.ReactNode;
@@ -40,14 +40,18 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
   const allFormComponents = getComponentsByCategory("forms");
   const allChartComponents = getComponentsByCategory("charts");
 
-  // Filter components based on search term
+  // Filter components based on search term and sort alphabetically
   const filterComponents = (components: typeof allUiComponents) => {
-    if (!searchTerm) return components;
-    return components.filter(
-      (config) =>
-        config.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        config.id.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let filtered = components;
+    if (searchTerm) {
+      filtered = components.filter(
+        (config) =>
+          config.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          config.id.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    // Sort alphabetically by name
+    return filtered.sort((a, b) => a.name.localeCompare(b.name));
   };
 
   const uiComponents = filterComponents(allUiComponents);

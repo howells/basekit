@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "slider",
   name: "Slider",
-  description: "An input component that allows users to select a single value or range from a continuous set of values.",
+  description:
+    "An input component that allows users to select a single value or range from a continuous set of values.",
   category: "inputs" as const,
   badge: "Input",
   importStatement: `import { Slider } from "@/components/ui/slider";`,
@@ -27,6 +28,30 @@ export const componentConfig: ComponentConfig = {
       type: "boolean",
       defaultValue: false,
       description: "Whether the slider is disabled.",
+    },
+    {
+      name: "min",
+      type: "number",
+      defaultValue: 0,
+      description: "The minimum value of the slider.",
+    },
+    {
+      name: "max",
+      type: "number",
+      defaultValue: 100,
+      description: "The maximum value of the slider.",
+    },
+    {
+      name: "step",
+      type: "number",
+      defaultValue: 1,
+      description: "The step increment for the slider values.",
+    },
+    {
+      name: "defaultValue",
+      type: "text",
+      defaultValue: "[50]",
+      description: "The default value(s) of the slider (as JSON array).",
     },
   ],
   examples: [

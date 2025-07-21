@@ -30,6 +30,12 @@ import { cx } from "@/lib/utils";
 
 //#region Shape
 
+/**
+ * Performs deep equality comparison between two objects.
+ * 
+ * Used to determine if bar chart elements should be highlighted
+ * by comparing active state with current data.
+ */
 function deepEqual<T>(obj1: T, obj2: T): boolean {
   if (obj1 === obj2) return true;
 
@@ -54,6 +60,17 @@ function deepEqual<T>(obj1: T, obj2: T): boolean {
   return true;
 }
 
+/**
+ * Renders custom bar shape with dynamic opacity based on interaction state.
+ * 
+ * Handles both horizontal and vertical layouts, adjusting opacity for
+ * active/inactive states and managing negative value positioning.
+ *
+ * @param props - Recharts bar shape props
+ * @param activeBar - Currently active bar data
+ * @param activeLegend - Currently active legend item
+ * @param layout - Chart orientation (horizontal/vertical)
+ */
 const renderShape = (
   props: any,
   activeBar: any | undefined,
@@ -90,13 +107,28 @@ const renderShape = (
 
 //#region Legend
 
+/**
+ * Props for individual legend items in bar charts.
+ * 
+ * @interface LegendItemProps
+ */
 interface LegendItemProps {
+  /** Display name for the legend item */
   name: string;
+  /** Color theme for the legend indicator */
   color: AvailableChartColorsKeys;
+  /** Callback when legend item is clicked */
   onClick?: (name: string, color: AvailableChartColorsKeys) => void;
+  /** Currently active legend item name */
   activeLegend?: string;
 }
 
+/**
+ * Individual legend item component with square color indicator.
+ * 
+ * Similar to area chart legend but uses square indicators instead of
+ * circular dots to match bar chart aesthetics.
+ */
 const LegendItem = ({
   name,
   color,
@@ -143,9 +175,17 @@ const LegendItem = ({
   );
 };
 
+/**
+ * Props for legend scroll navigation buttons.
+ * 
+ * @interface ScrollButtonProps
+ */
 interface ScrollButtonProps {
+  /** Icon component to display */
   icon: React.ElementType;
+  /** Click handler for scrolling */
   onClick?: () => void;
+  /** Whether button is disabled */
   disabled?: boolean;
 }
 
@@ -372,6 +412,21 @@ const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
 
 Legend.displayName = "Legend";
 
+/**
+ * Chart legend wrapper with responsive height and positioning for bar charts.
+ * 
+ * Integrates with Recharts Legend component to provide custom legend rendering
+ * with proper alignment and responsive behavior for bar chart layouts.
+ *
+ * @param payload - Legend data from Recharts
+ * @param categoryColors - Color mapping for categories
+ * @param setLegendHeight - Callback to update legend height
+ * @param activeLegend - Currently active legend item
+ * @param onClick - Click handler for legend interactions
+ * @param enableLegendSlider - Whether to enable horizontal scrolling
+ * @param legendPosition - Horizontal alignment (left, center, right)
+ * @param yAxisWidth - Y-axis width for alignment calculations
+ */
 const ChartLegend = (
   { payload }: any,
   categoryColors: Map<string, AvailableChartColorsKeys>,
@@ -423,24 +478,55 @@ const ChartLegend = (
 
 //#region Tooltip
 
+/**
+ * Tooltip data structure for bar chart interactions.
+ * 
+ * Simplified version of ChartTooltipProps for external callbacks and custom tooltips.
+ */
 type TooltipProps = Pick<ChartTooltipProps, "active" | "payload" | "label">;
 
+/**
+ * Individual data point in bar chart tooltip payload.
+ * 
+ * Represents a single bar's data in the tooltip display.
+ */
 type PayloadItem = {
+  /** Category/series name */
   category: string;
+  /** Numeric value of the bar */
   value: number;
+  /** Index identifier */
   index: string;
+  /** Display color theme */
   color: AvailableChartColorsKeys;
+  /** Chart element type */
   type?: string;
+  /** Raw data payload */
   payload: any;
 };
 
+/**
+ * Props for the bar chart tooltip component.
+ * 
+ * @interface ChartTooltipProps
+ */
 interface ChartTooltipProps {
+  /** Whether tooltip is currently active/visible */
   active: boolean | undefined;
+  /** Array of data points to display in tooltip */
   payload: PayloadItem[];
+  /** X-axis label for the data point */
   label: string;
+  /** Function to format displayed values */
   valueFormatter: (value: number) => string;
 }
 
+/**
+ * Default tooltip component for bar charts.
+ * 
+ * Displays formatted bar values with square color indicators matching
+ * the bar chart visual style and consistent formatting.
+ */
 const ChartTooltip = ({
   active,
   payload,
@@ -517,45 +603,184 @@ const ChartTooltip = ({
 
 //#region BarChart
 
+/**
+ * Base event data for bar chart interactions.
+ * 
+ * Common structure for click events on bars or legend items.
+ */
 type BaseEventProps = {
+  /** Type of element that was clicked */
   eventType: "category" | "bar";
+  /** Category that was clicked */
   categoryClicked: string;
+  /** Additional data properties from the clicked element */
   [key: string]: number | string;
 };
 
+/**
+ * Event data passed to onValueChange callback for bar charts.
+ * 
+ * Contains interaction information or null when selection is cleared.
+ */
 type BarChartEventProps = BaseEventProps | null | undefined;
 
+/**
+ * Props for the BarChart component.
+ * 
+ * Comprehensive configuration options for bar chart visualization
+ * including data binding, layout, styling, interactivity, and display options.
+ * 
+ * @interface BarChartProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface BarChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Array of data objects to visualize */
   data: Record<string, any>[];
+  /** Key in data objects to use for category axis values */
   index: string;
+  /** Array of data keys to display as chart series */
   categories: string[];
+  /** Color scheme for chart series */
   colors?: AvailableChartColorsKeys[];
+  /** Function to format displayed values */
   valueFormatter?: (value: number) => string;
+  /** Show only first and last category axis labels */
   startEndOnly?: boolean;
+  /** Whether to display X-axis */
   showXAxis?: boolean;
+  /** Whether to display Y-axis */
   showYAxis?: boolean;
+  /** Whether to show grid lines */
   showGridLines?: boolean;
+  /** Width of Y-axis in pixels */
   yAxisWidth?: number;
+  /** Category axis tick interval strategy */
   intervalType?: "preserveStartEnd" | "equidistantPreserveStart";
+  /** Whether to show tooltip on hover */
   showTooltip?: boolean;
+  /** Whether to display legend */
   showLegend?: boolean;
+  /** Auto-calculate minimum value axis value */
   autoMinValue?: boolean;
+  /** Fixed minimum value axis value */
   minValue?: number;
+  /** Fixed maximum value axis value */
   maxValue?: number;
+  /** Allow decimal values on value axis */
   allowDecimals?: boolean;
+  /** Callback for chart interactions (bar clicks, legend clicks) */
   onValueChange?: (value: BarChartEventProps) => void;
+  /** Enable horizontal legend scrolling */
   enableLegendSlider?: boolean;
+  /** Minimum gap between category axis ticks */
   tickGap?: number;
+  /** Gap between bar categories (string percentage or number pixels) */
   barCategoryGap?: string | number;
+  /** Label for X-axis */
   xAxisLabel?: string;
+  /** Label for Y-axis */
   yAxisLabel?: string;
+  /** Chart orientation (horizontal or vertical bars) */
   layout?: "vertical" | "horizontal";
+  /** Bar stacking type (default, stacked, or percentage) */
   type?: "default" | "stacked" | "percent";
+  /** Legend horizontal alignment */
   legendPosition?: "left" | "center" | "right";
+  /** Callback for tooltip state changes */
   tooltipCallback?: (tooltipCallbackContent: TooltipProps) => void;
+  /** Custom tooltip component */
   customTooltip?: React.ComponentType<TooltipProps>;
 }
 
+/**
+ * A comprehensive bar chart component built with Recharts.
+ * 
+ * Provides rich data visualization with multiple bar series, interactive legends,
+ * tooltips, and extensive customization options. Supports horizontal/vertical layouts,
+ * stacking modes, percentage views, and responsive design.
+ *
+ * @param data - Array of data objects for visualization
+ * @param index - Key for category axis values (X-axis for horizontal, Y-axis for vertical)
+ * @param categories - Data series to display as bars
+ * @param colors - Color scheme for bar series
+ * @param valueFormatter - Value formatting function
+ * @param layout - Chart orientation (horizontal or vertical bars)
+ * @param type - Chart type (default, stacked, percent)
+ * @param barCategoryGap - Spacing between category groups
+ * @param onValueChange - Interaction callback for bar/legend clicks
+ * @param showLegend - Whether to show legend
+ * @param showTooltip - Whether to show tooltips
+ * @param customTooltip - Custom tooltip component
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic horizontal bar chart
+ * <BarChart
+ *   data={[
+ *     { product: "Laptops", sales: 1200, profit: 200 },
+ *     { product: "Phones", sales: 800, profit: 150 },
+ *     { product: "Tablets", sales: 600, profit: 100 }
+ *   ]}
+ *   index="product"
+ *   categories={["sales", "profit"]}
+ *   layout="horizontal"
+ * />
+ *
+ * // Vertical stacked bar chart
+ * <BarChart
+ *   data={quarterlyData}
+ *   index="quarter"
+ *   categories={["revenue", "expenses"]}
+ *   layout="vertical"
+ *   type="stacked"
+ *   colors={["green", "red"]}
+ *   valueFormatter={(value) => `$${value.toLocaleString()}`}
+ * />
+ *
+ * // Interactive bar chart with custom styling
+ * <BarChart
+ *   data={performanceData}
+ *   index="department"
+ *   categories={["target", "actual"]}
+ *   onValueChange={(event) => {
+ *     if (event) {
+ *       console.log('Clicked:', event.categoryClicked, event.eventType);
+ *       setSelectedDepartment(event.categoryClicked);
+ *     }
+ *   }}
+ *   barCategoryGap="20%"
+ *   showGridLines
+ *   xAxisLabel="Departments"
+ *   yAxisLabel="Performance Score"
+ * />
+ *
+ * // Percentage view with custom tooltip
+ * <BarChart
+ *   data={marketData}
+ *   index="region"
+ *   categories={["online", "retail", "wholesale"]}
+ *   type="percent"
+ *   layout="horizontal"
+ *   customTooltip={({ active, payload, label }) => {
+ *     if (!active || !payload) return null;
+ *     return (
+ *       <div className="bg-white p-3 border rounded shadow">
+ *         <h3 className="font-semibold">{label}</h3>
+ *         {payload.map(item => (
+ *           <div key={item.category} className="flex justify-between">
+ *             <span>{item.category}:</span>
+ *             <span className="font-mono">{item.value}%</span>
+ *           </div>
+ *         ))}
+ *       </div>
+ *     );
+ *   }}
+ * />
+ * ```
+ *
+ * @see https://recharts.org/en-US/api/BarChart - Recharts documentation
+ */
 const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
   (props, forwardedRef) => {
     const {

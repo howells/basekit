@@ -33,13 +33,28 @@ import { cx } from "@/lib/utils";
 
 //#region Legend
 
+/**
+ * Props for individual legend items.
+ * 
+ * @interface LegendItemProps
+ */
 interface LegendItemProps {
+  /** Display name for the legend item */
   name: string;
+  /** Color theme for the legend indicator */
   color: AvailableChartColorsKeys;
+  /** Callback when legend item is clicked */
   onClick?: (name: string, color: AvailableChartColorsKeys) => void;
+  /** Currently active legend item name */
   activeLegend?: string;
 }
 
+/**
+ * Individual legend item component with color indicator and label.
+ * 
+ * Renders a clickable legend item with a colored indicator dot and text label.
+ * Supports hover states and visual feedback for active/inactive states.
+ */
 const LegendItem = ({
   name,
   color,
@@ -86,12 +101,26 @@ const LegendItem = ({
   );
 };
 
+/**
+ * Props for legend scroll buttons.
+ * 
+ * @interface ScrollButtonProps
+ */
 interface ScrollButtonProps {
+  /** Icon component to display in button */
   icon: React.ElementType;
+  /** Callback when button is clicked */
   onClick?: () => void;
+  /** Whether the button is disabled */
   disabled?: boolean;
 }
 
+/**
+ * Scroll button for navigating legend items when scrolling is enabled.
+ * 
+ * Provides continuous scrolling when held down and proper disabled states.
+ * Used for horizontal legend navigation when content overflows.
+ */
 const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
   const Icon = icon;
   const [isPressed, setIsPressed] = React.useState(false);
@@ -144,19 +173,43 @@ const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
   );
 };
 
+/**
+ * Props for the chart legend component.
+ * 
+ * @interface LegendProps
+ * @extends React.OlHTMLAttributes<HTMLOListElement>
+ */
 interface LegendProps extends React.OlHTMLAttributes<HTMLOListElement> {
+  /** Array of category names to display */
   categories: string[];
+  /** Color scheme for legend items */
   colors?: AvailableChartColorsKeys[];
+  /** Callback when legend item is clicked */
   onClickLegendItem?: (category: string, color: string) => void;
+  /** Currently active legend category */
   activeLegend?: string;
+  /** Whether to enable horizontal scrolling for long legends */
   enableLegendSlider?: boolean;
 }
 
+/**
+ * Scroll state for legend navigation.
+ * 
+ * Tracks whether scrolling is available in each direction.
+ */
 type HasScrollProps = {
+  /** Whether left scroll is available */
   left: boolean;
+  /** Whether right scroll is available */
   right: boolean;
 };
 
+/**
+ * Chart legend component with optional horizontal scrolling.
+ * 
+ * Displays category labels with color indicators. Supports keyboard navigation
+ * and horizontal scrolling when legend content overflows the container.
+ */
 const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
   const {
     categories,
@@ -315,6 +368,21 @@ const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
 
 Legend.displayName = "Legend";
 
+/**
+ * Chart legend wrapper with dynamic height calculation and positioning.
+ * 
+ * Integrates with Recharts Legend component to provide custom legend rendering
+ * with proper alignment, height calculation, and responsive behavior.
+ *
+ * @param payload - Legend data from Recharts
+ * @param categoryColors - Color mapping for categories  
+ * @param setLegendHeight - Callback to update legend height
+ * @param activeLegend - Currently active legend item
+ * @param onClick - Click handler for legend items
+ * @param enableLegendSlider - Whether to enable scrolling
+ * @param legendPosition - Horizontal alignment
+ * @param yAxisWidth - Width of Y axis for alignment
+ */
 const ChartLegend = (
   { payload }: any,
   categoryColors: Map<string, AvailableChartColorsKeys>,
@@ -364,24 +432,55 @@ const ChartLegend = (
 
 //#region Tooltip
 
+/**
+ * Tooltip data structure for chart interactions.
+ * 
+ * Simplified version of ChartTooltipProps for external tooltip callbacks.
+ */
 type TooltipProps = Pick<ChartTooltipProps, "active" | "payload" | "label">;
 
+/**
+ * Individual data point in tooltip payload.
+ * 
+ * Represents a single data series value in the tooltip display.
+ */
 type PayloadItem = {
+  /** Category/series name */
   category: string;
+  /** Numeric value */
   value: number;
+  /** Index identifier */
   index: string;
+  /** Display color */
   color: AvailableChartColorsKeys;
+  /** Chart element type */
   type?: string;
+  /** Raw data payload */
   payload: any;
 };
 
+/**
+ * Props for the chart tooltip component.
+ * 
+ * @interface ChartTooltipProps
+ */
 interface ChartTooltipProps {
+  /** Whether tooltip is currently active */
   active: boolean | undefined;
+  /** Array of data points to display */
   payload: PayloadItem[];
+  /** X-axis label for the data point */
   label: string;
+  /** Function to format displayed values */
   valueFormatter: (value: number) => string;
 }
 
+/**
+ * Default tooltip component for area charts.
+ * 
+ * Displays formatted data values with color-coded indicators and labels.
+ * Provides consistent styling and layout for chart data on hover.
+ */
 const ChartTooltip = ({
   active,
   payload,
@@ -458,50 +557,189 @@ const ChartTooltip = ({
 
 //#region AreaChart
 
+/**
+ * Active dot state for area chart interactions.
+ * 
+ * Tracks which specific data point is currently selected.
+ */
 interface ActiveDot {
+  /** Data point index */
   index?: number;
+  /** Data series key */
   dataKey?: string;
 }
 
+/**
+ * Base event data for chart interactions.
+ * 
+ * Common structure for click events on chart elements.
+ */
 type BaseEventProps = {
+  /** Type of element clicked */
   eventType: "dot" | "category";
+  /** Category that was clicked */
   categoryClicked: string;
+  /** Additional data properties */
   [key: string]: number | string;
 };
 
+/**
+ * Event data passed to onValueChange callback.
+ * 
+ * Contains information about chart interactions or null when cleared.
+ */
 type AreaChartEventProps = BaseEventProps | null | undefined;
 
+/**
+ * Props for the AreaChart component.
+ * 
+ * Comprehensive configuration options for area chart visualization
+ * including data binding, styling, interactivity, and display options.
+ * 
+ * @interface AreaChartProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface AreaChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Array of data objects to visualize */
   data: Record<string, any>[];
+  /** Key in data objects to use for X-axis values */
   index: string;
+  /** Array of data keys to display as chart series */
   categories: string[];
+  /** Color scheme for chart series */
   colors?: AvailableChartColorsKeys[];
+  /** Function to format displayed values */
   valueFormatter?: (value: number) => string;
+  /** Show only first and last X-axis labels */
   startEndOnly?: boolean;
+  /** Whether to display X-axis */
   showXAxis?: boolean;
+  /** Whether to display Y-axis */
   showYAxis?: boolean;
+  /** Whether to show grid lines */
   showGridLines?: boolean;
+  /** Width of Y-axis in pixels */
   yAxisWidth?: number;
+  /** X-axis tick interval strategy */
   intervalType?: "preserveStartEnd" | "equidistantPreserveStart";
+  /** Whether to show tooltip on hover */
   showTooltip?: boolean;
+  /** Whether to display legend */
   showLegend?: boolean;
+  /** Auto-calculate minimum Y value */
   autoMinValue?: boolean;
+  /** Fixed minimum Y-axis value */
   minValue?: number;
+  /** Fixed maximum Y-axis value */
   maxValue?: number;
+  /** Allow decimal values on Y-axis */
   allowDecimals?: boolean;
+  /** Callback for chart interactions */
   onValueChange?: (value: AreaChartEventProps) => void;
+  /** Enable horizontal legend scrolling */
   enableLegendSlider?: boolean;
+  /** Minimum gap between X-axis ticks */
   tickGap?: number;
+  /** Connect line segments over null values */
   connectNulls?: boolean;
+  /** Label for X-axis */
   xAxisLabel?: string;
+  /** Label for Y-axis */
   yAxisLabel?: string;
+  /** Chart stacking type */
   type?: "default" | "stacked" | "percent";
+  /** Legend horizontal alignment */
   legendPosition?: "left" | "center" | "right";
+  /** Area fill style */
   fill?: "gradient" | "solid" | "none";
+  /** Callback for tooltip state changes */
   tooltipCallback?: (tooltipCallbackContent: TooltipProps) => void;
+  /** Custom tooltip component */
   customTooltip?: React.ComponentType<TooltipProps>;
 }
 
+/**
+ * A comprehensive area chart component built with Recharts.
+ * 
+ * Provides rich data visualization with multiple area series, interactive legends,
+ * tooltips, and extensive customization options. Supports stacking, percentage
+ * views, gradient fills, and responsive design.
+ *
+ * @param data - Array of data objects for visualization
+ * @param index - Key for X-axis values
+ * @param categories - Data series to display
+ * @param colors - Color scheme for series
+ * @param valueFormatter - Value formatting function
+ * @param type - Chart type (default, stacked, percent)
+ * @param fill - Area fill style (gradient, solid, none)
+ * @param onValueChange - Interaction callback
+ * @param showLegend - Whether to show legend
+ * @param showTooltip - Whether to show tooltips
+ * @param customTooltip - Custom tooltip component
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic area chart
+ * <AreaChart
+ *   data={[
+ *     { date: "2023-01", sales: 100, profit: 20 },
+ *     { date: "2023-02", sales: 150, profit: 30 },
+ *     { date: "2023-03", sales: 120, profit: 25 }
+ *   ]}
+ *   index="date"
+ *   categories={["sales", "profit"]}
+ * />
+ *
+ * // Stacked area chart with custom colors
+ * <AreaChart
+ *   data={performanceData}
+ *   index="quarter"
+ *   categories={["revenue", "expenses", "profit"]}
+ *   colors={["blue", "red", "green"]}
+ *   type="stacked"
+ *   valueFormatter={(value) => `$${value.toLocaleString()}`}
+ * />
+ *
+ * // Interactive chart with legend
+ * <AreaChart
+ *   data={timeSeriesData}
+ *   index="timestamp"
+ *   categories={["visitors", "conversions"]}
+ *   onValueChange={(event) => {
+ *     if (event) {
+ *       console.log('Clicked:', event.categoryClicked, event.eventType);
+ *     }
+ *   }}
+ *   enableLegendSlider
+ *   legendPosition="center"
+ * />
+ *
+ * // Percentage view with custom tooltip
+ * <AreaChart
+ *   data={marketShareData}
+ *   index="month"
+ *   categories={["mobile", "desktop", "tablet"]}
+ *   type="percent"
+ *   fill="solid"
+ *   customTooltip={({ active, payload, label }) => {
+ *     if (!active || !payload) return null;
+ *     return (
+ *       <div className="bg-white p-3 border rounded">
+ *         <h3>{label}</h3>
+ *         {payload.map(item => (
+ *           <div key={item.category}>
+ *             {item.category}: {item.value}%
+ *           </div>
+ *         ))}
+ *       </div>
+ *     );
+ *   }}
+ * />
+ * ```
+ *
+ * @see https://recharts.org/en-US/api/AreaChart - Recharts documentation
+ */
 const AreaChart = React.forwardRef<HTMLDivElement, AreaChartProps>(
   (props, ref) => {
     const {

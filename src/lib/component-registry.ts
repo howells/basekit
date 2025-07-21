@@ -28,10 +28,13 @@ import { componentConfig as inputConfig } from "@/components/ui/input/config";
 import { componentConfig as lineChartConfig } from "@/components/ui/line-chart/config";
 import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
 import { componentConfig as meterConfig } from "@/components/ui/meter/config";
+import { componentConfig as paginationConfig } from "@/components/ui/pagination/config";
 import { componentConfig as radioCardGroupConfig } from "@/components/ui/radio-card-group/config";
 import { componentConfig as radioGroupConfig } from "@/components/ui/radio-group/config";
 import { componentConfig as radioConfig } from "@/components/ui/radio/config";
+import { componentConfig as scrollAreaConfig } from "@/components/ui/scroll-area/config";
 import { componentConfig as selectNativeConfig } from "@/components/ui/select-native/config";
+import { componentConfig as selectConfig } from "@/components/ui/select/config";
 import { componentConfig as separatorConfig } from "@/components/ui/separator/config";
 import { componentConfig as sliderConfig } from "@/components/ui/slider/config";
 import { componentConfig as sparkChartConfig } from "@/components/ui/spark-chart/config";
@@ -40,6 +43,7 @@ import { componentConfig as stackConfig } from "@/components/ui/stack/config";
 import { componentConfig as stackedListConfig } from "@/components/ui/stacked-list/config";
 import { componentConfig as statusDotConfig } from "@/components/ui/status-dot/config";
 import { componentConfig as switchConfig } from "@/components/ui/switch/config";
+import { componentConfig as tagConfig } from "@/components/ui/tag/config";
 
 // TODO: Update these components to use new ComponentConfig structure
 import {
@@ -84,6 +88,7 @@ const descriptionListConfig = createPlaceholderConfig(
 const dialogConfig = createPlaceholderConfig("dialog", "Dialog");
 const drawerConfig = createPlaceholderConfig("drawer", "Drawer");
 const headingConfig = createPlaceholderConfig("heading", "Heading");
+const subheadingConfig = createPlaceholderConfig("subheading", "Subheading");
 const labelConfig = createPlaceholderConfig("label", "Label");
 const menuConfig = createPlaceholderConfig("menu", "Menu");
 const menuBarConfig = createPlaceholderConfig("menu-bar", "Menu Bar");
@@ -92,7 +97,6 @@ const navigationMenuConfig = createPlaceholderConfig(
   "navigation-menu",
   "Navigation Menu"
 );
-const paginationConfig = createPlaceholderConfig("pagination", "Pagination");
 const popoverConfig = createPlaceholderConfig("popover", "Popover");
 const previewCardConfig = createPlaceholderConfig(
   "preview-card",
@@ -107,7 +111,7 @@ const responsiveDrawerConfig = createPlaceholderConfig(
   "responsive-drawer",
   "Responsive Drawer"
 );
-const scrollAreaConfig = createPlaceholderConfig("scroll-area", "Scroll Area");
+// scrollAreaConfig is now imported from the actual config file
 const sheetConfig = createPlaceholderConfig("sheet", "Sheet");
 const sidebarConfig = createPlaceholderConfig("sidebar", "Sidebar");
 const skeletonConfig = createPlaceholderConfig("skeleton", "Skeleton");
@@ -117,7 +121,6 @@ const tabNavigationConfig = createPlaceholderConfig(
 );
 const tableConfig = createPlaceholderConfig("table", "Table");
 const tabsConfig = createPlaceholderConfig("tabs", "Tabs");
-const tagConfig = createPlaceholderConfig("tag", "Tag");
 const textConfig = createPlaceholderConfig("text", "Text");
 const toastConfig = createPlaceholderConfig("toast", "Toast");
 const toggleConfig = createPlaceholderConfig("toggle", "Toggle");
@@ -150,7 +153,7 @@ const numberFieldConfig = createPlaceholderConfig(
   "Number Field",
   "inputs"
 );
-const selectConfig = createPlaceholderConfig("select", "Select", "inputs");
+// selectConfig is now imported from the actual config file
 const textareaConfig = createPlaceholderConfig(
   "textarea",
   "Textarea",
@@ -215,6 +218,7 @@ export const componentRegistry: ComponentConfigRegistry = {
   dialog: dialogConfig,
   drawer: drawerConfig,
   heading: headingConfig,
+  subheading: subheadingConfig,
   label: labelConfig,
   menu: menuConfig,
   "menu-bar": menuBarConfig,
@@ -303,6 +307,7 @@ export const COMPONENT_LIST = {
     "drawer",
     "grid",
     "heading",
+    "subheading",
     "label",
     "menu",
     "menu-bar",

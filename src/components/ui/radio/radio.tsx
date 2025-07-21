@@ -138,10 +138,27 @@ const radioCardVariants = tv({
   },
 });
 
-// Base Radio Components
+/**
+ * Root radio component built on Base UI's Radio primitive.
+ * 
+ * Based on Base UI's Radio, providing accessible radio button functionality
+ * with proper keyboard navigation and form integration. Use with RadioGroup
+ * for managing multiple radio options.
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const Radio = BaseRadio.Root;
 Radio.displayName = "Radio";
 
+/**
+ * Indicator component that shows the selected state of a radio button.
+ * 
+ * Based on Base UI's Radio.Indicator, this component renders the visual indicator
+ * (dot) that appears when the radio is selected. Typically used within RadioItem
+ * or custom radio implementations.
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioIndicator = React.forwardRef<
   React.ElementRef<typeof BaseRadio.Indicator>,
   React.ComponentPropsWithoutRef<typeof BaseRadio.Indicator>
@@ -154,7 +171,23 @@ const RadioIndicator = React.forwardRef<
 ));
 RadioIndicator.displayName = "RadioIndicator";
 
-// Styled Radio Components
+/**
+ * A styled radio button component with visual indicator.
+ * 
+ * Pre-styled radio button built on Base UI's Radio primitive with Tremor-inspired
+ * design. Features multiple sizes and variants, with a visual circle and dot indicator.
+ * Use within RadioGroup for managing multiple options.
+ *
+ * @param size - Size variant (sm, md, lg)
+ * @param variant - Style variant (default, card)
+ *
+ * @example
+ * ```tsx
+ * <RadioItem value="option1" size="md" variant="default" />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioItem = React.forwardRef<
   React.ElementRef<typeof BaseRadio.Root>,
   React.ComponentPropsWithoutRef<typeof BaseRadio.Root> &
@@ -174,6 +207,23 @@ const RadioItem = React.forwardRef<
 });
 RadioItem.displayName = "RadioItem";
 
+/**
+ * Label component for radio buttons with proper styling and accessibility.
+ * 
+ * Provides semantic labeling for radio buttons with size variants and proper
+ * cursor behavior. Features disabled state styling and flexible content support.
+ * Use to wrap radio buttons and their labels for better UX.
+ *
+ * @param size - Size variant affecting text size and spacing
+ *
+ * @example
+ * ```tsx
+ * <RadioLabel size="md">
+ *   <RadioItem value="option" />
+ *   <span>Option label</span>
+ * </RadioLabel>
+ * ```
+ */
 const RadioLabel = React.forwardRef<
   HTMLLabelElement,
   React.ComponentPropsWithoutRef<"label"> &
@@ -189,12 +239,37 @@ const RadioLabel = React.forwardRef<
 ));
 RadioLabel.displayName = "RadioLabel";
 
+/**
+ * A card-style radio button component with optional indicator.
+ * 
+ * Expanded radio button styled as a card for better visibility and content support.
+ * Features border highlighting when selected and optional radio indicator.
+ * Ideal for choice cards with additional content or descriptions.
+ *
+ * @param size - Size variant affecting padding
+ * @param children - Content to display in the card
+ * @param indicator - Custom indicator component
+ * @param showIndicator - Whether to show the radio indicator
+ *
+ * @example
+ * ```tsx
+ * <RadioCard value="premium" size="md">
+ *   <h3>Premium Plan</h3>
+ *   <p>Advanced features</p>
+ * </RadioCard>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioCard = React.forwardRef<
   React.ElementRef<typeof BaseRadio.Root>,
   React.ComponentPropsWithoutRef<typeof BaseRadio.Root> &
     VariantProps<typeof radioCardVariants> & {
+      /** Content to display in the card */
       children?: React.ReactNode;
+      /** Custom indicator component */
       indicator?: React.ReactNode;
+      /** Whether to show the radio indicator */
       showIndicator?: boolean;
     }
 >(
@@ -222,15 +297,49 @@ const RadioCard = React.forwardRef<
 );
 RadioCard.displayName = "RadioCard";
 
-// Composite Components for easy usage
+/**
+ * Props for the RadioOption component.
+ *
+ * @interface RadioOptionProps
+ */
 interface RadioOptionProps {
+  /** The value of the radio option */
   value: string;
+  /** Label text or content */
   label: React.ReactNode;
+  /** Optional description text */
   description?: React.ReactNode;
+  /** Whether the option is disabled */
   disabled?: boolean;
+  /** Size variant */
   size?: VariantProps<typeof radioVariants>["size"];
 }
 
+/**
+ * Complete radio option with label and optional description.
+ * 
+ * Pre-composed radio button with integrated label and description support.
+ * Combines RadioItem and RadioLabel for common use cases, reducing boilerplate
+ * while maintaining flexibility and proper accessibility.
+ *
+ * @param value - The value of the radio option
+ * @param label - Label text or content
+ * @param description - Optional description text
+ * @param disabled - Whether the option is disabled
+ * @param size - Size variant
+ *
+ * @example
+ * ```tsx
+ * <RadioOption
+ *   value="standard"
+ *   label="Standard Plan"
+ *   description="Basic features included"
+ *   size="md"
+ * />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioOption = React.forwardRef<
   React.ElementRef<typeof BaseRadio.Root>,
   RadioOptionProps
@@ -255,15 +364,52 @@ const RadioOption = React.forwardRef<
 ));
 RadioOption.displayName = "RadioOption";
 
+/**
+ * Props for the RadioCardOption component.
+ *
+ * @interface RadioCardOptionProps
+ */
 interface RadioCardOptionProps {
+  /** The value of the radio card option */
   value: string;
+  /** Title text or content */
   title: React.ReactNode;
+  /** Optional description text */
   description?: React.ReactNode;
+  /** Whether the option is disabled */
   disabled?: boolean;
+  /** Size variant */
   size?: VariantProps<typeof radioCardVariants>["size"];
+  /** Whether to show the radio indicator */
   showIndicator?: boolean;
 }
 
+/**
+ * Complete card-style radio option with title and optional description.
+ * 
+ * Pre-composed radio card with integrated title and description layout.
+ * Combines RadioCard with structured content for rich choice presentations.
+ * Ideal for feature comparisons, plan selections, or option cards.
+ *
+ * @param value - The value of the radio card option
+ * @param title - Title text or content
+ * @param description - Optional description text
+ * @param disabled - Whether the option is disabled
+ * @param size - Size variant affecting padding
+ * @param showIndicator - Whether to show the radio indicator
+ *
+ * @example
+ * ```tsx
+ * <RadioCardOption
+ *   value="enterprise"
+ *   title="Enterprise Plan"
+ *   description="Full feature access with priority support"
+ *   size="lg"
+ * />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/radio - Base UI documentation
+ */
 const RadioCardOption = React.forwardRef<
   React.ElementRef<typeof BaseRadio.Root>,
   RadioCardOptionProps

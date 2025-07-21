@@ -1,15 +1,19 @@
 import clsx from "clsx";
 import { HeadingElement, type HeadingElementProps } from "../heading-element";
 
-export type HeadingProps = HeadingElementProps;
+export type SubheadingProps = HeadingElementProps;
 
-export function Heading({ className, level = 1, ...props }: HeadingProps) {
+export function Subheading({
+  className,
+  level = 2,
+  ...props
+}: SubheadingProps) {
   return (
     <HeadingElement
       level={level}
       className={clsx(
         className,
-        "m-0 text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white"
+        "m-0 text-base/7 font-semibold text-current sm:text-sm/6"
       )}
       {...props}
     />

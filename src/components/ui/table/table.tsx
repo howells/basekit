@@ -4,6 +4,33 @@ import React from "react";
 
 import { cx } from "@/lib/utils";
 
+/**
+ * Root container for tables with responsive overflow handling.
+ * 
+ * Provides a responsive wrapper that enables horizontal scrolling on smaller
+ * screens while maintaining proper table layout. Essential for tables with
+ * many columns or wide content that may overflow container bounds.
+ *
+ * @example
+ * ```tsx
+ * <TableRoot>
+ *   <Table>
+ *     <TableHead>
+ *       <TableRow>
+ *         <TableHeaderCell>Name</TableHeaderCell>
+ *         <TableHeaderCell>Email</TableHeaderCell>
+ *       </TableRow>
+ *     </TableHead>
+ *     <TableBody>
+ *       <TableRow>
+ *         <TableCell>John Doe</TableCell>
+ *         <TableCell>john@example.com</TableCell>
+ *       </TableRow>
+ *     </TableBody>
+ *   </Table>
+ * </TableRoot>
+ * ```
+ */
 const TableRoot = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -25,6 +52,33 @@ const TableRoot = React.forwardRef<
 
 TableRoot.displayName = "TableRoot";
 
+/**
+ * Main table element with Tremor-inspired styling.
+ * 
+ * Provides a clean, professional table design with proper border styling
+ * and dark mode support. Features consistent spacing and typography that
+ * integrates seamlessly with other Tremor components.
+ *
+ * @example
+ * ```tsx
+ * <Table>
+ *   <TableHead>
+ *     <TableRow>
+ *       <TableHeaderCell>Product</TableHeaderCell>
+ *       <TableHeaderCell>Price</TableHeaderCell>
+ *       <TableHeaderCell>Status</TableHeaderCell>
+ *     </TableRow>
+ *   </TableHead>
+ *   <TableBody>
+ *     <TableRow>
+ *       <TableCell>Widget</TableCell>
+ *       <TableCell>$29.99</TableCell>
+ *       <TableCell>Available</TableCell>
+ *     </TableRow>
+ *   </TableBody>
+ * </Table>
+ * ```
+ */
 const Table = React.forwardRef<
   HTMLTableElement,
   React.TableHTMLAttributes<HTMLTableElement>
@@ -45,6 +99,22 @@ const Table = React.forwardRef<
 
 Table.displayName = "Table";
 
+/**
+ * Table header section container.
+ * 
+ * Semantic container for table header rows and cells. Provides proper
+ * accessibility structure and allows for consistent styling of header content.
+ *
+ * @example
+ * ```tsx
+ * <TableHead>
+ *   <TableRow>
+ *     <TableHeaderCell>Column 1</TableHeaderCell>
+ *     <TableHeaderCell>Column 2</TableHeaderCell>
+ *   </TableRow>
+ * </TableHead>
+ * ```
+ */
 const TableHead = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -54,6 +124,20 @@ const TableHead = React.forwardRef<
 
 TableHead.displayName = "TableHead";
 
+/**
+ * Individual header cell for table columns.
+ * 
+ * Styled table header cell with semibold text and proper spacing.
+ * Features bottom border separation and supports sorting indicators
+ * and other interactive header content.
+ *
+ * @example
+ * ```tsx
+ * <TableHeaderCell>Product Name</TableHeaderCell>
+ * <TableHeaderCell>Price</TableHeaderCell>
+ * <TableHeaderCell className="text-right">Actions</TableHeaderCell>
+ * ```
+ */
 const TableHeaderCell = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
@@ -75,6 +159,27 @@ const TableHeaderCell = React.forwardRef<
 
 TableHeaderCell.displayName = "TableHeaderCell";
 
+/**
+ * Table body section container with row dividers.
+ * 
+ * Semantic container for table data rows with visual separation between rows.
+ * Provides consistent spacing and divider styling that maintains readability
+ * across different data densities.
+ *
+ * @example
+ * ```tsx
+ * <TableBody>
+ *   <TableRow>
+ *     <TableCell>Data 1</TableCell>
+ *     <TableCell>Data 2</TableCell>
+ *   </TableRow>
+ *   <TableRow>
+ *     <TableCell>Data 3</TableCell>
+ *     <TableCell>Data 4</TableCell>
+ *   </TableRow>
+ * </TableBody>
+ * ```
+ */
 const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -94,6 +199,29 @@ const TableBody = React.forwardRef<
 
 TableBody.displayName = "TableBody";
 
+/**
+ * Table row container with consistent cell padding.
+ * 
+ * Provides proper horizontal padding for first and last cells to maintain
+ * consistent table spacing. Supports hover states and selection styling
+ * for interactive table rows.
+ *
+ * @example
+ * ```tsx
+ * <TableRow>
+ *   <TableCell>John Doe</TableCell>
+ *   <TableCell>john@example.com</TableCell>
+ *   <TableCell>Admin</TableCell>
+ * </TableRow>
+ * 
+ * // With hover styling
+ * <TableRow className="hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
+ *   <TableCell>Jane Smith</TableCell>
+ *   <TableCell>jane@example.com</TableCell>
+ *   <TableCell>User</TableCell>
+ * </TableRow>
+ * ```
+ */
 const TableRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
@@ -111,6 +239,23 @@ const TableRow = React.forwardRef<
 
 TableRow.displayName = "TableRow";
 
+/**
+ * Individual data cell within table rows.
+ * 
+ * Standard table cell with consistent padding and muted text coloring.
+ * Supports various content types including text, numbers, badges, buttons,
+ * and other interactive elements.
+ *
+ * @example
+ * ```tsx
+ * <TableCell>Regular text content</TableCell>
+ * <TableCell className="font-mono">CODE123</TableCell>
+ * <TableCell className="text-right">$99.99</TableCell>
+ * <TableCell>
+ *   <Badge variant="success">Active</Badge>
+ * </TableCell>
+ * ```
+ */
 const TableCell = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
@@ -130,6 +275,24 @@ const TableCell = React.forwardRef<
 
 TableCell.displayName = "TableCell";
 
+/**
+ * Table footer section for summary rows or totals.
+ * 
+ * Semantic container for table footer content with top border separation.
+ * Typically used for summary data, totals, or additional table metadata.
+ * Features medium font weight to distinguish from regular table data.
+ *
+ * @example
+ * ```tsx
+ * <TableFoot>
+ *   <TableRow>
+ *     <TableCell className="font-semibold">Total</TableCell>
+ *     <TableCell className="font-semibold">$1,234.56</TableCell>
+ *     <TableCell></TableCell>
+ *   </TableRow>
+ * </TableFoot>
+ * ```
+ */
 const TableFoot = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -153,6 +316,28 @@ const TableFoot = React.forwardRef<
 
 TableFoot.displayName = "TableFoot";
 
+/**
+ * Table caption for accessibility and context.
+ * 
+ * Provides semantic description of table content for screen readers and
+ * visual context for users. Positioned below the table with muted styling
+ * to provide helpful information without overwhelming the main content.
+ *
+ * @example
+ * ```tsx
+ * <Table>
+ *   <TableCaption>
+ *     User management data as of {new Date().toLocaleDateString()}
+ *   </TableCaption>
+ *   <TableHead>
+ *     <TableRow>
+ *       <TableHeaderCell>Name</TableHeaderCell>
+ *       <TableHeaderCell>Role</TableHeaderCell>
+ *     </TableRow>
+ *   </TableHead>
+ * </Table>
+ * ```
+ */
 const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>

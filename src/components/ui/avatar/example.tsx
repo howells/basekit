@@ -7,15 +7,19 @@ export const AvatarExample = ({
   square = false,
   initials = "JD",
   alt = "Avatar",
+  dynamicBackground = true,
   ...props
 }: {
   src?: string;
   square?: string | boolean;
   initials?: string;
   alt?: string;
+  dynamicBackground?: string | boolean;
   [key: string]: unknown;
 }) => {
   const isSquare = square === true || square === "true";
+  const isDynamicBackground =
+    dynamicBackground === true || dynamicBackground === "true";
 
   return (
     <Avatar
@@ -23,6 +27,7 @@ export const AvatarExample = ({
       square={isSquare}
       initials={initials}
       alt={alt}
+      dynamicBackground={isDynamicBackground}
       {...props}
     />
   );

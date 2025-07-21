@@ -101,6 +101,28 @@ type TabsListVariant = "solid" | "line";
 
 const TabsListVariantContext = React.createContext<TabsListVariant>("solid");
 
+/**
+ * Root tabs component built on Base UI's Tabs primitive.
+ * 
+ * Based on Base UI's Tabs (https://base-ui.com/react/components/tabs),
+ * providing accessible tabbed interfaces for toggling between related panels
+ * on the same page. Features keyboard navigation and proper focus management.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tabs defaultValue="tab1">
+ *   <TabsList>
+ *     <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+ *     <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+ *   </TabsList>
+ *   <TabsContent value="tab1">Content 1</TabsContent>
+ *   <TabsContent value="tab2">Content 2</TabsContent>
+ * </Tabs>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/tabs - Base UI documentation
+ */
 const Tabs = React.forwardRef<
   React.ElementRef<typeof BaseTabs.Root>,
   Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Root>, "orientation">
@@ -117,12 +139,39 @@ const Tabs = React.forwardRef<
 
 Tabs.displayName = "Tabs";
 
+/**
+ * Props for the TabsList component.
+ *
+ * @interface TabsListProps
+ * @extends React.ComponentPropsWithoutRef<typeof BaseTabs.List>
+ * @extends VariantProps<typeof tabsVariants>
+ */
 interface TabsListProps
   extends React.ComponentPropsWithoutRef<typeof BaseTabs.List>,
     VariantProps<typeof tabsVariants> {
+  /** Style variant for the tabs list */
   variant?: TabsListVariant;
 }
 
+/**
+ * Container for tab triggers with visual indicator.
+ * 
+ * Based on Base UI's Tabs.List, providing a styled container for tab buttons
+ * with animated indicator that follows the active tab. Supports solid and line
+ * variants with automatic indicator positioning.
+ *
+ * @param variant - Style variant (solid or line)
+ *
+ * @example
+ * ```tsx
+ * <TabsList variant="line">
+ *   <TabsTrigger value="overview">Overview</TabsTrigger>
+ *   <TabsTrigger value="details">Details</TabsTrigger>
+ * </TabsList>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/tabs - Base UI documentation
+ */
 const TabsList = React.forwardRef<
   React.ElementRef<typeof BaseTabs.List>,
   TabsListProps
@@ -152,6 +201,21 @@ const TabsList = React.forwardRef<
 
 TabsList.displayName = "TabsList";
 
+/**
+ * Individual tab trigger button for switching between panels.
+ * 
+ * Based on Base UI's Tabs.Tab, providing clickable tab buttons with proper
+ * keyboard navigation and accessibility. Automatically inherits styling variant
+ * from parent TabsList and supports disabled states.
+ *
+ * @example
+ * ```tsx
+ * <TabsTrigger value="settings">Settings</TabsTrigger>
+ * <TabsTrigger value="profile" disabled>Profile</TabsTrigger>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/tabs - Base UI documentation
+ */
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof BaseTabs.Tab>,
   React.ComponentPropsWithoutRef<typeof BaseTabs.Tab>
@@ -172,6 +236,23 @@ const TabsTrigger = React.forwardRef<
 
 TabsTrigger.displayName = "TabsTrigger";
 
+/**
+ * Content panel that displays when its corresponding tab is active.
+ * 
+ * Based on Base UI's Tabs.Panel, providing accessible content containers
+ * that show/hide based on the active tab selection. Features proper focus
+ * management and screen reader support.
+ *
+ * @example
+ * ```tsx
+ * <TabsContent value="general">
+ *   <h2>General Settings</h2>
+ *   <p>Configure your general preferences here.</p>
+ * </TabsContent>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/tabs - Base UI documentation
+ */
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof BaseTabs.Panel>,
   React.ComponentPropsWithoutRef<typeof BaseTabs.Panel>

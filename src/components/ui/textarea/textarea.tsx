@@ -4,11 +4,52 @@ import React from "react";
 
 import { cx, focusInput, hasErrorInput } from "@/lib/utils";
 
+/**
+ * Props for the Textarea component.
+ *
+ * @interface TextareaProps
+ * @extends React.TextareaHTMLAttributes<HTMLTextAreaElement>
+ */
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /** Whether to display error styling */
   hasError?: boolean;
 }
 
+/**
+ * A multi-line text input component with Tremor-inspired styling.
+ * 
+ * Provides a resizable textarea for longer text input with consistent styling
+ * that matches the Input component. Features error states for form validation,
+ * proper focus management, and dark mode support.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic textarea
+ * <Textarea placeholder="Enter your message" />
+ * 
+ * // With error state
+ * <Textarea hasError placeholder="Required field" />
+ * 
+ * // Controlled with resize constraints
+ * <Textarea 
+ *   value={message} 
+ *   onChange={handleChange}
+ *   rows={5}
+ *   resize="vertical"
+ * />
+ * 
+ * // Form integration
+ * <Textarea
+ *   name="description"
+ *   required
+ *   placeholder="Describe your request"
+ *   minLength={10}
+ *   maxLength={500}
+ * />
+ * ```
+ */
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, hasError, ...props }: TextareaProps, forwardedRef) => {
     return (

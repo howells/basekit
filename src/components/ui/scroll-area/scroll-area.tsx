@@ -33,7 +33,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
       <BaseScrollArea.Viewport
         className={cx("h-full w-full rounded-[inherit]", viewportClassName)}
       >
-        {children}
+        <BaseScrollArea.Content>{children}</BaseScrollArea.Content>
       </BaseScrollArea.Viewport>
       {(orientation === "vertical" || orientation === "both") && (
         <BaseScrollArea.Scrollbar
@@ -64,7 +64,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
         >
           <BaseScrollArea.Thumb
             className={cx(
-              "relative flex-1 rounded-full bg-zinc-300 dark:bg-zinc-600",
+              "relative rounded-full bg-zinc-300 dark:bg-zinc-600",
               "hover:bg-zinc-400 dark:hover:bg-zinc-500",
               thumbClassName
             )}

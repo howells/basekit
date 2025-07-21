@@ -5,17 +5,100 @@ import { NumberField as BaseNumberField } from "@base-ui-components/react/number
 import { Minus, Plus } from "lucide-react";
 import * as React from "react";
 
+/**
+ * Props for the NumberField component.
+ *
+ * @interface NumberFieldProps
+ * @extends React.ComponentPropsWithoutRef<typeof BaseNumberField.Root>
+ */
 interface NumberFieldProps
   extends React.ComponentPropsWithoutRef<typeof BaseNumberField.Root> {
+  /** Optional label text */
   label?: string;
+  /** Placeholder text for the input */
   placeholder?: string;
+  /** Whether to show the interactive scrub area on the label */
   showScrubArea?: boolean;
+  /** Whether to show increment/decrement buttons */
   showSteppers?: boolean;
+  /** Whether the field should take full width */
   fullWidth?: boolean;
+  /** Additional CSS classes for the container */
   className?: string;
+  /** Additional CSS classes for the input element */
   inputClassName?: string;
 }
 
+/**
+ * A numeric input field built on Base UI's NumberField primitive.
+ * 
+ * Based on Base UI's NumberField (https://base-ui.com/react/components/number-field),
+ * providing advanced numeric input with increment/decrement buttons and interactive
+ * scrub area for precise value manipulation. Features locale-aware formatting,
+ * validation, and smooth user interactions.
+ *
+ * @param value - Current numeric value
+ * @param defaultValue - Default value for uncontrolled mode
+ * @param min - Minimum allowed value
+ * @param max - Maximum allowed value
+ * @param step - Step increment for changes
+ * @param label - Optional label text
+ * @param placeholder - Placeholder text
+ * @param showScrubArea - Whether to enable drag-to-change on label
+ * @param showSteppers - Whether to show +/- buttons
+ * @param fullWidth - Whether field should take full width
+ * @param disabled - Whether the field is disabled
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic number field
+ * <NumberField label="Quantity" defaultValue={1} min={0} max={100} />
+ * 
+ * // With custom step and range
+ * <NumberField
+ *   label="Price"
+ *   defaultValue={9.99}
+ *   min={0}
+ *   step={0.01}
+ *   placeholder="0.00"
+ * />
+ * 
+ * // Without steppers (input only)
+ * <NumberField
+ *   label="ID Number"
+ *   showSteppers={false}
+ *   placeholder="Enter ID"
+ * />
+ * 
+ * // Full width with scrub area disabled
+ * <NumberField
+ *   label="Amount"
+ *   fullWidth
+ *   showScrubArea={false}
+ *   defaultValue={50}
+ * />
+ * 
+ * // Controlled with validation
+ * <NumberField
+ *   label="Age"
+ *   value={age}
+ *   onValueChange={setAge}
+ *   min={0}
+ *   max={120}
+ *   step={1}
+ * />
+ * 
+ * // Disabled state
+ * <NumberField
+ *   label="Read Only"
+ *   value={42}
+ *   disabled
+ * />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberField = React.forwardRef<
   React.ElementRef<typeof BaseNumberField.Root>,
   NumberFieldProps
@@ -75,9 +158,30 @@ const NumberField = React.forwardRef<
 );
 NumberField.displayName = "NumberField";
 
+/**
+ * Label component for NumberField with optional interactive scrub area.
+ * 
+ * Based on Base UI's NumberField.ScrubArea, allowing users to click and drag
+ * on the label to adjust the numeric value. Features visual cursor feedback
+ * and smooth value changes using the Pointer Lock API.
+ *
+ * @param showScrubArea - Whether to enable drag-to-change functionality
+ *
+ * @example
+ * ```tsx
+ * // Interactive label (default)
+ * <NumberFieldLabel htmlFor="field-id">Draggable Value</NumberFieldLabel>
+ * 
+ * // Static label
+ * <NumberFieldLabel showScrubArea={false}>Static Label</NumberFieldLabel>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberFieldLabel = React.forwardRef<
   HTMLLabelElement,
   React.LabelHTMLAttributes<HTMLLabelElement> & {
+    /** Whether to show the interactive scrub area */
     showScrubArea?: boolean;
   }
 >(({ className, children, showScrubArea = true, ...props }, ref) => (
@@ -118,6 +222,15 @@ const NumberFieldLabel = React.forwardRef<
 ));
 NumberFieldLabel.displayName = "NumberFieldLabel";
 
+/**
+ * Custom cursor that appears during scrub area interactions.
+ * 
+ * Based on Base UI's NumberField.ScrubAreaCursor, providing visual feedback
+ * when users are actively dragging to change values. Shows a resize cursor
+ * with arrow indicators.
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberFieldScrubCursor = React.forwardRef<
   React.ElementRef<typeof BaseNumberField.ScrubAreaCursor>,
   React.ComponentPropsWithoutRef<typeof BaseNumberField.ScrubAreaCursor>
@@ -132,6 +245,15 @@ const NumberFieldScrubCursor = React.forwardRef<
 ));
 NumberFieldScrubCursor.displayName = "NumberFieldScrubCursor";
 
+/**
+ * Container group for NumberField input and stepper buttons.
+ * 
+ * Based on Base UI's NumberField.Group, providing layout structure
+ * for the decrement button, input field, and increment button as
+ * a cohesive unit with connected borders.
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberFieldGroup = React.forwardRef<
   React.ElementRef<typeof BaseNumberField.Group>,
   React.ComponentPropsWithoutRef<typeof BaseNumberField.Group>
@@ -144,6 +266,15 @@ const NumberFieldGroup = React.forwardRef<
 ));
 NumberFieldGroup.displayName = "NumberFieldGroup";
 
+/**
+ * The numeric input element with tabular number formatting.
+ * 
+ * Based on Base UI's NumberField.Input, providing a styled numeric input
+ * with proper focus states, validation styling, and group integration.
+ * Features center-aligned text and monospace numbers for consistency.
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberFieldInput = React.forwardRef<
   React.ElementRef<typeof BaseNumberField.Input>,
   React.ComponentPropsWithoutRef<typeof BaseNumberField.Input>
@@ -174,6 +305,17 @@ const NumberFieldInput = React.forwardRef<
 ));
 NumberFieldInput.displayName = "NumberFieldInput";
 
+/**
+ * Increment button to increase the numeric value.
+ * 
+ * Based on Base UI's NumberField.Increment, providing an accessible button
+ * to increase the field value by the specified step amount. Features proper
+ * hover states, keyboard navigation, and disabled state handling.
+ *
+ * @param children - Custom content (defaults to Plus icon)
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberFieldIncrement = React.forwardRef<
   React.ElementRef<typeof BaseNumberField.Increment>,
   React.ComponentPropsWithoutRef<typeof BaseNumberField.Increment>
@@ -202,6 +344,17 @@ const NumberFieldIncrement = React.forwardRef<
 ));
 NumberFieldIncrement.displayName = "NumberFieldIncrement";
 
+/**
+ * Decrement button to decrease the numeric value.
+ * 
+ * Based on Base UI's NumberField.Decrement, providing an accessible button
+ * to decrease the field value by the specified step amount. Features proper
+ * hover states, keyboard navigation, and disabled state handling.
+ *
+ * @param children - Custom content (defaults to Minus icon)
+ *
+ * @see https://base-ui.com/react/components/number-field - Base UI documentation
+ */
 const NumberFieldDecrement = React.forwardRef<
   React.ElementRef<typeof BaseNumberField.Decrement>,
   React.ComponentPropsWithoutRef<typeof BaseNumberField.Decrement>
@@ -230,7 +383,14 @@ const NumberFieldDecrement = React.forwardRef<
 ));
 NumberFieldDecrement.displayName = "NumberFieldDecrement";
 
-// Icon components
+/**
+ * Cursor icon with grow arrows for scrub area interactions.
+ * 
+ * Provides visual feedback during drag operations, showing horizontal
+ * resize arrows to indicate the interactive nature of the scrub area.
+ *
+ * @param props - Standard SVG props
+ */
 function CursorGrowIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg

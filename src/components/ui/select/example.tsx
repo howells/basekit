@@ -9,25 +9,25 @@ import {
   SelectValue,
 } from "./select";
 
+interface SelectExampleProps {
+  placeholder?: string;
+  disabled?: boolean;
+  hasError?: boolean;
+  defaultValue?: string;
+}
+
 // Example component for preview system
 export const SelectExample = ({
   placeholder = "Select an option...",
   disabled = false,
   hasError = false,
   defaultValue,
-  ...props
-}: {
-  placeholder?: string;
-  disabled?: boolean;
-  hasError?: boolean;
-  defaultValue?: string;
-  [key: string]: unknown;
-}) => {
+}: SelectExampleProps) => {
   return (
     <div className="w-full max-w-xs">
-      <Select disabled={disabled} defaultValue={defaultValue} {...props}>
+      <Select disabled={disabled} defaultValue={defaultValue}>
         <SelectTrigger hasError={hasError}>
-          <SelectValue />
+          <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="apple">Apple</SelectItem>

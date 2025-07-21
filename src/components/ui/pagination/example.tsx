@@ -1,26 +1,33 @@
 "use client";
 
-import { 
-  Pagination, 
-  PaginationPrevious, 
-  PaginationNext, 
-  PaginationList, 
-  PaginationPage, 
-  PaginationGap 
+import {
+  Pagination,
+  PaginationGap,
+  PaginationList,
+  PaginationNext,
+  PaginationPage,
+  PaginationPrevious,
 } from "./pagination";
 
-export function Example({ 
+export function PaginationExample({
   currentPage = 3,
   totalPages = 10,
-  ...props 
-}: { 
-  currentPage?: number; 
+  maxVisible = 7,
+  showPreviousNext = true,
+  previousLabel = "Previous",
+  nextLabel = "Next",
+  ...props
+}: {
+  currentPage?: number;
   totalPages?: number;
-  [key: string]: any;
+  maxVisible?: number;
+  showPreviousNext?: boolean;
+  previousLabel?: string;
+  nextLabel?: string;
+  [key: string]: unknown;
 }) {
   const renderPageNumbers = () => {
     const pages = [];
-    const maxVisible = 7; // Maximum visible page numbers
 
     if (totalPages <= maxVisible) {
       // Show all pages if total is less than max visible
@@ -38,11 +45,7 @@ export function Example({
     } else {
       // Show condensed pagination with gaps
       pages.push(
-        <PaginationPage
-          key={1}
-          href="#page-1"
-          current={1 === currentPage}
-        >
+        <PaginationPage key={1} href="#page-1" current={1 === currentPage}>
           1
         </PaginationPage>
       );
@@ -87,17 +90,25 @@ export function Example({
 
   return (
     <Pagination {...props}>
-      <PaginationPrevious 
-        href={currentPage > 1 ? `#page-${currentPage - 1}` : undefined}
-        disabled={currentPage <= 1}
-      />
-      <PaginationList>
-        {renderPageNumbers()}
-      </PaginationList>
-      <PaginationNext 
-        href={currentPage < totalPages ? `#page-${currentPage + 1}` : undefined}
-        disabled={currentPage >= totalPages}
-      />
+      {showPreviousNext && (
+        <PaginationPrevious
+          href={currentPage > 1 ? `#page-${currentPage - 1}` : undefined}
+          disabled={currentPage <= 1}
+        >
+          {previousLabel}
+        </PaginationPrevious>
+      )}
+      <PaginationList>{renderPageNumbers()}</PaginationList>
+      {showPreviousNext && (
+        <PaginationNext
+          href={
+            currentPage < totalPages ? `#page-${currentPage + 1}` : undefined
+          }
+          disabled={currentPage >= totalPages}
+        >
+          {nextLabel}
+        </PaginationNext>
+      )}
     </Pagination>
   );
 }

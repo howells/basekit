@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "radio-group",
   name: "Radio Group",
-  description: "Radio group component built on Base UI for grouping related radio buttons with support for controlled selection.",
+  description:
+    "Radio group component built on Base UI for grouping related radio buttons with support for controlled selection.",
   category: "inputs" as const,
   badge: "Input",
   importStatement: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -30,6 +31,36 @@ import { RadioOption } from "@/components/ui/radio";`,
       defaultValue: false,
       description: "Whether the entire radio group is disabled.",
     },
+    {
+      name: "value",
+      type: "text",
+      defaultValue: "",
+      description: "The controlled value of the selected radio button.",
+    },
+    {
+      name: "defaultValue",
+      type: "text",
+      defaultValue: "option2",
+      description: "The default selected value (uncontrolled).",
+    },
+    {
+      name: "name",
+      type: "text",
+      defaultValue: "",
+      description: "The name attribute for form submission.",
+    },
+    {
+      name: "required",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether the radio group is required in a form.",
+    },
+    {
+      name: "readOnly",
+      type: "boolean",
+      defaultValue: false,
+      description: "Whether the radio group is read-only.",
+    },
   ],
   examples: [
     {
@@ -50,8 +81,8 @@ import { RadioOption } from "@/components/ui/radio";`,
       description: "Radio group with horizontal layout.",
       code: `const [value, setValue] = useState("small");
 
-<RadioGroup 
-  value={value} 
+<RadioGroup
+  value={value}
   onValueChange={setValue}
   orientation="horizontal"
 >
@@ -67,19 +98,19 @@ import { RadioOption } from "@/components/ui/radio";`,
       code: `const [plan, setPlan] = useState("basic");
 
 <RadioGroup value={plan} onValueChange={setPlan}>
-  <RadioOption 
-    value="basic" 
-    label="Basic Plan" 
+  <RadioOption
+    value="basic"
+    label="Basic Plan"
     description="Perfect for individuals and small projects"
   />
-  <RadioOption 
-    value="pro" 
-    label="Pro Plan" 
+  <RadioOption
+    value="pro"
+    label="Pro Plan"
     description="Best for growing teams and businesses"
   />
-  <RadioOption 
-    value="enterprise" 
-    label="Enterprise Plan" 
+  <RadioOption
+    value="enterprise"
+    label="Enterprise Plan"
     description="Advanced features for large organizations"
   />
 </RadioGroup>`,
@@ -100,7 +131,7 @@ const [value3, setValue3] = useState("option1");
       <RadioOption value="option2" label="Option 2" size="sm" />
     </RadioGroup>
   </div>
-  
+
   <div>
     <h4 className="text-sm font-medium mb-2">Medium</h4>
     <RadioGroup value={value2} onValueChange={setValue2} size="md">
@@ -108,7 +139,7 @@ const [value3, setValue3] = useState("option1");
       <RadioOption value="option2" label="Option 2" size="md" />
     </RadioGroup>
   </div>
-  
+
   <div>
     <h4 className="text-sm font-medium mb-2">Large</h4>
     <RadioGroup value={value3} onValueChange={setValue3} size="lg">
@@ -127,11 +158,11 @@ const [value3, setValue3] = useState("option1");
 <RadioGroup value={value} onValueChange={setValue}>
   <RadioOption value="available1" label="Available Option 1" />
   <RadioOption value="available2" label="Available Option 2" />
-  <RadioOption 
-    value="disabled" 
-    label="Disabled Option" 
+  <RadioOption
+    value="disabled"
+    label="Disabled Option"
     description="This option is not selectable"
-    disabled 
+    disabled
   />
   <RadioOption value="available3" label="Available Option 3" />
 </RadioGroup>`,
@@ -139,29 +170,30 @@ const [value3, setValue3] = useState("option1");
     {
       id: "controlled",
       title: "Controlled",
-      description: "Fully controlled radio group with external state management.",
+      description:
+        "Fully controlled radio group with external state management.",
       code: `const [selectedValue, setSelectedValue] = useState("option2");
 
 <div className="space-y-4">
   <div className="text-sm">
     <strong>Selected:</strong> {selectedValue}
   </div>
-  
+
   <RadioGroup value={selectedValue} onValueChange={setSelectedValue}>
     <RadioOption value="option1" label="Option 1" />
     <RadioOption value="option2" label="Option 2" />
     <RadioOption value="option3" label="Option 3" />
   </RadioGroup>
-  
+
   <div className="flex gap-2">
-    <Button 
+    <Button
       onClick={() => setSelectedValue("option1")}
       size="sm"
       variant="outline"
     >
       Select Option 1
     </Button>
-    <Button 
+    <Button
       onClick={() => setSelectedValue("option3")}
       size="sm"
       variant="outline"
@@ -185,7 +217,7 @@ const [value3, setValue3] = useState("option1");
       <span className="text-xs text-zinc-500">With custom layout</span>
     </div>
   </div>
-  
+
   <div className="flex items-center space-x-2">
     <RadioGroupItem value="custom2" />
     <div className="flex flex-col">
