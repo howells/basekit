@@ -1,5 +1,3 @@
-// Tremor Calendar [v1.0.0] - Base UI
-
 "use client";
 
 import { addYears, format, isSameMonth } from "date-fns";
@@ -306,7 +304,6 @@ const Calendar = ({
           );
         },
       }}
-      tremor-id="tremor-raw"
       {...(props as SingleProps & RangeProps)}
     />
   );
@@ -314,4 +311,4 @@ const Calendar = ({
 
 Calendar.displayName = "Calendar";
 
-export { Calendar, type Matcher };
+export { Calendar, type Matcher, type CalendarProps };

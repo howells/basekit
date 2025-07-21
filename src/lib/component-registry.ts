@@ -7,6 +7,7 @@ import { componentConfig as barChartConfig } from "@/components/ui/bar-chart/con
 import { componentConfig as barListConfig } from "@/components/ui/bar-list/config";
 import { componentConfig as breadcrumbsConfig } from "@/components/ui/breadcrumbs/config";
 import { componentConfig as buttonConfig } from "@/components/ui/button/config";
+import { componentConfig as calendarConfig } from "@/components/ui/calendar/config";
 // TODO: Update these components to use new ComponentConfig structure
 import {
   ComponentConfig,
@@ -24,6 +25,7 @@ export const componentRegistry: ComponentConfigRegistry = {
   "bar-list": barListConfig,
   breadcrumbs: breadcrumbsConfig,
   button: buttonConfig,
+  calendar: calendarConfig,
   // TODO: Re-add these after converting to new config structure
 };
 

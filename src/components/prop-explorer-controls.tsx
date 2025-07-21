@@ -9,6 +9,7 @@ import { Button } from "./ui/button/button";
 import { Field, FieldControl, FieldDescription, FieldLabel } from "./ui/field";
 import { IconSelect } from "./ui/icon-select";
 import { Input } from "./ui/input";
+import { NumberField } from "./ui/number-field";
 import {
   Select,
   SelectContent,
@@ -141,6 +142,28 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
                       <IconSelect
                         value={currentValue as string}
                         onValueChange={(value) => updateProp(prop.name, value)}
+                      />
+                    )}
+                  />
+                </Field>
+              </div>
+            );
+          }
+
+          if (prop.type === "number") {
+            return (
+              <div key={prop.name} className="space-y-2">
+                <Field>
+                  <FieldLabel>{prop.name}</FieldLabel>
+                  {prop.description && (
+                    <FieldDescription>{prop.description}</FieldDescription>
+                  )}
+                  <FieldControl
+                    render={() => (
+                      <NumberField
+                        value={currentValue as number}
+                        onValueChange={(value) => updateProp(prop.name, value)}
+                        placeholder={String(prop.defaultValue || "")}
                       />
                     )}
                   />
