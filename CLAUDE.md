@@ -4,10 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build the Next.js application
-- `npm run start` - Start production server
+- `npm run dev` - Start development server with Turbopack (DO NOT RUN - user handles this)
+- `npm run build` - Build the Next.js application (DO NOT RUN - user handles this) 
+- `npm run start` - Start production server (DO NOT RUN - user handles this)
 - `npm run lint` - Run ESLint to check code quality
+
+**IMPORTANT**: Never run `npm run dev`, `npm run build`, or `npm run start`. The user handles all build and server commands themselves.
 
 ## Project Architecture
 

@@ -22,7 +22,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 import { cx, focusInput, focusRing, hasErrorInput } from "@/lib/utils";
 
-import { Button } from "./button";
+import { Button } from "./button/button";
 import { Calendar as CalendarPrimitive, type Matcher } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
@@ -647,7 +647,7 @@ const SingleDatePicker = ({
                   {translations?.cancel ?? "Cancel"}
                 </Button>
                 <Button
-                  variant="primary"
+                  variant="default"
                   className="h-8 w-full"
                   type="button"
                   onClick={onApply}
@@ -972,7 +972,7 @@ const RangeDatePicker = ({
                     {translations?.cancel ?? "Cancel"}
                   </Button>
                   <Button
-                    variant="primary"
+                    variant="default"
                     className="h-8 w-full sm:w-fit"
                     type="button"
                     onClick={onApply}

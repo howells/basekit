@@ -5,7 +5,7 @@ import { ComponentConfig } from "@/lib/component-config-types";
 import { PropMetadata } from "@/lib/prop-explorer";
 import React from "react";
 import { usePropExplorer } from "./prop-explorer-context";
-import { Button } from "./ui/button";
+import { Button } from "./ui/button/button";
 import { Field, FieldControl, FieldDescription, FieldLabel } from "./ui/field";
 import { IconSelect } from "./ui/icon-select";
 import { Input } from "./ui/input";

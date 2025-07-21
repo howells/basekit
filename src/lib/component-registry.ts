@@ -3,9 +3,10 @@ import { componentConfig as alertDialogConfig } from "@/components/ui/alert-dial
 import { componentConfig as areaChartConfig } from "@/components/ui/area-chart/config";
 import { componentConfig as avatarConfig } from "@/components/ui/avatar/config";
 import { componentConfig as badgeConfig } from "@/components/ui/badge/config";
+import { componentConfig as barChartConfig } from "@/components/ui/bar-chart/config";
+import { componentConfig as buttonConfig } from "@/components/ui/button/config";
 // TODO: Update these components to use new ComponentConfig structure
 // import { componentConfig as breadcrumbsConfig } from "@/components/ui/breadcrumbs";
-// import { componentConfig as buttonConfig } from "@/components/ui/button";
 import {
   ComponentConfig,
   ComponentConfigRegistry,
@@ -18,9 +19,10 @@ export const componentRegistry: ComponentConfigRegistry = {
   "area-chart": areaChartConfig,
   avatar: avatarConfig,
   badge: badgeConfig,
+  "bar-chart": barChartConfig,
+  button: buttonConfig,
   // TODO: Re-add these after converting to new config structure
   // breadcrumbs: breadcrumbsConfig,
-  // button: buttonConfig,
 };
 
 // Helper to register a component config

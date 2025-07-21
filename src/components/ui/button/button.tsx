@@ -98,8 +98,8 @@ const buttonVariants = tv({
       ],
     },
     size: {
-      default: "h-9 px-3 py-2 text-sm has-[>svg]:px-2.5",
-      sm: "h-8 rounded-md gap-1.5 px-2.5 text-xs has-[>svg]:px-2",
+      default: "h-9 px-3 text-sm has-[>svg]:px-2.5",
+      sm: "h-8 px-2.5 text-xs has-[>svg]:px-2",
       icon: "size-9",
     },
   },
@@ -118,6 +118,7 @@ interface ButtonProps
   rightIcon?: React.ComponentType<{ className?: string }>;
   fullWidth?: boolean;
   textAlign?: "left" | "center" | "right";
+  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -135,6 +136,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       fullWidth,
       textAlign,
+      asChild = false,
       ...props
     }: ButtonProps,
     forwardedRef
@@ -156,6 +158,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const effectiveShouldShowChildren = shouldShowChildren;
 
     const renderButtonContent = () => {
+      // If asChild is true, render children directly (they should be a single React element)
+      if (asChild) {
+        return children;
+      }
+      
       // If children is a custom React element, render it directly
       if (hasCustomLayout) {
         return children;
@@ -177,59 +184,55 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
       // Normal width: simple gap layout
       if (!fullWidth) {
+        // Simple case: no icons or loading state
+        if (!hasLeftIcon && !hasRightIcon && !isLoading) {
+          return effectiveShouldShowChildren ? effectiveChildren : null;
+        }
+
         return (
           <span className={layoutClassName}>
             {/* Left icon container with CSS transitions */}
-            <span
-              className={cx(
-                "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                (isLoading || hasLeftIcon)
-                  ? "opacity-100 scale-100 w-auto"
-                  : "opacity-0 scale-95 w-0 overflow-hidden",
-                effectiveShouldShowChildren && (isLoading || hasLeftIcon)
-                  ? "mr-0"
-                  : ""
-              )}
-            >
-              <div
-                className={`relative ${iconSize} flex items-center justify-center`}
+            {(isLoading || hasLeftIcon) && (
+              <span
+                className={cx(
+                  "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]"
+                )}
               >
-                {/* Loader */}
                 <div
-                  className={cx(
-                    "absolute inset-0 flex items-center justify-center transition-opacity duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                    isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
-                  )}
+                  className={`relative ${iconSize} flex items-center justify-center`}
                 >
-                  <Loader
-                    size={size === "sm" ? "xs" : "sm"}
-                    aria-label={loadingText || "Loading"}
-                  />
-                </div>
-                {/* Left Icon */}
-                {hasLeftIcon && (
+                  {/* Loader */}
                   <div
                     className={cx(
                       "absolute inset-0 flex items-center justify-center transition-opacity duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                      !isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
+                      isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
                     )}
                   >
-                    <LeftIcon className={iconClassName} />
+                    <Loader
+                      size={size === "sm" ? "xs" : "sm"}
+                      aria-label={loadingText || "Loading"}
+                    />
                   </div>
-                )}
-              </div>
-            </span>
+                  {/* Left Icon */}
+                  {hasLeftIcon && (
+                    <div
+                      className={cx(
+                        "absolute inset-0 flex items-center justify-center transition-opacity duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
+                        !isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
+                      )}
+                    >
+                      <LeftIcon className={iconClassName} />
+                    </div>
+                  )}
+                </div>
+              </span>
+            )}
             
             {effectiveShouldShowChildren && effectiveChildren}
             
             {/* Right icon with CSS transitions */}
             {hasRightIcon && (
-              <span
-                className={cx(
-                  "flex items-center transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                  "opacity-100 scale-100 w-auto"
-                )}
-              >
+              <span className="flex items-center">
                 <RightIcon className={iconClassName} />
               </span>
             )}
@@ -384,6 +387,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </span>
       );
     };
+
+    // Handle asChild case
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children as React.ReactElement<any>, {
+        ...(children.props as any),
+        className: cx(
+          buttonVariants({ variant, size }),
+          fullWidth && "w-full max-w-[95vw]",
+          // Only apply text alignment classes when not using fullWidth center (which has its own layout)
+          !(fullWidth && textAlign === "center") &&
+            textAlign === "left" &&
+            "text-left",
+          !(fullWidth && textAlign === "center") &&
+            textAlign === "center" &&
+            "text-center",
+          !(fullWidth && textAlign === "center") &&
+            textAlign === "right" &&
+            "text-right",
+          !(fullWidth && textAlign === "center") && !textAlign && "text-center", // default to center
+          className,
+          (children.props as any).className
+        ),
+        ...props,
+      });
+    }
 
     const defaultProps: useRender.ElementProps<"button"> = {
       className: cx(

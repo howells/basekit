@@ -2,7 +2,7 @@ import { cx } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
-import { Button } from "./button";
+import { Button } from "./button/button";
 
 export function Pagination({
   "aria-label": ariaLabel = "Page navigation",
@@ -125,7 +125,7 @@ export function PaginationPage({
     return (
       <li>
         <Button
-          variant="primary"
+          variant="default"
           aria-label={`Page ${children}`}
           aria-current="page"
           className={cx("min-w-10", className)}

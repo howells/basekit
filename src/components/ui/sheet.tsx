@@ -6,7 +6,7 @@ import * as React from "react";
 
 import { cx, focusRing } from "@/lib/utils";
 
-import { Button } from "./button";
+import { Button } from "./button/button";
 
 const Drawer = (props: React.ComponentPropsWithoutRef<typeof Dialog.Root>) => {
   return <Dialog.Root {...props} />;

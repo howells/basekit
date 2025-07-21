@@ -37,11 +37,12 @@ const getComponentImportPath = (
     return `@/components/ui/${kebabCase}/example`;
   }
 
-  // All other components use the directory structure: component/component.tsx
+  // Convert componentId to kebab-case for directory structure
   const kebabCase = componentId
     .replace(/([a-z])([A-Z])/g, "$1-$2")
     .toLowerCase();
 
+  // Try three-file structure first: component/component.tsx
   return `@/components/ui/${kebabCase}/${kebabCase}`;
 };
 
@@ -74,20 +75,141 @@ const createDynamicComponent = (
       );
       const exportedName = getExportedComponentName(componentId);
 
-      return import(importPath).then((mod) => {
-        // If the component has a PropExplorer config with examples, try to use the first example's render function
-        const propConfig =
-          mod[`${exportedName.toLowerCase()}PropConfig`] || mod.propConfig;
+      console.log(
+        `Attempting to import component: ${componentId} from ${importPath}`
+      );
 
-        // Check if there's an example with a render function
-        if (propConfig?.examples?.[0]?.render) {
-          return { default: propConfig.examples[0].render };
-        }
+      return import(importPath)
+        .then((mod) => {
+          console.log(
+            `Successfully imported from three-file structure: ${importPath}`
+          );
 
-        // Try to get the named export first, then fall back to default
-        const component = mod[exportedName] || mod.default;
-        return { default: component };
-      });
+          // If the component has a PropExplorer config with examples, try to use the first example's render function
+          const propConfig =
+            mod[`${exportedName.toLowerCase()}PropConfig`] || mod.propConfig;
+
+          // Check if there's an example with a render function
+          if (propConfig?.examples?.[0]?.render) {
+            return { default: propConfig.examples[0].render };
+          }
+
+          // Try to get the named export first, then fall back to default
+          const component = mod[exportedName] || mod.default;
+          if (!component) {
+            console.error(
+              `No component found with name ${exportedName} in ${importPath}`
+            );
+            throw new Error(`Component ${exportedName} not found in module`);
+          }
+          return { default: component };
+        })
+        .catch((error) => {
+          console.warn(
+            `Failed to load from three-file structure (${importPath}):`,
+            error.message
+          );
+
+          // Try a few different fallback strategies
+          const kebabCase = componentId
+            .replace(/([a-z])([A-Z])/g, "$1-$2")
+            .toLowerCase();
+
+          // Strategy 1: Try flat structure in ui folder
+          const flatPath = `@/components/ui/${kebabCase}`;
+          console.log(`Trying fallback: ${flatPath}`);
+
+          return import(flatPath)
+            .then((mod) => {
+              console.log(
+                `Successfully imported from flat structure: ${flatPath}`
+              );
+              const component = mod[exportedName] || mod.default;
+              if (!component) {
+                throw new Error(
+                  `Component ${exportedName} not found in ${flatPath}`
+                );
+              }
+              return { default: component };
+            })
+            .catch((fallbackError) => {
+              console.warn(
+                `Flat structure fallback also failed (${flatPath}):`,
+                fallbackError.message
+              );
+
+              // Strategy 2: Try different category paths if category is provided
+              if (category && category !== "ui") {
+                const categoryPath = `@/components/${category}/${kebabCase}`;
+                console.log(`Trying category fallback: ${categoryPath}`);
+
+                return import(categoryPath)
+                  .then((mod) => {
+                    console.log(
+                      `Successfully imported from category structure: ${categoryPath}`
+                    );
+                    const component = mod[exportedName] || mod.default;
+                    if (!component) {
+                      throw new Error(
+                        `Component ${exportedName} not found in ${categoryPath}`
+                      );
+                    }
+                    return { default: component };
+                  })
+                  .catch((categoryError) => {
+                    console.error(
+                      `All import strategies failed for ${componentId}:`,
+                      {
+                        threeFile: error.message,
+                        flat: fallbackError.message,
+                        category: categoryError.message,
+                      }
+                    );
+
+                    // Return a fallback error component
+                    return {
+                      default: () => (
+                        <div className="text-red-500 p-4 border border-red-200 rounded">
+                          <p className="font-medium">
+                            Component not found: {componentId}
+                          </p>
+                          <p className="text-sm mt-1">Tried paths:</p>
+                          <ul className="text-xs mt-1 space-y-1">
+                            <li>• {importPath}</li>
+                            <li>• {flatPath}</li>
+                            <li>• {categoryPath}</li>
+                          </ul>
+                        </div>
+                      ),
+                    };
+                  });
+              }
+
+              // If no category, just throw the original error
+              console.error(
+                `All import strategies failed for ${componentId}:`,
+                {
+                  threeFile: error.message,
+                  flat: fallbackError.message,
+                }
+              );
+
+              return {
+                default: () => (
+                  <div className="text-red-500 p-4 border border-red-200 rounded">
+                    <p className="font-medium">
+                      Component not found: {componentId}
+                    </p>
+                    <p className="text-sm mt-1">Tried paths:</p>
+                    <ul className="text-xs mt-1 space-y-1">
+                      <li>• {importPath}</li>
+                      <li>• {flatPath}</li>
+                    </ul>
+                  </div>
+                ),
+              };
+            });
+        });
     },
     {
       loading: () => (
