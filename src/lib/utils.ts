@@ -1,6 +1,6 @@
 // Tremor Raw cx [v0.0.0]
 
-import { clsx, type ClassValue } from "clsx";
+import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cx(...inputs: ClassValue[]) {
@@ -45,10 +45,10 @@ export const appleEasing = {
   easeIn: [0.42, 0, 1, 1] as const,
 
   // Standard ease-out: fast start, decelerating (most common)
-  easeOut: [0, 0, 0.58, 1] as const,
+  easeOut: [0.16, 1, 0.3, 1] as const,
 
   // Standard ease-in-out: slow start and end, fast middle
-  easeInOut: [0.42, 0, 0.58, 1] as const,
+  easeInOut: [0.4, 0, 0.2, 1] as const,
 
   // Apple's signature "ease" (similar to easeInOut but slightly different)
   ease: [0.25, 0.1, 0.25, 1] as const,
@@ -65,3 +65,46 @@ export const appleEasingCSS = {
   ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
   spring: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
 } as const;
+
+// Shared icon utilities
+export const iconUtils = {
+  // Get icon size class based on component size
+  getIconSize: (size: "xs" | "sm" | "base" | "lg" | "xl" = "base") => {
+    switch (size) {
+      case "xs":
+        return "size-2.5";
+      case "sm":
+        return "size-3";
+      case "base":
+        return "size-3.5";
+      case "lg":
+        return "size-4";
+      case "xl":
+        return "size-5";
+      default:
+        return "size-3.5";
+    }
+  },
+
+  // Common icon props interface
+  iconProps: {
+    className: "shrink-0",
+  } as const,
+
+  // Icon positioning utilities
+  positioning: {
+    left: "[&>svg]:order-first",
+    right: "[&>svg]:order-last",
+  } as const,
+};
+
+// Shared icon component props interface
+export interface IconComponentProps {
+  className?: string;
+}
+
+// Shared component props for components that support left/right icons
+export interface ComponentWithIconsProps {
+  leftIcon?: React.ComponentType<IconComponentProps>;
+  rightIcon?: React.ComponentType<IconComponentProps>;
+}

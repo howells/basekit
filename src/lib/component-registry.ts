@@ -1,11 +1,19 @@
-import { accordionConfig } from "@/components/ui/accordion";
-import { buttonConfig } from "@/components/ui/button";
+import { componentConfig as accordionConfig } from "@/components/ui/accordion/config";
+import { componentConfig as alertDialogConfig } from "@/components/ui/alert-dialog";
+import { componentConfig as avatarConfig } from "@/components/ui/avatar";
+import { componentConfig as badgeConfig } from "@/components/ui/badge";
+import { componentConfig as breadcrumbsConfig } from "@/components/ui/breadcrumbs";
+import { componentConfig as buttonConfig } from "@/components/ui/button";
 import { ComponentConfig, ComponentConfigRegistry } from "./component-configs";
 
 // Component registry with all components
 // This will be populated dynamically or with inline configs
 export const componentRegistry: ComponentConfigRegistry = {
   accordion: accordionConfig,
+  "alert-dialog": alertDialogConfig,
+  avatar: avatarConfig,
+  badge: badgeConfig,
+  breadcrumbs: breadcrumbsConfig,
   button: buttonConfig,
 };
 

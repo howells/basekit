@@ -625,7 +625,7 @@ export const buttonPropConfig = createPropConfig(
 );
 
 // Component configuration for documentation
-export const buttonConfig = {
+export const componentConfig = {
   id: "button",
   name: "Button",
   description:

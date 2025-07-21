@@ -2,6 +2,7 @@
 
 import { cx } from "@/lib/utils";
 import { Avatar as BaseAvatar } from "@base-ui-components/react/avatar";
+import Image from "next/image";
 import * as React from "react";
 
 interface AvatarProps {
@@ -56,7 +57,16 @@ const Avatar = React.forwardRef<
           </text>
         </svg>
       )}
-      {src && <img className="size-full object-cover" src={src} alt={alt} />}
+      {src && (
+        <Image
+          className="size-full object-cover"
+          src={src}
+          alt={alt}
+          width={40}
+          height={40}
+          sizes="40px"
+        />
+      )}
     </span>
   )
 );
@@ -113,4 +123,179 @@ export {
   AvatarImage,
   AvatarWithFallback,
   type AvatarProps,
+};
+
+// Example component for preview system
+export const AvatarExample = ({
+  src,
+  square = false,
+  initials = "JD",
+  alt = "Avatar",
+  ...props
+}: {
+  src?: string;
+  square?: string | boolean;
+  initials?: string;
+  alt?: string;
+  [key: string]: unknown;
+}) => {
+  const isSquare = square === true || square === "true";
+
+  return (
+    <Avatar
+      src={src || null}
+      square={isSquare}
+      initials={initials}
+      alt={alt}
+      {...props}
+    />
+  );
+};
+
+// PropExplorer configuration for the avatar
+export const avatarPropConfig = {
+  componentName: "Avatar",
+  displayName: "Avatar",
+  description:
+    "A circular or square avatar component with support for images and initials fallback.",
+  variants: [],
+  props: [
+    {
+      name: "src",
+      type: "select",
+      description: "The image source URL for the avatar.",
+      defaultValue: "",
+      options: [
+        "",
+        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=face",
+      ],
+    },
+    {
+      name: "square",
+      type: "boolean",
+      description: "If true, displays a square avatar instead of circular.",
+      defaultValue: false,
+    },
+    {
+      name: "initials",
+      type: "string",
+      description: "The initials to display when no image is provided.",
+      defaultValue: "JD",
+    },
+    {
+      name: "alt",
+      type: "string",
+      description: "Alt text for the avatar image.",
+      defaultValue: "Avatar",
+    },
+  ],
+  examples: [
+    {
+      id: "image-avatar",
+      title: "Image Avatar",
+      description: "Avatar with a profile image.",
+      props: {
+        src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face",
+        square: false,
+        initials: "JD",
+        alt: "John Doe",
+      },
+      preview: (
+        <AvatarExample
+          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face"
+          square={false}
+          initials="JD"
+          alt="John Doe"
+        />
+      ),
+    },
+    {
+      id: "initials-avatar",
+      title: "Initials Avatar",
+      description: "Avatar displaying initials when no image is available.",
+      props: {
+        src: "",
+        square: false,
+        initials: "AB",
+        alt: "Avatar",
+      },
+      preview: (
+        <AvatarExample src="" square={false} initials="AB" alt="Avatar" />
+      ),
+    },
+    {
+      id: "square-avatar",
+      title: "Square Avatar",
+      description: "Square-shaped avatar with an image.",
+      props: {
+        src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+        square: true,
+        initials: "MJ",
+        alt: "Square Avatar",
+      },
+      preview: (
+        <AvatarExample
+          src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face"
+          square={true}
+          initials="MJ"
+          alt="Square Avatar"
+        />
+      ),
+    },
+  ],
+};
+
+// Component configuration for the registry
+export const componentConfig = {
+  id: "avatar",
+  name: "Avatar",
+  description:
+    "A circular or square avatar component with support for images and initials fallback.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Avatar } from "@/components/ui/avatar";`,
+  componentId: "AvatarExample",
+  propExplorer: avatarPropConfig,
+  examples: [
+    {
+      id: "default",
+      title: "Default",
+      description: "Basic avatar with initials.",
+      code: `<Avatar initials="JD" alt="John Doe" />`,
+      preview: <AvatarExample />,
+    },
+    {
+      id: "with-image",
+      title: "With Image",
+      description: "Avatar with a profile image.",
+      code: `<Avatar
+  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face"
+  alt="Profile picture"
+/>`,
+      preview: (
+        <AvatarExample src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face" />
+      ),
+    },
+    {
+      id: "square",
+      title: "Square",
+      description: "Square-shaped avatar.",
+      code: `<Avatar
+  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face"
+  square
+  alt="Square avatar"
+/>`,
+      preview: (
+        <AvatarExample
+          src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face"
+          square={true}
+        />
+      ),
+    },
+  ],
 };

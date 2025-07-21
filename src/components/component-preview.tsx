@@ -24,6 +24,23 @@ const getComponentImportPath = (
     return componentPath;
   }
 
+  // Special case for components that are exported from other component files
+  if (componentId.toLowerCase().endsWith("example")) {
+    // Remove "Example" from the original componentId first, then convert to kebab-case
+    const baseComponent = componentId.replace(/Example$/, "");
+    // Convert PascalCase to kebab-case: AlertDialog -> alert-dialog
+    const kebabCase = baseComponent
+      .replace(/([a-z])([A-Z])/g, "$1-$2")
+      .toLowerCase();
+
+    // Special case for accordion which has a separate config file
+    if (kebabCase === "accordion") {
+      return `@/components/ui/${kebabCase}/config`;
+    }
+
+    return `@/components/ui/${kebabCase}`;
+  }
+
   // Handle different component categories based on folder structure
   if (!category) {
     return `@/components/ui/${componentId.toLowerCase()}`;
@@ -76,7 +93,20 @@ const createDynamicComponent = (
       );
       const exportedName = getExportedComponentName(componentId);
 
-      return import(importPath).then((mod) => ({ default: mod[exportedName] }));
+      return import(importPath).then((mod) => {
+        // If the component has a PropExplorer config with examples, try to use the first example's render function
+        const propConfig =
+          mod[`${exportedName.toLowerCase()}PropConfig`] || mod.propConfig;
+
+        // Check if there's an example with a render function
+        if (propConfig?.examples?.[0]?.render) {
+          return { default: propConfig.examples[0].render };
+        }
+
+        // Try to get the named export first, then fall back to default
+        const component = mod[exportedName] || mod.default;
+        return { default: component };
+      });
     },
     {
       loading: () => (
@@ -159,7 +189,9 @@ export function ComponentPreview({
   // Render the component
   const renderComponent = () => {
     try {
-      const childrenContent = String(props.children || componentId);
+      // For simple components, use children. For complex ones, they should have their own structure
+      const childrenContent =
+        props.children !== undefined ? String(props.children) : componentId;
       return <Component {...componentProps}>{childrenContent}</Component>;
     } catch (renderError) {
       console.error("Error rendering component:", renderError);

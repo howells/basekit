@@ -292,11 +292,12 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
 
         {/* Show message if no configurable props */}
         {(!config.variants || config.variants.length === 0) &&
+          (!config.props || config.props.length === 0) &&
           !supportsIcons &&
           !supportsChildren && (
-            <FieldDescription>
+            <div className="text-sm text-zinc-600 dark:text-zinc-400">
               No configurable properties available
-            </FieldDescription>
+            </div>
           )}
       </div>
     </div>
