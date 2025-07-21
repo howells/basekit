@@ -63,6 +63,30 @@ export const inputConfig: ComponentConfig = {
       defaultValue: true,
       description: "Whether to show stepper controls for number inputs.",
     },
+    {
+      name: "prefix",
+      type: "string",
+      defaultValue: "",
+      description: "Text or content to display before the input.",
+    },
+    {
+      name: "suffix",
+      type: "string",
+      defaultValue: "",
+      description: "Text or content to display after the input.",
+    },
+    {
+      name: "prefixStyling",
+      type: "boolean",
+      defaultValue: true,
+      description: "Whether to apply default styling to the prefix.",
+    },
+    {
+      name: "suffixStyling",
+      type: "boolean",
+      defaultValue: true,
+      description: "Whether to apply default styling to the suffix.",
+    },
   ],
   examples: [
     {
@@ -132,6 +156,25 @@ export const inputConfig: ComponentConfig = {
       title: "File Input",
       description: "File input for uploads",
       code: `<Input type="file" />`,
+    },
+    {
+      id: "prefix-suffix-text",
+      title: "Text Prefix & Suffix",
+      description: "Input with text prefix and suffix",
+      code: `<div className="space-y-4">
+  <Input placeholder="Enter domain" prefix="https://" />
+  <Input placeholder="Enter username" suffix="@company.com" />
+  <Input placeholder="Website" prefix="https://" suffix=".com" />
+</div>`,
+    },
+    {
+      id: "prefix-suffix-styling",
+      title: "Styling Options",
+      description: "Control styling of prefix and suffix",
+      code: `<div className="space-y-4">
+  <Input placeholder="Styled" prefix="$" suffix="USD" />
+  <Input placeholder="Unstyled" prefix="$" suffix="USD" prefixStyling={false} suffixStyling={false} />
+</div>`,
     },
   ],
 };

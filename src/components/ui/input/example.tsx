@@ -9,6 +9,10 @@ export const InputExample = ({
   hasError = false,
   required = false,
   enableStepper = true,
+  prefix,
+  suffix,
+  prefixStyling = true,
+  suffixStyling = true,
   ...props
 }: {
   size?: "sm" | "base" | "lg";
@@ -26,6 +30,10 @@ export const InputExample = ({
   hasError?: boolean;
   required?: boolean;
   enableStepper?: boolean;
+  prefix?: string;
+  suffix?: string;
+  prefixStyling?: boolean;
+  suffixStyling?: boolean;
 } & React.ComponentProps<typeof Input>) => {
   return (
     <div className="w-full max-w-md">
@@ -37,6 +45,10 @@ export const InputExample = ({
         hasError={hasError}
         required={required}
         enableStepper={enableStepper}
+        prefix={prefix}
+        suffix={suffix}
+        prefixStyling={prefixStyling}
+        suffixStyling={suffixStyling}
         {...props}
       />
     </div>
