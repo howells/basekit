@@ -108,13 +108,74 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
     const isPassword = type === "password";
     const isSearch = type === "search";
 
+    // Auto-add search icon as prefix when type="search" (unless custom prefix provided)
+    const effectivePrefix =
+      isSearch && !prefix ? (
+        <Search
+          className={cx("shrink-0 text-zinc-400 dark:text-zinc-600", {
+            "size-3.5": size === "sm",
+            "size-4": size === "base",
+            "size-5": size === "lg",
+          })}
+        />
+      ) : (
+        prefix
+      );
+
+    // Auto-add password toggle as suffix when type="password" (unless custom suffix provided)
+    const effectiveSuffix =
+      isPassword && !suffix ? (
+        <button
+          aria-label="Change password visibility"
+          className={cx(
+            "h-fit w-fit rounded-xs outline-hidden transition-all",
+            "text-zinc-400 dark:text-zinc-600",
+            "hover:text-zinc-500 dark:hover:text-zinc-500",
+            focusRing
+          )}
+          type="button"
+          onClick={() => {
+            setTypeState(typeState === "password" ? "text" : "password");
+          }}
+        >
+          <span className="sr-only">
+            {typeState === "password" ? "Show password" : "Hide password"}
+          </span>
+          {typeState === "password" ? (
+            <Eye
+              className={cx("shrink-0", {
+                "size-3.5": size === "sm",
+                "size-4": size === "base",
+                "size-5": size === "lg",
+              })}
+              aria-hidden="true"
+            />
+          ) : (
+            <EyeOff
+              className={cx("shrink-0", {
+                "size-3.5": size === "sm",
+                "size-4": size === "base",
+                "size-5": size === "lg",
+              })}
+              aria-hidden="true"
+            />
+          )}
+        </button>
+      ) : (
+        suffix
+      );
+
     // Determine if we have custom prefix/suffix or built-in ones
     const hasCustomPrefix =
-      prefix !== undefined && prefix !== null && prefix !== "";
+      effectivePrefix !== undefined &&
+      effectivePrefix !== null &&
+      effectivePrefix !== "";
     const hasCustomSuffix =
-      suffix !== undefined && suffix !== null && suffix !== "";
-    const hasBuiltInPrefix = isSearch;
-    const hasBuiltInSuffix = isPassword;
+      effectiveSuffix !== undefined &&
+      effectiveSuffix !== null &&
+      effectiveSuffix !== "";
+    const hasBuiltInPrefix = false; // Now handled via effectivePrefix
+    const hasBuiltInSuffix = false; // Now handled via effectiveSuffix
 
     // Calculate padding adjustments - only apply when prefix/suffix exists
     const shouldApplyLeftPadding = hasCustomPrefix || hasBuiltInPrefix;
@@ -181,19 +242,26 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
                 "text-xs": size === "sm",
                 "text-sm": size === "base" || size === "lg",
               },
-              // Styling only controls background and border
+              // Styling controls background and border
               prefixStyling && [
                 "bg-zinc-50 dark:bg-zinc-900/50 border-r border-zinc-200 dark:border-zinc-700",
                 "rounded-l-md",
               ],
-              {
-                "px-2": size === "sm",
-                "px-2.5": size === "base",
-                "px-3": size === "lg",
-              }
+              // Padding - less when unstyled (no container to pad)
+              prefixStyling
+                ? {
+                    "px-2": size === "sm",
+                    "px-2.5": size === "base",
+                    "px-3": size === "lg",
+                  }
+                : {
+                    "pl-2": size === "sm",
+                    "pl-2.5": size === "base",
+                    "pl-3": size === "lg",
+                  }
             )}
           >
-            {prefix}
+            {effectivePrefix}
           </div>
         )}
 
@@ -232,96 +300,26 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
                 "text-xs": size === "sm",
                 "text-sm": size === "base" || size === "lg",
               },
-              // Styling only controls background and border
+              // Styling controls background and border
               suffixStyling && [
                 "bg-zinc-50 dark:bg-zinc-900/50 border-l border-zinc-200 dark:border-zinc-700",
                 "rounded-r-md",
               ],
-              {
-                "px-2": size === "sm",
-                "px-2.5": size === "base",
-                "px-3": size === "lg",
-              }
+              // Padding - less when unstyled (no container to pad)
+              suffixStyling
+                ? {
+                    "px-2": size === "sm",
+                    "px-2.5": size === "base",
+                    "px-3": size === "lg",
+                  }
+                : {
+                    "pl-0.5 pr-2": size === "sm",
+                    "pl-1 pr-2.5": size === "base",
+                    "pl-1 pr-3": size === "lg",
+                  }
             )}
           >
-            {suffix}
-          </div>
-        )}
-
-        {/* Built-in Search Icon */}
-        {isSearch && !hasCustomPrefix && (
-          <div
-            className={cx(
-              // base
-              "pointer-events-none absolute bottom-0 flex h-full items-center justify-center",
-              // text color
-              "text-zinc-400 dark:text-zinc-600",
-              // positioning based on size
-              {
-                "left-1.5": size === "sm",
-                "left-2": size === "base",
-                "left-2.5": size === "lg",
-              }
-            )}
-          >
-            <Search
-              className={cx("shrink-0", {
-                "size-3.5": size === "sm",
-                "size-[1.125rem]": size === "base",
-                "size-5": size === "lg",
-              })}
-              aria-hidden="true"
-            />
-          </div>
-        )}
-        {/* Built-in Password Toggle */}
-        {isPassword && !hasCustomSuffix && (
-          <div
-            className={cx(
-              "absolute bottom-0 right-0 flex h-full items-center justify-center",
-              {
-                "px-2": size === "sm",
-                "px-3": size === "base" || size === "lg",
-              }
-            )}
-          >
-            <button
-              aria-label="Change password visibility"
-              className={cx(
-                // base
-                "h-fit w-fit rounded-xs outline-hidden transition-all",
-                // text
-                "text-zinc-400 dark:text-zinc-600",
-                // hover
-                "hover:text-zinc-500 dark:hover:text-zinc-500",
-                focusRing
-              )}
-              type="button"
-              onClick={() => {
-                setTypeState(typeState === "password" ? "text" : "password");
-              }}
-            >
-              <span className="sr-only">
-                {typeState === "password" ? "Show password" : "Hide password"}
-              </span>
-              {typeState === "password" ? (
-                <Eye
-                  aria-hidden="true"
-                  className={cx("shrink-0", {
-                    "size-4": size === "sm",
-                    "size-5": size === "base" || size === "lg",
-                  })}
-                />
-              ) : (
-                <EyeOff
-                  aria-hidden="true"
-                  className={cx("shrink-0", {
-                    "size-4": size === "sm",
-                    "size-5": size === "base" || size === "lg",
-                  })}
-                />
-              )}
-            </button>
+            {effectiveSuffix}
           </div>
         )}
       </div>

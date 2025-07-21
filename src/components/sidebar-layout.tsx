@@ -103,6 +103,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   size="sm"
+                  type="search"
                 />
               </div>
             </SidebarSection>

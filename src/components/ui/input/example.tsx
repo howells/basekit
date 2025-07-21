@@ -48,10 +48,18 @@ export const InputExample = ({
   };
   const iconClassName = cx("shrink-0", iconSize);
 
+  // Gap size based on input size
+  const gapSize = {
+    "gap-0.5": size === "sm", // 2px gap for small
+    "gap-1": size === "base", // 4px gap for base
+    "gap-1.5": size === "lg", // 6px gap for large
+  };
+  const gapClassName = cx(gapSize);
+
   // Determine what to render for prefix - can be text, icon, or both
   const resolvedPrefix =
     prefixText && prefixIcon ? (
-      <div className="flex items-center gap-1">
+      <div className={cx("flex items-center", gapClassName)}>
         {React.createElement(prefixIcon, { className: iconClassName })}
         <span>{prefixText}</span>
       </div>
@@ -64,7 +72,7 @@ export const InputExample = ({
   // Determine what to render for suffix - can be text, icon, or both
   const resolvedSuffix =
     suffixText && suffixIcon ? (
-      <div className="flex items-center gap-1">
+      <div className={cx("flex items-center", gapClassName)}>
         <span>{suffixText}</span>
         {React.createElement(suffixIcon, { className: iconClassName })}
       </div>
