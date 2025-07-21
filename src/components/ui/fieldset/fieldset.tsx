@@ -3,6 +3,7 @@
 import { cx } from "@/lib/utils";
 import { Fieldset as BaseFieldset } from "@base-ui-components/react/fieldset";
 import * as React from "react";
+import { Subheading } from "../subheading/subheading";
 
 const Fieldset = React.forwardRef<
   React.ElementRef<typeof BaseFieldset.Root>,
@@ -41,6 +42,7 @@ const FieldsetLegend = React.forwardRef<
       "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
       className
     )}
+    render={(legendProps) => <Subheading {...legendProps} />}
     {...props}
   />
 ));

@@ -22,26 +22,128 @@ import {
 import { cx, focusRing } from "@/lib/utils";
 import { Button } from "../button/button";
 
+/**
+ * Utility type to omit specific keys from a type.
+ * 
+ * Helper for creating clean interfaces by removing unwanted props
+ * from react-day-picker types.
+ */
 type OmitKeys<T, K extends keyof T> = {
   [P in keyof T as P extends K ? never : P]: T[P];
 };
 
+/**
+ * Props to omit from react-day-picker interfaces.
+ * 
+ * These props are either handled internally or not supported
+ * in this calendar implementation.
+ */
 type KeysToOmit = "showWeekNumber" | "captionLayout" | "mode";
 
+/**
+ * Props for single date selection mode.
+ * 
+ * Based on react-day-picker's single mode with custom modifications.
+ */
 type SingleProps = OmitKeys<DayPickerSingleProps, KeysToOmit>;
+
+/**
+ * Props for date range selection mode.
+ * 
+ * Based on react-day-picker's range mode with custom modifications.
+ */
 type RangeProps = OmitKeys<DayPickerRangeProps, KeysToOmit>;
 
+/**
+ * Props for the Calendar component.
+ * 
+ * Supports both single date and date range selection modes
+ * with appropriate prop types for each mode.
+ */
 type CalendarProps =
   | ({
+      /** Single date selection mode */
       mode: "single";
     } & SingleProps)
   | ({
+      /** Default mode (single date selection) */
       mode?: undefined;
     } & SingleProps)
   | ({
+      /** Date range selection mode */
       mode: "range";
     } & RangeProps);
 
+/**
+ * A flexible calendar component built on React Day Picker.
+ * 
+ * Based on React Day Picker (https://daypicker.dev/), providing accessible
+ * date selection with single date and date range modes. Features custom styling,
+ * localization support, navigation controls, and extensive customization options.
+ *
+ * @param mode - Selection mode ("single" or "range")
+ * @param weekStartsOn - First day of week (0=Sunday, 1=Monday)
+ * @param numberOfMonths - Number of months to display
+ * @param enableYearNavigation - Show year navigation buttons
+ * @param disableNavigation - Disable all navigation
+ * @param locale - Date formatting locale
+ * @param selected - Selected date(s)
+ * @param onSelect - Selection change callback
+ * @param disabled - Disabled date matcher(s)
+ * @param fromDate - Earliest selectable date
+ * @param toDate - Latest selectable date
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Single date selection
+ * <Calendar
+ *   mode="single"
+ *   selected={selectedDate}
+ *   onSelect={setSelectedDate}
+ * />
+ *
+ * // Date range selection
+ * <Calendar
+ *   mode="range"
+ *   selected={selectedRange}
+ *   onSelect={setSelectedRange}
+ * />
+ *
+ * // Multiple months with year navigation
+ * <Calendar
+ *   mode="single"
+ *   numberOfMonths={2}
+ *   enableYearNavigation
+ *   selected={date}
+ *   onSelect={setDate}
+ * />
+ *
+ * // With date constraints
+ * <Calendar
+ *   mode="single"
+ *   selected={selectedDate}
+ *   onSelect={setSelectedDate}
+ *   fromDate={new Date()}
+ *   toDate={addMonths(new Date(), 6)}
+ *   disabled={[
+ *     { dayOfWeek: [0, 6] }, // Disable weekends
+ *     new Date(2024, 0, 1)   // Disable specific date
+ *   ]}
+ * />
+ *
+ * // Localized calendar
+ * <Calendar
+ *   mode="single"
+ *   selected={selectedDate}
+ *   onSelect={setSelectedDate}
+ *   locale={es} // Spanish locale
+ *   weekStartsOn={1} // Start week on Monday
+ * />
+ * ```
+ *
+ * @see https://daypicker.dev/ - React Day Picker documentation
+ */
 const Calendar = ({
   mode = "single",
   weekStartsOn = 1,

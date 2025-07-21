@@ -43,6 +43,7 @@ import { componentConfig as stackConfig } from "@/components/ui/stack/config";
 import { componentConfig as stackedListConfig } from "@/components/ui/stacked-list/config";
 import { componentConfig as statusDotConfig } from "@/components/ui/status-dot/config";
 import { componentConfig as switchConfig } from "@/components/ui/switch/config";
+import { componentConfig as tabsConfig } from "@/components/ui/tabs/config";
 import { componentConfig as tagConfig } from "@/components/ui/tag/config";
 
 // TODO: Update these components to use new ComponentConfig structure
@@ -120,7 +121,6 @@ const tabNavigationConfig = createPlaceholderConfig(
   "Tab Navigation"
 );
 const tableConfig = createPlaceholderConfig("table", "Table");
-const tabsConfig = createPlaceholderConfig("tabs", "Tabs");
 const textConfig = createPlaceholderConfig("text", "Text");
 const toastConfig = createPlaceholderConfig("toast", "Toast");
 const toggleConfig = createPlaceholderConfig("toggle", "Toggle");

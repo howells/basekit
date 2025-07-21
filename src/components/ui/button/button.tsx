@@ -9,6 +9,8 @@ const buttonVariants = tv({
   base: [
     // base
     "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-center text-sm font-medium shadow-xs outline-hidden",
+    // add transparent border to match input height
+    "border border-transparent",
     // background transition with Apple easing - only animate colors and shadows, not position
     "transition-[background-color,border-color,box-shadow,color] duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
     // disabled
@@ -116,10 +118,12 @@ const buttonVariants = tv({
       false: "rounded-md",
     },
     size: {
-      default: "h-9 px-3 text-sm has-[>svg]:px-2.5",
-      sm: "h-8 px-2.5 text-xs has-[>svg]:px-2",
-      icon: "size-9",
-      "icon-sm": "size-8",
+      default: "py-2 px-3 text-sm has-[>svg]:px-2.5",
+      sm: "py-1.5 px-2.5 text-xs has-[>svg]:px-2",
+      lg: "py-2.5 px-4 text-base has-[>svg]:px-3",
+      icon: "p-2",
+      "icon-sm": "p-1.5",
+      "icon-lg": "p-2.5",
     },
   },
   defaultVariants: {
@@ -207,17 +211,28 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const hasChildren = children != null && children !== "";
     const hasLeftIcon = LeftIcon != null;
     const hasRightIcon =
-      RightIcon != null && size !== "icon" && size !== "icon-sm";
+      RightIcon != null &&
+      size !== "icon" &&
+      size !== "icon-sm" &&
+      size !== "icon-lg";
     const shouldShowChildren =
-      hasChildren && size !== "icon" && size !== "icon-sm";
-    const isIconButton = size === "icon" || size === "icon-sm";
+      hasChildren &&
+      size !== "icon" &&
+      size !== "icon-sm" &&
+      size !== "icon-lg";
+    const isIconButton =
+      size === "icon" || size === "icon-sm" || size === "icon-lg";
 
     // Check if children is a complex element (custom layout)
     const hasCustomLayout = React.isValidElement(children);
 
     // Icon size based on button size
     const iconSize =
-      size === "sm" || size === "icon-sm" ? "size-3.5" : "size-3.5";
+      size === "sm" || size === "icon-sm"
+        ? "size-3.5"
+        : size === "lg" || size === "icon-lg"
+        ? "size-5"
+        : "size-4";
     const iconClassName = `${iconSize} shrink-0`;
 
     // When loading, Loader replaces leftIcon, and we show loadingText or original children
@@ -282,7 +297,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     )}
                   >
                     <Loader
-                      size={size === "sm" ? "xs" : "sm"}
+                      size={
+                        size === "sm" || size === "icon-sm"
+                          ? "xs"
+                          : size === "lg" || size === "icon-lg"
+                          ? "base"
+                          : "sm"
+                      }
                       aria-label={loadingText || "Loading"}
                     />
                   </div>
@@ -334,7 +355,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     )}
                   >
                     <Loader
-                      size={size === "sm" ? "xs" : "sm"}
+                      size={
+                        size === "sm" || size === "icon-sm"
+                          ? "xs"
+                          : size === "lg" || size === "icon-lg"
+                          ? "base"
+                          : "sm"
+                      }
                       aria-label={loadingText || "Loading"}
                     />
                   </div>
