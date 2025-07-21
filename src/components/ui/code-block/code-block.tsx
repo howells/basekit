@@ -2,14 +2,14 @@
 
 "use client";
 
-import { Check, Copy } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   oneDark,
   oneLight,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+import { CopyButton } from "@/components/ui/copy-button/copy-button";
 import { cx } from "@/lib/utils";
 
 interface CodeBlockProps {
@@ -21,8 +21,6 @@ interface CodeBlockProps {
 
 export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
   ({ children, language = "tsx", className, theme = "auto" }, ref) => {
-    const [copied, setCopied] = useState(false);
-    
     // Determine theme
     const isDark = React.useMemo(() => {
       if (theme === "light") return false;
@@ -44,26 +42,17 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
 
     React.useEffect(() => {
       if (typeof window === "undefined") return;
-      
+
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleChange = (e: MediaQueryListEvent) => setSystemIsDark(e.matches);
-      
+      const handleChange = (e: MediaQueryListEvent) =>
+        setSystemIsDark(e.matches);
+
       mediaQuery.addEventListener("change", handleChange);
       return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
 
     // Use system theme only when theme is "auto"
     const effectiveIsDark = theme === "auto" ? systemIsDark : isDark;
-
-    const copyToClipboard = async () => {
-      try {
-        await navigator.clipboard.writeText(children);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch (err) {
-        console.error("Failed to copy text: ", err);
-      }
-    };
 
     return (
       <div
@@ -77,22 +66,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
           <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
             {language}
           </span>
-          <button
-            onClick={copyToClipboard}
-            className="flex items-center gap-1.5 rounded px-2 py-1 text-xs font-medium text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-          >
-            {copied ? (
-              <>
-                <Check className="size-3" />
-                Copied
-              </>
-            ) : (
-              <>
-                <Copy className="size-3" />
-                Copy
-              </>
-            )}
-          </button>
+          <CopyButton text={children} />
         </div>
         <SyntaxHighlighter
           language={language}
@@ -107,7 +81,8 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
           codeTagProps={{
             style: {
               fontSize: "0.875rem",
-              fontFamily: "ui-monospace, SFMono-Regular, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace",
+              fontFamily:
+                "ui-monospace, SFMono-Regular, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace",
             },
           }}
         >
