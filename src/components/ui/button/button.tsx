@@ -100,6 +100,16 @@ const buttonVariants = tv({
         "disabled:text-zinc-400",
         "dark:disabled:text-zinc-600",
       ],
+      minimal: [
+        // base - completely transparent, no shadows
+        "shadow-none bg-transparent",
+        // text color
+        "text-zinc-950 dark:text-white",
+        // hover - no background change, just subtle opacity
+        "hover:text-zinc-700 dark:hover:text-zinc-300",
+        // disabled
+        "disabled:text-zinc-400 dark:disabled:text-zinc-600",
+      ],
     },
     rounded: {
       true: "rounded-full",
@@ -119,17 +129,61 @@ const buttonVariants = tv({
   },
 });
 
+/**
+ * Props for the Button component.
+ *
+ * @interface ButtonProps
+ * @extends useRender.ComponentProps<"button">
+ * @extends VariantProps<typeof buttonVariants>
+ */
 interface ButtonProps
   extends useRender.ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {
+  /** Whether the button is in a loading state */
   isLoading?: boolean;
+  /** Text to display when loading (defaults to children) */
   loadingText?: string;
+  /** Icon component to display on the left side */
   leftIcon?: React.ComponentType<{ className?: string }>;
+  /** Icon component to display on the right side */
   rightIcon?: React.ComponentType<{ className?: string }>;
+  /** Whether the button should take full width */
   fullWidth?: boolean;
+  /** Text alignment within the button */
   textAlign?: "left" | "center" | "right";
 }
 
+/**
+ * A versatile button component built with Base UI's useRender pattern.
+ *
+ * Based on Base UI's useRender hook for flexible rendering, providing multiple variants,
+ * sizes, and states. Supports icons, loading states, and full-width layouts with
+ * sophisticated animation and focus management.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <Button>Click me</Button>
+ *
+ * // With variants and sizes
+ * <Button variant="destructive">Delete</Button>
+ * <Button variant="outline" size="sm">Small</Button>
+ *
+ * // With icons and loading
+ * <Button leftIcon={PlusIcon}>Add Item</Button>
+ * <Button isLoading loadingText="Saving...">Save</Button>
+ *
+ * // Icon-only buttons
+ * <Button size="icon" leftIcon={SearchIcon} />
+ *
+ * // Full-width with alignment
+ * <Button fullWidth textAlign="left">Left Aligned</Button>
+ *
+ * // As different elements
+ * <Button render={<Link href="/page" />}>Navigation</Button>
+ * ```
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {

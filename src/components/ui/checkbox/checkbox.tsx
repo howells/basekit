@@ -5,11 +5,46 @@ import React from "react";
 
 import { cx, focusRing } from "@/lib/utils";
 
+/**
+ * Props for the Checkbox component.
+ *
+ * @interface CheckboxProps
+ * @extends React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root>
+ */
 interface CheckboxProps
   extends React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root> {
+  /** Checked state, including indeterminate for partial selection */
   checked?: boolean | "indeterminate";
 }
 
+/**
+ * A checkbox input component built on Base UI's Checkbox primitive.
+ * 
+ * Based on Base UI's Checkbox (https://base-ui.com/react/components/checkbox),
+ * providing accessible checkbox functionality with support for checked, unchecked,
+ * and indeterminate states. Features Tremor-inspired styling and smooth transitions.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <Checkbox />
+ * 
+ * // Controlled checkbox
+ * <Checkbox checked={isChecked} onCheckedChange={setIsChecked} />
+ * 
+ * // Indeterminate state (useful for "select all" scenarios)
+ * <Checkbox checked="indeterminate" />
+ * 
+ * // With form integration
+ * <Checkbox name="newsletter" defaultChecked />
+ * 
+ * // Disabled state
+ * <Checkbox disabled checked />
+ * ```
+ *
+ * @see https://base-ui.com/react/components/checkbox - Base UI documentation
+ */
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof BaseCheckbox.Root>,
   CheckboxProps

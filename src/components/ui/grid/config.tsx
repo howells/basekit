@@ -13,7 +13,7 @@ export const componentConfig: ComponentConfig = {
     {
       name: "columns",
       type: "number",
-      defaultValue: 6,
+      defaultValue: 3,
       min: 1,
       max: 12,
       description:
@@ -22,6 +22,7 @@ export const componentConfig: ComponentConfig = {
     {
       name: "rows",
       type: "number",
+      defaultValue: 3,
       min: 1,
       max: 10,
       description:
@@ -56,7 +57,7 @@ export const componentConfig: ComponentConfig = {
     {
       name: "cellCount",
       type: "number",
-      defaultValue: 12,
+      defaultValue: 9,
       min: 1,
       max: 50,
       description:

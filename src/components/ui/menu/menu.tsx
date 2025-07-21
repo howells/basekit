@@ -43,6 +43,7 @@ const MenuSubmenuTrigger = React.forwardRef<
     <ChevronRight className="ml-auto size-4 shrink-0" aria-hidden="true" />
   </BaseMenu.SubmenuTrigger>
 ));
+MenuSubmenuTrigger.displayName = "MenuSubmenuTrigger";
 
 const MenuSubmenuContent = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Popup>,
@@ -77,6 +78,7 @@ const MenuSubmenuContent = React.forwardRef<
     </BaseMenu.Positioner>
   </BaseMenu.Portal>
 ));
+MenuSubmenuContent.displayName = "MenuSubmenuContent";
 
 const MenuContent = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Popup>,
@@ -130,49 +132,68 @@ const MenuContent = React.forwardRef<
     </BaseMenu.Portal>
   )
 );
+MenuContent.displayName = "MenuContent";
 
 const MenuItem = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Item>,
   React.ComponentPropsWithoutRef<typeof BaseMenu.Item> & {
     shortcut?: string;
     hint?: string;
+    icon?: React.ComponentType<{ className?: string }>;
   }
->(({ className, shortcut, hint, children, ...props }, forwardedRef) => (
-  <BaseMenu.Item
-    ref={forwardedRef}
-    className={cx(
-      // base
-      "group/MenuItem relative flex cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-1 outline-hidden transition-colors sm:text-sm",
-      // text color
-      "text-zinc-900 dark:text-zinc-50",
-      // disabled
-      "data-disabled:pointer-events-none data-disabled:text-zinc-400 data-disabled:hover:bg-none dark:data-disabled:text-zinc-600",
-      // focus
-      "focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900",
-      // hover
-      "data-highlighted:bg-zinc-100 dark:data-highlighted:bg-zinc-900",
-      className
-    )}
-    tremor-id="tremor-raw"
-    {...props}
-  >
-    {children}
-    {hint && (
-      <span
-        className={cx("ml-auto pl-2 text-sm text-zinc-400 dark:text-zinc-600")}
-      >
-        {hint}
-      </span>
-    )}
-    {shortcut && (
-      <span
-        className={cx("ml-auto pl-2 text-sm text-zinc-400 dark:text-zinc-600")}
-      >
-        {shortcut}
-      </span>
-    )}
-  </BaseMenu.Item>
-));
+>(
+  (
+    { className, shortcut, hint, icon: Icon, children, ...props },
+    forwardedRef
+  ) => (
+    <BaseMenu.Item
+      ref={forwardedRef}
+      className={cx(
+        // base
+        "group/MenuItem relative flex cursor-pointer select-none items-center rounded-sm py-1.5 outline-hidden transition-colors sm:text-sm",
+        // adjust padding based on whether icon is present
+        Icon ? "pl-8 pr-1" : "pl-2 pr-1",
+        // text color
+        "text-zinc-900 dark:text-zinc-50",
+        // disabled
+        "data-disabled:pointer-events-none data-disabled:text-zinc-400 data-disabled:hover:bg-none dark:data-disabled:text-zinc-600",
+        // focus
+        "focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900",
+        // hover
+        "data-highlighted:bg-zinc-100 dark:data-highlighted:bg-zinc-900",
+        className
+      )}
+      tremor-id="tremor-raw"
+      {...props}
+    >
+      {Icon && (
+        <span className="absolute left-2 flex size-4 items-center justify-center">
+          <Icon className="size-4 shrink-0 text-zinc-600 dark:text-zinc-400 group-data-disabled/MenuItem:text-zinc-400 dark:group-data-disabled/MenuItem:text-zinc-700" />
+        </span>
+      )}
+      {children}
+      {hint && (
+        <span
+          className={cx(
+            "ml-auto pl-2 text-sm text-zinc-400 dark:text-zinc-600"
+          )}
+        >
+          {hint}
+        </span>
+      )}
+      {shortcut && (
+        <span
+          className={cx(
+            "ml-auto pl-2 text-sm text-zinc-400 dark:text-zinc-600"
+          )}
+        >
+          {shortcut}
+        </span>
+      )}
+    </BaseMenu.Item>
+  )
+);
+MenuItem.displayName = "MenuItem";
 
 const MenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof BaseMenu.CheckboxItem>,
@@ -233,6 +254,7 @@ const MenuCheckboxItem = React.forwardRef<
     </BaseMenu.CheckboxItem>
   )
 );
+MenuCheckboxItem.displayName = "MenuCheckboxItem";
 
 const MenuRadioItem = React.forwardRef<
   React.ElementRef<typeof BaseMenu.RadioItem>,
@@ -293,6 +315,7 @@ const MenuRadioItem = React.forwardRef<
     )}
   </BaseMenu.RadioItem>
 ));
+MenuRadioItem.displayName = "MenuRadioItem";
 
 const MenuLabel = React.forwardRef<
   React.ElementRef<typeof BaseMenu.GroupLabel>,
@@ -310,6 +333,7 @@ const MenuLabel = React.forwardRef<
     {...props}
   />
 ));
+MenuLabel.displayName = "MenuLabel";
 
 const MenuSeparator = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Separator>,
@@ -324,31 +348,13 @@ const MenuSeparator = React.forwardRef<
     {...props}
   />
 ));
-
-const MenuIconWrapper = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
-  return (
-    <div
-      className={cx(
-        // text color
-        "text-zinc-600 dark:text-zinc-400",
-        // disabled
-        "group-data-disabled/MenuItem:text-zinc-400 dark:group-data-disabled/MenuItem:text-zinc-700",
-        className
-      )}
-      {...props}
-    />
-  );
-};
+MenuSeparator.displayName = "MenuSeparator";
 
 export {
   Menu,
   MenuCheckboxItem,
   MenuContent,
   MenuGroup,
-  MenuIconWrapper,
   MenuItem,
   MenuLabel,
   MenuRadioGroup,

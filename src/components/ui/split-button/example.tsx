@@ -2,7 +2,7 @@
 
 import { Download, Save } from "lucide-react";
 import React from "react";
-import { MenuIconWrapper, MenuItem, MenuLabel, MenuSeparator } from "../menu";
+import { MenuGroup, MenuItem, MenuLabel, MenuSeparator } from "../menu";
 import { SplitButton } from "./split-button";
 
 // Example component for preview system
@@ -51,29 +51,30 @@ export const SplitButtonExample = ({
       onButtonClick={handleButtonClick}
       {...props}
     >
-      <MenuLabel>Quick Actions</MenuLabel>
-      <MenuItem onClick={() => handleMenuItemClick("Save as Draft")}>
-        <MenuIconWrapper>
-          <Save className="size-4" />
-        </MenuIconWrapper>
-        Save as Draft
-      </MenuItem>
-      <MenuItem onClick={() => handleMenuItemClick("Save as Template")}>
-        <MenuIconWrapper>
-          <Save className="size-4" />
-        </MenuIconWrapper>
-        Save as Template
-      </MenuItem>
+      <MenuGroup>
+        <MenuLabel>Quick Actions</MenuLabel>
+        <MenuItem
+          icon={Save}
+          onClick={() => handleMenuItemClick("Save as Draft")}
+        >
+          Save as Draft
+        </MenuItem>
+        <MenuItem
+          icon={Save}
+          onClick={() => handleMenuItemClick("Save as Template")}
+        >
+          Save as Template
+        </MenuItem>
+      </MenuGroup>
       <MenuSeparator />
-      <MenuItem onClick={() => handleMenuItemClick("Export")}>
-        <MenuIconWrapper>
-          <Download className="size-4" />
-        </MenuIconWrapper>
-        Export
-      </MenuItem>
-      <MenuItem onClick={() => handleMenuItemClick("Preview")}>
-        Preview
-      </MenuItem>
+      <MenuGroup>
+        <MenuItem icon={Download} onClick={() => handleMenuItemClick("Export")}>
+          Export
+        </MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("Preview")}>
+          Preview
+        </MenuItem>
+      </MenuGroup>
     </SplitButton>
   );
 };

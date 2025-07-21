@@ -7,67 +7,95 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuViewport,
 } from "./navigation-menu";
 
-export function Example() {
+export function NavigationMenuExample() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
+    <NavigationMenu className="min-w-max rounded-lg bg-gray-50 p-1 text-gray-900">
+      <NavigationMenuList className="relative flex">
         <NavigationMenuItem>
-          <NavigationMenuLink href="#home">
-            Home
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="grid gap-3 p-6 w-[400px]">
-              <NavigationMenuLink href="#ui" className="block">
-                <div className="text-sm font-medium leading-none">UI Components</div>
-                <p className="line-clamp-2 text-sm leading-snug text-zinc-600 dark:text-zinc-400 mt-1">
-                  Comprehensive collection of accessible React components.
-                </p>
-              </NavigationMenuLink>
-              <NavigationMenuLink href="#templates" className="block">
-                <div className="text-sm font-medium leading-none">Templates</div>
-                <p className="line-clamp-2 text-sm leading-snug text-zinc-600 dark:text-zinc-400 mt-1">
-                  Ready-to-use page templates and layouts.
-                </p>
-              </NavigationMenuLink>
-              <NavigationMenuLink href="#themes" className="block">
-                <div className="text-sm font-medium leading-none">Themes</div>
-                <p className="line-clamp-2 text-sm leading-snug text-zinc-600 dark:text-zinc-400 mt-1">
-                  Customizable color schemes and design tokens.
-                </p>
-              </NavigationMenuLink>
-            </div>
+          <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
+          <NavigationMenuContent className="w-[400px] h-full p-6 transition-[opacity,transform,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0">
+            <ul className="grid list-none grid-cols-2 gap-3">
+              <li>
+                <NavigationMenuLink href="#quick-start">
+                  <h3 className="m-0 mb-1 text-sm font-medium">Quick Start</h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    Install and assemble your first component.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink href="#accessibility">
+                  <h3 className="m-0 mb-1 text-sm font-medium">
+                    Accessibility
+                  </h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    Learn how we build accessible components.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink href="#releases">
+                  <h3 className="m-0 mb-1 text-sm font-medium">Releases</h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    See what&apos;s new in the latest versions.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink href="#about">
+                  <h3 className="m-0 mb-1 text-sm font-medium">About</h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    Learn more about Base UI and our mission.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+            </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="grid gap-3 p-6 w-[300px]">
-              <NavigationMenuLink href="#docs">
-                <div className="text-sm font-medium">Documentation</div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  API reference and guides
-                </p>
-              </NavigationMenuLink>
-              <NavigationMenuLink href="#examples">
-                <div className="text-sm font-medium">Examples</div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  Code examples and demos
-                </p>
-              </NavigationMenuLink>
-            </div>
+          <NavigationMenuTrigger>Handbook</NavigationMenuTrigger>
+          <NavigationMenuContent className="w-[300px] h-full p-6 transition-[opacity,transform,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0">
+            <ul className="flex flex-col gap-3">
+              <li>
+                <NavigationMenuLink href="#styling">
+                  <h3 className="m-0 mb-1 text-sm font-medium">Styling</h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    Style components with CSS, Tailwind, or CSS-in-JS.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink href="#animation">
+                  <h3 className="m-0 mb-1 text-sm font-medium">Animation</h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    Animate with CSS transitions or JavaScript libraries.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink href="#composition">
+                  <h3 className="m-0 mb-1 text-sm font-medium">Composition</h3>
+                  <p className="m-0 text-xs leading-4 text-gray-500">
+                    Compose components with your existing ones.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+            </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
-          <NavigationMenuLink href="#about">
-            About
+          <NavigationMenuLink href="https://github.com/mui/base-ui">
+            GitHub
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
+
+      <NavigationMenuViewport />
     </NavigationMenu>
   );
 }

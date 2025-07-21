@@ -5,6 +5,30 @@ import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion"
 import { Plus } from "lucide-react";
 import React from "react";
 
+/**
+ * A set of collapsible panels with headings built on Base UI's Accordion primitive.
+ * 
+ * Based on Base UI's Accordion (https://base-ui.com/react/components/accordion), 
+ * providing accessible collapsible content with keyboard navigation and focus management.
+ * Features Tremor-inspired styling with proper contrast and spacing.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Accordion defaultValue={['item-1']} openMultiple>
+ *   <AccordionItem value="item-1">
+ *     <AccordionTrigger>Panel 1</AccordionTrigger>
+ *     <AccordionContent>Content for panel 1</AccordionContent>
+ *   </AccordionItem>
+ *   <AccordionItem value="item-2">
+ *     <AccordionTrigger>Panel 2</AccordionTrigger>
+ *     <AccordionContent>Content for panel 2</AccordionContent>
+ *   </AccordionItem>
+ * </Accordion>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/accordion - Base UI documentation
+ */
 const Accordion = React.forwardRef<
   React.ElementRef<typeof BaseAccordion.Root>,
   React.ComponentPropsWithoutRef<typeof BaseAccordion.Root>
@@ -18,6 +42,20 @@ const Accordion = React.forwardRef<
 
 Accordion.displayName = "Accordion";
 
+/**
+ * Accordion trigger button that toggles the panel open/closed state.
+ * 
+ * Renders as a button element with the panel heading text and a rotating plus icon.
+ * Supports keyboard navigation and provides visual feedback for hover, focus, and disabled states.
+ * The icon rotates 45 degrees when the panel is open.
+ *
+ * @example
+ * ```tsx
+ * <AccordionTrigger>
+ *   What are your shipping options?
+ * </AccordionTrigger>
+ * ```
+ */
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof BaseAccordion.Trigger>,
   React.ComponentPropsWithoutRef<typeof BaseAccordion.Trigger>
@@ -54,6 +92,20 @@ const AccordionTrigger = React.forwardRef<
 
 AccordionTrigger.displayName = "AccordionTrigger";
 
+/**
+ * Accordion panel content that appears when the trigger is activated.
+ * 
+ * Contains the collapsible content with appropriate padding and typography.
+ * Handles overflow properly and provides smooth expand/collapse animations.
+ * Content is hidden when the panel is closed and visible when open.
+ *
+ * @example
+ * ```tsx
+ * <AccordionContent>
+ *   <p>We offer standard shipping (5-7 days) and express shipping (2-3 days).</p>
+ * </AccordionContent>
+ * ```
+ */
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof BaseAccordion.Panel>,
   React.ComponentPropsWithoutRef<typeof BaseAccordion.Panel>
@@ -71,6 +123,21 @@ const AccordionContent = React.forwardRef<
 
 AccordionContent.displayName = "AccordionContent";
 
+/**
+ * Accordion item container that wraps a trigger and content pair.
+ * 
+ * Provides the structure and styling for individual accordion panels.
+ * Includes bottom border styling that creates visual separation between items.
+ * Each item requires a unique `value` prop for identification.
+ *
+ * @example
+ * ```tsx
+ * <AccordionItem value="shipping">
+ *   <AccordionTrigger>Shipping Information</AccordionTrigger>
+ *   <AccordionContent>Shipping details here...</AccordionContent>
+ * </AccordionItem>
+ * ```
+ */
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof BaseAccordion.Item>,
   React.ComponentPropsWithoutRef<typeof BaseAccordion.Item>

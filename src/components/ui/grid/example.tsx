@@ -5,13 +5,13 @@ import { Grid, GridAuto, GridCell } from "./grid";
 
 // Example component for preview system
 export const GridExample = ({
-  columns = 6,
-  rows,
+  columns = 3,
+  rows = 3,
   gap = 4,
   showColumnGuides = true,
   showRowGuides = true,
   useAutoGrid = false,
-  cellCount = 12,
+  cellCount = 9,
   solidCells = false,
   showSpanning = false,
   showOverlay = false,
@@ -30,10 +30,10 @@ export const GridExample = ({
   [key: string]: unknown;
 }) => {
   // Ensure values are numbers (props explorer now passes numbers directly)
-  const columnsValue = Number(columns) || 6;
-  const rowsValue = rows ? Number(rows) : undefined;
+  const columnsValue = Number(columns) || 3;
+  const rowsValue = Number(rows) || 3;
   const gapValue = Number(gap) || 4;
-  const cellCountValue = Number(cellCount) || 12;
+  const cellCountValue = Number(cellCount) || 9;
 
   // Use GridAuto for simple numbered grid
   if (useAutoGrid) {

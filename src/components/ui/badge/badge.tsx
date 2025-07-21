@@ -58,11 +58,45 @@ const badgeToIconSizeMap = {
   lg: "base",
 } as const;
 
+/**
+ * Props for the Badge component.
+ *
+ * @interface BadgeProps
+ * @extends useRender.ComponentProps<"span">
+ * @extends VariantProps<typeof badgeVariants>
+ * @extends ComponentWithIconsProps
+ */
 interface BadgeProps
   extends useRender.ComponentProps<"span">,
     VariantProps<typeof badgeVariants>,
     ComponentWithIconsProps {}
 
+/**
+ * A small status or label component built with Base UI's useRender pattern.
+ *
+ * Based on Base UI's useRender hook for flexible rendering, providing status indicators,
+ * labels, and tags with multiple color variants and sizes. Supports left and right icons
+ * for enhanced visual context.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <Badge>New</Badge>
+ *
+ * // With variants
+ * <Badge variant="success">Completed</Badge>
+ * <Badge variant="error">Failed</Badge>
+ *
+ * // With icons
+ * <Badge leftIcon={CheckIcon} variant="success">Verified</Badge>
+ * <Badge rightIcon={ArrowRightIcon}>Continue</Badge>
+ *
+ * // Different sizes
+ * <Badge size="sm">Small</Badge>
+ * <Badge size="lg">Large</Badge>
+ * ```
+ */
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {

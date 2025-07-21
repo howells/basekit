@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card/card";
 import { getIconByName } from "@/components/ui/icon-select";
+import { Loader } from "@/components/ui/loader/loader";
 import dynamic from "next/dynamic";
 import React from "react";
 import { usePropExplorer } from "./prop-explorer-context";
@@ -213,7 +214,9 @@ const createDynamicComponent = (
     },
     {
       loading: () => (
-        <div className="text-zinc-500">Loading {componentId}...</div>
+        <div className="flex items-center justify-center p-8">
+          <Loader aria-label={`Loading ${componentId}`} />
+        </div>
       ),
       ssr: false,
     }

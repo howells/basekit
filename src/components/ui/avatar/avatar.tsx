@@ -5,14 +5,44 @@ import { Avatar as BaseAvatar } from "@base-ui-components/react/avatar";
 import Image from "next/image";
 import * as React from "react";
 
+/**
+ * Props for the Avatar component.
+ * 
+ * @interface AvatarProps
+ */
 interface AvatarProps {
+  /** Image source URL for the avatar */
   src?: string | null;
+  /** Whether to render the avatar with square corners instead of circular */
   square?: boolean;
+  /** Initials to display when no image is provided */
   initials?: string;
+  /** Alt text for accessibility */
   alt?: string;
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * A user profile picture display component with initials fallback.
+ * 
+ * Displays user profile pictures with automatic fallback to initials when no image is provided.
+ * Supports both circular and square variants with proper layering using CSS Grid.
+ * Uses Next.js Image component for optimized loading.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // With image
+ * <Avatar src="/profile.jpg" alt="John Doe" />
+ * 
+ * // With initials fallback
+ * <Avatar initials="JD" alt="John Doe" />
+ * 
+ * // Square variant
+ * <Avatar src="/profile.jpg" square alt="John Doe" />
+ * ```
+ */
 const Avatar = React.forwardRef<
   HTMLSpanElement,
   AvatarProps & React.ComponentPropsWithoutRef<"span">
@@ -72,7 +102,24 @@ const Avatar = React.forwardRef<
 );
 Avatar.displayName = "Avatar";
 
-// Keep Base UI version for when you need automatic fallback behavior
+/**
+ * Avatar root container built on Base UI's Avatar primitive for automatic fallback behavior.
+ * 
+ * Based on Base UI's Avatar (https://base-ui.com/react/components/avatar),
+ * providing automatic image loading states and fallback management.
+ * Use this when you need built-in loading state handling.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <AvatarWithFallback>
+ *   <AvatarImage src="/profile.jpg" alt="John Doe" />
+ *   <AvatarFallback>JD</AvatarFallback>
+ * </AvatarWithFallback>
+ * ```
+ * 
+ * @see https://base-ui.com/react/components/avatar - Base UI documentation
+ */
 const AvatarWithFallback = React.forwardRef<
   React.ElementRef<typeof BaseAvatar.Root>,
   React.ComponentPropsWithoutRef<typeof BaseAvatar.Root>
@@ -89,6 +136,18 @@ const AvatarWithFallback = React.forwardRef<
 ));
 AvatarWithFallback.displayName = "AvatarWithFallback";
 
+/**
+ * Avatar image component with automatic loading state handling.
+ * 
+ * Renders the avatar image with built-in loading state management.
+ * Automatically shows the fallback when image fails to load or is unavailable.
+ * Use within AvatarWithFallback for complete fallback behavior.
+ *
+ * @example
+ * ```tsx
+ * <AvatarImage src="/profile.jpg" alt="John Doe" />
+ * ```
+ */
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof BaseAvatar.Image>,
   React.ComponentPropsWithoutRef<typeof BaseAvatar.Image>
@@ -101,6 +160,21 @@ const AvatarImage = React.forwardRef<
 ));
 AvatarImage.displayName = "AvatarImage";
 
+/**
+ * Fallback content displayed when avatar image fails to load or is unavailable.
+ * 
+ * Automatically appears when the avatar image cannot be displayed.
+ * Typically contains user initials or a placeholder icon.
+ * Features background color and proper text styling for readability.
+ *
+ * @example
+ * ```tsx
+ * <AvatarFallback>JD</AvatarFallback>
+ * <AvatarFallback>
+ *   <UserIcon className="h-4 w-4" />
+ * </AvatarFallback>
+ * ```
+ */
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof BaseAvatar.Fallback>,
   React.ComponentPropsWithoutRef<typeof BaseAvatar.Fallback>

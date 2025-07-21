@@ -12,7 +12,7 @@ import {
   MenuBarTrigger,
 } from "./menu-bar";
 
-export function Example() {
+export function MenuBarExample() {
   return (
     <MenuBar>
       <MenuBarMenu>

@@ -2,7 +2,6 @@
 
 import { cx } from "@/lib/utils";
 import { Menubar as BaseMenubar } from "@base-ui-components/react/menubar";
-import { ChevronRight } from "lucide-react";
 import React from "react";
 import {
   Menu,

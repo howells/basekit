@@ -4,8 +4,48 @@ import { cx } from "@/lib/utils";
 import { AlertDialog as BaseAlertDialog } from "@base-ui-components/react/alert-dialog";
 import * as React from "react";
 
+/**
+ * A dialog that requires user response to proceed, built on Base UI's AlertDialog primitive.
+ * 
+ * Based on Base UI's AlertDialog (https://base-ui.com/react/components/alert-dialog), 
+ * providing accessible modal dialogs for critical user confirmations and actions.
+ * Features Tremor-inspired styling with proper focus management and keyboard navigation.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <AlertDialog>
+ *   <AlertDialogTrigger>Delete Account</AlertDialogTrigger>
+ *   <AlertDialogContent>
+ *     <AlertDialogHeader>
+ *       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+ *       <AlertDialogDescription>
+ *         This action cannot be undone. This will permanently delete your account.
+ *       </AlertDialogDescription>
+ *     </AlertDialogHeader>
+ *     <AlertDialogFooter>
+ *       <AlertDialogCancel>Cancel</AlertDialogCancel>
+ *       <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
+ *     </AlertDialogFooter>
+ *   </AlertDialogContent>
+ * </AlertDialog>
+ * ```
+ *
+ * @see https://base-ui.com/react/components/alert-dialog - Base UI documentation
+ */
 const AlertDialog = BaseAlertDialog.Root;
 
+/**
+ * Trigger button that opens the alert dialog.
+ * 
+ * Renders as a styled button with hover and focus states.
+ * When clicked, opens the alert dialog for user confirmation or action.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogTrigger>Delete Item</AlertDialogTrigger>
+ * ```
+ */
 const AlertDialogTrigger = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Trigger>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Trigger>
@@ -27,6 +67,17 @@ AlertDialogTrigger.displayName = "AlertDialogTrigger";
 
 const AlertDialogPortal = BaseAlertDialog.Portal;
 
+/**
+ * Semi-transparent backdrop that appears behind the alert dialog.
+ * 
+ * Provides visual separation between the dialog and the rest of the page.
+ * Clicking the backdrop typically does not close an alert dialog (unlike regular dialogs).
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogBackdrop />
+ * ```
+ */
 const AlertDialogBackdrop = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Backdrop>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Backdrop>
@@ -44,6 +95,27 @@ const AlertDialogBackdrop = React.forwardRef<
 ));
 AlertDialogBackdrop.displayName = "AlertDialogBackdrop";
 
+/**
+ * Main content container for the alert dialog.
+ * 
+ * Contains the dialog's title, description, and action buttons.
+ * Automatically includes the portal and backdrop for proper layering.
+ * Features smooth scale and opacity transitions for open/close animations.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogContent>
+ *   <AlertDialogHeader>
+ *     <AlertDialogTitle>Confirm Action</AlertDialogTitle>
+ *     <AlertDialogDescription>Are you sure?</AlertDialogDescription>
+ *   </AlertDialogHeader>
+ *   <AlertDialogFooter>
+ *     <AlertDialogCancel>Cancel</AlertDialogCancel>
+ *     <AlertDialogAction>Confirm</AlertDialogAction>
+ *   </AlertDialogFooter>
+ * </AlertDialogContent>
+ * ```
+ */
 const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Popup>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Popup>
@@ -65,6 +137,20 @@ const AlertDialogContent = React.forwardRef<
 ));
 AlertDialogContent.displayName = "AlertDialogContent";
 
+/**
+ * Header container for the alert dialog title and description.
+ * 
+ * Provides consistent spacing and alignment for the dialog's header content.
+ * Uses center alignment on mobile and left alignment on larger screens.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogHeader>
+ *   <AlertDialogTitle>Delete Account</AlertDialogTitle>
+ *   <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+ * </AlertDialogHeader>
+ * ```
+ */
 const AlertDialogHeader = React.forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<"div">
@@ -80,6 +166,21 @@ const AlertDialogHeader = React.forwardRef<
 ));
 AlertDialogHeader.displayName = "AlertDialogHeader";
 
+/**
+ * Footer container for alert dialog action buttons.
+ * 
+ * Arranges cancel and action buttons with responsive layout.
+ * On mobile, buttons stack vertically with action button on top.
+ * On larger screens, buttons are arranged horizontally with action button on right.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogFooter>
+ *   <AlertDialogCancel>Cancel</AlertDialogCancel>
+ *   <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
+ * </AlertDialogFooter>
+ * ```
+ */
 const AlertDialogFooter = React.forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<"div">
@@ -95,6 +196,17 @@ const AlertDialogFooter = React.forwardRef<
 ));
 AlertDialogFooter.displayName = "AlertDialogFooter";
 
+/**
+ * Title heading for the alert dialog.
+ * 
+ * Provides semantic heading markup for screen readers and proper visual hierarchy.
+ * Uses prominent typography to clearly communicate the dialog's purpose.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogTitle>Delete Account</AlertDialogTitle>
+ * ```
+ */
 const AlertDialogTitle = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Title>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Title>
@@ -110,6 +222,20 @@ const AlertDialogTitle = React.forwardRef<
 ));
 AlertDialogTitle.displayName = "AlertDialogTitle";
 
+/**
+ * Description text that provides additional context for the alert dialog.
+ * 
+ * Offers detailed information about the action or confirmation being requested.
+ * Uses muted text color to establish proper visual hierarchy with the title.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogDescription>
+ *   This action cannot be undone. This will permanently delete your account
+ *   and remove your data from our servers.
+ * </AlertDialogDescription>
+ * ```
+ */
 const AlertDialogDescription = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Description>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Description>
@@ -122,6 +248,21 @@ const AlertDialogDescription = React.forwardRef<
 ));
 AlertDialogDescription.displayName = "AlertDialogDescription";
 
+/**
+ * Primary action button that closes the dialog and performs the main action.
+ * 
+ * Supports "default" and "destructive" variants for different action types.
+ * When clicked, closes the dialog and typically performs the confirmed action.
+ * Use "destructive" variant for dangerous actions like deleting data.
+ *
+ * @param variant - Visual style variant ("default" | "destructive")
+ * 
+ * @example
+ * ```tsx
+ * <AlertDialogAction>Continue</AlertDialogAction>
+ * <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
+ * ```
+ */
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Close>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Close> & {
@@ -149,6 +290,18 @@ const AlertDialogAction = React.forwardRef<
 ));
 AlertDialogAction.displayName = "AlertDialogAction";
 
+/**
+ * Cancel button that closes the dialog without performing any action.
+ * 
+ * Provides users a way to exit the dialog without proceeding with the main action.
+ * Styled as a secondary button with outline appearance to de-emphasize it
+ * compared to the primary action button.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialogCancel>Cancel</AlertDialogCancel>
+ * ```
+ */
 const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Close>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Close>

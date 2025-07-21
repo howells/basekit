@@ -313,10 +313,10 @@ const SplitButton = React.forwardRef<HTMLDivElement, SplitButtonProps>(
           {buttonContent}
         </Button>
 
-        {/* Divider */}
+        {/* Separator */}
         <div
           className={cx(
-            "w-px",
+            "w-px h-full",
             variant === "default" && ["bg-white/20 dark:bg-black/20"],
             variant === "secondary" && ["bg-zinc-300 dark:bg-zinc-600"],
             variant === "destructive" && ["bg-white/20 dark:bg-white/10"],
