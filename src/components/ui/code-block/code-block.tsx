@@ -12,13 +12,105 @@ import {
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
 import { cx } from "@/lib/utils";
 
+/**
+ * Props for the CodeBlock component.
+ * 
+ * Configuration for syntax-highlighted code display with theming options.
+ * 
+ * @interface CodeBlockProps
+ */
 interface CodeBlockProps {
+  /** Code content to syntax highlight */
   children: string;
+  /** Programming language for syntax highlighting (defaults to "tsx") */
   language?: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Color theme for syntax highlighting */
   theme?: "light" | "dark" | "auto";
 }
 
+/**
+ * A syntax-highlighted code block component.
+ * 
+ * Built on react-syntax-highlighter with Prism.js (https://prismjs.com/),
+ * providing syntax highlighting for 297+ programming languages. Features
+ * automatic theme switching, copy functionality, and professional styling.
+ *
+ * @param children - Code content to display
+ * @param language - Programming language for syntax highlighting
+ * @param theme - Color theme (light, dark, or auto-detect)
+ * @param className - Additional CSS classes
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic TypeScript code block
+ * <CodeBlock language="typescript">
+ *   {`const greeting = (name: string) => {
+ *     return \`Hello, \${name}!\`;
+ *   };`}
+ * </CodeBlock>
+ *
+ * // JavaScript with dark theme
+ * <CodeBlock language="javascript" theme="dark">
+ *   {`function fibonacci(n) {
+ *     if (n <= 1) return n;
+ *     return fibonacci(n - 1) + fibonacci(n - 2);
+ *   }`}
+ * </CodeBlock>
+ *
+ * // Python code with auto theme detection
+ * <CodeBlock language="python" theme="auto">
+ *   {`def quicksort(arr):
+ *     if len(arr) <= 1:
+ *         return arr
+ *     pivot = arr[len(arr) // 2]
+ *     left = [x for x in arr if x < pivot]
+ *     middle = [x for x in arr if x == pivot]
+ *     right = [x for x in arr if x > pivot]
+ *     return quicksort(left) + middle + quicksort(right)`}
+ * </CodeBlock>
+ *
+ * // CSS with light theme
+ * <CodeBlock language="css" theme="light">
+ *   {`.button {
+ *     background: linear-gradient(45deg, #007bff, #0056b3);
+ *     border: none;
+ *     border-radius: 8px;
+ *     color: white;
+ *     padding: 12px 24px;
+ *     transition: all 0.2s ease;
+ *   }
+ *   
+ *   .button:hover {
+ *     transform: translateY(-2px);
+ *     box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+ *   }`}
+ * </CodeBlock>
+ *
+ * // Shell commands
+ * <CodeBlock language="bash">
+ *   {`npm install @stencilui/react
+ * npm run dev
+ * npm run build`}
+ * </CodeBlock>
+ *
+ * // JSON configuration
+ * <CodeBlock language="json">
+ *   {`{
+ *     "name": "my-app",
+ *     "version": "1.0.0",
+ *     "dependencies": {
+ *       "react": "^18.0.0",
+ *       "typescript": "^5.0.0"
+ *     }
+ *   }`}
+ * </CodeBlock>
+ * ```
+ *
+ * @see https://prismjs.com/ - Prism.js syntax highlighting documentation
+ */
 export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
   ({ children, language = "tsx", className, theme = "auto" }, ref) => {
     // Determine theme
