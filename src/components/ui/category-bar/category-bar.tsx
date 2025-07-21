@@ -13,6 +13,17 @@ import { cx } from "@/lib/utils";
 
 import { Tooltip } from "../tooltip";
 
+/**
+ * Determines the background color for the marker based on its position.
+ * 
+ * Calculates which category segment the marker falls into and returns
+ * the corresponding color class.
+ *
+ * @param marker - Marker position value
+ * @param values - Array of category values
+ * @param colors - Array of color themes for categories
+ * @returns CSS color class name
+ */
 const getMarkerBgColor = (
   marker: number | undefined,
   values: number[],
@@ -39,12 +50,37 @@ const getMarkerBgColor = (
   return getColorClassName(colors[values.length - 1], "bg");
 };
 
+/**
+ * Calculates the left position percentage for a value.
+ * 
+ * Converts an absolute value to a percentage position within the total range.
+ *
+ * @param value - Value to position
+ * @param maxValue - Maximum value in the range
+ * @returns Percentage position (0-100)
+ */
 const getPositionLeft = (value: number | undefined, maxValue: number): number =>
   value ? (value / maxValue) * 100 : 0;
 
+/**
+ * Sums all values in a numeric array.
+ * 
+ * Helper function for calculating total values in category data.
+ *
+ * @param arr - Array of numbers to sum
+ * @returns Total sum of array values
+ */
 const sumNumericArray = (arr: number[]) =>
   arr.reduce((prefixSum, num) => prefixSum + num, 0);
 
+/**
+ * Formats numbers for display in labels.
+ * 
+ * Shows integers as-is and decimals rounded to one decimal place.
+ *
+ * @param num - Number to format
+ * @returns Formatted number string
+ */
 const formatNumber = (num: number): string => {
   if (Number.isInteger(num)) {
     return num.toString();
@@ -52,6 +88,14 @@ const formatNumber = (num: number): string => {
   return num.toFixed(1);
 };
 
+/**
+ * Component that renders numeric labels above the category bar.
+ * 
+ * Intelligently displays labels at category boundaries with logic to prevent
+ * overcrowding. Shows values at 0, significant boundaries, and the maximum value.
+ *
+ * @param values - Array of category values to label
+ */
 const BarLabels = ({ values }: { values: number[] }) => {
   const sumValues = React.useMemo(() => sumNumericArray(values), [values]);
   let prefixSum = 0;
@@ -106,13 +150,98 @@ const BarLabels = ({ values }: { values: number[] }) => {
   );
 };
 
+/**
+ * Props for the CategoryBar component.
+ * 
+ * Configuration for displaying proportional category data with optional
+ * marker overlay and value labels.
+ * 
+ * @interface CategoryBarProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Array of numeric values for each category */
   values: number[];
+  /** Color themes for each category (defaults to chart colors) */
   colors?: AvailableChartColorsKeys[];
-  marker?: { value: number; tooltip?: string; showAnimation?: boolean };
+  /** Optional marker with position, tooltip, and animation */
+  marker?: { 
+    /** Position value for the marker */
+    value: number; 
+    /** Optional tooltip text to show on hover */
+    tooltip?: string; 
+    /** Whether to animate marker position changes */
+    showAnimation?: boolean 
+  };
+  /** Whether to show numeric labels above the bar */
   showLabels?: boolean;
 }
 
+/**
+ * A horizontal bar component for displaying categorical data proportions.
+ * 
+ * Visualizes multiple category values as proportional segments in a horizontal bar.
+ * Supports an optional marker overlay for indicating targets, thresholds, or current
+ * values. Includes intelligent labeling and tooltip functionality.
+ *
+ * @param values - Array of numeric values for each category
+ * @param colors - Color themes for categories (defaults to chart colors)
+ * @param marker - Optional marker with position and tooltip
+ * @param showLabels - Whether to display numeric labels
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic category bar
+ * <CategoryBar values={[20, 30, 50]} />
+ *
+ * // With custom colors
+ * <CategoryBar
+ *   values={[25, 35, 40]}
+ *   colors={["blue", "green", "red"]}
+ * />
+ *
+ * // With marker and tooltip
+ * <CategoryBar
+ *   values={[10, 20, 30, 40]}
+ *   marker={{
+ *     value: 75,
+ *     tooltip: "Target: 75",
+ *     showAnimation: true
+ *   }}
+ * />
+ *
+ * // Performance dashboard example
+ * <CategoryBar
+ *   values={[45, 30, 15, 10]} // Good, Fair, Poor, Critical
+ *   colors={["emerald", "yellow", "orange", "red"]}
+ *   marker={{
+ *     value: 85,
+ *     tooltip: "Current Score: 85"
+ *   }}
+ *   className="mb-4"
+ * />
+ *
+ * // Budget allocation visualization
+ * <CategoryBar
+ *   values={[40000, 25000, 20000, 15000]} // Marketing, Development, Operations, Admin
+ *   colors={["blue", "purple", "green", "gray"]}
+ *   marker={{
+ *     value: 90000,
+ *     tooltip: "Budget Used: $90,000",
+ *     showAnimation: true
+ *   }}
+ *   showLabels
+ * />
+ *
+ * // Without labels
+ * <CategoryBar
+ *   values={[1, 2, 3]}
+ *   showLabels={false}
+ *   className="h-1"
+ * />
+ * ```
+ */
 const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
   (
     {
