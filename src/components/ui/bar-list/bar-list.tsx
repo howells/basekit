@@ -1,7 +1,4 @@
-// Tremor BarList [v1.0.0]
-
 import React from "react";
-
 import { cx, focusRing } from "@/lib/utils";
 
 type Bar<T> = T & {
@@ -56,7 +53,6 @@ function BarListInner<T>(
       ref={forwardedRef}
       className={cx("flex justify-between space-x-6", className)}
       aria-sort={sortOrder}
-      tremor-id="tremor-raw"
       {...props}
     >
       <div className="relative w-full space-y-1.5">
@@ -168,4 +164,4 @@ const BarList = React.forwardRef(BarListInner) as <T>(
   p: BarListProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof BarListInner>;
 
-export { BarList, type BarListProps };
+export { BarList, type BarListProps, type Bar };
