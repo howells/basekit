@@ -1,11 +1,9 @@
-// Tremor Breadcrumbs [v1.0.0] - Simplified
-
 import { cx } from "@/lib/utils";
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 import * as React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import { tv } from "tailwind-variants";
 
 const breadcrumbVariants = tv({
   slots: {
@@ -164,147 +162,6 @@ const BreadcrumbEllipsis = React.forwardRef<
   );
 });
 BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";
-
-// Example component for preview system
-export const BreadcrumbsExample = ({
-  showEllipsis = false,
-  ...props
-}: {
-  showEllipsis?: string | boolean;
-  [key: string]: unknown;
-}) => {
-  const shouldShowEllipsis = showEllipsis === true || showEllipsis === "true";
-
-  return (
-    <Breadcrumb {...props}>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        {shouldShowEllipsis && (
-          <>
-            <BreadcrumbItem>
-              <BreadcrumbEllipsis />
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-          </>
-        )}
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumbs</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  );
-};
-
-// PropExplorer configuration
-export const breadcrumbsPropConfig = {
-  componentName: "Breadcrumbs",
-  displayName: "Breadcrumbs",
-  description:
-    "A navigation component that shows the current page's location within a navigational hierarchy.",
-  variants: [],
-  props: [
-    {
-      name: "showEllipsis",
-      type: "boolean",
-      description: "Whether to show ellipsis for collapsed items.",
-      defaultValue: false,
-    },
-  ],
-  examples: [
-    {
-      id: "default-breadcrumbs",
-      title: "Default Breadcrumbs",
-      description: "Basic breadcrumb navigation.",
-      props: { showEllipsis: false },
-      preview: <BreadcrumbsExample />,
-    },
-    {
-      id: "with-ellipsis",
-      title: "With Ellipsis",
-      description: "Breadcrumbs with collapsed items.",
-      props: { showEllipsis: true },
-      preview: <BreadcrumbsExample showEllipsis={true} />,
-    },
-  ],
-};
-
-// Component configuration for documentation
-export const componentConfig = {
-  id: "breadcrumbs",
-  name: "Breadcrumbs",
-  description:
-    "A navigation component that shows the current page's location within a navigational hierarchy.",
-  category: "ui" as const,
-  badge: "UI",
-  installation: {
-    npm: "@base-ui-components/react",
-  },
-  importStatement: `import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from "@/components/ui/breadcrumbs";`,
-  componentId: "BreadcrumbsExample",
-  propExplorer: breadcrumbsPropConfig,
-  examples: [
-    {
-      id: "default",
-      title: "Default",
-      description: "Basic breadcrumb navigation.",
-      preview: <BreadcrumbsExample />,
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Breadcrumbs</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
-    },
-    {
-      id: "with-ellipsis",
-      title: "With Ellipsis",
-      description: "Breadcrumbs with collapsed items.",
-      preview: <BreadcrumbsExample showEllipsis={true} />,
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbEllipsis />
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Breadcrumbs</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
-    },
-  ],
-};
 
 export {
   Breadcrumb,
