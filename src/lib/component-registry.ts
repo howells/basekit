@@ -14,6 +14,7 @@ import { componentConfig as carouselConfig } from "@/components/ui/carousel/conf
 import { componentConfig as categoryBarConfig } from "@/components/ui/category-bar/config";
 import { componentConfig as checkboxConfig } from "@/components/ui/checkbox/config";
 import { componentConfig as checkboxGroupConfig } from "@/components/ui/checkbox-group/config";
+import { componentConfig as codeBlockConfig } from "@/components/ui/code-block/config";
 import { componentConfig as dividerConfig } from "@/components/ui/divider/config";
 import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
 import { componentConfig as meterConfig } from "@/components/ui/meter/config";
@@ -42,6 +43,7 @@ export const componentRegistry: ComponentConfigRegistry = {
   "category-bar": categoryBarConfig,
   checkbox: checkboxConfig,
   "checkbox-group": checkboxGroupConfig,
+  "code-block": codeBlockConfig,
   divider: dividerConfig,
   loader: loaderConfig,
   meter: meterConfig,

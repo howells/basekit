@@ -2,14 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Package Manager
+
+**ALWAYS use pnpm for package management** - Never use npm or yarn.
+
 ## Development Commands
 
-- `npm run dev` - Start development server with Turbopack (DO NOT RUN - user handles this)
-- `npm run build` - Build the Next.js application (DO NOT RUN - user handles this) 
-- `npm run start` - Start production server (DO NOT RUN - user handles this)
-- `npm run lint` - Run ESLint to check code quality
+- `pnpm run dev` - Start development server with Turbopack (DO NOT RUN - user handles this)
+- `pnpm run build` - Build the Next.js application (DO NOT RUN - user handles this) 
+- `pnpm run start` - Start production server (DO NOT RUN - user handles this)
+- `pnpm run lint` - Run ESLint to check code quality
 
-**IMPORTANT**: Never run `npm run dev`, `npm run build`, or `npm run start`. The user handles all build and server commands themselves.
+**IMPORTANT**: Never run `pnpm run dev`, `pnpm run build`, or `pnpm run start`. The user handles all build and server commands themselves.
 
 ## Project Architecture
 
