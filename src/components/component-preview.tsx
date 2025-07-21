@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/card/card";
 import { getIconByName } from "@/components/ui/icon-select";
 import dynamic from "next/dynamic";
 import React from "react";

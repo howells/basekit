@@ -3,7 +3,7 @@
 import { cx } from "@/lib/utils";
 import { CheckboxGroup as BaseCheckboxGroup } from "@base-ui-components/react/checkbox-group";
 import * as React from "react";
-import { Checkbox } from "./checkbox";
+import { Checkbox } from "../checkbox";
 
 interface CheckboxGroupProps
   extends React.ComponentPropsWithoutRef<typeof BaseCheckboxGroup> {

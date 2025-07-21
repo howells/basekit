@@ -1,4 +1,4 @@
-// Tremor Loader [v1.0.0]
+// Loader Component [v1.0.0] - Pure Implementation
 
 import { Loader2 } from "lucide-react";
 import React from "react";
@@ -49,35 +49,5 @@ const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
 );
 
 Loader.displayName = "Loader";
-
-// PropExplorer configuration
-export const loaderPropConfig = {
-  componentName: "Loader",
-  displayName: "Loader",
-  description: "A spinning loader indicator with configurable size.",
-
-  variants: [
-    {
-      name: "size",
-      options: [
-        { value: "xs", label: "Extra Small" },
-        { value: "sm", label: "Small" },
-        { value: "base", label: "Base" },
-        { value: "lg", label: "Large" },
-        { value: "xl", label: "Extra Large" },
-      ],
-      defaultOption: "base",
-      description: "The size of the loader spinner.",
-    },
-  ],
-
-  props: [
-    {
-      name: "aria-label",
-      type: "string",
-      description: "Accessible label for screen readers.",
-    },
-  ],
-};
 
 export { Loader, loaderVariants, type LoaderProps };

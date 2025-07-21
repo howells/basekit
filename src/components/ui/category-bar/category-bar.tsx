@@ -1,4 +1,4 @@
-// Tremor CategoryBar [v0.0.3]
+// CategoryBar Component [v1.0.0] - Pure Implementation
 
 "use client";
 
@@ -11,7 +11,7 @@ import {
 } from "@/lib/chartUtils";
 import { cx } from "@/lib/utils";
 
-import { Tooltip } from "./tooltip";
+import { Tooltip } from "../tooltip";
 
 const getMarkerBgColor = (
   marker: number | undefined,
@@ -188,7 +188,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
               }}
             >
               {marker.tooltip ? (
-                <Tooltip asChild content={marker.tooltip}>
+                <Tooltip content={marker.tooltip}>
                   <div
                     aria-hidden="true"
                     className={cx(

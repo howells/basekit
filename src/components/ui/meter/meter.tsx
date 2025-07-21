@@ -1,4 +1,4 @@
-// Tremor Meter [v1.0.0] - Base UI
+// Meter Component [v1.0.0] - Base UI Implementation
 
 import { cx } from "@/lib/utils";
 import { Meter as BaseMeter } from "@base-ui-components/react/meter";
@@ -150,6 +150,7 @@ const Meter = React.forwardRef<
     );
   }
 );
+
 Meter.displayName = "Meter";
 
 export { Meter, meterVariants, type MeterProps };

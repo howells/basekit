@@ -30,9 +30,16 @@ export const componentConfig: ComponentConfig = {
     {
       name: "size",
       type: "select",
-      options: ["default", "sm", "icon"],
+      options: ["default", "sm", "icon", "icon-sm"],
       defaultValue: "default",
       description: "The size of the button.",
+    },
+    {
+      name: "rounded",
+      type: "boolean",
+      defaultValue: false,
+      description:
+        "Makes the button fully rounded (circular for icon buttons).",
     },
     {
       name: "children",

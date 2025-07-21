@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge/badge";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/card/card";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { getComponentsByCategory } from "@/lib/component-registry";

@@ -9,6 +9,15 @@ import { componentConfig as breadcrumbsConfig } from "@/components/ui/breadcrumb
 import { componentConfig as buttonConfig } from "@/components/ui/button/config";
 import { componentConfig as calendarConfig } from "@/components/ui/calendar/config";
 import { componentConfig as calloutConfig } from "@/components/ui/callout/config";
+import { componentConfig as cardConfig } from "@/components/ui/card/config";
+import { componentConfig as carouselConfig } from "@/components/ui/carousel/config";
+import { componentConfig as categoryBarConfig } from "@/components/ui/category-bar/config";
+import { componentConfig as checkboxConfig } from "@/components/ui/checkbox/config";
+import { componentConfig as checkboxGroupConfig } from "@/components/ui/checkbox-group/config";
+import { componentConfig as dividerConfig } from "@/components/ui/divider/config";
+import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
+import { componentConfig as meterConfig } from "@/components/ui/meter/config";
+import { componentConfig as separatorConfig } from "@/components/ui/separator/config";
 // TODO: Update these components to use new ComponentConfig structure
 import {
   ComponentConfig,
@@ -28,6 +37,15 @@ export const componentRegistry: ComponentConfigRegistry = {
   button: buttonConfig,
   calendar: calendarConfig,
   callout: calloutConfig,
+  card: cardConfig,
+  carousel: carouselConfig,
+  "category-bar": categoryBarConfig,
+  checkbox: checkboxConfig,
+  "checkbox-group": checkboxGroupConfig,
+  divider: dividerConfig,
+  loader: loaderConfig,
+  meter: meterConfig,
+  separator: separatorConfig,
   // TODO: Re-add these after converting to new config structure
 };
 

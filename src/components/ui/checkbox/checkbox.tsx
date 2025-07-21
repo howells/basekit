@@ -45,7 +45,6 @@ const Checkbox = React.forwardRef<
         focusRing,
         className
       )}
-      tremor-id="tremor-raw"
     >
       <BaseCheckbox.Indicator className="flex size-full items-center justify-center">
         {checked === "indeterminate" ? (

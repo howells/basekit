@@ -101,6 +101,10 @@ const buttonVariants = tv({
         "dark:disabled:text-zinc-600",
       ],
     },
+    rounded: {
+      true: "rounded-full",
+      false: "rounded-md",
+    },
     size: {
       default: "h-9 px-3 text-sm has-[>svg]:px-2.5",
       sm: "h-8 px-2.5 text-xs has-[>svg]:px-2",
@@ -111,6 +115,7 @@ const buttonVariants = tv({
   defaultVariants: {
     variant: "default",
     size: "default",
+    rounded: false,
   },
 });
 
@@ -135,6 +140,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       variant,
       size,
+      rounded,
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
       children,
@@ -146,14 +152,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const hasChildren = children != null && children !== "";
     const hasLeftIcon = LeftIcon != null;
-    const hasRightIcon = RightIcon != null && size !== "icon";
-    const shouldShowChildren = hasChildren && size !== "icon";
+    const hasRightIcon =
+      RightIcon != null && size !== "icon" && size !== "icon-sm";
+    const shouldShowChildren =
+      hasChildren && size !== "icon" && size !== "icon-sm";
 
     // Check if children is a complex element (custom layout)
     const hasCustomLayout = React.isValidElement(children);
 
     // Icon size based on button size
-    const iconSize = size === "sm" ? "size-3" : "size-3.5";
+    const iconSize =
+      size === "sm" || size === "icon-sm" ? "size-3" : "size-3.5";
     const iconClassName = `${iconSize} shrink-0`;
 
     // When loading, Loader replaces leftIcon, and we show loadingText or original children
@@ -161,8 +170,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const effectiveShouldShowChildren = shouldShowChildren;
 
     const renderButtonContent = () => {
-      // If children is a custom React element, render it directly
-      if (hasCustomLayout) {
+      // If children is a custom React element AND we don't have icon props, render it directly
+      if (hasCustomLayout && !hasLeftIcon && !hasRightIcon && !isLoading) {
         return children;
       }
 
@@ -170,7 +179,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       const layoutClassName = cx(
         "flex items-center w-full transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
         // For icon-only buttons, center everything
-        size === "icon"
+        size === "icon" || size === "icon-sm"
           ? "justify-center"
           : // Full width always uses space-between when there are edge elements
           fullWidth &&
@@ -392,7 +401,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const defaultProps: useRender.ElementProps<"button"> = {
       className: cx(
-        buttonVariants({ variant, size }),
+        buttonVariants({ variant, size, rounded }),
         fullWidth && "w-full max-w-[95vw]",
         // Only apply text alignment classes when not using fullWidth center (which has its own layout)
         !(fullWidth && textAlign === "center") &&

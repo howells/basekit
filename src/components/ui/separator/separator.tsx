@@ -1,4 +1,4 @@
-// Tremor Separator [v1.0.0] - Base UI
+// Separator Component [v1.0.0] - Base UI Implementation
 
 import { cx } from "@/lib/utils";
 import { Separator as BaseSeparator } from "@base-ui-components/react/separator";
@@ -69,10 +69,14 @@ const separatorVariants = tv({
   },
 });
 
+interface SeparatorProps
+  extends React.ComponentPropsWithoutRef<typeof BaseSeparator>,
+    VariantProps<typeof separatorVariants> {
+}
+
 const Separator = React.forwardRef<
   React.ElementRef<typeof BaseSeparator>,
-  React.ComponentPropsWithoutRef<typeof BaseSeparator> &
-    VariantProps<typeof separatorVariants>
+  SeparatorProps
 >(({ className, orientation = "horizontal", variant, size, ...props }, ref) => (
   <BaseSeparator
     ref={ref}
@@ -81,6 +85,7 @@ const Separator = React.forwardRef<
     {...props}
   />
 ));
+
 Separator.displayName = "Separator";
 
-export { Separator, separatorVariants };
+export { Separator, separatorVariants, type SeparatorProps };

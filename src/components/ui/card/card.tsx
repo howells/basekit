@@ -1,4 +1,4 @@
-// Tremor Card [v1.0.0] - Base UI
+// Card Component [v1.0.0] - Pure Implementation
 
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
@@ -13,11 +13,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const defaultProps: useRender.ElementProps<"div"> = {
       className: cx(
         // base
-        "relative w-full rounded-lg border p-6 text-left shadow-xs",
+        "relative w-full rounded-lg p-6 text-left shadow-xs",
+        // inset ring border (similar to button)
+        "inset-ring-1 inset-ring-black/10",
+        "dark:inset-ring-white/10",
         // background color
         "bg-white dark:bg-[#090E1A]",
-        // border color
-        "border-zinc-200 dark:border-zinc-900",
         className
       ),
     };
@@ -33,20 +34,5 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = "Card";
-
-// PropExplorer configuration
-export const cardPropConfig = {
-  componentName: "Card",
-  displayName: "Card",
-  description: "A flexible container component with subtle styling and shadow.",
-
-  props: [
-    {
-      name: "children",
-      type: "React.ReactNode",
-      description: "The content to display inside the card.",
-    },
-  ],
-};
 
 export { Card, type CardProps };
