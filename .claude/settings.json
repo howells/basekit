@@ -1,0 +1,24 @@
+{
+  "tools": {
+    "bash": {
+      "enabled": true,
+      "confirm_before_run": false
+    },
+    "edit": {
+      "enabled": true,
+      "confirm_before_run": false
+    },
+    "webfetch": {
+      "enabled": true,
+      "confirm_before_run": false
+    },
+    "write": {
+      "enabled": true,
+      "confirm_before_run": false
+    },
+    "read": {
+      "enabled": true,
+      "confirm_before_run": false
+    }
+  }
+}

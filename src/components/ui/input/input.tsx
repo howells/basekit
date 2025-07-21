@@ -229,23 +229,36 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
     const shouldApplyRightPadding = hasCustomSuffix || hasBuiltInSuffix;
 
     // Simple padding logic - reduce padding only for UNSTYLED prefix/suffix
-    const paddingClasses = cx({
-      // Left padding
-      "pl-2.5": size === "sm" && !(hasCustomPrefix && !prefixStyling),
-      "pl-3": size === "base" && !(hasCustomPrefix && !prefixStyling),
-      "pl-3.5": size === "lg" && !(hasCustomPrefix && !prefixStyling),
-      "pl-1.5": size === "sm" && hasCustomPrefix && !prefixStyling,
-      "pl-2": size === "base" && hasCustomPrefix && !prefixStyling,
-      "pl-2.5": size === "lg" && hasCustomPrefix && !prefixStyling,
+    const hasUnstyledPrefix = hasCustomPrefix && !prefixStyling;
+    const hasUnstyledSuffix = hasCustomSuffix && !suffixStyling;
 
-      // Right padding
-      "pr-2.5": size === "sm" && !(hasCustomSuffix && !suffixStyling),
-      "pr-3": size === "base" && !(hasCustomSuffix && !suffixStyling),
-      "pr-3.5": size === "lg" && !(hasCustomSuffix && !suffixStyling),
-      "pr-1.5": size === "sm" && hasCustomSuffix && !suffixStyling,
-      "pr-2": size === "base" && hasCustomSuffix && !suffixStyling,
-      "pr-2.5": size === "lg" && hasCustomSuffix && !suffixStyling,
-    });
+    // Calculate left padding
+    const leftPadding = hasUnstyledPrefix
+      ? size === "sm"
+        ? "pl-1.5"
+        : size === "base"
+        ? "pl-2"
+        : "pl-2.5"
+      : size === "sm"
+      ? "pl-2.5"
+      : size === "base"
+      ? "pl-3"
+      : "pl-3.5";
+
+    // Calculate right padding
+    const rightPadding = hasUnstyledSuffix
+      ? size === "sm"
+        ? "pr-1.5"
+        : size === "base"
+        ? "pr-2"
+        : "pr-2.5"
+      : size === "sm"
+      ? "pr-2.5"
+      : size === "base"
+      ? "pr-3"
+      : "pr-3.5";
+
+    const paddingClasses = cx(leftPadding, rightPadding);
 
     return (
       <div
