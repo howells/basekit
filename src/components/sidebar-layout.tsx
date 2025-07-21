@@ -5,7 +5,7 @@
 import logo from "@/images/logo.png";
 import { getComponentsByCategory } from "@/lib/component-registry";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React from "react";
 import {
   Collapsible,
@@ -31,6 +31,7 @@ interface SidebarLayoutProps {
 
 export function SidebarLayout({ children }: SidebarLayoutProps) {
   const pathname = usePathname();
+  const segments = useSelectedLayoutSegments();
   const [searchTerm, setSearchTerm] = React.useState("");
 
   // Get components by category from the registry
@@ -54,9 +55,13 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
   const formComponents = filterComponents(allFormComponents);
   const chartComponents = filterComponents(allChartComponents);
 
-  // Check if current path matches a component
+  // Check if current path matches a component using segments
   const isCurrentComponent = (category: string, componentId: string) => {
-    return pathname === `/${category}/${componentId}`;
+    return (
+      segments.length >= 2 &&
+      segments[0] === category &&
+      segments[1] === componentId
+    );
   };
 
   return (
@@ -69,11 +74,10 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
               <Image
                 src={logo}
                 alt="Patternmode"
-                width={24}
-                height={24}
+                width={32}
+                height={32}
                 className="shrink-0"
               />
-              <Subheading level={2}>Patternmode</Subheading>
             </div>
           </SidebarHeader>
           <SidebarBody>

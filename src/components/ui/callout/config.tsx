@@ -28,6 +28,7 @@ export const componentConfig: ComponentConfig = {
     {
       name: "icon",
       type: "icon",
+      defaultValue: "Info",
       description: "Optional icon displayed before the title.",
     },
     {

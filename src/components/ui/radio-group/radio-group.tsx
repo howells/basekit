@@ -43,7 +43,7 @@ RadioGroup.displayName = "RadioGroup";
 
 // Legacy components for backward compatibility with existing radio-group.tsx usage
 // These use the new Radio components from radio.tsx
-import { RadioItem } from "./radio";
+import { RadioItem } from "../radio";
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioItem>,

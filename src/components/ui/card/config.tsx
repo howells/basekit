@@ -17,11 +17,6 @@ export const componentConfig: ComponentConfig = {
         "This is a card component with some example content. It provides a clean container with subtle styling and shadow.",
       description: "The content to display inside the card.",
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes to apply to the card.",
-    },
   ],
   examples: [
     {

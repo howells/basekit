@@ -13,7 +13,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const defaultProps: useRender.ElementProps<"div"> = {
       className: cx(
         // base
-        "relative w-full rounded-lg p-6 text-left shadow-xs",
+        "relative w-full rounded-lg p-6 text-left text-sm shadow-xs",
         // inset ring border (similar to button)
         "inset-ring-1 inset-ring-black/10",
         "dark:inset-ring-white/10",

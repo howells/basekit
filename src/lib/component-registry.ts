@@ -24,6 +24,12 @@ import { componentConfig as inputConfig } from "@/components/ui/input/config";
 import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
 import { componentConfig as meterConfig } from "@/components/ui/meter/config";
 import { componentConfig as separatorConfig } from "@/components/ui/separator/config";
+import { componentConfig as radioConfig } from "@/components/ui/radio/config";
+import { componentConfig as radioGroupConfig } from "@/components/ui/radio-group/config";
+import { componentConfig as radioCardGroupConfig } from "@/components/ui/radio-card-group/config";
+import { componentConfig as sliderConfig } from "@/components/ui/slider/config";
+import { componentConfig as switchConfig } from "@/components/ui/switch/config";
+import { componentConfig as selectNativeConfig } from "@/components/ui/select-native/config";
 
 // TODO: Update these components to use new ComponentConfig structure
 import {
@@ -134,25 +140,7 @@ const numberFieldConfig = createPlaceholderConfig(
   "Number Field",
   "inputs"
 );
-const radioConfig = createPlaceholderConfig("radio", "Radio", "inputs");
-const radioCardGroupConfig = createPlaceholderConfig(
-  "radio-card-group",
-  "Radio Card Group",
-  "inputs"
-);
-const radioGroupConfig = createPlaceholderConfig(
-  "radio-group",
-  "Radio Group",
-  "inputs"
-);
 const selectConfig = createPlaceholderConfig("select", "Select", "inputs");
-const selectNativeConfig = createPlaceholderConfig(
-  "select-native",
-  "Select Native",
-  "inputs"
-);
-const sliderConfig = createPlaceholderConfig("slider", "Slider", "inputs");
-const switchConfig = createPlaceholderConfig("switch", "Switch", "inputs");
 const textareaConfig = createPlaceholderConfig(
   "textarea",
   "Textarea",
@@ -214,6 +202,12 @@ export const componentRegistry: ComponentConfigRegistry = {
   separator: separatorConfig,
   command: commandConfig,
   combobox: comboboxConfig,
+  radio: radioConfig,
+  "radio-group": radioGroupConfig,
+  "radio-card-group": radioCardGroupConfig,
+  slider: sliderConfig,
+  switch: switchConfig,
+  "select-native": selectNativeConfig,
 
   // UI Components (placeholders)
   "context-menu": contextMenuConfig,
@@ -254,13 +248,7 @@ export const componentRegistry: ComponentConfigRegistry = {
   "date-range-picker": dateRangePickerConfig,
   input: inputConfig,
   "number-field": numberFieldConfig,
-  radio: radioConfig,
-  "radio-card-group": radioCardGroupConfig,
-  "radio-group": radioGroupConfig,
   select: selectConfig,
-  "select-native": selectNativeConfig,
-  slider: sliderConfig,
-  switch: switchConfig,
   textarea: textareaConfig,
 
   // Form Components (placeholders)

@@ -2,9 +2,8 @@
 
 import { cx, focusInput, focusRing } from "@/lib/utils";
 import React from "react";
-import { type VariantProps } from "tailwind-variants";
-import { Radio, RadioIndicator } from "./radio";
-import { RadioGroup } from "./radio-group";
+import { Radio, RadioIndicator } from "../radio";
+import { RadioGroup } from "../radio-group";
 
 // Re-export RadioGroup as RadioCardGroup for backward compatibility
 const RadioCardGroup = React.forwardRef<
