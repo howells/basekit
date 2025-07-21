@@ -16,9 +16,11 @@ import { componentConfig as checkboxGroupConfig } from "@/components/ui/checkbox
 import { componentConfig as checkboxConfig } from "@/components/ui/checkbox/config";
 import { componentConfig as codeBlockConfig } from "@/components/ui/code-block/config";
 import { componentConfig as collapsibleConfig } from "@/components/ui/collapsible/config";
+import { componentConfig as comboboxConfig } from "@/components/ui/combobox/config";
+import { componentConfig as commandConfig } from "@/components/ui/command/config";
 import { componentConfig as copyButtonConfig } from "@/components/ui/copy-button/config";
 import { componentConfig as dividerConfig } from "@/components/ui/divider/config";
-import { inputConfig } from "@/components/ui/input/config";
+import { componentConfig as inputConfig } from "@/components/ui/input/config";
 import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
 import { componentConfig as meterConfig } from "@/components/ui/meter/config";
 import { componentConfig as separatorConfig } from "@/components/ui/separator/config";
@@ -55,8 +57,6 @@ const createPlaceholderConfig = (
 
 // Placeholder configurations for components not yet converted to three-file structure
 // (Only for components that don't already have imports above)
-const comboboxConfig = createPlaceholderConfig("combobox", "Combobox");
-const commandConfig = createPlaceholderConfig("command", "Command");
 const contextMenuConfig = createPlaceholderConfig(
   "context-menu",
   "Context Menu"
@@ -212,10 +212,10 @@ export const componentRegistry: ComponentConfigRegistry = {
   loader: loaderConfig,
   meter: meterConfig,
   separator: separatorConfig,
+  command: commandConfig,
+  combobox: comboboxConfig,
 
   // UI Components (placeholders)
-  combobox: comboboxConfig,
-  command: commandConfig,
   "context-menu": contextMenuConfig,
   "description-list": descriptionListConfig,
   dialog: dialogConfig,

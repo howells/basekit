@@ -1,6 +1,6 @@
 import { ComponentConfig } from "@/lib/component-config-types";
 
-export const inputConfig: ComponentConfig = {
+export const componentConfig: ComponentConfig = {
   id: "input",
   name: "Input",
   description:

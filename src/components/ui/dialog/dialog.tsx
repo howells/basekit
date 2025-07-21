@@ -29,9 +29,10 @@ const DialogOverlay = React.forwardRef<
         "fixed inset-0 z-50 overflow-y-auto",
         // background color
         "bg-black/70",
-        // transition - Base UI uses different data attributes
-        "data-[starting-style]:animate-dialog-overlay-show",
-        "data-open:animate-dialog-overlay-show",
+        // transition - match Base UI pattern
+        "transition-all duration-150",
+        "data-[starting-style]:opacity-0",
+        "data-[ending-style]:opacity-0",
         className
       )}
       {...props}
@@ -56,9 +57,10 @@ const DialogContent = React.forwardRef<
           "border-zinc-200 dark:border-zinc-900",
           // background color
           "bg-white dark:bg-[#090E1A]",
-          // transition - Base UI uses different data attributes
-          "data-[starting-style]:animate-dialog-content-show",
-          "data-open:animate-dialog-content-show",
+          // transition - match Base UI pattern with scale and opacity
+          "transition-all duration-150",
+          "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+          "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
           focusRing,
           className
         )}

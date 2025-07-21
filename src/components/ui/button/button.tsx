@@ -156,13 +156,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       RightIcon != null && size !== "icon" && size !== "icon-sm";
     const shouldShowChildren =
       hasChildren && size !== "icon" && size !== "icon-sm";
+    const isIconButton = size === "icon" || size === "icon-sm";
 
     // Check if children is a complex element (custom layout)
     const hasCustomLayout = React.isValidElement(children);
 
     // Icon size based on button size
     const iconSize =
-      size === "sm" || size === "icon-sm" ? "size-3" : "size-3.5";
+      size === "sm" || size === "icon-sm" ? "size-3.5" : "size-3.5";
     const iconClassName = `${iconSize} shrink-0`;
 
     // When loading, Loader replaces leftIcon, and we show loadingText or original children
@@ -174,6 +175,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (hasCustomLayout && !hasLeftIcon && !hasRightIcon && !isLoading) {
         return children;
       }
+
+      // For icon buttons, wrap any text children in sr-only span
+      const iconButtonChildren = isIconButton && hasChildren && (
+        <span className="sr-only">{effectiveChildren}</span>
+      );
 
       // Determine layout class
       const layoutClassName = cx(
@@ -193,6 +199,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (!fullWidth) {
         // Simple case: no icons or loading state
         if (!hasLeftIcon && !hasRightIcon && !isLoading) {
+          // For icon buttons, return sr-only wrapped children
+          if (isIconButton && hasChildren) {
+            return iconButtonChildren;
+          }
           return effectiveShouldShowChildren ? effectiveChildren : null;
         }
 
@@ -239,7 +249,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               </span>
             )}
 
-            {effectiveShouldShowChildren && effectiveChildren}
+            {isIconButton && hasChildren
+              ? iconButtonChildren
+              : effectiveShouldShowChildren && effectiveChildren}
 
             {/* Right icon with CSS transitions */}
             {hasRightIcon && (
@@ -292,7 +304,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             </span>
 
             <div className="flex-1 text-center">
-              {effectiveShouldShowChildren && effectiveChildren}
+              {isIconButton && hasChildren
+                ? iconButtonChildren
+                : effectiveShouldShowChildren && effectiveChildren}
             </div>
 
             {/* Right icon */}
@@ -345,7 +359,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   )}
                 </div>
               </span>
-              {effectiveShouldShowChildren && effectiveChildren}
+              {isIconButton && hasChildren
+                ? iconButtonChildren
+                : effectiveShouldShowChildren && effectiveChildren}
             </div>
 
             {/* Right icon */}
@@ -394,7 +410,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               )}
             </div>
           </span>
-          {effectiveShouldShowChildren && effectiveChildren}
+          {isIconButton && hasChildren
+            ? iconButtonChildren
+            : effectiveShouldShowChildren && effectiveChildren}
         </span>
       );
     };
