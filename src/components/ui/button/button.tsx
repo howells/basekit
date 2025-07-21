@@ -9,8 +9,8 @@ const buttonVariants = tv({
   base: [
     // base
     "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-center text-sm font-medium shadow-xs outline-hidden",
-    // background transition with Apple easing
-    "transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
+    // background transition with Apple easing - only animate colors and shadows, not position
+    "transition-[background-color,border-color,box-shadow,color] duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
     // disabled
     "disabled:pointer-events-none disabled:shadow-none",
     // focus

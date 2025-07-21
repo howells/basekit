@@ -4,6 +4,8 @@ import { Dialog as BaseDialog } from "@base-ui-components/react/dialog";
 import React from "react";
 
 import { cx, focusRing } from "@/lib/utils";
+import { Subheading } from "../heading";
+import { Text } from "../text";
 
 const Dialog = BaseDialog.Root;
 Dialog.displayName = "Dialog";
@@ -15,7 +17,6 @@ const DialogClose = BaseDialog.Close;
 DialogClose.displayName = "DialogClose";
 
 const DialogPortal = BaseDialog.Portal;
-DialogPortal.displayName = "DialogPortal";
 
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof BaseDialog.Backdrop>,
@@ -26,7 +27,7 @@ const DialogOverlay = React.forwardRef<
       ref={forwardedRef}
       className={cx(
         // base
-        "fixed inset-0 z-50 overflow-y-auto",
+        "fixed inset-0 z-50",
         // background color
         "bg-black/70",
         // transition - match Base UI pattern
@@ -52,7 +53,7 @@ const DialogContent = React.forwardRef<
         ref={forwardedRef}
         className={cx(
           // base
-          "fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border p-6 shadow-lg",
+          "fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-lg -translate-x-1/2 -translate-y-1/2 max-h-[90vh] overflow-y-auto rounded-md border p-6 shadow-lg",
           // border color
           "border-zinc-200 dark:border-zinc-900",
           // background color
@@ -86,13 +87,15 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, forwardedRef) => (
   <BaseDialog.Title
     ref={forwardedRef}
-    className={cx(
-      // base
-      "text-lg font-semibold",
-      // text color
-      "text-zinc-900 dark:text-zinc-50",
-      className
-    )}
+    render={
+      <Subheading
+        className={cx(
+          // text color
+          "text-zinc-900 dark:text-zinc-50",
+          className
+        )}
+      />
+    }
     {...props}
   />
 ));
@@ -105,7 +108,7 @@ const DialogDescription = React.forwardRef<
   return (
     <BaseDialog.Description
       ref={forwardedRef}
-      className={cx("text-zinc-500 dark:text-zinc-500", className)}
+      render={<Text className={cx(className)} />}
       {...props}
     />
   );

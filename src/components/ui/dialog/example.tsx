@@ -36,7 +36,7 @@ export function DialogExample({
   };
 
   return (
-    <div className="space-y-4">
+    <div>
       <Dialog>
         <DialogTrigger render={<Button />}>Open Dialog</DialogTrigger>
         <DialogContent
