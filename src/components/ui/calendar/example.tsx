@@ -36,19 +36,18 @@ export const CalendarExample = ({
   // Add mode-specific props
   if (mode === "single") {
     return (
-      <Calendar
-        {...calendarProps}
-        mode="single"
-        selected={selected as Date}
-        defaultSelected={defaultSelected as Date}
-      />
+      <Calendar {...calendarProps} mode="single" selected={selected as Date} />
     );
   } else if (mode === "range") {
     return (
       <Calendar
         {...calendarProps}
         mode="range"
-        selected={selected as { from?: Date; to?: Date }}
+        selected={
+          selected?.from && selected?.to
+            ? { from: selected.from, to: selected.to }
+            : undefined
+        }
         defaultSelected={defaultSelected as { from?: Date; to?: Date }}
       />
     );

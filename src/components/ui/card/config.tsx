@@ -11,6 +11,32 @@ export const componentConfig: ComponentConfig = {
   componentId: "CardExample",
   props: [
     {
+      name: "padding",
+      type: "select",
+      options: [
+        "0",
+        "0.5",
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+      ],
+      defaultValue: "6",
+      description:
+        "Padding for the card (Tailwind scale). Use 0 for no padding.",
+    },
+    {
       name: "children",
       type: "string",
       defaultValue:
@@ -39,9 +65,23 @@ export const componentConfig: ComponentConfig = {
     {
       id: "compact",
       title: "Compact",
-      description: "Card with reduced padding.",
-      code: `<Card className="p-4">
+      description: "Card with reduced padding using the padding prop.",
+      code: `<Card padding={4}>
   <p>This is a more compact card with less padding.</p>
+</Card>`,
+    },
+    {
+      id: "no-padding",
+      title: "No Padding",
+      description:
+        "Card with no internal padding, useful for full-width content.",
+      code: `<Card padding={0}>
+  <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
+    <h3 className="font-semibold">Header</h3>
+  </div>
+  <div className="p-6">
+    <p>Content with custom padding structure.</p>
+  </div>
 </Card>`,
     },
     {

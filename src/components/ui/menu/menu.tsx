@@ -9,19 +9,14 @@ import * as React from "react";
 import { cx } from "@/lib/utils";
 
 const Menu = BaseMenu.Root;
-Menu.displayName = "Menu";
 
 const MenuTrigger = BaseMenu.Trigger;
-MenuTrigger.displayName = "MenuTrigger";
 
 const MenuGroup = BaseMenu.Group;
-MenuGroup.displayName = "MenuGroup";
 
 const MenuSubmenu = BaseMenu.SubmenuRoot;
-MenuSubmenu.displayName = "MenuSubmenu";
 
 const MenuRadioGroup = BaseMenu.RadioGroup;
-MenuRadioGroup.displayName = "MenuRadioGroup";
 
 const MenuSubmenuTrigger = React.forwardRef<
   React.ElementRef<typeof BaseMenu.SubmenuTrigger>,
@@ -48,7 +43,6 @@ const MenuSubmenuTrigger = React.forwardRef<
     <ChevronRight className="ml-auto size-4 shrink-0" aria-hidden="true" />
   </BaseMenu.SubmenuTrigger>
 ));
-MenuSubmenuTrigger.displayName = "MenuSubmenuTrigger";
 
 const MenuSubmenuContent = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Popup>,
@@ -83,7 +77,6 @@ const MenuSubmenuContent = React.forwardRef<
     </BaseMenu.Positioner>
   </BaseMenu.Portal>
 ));
-MenuSubmenuContent.displayName = "MenuSubmenuContent";
 
 const MenuContent = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Popup>,
@@ -137,7 +130,6 @@ const MenuContent = React.forwardRef<
     </BaseMenu.Portal>
   )
 );
-MenuContent.displayName = "MenuContent";
 
 const MenuItem = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Item>,
@@ -181,7 +173,6 @@ const MenuItem = React.forwardRef<
     )}
   </BaseMenu.Item>
 ));
-MenuItem.displayName = "MenuItem";
 
 const MenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof BaseMenu.CheckboxItem>,
@@ -242,7 +233,6 @@ const MenuCheckboxItem = React.forwardRef<
     </BaseMenu.CheckboxItem>
   )
 );
-MenuCheckboxItem.displayName = "MenuCheckboxItem";
 
 const MenuRadioItem = React.forwardRef<
   React.ElementRef<typeof BaseMenu.RadioItem>,
@@ -303,7 +293,6 @@ const MenuRadioItem = React.forwardRef<
     )}
   </BaseMenu.RadioItem>
 ));
-MenuRadioItem.displayName = "MenuRadioItem";
 
 const MenuLabel = React.forwardRef<
   React.ElementRef<typeof BaseMenu.GroupLabel>,
@@ -321,7 +310,6 @@ const MenuLabel = React.forwardRef<
     {...props}
   />
 ));
-MenuLabel.displayName = "MenuLabel";
 
 const MenuSeparator = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Separator>,
@@ -336,7 +324,6 @@ const MenuSeparator = React.forwardRef<
     {...props}
   />
 ));
-MenuSeparator.displayName = "MenuSeparator";
 
 const MenuIconWrapper = ({
   className,
@@ -355,7 +342,6 @@ const MenuIconWrapper = ({
     />
   );
 };
-MenuIconWrapper.displayName = "MenuIconWrapper";
 
 export {
   Menu,

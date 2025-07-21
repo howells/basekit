@@ -285,7 +285,7 @@ export function ComponentPreview({
   };
 
   return (
-    <Card className="p-8 bg-gray-50/50">
+    <Card>
       <div className="flex items-center justify-center min-h-[120px]">
         {renderComponent()}
       </div>

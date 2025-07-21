@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { 
-  Popover, 
-  PopoverTrigger, 
-  PopoverContent, 
-  PopoverTitle, 
-  PopoverDescription, 
+import { useState } from "react";
+import {
+  Popover,
+  PopoverArrow,
   PopoverClose,
-  PopoverArrow
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
 } from "./popover";
 
 interface PopoverExampleProps {
@@ -22,7 +22,7 @@ interface PopoverExampleProps {
 
 export function PopoverExample({
   side = "bottom",
-  align = "center", 
+  align = "center",
   sideOffset = 10,
   showArrow = false,
   showClose = false,
@@ -34,31 +34,33 @@ export function PopoverExample({
       {/* Basic popover */}
       <div className="flex justify-center">
         <Popover>
-          <PopoverTrigger asChild>
-            <Button>Open Popover</Button>
-          </PopoverTrigger>
-          <PopoverContent 
-            side={side} 
-            align={align}
-            sideOffset={sideOffset}
-          >
+          <PopoverTrigger render={<Button />}>Open Popover</PopoverTrigger>
+          <PopoverContent side={side} align={align} sideOffset={sideOffset}>
             {showArrow && <PopoverArrow />}
             <div className="space-y-2">
               {showClose && (
                 <div className="flex items-start justify-between">
                   <PopoverTitle>Popover Title</PopoverTitle>
-                  <PopoverClose asChild>
-                    <button className="text-zinc-400 hover:text-zinc-900 dark:text-zinc-600 dark:hover:text-zinc-50">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M12.207 4.793a1 1 0 010 1.414L9.414 9l2.793 2.793a1 1 0 01-1.414 1.414L8 10.414l-2.793 2.793a1 1 0 01-1.414-1.414L6.586 9 3.793 6.207a1 1 0 011.414-1.414L8 7.586l2.793-2.793a1 1 0 011.414 0z" />
-                      </svg>
-                    </button>
+                  <PopoverClose
+                    render={
+                      <button className="text-zinc-400 hover:text-zinc-900 dark:text-zinc-600 dark:hover:text-zinc-50" />
+                    }
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                    >
+                      <path d="M12.207 4.793a1 1 0 010 1.414L9.414 9l2.793 2.793a1 1 0 01-1.414 1.414L8 10.414l-2.793 2.793a1 1 0 01-1.414-1.414L6.586 9 3.793 6.207a1 1 0 011.414-1.414L8 7.586l2.793-2.793a1 1 0 011.414 0z" />
+                    </svg>
                   </PopoverClose>
                 </div>
               )}
               {!showClose && <PopoverTitle>Popover Title</PopoverTitle>}
               <PopoverDescription>
-                This is a popover description with some helpful information about the content.
+                This is a popover description with some helpful information
+                about the content.
               </PopoverDescription>
             </div>
           </PopoverContent>
@@ -68,7 +70,7 @@ export function PopoverExample({
       {/* Position examples */}
       <div className="flex justify-center gap-4">
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger render={<Button />}>
             <Button size="sm">Top</Button>
           </PopoverTrigger>
           <PopoverContent side="top">
@@ -78,9 +80,9 @@ export function PopoverExample({
             </PopoverDescription>
           </PopoverContent>
         </Popover>
-        
+
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger render={<Button />}>
             <Button size="sm">Right</Button>
           </PopoverTrigger>
           <PopoverContent side="right">
@@ -90,9 +92,9 @@ export function PopoverExample({
             </PopoverDescription>
           </PopoverContent>
         </Popover>
-        
+
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger render={<Button />}>
             <Button size="sm">Bottom</Button>
           </PopoverTrigger>
           <PopoverContent side="bottom">
@@ -102,9 +104,9 @@ export function PopoverExample({
             </PopoverDescription>
           </PopoverContent>
         </Popover>
-        
+
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger render={<Button />}>
             <Button size="sm">Left</Button>
           </PopoverTrigger>
           <PopoverContent side="left">
@@ -119,7 +121,7 @@ export function PopoverExample({
       {/* Rich content example */}
       <div className="flex justify-center">
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger render={<Button />}>
             <Button>User Menu</Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
@@ -128,7 +130,7 @@ export function PopoverExample({
                 <PopoverTitle>John Doe</PopoverTitle>
                 <PopoverDescription>john.doe@example.com</PopoverDescription>
               </div>
-              
+
               <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3">
                 <div className="space-y-1">
                   <button className="flex w-full items-center px-2 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded">
@@ -142,7 +144,7 @@ export function PopoverExample({
                   </button>
                 </div>
               </div>
-              
+
               <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3">
                 <button className="flex w-full items-center px-2 py-1.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded">
                   Sign out
@@ -156,7 +158,7 @@ export function PopoverExample({
       {/* Controlled example */}
       <div className="flex justify-center gap-4">
         <Popover open={controlledOpen} onOpenChange={setControlledOpen}>
-          <PopoverTrigger asChild>
+          <PopoverTrigger render={<Button />}>
             <Button>Controlled</Button>
           </PopoverTrigger>
           <PopoverContent>
@@ -171,13 +173,13 @@ export function PopoverExample({
             </div>
           </PopoverContent>
         </Popover>
-        
-        <Button 
+
+        <Button
           onClick={() => setControlledOpen(!controlledOpen)}
           variant="outline"
           size="sm"
         >
-          Toggle: {controlledOpen ? 'Open' : 'Closed'}
+          Toggle: {controlledOpen ? "Open" : "Closed"}
         </Button>
       </div>
     </div>

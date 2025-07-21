@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Truck, Zap, Rocket, Cpu, HardDrive, Wifi } from "lucide-react";
-import { RadioCardGroup, RadioCardItem, RadioCardIndicator } from "./radio-card-group";
+import { Cpu, HardDrive, Rocket, Truck, Wifi, Zap } from "lucide-react";
+import { useState } from "react";
+import {
+  RadioCardGroup,
+  RadioCardIndicator,
+  RadioCardItem,
+} from "./radio-card-group";
 
 interface RadioCardGroupExampleProps {
   orientation?: "vertical" | "horizontal";
@@ -28,9 +32,9 @@ export function RadioCardGroupExample({
       {/* Basic radio card group */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium">Basic Radio Card Group</h3>
-        <RadioCardGroup 
-          value={planValue} 
-          onValueChange={setPlanValue}
+        <RadioCardGroup
+          value={planValue}
+          onValueChange={(value) => setPlanValue(value as string)}
           orientation={orientation}
           size={size}
           disabled={disabled}
@@ -48,7 +52,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="pro">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -62,7 +66,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="enterprise">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -83,7 +87,7 @@ export function RadioCardGroupExample({
       {/* With pricing */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium">With Pricing</h3>
-        <RadioCardGroup value={pricingValue} onValueChange={setPricingValue}>
+        <RadioCardGroup value={pricingValue} onValueChange={(value) => setPricingValue(value as string)}>
           <RadioCardItem value="starter">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -92,7 +96,10 @@ export function RadioCardGroupExample({
                     Starter
                   </div>
                   <div className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-                    $9<span className="text-sm font-normal text-zinc-500">/mo</span>
+                    $9
+                    <span className="text-sm font-normal text-zinc-500">
+                      /mo
+                    </span>
                   </div>
                 </div>
                 <div className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
@@ -107,7 +114,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="professional">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -116,7 +123,10 @@ export function RadioCardGroupExample({
                     Professional
                   </div>
                   <div className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-                    $29<span className="text-sm font-normal text-zinc-500">/mo</span>
+                    $29
+                    <span className="text-sm font-normal text-zinc-500">
+                      /mo
+                    </span>
                   </div>
                 </div>
                 <div className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
@@ -138,7 +148,7 @@ export function RadioCardGroupExample({
       {/* With icons */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium">With Icons</h3>
-        <RadioCardGroup value={shippingValue} onValueChange={setShippingValue}>
+        <RadioCardGroup value={shippingValue} onValueChange={(value) => setShippingValue(value as string)}>
           <RadioCardItem value="standard">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 flex-1">
@@ -155,7 +165,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="express">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 flex-1">
@@ -172,7 +182,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="overnight">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 flex-1">
@@ -195,9 +205,9 @@ export function RadioCardGroupExample({
       {/* Horizontal layout */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium">Horizontal Layout</h3>
-        <RadioCardGroup 
-          value={sizeValue} 
-          onValueChange={setSizeValue}
+        <RadioCardGroup
+          value={sizeValue}
+          onValueChange={(value) => setSizeValue(value as string)}
           orientation="horizontal"
           className="grid-cols-3"
         >
@@ -215,7 +225,7 @@ export function RadioCardGroupExample({
               </div>
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="medium">
             <div className="text-center">
               <HardDrive className="size-6 mx-auto mb-2 text-zinc-600 dark:text-zinc-400" />
@@ -230,7 +240,7 @@ export function RadioCardGroupExample({
               </div>
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="large">
             <div className="text-center">
               <Wifi className="size-6 mx-auto mb-2 text-zinc-600 dark:text-zinc-400" />
@@ -251,7 +261,7 @@ export function RadioCardGroupExample({
       {/* With disabled options */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium">With Disabled Options</h3>
-        <RadioCardGroup value={disabledValue} onValueChange={setDisabledValue}>
+        <RadioCardGroup value={disabledValue} onValueChange={(value) => setDisabledValue(value as string)}>
           <RadioCardItem value="available1">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -265,7 +275,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="disabled" disabled>
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -279,7 +289,7 @@ export function RadioCardGroupExample({
               <RadioCardIndicator />
             </div>
           </RadioCardItem>
-          
+
           <RadioCardItem value="available2">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -303,8 +313,11 @@ export function RadioCardGroupExample({
           <div className="text-sm text-zinc-600">
             Selected: <strong>{controlledValue}</strong>
           </div>
-          
-          <RadioCardGroup value={controlledValue} onValueChange={setControlledValue}>
+
+          <RadioCardGroup
+            value={controlledValue}
+            onValueChange={(value) => setControlledValue(value as string)}
+          >
             <RadioCardItem value="option1">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -318,7 +331,7 @@ export function RadioCardGroupExample({
                 <RadioCardIndicator />
               </div>
             </RadioCardItem>
-            
+
             <RadioCardItem value="option2">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -333,16 +346,16 @@ export function RadioCardGroupExample({
               </div>
             </RadioCardItem>
           </RadioCardGroup>
-          
+
           <div className="flex gap-2">
-            <Button 
+            <Button
               onClick={() => setControlledValue("option1")}
               size="sm"
               variant="outline"
             >
               Select Option 1
             </Button>
-            <Button 
+            <Button
               onClick={() => setControlledValue("option2")}
               size="sm"
               variant="outline"

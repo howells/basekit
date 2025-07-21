@@ -3,15 +3,16 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "menu",
   name: "Menu",
-  description: "Dropdown menu component built on Base UI with support for nested submenus, radio groups, checkboxes, and keyboard navigation.",
+  description:
+    "Dropdown menu component built on Base UI with support for nested submenus, radio groups, checkboxes, and keyboard navigation.",
   category: "ui" as const,
   badge: "UI",
-  importStatement: `import { 
-  Menu, 
-  MenuTrigger, 
-  MenuContent, 
-  MenuItem, 
-  MenuSeparator, 
+  importStatement: `import {
+  Menu,
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
   MenuLabel,
   MenuCheckboxItem,
   MenuRadioGroup,
@@ -49,8 +50,8 @@ export const componentConfig: ComponentConfig = {
       title: "Default",
       description: "Basic menu with items and separators.",
       code: `<Menu>
-  <MenuTrigger asChild>
-    <Button>Open Menu</Button>
+  <MenuTrigger render={<Button />}>
+    Open Menu
   </MenuTrigger>
   <MenuContent>
     <MenuItem>New File</MenuItem>
@@ -66,8 +67,8 @@ export const componentConfig: ComponentConfig = {
       title: "With Icons",
       description: "Menu items with icons and shortcuts.",
       code: `<Menu>
-  <MenuTrigger asChild>
-    <Button>Edit Menu</Button>
+  <MenuTrigger render={<Button />}>
+    Edit Menu
   </MenuTrigger>
   <MenuContent>
     <MenuItem>
@@ -102,18 +103,18 @@ export const componentConfig: ComponentConfig = {
 const [showToolbar, setShowToolbar] = useState(false);
 
 <Menu>
-  <MenuTrigger asChild>
-    <Button>View Options</Button>
+  <MenuTrigger render={<Button />}>
+    View Options
   </MenuTrigger>
   <MenuContent>
     <MenuLabel>Show/Hide</MenuLabel>
-    <MenuCheckboxItem 
+    <MenuCheckboxItem
       checked={showSidebar}
       onCheckedChange={setShowSidebar}
     >
       Sidebar
     </MenuCheckboxItem>
-    <MenuCheckboxItem 
+    <MenuCheckboxItem
       checked={showToolbar}
       onCheckedChange={setShowToolbar}
     >
@@ -131,8 +132,8 @@ const [showToolbar, setShowToolbar] = useState(false);
       code: `const [theme, setTheme] = useState("light");
 
 <Menu>
-  <MenuTrigger asChild>
-    <Button>Theme</Button>
+  <MenuTrigger render={<Button />}>
+    Theme
   </MenuTrigger>
   <MenuContent>
     <MenuLabel>Theme</MenuLabel>
@@ -155,14 +156,14 @@ const [showToolbar, setShowToolbar] = useState(false);
       title: "With Submenu",
       description: "Menu with nested submenu items.",
       code: `<Menu>
-  <MenuTrigger asChild>
-    <Button>File Menu</Button>
+  <MenuTrigger render={<Button />}>
+    File Menu
   </MenuTrigger>
   <MenuContent>
     <MenuItem>New File</MenuItem>
     <MenuItem>Open File</MenuItem>
     <MenuSeparator />
-    
+
     <MenuSubmenu>
       <MenuSubmenuTrigger>
         Recent Files
@@ -175,7 +176,7 @@ const [showToolbar, setShowToolbar] = useState(false);
         <MenuItem>Clear Recent</MenuItem>
       </MenuSubmenuContent>
     </MenuSubmenu>
-    
+
     <MenuSubmenu>
       <MenuSubmenuTrigger>
         Export As
@@ -187,7 +188,7 @@ const [showToolbar, setShowToolbar] = useState(false);
         <MenuItem>Markdown</MenuItem>
       </MenuSubmenuContent>
     </MenuSubmenu>
-    
+
     <MenuSeparator />
     <MenuItem>Exit</MenuItem>
   </MenuContent>
@@ -202,36 +203,36 @@ const [autoSave, setAutoSave] = useState(false);
 const [language, setLanguage] = useState("english");
 
 <Menu>
-  <MenuTrigger asChild>
-    <Button>Settings</Button>
+  <MenuTrigger render={<Button />}>
+    Settings
   </MenuTrigger>
   <MenuContent className="w-56">
     <MenuLabel>Preferences</MenuLabel>
-    
-    <MenuCheckboxItem 
+
+    <MenuCheckboxItem
       checked={notifications}
       onCheckedChange={setNotifications}
     >
       Enable Notifications
     </MenuCheckboxItem>
-    <MenuCheckboxItem 
+    <MenuCheckboxItem
       checked={autoSave}
       onCheckedChange={setAutoSave}
     >
       Auto Save
     </MenuCheckboxItem>
-    
+
     <MenuSeparator />
-    
+
     <MenuLabel>Language</MenuLabel>
     <MenuRadioGroup value={language} onValueChange={setLanguage}>
       <MenuRadioItem value="english">English</MenuRadioItem>
       <MenuRadioItem value="spanish">Español</MenuRadioItem>
       <MenuRadioItem value="french">Français</MenuRadioItem>
     </MenuRadioGroup>
-    
+
     <MenuSeparator />
-    
+
     <MenuSubmenu>
       <MenuSubmenuTrigger>Advanced</MenuSubmenuTrigger>
       <MenuSubmenuContent>
@@ -242,7 +243,7 @@ const [language, setLanguage] = useState("english");
         <MenuItem>Import Config</MenuItem>
       </MenuSubmenuContent>
     </MenuSubmenu>
-    
+
     <MenuSeparator />
     <MenuItem>About</MenuItem>
   </MenuContent>

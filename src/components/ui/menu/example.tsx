@@ -42,9 +42,7 @@ export function MenuExample({
       {/* Basic menu */}
       <div className="flex justify-center">
         <Menu>
-          <MenuTrigger asChild>
-            <Button>Open Menu</Button>
-          </MenuTrigger>
+          <MenuTrigger render={<Button />}>Open Menu</MenuTrigger>
           <MenuContent
             sideOffset={sideOffset}
             align={align}
@@ -62,9 +60,7 @@ export function MenuExample({
       {/* Menu with icons and shortcuts */}
       <div className="flex justify-center gap-4">
         <Menu>
-          <MenuTrigger asChild>
-            <Button size="sm">Edit Menu</Button>
-          </MenuTrigger>
+          <MenuTrigger render={<Button size="sm" />}>Edit Menu</MenuTrigger>
           <MenuContent>
             <MenuItem>
               <MenuIconWrapper>
@@ -92,11 +88,9 @@ export function MenuExample({
 
         {/* Menu with checkboxes */}
         <Menu>
-          <MenuTrigger asChild>
-            <Button size="sm" variant="outline">
-              <Eye className="size-4 mr-2" />
-              View Options
-            </Button>
+          <MenuTrigger render={<Button size="sm" variant="outline" />}>
+            <Eye className="size-4 mr-2" />
+            View Options
           </MenuTrigger>
           <MenuContent>
             <MenuLabel>Show/Hide</MenuLabel>
@@ -121,8 +115,8 @@ export function MenuExample({
       {/* Menu with radio group */}
       <div className="flex justify-center">
         <Menu>
-          <MenuTrigger asChild>
-            <Button variant="secondary">Theme: {theme}</Button>
+          <MenuTrigger render={<Button variant="secondary" />}>
+            Theme: {theme}
           </MenuTrigger>
           <MenuContent>
             <MenuLabel>Theme</MenuLabel>
@@ -138,9 +132,7 @@ export function MenuExample({
       {/* Menu with submenu */}
       <div className="flex justify-center">
         <Menu>
-          <MenuTrigger asChild>
-            <Button>File Menu</Button>
-          </MenuTrigger>
+          <MenuTrigger render={<Button />}>File Menu</MenuTrigger>
           <MenuContent>
             <MenuItem>
               <MenuIconWrapper>
@@ -186,11 +178,9 @@ export function MenuExample({
       {/* Complex menu with all features */}
       <div className="flex justify-center">
         <Menu>
-          <MenuTrigger asChild>
-            <Button>
-              <Settings className="size-4 mr-2" />
-              Settings
-            </Button>
+          <MenuTrigger render={<Button />}>
+            <Settings className="size-4 mr-2" />
+            Settings
           </MenuTrigger>
           <MenuContent className="w-56">
             <MenuLabel>Preferences</MenuLabel>

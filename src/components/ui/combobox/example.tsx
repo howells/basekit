@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, User, Home, Settings, HelpCircle } from "lucide-react";
+import { Check, HelpCircle, Home, Settings, User } from "lucide-react";
+import { useState } from "react";
 import { Combobox, useCombobox, type ComboboxOption } from "./combobox";
 
 interface ComboboxExampleProps {
@@ -35,52 +35,60 @@ export function ComboboxExample({
   ];
 
   const iconOptions: ComboboxOption[] = [
-    { 
-      value: "home", 
-      label: "Home", 
-      leftIcon: ({ className }) => <Home className={className} />
+    {
+      value: "home",
+      label: "Home",
+      leftIcon: ({ className }) => <Home className={className} />,
     },
-    { 
-      value: "profile", 
-      label: "Profile", 
-      leftIcon: ({ className }) => <User className={className} />
+    {
+      value: "profile",
+      label: "Profile",
+      leftIcon: ({ className }) => <User className={className} />,
     },
-    { 
-      value: "settings", 
-      label: "Settings", 
-      leftIcon: ({ className }) => <Settings className={className} />
+    {
+      value: "settings",
+      label: "Settings",
+      leftIcon: ({ className }) => <Settings className={className} />,
     },
-    { 
-      value: "help", 
-      label: "Help", 
-      leftIcon: ({ className }) => <HelpCircle className={className} />
+    {
+      value: "help",
+      label: "Help",
+      leftIcon: ({ className }) => <HelpCircle className={className} />,
     },
   ];
 
   const userOptions = [
-    { 
-      value: "john", 
-      label: "John Doe", 
+    {
+      value: "john",
+      label: "John Doe",
       email: "john@example.com",
-      leftIcon: ({ className }: { className?: string }) => <User className={className} />
+      leftIcon: ({ className }: { className?: string }) => (
+        <User className={className} />
+      ),
     },
-    { 
-      value: "jane", 
-      label: "Jane Smith", 
+    {
+      value: "jane",
+      label: "Jane Smith",
       email: "jane@example.com",
-      leftIcon: ({ className }: { className?: string }) => <User className={className} />
+      leftIcon: ({ className }: { className?: string }) => (
+        <User className={className} />
+      ),
     },
-    { 
-      value: "bob", 
-      label: "Bob Johnson", 
+    {
+      value: "bob",
+      label: "Bob Johnson",
       email: "bob@example.com",
-      leftIcon: ({ className }: { className?: string }) => <User className={className} />
+      leftIcon: ({ className }: { className?: string }) => (
+        <User className={className} />
+      ),
     },
-    { 
-      value: "alice", 
-      label: "Alice Wilson", 
+    {
+      value: "alice",
+      label: "Alice Wilson",
       email: "alice@example.com",
-      leftIcon: ({ className }: { className?: string }) => <User className={className} />
+      leftIcon: ({ className }: { className?: string }) => (
+        <User className={className} />
+      ),
     },
   ];
 
@@ -148,13 +156,15 @@ export function ComboboxExample({
           placeholder="Select a user..."
           searchPlaceholder="Search users..."
           className="max-w-sm"
-          renderTrigger={(selectedOption) => 
+          renderTrigger={(selectedOption) =>
             selectedOption ? (
               <div className="flex items-center gap-2">
                 <User className="size-4" />
                 <div className="text-left min-w-0">
-                  <div className="font-medium truncate">{selectedOption.label}</div>
-                  <div className="text-xs text-zinc-500 truncate">{selectedOption.email}</div>
+                  <div className="font-medium truncate">
+                    {selectedOption.label}
+                  </div>
+                  <div className="text-xs text-zinc-500 truncate">User</div>
                 </div>
               </div>
             ) : (
@@ -163,11 +173,17 @@ export function ComboboxExample({
           }
           renderItem={(option) => (
             <>
-              <Check className={userValue === option.value ? "mr-2 h-4 w-4" : "mr-2 h-4 w-4 opacity-0"} />
+              <Check
+                className={
+                  userValue === option.value
+                    ? "mr-2 h-4 w-4"
+                    : "mr-2 h-4 w-4 opacity-0"
+                }
+              />
               <User className="mr-2 size-4" />
               <div className="flex-1 min-w-0">
                 <div className="font-medium truncate">{option.label}</div>
-                <div className="text-xs text-zinc-500 truncate">{option.email}</div>
+                <div className="text-xs text-zinc-500 truncate">User</div>
               </div>
             </>
           )}
@@ -187,14 +203,14 @@ export function ComboboxExample({
             className="max-w-xs"
           />
           <div className="flex gap-2">
-            <Button 
+            <Button
               onClick={() => hookCombobox.setValue("banana")}
               size="sm"
               variant="outline"
             >
               Select Banana
             </Button>
-            <Button 
+            <Button
               onClick={() => hookCombobox.setValue("")}
               size="sm"
               variant="outline"
@@ -203,7 +219,9 @@ export function ComboboxExample({
             </Button>
           </div>
           {hookCombobox.value && (
-            <p className="text-sm text-zinc-600">Selected: {hookCombobox.value}</p>
+            <p className="text-sm text-zinc-600">
+              Selected: {hookCombobox.value}
+            </p>
           )}
         </div>
       </div>

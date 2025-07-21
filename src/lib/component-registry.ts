@@ -16,20 +16,30 @@ import { componentConfig as checkboxGroupConfig } from "@/components/ui/checkbox
 import { componentConfig as checkboxConfig } from "@/components/ui/checkbox/config";
 import { componentConfig as codeBlockConfig } from "@/components/ui/code-block/config";
 import { componentConfig as collapsibleConfig } from "@/components/ui/collapsible/config";
+import { componentConfig as comboChartConfig } from "@/components/ui/combo-chart/config";
 import { componentConfig as comboboxConfig } from "@/components/ui/combobox/config";
 import { componentConfig as commandConfig } from "@/components/ui/command/config";
 import { componentConfig as copyButtonConfig } from "@/components/ui/copy-button/config";
 import { componentConfig as dividerConfig } from "@/components/ui/divider/config";
+import { componentConfig as donutChartConfig } from "@/components/ui/donut-chart/config";
+import { componentConfig as emptyStateConfig } from "@/components/ui/empty-state/config";
+import { componentConfig as gridConfig } from "@/components/ui/grid/config";
 import { componentConfig as inputConfig } from "@/components/ui/input/config";
+import { componentConfig as lineChartConfig } from "@/components/ui/line-chart/config";
 import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
 import { componentConfig as meterConfig } from "@/components/ui/meter/config";
-import { componentConfig as separatorConfig } from "@/components/ui/separator/config";
-import { componentConfig as radioConfig } from "@/components/ui/radio/config";
-import { componentConfig as radioGroupConfig } from "@/components/ui/radio-group/config";
 import { componentConfig as radioCardGroupConfig } from "@/components/ui/radio-card-group/config";
-import { componentConfig as sliderConfig } from "@/components/ui/slider/config";
-import { componentConfig as switchConfig } from "@/components/ui/switch/config";
+import { componentConfig as radioGroupConfig } from "@/components/ui/radio-group/config";
+import { componentConfig as radioConfig } from "@/components/ui/radio/config";
 import { componentConfig as selectNativeConfig } from "@/components/ui/select-native/config";
+import { componentConfig as separatorConfig } from "@/components/ui/separator/config";
+import { componentConfig as sliderConfig } from "@/components/ui/slider/config";
+import { componentConfig as sparkChartConfig } from "@/components/ui/spark-chart/config";
+import { componentConfig as splitButtonConfig } from "@/components/ui/split-button/config";
+import { componentConfig as stackConfig } from "@/components/ui/stack/config";
+import { componentConfig as stackedListConfig } from "@/components/ui/stacked-list/config";
+import { componentConfig as statusDotConfig } from "@/components/ui/status-dot/config";
+import { componentConfig as switchConfig } from "@/components/ui/switch/config";
 
 // TODO: Update these components to use new ComponentConfig structure
 import {
@@ -153,26 +163,6 @@ const fieldsetConfig = createPlaceholderConfig("fieldset", "Fieldset", "forms");
 const formConfig = createPlaceholderConfig("form", "Form", "forms");
 
 // Placeholder configurations for charts category
-const comboChartConfig = createPlaceholderConfig(
-  "combo-chart",
-  "Combo Chart",
-  "charts"
-);
-const donutChartConfig = createPlaceholderConfig(
-  "donut-chart",
-  "Donut Chart",
-  "charts"
-);
-const lineChartConfig = createPlaceholderConfig(
-  "line-chart",
-  "Line Chart",
-  "charts"
-);
-const sparkChartConfig = createPlaceholderConfig(
-  "spark-chart",
-  "Spark Chart",
-  "charts"
-);
 
 // Component registry with components using new config structure
 export const componentRegistry: ComponentConfigRegistry = {
@@ -197,9 +187,12 @@ export const componentRegistry: ComponentConfigRegistry = {
   collapsible: collapsibleConfig,
   "copy-button": copyButtonConfig,
   divider: dividerConfig,
+  "empty-state": emptyStateConfig,
+  grid: gridConfig,
   loader: loaderConfig,
   meter: meterConfig,
   separator: separatorConfig,
+  "stacked-list": stackedListConfig,
   command: commandConfig,
   combobox: comboboxConfig,
   radio: radioConfig,
@@ -208,6 +201,13 @@ export const componentRegistry: ComponentConfigRegistry = {
   slider: sliderConfig,
   switch: switchConfig,
   "select-native": selectNativeConfig,
+  "combo-chart": comboChartConfig,
+  "donut-chart": donutChartConfig,
+  "line-chart": lineChartConfig,
+  "spark-chart": sparkChartConfig,
+  "split-button": splitButtonConfig,
+  stack: stackConfig,
+  "status-dot": statusDotConfig,
 
   // UI Components (placeholders)
   "context-menu": contextMenuConfig,
@@ -257,10 +257,6 @@ export const componentRegistry: ComponentConfigRegistry = {
   form: formConfig,
 
   // Chart Components (placeholders)
-  "combo-chart": comboChartConfig,
-  "donut-chart": donutChartConfig,
-  "line-chart": lineChartConfig,
-  "spark-chart": sparkChartConfig,
 };
 
 // Helper to register a component config
@@ -305,6 +301,7 @@ export const COMPONENT_LIST = {
     "dialog",
     "divider",
     "drawer",
+    "grid",
     "heading",
     "label",
     "menu",
@@ -323,6 +320,10 @@ export const COMPONENT_LIST = {
     "sheet",
     "sidebar",
     "skeleton",
+    "split-button",
+    "stack",
+    "stacked-list",
+    "status-dot",
     "tab-navigation",
     "table",
     "tabs",

@@ -25,13 +25,9 @@ export const SelectExample = ({
 }) => {
   return (
     <div className="w-full max-w-xs">
-      <Select
-        disabled={disabled}
-        defaultValue={defaultValue}
-        {...props}
-      >
+      <Select disabled={disabled} defaultValue={defaultValue} {...props}>
         <SelectTrigger hasError={hasError}>
-          <SelectValue placeholder={placeholder} />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="apple">Apple</SelectItem>

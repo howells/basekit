@@ -3,18 +3,19 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "dialog",
   name: "Dialog",
-  description: "Modal dialog component built on Base UI with overlay and focus management.",
+  description:
+    "Modal dialog component built on Base UI with overlay and focus management.",
   category: "ui" as const,
   badge: "UI",
-  importStatement: `import { 
-  Dialog, 
-  DialogTrigger, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogDescription, 
-  DialogFooter, 
-  DialogClose 
+  importStatement: `import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose
 } from "@/components/ui/dialog";`,
   componentId: "DialogExample",
   props: [
@@ -33,7 +34,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "closeOnOverlayClick",
-      type: "boolean", 
+      type: "boolean",
       defaultValue: true,
       description: "Whether clicking the overlay closes the dialog.",
     },
@@ -44,8 +45,8 @@ export const componentConfig: ComponentConfig = {
       title: "Default",
       description: "Basic dialog with trigger button and content.",
       code: `<Dialog>
-  <DialogTrigger asChild>
-    <Button>Open Dialog</Button>
+  <DialogTrigger render={<Button />}>
+    Open Dialog
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -58,8 +59,8 @@ export const componentConfig: ComponentConfig = {
       <p>Dialog content goes here.</p>
     </div>
     <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="secondary">Cancel</Button>
+      <DialogClose render={<Button variant="secondary" />}>
+        Cancel
       </DialogClose>
       <Button>Confirm</Button>
     </DialogFooter>
@@ -71,8 +72,8 @@ export const componentConfig: ComponentConfig = {
       title: "With Form",
       description: "Dialog containing a form with input fields.",
       code: `<Dialog>
-  <DialogTrigger asChild>
-    <Button>Edit Profile</Button>
+  <DialogTrigger render={<Button />}>
+    Edit Profile
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -104,8 +105,8 @@ export const componentConfig: ComponentConfig = {
       </div>
     </div>
     <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="secondary">Cancel</Button>
+      <DialogClose render={<Button variant="secondary" />}>
+        Cancel
       </DialogClose>
       <Button>Save changes</Button>
     </DialogFooter>
@@ -117,8 +118,8 @@ export const componentConfig: ComponentConfig = {
       title: "Confirmation",
       description: "Dialog for confirming destructive actions.",
       code: `<Dialog>
-  <DialogTrigger asChild>
-    <Button variant="destructive">Delete Account</Button>
+  <DialogTrigger render={<Button variant="destructive" />}>
+    Delete Account
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -129,8 +130,8 @@ export const componentConfig: ComponentConfig = {
       </DialogDescription>
     </DialogHeader>
     <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="secondary">Cancel</Button>
+      <DialogClose render={<Button variant="secondary" />}>
+        Cancel
       </DialogClose>
       <Button variant="destructive">Delete Account</Button>
     </DialogFooter>
@@ -144,8 +145,8 @@ export const componentConfig: ComponentConfig = {
       code: `const [open, setOpen] = useState(false);
 
 <Dialog open={open} onOpenChange={setOpen}>
-  <DialogTrigger asChild>
-    <Button>Open Controlled Dialog</Button>
+  <DialogTrigger render={<Button />}>
+    Open Controlled Dialog
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -161,8 +162,8 @@ export const componentConfig: ComponentConfig = {
       </Button>
     </div>
     <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="secondary">Close</Button>
+      <DialogClose render={<Button variant="secondary" />}>
+        Close
       </DialogClose>
     </DialogFooter>
   </DialogContent>

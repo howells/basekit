@@ -106,14 +106,14 @@ const Tooltip = React.forwardRef<
     const { popup, arrow } = tooltipVariants({ variant, size });
 
     return (
-      <BaseTooltip.Provider delayDuration={delayDuration}>
+      <BaseTooltip.Provider>
         <BaseTooltip.Root
           open={open}
           defaultOpen={defaultOpen}
           onOpenChange={onOpenChange}
           {...props}
         >
-          <BaseTooltip.Trigger onClick={onClick} asChild>
+          <BaseTooltip.Trigger onClick={onClick}>
             {children}
           </BaseTooltip.Trigger>
           <BaseTooltip.Portal>

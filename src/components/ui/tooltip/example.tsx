@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Tooltip } from "./tooltip";
 
 interface TooltipExampleProps {
@@ -80,7 +80,7 @@ export function TooltipExample({
           <Button>Default</Button>
         </Tooltip>
         <Tooltip content="Large tooltip with more content" size="lg">
-          <Button size="lg">Large</Button>
+          <Button size="default">Large</Button>
         </Tooltip>
       </div>
 
@@ -109,12 +109,12 @@ export function TooltipExample({
         >
           <Button>Controlled</Button>
         </Tooltip>
-        <Button 
+        <Button
           onClick={() => setControlledOpen(!controlledOpen)}
           variant="outline"
           size="sm"
         >
-          Toggle: {controlledOpen ? 'Open' : 'Closed'}
+          Toggle: {controlledOpen ? "Open" : "Closed"}
         </Button>
       </div>
     </div>

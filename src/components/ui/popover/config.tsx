@@ -3,15 +3,16 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "popover",
   name: "Popover",
-  description: "Popover component built on Base UI with customizable positioning and rich content support.",
+  description:
+    "Popover component built on Base UI with customizable positioning and rich content support.",
   category: "ui" as const,
   badge: "UI",
-  importStatement: `import { 
-  Popover, 
-  PopoverTrigger, 
-  PopoverContent, 
-  PopoverTitle, 
-  PopoverDescription, 
+  importStatement: `import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
   PopoverClose,
   PopoverArrow
 } from "@/components/ui/popover";`,
@@ -56,8 +57,8 @@ export const componentConfig: ComponentConfig = {
       title: "Default",
       description: "Basic popover with title and description.",
       code: `<Popover>
-  <PopoverTrigger asChild>
-    <Button>Open Popover</Button>
+  <PopoverTrigger render={<Button />}>
+    Open Popover
   </PopoverTrigger>
   <PopoverContent>
     <PopoverTitle>Popover Title</PopoverTitle>
@@ -73,8 +74,8 @@ export const componentConfig: ComponentConfig = {
       description: "Popovers positioned on different sides.",
       code: `<div className="flex gap-4">
   <Popover>
-    <PopoverTrigger asChild>
-      <Button>Top</Button>
+    <PopoverTrigger render={<Button />}>
+      Top
     </PopoverTrigger>
     <PopoverContent side="top">
       <PopoverTitle>Top Popover</PopoverTitle>
@@ -83,10 +84,10 @@ export const componentConfig: ComponentConfig = {
       </PopoverDescription>
     </PopoverContent>
   </Popover>
-  
+
   <Popover>
-    <PopoverTrigger asChild>
-      <Button>Bottom</Button>
+    <PopoverTrigger render={<Button />}>
+      Bottom
     </PopoverTrigger>
     <PopoverContent side="bottom">
       <PopoverTitle>Bottom Popover</PopoverTitle>
@@ -95,10 +96,10 @@ export const componentConfig: ComponentConfig = {
       </PopoverDescription>
     </PopoverContent>
   </Popover>
-  
+
   <Popover>
-    <PopoverTrigger asChild>
-      <Button>Right</Button>
+    <PopoverTrigger render={<Button />}>
+      Right
     </PopoverTrigger>
     <PopoverContent side="right">
       <PopoverTitle>Right Popover</PopoverTitle>
@@ -114,8 +115,8 @@ export const componentConfig: ComponentConfig = {
       title: "With Arrow",
       description: "Popover with pointing arrow.",
       code: `<Popover>
-  <PopoverTrigger asChild>
-    <Button>With Arrow</Button>
+  <PopoverTrigger render={<Button />}>
+    With Arrow
   </PopoverTrigger>
   <PopoverContent>
     <PopoverArrow />
@@ -131,18 +132,16 @@ export const componentConfig: ComponentConfig = {
       title: "With Close Button",
       description: "Popover with a close button in the header.",
       code: `<Popover>
-  <PopoverTrigger asChild>
-    <Button>With Close Button</Button>
+  <PopoverTrigger render={<Button />}>
+    With Close Button
   </PopoverTrigger>
   <PopoverContent>
     <div className="flex items-start justify-between">
       <PopoverTitle>Settings</PopoverTitle>
-      <PopoverClose asChild>
-        <button className="text-zinc-400 hover:text-zinc-900">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M12.207 4.793a1 1 0 010 1.414L9.414 9l2.793 2.793a1 1 0 01-1.414 1.414L8 10.414l-2.793 2.793a1 1 0 01-1.414-1.414L6.586 9 3.793 6.207a1 1 0 011.414-1.414L8 7.586l2.793-2.793a1 1 0 011.414 0z" />
-          </svg>
-        </button>
+      <PopoverClose render={<button className="text-zinc-400 hover:text-zinc-900" />}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M12.207 4.793a1 1 0 010 1.414L9.414 9l2.793 2.793a1 1 0 01-1.414 1.414L8 10.414l-2.793 2.793a1 1 0 01-1.414-1.414L6.586 9 3.793 6.207a1 1 0 011.414-1.414L8 7.586l2.793-2.793a1 1 0 011.414 0z" />
+        </svg>
       </PopoverClose>
     </div>
     <PopoverDescription>
@@ -154,10 +153,11 @@ export const componentConfig: ComponentConfig = {
     {
       id: "rich-content",
       title: "Rich Content",
-      description: "Popover with custom content including buttons and form elements.",
+      description:
+        "Popover with custom content including buttons and form elements.",
       code: `<Popover>
-  <PopoverTrigger asChild>
-    <Button>User Menu</Button>
+  <PopoverTrigger render={<Button />}>
+    User Menu
   </PopoverTrigger>
   <PopoverContent className="w-80">
     <div className="space-y-3">
@@ -165,7 +165,7 @@ export const componentConfig: ComponentConfig = {
         <PopoverTitle>John Doe</PopoverTitle>
         <PopoverDescription>john.doe@example.com</PopoverDescription>
       </div>
-      
+
       <div className="border-t pt-3">
         <div className="space-y-2">
           <button className="flex w-full items-center px-2 py-1.5 text-sm hover:bg-zinc-100 rounded">
@@ -179,7 +179,7 @@ export const componentConfig: ComponentConfig = {
           </button>
         </div>
       </div>
-      
+
       <div className="border-t pt-3">
         <button className="flex w-full items-center px-2 py-1.5 text-sm text-red-600 hover:bg-red-50 rounded">
           Sign out
@@ -197,8 +197,8 @@ export const componentConfig: ComponentConfig = {
 
 <div className="space-x-4">
   <Popover open={open} onOpenChange={setOpen}>
-    <PopoverTrigger asChild>
-      <Button>Controlled Popover</Button>
+    <PopoverTrigger render={<Button />}>
+      Controlled Popover
     </PopoverTrigger>
     <PopoverContent>
       <PopoverTitle>Controlled State</PopoverTitle>
@@ -212,7 +212,7 @@ export const componentConfig: ComponentConfig = {
       </div>
     </PopoverContent>
   </Popover>
-  
+
   <Button onClick={() => setOpen(!open)} variant="outline">
     Toggle: {open ? 'Open' : 'Closed'}
   </Button>

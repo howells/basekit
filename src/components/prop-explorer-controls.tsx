@@ -109,7 +109,7 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
                   <FieldControl
                     render={() => (
                       <Select
-                        value={currentValue as string}
+                        value={(currentValue as string) ?? ""}
                         onValueChange={(value) => updateProp(prop.name, value)}
                       >
                         <SelectTrigger>

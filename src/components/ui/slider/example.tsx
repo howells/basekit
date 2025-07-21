@@ -28,7 +28,9 @@ export function SliderExample({
         <h3 className="text-sm font-medium">Basic Slider</h3>
         <Slider
           value={basicValue}
-          onValueChange={setBasicValue}
+          onValueChange={(value) =>
+            setBasicValue(Array.isArray(value) ? value : [value])
+          }
           min={0}
           max={100}
           step={1}
@@ -44,7 +46,9 @@ export function SliderExample({
         <h3 className="text-sm font-medium">With Value Display</h3>
         <Slider
           value={withValueValue}
-          onValueChange={setWithValueValue}
+          onValueChange={(value) =>
+            setWithValueValue(Array.isArray(value) ? value : [value])
+          }
           min={0}
           max={100}
           step={1}
@@ -59,7 +63,9 @@ export function SliderExample({
         <h3 className="text-sm font-medium">Range Slider</h3>
         <Slider
           value={rangeValue}
-          onValueChange={setRangeValue}
+          onValueChange={(value) =>
+            setRangeValue(Array.isArray(value) ? value : [value])
+          }
           min={0}
           max={100}
           step={1}
@@ -77,7 +83,9 @@ export function SliderExample({
         <h3 className="text-sm font-medium">Custom Step & Formatter</h3>
         <Slider
           value={stepValue}
-          onValueChange={setStepValue}
+          onValueChange={(value) =>
+            setStepValue(Array.isArray(value) ? value : [value])
+          }
           min={0}
           max={100}
           step={5}
@@ -96,7 +104,9 @@ export function SliderExample({
           <div className="h-64 flex items-center">
             <Slider
               value={verticalValue}
-              onValueChange={setVerticalValue}
+              onValueChange={(value) =>
+                setVerticalValue(Array.isArray(value) ? value : [value])
+              }
               min={0}
               max={100}
               step={1}
