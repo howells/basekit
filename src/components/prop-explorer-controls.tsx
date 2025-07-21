@@ -1,30 +1,25 @@
 "use client";
 
 import { Subheading } from "@/components/ui/heading";
-import { ComponentConfig } from "@/lib/component-configs";
+import { ComponentConfig } from "@/lib/component-config-types";
 import { PropMetadata } from "@/lib/prop-explorer";
 import React from "react";
-import {
-  Field,
-  FieldControl,
-  FieldDescription,
-  FieldLabel,
-} from "./forms/field";
-import { Input } from "./inputs/input";
+import { usePropExplorer } from "./prop-explorer-context";
+import { Button } from "./ui/button";
+import { Field, FieldControl, FieldDescription, FieldLabel } from "./ui/field";
+import { IconSelect } from "./ui/icon-select";
+import { Input } from "./ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./inputs/select";
-import { Switch } from "./inputs/switch";
-import { usePropExplorer } from "./prop-explorer-context";
-import { Button } from "./ui/button";
-import { IconSelect } from "./ui/icon-select";
+} from "./ui/select";
+import { Switch } from "./ui/switch";
 
 interface PropExplorerContentProps {
-  config: ComponentConfig["propExplorer"];
+  config?: ComponentConfig;
 }
 
 // Helper function to get string options from a prop
@@ -40,7 +35,7 @@ function getStringOptions(prop: PropMetadata): string[] {
 export function PropExplorerContent({ config }: PropExplorerContentProps) {
   const { props, updateProp, resetProps } = usePropExplorer();
 
-  if (!config) {
+  if (!config || !config.props) {
     return (
       <div className="space-y-6">
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
@@ -51,12 +46,14 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
   }
 
   // Check if component supports icons
-  const supportsIcons =
-    config.props?.some((prop) => prop.name === "icon") || false;
+  const supportsIcons = config.props.some(
+    (prop: PropMetadata) => prop.name === "icon" || prop.name.endsWith("Icon")
+  );
 
   // Check if component supports children
-  const supportsChildren =
-    config.props?.some((prop) => prop.name === "children") || false;
+  const supportsChildren = config.props.some(
+    (prop: PropMetadata) => prop.name === "children"
+  );
 
   return (
     <div className="space-y-4">
@@ -70,235 +67,141 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
 
       {/* Content */}
       <div className="space-y-6">
-        {/* Variants */}
-        {config.variants?.map((variant) => {
-          // Check if this is a boolean variant (has only true/false options)
-          const isBooleanVariant =
-            variant.options.length === 2 &&
-            variant.options.every(
-              (opt) => opt.value === "true" || opt.value === "false"
-            );
+        {/* Props */}
+        {config.props.map((prop: PropMetadata) => {
+          const currentValue = props[prop.name];
 
-          return (
-            <div key={variant.name} className="space-y-2">
-              <Field>
-                <FieldLabel>{variant.name}</FieldLabel>
-                {isBooleanVariant ? (
+          // Handle different prop types
+          if (prop.type === "boolean") {
+            return (
+              <div key={prop.name} className="space-y-2">
+                <Field>
+                  <FieldLabel>{prop.name}</FieldLabel>
+                  {prop.description && (
+                    <FieldDescription>{prop.description}</FieldDescription>
+                  )}
                   <FieldControl
-                    render={
+                    render={() => (
                       <Switch
-                        checked={String(props[variant.name]) === "true"}
+                        checked={currentValue === true}
                         onCheckedChange={(checked) =>
-                          updateProp(variant.name, String(checked))
-                        }
-                        label={
-                          // Don't show label for icon-only buttons (no space)
-                          props.size === "icon"
-                            ? undefined
-                            : String(props[variant.name]) === "true"
-                            ? "true"
-                            : "false"
+                          updateProp(prop.name, checked)
                         }
                       />
-                    }
+                    )}
                   />
-                ) : (
-                  <FieldControl
-                    render={
-                      <Select
-                        value={String(props[variant.name] || "")}
-                        onValueChange={(value) =>
-                          updateProp(variant.name, value)
-                        }
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {variant.options.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.value}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    }
-                  />
-                )}
-                {variant.description && (
-                  <FieldDescription>{variant.description}</FieldDescription>
-                )}
-              </Field>
-            </div>
-          );
-        })}
-
-        {/* Icon Selectors */}
-        {config.props?.some((prop) => prop.name === "leftIcon") && (
-          <div className="space-y-2">
-            <Field>
-              <FieldLabel>leftIcon</FieldLabel>
-              <FieldControl
-                render={
-                  <IconSelect
-                    value={String(props.leftIcon || "")}
-                    onValueChange={(value) => updateProp("leftIcon", value)}
-                  />
-                }
-              />
-              <FieldDescription>
-                Icon to display on the left side
-              </FieldDescription>
-            </Field>
-          </div>
-        )}
-
-        {config.props?.some((prop) => prop.name === "rightIcon") && (
-          <div className="space-y-2">
-            <Field>
-              <FieldLabel>rightIcon</FieldLabel>
-              <FieldControl
-                render={
-                  <IconSelect
-                    value={String(props.rightIcon || "")}
-                    onValueChange={(value) => updateProp("rightIcon", value)}
-                  />
-                }
-              />
-              <FieldDescription>
-                Icon to display on the right side
-              </FieldDescription>
-            </Field>
-          </div>
-        )}
-
-        {/* Generic Props Renderer */}
-        {config.props?.map((prop) => {
-          // Skip special props that are handled separately
-          if (
-            prop.name === "leftIcon" ||
-            prop.name === "rightIcon" ||
-            prop.name === "children"
-          ) {
-            return null;
+                </Field>
+              </div>
+            );
           }
 
-          return (
-            <div key={prop.name} className="space-y-2">
-              <Field>
-                <FieldLabel>{prop.name}</FieldLabel>
-
-                {/* Boolean props */}
-                {prop.type === "boolean" && (
+          if (prop.type === "select" && prop.options) {
+            const options = getStringOptions(prop);
+            return (
+              <div key={prop.name} className="space-y-2">
+                <Field>
+                  <FieldLabel>{prop.name}</FieldLabel>
+                  {prop.description && (
+                    <FieldDescription>{prop.description}</FieldDescription>
+                  )}
                   <FieldControl
-                    render={
-                      <Switch
-                        checked={String(props[prop.name]) === "true"}
-                        onCheckedChange={(checked) =>
-                          updateProp(prop.name, String(checked))
-                        }
-                        label={
-                          String(props[prop.name]) === "true" ? "true" : "false"
-                        }
-                      />
-                    }
-                  />
-                )}
-
-                {/* Select props */}
-                {prop.type === "select" && prop.options && (
-                  <FieldControl
-                    render={
+                    render={() => (
                       <Select
-                        value={String(
-                          props[prop.name] ?? prop.defaultValue ?? ""
-                        )}
+                        value={currentValue as string}
                         onValueChange={(value) => updateProp(prop.name, value)}
                       >
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {getStringOptions(prop).map((option: string) => (
+                          {options.map((option: string) => (
                             <SelectItem key={option} value={option}>
                               {option}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                    }
+                    )}
                   />
-                )}
+                </Field>
+              </div>
+            );
+          }
 
-                {/* String props */}
-                {prop.type === "string" && (
+          if (prop.type === "icon") {
+            return (
+              <div key={prop.name} className="space-y-2">
+                <Field>
+                  <FieldLabel>{prop.name}</FieldLabel>
+                  {prop.description && (
+                    <FieldDescription>{prop.description}</FieldDescription>
+                  )}
                   <FieldControl
-                    render={
-                      <Input
-                        value={String(props[prop.name] || "")}
-                        onChange={(e) => updateProp(prop.name, e.target.value)}
-                        placeholder={
-                          prop.name === "loadingText"
-                            ? "Loading..."
-                            : prop.description || `Enter ${prop.name}`
-                        }
-                      />
-                    }
-                  />
-                )}
-
-                {/* Icon props */}
-                {prop.type === "icon" && (
-                  <FieldControl
-                    render={
+                    render={() => (
                       <IconSelect
-                        value={String(props[prop.name] || "")}
+                        value={currentValue as string}
                         onValueChange={(value) => updateProp(prop.name, value)}
                       />
-                    }
+                    )}
                   />
-                )}
+                </Field>
+              </div>
+            );
+          }
 
+          // Default to string input
+          return (
+            <div key={prop.name} className="space-y-2">
+              <Field>
+                <FieldLabel>{prop.name}</FieldLabel>
                 {prop.description && (
                   <FieldDescription>{prop.description}</FieldDescription>
                 )}
+                <FieldControl
+                  render={(controlProps) => {
+                    const { children, ...inputProps } = controlProps;
+                    return (
+                      <Input
+                        {...inputProps}
+                        value={(currentValue as string) || ""}
+                        onChange={(e) => updateProp(prop.name, e.target.value)}
+                        placeholder={prop.defaultValue as string}
+                      />
+                    );
+                  }}
+                />
               </Field>
             </div>
           );
         })}
 
-        {/* Children - Special handling */}
-        {config.props?.some((prop) => prop.name === "children") && (
+        {/* Usage Info */}
+        <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
           <div className="space-y-2">
-            <Field>
-              <FieldLabel>children</FieldLabel>
-              <FieldControl
-                render={
-                  <Input
-                    value={String(props.children || "")}
-                    onChange={(e) => updateProp("children", e.target.value)}
-                    placeholder={`${
-                      config.displayName || config.componentName
-                    } text`}
-                  />
-                }
-              />
-              <FieldDescription>
-                The content to display inside the component
-              </FieldDescription>
-            </Field>
+            <Subheading level={4}>Component</Subheading>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              {config.name}
+            </p>
+            <p className="text-xs text-zinc-500 dark:text-zinc-500">
+              {config.description}
+            </p>
           </div>
-        )}
 
-        {/* Show message if no configurable props */}
-        {(!config.variants || config.variants.length === 0) &&
-          (!config.props || config.props.length === 0) &&
-          !supportsIcons &&
-          !supportsChildren && (
-            <div className="text-sm text-zinc-600 dark:text-zinc-400">
-              No configurable properties available
+          {/* Additional Info */}
+          {(supportsIcons || supportsChildren) && (
+            <div className="mt-4 space-y-2">
+              <Subheading level={4}>Features</Subheading>
+              <div className="space-y-1">
+                {supportsIcons && (
+                  <p className="text-xs text-zinc-500">✓ Icon support</p>
+                )}
+                {supportsChildren && (
+                  <p className="text-xs text-zinc-500">✓ Children content</p>
+                )}
+              </div>
             </div>
           )}
+        </div>
       </div>
     </div>
   );

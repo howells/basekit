@@ -1,20 +1,26 @@
 import { componentConfig as accordionConfig } from "@/components/ui/accordion/config";
-import { componentConfig as alertDialogConfig } from "@/components/ui/alert-dialog";
-import { componentConfig as avatarConfig } from "@/components/ui/avatar";
-import { componentConfig as badgeConfig } from "@/components/ui/badge";
-import { componentConfig as breadcrumbsConfig } from "@/components/ui/breadcrumbs";
-import { componentConfig as buttonConfig } from "@/components/ui/button";
-import { ComponentConfig, ComponentConfigRegistry } from "./component-configs";
+import { componentConfig as alertDialogConfig } from "@/components/ui/alert-dialog/config";
+import { componentConfig as areaChartConfig } from "@/components/ui/area-chart/config";
+import { componentConfig as avatarConfig } from "@/components/ui/avatar/config";
+import { componentConfig as badgeConfig } from "@/components/ui/badge/config";
+// TODO: Update these components to use new ComponentConfig structure
+// import { componentConfig as breadcrumbsConfig } from "@/components/ui/breadcrumbs";
+// import { componentConfig as buttonConfig } from "@/components/ui/button";
+import {
+  ComponentConfig,
+  ComponentConfigRegistry,
+} from "./component-config-types";
 
-// Component registry with all components
-// This will be populated dynamically or with inline configs
+// Component registry with components using new config structure
 export const componentRegistry: ComponentConfigRegistry = {
   accordion: accordionConfig,
   "alert-dialog": alertDialogConfig,
+  "area-chart": areaChartConfig,
   avatar: avatarConfig,
   badge: badgeConfig,
-  breadcrumbs: breadcrumbsConfig,
-  button: buttonConfig,
+  // TODO: Re-add these after converting to new config structure
+  // breadcrumbs: breadcrumbsConfig,
+  // button: buttonConfig,
 };
 
 // Helper to register a component config

@@ -3,7 +3,7 @@
 import { cx } from "@/lib/utils";
 import { Field as BaseField } from "@base-ui-components/react/field";
 import * as React from "react";
-import { Input } from "../inputs/input";
+import { Input } from "./input";
 
 const Field = BaseField.Root;
 

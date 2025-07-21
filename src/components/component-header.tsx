@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentConfig } from "@/lib/component-configs";
-import { Badge } from "./ui/badge";
+import { Badge } from "./ui/badge/badge";
 import { Heading } from "./ui/heading";
 import { Text } from "./ui/text";
 

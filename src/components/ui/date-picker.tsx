@@ -22,9 +22,9 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 import { cx, focusInput, focusRing, hasErrorInput } from "@/lib/utils";
 
-import { Button } from "../ui/button";
-import { Calendar as CalendarPrimitive, type Matcher } from "../ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "./button";
+import { Calendar as CalendarPrimitive, type Matcher } from "./calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 //#region TimeInput
 // ============================================================================

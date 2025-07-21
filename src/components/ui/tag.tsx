@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import React from "react";
 
 import { cx } from "@/lib/utils";
-import { Avatar, type AvatarProps } from "./avatar";
+import { Avatar, type AvatarProps } from "./avatar/avatar";
 
 interface TagProps extends useRender.ComponentProps<"span"> {
   /**

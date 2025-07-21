@@ -24,7 +24,7 @@ const getComponentImportPath = (
     return componentPath;
   }
 
-  // Special case for components that are exported from other component files
+  // Handle example components - all use the standardized three-file structure
   if (componentId.toLowerCase().endsWith("example")) {
     // Remove "Example" from the original componentId first, then convert to kebab-case
     const baseComponent = componentId.replace(/Example$/, "");
@@ -33,35 +33,16 @@ const getComponentImportPath = (
       .replace(/([a-z])([A-Z])/g, "$1-$2")
       .toLowerCase();
 
-    // Special case for accordion which has a separate config file
-    if (kebabCase === "accordion") {
-      return `@/components/ui/${kebabCase}/config`;
-    }
-
-    return `@/components/ui/${kebabCase}`;
+    // All examples are in component/example.tsx
+    return `@/components/ui/${kebabCase}/example`;
   }
 
-  // Handle different component categories based on folder structure
-  if (!category) {
-    return `@/components/ui/${componentId.toLowerCase()}`;
-  }
+  // All other components use the directory structure: component/component.tsx
+  const kebabCase = componentId
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .toLowerCase();
 
-  switch (category) {
-    case "charts":
-      return `@/components/charts/${componentId
-        .toLowerCase()
-        .replace("chart", "-chart")}`;
-    case "inputs":
-      return `@/components/inputs/${componentId
-        .toLowerCase()
-        .replace(/([A-Z])/g, "-$1")
-        .substring(1)}`;
-    case "forms":
-      return `@/components/forms/${componentId.toLowerCase()}`;
-    case "ui":
-    default:
-      return `@/components/ui/${componentId.toLowerCase()}`;
-  }
+  return `@/components/ui/${kebabCase}/${kebabCase}`;
 };
 
 // Map kebab-case component names to their actual exported component names
@@ -133,46 +114,25 @@ export function ComponentPreview({
     [componentId, category, componentPath]
   );
 
-  // Get the icon components from the selected names
-  const iconComponent =
-    props.icon && typeof props.icon === "string" && props.icon.trim() !== ""
-      ? getIconByName(props.icon as string)
-      : undefined;
-
-  const leftIconComponent =
-    props.leftIcon &&
-    typeof props.leftIcon === "string" &&
-    props.leftIcon.trim() !== ""
-      ? getIconByName(props.leftIcon as string)
-      : undefined;
-
-  const rightIconComponent =
-    props.rightIcon &&
-    typeof props.rightIcon === "string" &&
-    props.rightIcon.trim() !== ""
-      ? getIconByName(props.rightIcon as string)
-      : undefined;
-
   // Create final props for the component
   const componentProps = React.useMemo(() => {
     const finalProps: Record<string, unknown> = { ...props };
 
-    // Add icons if selected
-    if (iconComponent) {
-      finalProps.icon = iconComponent;
-    } else if (props.icon === "") {
-      delete finalProps.icon;
-    }
-    if (leftIconComponent) {
-      finalProps.leftIcon = leftIconComponent;
-    } else if (props.leftIcon === "") {
-      delete finalProps.leftIcon;
-    }
-    if (rightIconComponent) {
-      finalProps.rightIcon = rightIconComponent;
-    } else if (props.rightIcon === "") {
-      delete finalProps.rightIcon;
-    }
+    // Generic icon handling - convert string icon names to components
+    // Use naming convention: any prop named "icon" or ending with "Icon"
+    Object.entries(finalProps).forEach(([key, value]) => {
+      const isIconProp = key === "icon" || key.endsWith("Icon");
+
+      if (isIconProp && typeof value === "string" && value.trim() !== "") {
+        const iconComponent = getIconByName(value);
+        if (iconComponent) {
+          finalProps[key] = iconComponent;
+        }
+      } else if (isIconProp && value === "") {
+        // Remove empty icon props
+        delete finalProps[key];
+      }
+    });
 
     // Convert string booleans to actual booleans
     Object.entries(finalProps).forEach(([key, value]) => {
@@ -184,7 +144,7 @@ export function ComponentPreview({
     });
 
     return finalProps;
-  }, [props, iconComponent, leftIconComponent, rightIconComponent]);
+  }, [props]);
 
   // Render the component
   const renderComponent = () => {

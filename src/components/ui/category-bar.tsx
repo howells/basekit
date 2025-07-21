@@ -11,7 +11,7 @@ import {
 } from "@/lib/chartUtils";
 import { cx } from "@/lib/utils";
 
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "./tooltip";
 
 const getMarkerBgColor = (
   marker: number | undefined,

@@ -2,13 +2,10 @@ import { ComponentHeader } from "@/components/component-header";
 import { ComponentPreview } from "@/components/component-preview";
 import { PropExplorerProvider } from "@/components/prop-explorer-context";
 import { PropExplorerContent } from "@/components/prop-explorer-controls";
-import {
-  Inspector,
-  InspectorBody,
-  InspectorHeader,
-} from "@/components/ui/inspector";
+import { Inspector, InspectorBody } from "@/components/ui/inspector";
 import { COMPONENT_LIST, getComponentConfig } from "@/lib/component-registry";
 import { createComponentConfig } from "@/lib/config-helpers";
+import { PropMetadata } from "@/lib/prop-explorer";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -140,22 +137,26 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     notFound();
   }
 
-  // Extract default values from prop explorer if available
+  // Extract default values from props if available
   const getDefaultProps = () => {
-    if (!config.propExplorer) return {};
+    if (!config.props) return {};
 
     const defaultProps: Record<string, unknown> = {};
-    config.propExplorer.variants?.forEach(
-      (variant: { name: string; defaultOption?: unknown }) => {
-        if (variant.defaultOption) {
-          defaultProps[variant.name] = variant.defaultOption;
-        }
-      }
-    );
 
-    // Add default values for special props
-    defaultProps.children =
-      config.propExplorer.displayName || config.propExplorer.componentName;
+    // Extract default values from props
+    config.props.forEach((prop: PropMetadata) => {
+      if (prop.defaultValue !== undefined) {
+        defaultProps[prop.name] = prop.defaultValue;
+      }
+    });
+
+    // Add default children if the component supports it
+    const hasChildren = config.props.some(
+      (prop: PropMetadata) => prop.name === "children"
+    );
+    if (hasChildren) {
+      defaultProps.children = config.name;
+    }
 
     return defaultProps;
   };
@@ -179,7 +180,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Right sidebar - Inspector */}
           <Inspector>
             <InspectorBody>
-              <PropExplorerContent config={config.propExplorer} />
+              <PropExplorerContent config={config} />
             </InspectorBody>
           </Inspector>
         </div>

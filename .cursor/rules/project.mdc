@@ -1,26 +1,10 @@
----
-alwaysApply: true
----
-
 # StencilUI Project
 
 ## Overview
 
 StencilUI is a modern React component library that combines the best design patterns and developer experience from leading UI libraries while building on a solid, accessible foundation. We curate and adapt components from shadcn/ui, Radix UI, Tailwind UI (Catalyst), and other excellent libraries, porting them to Base UI primitives with Tremor-inspired styling.
 
-## Philosophy
-
-### Best of Breed Approach
-
-Rather than reinventing the wheel, we identify and adapt the best component designs and patterns from the ecosystem:
-
-- **shadcn/ui**: Excellent component composition patterns and developer experience
-- **Radix UI**: Pioneering accessibility and unstyled primitive concepts
-- **Tailwind UI (Catalyst)**: Beautiful, modern design patterns and layouts
-- **Tremor**: Clean, professional styling for data-heavy applications
-- **Base UI**: Modern, performant, and accessible primitive foundation
-
-### Core Principles
+## Core Principles
 
 1. **Accessibility First**: Built on Base UI primitives that provide robust accessibility out of the box
 2. **Developer Experience**: Copy-paste friendly components with excellent TypeScript support
@@ -43,11 +27,41 @@ Rather than reinventing the wheel, we identify and adapt the best component desi
 ```
 src/components/
 ├── ui/           # Core UI primitives (buttons, inputs, etc.)
+│   └── badge/    # Each component follows three-file architecture
+│       ├── badge.tsx     # Pure component implementation
+│       ├── config.tsx    # Component configuration (props, examples, docs)
+│       └── example.tsx   # Preview component for prop explorer
 ├── charts/       # Data visualization components
 ├── forms/        # Form-related components
 ├── inputs/       # Input components and controls
 └── navigation/   # Navigation and layout components
 ```
+
+#### Three-File Component Architecture
+
+Every component in StencilUI follows a consistent three-file structure for optimal separation of concerns:
+
+**1. `component.tsx` - Pure Component Implementation**
+
+- Contains only the core component logic and styling
+- No configuration, examples, or preview code
+- Exports the component and its TypeScript types
+- Focuses solely on the component's functionality
+
+**2. `config.tsx` - Pure Configuration Data**
+
+- Contains the `ComponentConfig` object with metadata, prop definitions, and examples
+- No React imports or JSX - pure TypeScript configuration
+- Defines props available for user experimentation in the prop explorer
+- Includes code examples and documentation
+- Powers the component registry and documentation system
+
+**3. `example.tsx` - Preview Component**
+
+- Contains the example component used in the prop explorer and previews
+- Handles prop transformations (e.g., string icon names to icon components)
+- Provides the interactive preview experience
+- Bridges between the prop explorer system and the pure component
 
 ### Styling Strategy
 
@@ -77,7 +91,133 @@ Each component is built on appropriate Base UI primitives:
 - Provides consistent behavior patterns
 - Enables advanced features like portal rendering and collision detection
 
-### 3. Styling Adaptation
+### 3. Three-File Implementation
+
+Each component is implemented using our standardized three-file architecture:
+
+**Step 1: Create Pure Component (`component.tsx`)**
+
+```tsx
+// badge/badge.tsx - Pure component implementation
+import React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
+
+const badgeVariants = tv({
+  base: "inline-flex items-center gap-x-1.5 whitespace-nowrap rounded-md font-medium ring-1 ring-inset",
+  variants: {
+    variant: {
+      default: "bg-blue-50 text-blue-900 ring-blue-500/30",
+      // ... other variants
+    },
+    size: {
+      sm: "px-1.5 py-0.5 text-xs",
+      base: "px-2 py-1 text-xs",
+      lg: "px-2.5 py-1.5 text-sm",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "base",
+  },
+});
+
+interface BadgeProps
+  extends React.HTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof badgeVariants> {
+  leftIcon?: React.ComponentType<{ className?: string }>;
+  rightIcon?: React.ComponentType<{ className?: string }>;
+}
+
+const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
+  (
+    {
+      /* ... */
+    }
+  ) => {
+    // Component implementation
+  }
+);
+
+export { Badge, badgeVariants, type BadgeProps };
+```
+
+**Step 2: Create Configuration (`config.tsx`)**
+
+```tsx
+// badge/config.tsx - Pure configuration data
+import type { ComponentConfig } from "@/lib/component-config-types";
+
+export const componentConfig: ComponentConfig = {
+  id: "badge",
+  name: "Badge",
+  description: "A label used to show a status or category.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: { npm: "@base-ui-components/react" },
+  importStatement: `import { Badge } from "@/components/ui/badge";`,
+  componentId: "BadgeExample",
+  props: [
+    {
+      name: "variant",
+      type: "select",
+      options: ["default", "neutral", "success", "error", "warning"],
+      defaultValue: "default",
+      description: "The visual style variant of the badge.",
+    },
+    {
+      name: "leftIcon",
+      type: "icon",
+      description: "Icon component to display on the left side.",
+    },
+    // ... other props
+  ],
+  examples: [
+    {
+      title: "Default",
+      code: `<Badge>Badge</Badge>`,
+    },
+    // ... other examples
+  ],
+};
+```
+
+**Step 3: Create Example Component (`example.tsx`)**
+
+```tsx
+// badge/example.tsx - Preview component
+import React from "react";
+import { Badge } from "./badge";
+
+export const BadgeExample = ({
+  variant = "default",
+  size = "base",
+  leftIcon,
+  rightIcon,
+  children = "Badge",
+  ...props
+}: {
+  variant?: "default" | "neutral" | "success" | "error" | "warning";
+  size?: "sm" | "base" | "lg";
+  leftIcon?: React.ComponentType<{ className?: string }>;
+  rightIcon?: React.ComponentType<{ className?: string }>;
+  children?: string;
+  [key: string]: unknown;
+}) => {
+  return (
+    <Badge
+      variant={variant}
+      size={size}
+      leftIcon={leftIcon}
+      rightIcon={rightIcon}
+      {...props}
+    >
+      {children}
+    </Badge>
+  );
+};
+```
+
+### 4. Styling Adaptation
 
 Components receive Tremor-inspired styling with:
 
@@ -86,120 +226,50 @@ Components receive Tremor-inspired styling with:
 - Dark mode support throughout
 - Focus management and keyboard navigation styles
 
-### 4. API Design
+### 5. API Design
 
 Component APIs prioritize:
 
 - TypeScript-first development
 - Intuitive prop naming
 - Composition over configuration
-- Backward compatibility where possible
+- Separation of concerns through three-file architecture
 
-## Example Component Evolution
-
-### Carousel Component
-
-**Inspiration**: shadcn/ui Carousel
-**Foundation**: Embla Carousel React + Base UI patterns
-**Styling**: Tremor color palette and spacing
-**Result**: Accessible, performant carousel with professional styling
-
-```tsx
-// shadcn/ui pattern adapted to our architecture
-<Carousel className="w-full max-w-xs">
-  <CarouselContent>
-    <CarouselItem>Content 1</CarouselItem>
-    <CarouselItem>Content 2</CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>
-```
-
-### Navigation Menu
-
-**Inspiration**: shadcn/ui NavigationMenu + Tailwind UI patterns
-**Foundation**: Base UI NavigationMenu primitives
-**Migration**: Removed Radix-specific APIs, adopted Base UI data attributes
-**Styling**: Tremor professional styling with proper focus states
-
-## Key Differentiators
-
-### vs. shadcn/ui
-
-- **Foundation**: Base UI instead of Radix UI (more modern, better performance)
-- **Styling**: Tremor-inspired professional aesthetic vs. neutral design
-- **Approach**: Curated library vs. copy-paste utilities
-
-### vs. Radix UI
-
-- **Styling**: Fully styled components vs. unstyled primitives
-- **DX**: Ready-to-use vs. requires styling implementation
-- **Foundation**: Base UI (next-generation primitives)
-
-### vs. Tailwind UI (Catalyst)
-
-- **Accessibility**: Base UI primitives ensure robust a11y
-- **Customization**: Programmatic variants vs. static examples
-- **Integration**: React-first vs. multi-framework
-
-### vs. Tremor
-
-- **Scope**: Full component library vs. data visualization focus
-- **Foundation**: Modern Base UI vs. older primitive libraries
-- **Flexibility**: More customization options and variants
-
-## Development Workflow
-
-### Component Creation Process
-
-1. **Identify Source**: Find best-in-class component from shadcn/ui, Catalyst, etc.
-2. **Map Primitives**: Identify corresponding Base UI primitives
-3. **Port Implementation**: Adapt component logic to Base UI APIs
-4. **Apply Styling**: Implement Tremor-inspired design system
-5. **Add Variants**: Create tailwind-variants for different use cases
-6. **Test & Document**: Ensure accessibility and provide usage examples
-
-### Quality Standards
+## Quality Standards
 
 - **TypeScript**: Full type safety with proper generic support
 - **Accessibility**: WCAG AA compliance via Base UI primitives
 - **Performance**: Minimal re-renders and optimal bundle size
-- **Documentation**: Clear examples and API documentation
+- **Architecture**: Consistent three-file structure for all components
+- **Configuration**: Pure TypeScript configuration without React dependencies
+- **Documentation**: Clear examples and API documentation powered by config files
 - **Testing**: Comprehensive test coverage for critical paths
-
-## Future Roadmap
-
-### Short Term
-
-- Complete core component set (forms, navigation, feedback)
-- Advanced data visualization components
-- Comprehensive theming system
-- Storybook documentation site
-
-### Medium Term
-
-- Advanced composition patterns
-- Animation and motion system
-- Design tokens and theme builder
-- CLI tool for component installation
-
-### Long Term
-
-- Design system documentation
-- Figma design kit integration
-- Advanced customization APIs
-- Framework adapters (Vue, Svelte)
 
 ## Contributing
 
 We welcome contributions that align with our philosophy of curating the best patterns from the ecosystem. When proposing new components:
 
-1. Identify the best-in-class reference implementation
-2. Ensure Base UI primitive support exists
-3. Follow our styling and API conventions
-4. Provide comprehensive TypeScript types
-5. Include accessibility considerations
+1. **Identify the best-in-class reference implementation** from shadcn/ui, Catalyst, etc.
+2. **Ensure Base UI primitive support exists** for the component's functionality
+3. **Follow the three-file architecture**:
+   - `component.tsx`: Pure component implementation
+   - `config.tsx`: Pure TypeScript configuration
+   - `example.tsx`: Preview component for prop explorer
+4. **Follow our styling and API conventions** with Tremor-inspired design
+5. **Provide comprehensive TypeScript types** with proper generics
+6. **Include accessibility considerations** via Base UI primitives
+7. **Add to component registry** in `src/lib/component-registry.ts`
+
+### Component Conversion Process
+
+When converting existing components to the new architecture:
+
+1. **Extract pure component** logic to `component.tsx`
+2. **Create configuration** in `config.tsx` using `ComponentConfig` interface
+3. **Build example component** in `example.tsx` for prop explorer integration
+4. **Update component registry** to include the new configuration
+5. **Test prop explorer** functionality and icon handling
+6. **Verify TypeScript** compliance and remove any runtime validation
 
 ## License
 
