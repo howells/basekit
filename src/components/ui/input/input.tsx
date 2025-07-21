@@ -82,6 +82,10 @@ interface InputProps
   type?: string;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
+  prefixText?: string;
+  prefixIcon?: React.ComponentType<{ className?: string }>;
+  suffixText?: string;
+  suffixIcon?: React.ComponentType<{ className?: string }>;
   prefixStyling?: boolean;
   suffixStyling?: boolean;
 }
@@ -97,6 +101,10 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
       type,
       prefix,
       suffix,
+      prefixText,
+      prefixIcon: PrefixIcon,
+      suffixText,
+      suffixIcon: SuffixIcon,
       prefixStyling = true,
       suffixStyling = true,
       ...props
@@ -108,29 +116,68 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
     const isPassword = type === "password";
     const isSearch = type === "search";
 
+    // Icon size and color based on input size (like Button component)
+    const iconSize = {
+      "size-3.5": size === "sm",
+      "size-4": size === "base",
+      "size-5": size === "lg",
+    };
+    const iconClassName = cx(
+      "shrink-0 text-zinc-500 dark:text-zinc-400",
+      iconSize
+    );
+
+    // Gap size based on input size
+    const gapSize = {
+      "gap-0.5": size === "sm", // 2px gap for small
+      "gap-1": size === "base", // 4px gap for base
+      "gap-1.5": size === "lg", // 6px gap for large
+    };
+    const gapClassName = cx(gapSize);
+
+    // Resolve prefix - can be explicit prefix prop, or combination of prefixText/prefixIcon
+    const resolvedPrefix =
+      prefix || (prefixText && PrefixIcon) ? (
+        <div className={cx("flex items-center", gapClassName)}>
+          {PrefixIcon && <PrefixIcon className={iconClassName} />}
+          {prefixText && <span>{prefixText}</span>}
+        </div>
+      ) : PrefixIcon ? (
+        <PrefixIcon className={iconClassName} />
+      ) : (
+        prefixText || undefined
+      );
+
+    // Resolve suffix - can be explicit suffix prop, or combination of suffixText/suffixIcon
+    const resolvedSuffix =
+      suffix || (suffixText && SuffixIcon) ? (
+        <div className={cx("flex items-center", gapClassName)}>
+          {suffixText && <span>{suffixText}</span>}
+          {SuffixIcon && <SuffixIcon className={iconClassName} />}
+        </div>
+      ) : SuffixIcon ? (
+        <SuffixIcon className={iconClassName} />
+      ) : (
+        suffixText || undefined
+      );
+
     // Auto-add search icon as prefix when type="search" (unless custom prefix provided)
     const effectivePrefix =
-      isSearch && !prefix ? (
-        <Search
-          className={cx("shrink-0 text-zinc-400 dark:text-zinc-600", {
-            "size-3.5": size === "sm",
-            "size-4": size === "base",
-            "size-5": size === "lg",
-          })}
-        />
+      isSearch && !resolvedPrefix ? (
+        <Search className={iconClassName} />
       ) : (
-        prefix
+        resolvedPrefix
       );
 
     // Auto-add password toggle as suffix when type="password" (unless custom suffix provided)
     const effectiveSuffix =
-      isPassword && !suffix ? (
+      isPassword && !resolvedSuffix ? (
         <button
           aria-label="Change password visibility"
           className={cx(
             "h-fit w-fit rounded-xs outline-hidden transition-all",
-            "text-zinc-400 dark:text-zinc-600",
-            "hover:text-zinc-500 dark:hover:text-zinc-500",
+            "text-zinc-500 dark:text-zinc-400",
+            "hover:text-zinc-600 dark:hover:text-zinc-300",
             focusRing
           )}
           type="button"
@@ -162,7 +209,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
           )}
         </button>
       ) : (
-        suffix
+        resolvedSuffix
       );
 
     // Determine if we have custom prefix/suffix or built-in ones
@@ -181,43 +228,24 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
     const shouldApplyLeftPadding = hasCustomPrefix || hasBuiltInPrefix;
     const shouldApplyRightPadding = hasCustomSuffix || hasBuiltInSuffix;
 
-    // Dynamic padding for input element
-    const leftPadding = hasCustomPrefix
-      ? {} // No left padding - let flex layout handle spacing
-      : shouldApplyLeftPadding
-      ? {
-          "pl-8": size === "sm",
-          "pl-9": size === "base",
-          "pl-10": size === "lg",
-        }
-      : {
-          "pl-2": size === "sm",
-          "pl-2.5": size === "base",
-          "pl-3": size === "lg",
-        };
+    // Simple padding logic - reduce padding only for UNSTYLED prefix/suffix
+    const paddingClasses = cx({
+      // Left padding
+      "pl-2.5": size === "sm" && !(hasCustomPrefix && !prefixStyling),
+      "pl-3": size === "base" && !(hasCustomPrefix && !prefixStyling),
+      "pl-3.5": size === "lg" && !(hasCustomPrefix && !prefixStyling),
+      "pl-1.5": size === "sm" && hasCustomPrefix && !prefixStyling,
+      "pl-2": size === "base" && hasCustomPrefix && !prefixStyling,
+      "pl-2.5": size === "lg" && hasCustomPrefix && !prefixStyling,
 
-    const rightPadding = hasCustomSuffix
-      ? {} // No right padding - let flex layout handle spacing
-      : shouldApplyRightPadding
-      ? {
-          "pr-10": size === "sm",
-          "pr-12": size === "base",
-          "pr-14": size === "lg",
-        }
-      : {
-          "pr-2": size === "sm",
-          "pr-2.5": size === "base",
-          "pr-3": size === "lg",
-        };
-
-    const paddingClasses = {
-      ...(typeof leftPadding === "string"
-        ? { [leftPadding]: true }
-        : leftPadding),
-      ...(typeof rightPadding === "string"
-        ? { [rightPadding]: true }
-        : rightPadding),
-    };
+      // Right padding
+      "pr-2.5": size === "sm" && !(hasCustomSuffix && !suffixStyling),
+      "pr-3": size === "base" && !(hasCustomSuffix && !suffixStyling),
+      "pr-3.5": size === "lg" && !(hasCustomSuffix && !suffixStyling),
+      "pr-1.5": size === "sm" && hasCustomSuffix && !suffixStyling,
+      "pr-2": size === "base" && hasCustomSuffix && !suffixStyling,
+      "pr-2.5": size === "lg" && hasCustomSuffix && !suffixStyling,
+    });
 
     return (
       <div
@@ -277,7 +305,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
               "py-2 text-sm": size === "base",
               "py-2.5 text-base": size === "lg",
             },
-            // Dynamic padding based on prefix/suffix
+            // Simple padding
             paddingClasses,
             // Text and placeholder colors
             "text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 dark:placeholder-zinc-500",

@@ -97,13 +97,14 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
             {/* Search input for components only */}
             <SidebarSection>
-              <div className="px-3 pb-3">
+              <div className="pb-3">
                 <Input
                   placeholder="Search components..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   size="sm"
                   type="search"
+                  prefixStyling={false}
                 />
               </div>
             </SidebarSection>
