@@ -77,6 +77,13 @@ src/components/ui/[component]/
 6. **Register component** in `component-registry.ts`
 7. **Test prop explorer** functionality and icon handling
 
+### Base UI Integration
+
+- Use Base UI's `useRender` hook and `render` prop instead of custom `asChild` implementations
+- Extend `useRender.ComponentProps<"element">` in component interfaces for proper typing
+- Example: `<Button render={<a href="/link" />}>Link Button</Button>` instead of `<Button asChild><a href="/link">Link Button</a></Button>`
+- This provides better TypeScript support and follows Base UI patterns
+
 ### Styling Conventions
 
 - Use Tremor-inspired color palettes (grays, blues, semantic colors)
@@ -89,8 +96,11 @@ src/components/ui/[component]/
 
 - All components must have proper TypeScript types
 - Use `VariantProps<typeof variants>` for variant props
-- Extend appropriate HTML element props
+- Extend `useRender.ComponentProps<"element">` for Base UI integration
 - Export component, variants, and prop types
+- **NEVER use `any` type or force casting with `as any`**
+- Use proper type guards and strict typing instead of type assertions
+- Prefer Base UI's `render` prop over custom `asChild` implementations
 
 ### Component Migration Process
 

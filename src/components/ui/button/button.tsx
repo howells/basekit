@@ -1,14 +1,14 @@
+import { cx, focusRing } from "@/lib/utils";
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
-import { cx, focusRing } from "@/lib/utils";
 import { Loader } from "../loader";
 
 const buttonVariants = tv({
   base: [
     // base
-    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border text-center text-sm font-medium shadow-xs outline-hidden",
+    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-center text-sm font-medium shadow-xs outline-hidden",
     // background transition with Apple easing
     "transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
     // disabled
@@ -19,66 +19,72 @@ const buttonVariants = tv({
   variants: {
     variant: {
       default: [
-        // border
-        "border-transparent",
+        // inset border with normal shadow using proper Tailwind classes
+        "inset-ring-1 inset-ring-white/10 shadow-xs",
+        "dark:inset-ring-black/20",
         // text color
         "text-white dark:text-white",
         // background color
         "bg-zinc-900 dark:bg-zinc-50",
-        // hover color
-        "hover:bg-zinc-800 dark:hover:bg-zinc-200",
+        // hover with enhanced inset border
+        "hover:bg-zinc-800 hover:inset-ring-white/15 hover:shadow-xs",
+        "dark:hover:bg-zinc-200 dark:hover:inset-ring-black/25",
         // disabled
-        "disabled:bg-zinc-400 disabled:text-white",
-        "dark:disabled:bg-zinc-600 dark:disabled:text-zinc-300",
+        "disabled:bg-zinc-400 disabled:text-white disabled:inset-ring-white/5 disabled:shadow-none",
+        "dark:disabled:bg-zinc-600 dark:disabled:text-zinc-300 dark:disabled:inset-ring-black/10",
       ],
       secondary: [
-        // ring instead of border
-        "border-transparent ring-1 ring-zinc-200 dark:ring-zinc-800",
+        // clean secondary without border, just shadow
+        "shadow-xs",
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // background color
         "bg-zinc-100 dark:bg-zinc-800",
-        // hover color
-        "hover:bg-zinc-200 dark:hover:bg-zinc-700",
+        // hover with shadow only
+        "hover:bg-zinc-200 hover:shadow-xs",
+        "dark:hover:bg-zinc-700",
         // disabled
-        "disabled:bg-zinc-50 disabled:text-zinc-400",
+        "disabled:bg-zinc-50 disabled:text-zinc-400 disabled:shadow-none",
         "dark:disabled:bg-zinc-900 dark:disabled:text-zinc-600",
       ],
       destructive: [
-        // border
-        "border-transparent",
+        // inset border with normal shadow using proper Tailwind classes
+        "inset-ring-1 inset-ring-white/20 shadow-xs",
+        "dark:inset-ring-white/10",
         // text color
         "text-white dark:text-white",
         // background color
         "bg-red-500 dark:bg-red-900",
-        // hover color
-        "hover:bg-red-600 dark:hover:bg-red-800",
+        // hover with enhanced inset border
+        "hover:bg-red-600 hover:inset-ring-white/25 hover:shadow-xs",
+        "dark:hover:bg-red-800 dark:hover:inset-ring-white/15",
         // disabled
-        "disabled:bg-red-300 disabled:text-white",
-        "dark:disabled:bg-red-950 dark:disabled:text-red-400",
+        "disabled:bg-red-300 disabled:text-white disabled:inset-ring-white/15 disabled:shadow-none",
+        "dark:disabled:bg-red-950 dark:disabled:text-red-400 dark:disabled:inset-ring-white/5",
       ],
       outline: [
-        // ring instead of border
-        "border-transparent ring-1 ring-zinc-200 dark:ring-zinc-800",
+        // inset border with normal shadow using proper Tailwind classes
+        "inset-ring-1 inset-ring-black/15 shadow-xs",
+        "dark:inset-ring-white/15",
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // background color
         "bg-white dark:bg-zinc-950",
-        // hover color
-        "hover:bg-zinc-100 dark:hover:bg-zinc-800",
+        // hover with enhanced inset border
+        "hover:bg-zinc-100 hover:inset-ring-black/20 hover:shadow-xs",
+        "dark:hover:bg-zinc-800 dark:hover:inset-ring-white/20",
         // disabled
-        "disabled:ring-zinc-200 disabled:text-zinc-400",
-        "dark:disabled:ring-zinc-800 dark:disabled:text-zinc-600",
+        "disabled:text-zinc-400 disabled:inset-ring-black/10 disabled:shadow-none",
+        "dark:disabled:text-zinc-600 dark:disabled:inset-ring-white/10",
       ],
       ghost: [
         // base
         "shadow-none",
-        // border
-        "border-transparent",
         // text color
         "text-zinc-900 dark:text-zinc-50",
-        // hover color
-        "bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800",
+        // hover with just background and shadow, no border
+        "bg-transparent hover:bg-zinc-100 hover:shadow-xs",
+        "dark:hover:bg-zinc-800",
         // disabled
         "disabled:text-zinc-400",
         "dark:disabled:text-zinc-600",
@@ -86,8 +92,6 @@ const buttonVariants = tv({
       link: [
         // base
         "shadow-none",
-        // border
-        "border-transparent",
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // hover color
@@ -118,7 +122,6 @@ interface ButtonProps
   rightIcon?: React.ComponentType<{ className?: string }>;
   fullWidth?: boolean;
   textAlign?: "left" | "center" | "right";
-  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -136,7 +139,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       fullWidth,
       textAlign,
-      asChild = false,
       ...props
     }: ButtonProps,
     forwardedRef
@@ -158,11 +160,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const effectiveShouldShowChildren = shouldShowChildren;
 
     const renderButtonContent = () => {
-      // If asChild is true, render children directly (they should be a single React element)
-      if (asChild) {
-        return children;
-      }
-      
       // If children is a custom React element, render it directly
       if (hasCustomLayout) {
         return children;
@@ -205,7 +202,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   <div
                     className={cx(
                       "absolute inset-0 flex items-center justify-center transition-opacity duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                      isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
+                      isLoading
+                        ? "opacity-100"
+                        : "opacity-0 pointer-events-none"
                     )}
                   >
                     <Loader
@@ -218,7 +217,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     <div
                       className={cx(
                         "absolute inset-0 flex items-center justify-center transition-opacity duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                        !isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
+                        !isLoading
+                          ? "opacity-100"
+                          : "opacity-0 pointer-events-none"
                       )}
                     >
                       <LeftIcon className={iconClassName} />
@@ -227,9 +228,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 </div>
               </span>
             )}
-            
+
             {effectiveShouldShowChildren && effectiveChildren}
-            
+
             {/* Right icon with CSS transitions */}
             {hasRightIcon && (
               <span className="flex items-center">
@@ -248,7 +249,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <span
               className={cx(
                 "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                (isLoading || hasLeftIcon)
+                isLoading || hasLeftIcon
                   ? "opacity-100 scale-100 w-auto"
                   : "opacity-0 scale-95 w-0"
               )}
@@ -279,11 +280,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 )}
               </div>
             </span>
-            
+
             <div className="flex-1 text-center">
               {effectiveShouldShowChildren && effectiveChildren}
             </div>
-            
+
             {/* Right icon */}
             {hasRightIcon && (
               <span className="flex items-center">
@@ -303,7 +304,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               <span
                 className={cx(
                   "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-                  (isLoading || hasLeftIcon)
+                  isLoading || hasLeftIcon
                     ? "opacity-100 scale-100 w-auto"
                     : "opacity-0 scale-95 w-0"
                 )}
@@ -336,7 +337,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               </span>
               {effectiveShouldShowChildren && effectiveChildren}
             </div>
-            
+
             {/* Right icon */}
             <span className="flex items-center">
               <RightIcon className={iconClassName} />
@@ -352,7 +353,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <span
             className={cx(
               "flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
-              (isLoading || hasLeftIcon)
+              isLoading || hasLeftIcon
                 ? "opacity-100 scale-100 w-auto"
                 : "opacity-0 scale-95 w-0"
             )}
@@ -387,31 +388,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </span>
       );
     };
-
-    // Handle asChild case
-    if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children as React.ReactElement<any>, {
-        ...(children.props as any),
-        className: cx(
-          buttonVariants({ variant, size }),
-          fullWidth && "w-full max-w-[95vw]",
-          // Only apply text alignment classes when not using fullWidth center (which has its own layout)
-          !(fullWidth && textAlign === "center") &&
-            textAlign === "left" &&
-            "text-left",
-          !(fullWidth && textAlign === "center") &&
-            textAlign === "center" &&
-            "text-center",
-          !(fullWidth && textAlign === "center") &&
-            textAlign === "right" &&
-            "text-right",
-          !(fullWidth && textAlign === "center") && !textAlign && "text-center", // default to center
-          className,
-          (children.props as any).className
-        ),
-        ...props,
-      });
-    }
 
     const defaultProps: useRender.ElementProps<"button"> = {
       className: cx(
