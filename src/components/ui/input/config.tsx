@@ -64,16 +64,28 @@ export const inputConfig: ComponentConfig = {
       description: "Whether to show stepper controls for number inputs.",
     },
     {
-      name: "prefix",
+      name: "prefixText",
       type: "string",
       defaultValue: "",
-      description: "Text or content to display before the input.",
+      description: "Text to display before the input.",
     },
     {
-      name: "suffix",
+      name: "prefixIcon",
+      type: "icon",
+      defaultValue: "",
+      description: "Icon to display before the input.",
+    },
+    {
+      name: "suffixText",
       type: "string",
       defaultValue: "",
-      description: "Text or content to display after the input.",
+      description: "Text to display after the input.",
+    },
+    {
+      name: "suffixIcon",
+      type: "icon",
+      defaultValue: "",
+      description: "Icon to display after the input.",
     },
     {
       name: "prefixStyling",
@@ -162,9 +174,9 @@ export const inputConfig: ComponentConfig = {
       title: "Text Prefix & Suffix",
       description: "Input with text prefix and suffix",
       code: `<div className="space-y-4">
-  <Input placeholder="Enter domain" prefix="https://" />
-  <Input placeholder="Enter username" suffix="@company.com" />
-  <Input placeholder="Website" prefix="https://" suffix=".com" />
+  <Input placeholder="Enter domain" prefixText="https://" />
+  <Input placeholder="Enter username" suffixText="@company.com" />
+  <Input placeholder="Website" prefixText="https://" suffixText=".com" />
 </div>`,
     },
     {
@@ -172,9 +184,25 @@ export const inputConfig: ComponentConfig = {
       title: "Styling Options",
       description: "Control styling of prefix and suffix",
       code: `<div className="space-y-4">
-  <Input placeholder="Styled" prefix="$" suffix="USD" />
-  <Input placeholder="Unstyled" prefix="$" suffix="USD" prefixStyling={false} suffixStyling={false} />
+  <Input placeholder="Styled" prefixText="$" suffixText="USD" />
+  <Input placeholder="Unstyled" prefixText="$" suffixText="USD" prefixStyling={false} suffixStyling={false} />
 </div>`,
+    },
+    {
+      id: "prefix-suffix-icons",
+      title: "Icon Prefix & Suffix",
+      description: "Input with icon prefix and suffix (use prop explorer)",
+      code: `// Use the prop explorer to set:
+// prefixIcon: "Search", suffixIcon: "ArrowRight"
+<Input placeholder="Search and submit..." />`,
+    },
+    {
+      id: "mixed-prefix-suffix",
+      title: "Mixed Prefix & Suffix",
+      description: "Combine text and icons (use prop explorer)",
+      code: `// Use the prop explorer to set:
+// prefixText: "@", suffixIcon: "Mail"
+<Input placeholder="Enter your email" />`,
     },
   ],
 };

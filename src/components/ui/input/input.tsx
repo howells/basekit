@@ -122,11 +122,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
 
     // Dynamic padding for input element
     const leftPadding = hasCustomPrefix
-      ? {
-          "pl-2": size === "sm",
-          "pl-2.5": size === "base",
-          "pl-3": size === "lg",
-        } // Match prefix padding for visual consistency
+      ? {} // No left padding - let flex layout handle spacing
       : shouldApplyLeftPadding
       ? {
           "pl-8": size === "sm",
@@ -140,11 +136,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
         };
 
     const rightPadding = hasCustomSuffix
-      ? {
-          "pr-2": size === "sm",
-          "pr-2.5": size === "base",
-          "pr-3": size === "lg",
-        } // Match suffix padding for visual consistency
+      ? {} // No right padding - let flex layout handle spacing
       : shouldApplyRightPadding
       ? {
           "pr-10": size === "sm",
@@ -201,23 +193,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
               }
             )}
           >
-            {React.isValidElement(prefix)
-              ? React.cloneElement(
-                  prefix as React.ReactElement<{ className?: string }>,
-                  {
-                    className: cx(
-                      "shrink-0",
-                      {
-                        "size-3.5": size === "sm",
-                        "size-4": size === "base",
-                        "size-5": size === "lg",
-                      },
-                      (prefix as React.ReactElement<{ className?: string }>)
-                        .props.className
-                    ),
-                  }
-                )
-              : prefix}
+            {prefix}
           </div>
         )}
 
@@ -268,23 +244,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
               }
             )}
           >
-            {React.isValidElement(suffix)
-              ? React.cloneElement(
-                  suffix as React.ReactElement<{ className?: string }>,
-                  {
-                    className: cx(
-                      "shrink-0",
-                      {
-                        "size-3.5": size === "sm",
-                        "size-4": size === "base",
-                        "size-5": size === "lg",
-                      },
-                      (suffix as React.ReactElement<{ className?: string }>)
-                        .props.className
-                    ),
-                  }
-                )
-              : suffix}
+            {suffix}
           </div>
         )}
 

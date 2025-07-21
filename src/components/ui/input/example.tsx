@@ -1,3 +1,4 @@
+import { cx } from "@/lib/utils";
 import React from "react";
 import { Input } from "./input";
 
@@ -9,8 +10,10 @@ export const InputExample = ({
   hasError = false,
   required = false,
   enableStepper = true,
-  prefix,
-  suffix,
+  prefixText,
+  prefixIcon,
+  suffixText,
+  suffixIcon,
   prefixStyling = true,
   suffixStyling = true,
   ...props
@@ -30,11 +33,47 @@ export const InputExample = ({
   hasError?: boolean;
   required?: boolean;
   enableStepper?: boolean;
-  prefix?: string;
-  suffix?: string;
+  prefixText?: string;
+  prefixIcon?: React.ComponentType<{ className?: string }>;
+  suffixText?: string;
+  suffixIcon?: React.ComponentType<{ className?: string }>;
   prefixStyling?: boolean;
   suffixStyling?: boolean;
 } & React.ComponentProps<typeof Input>) => {
+  // Icon size based on input size (like Button component)
+  const iconSize = {
+    "size-3.5": size === "sm",
+    "size-4": size === "base",
+    "size-5": size === "lg",
+  };
+  const iconClassName = cx("shrink-0", iconSize);
+
+  // Determine what to render for prefix - can be text, icon, or both
+  const resolvedPrefix =
+    prefixText && prefixIcon ? (
+      <div className="flex items-center gap-1">
+        {React.createElement(prefixIcon, { className: iconClassName })}
+        <span>{prefixText}</span>
+      </div>
+    ) : prefixIcon ? (
+      React.createElement(prefixIcon, { className: iconClassName })
+    ) : (
+      prefixText || undefined
+    );
+
+  // Determine what to render for suffix - can be text, icon, or both
+  const resolvedSuffix =
+    suffixText && suffixIcon ? (
+      <div className="flex items-center gap-1">
+        <span>{suffixText}</span>
+        {React.createElement(suffixIcon, { className: iconClassName })}
+      </div>
+    ) : suffixIcon ? (
+      React.createElement(suffixIcon, { className: iconClassName })
+    ) : (
+      suffixText || undefined
+    );
+
   return (
     <div className="w-full max-w-md">
       <Input
@@ -45,8 +84,8 @@ export const InputExample = ({
         hasError={hasError}
         required={required}
         enableStepper={enableStepper}
-        prefix={prefix}
-        suffix={suffix}
+        prefix={resolvedPrefix}
+        suffix={resolvedSuffix}
         prefixStyling={prefixStyling}
         suffixStyling={suffixStyling}
         {...props}
