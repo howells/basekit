@@ -1,4 +1,4 @@
-// Tremor Callout [v0.0.1]
+// Callout Component [v1.0.0] - Pure Implementation
 
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -50,7 +50,7 @@ interface CalloutProps
   extends React.ComponentPropsWithoutRef<"div">,
     VariantProps<typeof calloutVariants> {
   title: string;
-  icon?: React.ElementType | React.ReactElement;
+  icon?: React.ComponentType<{ className?: string }>;
 }
 
 const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
@@ -62,17 +62,11 @@ const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
       <div
         ref={forwardedRef}
         className={cx(calloutVariants({ variant }), className)}
-        tremor-id="tremor-raw"
         {...props}
       >
-        <div className={cx("flex items-start")}>
-          {Icon && typeof Icon === "function" ? (
-            <Icon
-              className={cx("mr-1.5 h-5 w-5 shrink-0")}
-              aria-hidden="true"
-            />
-          ) : (
-            Icon
+        <div className={cx("flex items-center")}>
+          {Icon && (
+            <Icon className={cx("mr-1.5 size-4 shrink-0")} aria-hidden="true" />
           )}
           <span className={cx("font-semibold")}>{title}</span>
         </div>
