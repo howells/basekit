@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "callout",
   name: "Callout",
-  description: "An alert component that displays important information with optional icon and variant styling.",
+  description:
+    "An alert component that displays important information with optional icon and variant styling.",
   category: "ui" as const,
   badge: "UI",
   importStatement: `import { Callout } from "@/components/ui/callout";`,
@@ -13,8 +14,9 @@ export const componentConfig: ComponentConfig = {
       name: "title",
       type: "string",
       defaultValue: "Important Information",
-      description: "The title text displayed in the callout.",
-      required: true,
+      description:
+        "The title text displayed in the callout. Either title or children must be provided.",
+      required: false,
     },
     {
       name: "variant",
@@ -31,7 +33,8 @@ export const componentConfig: ComponentConfig = {
     {
       name: "children",
       type: "string",
-      defaultValue: "This callout contains important information that requires your attention. It can include multiple sentences and longer content to demonstrate how the component handles extended text. The callout will automatically adjust its height to accommodate the content while maintaining proper styling and readability.",
+      defaultValue:
+        "This callout contains important information that requires your attention. It can include multiple sentences and longer content to demonstrate how the component handles extended text. The callout will automatically adjust its height to accommodate the content while maintaining proper styling and readability.",
       description: "The content displayed below the title.",
     },
   ],

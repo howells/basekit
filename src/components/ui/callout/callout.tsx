@@ -4,6 +4,7 @@ import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 import { cx } from "@/lib/utils";
+import { Subheading } from "../heading";
 
 const calloutVariants = tv({
   base: "flex flex-col overflow-hidden rounded-md p-4 text-sm",
@@ -49,7 +50,7 @@ const calloutVariants = tv({
 interface CalloutProps
   extends React.ComponentPropsWithoutRef<"div">,
     VariantProps<typeof calloutVariants> {
-  title: string;
+  title?: string;
   icon?: React.ComponentType<{ className?: string }>;
 }
 
@@ -64,14 +65,18 @@ const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
         className={cx(calloutVariants({ variant }), className)}
         {...props}
       >
-        <div className={cx("flex items-center")}>
+        <div className={cx("flex items-start gap-3")}>
           {Icon && (
-            <Icon className={cx("mr-1.5 size-4 shrink-0")} aria-hidden="true" />
+            <Icon className={cx("size-4 shrink-0 mt-1")} aria-hidden="true" />
           )}
-          <span className={cx("font-semibold")}>{title}</span>
-        </div>
-        <div className={cx("overflow-y-auto", children ? "mt-2" : "")}>
-          {children}
+          <div className={cx("flex-1")}>
+            {title && <Subheading level={3}>{title}</Subheading>}
+            {children && (
+              <div className={cx(title ? "mt-2" : "", "overflow-y-auto")}>
+                {children}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

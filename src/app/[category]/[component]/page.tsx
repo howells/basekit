@@ -151,10 +151,13 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     });
 
     // Add default children if the component supports it
-    const hasChildren = config.props.some(
+    const childrenProp = config.props.find(
       (prop: PropMetadata) => prop.name === "children"
     );
-    if (hasChildren) {
+    if (childrenProp && childrenProp.defaultValue !== undefined) {
+      defaultProps.children = childrenProp.defaultValue;
+    } else if (childrenProp) {
+      // Fallback to component name if no defaultValue is specified
       defaultProps.children = config.name;
     }
 

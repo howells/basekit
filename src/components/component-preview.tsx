@@ -271,10 +271,13 @@ export function ComponentPreview({
   // Render the component
   const renderComponent = () => {
     try {
-      // For simple components, use children. For complex ones, they should have their own structure
-      const childrenContent =
-        props.children !== undefined ? String(props.children) : componentId;
-      return <Component {...componentProps}>{childrenContent}</Component>;
+      // Only pass children if it's explicitly set in props, otherwise let the component use its defaults
+      if (props.children !== undefined) {
+        const childrenContent = String(props.children);
+        return <Component {...componentProps}>{childrenContent}</Component>;
+      } else {
+        return <Component {...componentProps} />;
+      }
     } catch (renderError) {
       console.error("Error rendering component:", renderError);
       return <div className="text-red-500">Error rendering {componentId}</div>;
