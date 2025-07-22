@@ -3,10 +3,13 @@
 "use client";
 
 import { cx, focusRing } from "@/lib/utils";
+import * as Dialog from "@radix-ui/react-dialog";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+
 import { Input } from "../input/input";
 
 const commandVariants = tv({
@@ -193,18 +196,22 @@ Command.displayName = CommandPrimitive.displayName;
 const CommandDialog = ({
   children,
   ...props
-}: React.ComponentPropsWithoutRef<typeof CommandPrimitive.Dialog>) => {
+}: React.ComponentPropsWithoutRef<typeof Dialog.Root>) => {
   const { dialog, dialogContent } = commandVariants();
   return (
-    <CommandPrimitive.Dialog {...props}>
-      <div className={dialog()}>
-        <div className={dialogContent()}>
+    <Dialog.Root {...props}>
+      <Dialog.Portal>
+        <Dialog.Overlay className={dialog()} />
+        <Dialog.Content className={dialogContent()}>
+          <VisuallyHidden.Root>
+            <Dialog.Title>Command Menu</Dialog.Title>
+          </VisuallyHidden.Root>
           <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-zinc-500 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
             {children}
           </Command>
-        </div>
-      </div>
-    </CommandPrimitive.Dialog>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 
@@ -245,11 +252,7 @@ const CommandInput = React.forwardRef<
         className={className}
         {...props}
       >
-        <Input
-          prefixIcon={Search}
-          prefixStyling={false}
-          className="border-0 shadow-none rounded-none bg-transparent focus-within:ring-0 focus-within:border-0 [&>div]:border-0 [&>div]:shadow-none [&>div]:rounded-none [&>div]:bg-transparent [&>div]:focus-within:ring-0 [&>div]:focus-within:border-0"
-        />
+        <Input prefixIcon={Search} prefixStyling={false} minimal />
       </CommandPrimitive.Input>
     </div>
   );

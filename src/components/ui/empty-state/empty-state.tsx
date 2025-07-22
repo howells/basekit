@@ -1,3 +1,78 @@
+/**
+ * Empty State Component
+ * 
+ * A component for displaying empty states when there's no content to show.
+ * Provides a structured layout with optional icon, title, description, and
+ * action buttons to guide users toward taking action.
+ * 
+ * Features:
+ * - Multiple size variants (sm, default, lg)
+ * - Visual variants (default, minimal)
+ * - Optional icon display
+ * - Primary and secondary action buttons
+ * - Link and button action support
+ * - Responsive design
+ * 
+ * @example
+ * ```tsx
+ * // Basic empty state
+ * <EmptyState
+ *   title="No items found"
+ *   description="Get started by creating your first item."
+ * />
+ * 
+ * // With icon and actions
+ * <EmptyState
+ *   icon={Plus}
+ *   title="No projects yet"
+ *   description="Create your first project to get started."
+ *   primaryAction={{
+ *     label: "Create Project",
+ *     onClick: () => createProject()
+ *   }}
+ *   secondaryAction={{
+ *     label: "Import Project",
+ *     onClick: () => openImport()
+ *   }}
+ * />
+ * 
+ * // Large variant with link actions
+ * <EmptyState
+ *   size="lg"
+ *   icon={FolderOpen}
+ *   title="No files uploaded"
+ *   description="Upload your first file or drag and drop files here."
+ *   primaryAction={{
+ *     label: "Upload Files",
+ *     href: "/upload"
+ *   }}
+ *   secondaryAction={{
+ *     label: "Learn More",
+ *     href: "/docs"
+ *   }}
+ * />
+ * 
+ * // Minimal variant
+ * <EmptyState
+ *   variant="minimal"
+ *   size="sm"
+ *   title="No notifications"
+ *   description="You're all caught up!"
+ * />
+ * 
+ * // Search results empty state
+ * <EmptyState
+ *   icon={Search}
+ *   title="No results found"
+ *   description={`No results for "${searchQuery}". Try adjusting your search.`}
+ *   primaryAction={{
+ *     label: "Clear Search",
+ *     onClick: () => clearSearch()
+ *   }}
+ * />
+ * ```
+ */
+
 import { cx } from "@/lib/utils";
 import React from "react";
 import { Button } from "../button/button";
@@ -5,46 +80,139 @@ import { Heading } from "../heading";
 import { Subheading } from "../subheading";
 import { Text } from "../text";
 
+/**
+ * Props for the EmptyState component.
+ * 
+ * Configuration for empty state display including content, actions,
+ * and visual appearance options.
+ * 
+ * @interface EmptyStateProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The main heading/title of the empty state
-   */
+  /** The main heading/title of the empty state */
   title: string;
-  /**
-   * Optional description text below the title
-   */
+  /** Optional description text below the title */
   description?: string;
-  /**
-   * Optional icon to display above the title
-   */
+  /** Optional icon component to display above the title */
   icon?: React.ComponentType<{ className?: string }>;
-  /**
-   * Primary action button
-   */
+  /** Primary action button configuration */
   primaryAction?: {
+    /** Button label text */
     label: string;
+    /** Click handler for button action */
     onClick?: () => void;
+    /** URL for link action (alternative to onClick) */
     href?: string;
+    /** Whether the button is disabled */
     disabled?: boolean;
   };
-  /**
-   * Secondary action (usually a link)
-   */
+  /** Secondary action button configuration */
   secondaryAction?: {
+    /** Button label text */
     label: string;
+    /** Click handler for button action */
     onClick?: () => void;
+    /** URL for link action (alternative to onClick) */
     href?: string;
   };
-  /**
-   * Visual variant of the empty state
-   */
+  /** Visual variant of the empty state */
   variant?: "default" | "minimal";
-  /**
-   * Size variant
-   */
+  /** Size variant affecting spacing and icon size */
   size?: "sm" | "default" | "lg";
 }
 
+/**
+ * A component for displaying empty states when there's no content to show.
+ * 
+ * Provides a structured layout with optional icon, title, description, and
+ * action buttons to guide users toward taking action. Supports multiple
+ * size and visual variants for different contexts.
+ *
+ * @param title - The main heading/title of the empty state
+ * @param description - Optional description text below the title
+ * @param icon - Optional icon component to display above the title
+ * @param primaryAction - Primary action button configuration
+ * @param secondaryAction - Secondary action button configuration
+ * @param variant - Visual variant (default shows background for icon, minimal is text-only)
+ * @param size - Size variant affecting spacing and icon size
+ * @param className - Additional CSS classes
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic empty state
+ * <EmptyState
+ *   title="No items found"
+ *   description="Get started by creating your first item."
+ * />
+ * 
+ * // With icon and actions
+ * <EmptyState
+ *   icon={Plus}
+ *   title="No projects yet"
+ *   description="Create your first project to get started."
+ *   primaryAction={{
+ *     label: "Create Project",
+ *     onClick: () => createProject()
+ *   }}
+ *   secondaryAction={{
+ *     label: "Import Project",
+ *     onClick: () => openImport()
+ *   }}
+ * />
+ * 
+ * // Large variant with link actions
+ * <EmptyState
+ *   size="lg"
+ *   icon={FolderOpen}
+ *   title="No files uploaded"
+ *   description="Upload your first file or drag and drop files here."
+ *   primaryAction={{
+ *     label: "Upload Files",
+ *     href: "/upload"
+ *   }}
+ *   secondaryAction={{
+ *     label: "Learn More",
+ *     href: "/docs"
+ *   }}
+ * />
+ * 
+ * // Minimal variant
+ * <EmptyState
+ *   variant="minimal"
+ *   size="sm"
+ *   title="No notifications"
+ *   description="You're all caught up!"
+ * />
+ * 
+ * // Search results empty state
+ * <EmptyState
+ *   icon={Search}
+ *   title="No results found"
+ *   description={`No results for "${searchQuery}". Try adjusting your search.`}
+ *   primaryAction={{
+ *     label: "Clear Search",
+ *     onClick: () => clearSearch()
+ *   }}
+ * />
+ * 
+ * // Error empty state
+ * <EmptyState
+ *   icon={AlertCircle}
+ *   title="Something went wrong"
+ *   description="We encountered an error loading your data."
+ *   primaryAction={{
+ *     label: "Try Again",
+ *     onClick: () => retry()
+ *   }}
+ *   secondaryAction={{
+ *     label: "Contact Support",
+ *     href: "/support"
+ *   }}
+ * />
+ * ```
+ */
 const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   (
     {

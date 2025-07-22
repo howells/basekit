@@ -107,8 +107,6 @@ interface InputProps
   suffixStyling?: boolean;
   /** Minimal variant for command palettes - removes border, shadow, focus ring */
   minimal?: boolean;
-  /** Render just the bare input element without any wrapper */
-  unstyled?: boolean;
 }
 
 /**

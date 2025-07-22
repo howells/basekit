@@ -1,4 +1,72 @@
-// Tremor LineChart [v1.0.0]
+/**
+ * Line Chart Component
+ * 
+ * A comprehensive line chart component built on Recharts for displaying
+ * time series data, trends, and multi-category comparisons. Features
+ * interactive legends, tooltips, and extensive customization options.
+ * 
+ * Features:
+ * - Multiple data series with configurable colors
+ * - Interactive legend with optional slider for overflow
+ * - Customizable tooltips with value formatting
+ * - Click interactions for data points and categories
+ * - Responsive design with auto-sizing
+ * - Axis labels and grid lines
+ * - Dark mode support
+ * - Animation controls
+ * - Null value handling
+ * 
+ * Built on Recharts library:
+ * https://recharts.org/en-US/api/LineChart
+ * 
+ * @example
+ * ```tsx
+ * // Basic line chart
+ * const data = [
+ *   { month: 'Jan', sales: 100, profit: 20 },
+ *   { month: 'Feb', sales: 150, profit: 35 },
+ *   { month: 'Mar', sales: 200, profit: 50 }
+ * ];
+ * 
+ * <LineChart
+ *   data={data}
+ *   index="month"
+ *   categories={['sales', 'profit']}
+ *   colors={['blue', 'green']}
+ *   valueFormatter={(value) => `$${value}`}
+ * />
+ * 
+ * // Interactive chart with callbacks
+ * <LineChart
+ *   data={timeSeriesData}
+ *   index="date"
+ *   categories={['revenue', 'expenses']}
+ *   onValueChange={(event) => {
+ *     if (event) {
+ *       console.log('Clicked:', event.categoryClicked);
+ *     }
+ *   }}
+ *   showLegend
+ *   enableLegendSlider
+ *   xAxisLabel="Date"
+ *   yAxisLabel="Amount ($)"
+ * />
+ * 
+ * // Custom styling and formatting
+ * <LineChart
+ *   data={data}
+ *   index="x"
+ *   categories={['y1', 'y2', 'y3']}
+ *   colors={['red', 'blue', 'green']}
+ *   valueFormatter={(val) => `${val.toFixed(2)}%`}
+ *   showGridLines={false}
+ *   connectNulls
+ *   autoMinValue
+ *   className="h-96"
+ * />
+ * ```
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 "use client";
@@ -32,13 +100,28 @@ import { cx } from "@/lib/utils";
 
 //#region Legend
 
+/**
+ * Props for individual legend items.
+ * 
+ * Configuration for legend item appearance and interaction.
+ */
 interface LegendItemProps {
+  /** Display name for the legend item */
   name: string;
+  /** Color key from available chart colors */
   color: AvailableChartColorsKeys;
+  /** Optional click handler for legend interactions */
   onClick?: (name: string, color: AvailableChartColorsKeys) => void;
+  /** Currently active legend item name */
   activeLegend?: string;
 }
 
+/**
+ * Individual legend item component with color indicator and label.
+ * 
+ * Displays a colored dot and label for chart categories with optional
+ * click interaction and active state styling.
+ */
 const LegendItem = ({
   name,
   color,
@@ -85,12 +168,26 @@ const LegendItem = ({
   );
 };
 
+/**
+ * Props for legend scroll buttons.
+ * 
+ * Configuration for navigation buttons in scrollable legends.
+ */
 interface ScrollButtonProps {
+  /** Icon component to display */
   icon: React.ElementType;
+  /** Click handler for scroll action */
   onClick?: () => void;
+  /** Whether the button is disabled */
   disabled?: boolean;
 }
 
+/**
+ * Scroll button component for navigating legend overflow.
+ * 
+ * Provides left/right navigation for legends that exceed container width.
+ * Supports continuous scrolling with mouse hold and keyboard interaction.
+ */
 const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
   const Icon = icon;
   const [isPressed, setIsPressed] = React.useState(false);
@@ -143,19 +240,55 @@ const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
   );
 };
 
+/**
+ * Props for the Legend component.
+ * 
+ * Configuration for chart legend display and interaction.
+ */
 interface LegendProps extends React.OlHTMLAttributes<HTMLOListElement> {
+  /** Array of category names to display */
   categories: string[];
+  /** Optional color mapping for categories */
   colors?: AvailableChartColorsKeys[];
+  /** Click handler for legend item interactions */
   onClickLegendItem?: (category: string, color: string) => void;
+  /** Currently active legend item */
   activeLegend?: string;
+  /** Whether to enable horizontal scrolling for overflow */
   enableLegendSlider?: boolean;
 }
 
+/**
+ * Scroll state tracking for legend navigation.
+ * 
+ * Tracks whether scrolling is available in each direction.
+ */
 type HasScrollProps = {
+  /** Whether scrolling left is available */
   left: boolean;
+  /** Whether scrolling right is available */
   right: boolean;
 };
 
+/**
+ * Interactive legend component for chart categories.
+ * 
+ * Displays chart categories with color indicators and optional scrolling
+ * for overflow content. Supports click interactions and keyboard navigation.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Legend
+ *   categories={['Sales', 'Profit', 'Revenue']}
+ *   colors={['blue', 'green', 'red']}
+ *   onClickLegendItem={(category, color) => {
+ *     console.log('Clicked:', category);
+ *   }}
+ *   enableLegendSlider
+ * />
+ * ```
+ */
 const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
   const {
     categories,
@@ -314,6 +447,21 @@ const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
 
 Legend.displayName = "Legend";
 
+/**
+ * Chart legend wrapper component for Recharts integration.
+ * 
+ * Integrates the custom Legend component with Recharts legend system,
+ * handling positioning, height calculations, and responsive behavior.
+ *
+ * @param payload - Recharts legend payload data
+ * @param categoryColors - Color mapping for categories
+ * @param setLegendHeight - Height setter for layout calculations
+ * @param activeLegend - Currently active legend item
+ * @param onClick - Legend click handler
+ * @param enableLegendSlider - Whether to enable scrolling
+ * @param legendPosition - Legend alignment position
+ * @param yAxisWidth - Y-axis width for positioning
+ */
 const ChartLegend = (
   { payload }: any,
   categoryColors: Map<string, AvailableChartColorsKeys>,
@@ -363,24 +511,69 @@ const ChartLegend = (
 
 //#region Tooltip
 
+/**
+ * Props passed to tooltip components.
+ * 
+ * Subset of ChartTooltipProps for external tooltip components.
+ */
 type TooltipProps = Pick<ChartTooltipProps, "active" | "payload" | "label">;
 
+/**
+ * Individual data item in tooltip payload.
+ * 
+ * Represents a single data series value in the tooltip.
+ */
 type PayloadItem = {
+  /** Category name for the data point */
   category: string;
+  /** Numeric value for the data point */
   value: number;
+  /** Index value from the data */
   index: string;
+  /** Color key for the data series */
   color: AvailableChartColorsKeys;
+  /** Optional type identifier */
   type?: string;
+  /** Raw data payload */
   payload: any;
 };
 
+/**
+ * Props for the ChartTooltip component.
+ * 
+ * Configuration for tooltip display and formatting.
+ */
 interface ChartTooltipProps {
+  /** Whether the tooltip is currently active */
   active: boolean | undefined;
+  /** Array of data items to display */
   payload: PayloadItem[];
+  /** Label for the tooltip (usually x-axis value) */
   label: string;
+  /** Function to format numeric values */
   valueFormatter: (value: number) => string;
 }
 
+/**
+ * Default tooltip component for line charts.
+ * 
+ * Displays data values in a formatted card with category colors and labels.
+ * Shows when hovering over chart elements.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Used internally by LineChart
+ * <ChartTooltip
+ *   active={true}
+ *   payload={[
+ *     { category: 'Sales', value: 100, color: 'blue', index: '0', payload: {} }
+ *   ]}
+ *   label="January"
+ *   valueFormatter={(val) => `$${val}`}
+ * />
+ * ```
+ */
 const ChartTooltip = ({
   active,
   payload,
@@ -458,48 +651,150 @@ const ChartTooltip = ({
 
 //#region LineChart
 
+/**
+ * Active dot state for tracking selected data points.
+ * 
+ * Identifies which specific data point is currently active.
+ */
 interface ActiveDot {
+  /** Data point index in the series */
   index?: number;
+  /** Data key/category name */
   dataKey?: string;
 }
 
+/**
+ * Base event properties for chart interactions.
+ * 
+ * Common structure for click and selection events.
+ */
 type BaseEventProps = {
+  /** Type of interaction event */
   eventType: "dot" | "category";
+  /** Name of the clicked category */
   categoryClicked: string;
+  /** Additional data properties */
   [key: string]: number | string;
 };
 
+/**
+ * Event props passed to onValueChange callbacks.
+ * 
+ * Can be null when clearing selection or undefined for no event.
+ */
 type LineChartEventProps = BaseEventProps | null | undefined;
 
+/**
+ * Props for the LineChart component.
+ * 
+ * Comprehensive configuration for line chart appearance, behavior, and interactions.
+ * 
+ * @interface LineChartProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface LineChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Array of data objects to chart */
   data: Record<string, any>[];
+  /** Key name for x-axis values */
   index: string;
+  /** Array of data keys to display as lines */
   categories: string[];
+  /** Optional color mapping for categories */
   colors?: AvailableChartColorsKeys[];
+  /** Function to format displayed values */
   valueFormatter?: (value: number) => string;
+  /** Whether to show only start and end x-axis labels */
   startEndOnly?: boolean;
+  /** Whether to display the x-axis */
   showXAxis?: boolean;
+  /** Whether to display the y-axis */
   showYAxis?: boolean;
+  /** Whether to show grid lines */
   showGridLines?: boolean;
+  /** Width of the y-axis area in pixels */
   yAxisWidth?: number;
+  /** X-axis tick interval strategy */
   intervalType?: "preserveStartEnd" | "equidistantPreserveStart";
+  /** Whether to show tooltips on hover */
   showTooltip?: boolean;
+  /** Whether to display the legend */
   showLegend?: boolean;
+  /** Whether to automatically determine minimum y-value */
   autoMinValue?: boolean;
+  /** Fixed minimum y-axis value */
   minValue?: number;
+  /** Fixed maximum y-axis value */
   maxValue?: number;
+  /** Whether to allow decimal values on y-axis */
   allowDecimals?: boolean;
+  /** Callback for chart interaction events */
   onValueChange?: (value: LineChartEventProps) => void;
+  /** Whether to enable legend scrolling for overflow */
   enableLegendSlider?: boolean;
+  /** Minimum gap between x-axis ticks */
   tickGap?: number;
+  /** Whether to connect lines across null values */
   connectNulls?: boolean;
+  /** Label text for x-axis */
   xAxisLabel?: string;
+  /** Label text for y-axis */
   yAxisLabel?: string;
+  /** Legend alignment position */
   legendPosition?: "left" | "center" | "right";
+  /** Callback for tooltip state changes */
   tooltipCallback?: (tooltipCallbackContent: TooltipProps) => void;
+  /** Custom tooltip component */
   customTooltip?: React.ComponentType<TooltipProps>;
 }
 
+/**
+ * Interactive line chart component for data visualization.
+ * 
+ * A comprehensive charting solution built on Recharts with support for
+ * multiple data series, interactive elements, and extensive customization.
+ * Perfect for time series data, trends, and comparative analysis.
+ *
+ * @param data - Array of data objects to chart
+ * @param index - Key for x-axis values
+ * @param categories - Data keys to display as lines
+ * @param colors - Color mapping for categories
+ * @param valueFormatter - Function to format values
+ * @param onValueChange - Interaction event handler
+ * @param className - Additional CSS classes
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <LineChart
+ *   data={[
+ *     { month: 'Jan', sales: 100, profit: 20 },
+ *     { month: 'Feb', sales: 150, profit: 35 }
+ *   ]}
+ *   index="month"
+ *   categories={['sales', 'profit']}
+ * />
+ * 
+ * // Advanced configuration
+ * <LineChart
+ *   data={timeSeriesData}
+ *   index="date"
+ *   categories={['revenue', 'expenses', 'profit']}
+ *   colors={['blue', 'red', 'green']}
+ *   valueFormatter={(val) => `$${val.toLocaleString()}`}
+ *   onValueChange={(event) => {
+ *     if (event) {
+ *       console.log('Selected:', event.categoryClicked);
+ *     }
+ *   }}
+ *   showLegend
+ *   enableLegendSlider
+ *   xAxisLabel="Time Period"
+ *   yAxisLabel="Amount (USD)"
+ *   className="h-96"
+ * />
+ * ```
+ */
 const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
   (props, ref) => {
     const {

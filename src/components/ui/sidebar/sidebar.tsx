@@ -1,6 +1,5 @@
 "use client";
 
-import { appleEasing } from "@/lib/utils";
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
 import { LayoutGroup, motion } from "framer-motion";
@@ -30,12 +29,12 @@ export function Sidebar({
   showToggle?: boolean;
 }) {
   return (
-    <motion.nav
+    <nav
       {...props}
       className={clsx(className, "flex h-full min-h-0 flex-col relative")}
-      animate={{ width: isCollapsed ? "3rem" : "16rem" }}
-      initial={false}
-      transition={{ duration: 0.2, ease: appleEasing.easeOut }}
+      style={{
+        width: "var(--sidebar-width, 16rem)",
+      }}
     >
       {/* Toggle button - positioned absolutely within sidebar */}
       {showToggle && (
@@ -51,7 +50,7 @@ export function Sidebar({
         </div>
       )}
       {children}
-    </motion.nav>
+    </nav>
   );
 }
 

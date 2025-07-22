@@ -5,6 +5,7 @@
 import logo from "@/images/logo.png";
 import { getComponentsByCategory } from "@/lib/component-registry";
 import { clsx } from "clsx";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React, { createContext, useContext, useState } from "react";
@@ -45,10 +46,18 @@ function SidebarContent() {
   const { isCollapsed, toggleCollapsed } = useSidebar();
 
   // Get components by category from the registry
-  const allUiComponents = getComponentsByCategory("ui");
-  const allInputComponents = getComponentsByCategory("inputs");
-  const allFormComponents = getComponentsByCategory("forms");
-  const allChartComponents = getComponentsByCategory("charts");
+  const allUiComponents = getComponentsByCategory("ui").sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  const allInputComponents = getComponentsByCategory("inputs").sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  const allFormComponents = getComponentsByCategory("forms").sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  const allChartComponents = getComponentsByCategory("charts").sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
   // Check if current path matches a component using segments
   const isCurrentComponent = (category: string, componentId: string) => {
@@ -234,34 +243,52 @@ function SidebarContent() {
 function MainContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
 
-  const handleSearch = (term: string) => {
-    // Search functionality will be implemented here or passed to children
-    console.log("Search term:", term);
-  };
-
   return (
-    <div
-      className="flex flex-1 flex-col transition-all duration-200"
+    <motion.div
+      className="flex-1 flex flex-col"
+      initial={false}
+      animate={{
+        "--sidebar-width": isCollapsed ? "3rem" : "16rem",
+      }}
+      transition={{
+        duration: 0.3,
+        ease: [0.32, 0.72, 0, 1], // Custom easing for smoother animation
+      }}
       style={{
-        marginLeft: `${isCollapsed ? 3 : 16}rem`,
+        marginLeft: "var(--sidebar-width)",
       }}
     >
-      {/* Header matching sidebar header height */}
-      <header className="h-11 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center ">
-        <ComponentSearch onSearch={handleSearch} />
-      </header>
-      <main className="flex-1 overflow-y-auto">{children}</main>
-    </div>
+      <div className="flex flex-col min-h-0 flex-1">
+        {/* Header matching sidebar header height */}
+        <header className="h-11 px-6 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center ">
+          <ComponentSearch />
+        </header>
+        <main className="flex-1 overflow-y-auto">{children}</main>
+      </div>
+    </motion.div>
   );
 }
 
 export function SidebarLayout({ children }: SidebarLayoutProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const toggleCollapsed = () => setIsCollapsed((prev) => !prev);
+
+  const toggleCollapsed = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   return (
     <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
-      <div className="flex h-screen bg-white dark:bg-zinc-900">
+      <motion.div
+        className="flex h-screen bg-white dark:bg-zinc-900"
+        initial={false}
+        animate={{
+          "--sidebar-width": isCollapsed ? "3rem" : "16rem",
+        }}
+        transition={{
+          duration: 0.3,
+          ease: [0.32, 0.72, 0, 1],
+        }}
+      >
         {/* Sidebar */}
         <div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-zinc-200 lg:bg-zinc-50 lg:dark:border-zinc-800 lg:dark:bg-zinc-900 transition-all duration-200">
           <Sidebar
@@ -275,7 +302,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
         {/* Main Content */}
         <MainContent>{children}</MainContent>
-      </div>
+      </motion.div>
     </SidebarContext.Provider>
   );
 }
