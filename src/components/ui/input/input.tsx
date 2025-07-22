@@ -105,11 +105,15 @@ interface InputProps
   prefixStyling?: boolean;
   /** Whether to apply suffix styling */
   suffixStyling?: boolean;
+  /** Minimal variant for command palettes - removes border, shadow, focus ring */
+  minimal?: boolean;
+  /** Render just the bare input element without any wrapper */
+  unstyled?: boolean;
 }
 
 /**
  * A versatile input component built on Base UI's Input primitive.
- * 
+ *
  * Based on Base UI's Input, providing accessible form inputs with extensive customization
  * options including prefix/suffix content, icons, validation states, and multiple sizes.
  * Features comprehensive styling for different input types including file, search, and number inputs.
@@ -119,32 +123,32 @@ interface InputProps
  * ```tsx
  * // Basic input
  * <Input placeholder="Enter text" />
- * 
+ *
  * // With validation
  * <Input hasError placeholder="Required field" />
- * 
+ *
  * // With icons
  * <Input prefixIcon={SearchIcon} placeholder="Search..." />
  * <Input suffixIcon={EyeIcon} type="password" />
- * 
+ *
  * // Different sizes
  * <Input size="sm" placeholder="Small" />
  * <Input size="lg" placeholder="Large" />
- * 
+ *
  * // With prefix/suffix content
  * <Input prefixText="$" placeholder="0.00" type="number" />
  * <Input suffixText="USD" placeholder="Amount" />
- * 
+ *
  * // Custom prefix/suffix
- * <Input 
- *   prefix={<Badge>NEW</Badge>} 
+ * <Input
+ *   prefix={<Badge>NEW</Badge>}
  *   suffix={<Button size="sm">Send</Button>}
  *   placeholder="Custom content"
  * />
- * 
+ *
  * // File input
  * <Input type="file" />
- * 
+ *
  * // Number input without steppers
  * <Input type="number" enableStepper={false} />
  * ```
@@ -166,6 +170,8 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
       suffixIcon: SuffixIcon,
       prefixStyling = true,
       suffixStyling = true,
+      minimal,
+      unstyled,
       ...props
     }: InputProps,
     forwardedRef
@@ -319,6 +325,30 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
 
     const paddingClasses = cx(leftPadding, rightPadding);
 
+    // If unstyled, return just the bare input element
+    if (unstyled) {
+      return (
+        <BaseInput
+          ref={forwardedRef}
+          type={isPassword ? typeState : type}
+          className={cx(
+            // Basic input styling
+            "flex w-full bg-transparent text-sm outline-none transition-colors",
+            // text color
+            "text-zinc-900 dark:text-zinc-50",
+            // placeholder color
+            "placeholder-zinc-400 dark:placeholder-zinc-500",
+            // disabled
+            "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-500",
+            // remove all borders, shadows, and focus rings
+            "border-0 shadow-none focus:outline-none focus:ring-0",
+            inputClassName
+          )}
+          {...props}
+        />
+      );
+    }
+
     return (
       <div
         className={cx(
@@ -329,6 +359,9 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
           hasError && "border-red-500 dark:border-red-500",
           // Focus-within for container focus
           "focus-within:ring-2 focus-within:ring-blue-200 dark:focus-within:ring-blue-700/30 focus-within:border-blue-500 dark:focus-within:border-blue-700",
+          // Minimal variant overrides
+          minimal &&
+            "!border-0 !shadow-none !rounded-none !bg-transparent focus-within:!ring-0 focus-within:!border-0",
           className
         )}
       >

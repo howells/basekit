@@ -7,6 +7,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+import { Input } from "../input/input";
 
 const commandVariants = tv({
   slots: {
@@ -109,7 +110,7 @@ const commandVariants = tv({
 
 /**
  * Variant props for command components.
- * 
+ *
  * Defines size variants that affect input height, item padding,
  * and overall component dimensions.
  */
@@ -117,7 +118,7 @@ type CommandVariants = VariantProps<typeof commandVariants>;
 
 /**
  * A command palette component built on CMDK.
- * 
+ *
  * Based on CMDK (https://cmdk.paco.me/), providing a fast, composable command menu
  * with search functionality. Perfect for command palettes, quick actions, and
  * searchable lists. Features keyboard navigation, filtering, and grouping.
@@ -165,7 +166,7 @@ Command.displayName = CommandPrimitive.displayName;
 
 /**
  * A modal dialog wrapper for the command palette.
- * 
+ *
  * Based on CMDK's Dialog component, providing a full-screen modal overlay
  * for command palette interfaces. Features backdrop blur, animations,
  * and proper focus management.
@@ -209,8 +210,8 @@ const CommandDialog = ({
 
 /**
  * Search input for filtering command items.
- * 
- * Based on CMDK's Input component, providing real-time filtering of command items.
+ *
+ * Based on our Input component, providing real-time filtering of command items.
  * Features a search icon, proper focus styling, and matches the design system.
  * Automatically filters items based on text content.
  *
@@ -220,7 +221,7 @@ const CommandDialog = ({
  *
  * @example
  * ```tsx
- * <CommandInput 
+ * <CommandInput
  *   placeholder="Type to search commands..."
  *   value={search}
  *   onValueChange={setSearch}
@@ -235,27 +236,21 @@ const CommandInput = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <div
-      className="flex items-center border-b border-zinc-200 px-3 dark:border-zinc-800"
+      className="border-b border-zinc-200 dark:border-zinc-800"
       cmdk-input-wrapper=""
     >
-      <Search className="mr-2 h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-600" />
       <CommandPrimitive.Input
         ref={ref}
-        className={cx(
-          // Match Input component styling
-          "flex h-11 w-full rounded-none border-0 bg-transparent py-3 px-0 text-sm shadow-none outline-none transition-colors",
-          // text color
-          "text-zinc-900 dark:text-zinc-50",
-          // placeholder color
-          "placeholder-zinc-400 dark:placeholder-zinc-500",
-          // disabled
-          "disabled:cursor-not-allowed disabled:opacity-50",
-          // focus - remove focus ring since it's in a container
-          "focus:outline-none focus:ring-0",
-          className
-        )}
+        asChild
+        className={className}
         {...props}
-      />
+      >
+        <Input
+          prefixIcon={Search}
+          prefixStyling={false}
+          className="border-0 shadow-none rounded-none bg-transparent focus-within:ring-0 focus-within:border-0 [&>div]:border-0 [&>div]:shadow-none [&>div]:rounded-none [&>div]:bg-transparent [&>div]:focus-within:ring-0 [&>div]:focus-within:border-0"
+        />
+      </CommandPrimitive.Input>
     </div>
   );
 });
@@ -264,7 +259,7 @@ CommandInput.displayName = CommandPrimitive.Input.displayName;
 
 /**
  * Scrollable container for command groups and items.
- * 
+ *
  * Based on CMDK's List component, providing a scrollable area for command items
  * with custom scrollbar styling. Handles keyboard navigation and selection
  * automatically.
@@ -304,14 +299,14 @@ CommandList.displayName = CommandPrimitive.List.displayName;
 
 /**
  * Fallback component displayed when no commands match the search.
- * 
+ *
  * Based on CMDK's Empty component, shown automatically when no command items
  * match the current filter. Provides user feedback for empty search results.
  *
  * @example
  * ```tsx
  * <CommandEmpty>No results found.</CommandEmpty>
- * 
+ *
  * // Custom empty state
  * <CommandEmpty>
  *   <div className="text-center py-8">
@@ -342,7 +337,7 @@ CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
 /**
  * Grouping component for organizing related commands.
- * 
+ *
  * Based on CMDK's Group component, providing logical grouping with optional
  * headings. Groups can be filtered independently and provide visual separation
  * between different command categories.
@@ -356,7 +351,7 @@ CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
  *   <CommandItem>Open File</CommandItem>
  *   <CommandItem>Save File</CommandItem>
  * </CommandGroup>
- * 
+ *
  * // Group without heading
  * <CommandGroup>
  *   <CommandItem>About</CommandItem>
@@ -384,7 +379,7 @@ CommandGroup.displayName = CommandPrimitive.Group.displayName;
 
 /**
  * Visual separator between command groups or items.
- * 
+ *
  * Based on CMDK's Separator component, providing a subtle divider line
  * to organize command sections visually.
  *
@@ -420,7 +415,7 @@ CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
 /**
  * Props for the CommandItem component.
- * 
+ *
  * @interface CommandItemProps
  * @extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
  */
@@ -432,7 +427,7 @@ interface CommandItemProps
 
 /**
  * Individual selectable command item.
- * 
+ *
  * Based on CMDK's Item component, providing keyboard navigation and selection.
  * Supports optional left icons, keyboard shortcuts, and custom content.
  * Automatically handles hover, focus, and selection states.
@@ -446,13 +441,13 @@ interface CommandItemProps
  * ```tsx
  * // Basic item
  * <CommandItem onSelect={() => createNewFile()}>New File</CommandItem>
- * 
+ *
  * // Item with icon and shortcut
  * <CommandItem leftIcon={FileIcon} onSelect={handleNew}>
  *   New File
  *   <CommandShortcut>⌘N</CommandShortcut>
  * </CommandItem>
- * 
+ *
  * // Disabled item
  * <CommandItem disabled>Unavailable Action</CommandItem>
  * ```
@@ -481,7 +476,7 @@ CommandItem.displayName = CommandPrimitive.Item.displayName;
 
 /**
  * Keyboard shortcut display component.
- * 
+ *
  * Displays keyboard shortcuts aligned to the right of command items.
  * Provides consistent styling for shortcuts across the command palette.
  *
@@ -491,7 +486,7 @@ CommandItem.displayName = CommandPrimitive.Item.displayName;
  *   Save File
  *   <CommandShortcut>⌘S</CommandShortcut>
  * </CommandItem>
- * 
+ *
  * <CommandItem>
  *   Open File
  *   <CommandShortcut>⌘O</CommandShortcut>
@@ -509,14 +504,14 @@ CommandShortcut.displayName = "CommandShortcut";
 
 /**
  * Loading state component for async command loading.
- * 
+ *
  * Based on CMDK's Loading component, displayed when commands are being
  * loaded asynchronously. Provides user feedback during loading states.
  *
  * @example
  * ```tsx
  * {isLoading && <CommandLoading>Loading commands...</CommandLoading>}
- * 
+ *
  * // Custom loading indicator
  * <CommandLoading>
  *   <div className="flex items-center gap-2">

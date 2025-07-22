@@ -8,8 +8,8 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React, { createContext, useContext, useState } from "react";
+import { ComponentSearch } from "./component-search";
 import { Badge } from "./ui/badge/badge";
-import { Input } from "./ui/input/input";
 import {
   Sidebar,
   SidebarBody,
@@ -42,7 +42,6 @@ function useSidebar() {
 function SidebarContent() {
   const pathname = usePathname();
   const segments = useSelectedLayoutSegments();
-  const [searchTerm, setSearchTerm] = React.useState("");
   const { isCollapsed, toggleCollapsed } = useSidebar();
 
   // Get components by category from the registry
@@ -50,25 +49,6 @@ function SidebarContent() {
   const allInputComponents = getComponentsByCategory("inputs");
   const allFormComponents = getComponentsByCategory("forms");
   const allChartComponents = getComponentsByCategory("charts");
-
-  // Filter components based on search term and sort alphabetically
-  const filterComponents = (components: typeof allUiComponents) => {
-    let filtered = components;
-    if (searchTerm) {
-      filtered = components.filter(
-        (config) =>
-          config.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          config.id.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    // Sort alphabetically by name
-    return filtered.sort((a, b) => a.name.localeCompare(b.name));
-  };
-
-  const uiComponents = filterComponents(allUiComponents);
-  const inputComponents = filterComponents(allInputComponents);
-  const formComponents = filterComponents(allFormComponents);
-  const chartComponents = filterComponents(allChartComponents);
 
   // Check if current path matches a component using segments
   const isCurrentComponent = (category: string, componentId: string) => {
@@ -111,29 +91,13 @@ function SidebarContent() {
 
         <SidebarDivider isCollapsed={isCollapsed} />
 
-        {/* Search input for components only */}
-        {!isCollapsed && (
-          <SidebarSection>
-            <div className="pb-3 px-4">
-              <Input
-                placeholder="Search components..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                size="sm"
-                type="search"
-                prefixStyling={false}
-              />
-            </div>
-          </SidebarSection>
-        )}
-
-        {uiComponents.length > 0 && (
+        {allUiComponents.length > 0 && (
           <SidebarSection
             title={
               <div className="flex items-center gap-2">
                 <span>UI Components</span>
                 <Badge variant="neutral" size="sm">
-                  {uiComponents.length}
+                  {allUiComponents.length}
                 </Badge>
               </div>
             }
@@ -141,7 +105,7 @@ function SidebarContent() {
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
-            {uiComponents.map((config) => {
+            {allUiComponents.map((config) => {
               return (
                 <SidebarItem
                   key={config.id}
@@ -158,17 +122,17 @@ function SidebarContent() {
           </SidebarSection>
         )}
 
-        {uiComponents.length > 0 && (
+        {allUiComponents.length > 0 && (
           <SidebarDivider isCollapsed={isCollapsed} />
         )}
 
-        {inputComponents.length > 0 && (
+        {allInputComponents.length > 0 && (
           <SidebarSection
             title={
               <div className="flex items-center gap-2">
                 <span>Input Components</span>
                 <Badge variant="neutral" size="sm">
-                  {inputComponents.length}
+                  {allInputComponents.length}
                 </Badge>
               </div>
             }
@@ -176,7 +140,7 @@ function SidebarContent() {
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
-            {inputComponents.map((config) => {
+            {allInputComponents.map((config) => {
               return (
                 <SidebarItem
                   key={config.id}
@@ -193,17 +157,17 @@ function SidebarContent() {
           </SidebarSection>
         )}
 
-        {inputComponents.length > 0 && (
+        {allInputComponents.length > 0 && (
           <SidebarDivider isCollapsed={isCollapsed} />
         )}
 
-        {formComponents.length > 0 && (
+        {allFormComponents.length > 0 && (
           <SidebarSection
             title={
               <div className="flex items-center gap-2">
                 <span>Form Components</span>
                 <Badge variant="neutral" size="sm">
-                  {formComponents.length}
+                  {allFormComponents.length}
                 </Badge>
               </div>
             }
@@ -211,7 +175,7 @@ function SidebarContent() {
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
-            {formComponents.map((config) => {
+            {allFormComponents.map((config) => {
               return (
                 <SidebarItem
                   key={config.id}
@@ -228,17 +192,17 @@ function SidebarContent() {
           </SidebarSection>
         )}
 
-        {formComponents.length > 0 && (
+        {allFormComponents.length > 0 && (
           <SidebarDivider isCollapsed={isCollapsed} />
         )}
 
-        {chartComponents.length > 0 && (
+        {allChartComponents.length > 0 && (
           <SidebarSection
             title={
               <div className="flex items-center gap-2">
                 <span>Chart Components</span>
                 <Badge variant="neutral" size="sm">
-                  {chartComponents.length}
+                  {allChartComponents.length}
                 </Badge>
               </div>
             }
@@ -246,7 +210,7 @@ function SidebarContent() {
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
-            {chartComponents.map((config) => {
+            {allChartComponents.map((config) => {
               return (
                 <SidebarItem
                   key={config.id}
@@ -262,19 +226,6 @@ function SidebarContent() {
             })}
           </SidebarSection>
         )}
-
-        {/* No results message */}
-        {searchTerm &&
-          uiComponents.length === 0 &&
-          inputComponents.length === 0 &&
-          formComponents.length === 0 &&
-          chartComponents.length === 0 && (
-            <SidebarSection>
-              <div className="px-3 py-4 text-center text-sm text-zinc-500 dark:text-zinc-400">
-                No components found for &ldquo;{searchTerm}&rdquo;
-              </div>
-            </SidebarSection>
-          )}
       </SidebarBody>
     </>
   );
@@ -283,6 +234,11 @@ function SidebarContent() {
 function MainContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
 
+  const handleSearch = (term: string) => {
+    // Search functionality will be implemented here or passed to children
+    console.log("Search term:", term);
+  };
+
   return (
     <div
       className="flex flex-1 flex-col transition-all duration-200"
@@ -290,6 +246,10 @@ function MainContent({ children }: { children: React.ReactNode }) {
         marginLeft: `${isCollapsed ? 3 : 16}rem`,
       }}
     >
+      {/* Header matching sidebar header height */}
+      <header className="h-11 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center ">
+        <ComponentSearch onSearch={handleSearch} />
+      </header>
       <main className="flex-1 overflow-y-auto">{children}</main>
     </div>
   );
