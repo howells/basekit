@@ -1,6 +1,7 @@
 import { cx, focusRing } from "@/lib/utils";
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
+import { MoreHorizontal } from "lucide-react";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { Loader } from "../loader";
@@ -209,7 +210,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     forwardedRef
   ) => {
     const hasChildren = children != null && children !== "";
-    const hasLeftIcon = LeftIcon != null;
+    const isIconOnly =
+      size === "icon" || size === "icon-sm" || size === "icon-lg";
+    const hasLeftIcon = LeftIcon != null || (isIconOnly && !hasChildren);
+    const effectiveLeftIcon =
+      LeftIcon || (isIconOnly && !hasChildren ? MoreHorizontal : null);
     const hasRightIcon =
       RightIcon != null &&
       size !== "icon" &&
@@ -256,10 +261,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         // For icon-only buttons, center everything
         size === "icon" || size === "icon-sm"
           ? "justify-center"
-          : // Full width always uses space-between when there are edge elements
-          fullWidth &&
-            (hasRightIcon ||
-              (textAlign === "center" && (hasLeftIcon || isLoading)))
+          : // Full width with centered text and left elements uses space-between
+          fullWidth && textAlign === "center" && (hasLeftIcon || isLoading)
           ? "justify-between"
           : "justify-start gap-2"
       );
@@ -317,7 +320,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                           : "opacity-0 pointer-events-none"
                       )}
                     >
-                      <LeftIcon className={iconClassName} />
+                      {effectiveLeftIcon &&
+                        React.createElement(effectiveLeftIcon, {
+                          className: iconClassName,
+                        })}
                     </div>
                   )}
                 </div>
@@ -331,7 +337,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {/* Right icon with CSS transitions */}
             {hasRightIcon && (
               <span className="flex items-center">
-                <RightIcon className={iconClassName} />
+                {RightIcon &&
+                  React.createElement(RightIcon, { className: iconClassName })}
               </span>
             )}
           </span>
@@ -372,7 +379,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         !isLoading ? "opacity-100" : "opacity-0"
                       )}
                     >
-                      <LeftIcon className={iconClassName} />
+                      {effectiveLeftIcon &&
+                        React.createElement(effectiveLeftIcon, {
+                          className: iconClassName,
+                        })}
                     </div>
                   )}
                 </div>
@@ -386,58 +396,61 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             </div>
 
             {/* Right icon */}
-            {hasRightIcon && (
-              <span className="flex items-center">
-                <RightIcon className={iconClassName} />
-              </span>
-            )}
+            <span className="flex items-center">
+              {RightIcon &&
+                React.createElement(RightIcon, { className: iconClassName })}
+            </span>
           </span>
         );
       }
 
-      // Full width with left/right alignment and right icon: left group + right icon
+      // Full width with left/right alignment and right icon: single flex container
       if (hasRightIcon) {
         return (
-          <span className={layoutClassName}>
-            <div className="flex items-center gap-1.5">
-              {/* Left icon container */}
-              {(isLoading || hasLeftIcon) && (
-                <span className="flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
+          <span className="flex items-center gap-2 w-full transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
+            {/* Left icon container */}
+            {(isLoading || hasLeftIcon) && (
+              <span className="flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
+                <div
+                  className={`relative ${iconSize} flex items-center justify-center`}
+                >
                   <div
-                    className={`relative ${iconSize} flex items-center justify-center`}
+                    className={cx(
+                      "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
+                      isLoading ? "opacity-100" : "opacity-0"
+                    )}
                   >
+                    <Loader
+                      size={size === "sm" ? "xs" : "sm"}
+                      aria-label={loadingText || "Loading"}
+                    />
+                  </div>
+                  {hasLeftIcon && (
                     <div
                       className={cx(
                         "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
-                        isLoading ? "opacity-100" : "opacity-0"
+                        !isLoading ? "opacity-100" : "opacity-0"
                       )}
                     >
-                      <Loader
-                        size={size === "sm" ? "xs" : "sm"}
-                        aria-label={loadingText || "Loading"}
-                      />
+                      {effectiveLeftIcon &&
+                        React.createElement(effectiveLeftIcon, {
+                          className: iconClassName,
+                        })}
                     </div>
-                    {hasLeftIcon && (
-                      <div
-                        className={cx(
-                          "absolute inset-0 flex items-center justify-center transition-opacity duration-150",
-                          !isLoading ? "opacity-100" : "opacity-0"
-                        )}
-                      >
-                        <LeftIcon className={iconClassName} />
-                      </div>
-                    )}
-                  </div>
-                </span>
-              )}
-              {isIconButton && hasChildren
-                ? iconButtonChildren
-                : effectiveShouldShowChildren && effectiveChildren}
-            </div>
+                  )}
+                </div>
+              </span>
+            )}
 
-            {/* Right icon */}
-            <span className="flex items-center">
-              <RightIcon className={iconClassName} />
+            {/* Text content */}
+            {isIconButton && hasChildren
+              ? iconButtonChildren
+              : effectiveShouldShowChildren && effectiveChildren}
+
+            {/* Right icon with ml-auto to push to right */}
+            <span className={`flex items-center ${fullWidth ? "ml-auto" : ""}`}>
+              {RightIcon &&
+                React.createElement(RightIcon, { className: iconClassName })}
             </span>
           </span>
         );
@@ -470,7 +483,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       !isLoading ? "opacity-100" : "opacity-0"
                     )}
                   >
-                    <LeftIcon className={iconClassName} />
+                    {effectiveLeftIcon &&
+                      React.createElement(effectiveLeftIcon, {
+                        className: iconClassName,
+                      })}
                   </div>
                 )}
               </div>

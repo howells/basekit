@@ -1,16 +1,106 @@
-// Tremor NavigationMenu [v1.0.0] - Base UI
+/**
+ * Navigation Menu Components
+ *
+ * A comprehensive navigation menu system built on Base UI NavigationMenu for
+ * creating dropdown navigation menus with smooth animations and accessibility.
+ * Perfect for website headers, main navigation, and complex menu structures.
+ *
+ * Features:
+ * - Base UI NavigationMenu integration for full accessibility
+ * - Smooth animated dropdowns with custom timing curves
+ * - Keyboard navigation (Tab, Arrow keys, Enter, Escape)
+ * - Focus management and ARIA attributes
+ * - Animated chevron indicators
+ * - Collision detection and smart positioning
+ * - Portal rendering for z-index management
+ * - Dark mode support
+ * - Responsive design considerations
+ *
+ * Built on Base UI NavigationMenu documentation:
+ * https://base-ui.com/react/components/navigation-menu
+ *
+ * @example
+ * ```tsx
+ * <NavigationMenu>
+ *   <NavigationMenuList>
+ *     <NavigationMenuItem>
+ *       <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
+ *       <NavigationMenuContent>Content</NavigationMenuContent>
+ *     </NavigationMenuItem>
+ *   </NavigationMenuList>
+ *   <NavigationMenuViewport />
+ * </NavigationMenu>
+ * ```
+ */
 
 import { cx } from "@/lib/utils";
 import { NavigationMenu as BaseNavigationMenu } from "@base-ui-components/react/navigation-menu";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 
+/**
+ * Root navigation menu component.
+ *
+ * The container for the entire navigation menu structure.
+ * Built on Base UI NavigationMenu.Root for full accessibility.
+ */
 const NavigationMenu = BaseNavigationMenu.Root;
 
+/**
+ * Navigation menu list component for menu item containers.
+ *
+ * Horizontal container for navigation menu items with proper keyboard
+ * navigation and focus management.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationMenuList>
+ *   <NavigationMenuItem>
+ *     <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
+ *     <NavigationMenuContent>Content</NavigationMenuContent>
+ *   </NavigationMenuItem>
+ * </NavigationMenuList>
+ * ```
+ */
 const NavigationMenuList = BaseNavigationMenu.List;
 
+/**
+ * Navigation menu item component for individual menu sections.
+ *
+ * Container for navigation menu triggers and their associated content.
+ * Manages the open/closed state and focus behavior.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationMenuItem>
+ *   <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+ *   <NavigationMenuContent>
+ *     Menu content here
+ *   </NavigationMenuContent>
+ * </NavigationMenuItem>
+ * ```
+ */
 const NavigationMenuItem = BaseNavigationMenu.Item;
 
+/**
+ * Navigation menu trigger component for dropdown buttons.
+ *
+ * Clickable trigger that opens dropdown menu content. Features animated
+ * chevron indicator and proper focus states.
+ *
+ * @param className - Additional CSS classes
+ * @param children - Trigger content (typically text)
+ * @param props - Additional Base UI Trigger props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+ * <NavigationMenuTrigger className="font-bold">Featured</NavigationMenuTrigger>
+ * ```
+ */
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenu.Trigger>,
   React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Trigger>
@@ -40,6 +130,33 @@ const NavigationMenuTrigger = React.forwardRef<
 ));
 NavigationMenuTrigger.displayName = "NavigationMenuTrigger";
 
+/**
+ * Navigation menu content component for dropdown content.
+ *
+ * Container for dropdown menu content with smooth animations and transitions.
+ * Rendered within the NavigationMenuViewport with proper positioning.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional Base UI Content props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationMenuContent>
+ *   <div className="p-6 space-y-3">
+ *     <NavigationMenuLink href="/link1">Link 1</NavigationMenuLink>
+ *     <NavigationMenuLink href="/link2">Link 2</NavigationMenuLink>
+ *   </div>
+ * </NavigationMenuContent>
+ *
+ * <NavigationMenuContent className="w-96">
+ *   <div className="grid grid-cols-2 gap-4 p-6">
+ *     <div>Column 1</div>
+ *     <div>Column 2</div>
+ *   </div>
+ * </NavigationMenuContent>
+ * ```
+ */
 const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenu.Content>,
   React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Content>
@@ -60,6 +177,31 @@ const NavigationMenuContent = React.forwardRef<
 ));
 NavigationMenuContent.displayName = "NavigationMenuContent";
 
+/**
+ * Navigation menu link component for dropdown links.
+ *
+ * Interactive link component for use within dropdown menu content.
+ * Features hover states and proper focus management.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional Base UI Link props (href, onClick, etc.)
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationMenuLink href="/products">
+ *   View All Products
+ * </NavigationMenuLink>
+ *
+ * <NavigationMenuLink href="/services" className="font-semibold">
+ *   Premium Services
+ * </NavigationMenuLink>
+ *
+ * <NavigationMenuLink onClick={() => handleAction()}>
+ *   Custom Action
+ * </NavigationMenuLink>
+ * ```
+ */
 const NavigationMenuLink = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenu.Link>,
   React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Link>
@@ -82,7 +224,31 @@ const NavigationMenuLink = React.forwardRef<
 ));
 NavigationMenuLink.displayName = "NavigationMenuLink";
 
-// Create a separate component for top-level navigation links
+/**
+ * Navigation menu item link component for top-level links.
+ *
+ * Styled link component for navigation items that don't have dropdown content.
+ * Matches the styling of NavigationMenuTrigger for visual consistency.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional Base UI Link props (href, onClick, etc.)
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationMenuItem>
+ *   <NavigationMenuItemLink href="/about">
+ *     About Us
+ *   </NavigationMenuItemLink>
+ * </NavigationMenuItem>
+ *
+ * <NavigationMenuItem>
+ *   <NavigationMenuItemLink href="/contact" className="bg-blue-500 text-white">
+ *     Contact
+ *   </NavigationMenuItemLink>
+ * </NavigationMenuItem>
+ * ```
+ */
 const NavigationMenuItemLink = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenu.Link>,
   React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Link>
@@ -107,6 +273,31 @@ const NavigationMenuItemLink = React.forwardRef<
 ));
 NavigationMenuItemLink.displayName = "NavigationMenuItemLink";
 
+/**
+ * Navigation menu viewport component for dropdown rendering.
+ *
+ * Portal-rendered viewport that contains dropdown content with smart positioning,
+ * collision detection, and smooth animations. Features arrow indicators and
+ * responsive behavior.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional Base UI Viewport props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Must be included at the root level of NavigationMenu
+ * <NavigationMenu>
+ *   <NavigationMenuList>
+ *     <NavigationMenuItem>...</NavigationMenuItem>
+ *   </NavigationMenuList>
+ *   <NavigationMenuViewport />
+ * </NavigationMenu>
+ *
+ * // Custom styled viewport
+ * <NavigationMenuViewport className="border-2 border-blue-200" />
+ * ```
+ */
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenu.Viewport>,
   React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Viewport>

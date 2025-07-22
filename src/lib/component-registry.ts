@@ -23,6 +23,7 @@ import { componentConfig as copyButtonConfig } from "@/components/ui/copy-button
 import { componentConfig as dividerConfig } from "@/components/ui/divider/config";
 import { componentConfig as donutChartConfig } from "@/components/ui/donut-chart/config";
 import { componentConfig as emptyStateConfig } from "@/components/ui/empty-state/config";
+import { componentConfig as fieldConfig } from "@/components/ui/field/config";
 import { componentConfig as gridConfig } from "@/components/ui/grid/config";
 import { componentConfig as inputConfig } from "@/components/ui/input/config";
 import { componentConfig as lineChartConfig } from "@/components/ui/line-chart/config";
@@ -161,7 +162,6 @@ const textareaConfig = createPlaceholderConfig(
 );
 
 // Placeholder configurations for forms category
-const fieldConfig = createPlaceholderConfig("field", "Field", "forms");
 const fieldsetConfig = createPlaceholderConfig("fieldset", "Fieldset", "forms");
 const formConfig = createPlaceholderConfig("form", "Form", "forms");
 

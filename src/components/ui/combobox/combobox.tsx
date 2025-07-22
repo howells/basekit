@@ -21,10 +21,10 @@ import { cx } from "@/lib/utils";
 
 /**
  * Option configuration for combobox items.
- * 
+ *
  * Defines the structure for individual selectable options including
  * display text, unique values, disabled state, and optional icons.
- * 
+ *
  * @interface ComboboxOption
  */
 export interface ComboboxOption {
@@ -42,10 +42,10 @@ export interface ComboboxOption {
 
 /**
  * Props for the Combobox component.
- * 
+ *
  * Comprehensive configuration for searchable select dropdowns with
  * custom rendering, styling, and interaction options.
- * 
+ *
  * @interface ComboboxProps
  */
 export interface ComboboxProps {
@@ -79,7 +79,7 @@ export interface ComboboxProps {
 
 /**
  * A searchable select component with filtering and custom rendering.
- * 
+ *
  * Combines a button trigger with a command palette popup for option selection.
  * Built on Command and Popover components, providing search functionality,
  * keyboard navigation, and extensive customization options.
@@ -168,12 +168,12 @@ export function Combobox({
 
     if (selectedOption) {
       return (
-        <div className="flex items-center gap-2">
+        <>
           {selectedOption.leftIcon && (
             <selectedOption.leftIcon className="size-4 shrink-0" />
           )}
           <span className="truncate">{selectedOption.label}</span>
-        </div>
+        </>
       );
     }
 
@@ -208,7 +208,6 @@ export function Combobox({
           render={
             <Button
               variant="outline"
-              leftIcon={selectedOption?.leftIcon}
               rightIcon={ChevronsUpDown}
               fullWidth={triggerFullWidth}
               textAlign={triggerFullWidth ? "left" : "center"}
@@ -222,7 +221,7 @@ export function Combobox({
           aria-expanded={open}
           disabled={disabled}
         >
-          {selectedOption ? selectedOption.label : placeholder}
+          {renderTriggerContent()}
         </PopoverTrigger>
         <PopoverContent
           className={cx(
@@ -268,7 +267,7 @@ export function Combobox({
 
 /**
  * Hook for managing combobox state in forms.
- * 
+ *
  * Provides state management for value and open/close state,
  * simplifying combobox integration in forms and controlled components.
  *
@@ -279,7 +278,7 @@ export function Combobox({
  * ```tsx
  * function UserSelector() {
  *   const { value, setValue, open, setOpen } = useCombobox();
- * 
+ *
  *   return (
  *     <Combobox
  *       value={value}
@@ -289,7 +288,7 @@ export function Combobox({
  *     />
  *   );
  * }
- * 
+ *
  * // With initial value
  * const combobox = useCombobox("default-user-id");
  * ```

@@ -23,13 +23,6 @@ export const componentConfig: ComponentConfig = {
   // Props that users can experiment with
   props: [
     {
-      name: "orientation",
-      type: "select",
-      description: "The orientation of the accordion.",
-      defaultValue: "vertical",
-      options: ["vertical", "horizontal"],
-    },
-    {
       name: "openMultiple",
       type: "boolean",
       description:

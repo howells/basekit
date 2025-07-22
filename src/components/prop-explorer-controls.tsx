@@ -1,6 +1,7 @@
 "use client";
 
 import { Subheading } from "@/components/ui/subheading";
+import { Text } from "@/components/ui/text/text";
 import { ComponentConfig } from "@/lib/component-config-types";
 import { PropMetadata } from "@/lib/prop-explorer";
 import React from "react";
@@ -40,9 +41,7 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
   if (!config || !config.props) {
     return (
       <div className="space-y-6">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          No configurable properties available
-        </p>
+        <Text>No configurable properties available for this component.</Text>
       </div>
     );
   }
@@ -61,7 +60,7 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <Subheading level={3}>props</Subheading>
+        <Subheading level={3}>Props</Subheading>
         <Button onClick={resetProps} variant="ghost">
           Reset
         </Button>
@@ -223,34 +222,6 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
             </div>
           );
         })}
-
-        {/* Usage Info */}
-        <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
-          <div className="space-y-2">
-            <Subheading level={4}>Component</Subheading>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              {config.name}
-            </p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-500">
-              {config.description}
-            </p>
-          </div>
-
-          {/* Additional Info */}
-          {(supportsIcons || supportsChildren) && (
-            <div className="mt-4 space-y-2">
-              <Subheading level={4}>Features</Subheading>
-              <div className="space-y-1">
-                {supportsIcons && (
-                  <p className="text-xs text-zinc-500">✓ Icon support</p>
-                )}
-                {supportsChildren && (
-                  <p className="text-xs text-zinc-500">✓ Children content</p>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

@@ -36,19 +36,25 @@ export const ButtonExample = ({
   // The component preview system already converts icon strings to components
   // so we can pass them directly to the Button
   return (
-    <Button
-      variant={variant}
-      size={size}
-      isLoading={isLoading}
-      disabled={disabled}
-      fullWidth={fullWidth}
-      textAlign={textAlign}
-      leftIcon={leftIcon}
-      rightIcon={rightIcon}
-      loadingText={loadingText}
-      {...props}
-    >
-      {children}
-    </Button>
+    <div className="flex gap-4 items-center">
+      <Button
+        variant={variant}
+        size={size}
+        isLoading={isLoading}
+        disabled={disabled}
+        fullWidth={fullWidth}
+        textAlign={textAlign}
+        leftIcon={leftIcon}
+        rightIcon={rightIcon}
+        loadingText={loadingText}
+        {...props}
+      >
+        {children}
+      </Button>
+
+      {/* Test case for default icon feature */}
+      <Button size="icon" />
+      <Button size="icon-sm" />
+    </div>
   );
 };

@@ -1,3 +1,97 @@
+/**
+ * Navbar Components
+ * 
+ * A flexible navigation bar component system for building application headers,
+ * toolbars, and navigation areas. Features animated current indicators, flexible
+ * layout options, and responsive design.
+ * 
+ * Features:
+ * - Flexible horizontal layout system
+ * - Animated current page indicators using Framer Motion
+ * - Section-based organization with dividers and spacers
+ * - Next.js Link integration for navigation
+ * - Icon and avatar support
+ * - Responsive design with mobile optimizations
+ * - Dark mode support
+ * - Truncated labels for overflow handling
+ * 
+ * @example
+ * ```tsx
+ * // Basic navigation bar
+ * <Navbar>
+ *   <NavbarSection>
+ *     <NavbarItem href="/" current>
+ *       Home
+ *     </NavbarItem>
+ *     <NavbarItem href="/about">
+ *       About
+ *     </NavbarItem>
+ *     <NavbarItem href="/contact">
+ *       Contact
+ *     </NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * 
+ * // Complex navbar with sections and dividers
+ * <Navbar>
+ *   <NavbarSection>
+ *     <NavbarItem href="/" current>
+ *       <HomeIcon />
+ *       <NavbarLabel>Dashboard</NavbarLabel>
+ *     </NavbarItem>
+ *     <NavbarItem href="/projects">
+ *       <FolderIcon />
+ *       <NavbarLabel>Projects</NavbarLabel>
+ *     </NavbarItem>
+ *   </NavbarSection>
+ *   
+ *   <NavbarDivider />
+ *   
+ *   <NavbarSection>
+ *     <NavbarItem href="/settings">
+ *       <SettingsIcon />
+ *       <NavbarLabel>Settings</NavbarLabel>
+ *     </NavbarItem>
+ *   </NavbarSection>
+ *   
+ *   <NavbarSpacer />
+ *   
+ *   <NavbarSection>
+ *     <NavbarItem href="/profile">
+ *       <Avatar src={user.avatar} />
+ *       <NavbarLabel>{user.name}</NavbarLabel>
+ *     </NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * 
+ * // Toolbar style navbar
+ * <Navbar className="bg-white border-b">
+ *   <NavbarSection>
+ *     <NavbarItem onClick={() => undo()}>
+ *       <UndoIcon />
+ *     </NavbarItem>
+ *     <NavbarItem onClick={() => redo()}>
+ *       <RedoIcon />
+ *     </NavbarItem>
+ *   </NavbarSection>
+ *   
+ *   <NavbarDivider />
+ *   
+ *   <NavbarSection>
+ *     <NavbarItem onClick={() => cut()}>
+ *       <ScissorsIcon />
+ *     </NavbarItem>
+ *     <NavbarItem onClick={() => copy()}>
+ *       <CopyIcon />
+ *     </NavbarItem>
+ *     <NavbarItem onClick={() => paste()}>
+ *       <ClipboardIcon />
+ *     </NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * ```
+ */
+
 "use client";
 
 import clsx from "clsx";
@@ -6,6 +100,26 @@ import Link from "next/link";
 import React, { forwardRef, useId } from "react";
 import { Button } from "../button";
 
+/**
+ * Root navbar component for horizontal navigation layouts.
+ * 
+ * Creates a flexible horizontal container for navigation items, sections,
+ * and other navbar components. Provides consistent spacing and alignment.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional HTML nav element props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Navbar className="bg-white border-b px-4">
+ *   <NavbarSection>
+ *     <NavbarItem href="/home">Home</NavbarItem>
+ *     <NavbarItem href="/about">About</NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * ```
+ */
 export function Navbar({
   className,
   ...props
@@ -18,6 +132,30 @@ export function Navbar({
   );
 }
 
+/**
+ * Navbar divider component for visual separation.
+ * 
+ * Creates a vertical line separator between navbar sections for visual
+ * grouping and organization. Automatically adapts to light and dark themes.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional HTML div element props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Navbar>
+ *   <NavbarSection>
+ *     <NavbarItem>Item 1</NavbarItem>
+ *     <NavbarItem>Item 2</NavbarItem>
+ *   </NavbarSection>
+ *   <NavbarDivider />
+ *   <NavbarSection>
+ *     <NavbarItem>Item 3</NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * ```
+ */
 export function NavbarDivider({
   className,
   ...props
@@ -31,6 +169,32 @@ export function NavbarDivider({
   );
 }
 
+/**
+ * Navbar section component for grouping related items.
+ * 
+ * Groups related navbar items together with consistent spacing and
+ * shared animation context using Framer Motion LayoutGroup. Each section
+ * has its own animation scope for current indicators.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional HTML div element props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Navbar>
+ *   <NavbarSection>
+ *     <NavbarItem href="/dashboard" current>Dashboard</NavbarItem>
+ *     <NavbarItem href="/projects">Projects</NavbarItem>
+ *   </NavbarSection>
+ *   
+ *   <NavbarSection>
+ *     <NavbarItem href="/settings">Settings</NavbarItem>
+ *     <NavbarItem href="/help">Help</NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * ```
+ */
 export function NavbarSection({
   className,
   ...props
@@ -44,6 +208,33 @@ export function NavbarSection({
   );
 }
 
+/**
+ * Navbar spacer component for flexible spacing.
+ * 
+ * Creates flexible space between navbar sections, pushing subsequent
+ * sections to the right. Useful for creating left/right layouts.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional HTML div element props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Navbar>
+ *   <NavbarSection>
+ *     <NavbarItem>Logo</NavbarItem>
+ *     <NavbarItem>Home</NavbarItem>
+ *   </NavbarSection>
+ *   
+ *   <NavbarSpacer />
+ *   
+ *   <NavbarSection>
+ *     <NavbarItem>Profile</NavbarItem>
+ *     <NavbarItem>Settings</NavbarItem>
+ *   </NavbarSection>
+ * </Navbar>
+ * ```
+ */
 export function NavbarSpacer({
   className,
   ...props
@@ -57,6 +248,47 @@ export function NavbarSpacer({
   );
 }
 
+/**
+ * Navbar item component for navigation links and buttons.
+ * 
+ * Interactive navigation item that can function as a link (with href)
+ * or button (with onClick). Features animated current page indicators,
+ * icon support, and responsive design.
+ *
+ * @param current - Whether this item represents the current page
+ * @param className - Additional CSS classes
+ * @param children - Content including icons, labels, and other elements
+ * @param href - Optional URL for link behavior (uses Next.js Link)
+ * @param props - Additional button element props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Link navigation item
+ * <NavbarItem href="/dashboard" current>
+ *   <DashboardIcon />
+ *   <NavbarLabel>Dashboard</NavbarLabel>
+ * </NavbarItem>
+ * 
+ * // Button navigation item
+ * <NavbarItem onClick={() => handleAction()}>
+ *   <ActionIcon />
+ *   <NavbarLabel>Action</NavbarLabel>
+ * </NavbarItem>
+ * 
+ * // Simple text item
+ * <NavbarItem href="/about">
+ *   About
+ * </NavbarItem>
+ * 
+ * // With avatar
+ * <NavbarItem href="/profile">
+ *   <Avatar src={user.avatar} />
+ *   <NavbarLabel>{user.name}</NavbarLabel>
+ *   <ChevronDownIcon />
+ * </NavbarItem>
+ * ```
+ */
 export const NavbarItem = forwardRef(function NavbarItem(
   {
     current,
@@ -65,9 +297,13 @@ export const NavbarItem = forwardRef(function NavbarItem(
     href,
     ...props
   }: {
+    /** Whether this item represents the current page/section */
     current?: boolean;
+    /** Additional CSS classes */
     className?: string;
+    /** Item content including icons, labels, and other elements */
     children: React.ReactNode;
+    /** Optional URL for link behavior */
     href?: string;
   } & React.ComponentPropsWithoutRef<"button">,
   ref: React.ForwardedRef<HTMLButtonElement>
@@ -105,6 +341,34 @@ export const NavbarItem = forwardRef(function NavbarItem(
   );
 });
 
+/**
+ * Navbar label component for text content within navbar items.
+ * 
+ * Renders text labels with automatic truncation for overflow handling.
+ * Typically used within NavbarItem components for displaying navigation text.
+ *
+ * @param className - Additional CSS classes
+ * @param props - Additional HTML span element props
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavbarItem href="/dashboard">
+ *   <DashboardIcon />
+ *   <NavbarLabel>Dashboard Overview</NavbarLabel>
+ * </NavbarItem>
+ * 
+ * <NavbarItem>
+ *   <UserIcon />
+ *   <NavbarLabel>{user.fullName}</NavbarLabel>
+ * </NavbarItem>
+ * 
+ * // Long text gets truncated
+ * <NavbarItem>
+ *   <NavbarLabel>Very Long Navigation Item Name</NavbarLabel>
+ * </NavbarItem>
+ * ```
+ */
 export function NavbarLabel({
   className,
   ...props

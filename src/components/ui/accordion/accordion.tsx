@@ -7,8 +7,8 @@ import React from "react";
 
 /**
  * A set of collapsible panels with headings built on Base UI's Accordion primitive.
- * 
- * Based on Base UI's Accordion (https://base-ui.com/react/components/accordion), 
+ *
+ * Based on Base UI's Accordion (https://base-ui.com/react/components/accordion),
  * providing accessible collapsible content with keyboard navigation and focus management.
  * Features Tremor-inspired styling with proper contrast and spacing.
  *
@@ -32,9 +32,10 @@ import React from "react";
 const Accordion = React.forwardRef<
   React.ElementRef<typeof BaseAccordion.Root>,
   React.ComponentPropsWithoutRef<typeof BaseAccordion.Root>
->(({ className, ...props }, forwardedRef) => (
+>(({ className, orientation = "vertical", ...props }, forwardedRef) => (
   <BaseAccordion.Root
     className={cx("flex w-96 max-w-[calc(100vw-8rem)] flex-col", className)}
+    orientation={orientation}
     ref={forwardedRef}
     {...props}
   />
@@ -44,7 +45,7 @@ Accordion.displayName = "Accordion";
 
 /**
  * Accordion trigger button that toggles the panel open/closed state.
- * 
+ *
  * Renders as a button element with the panel heading text and a rotating plus icon.
  * Supports keyboard navigation and provides visual feedback for hover, focus, and disabled states.
  * The icon rotates 45 degrees when the panel is open.
@@ -94,7 +95,7 @@ AccordionTrigger.displayName = "AccordionTrigger";
 
 /**
  * Accordion panel content that appears when the trigger is activated.
- * 
+ *
  * Contains the collapsible content with appropriate padding and typography.
  * Handles overflow properly and provides smooth expand/collapse animations.
  * Content is hidden when the panel is closed and visible when open.
@@ -125,7 +126,7 @@ AccordionContent.displayName = "AccordionContent";
 
 /**
  * Accordion item container that wraps a trigger and content pair.
- * 
+ *
  * Provides the structure and styling for individual accordion panels.
  * Includes bottom border styling that creates visual separation between items.
  * Each item requires a unique `value` prop for identification.

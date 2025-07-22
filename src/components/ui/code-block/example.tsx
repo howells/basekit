@@ -16,12 +16,10 @@ export const CodeBlockExample = ({
   [key: string]: unknown;
 }) => {
   return (
-    <CodeBlock
-      language={language}
-      theme={theme}
-      {...props}
-    >
-      {children}
-    </CodeBlock>
+    <div className="w-full max-w-2xl">
+      <CodeBlock language={language} theme={theme} {...props}>
+        {children}
+      </CodeBlock>
+    </div>
   );
 };
