@@ -27,7 +27,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
   ) => (
     <BaseScrollArea.Root
       ref={ref}
-      className={cx("relative overflow-hidden", className)}
+      className={cx("relative overflow-hidden group", className)}
       {...props}
     >
       <BaseScrollArea.Viewport
@@ -39,7 +39,8 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
         <BaseScrollArea.Scrollbar
           orientation="vertical"
           className={cx(
-            "flex h-full w-2.5 touch-none select-none border-l border-l-transparent p-[1px] transition-colors",
+            "flex h-full w-2.5 touch-none select-none border-l border-l-transparent p-[1px] transition-all duration-200",
+            "opacity-0 group-hover:opacity-100 data-[state=visible]:opacity-100",
             "hover:bg-zinc-100 dark:hover:bg-zinc-800",
             scrollbarClassName
           )}
@@ -57,7 +58,8 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
         <BaseScrollArea.Scrollbar
           orientation="horizontal"
           className={cx(
-            "flex h-2.5 w-full touch-none select-none border-t border-t-transparent p-[1px] transition-colors",
+            "flex h-2.5 w-full touch-none select-none border-t border-t-transparent p-[1px] transition-all duration-200",
+            "opacity-0 group-hover:opacity-100 data-[state=visible]:opacity-100",
             "hover:bg-zinc-100 dark:hover:bg-zinc-800",
             scrollbarClassName
           )}
@@ -86,7 +88,8 @@ const ScrollBar = React.forwardRef<
     ref={ref}
     orientation={orientation}
     className={cx(
-      "flex touch-none select-none transition-colors",
+      "flex touch-none select-none transition-all duration-200",
+      "opacity-0 group-hover:opacity-100 data-[state=visible]:opacity-100",
       orientation === "vertical" &&
         "h-full w-2.5 border-l border-l-transparent p-[1px]",
       orientation === "horizontal" &&

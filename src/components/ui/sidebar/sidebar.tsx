@@ -1,5 +1,6 @@
 "use client";
 
+import { appleEasing } from "@/lib/utils";
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
 import { LayoutGroup, motion } from "framer-motion";
@@ -7,28 +8,48 @@ import { PanelLeftClose } from "lucide-react";
 import Link from "next/link";
 import React, { forwardRef, useId } from "react";
 import { Button } from "../button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../collapsible";
 import { ScrollArea } from "../scroll-area";
+import { Subheading } from "../subheading";
 import { TouchTarget } from "../touch-target";
 
 export function Sidebar({
   className,
   children,
   isCollapsed = false,
+  onToggle,
+  showToggle = false,
   ...props
 }: React.ComponentPropsWithoutRef<"nav"> & {
   isCollapsed?: boolean;
+  onToggle?: () => void;
+  showToggle?: boolean;
 }) {
   return (
     <motion.nav
       {...props}
-      className={clsx(
-        className,
-        "flex h-full min-h-0 flex-col transition-all duration-200"
-      )}
+      className={clsx(className, "flex h-full min-h-0 flex-col relative")}
       animate={{ width: isCollapsed ? "3rem" : "16rem" }}
       initial={false}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
+      transition={{ duration: 0.2, ease: appleEasing.easeOut }}
     >
+      {/* Toggle button - positioned absolutely within sidebar */}
+      {showToggle && (
+        <div
+          className={clsx(
+            "absolute top-0 z-10 group",
+            isCollapsed
+              ? "inset-x-2 h-12 flex items-center justify-center opacity-0 hover:opacity-100 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-md transition-opacity duration-200"
+              : "right-2 top-2"
+          )}
+        >
+          <SidebarToggle isCollapsed={isCollapsed} onToggle={onToggle} />
+        </div>
+      )}
       {children}
     </motion.nav>
   );
@@ -91,10 +112,7 @@ export function SidebarBody({
   return (
     <ScrollArea
       className={clsx(className, "flex-1")}
-      viewportClassName={clsx(
-        "transition-all duration-200 [&>[data-slot=section]+[data-slot=section]]:mt-8",
-        isCollapsed ? "p-2" : "p-4"
-      )}
+      viewportClassName="[&>[data-slot=section]+[data-slot=section]]:mt-8"
       {...props}
     />
   );
@@ -120,19 +138,84 @@ export function SidebarFooter({
   );
 }
 
+export function SidebarContent({
+  className,
+  isCollapsed,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"div"> & {
+  isCollapsed?: boolean;
+}) {
+  return (
+    <div
+      {...props}
+      className={clsx(
+        className,
+        "transition-all duration-200",
+        isCollapsed ? "px-2" : "px-4"
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function SidebarSection({
   className,
+  title,
+  defaultOpen = true,
+  isCollapsed,
+  children,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  title?: React.ReactNode;
+  defaultOpen?: boolean;
+  isCollapsed?: boolean;
+}) {
   const id = useId();
 
+  // If no title provided, render as a simple container
+  if (!title) {
+    return (
+      <LayoutGroup id={id}>
+        <div
+          {...props}
+          data-slot="section"
+          className={clsx(className, "flex flex-col gap-0.5")}
+        >
+          {children}
+        </div>
+      </LayoutGroup>
+    );
+  }
+
+  // Render as collapsible section with title
   return (
     <LayoutGroup id={id}>
       <div
         {...props}
         data-slot="section"
         className={clsx(className, "flex flex-col gap-0.5")}
-      />
+      >
+        <Collapsible defaultOpen={defaultOpen}>
+          <CollapsibleTrigger
+            className={clsx(
+              "transition-all duration-200",
+              isCollapsed ? "px-2" : "px-4"
+            )}
+          >
+            <SidebarHeading isCollapsed={isCollapsed}>{title}</SidebarHeading>
+          </CollapsibleTrigger>
+          <CollapsibleContent
+            className={clsx(
+              "transition-all duration-200",
+              isCollapsed ? "px-2" : "px-2"
+            )}
+          >
+            {children}
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
     </LayoutGroup>
   );
 }
@@ -151,7 +234,7 @@ export function SidebarDivider({
       {...props}
       className={clsx(
         className,
-        "my-4 border-t border-zinc-950/5 lg:-mx-4 dark:border-white/5"
+        "my-4 border-t border-zinc-950/5 dark:border-white/5"
       )}
     />
   );
@@ -179,15 +262,7 @@ export function SidebarHeading({
 }) {
   if (isCollapsed) return null;
 
-  return (
-    <h3
-      {...props}
-      className={clsx(
-        className,
-        "mb-1 text-xs/6 font-medium text-zinc-500 dark:text-zinc-400"
-      )}
-    />
-  );
+  return <Subheading {...props} className={clsx(className)} />;
 }
 
 export const SidebarItem = forwardRef(function SidebarItem(
@@ -210,8 +285,8 @@ export const SidebarItem = forwardRef(function SidebarItem(
 ) {
   const classes = clsx(
     // Base
-    "flex w-full items-center gap-3 rounded-lg text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 transition-all duration-200",
-    isCollapsed ? "px-2 py-2 justify-center" : "px-2 py-2.5 sm:py-2",
+    "flex w-full px-2 items-center gap-3 rounded-md text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 transition-all duration-200",
+    isCollapsed ? "px-1 py-2 justify-center" : "py-2.5 sm:py-2",
     // Leading icon/icon-only
     "*:data-[slot=icon]:size-6 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:fill-zinc-500 sm:*:data-[slot=icon]:size-5",
     // Trailing icon (down chevron or similar)
@@ -236,7 +311,7 @@ export const SidebarItem = forwardRef(function SidebarItem(
       {current && !isCollapsed && (
         <motion.span
           layoutId="current-indicator"
-          className="absolute inset-y-2 -left-4 w-0.5 rounded-full bg-zinc-950 dark:bg-white"
+          className="absolute inset-y-2 -left-2 w-0.5 rounded-full bg-zinc-950 dark:bg-white"
         />
       )}
       {"href" in props ? (

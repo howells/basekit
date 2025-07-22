@@ -8,24 +8,16 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React, { createContext, useContext, useState } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./ui/collapsible/collapsible";
 import { Input } from "./ui/input/input";
 import {
   Sidebar,
   SidebarBody,
   SidebarDivider,
   SidebarHeader,
-  SidebarHeading,
   SidebarItem,
   SidebarLabel,
   SidebarSection,
-  SidebarToggle,
 } from "./ui/sidebar";
-import { Subheading } from "./ui/subheading";
 
 interface SidebarLayoutProps {
   children: React.ReactNode;
@@ -89,14 +81,9 @@ function SidebarContent() {
   return (
     <>
       <SidebarHeader isCollapsed={isCollapsed}>
-        <div className="relative h-12 w-full group p-2">
-          {/* Logo - positioned based on collapsed state */}
-          <div
-            className={clsx(
-              "absolute flex items-center justify-center transition-all duration-200",
-              isCollapsed ? "inset-0" : "left-2 top-2"
-            )}
-          >
+        <div className="relative h-11 w-full p-2">
+          {/* Logo */}
+          <div className={clsx("absolute", "left-2 top-2")}>
             <Image
               src={logo}
               alt="Patternmode"
@@ -105,47 +92,20 @@ function SidebarContent() {
               className="shrink-0"
             />
           </div>
-
-          {/* Toggle button - only visible when not collapsed */}
-          {!isCollapsed && (
-            <div className="absolute right-2 top-2 flex items-center justify-center">
-              <SidebarToggle
-                isCollapsed={isCollapsed}
-                onToggle={toggleCollapsed}
-              />
-            </div>
-          )}
-
-          {/* Toggle overlay when collapsed - appears on hover */}
-          {isCollapsed && (
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-md">
-              <SidebarToggle
-                isCollapsed={isCollapsed}
-                onToggle={toggleCollapsed}
-              />
-            </div>
-          )}
         </div>
       </SidebarHeader>
       <SidebarBody isCollapsed={isCollapsed}>
-        <SidebarSection>
-          <Collapsible defaultOpen>
-            <CollapsibleTrigger>
-              <SidebarHeading isCollapsed={isCollapsed}>
-                Getting Started
-              </SidebarHeading>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarItem href="/" isCollapsed={isCollapsed}>
-                <SidebarLabel isCollapsed={isCollapsed}>Overview</SidebarLabel>
-              </SidebarItem>
-              <SidebarItem href="/installation" isCollapsed={isCollapsed}>
-                <SidebarLabel isCollapsed={isCollapsed}>
-                  Installation
-                </SidebarLabel>
-              </SidebarItem>
-            </CollapsibleContent>
-          </Collapsible>
+        <SidebarSection
+          title="Getting Started"
+          defaultOpen={true}
+          isCollapsed={isCollapsed}
+        >
+          <SidebarItem href="/" isCollapsed={isCollapsed}>
+            <SidebarLabel isCollapsed={isCollapsed}>Overview</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/installation" isCollapsed={isCollapsed}>
+            <SidebarLabel isCollapsed={isCollapsed}>Installation</SidebarLabel>
+          </SidebarItem>
         </SidebarSection>
 
         <SidebarDivider isCollapsed={isCollapsed} />
@@ -153,7 +113,7 @@ function SidebarContent() {
         {/* Search input for components only */}
         {!isCollapsed && (
           <SidebarSection>
-            <div className="pb-3">
+            <div className="pb-3 px-4">
               <Input
                 placeholder="Search components..."
                 value={searchTerm}
@@ -167,30 +127,25 @@ function SidebarContent() {
         )}
 
         {uiComponents.length > 0 && (
-          <SidebarSection>
-            <Collapsible defaultOpen>
-              <CollapsibleTrigger>
-                <SidebarHeading isCollapsed={isCollapsed}>
-                  UI Components ({uiComponents.length})
-                </SidebarHeading>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                {uiComponents.map((config) => {
-                  return (
-                    <SidebarItem
-                      key={config.id}
-                      href={`/ui/${config.id}`}
-                      current={isCurrentComponent("ui", config.id)}
-                      isCollapsed={isCollapsed}
-                    >
-                      <SidebarLabel isCollapsed={isCollapsed}>
-                        {config.name}
-                      </SidebarLabel>
-                    </SidebarItem>
-                  );
-                })}
-              </CollapsibleContent>
-            </Collapsible>
+          <SidebarSection
+            title={`UI Components (${uiComponents.length})`}
+            defaultOpen={true}
+            isCollapsed={isCollapsed}
+          >
+            {uiComponents.map((config) => {
+              return (
+                <SidebarItem
+                  key={config.id}
+                  href={`/ui/${config.id}`}
+                  current={isCurrentComponent("ui", config.id)}
+                  isCollapsed={isCollapsed}
+                >
+                  <SidebarLabel isCollapsed={isCollapsed}>
+                    {config.name}
+                  </SidebarLabel>
+                </SidebarItem>
+              );
+            })}
           </SidebarSection>
         )}
 
@@ -199,30 +154,25 @@ function SidebarContent() {
         )}
 
         {inputComponents.length > 0 && (
-          <SidebarSection>
-            <Collapsible defaultOpen>
-              <CollapsibleTrigger>
-                <SidebarHeading isCollapsed={isCollapsed}>
-                  Input Components ({inputComponents.length})
-                </SidebarHeading>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                {inputComponents.map((config) => {
-                  return (
-                    <SidebarItem
-                      key={config.id}
-                      href={`/inputs/${config.id}`}
-                      current={isCurrentComponent("inputs", config.id)}
-                      isCollapsed={isCollapsed}
-                    >
-                      <SidebarLabel isCollapsed={isCollapsed}>
-                        {config.name}
-                      </SidebarLabel>
-                    </SidebarItem>
-                  );
-                })}
-              </CollapsibleContent>
-            </Collapsible>
+          <SidebarSection
+            title={`Input Components (${inputComponents.length})`}
+            defaultOpen={true}
+            isCollapsed={isCollapsed}
+          >
+            {inputComponents.map((config) => {
+              return (
+                <SidebarItem
+                  key={config.id}
+                  href={`/inputs/${config.id}`}
+                  current={isCurrentComponent("inputs", config.id)}
+                  isCollapsed={isCollapsed}
+                >
+                  <SidebarLabel isCollapsed={isCollapsed}>
+                    {config.name}
+                  </SidebarLabel>
+                </SidebarItem>
+              );
+            })}
           </SidebarSection>
         )}
 
@@ -231,30 +181,25 @@ function SidebarContent() {
         )}
 
         {formComponents.length > 0 && (
-          <SidebarSection>
-            <Collapsible defaultOpen>
-              <CollapsibleTrigger>
-                <SidebarHeading isCollapsed={isCollapsed}>
-                  Form Components ({formComponents.length})
-                </SidebarHeading>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                {formComponents.map((config) => {
-                  return (
-                    <SidebarItem
-                      key={config.id}
-                      href={`/forms/${config.id}`}
-                      current={isCurrentComponent("forms", config.id)}
-                      isCollapsed={isCollapsed}
-                    >
-                      <SidebarLabel isCollapsed={isCollapsed}>
-                        {config.name}
-                      </SidebarLabel>
-                    </SidebarItem>
-                  );
-                })}
-              </CollapsibleContent>
-            </Collapsible>
+          <SidebarSection
+            title={`Form Components (${formComponents.length})`}
+            defaultOpen={true}
+            isCollapsed={isCollapsed}
+          >
+            {formComponents.map((config) => {
+              return (
+                <SidebarItem
+                  key={config.id}
+                  href={`/forms/${config.id}`}
+                  current={isCurrentComponent("forms", config.id)}
+                  isCollapsed={isCollapsed}
+                >
+                  <SidebarLabel isCollapsed={isCollapsed}>
+                    {config.name}
+                  </SidebarLabel>
+                </SidebarItem>
+              );
+            })}
           </SidebarSection>
         )}
 
@@ -263,30 +208,25 @@ function SidebarContent() {
         )}
 
         {chartComponents.length > 0 && (
-          <SidebarSection>
-            <Collapsible defaultOpen>
-              <CollapsibleTrigger>
-                <SidebarHeading isCollapsed={isCollapsed}>
-                  Chart Components ({chartComponents.length})
-                </SidebarHeading>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                {chartComponents.map((config) => {
-                  return (
-                    <SidebarItem
-                      key={config.id}
-                      href={`/charts/${config.id}`}
-                      current={isCurrentComponent("charts", config.id)}
-                      isCollapsed={isCollapsed}
-                    >
-                      <SidebarLabel isCollapsed={isCollapsed}>
-                        {config.name}
-                      </SidebarLabel>
-                    </SidebarItem>
-                  );
-                })}
-              </CollapsibleContent>
-            </Collapsible>
+          <SidebarSection
+            title={`Chart Components (${chartComponents.length})`}
+            defaultOpen={true}
+            isCollapsed={isCollapsed}
+          >
+            {chartComponents.map((config) => {
+              return (
+                <SidebarItem
+                  key={config.id}
+                  href={`/charts/${config.id}`}
+                  current={isCurrentComponent("charts", config.id)}
+                  isCollapsed={isCollapsed}
+                >
+                  <SidebarLabel isCollapsed={isCollapsed}>
+                    {config.name}
+                  </SidebarLabel>
+                </SidebarItem>
+              );
+            })}
           </SidebarSection>
         )}
 
@@ -331,7 +271,11 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
       <div className="flex h-screen bg-white dark:bg-zinc-900">
         {/* Sidebar */}
         <div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-zinc-200 lg:bg-white lg:dark:border-zinc-800 lg:dark:bg-zinc-900 transition-all duration-200">
-          <Sidebar isCollapsed={isCollapsed}>
+          <Sidebar
+            isCollapsed={isCollapsed}
+            onToggle={toggleCollapsed}
+            showToggle={true}
+          >
             <SidebarContent />
           </Sidebar>
         </div>
