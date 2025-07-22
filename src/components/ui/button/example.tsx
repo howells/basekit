@@ -51,10 +51,6 @@ export const ButtonExample = ({
       >
         {children}
       </Button>
-
-      {/* Test case for default icon feature */}
-      <Button size="icon" />
-      <Button size="icon-sm" />
     </div>
   );
 };

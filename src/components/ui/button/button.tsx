@@ -122,9 +122,9 @@ const buttonVariants = tv({
       default: "py-2 px-3 text-sm has-[>svg]:px-2.5",
       sm: "py-1.5 px-2.5 text-xs has-[>svg]:px-2",
       lg: "py-2.5 px-4 text-base has-[>svg]:px-3",
-      icon: "p-2",
-      "icon-sm": "p-1.5",
-      "icon-lg": "p-2.5",
+      icon: "p-2.5",
+      "icon-sm": "p-2",
+      "icon-lg": "p-3",
     },
   },
   defaultVariants: {
@@ -212,9 +212,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const hasChildren = children != null && children !== "";
     const isIconOnly =
       size === "icon" || size === "icon-sm" || size === "icon-lg";
-    const hasLeftIcon = LeftIcon != null || (isIconOnly && !hasChildren);
+    const hasLeftIcon = LeftIcon != null || (isIconOnly && LeftIcon == null);
     const effectiveLeftIcon =
-      LeftIcon || (isIconOnly && !hasChildren ? MoreHorizontal : null);
+      LeftIcon || (isIconOnly && LeftIcon == null ? MoreHorizontal : null);
     const hasRightIcon =
       RightIcon != null &&
       size !== "icon" &&
