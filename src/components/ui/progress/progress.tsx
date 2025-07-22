@@ -1,4 +1,71 @@
-// Tremor Progress [v1.0.0] - Base UI
+/**
+ * Progress Components
+ * 
+ * A comprehensive progress indicator system built on Base UI Progress components.
+ * Provides linear progress bars with configurable styling, animations, labels,
+ * and value display options for tracking task completion and loading states.
+ * 
+ * Features:
+ * - Base UI Progress integration for full accessibility
+ * - Multiple color variants (default, neutral, warning, error, success)
+ * - Optional smooth animations with transitions
+ * - Label and value display components
+ * - Custom value formatting functions
+ * - Composed ProgressBar component for easy usage
+ * - Consistent styling with design system
+ * - Screen reader support and ARIA attributes
+ * 
+ * Built on Base UI Progress documentation:
+ * https://base-ui.com/react/components/progress
+ * 
+ * @example
+ * ```tsx
+ * // Simple progress bar
+ * <ProgressBar value={75} />
+ * 
+ * // With label and value display
+ * <ProgressBar 
+ *   value={60} 
+ *   label="Loading data" 
+ *   showValue 
+ *   variant="success"
+ * />
+ * 
+ * // Custom composition
+ * <Progress value={45} max={100}>
+ *   <ProgressLabel>Custom Progress</ProgressLabel>
+ *   <ProgressTrack variant="warning">
+ *     <ProgressIndicator variant="warning" />
+ *   </ProgressTrack>
+ *   <ProgressValue>
+ *     {(formatted, value) => `${value}% complete`}
+ *   </ProgressValue>
+ * </Progress>
+ * 
+ * // File upload progress
+ * <ProgressBar
+ *   value={uploadedBytes}
+ *   max={totalBytes}
+ *   label="Uploading files"
+ *   showValue
+ *   valueFormatter={(value, max) => 
+ *     `${Math.round((value / max) * 100)}% (${value}/${max} bytes)`
+ *   }
+ *   variant="default"
+ * />
+ * 
+ * // Task completion
+ * <ProgressBar
+ *   value={completedTasks}
+ *   max={totalTasks}
+ *   label="Processing tasks"
+ *   showValue
+ *   valueFormatter={(value, max) => `${value} of ${max} tasks`}
+ *   variant="success"
+ *   showAnimation
+ * />
+ * ```
+ */
 
 import { cx } from "@/lib/utils";
 import { Progress as BaseProgress } from "@base-ui-components/react/progress";
@@ -13,41 +80,59 @@ import {
   type ProgressVariant,
 } from "../progress-utils";
 
+/**
+ * Tailwind variants for progress components.
+ * 
+ * Defines styling slots for different parts of the progress indicator
+ * with variants for colors and animation states.
+ */
 const progressVariants = tv({
   slots: {
+    /** Root container with horizontal layout */
     root: "flex w-full items-center",
+    /** Track background container */
     track: "relative flex h-2 w-full items-center rounded-full",
+    /** Progress indicator fill */
     indicator: "h-full flex-col rounded-full",
+    /** Label text styling */
     label: [progressLabelVariants.base, "ml-2 whitespace-nowrap"],
+    /** Value text styling */
     value: [progressValueVariants.base, "ml-2 whitespace-nowrap"],
   },
   variants: {
     variant: {
+      /** Default blue color scheme */
       default: {
         track: `bg-${sharedProgressVariants.default.lightBg} dark:bg-${sharedProgressVariants.default.darkBg}`,
         indicator: `bg-${sharedProgressVariants.default.light} dark:bg-${sharedProgressVariants.default.dark}`,
       },
+      /** Neutral gray color scheme */
       neutral: {
         track: `bg-${sharedProgressVariants.neutral.lightBg} dark:bg-${sharedProgressVariants.neutral.darkBg}`,
         indicator: `bg-${sharedProgressVariants.neutral.light} dark:bg-${sharedProgressVariants.neutral.dark}`,
       },
+      /** Warning yellow/orange color scheme */
       warning: {
         track: `bg-${sharedProgressVariants.warning.lightBg} dark:bg-${sharedProgressVariants.warning.darkBg}`,
         indicator: `bg-${sharedProgressVariants.warning.light} dark:bg-${sharedProgressVariants.warning.dark}`,
       },
+      /** Error red color scheme */
       error: {
         track: `bg-${sharedProgressVariants.error.lightBg} dark:bg-${sharedProgressVariants.error.darkBg}`,
         indicator: `bg-${sharedProgressVariants.error.light} dark:bg-${sharedProgressVariants.error.dark}`,
       },
+      /** Success green color scheme */
       success: {
         track: `bg-${sharedProgressVariants.success.lightBg} dark:bg-${sharedProgressVariants.success.darkBg}`,
         indicator: `bg-${sharedProgressVariants.success.light} dark:bg-${sharedProgressVariants.success.dark}`,
       },
     },
     showAnimation: {
+      /** Smooth progress animation enabled */
       true: {
         indicator: progressAnimationClasses.enabled,
       },
+      /** No animation, instant progress updates */
       false: {
         indicator: progressAnimationClasses.disabled,
       },
@@ -192,6 +277,8 @@ ProgressValue.displayName = "ProgressValue";
 
 /**
  * Props for the ProgressBar component.
+ * 
+ * Configuration for the composed progress bar with label and value display options.
  *
  * @interface ProgressBarProps
  * @extends React.ComponentPropsWithoutRef<typeof BaseProgress.Root>
@@ -200,9 +287,9 @@ ProgressValue.displayName = "ProgressValue";
 interface ProgressBarProps
   extends React.ComponentPropsWithoutRef<typeof BaseProgress.Root>,
     VariantProps<typeof progressVariants> {
-  /** Optional label text to display */
+  /** Optional label text to display next to the progress bar */
   label?: string;
-  /** Whether to show the current value */
+  /** Whether to show the current progress value */
   showValue?: boolean;
   /** Custom function to format the displayed value */
   valueFormatter?: (value: number | null, max: number) => string;
