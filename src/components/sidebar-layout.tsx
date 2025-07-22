@@ -8,6 +8,7 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React, { createContext, useContext, useState } from "react";
+import { Badge } from "./ui/badge/badge";
 import { Input } from "./ui/input/input";
 import {
   Sidebar,
@@ -128,7 +129,15 @@ function SidebarContent() {
 
         {uiComponents.length > 0 && (
           <SidebarSection
-            title={`UI Components (${uiComponents.length})`}
+            title={
+              <div className="flex items-center gap-2">
+                <span>UI Components</span>
+                <Badge variant="neutral" size="sm">
+                  {uiComponents.length}
+                </Badge>
+              </div>
+            }
+            href="/ui"
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
@@ -155,7 +164,15 @@ function SidebarContent() {
 
         {inputComponents.length > 0 && (
           <SidebarSection
-            title={`Input Components (${inputComponents.length})`}
+            title={
+              <div className="flex items-center gap-2">
+                <span>Input Components</span>
+                <Badge variant="neutral" size="sm">
+                  {inputComponents.length}
+                </Badge>
+              </div>
+            }
+            href="/inputs"
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
@@ -182,7 +199,15 @@ function SidebarContent() {
 
         {formComponents.length > 0 && (
           <SidebarSection
-            title={`Form Components (${formComponents.length})`}
+            title={
+              <div className="flex items-center gap-2">
+                <span>Form Components</span>
+                <Badge variant="neutral" size="sm">
+                  {formComponents.length}
+                </Badge>
+              </div>
+            }
+            href="/forms"
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
@@ -209,7 +234,15 @@ function SidebarContent() {
 
         {chartComponents.length > 0 && (
           <SidebarSection
-            title={`Chart Components (${chartComponents.length})`}
+            title={
+              <div className="flex items-center gap-2">
+                <span>Chart Components</span>
+                <Badge variant="neutral" size="sm">
+                  {chartComponents.length}
+                </Badge>
+              </div>
+            }
+            href="/charts"
             defaultOpen={true}
             isCollapsed={isCollapsed}
           >
@@ -270,7 +303,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
     <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
       <div className="flex h-screen bg-white dark:bg-zinc-900">
         {/* Sidebar */}
-        <div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-zinc-200 lg:bg-white lg:dark:border-zinc-800 lg:dark:bg-zinc-900 transition-all duration-200">
+        <div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-zinc-200 lg:bg-zinc-50 lg:dark:border-zinc-800 lg:dark:bg-zinc-900 transition-all duration-200">
           <Sidebar
             isCollapsed={isCollapsed}
             onToggle={toggleCollapsed}

@@ -2,12 +2,14 @@
 
 import { cx, focusRing } from "@/lib/utils";
 import { Collapsible as BaseCollapsible } from "@base-ui-components/react/collapsible";
-import { ChevronsDownUp, ChevronsUpDown, LucideIcon } from "lucide-react";
+import { ChevronDown, ChevronUp, LucideIcon } from "lucide-react";
+import Link from "next/link";
 import * as React from "react";
+import { Button } from "../button";
 
 /**
  * Root collapsible component built on Base UI's Collapsible primitive.
- * 
+ *
  * Based on Base UI's Collapsible (https://base-ui.com/react/components/collapsible),
  * providing accessible expandable/collapsible panels with smooth animations.
  * Perfect for FAQ sections, navigation menus, and content organization.
@@ -28,30 +30,42 @@ interface CollapsibleTriggerProps
   closedIcon?: React.ComponentType<{ className?: string }>;
   /** Icon to show when collapsible is open */
   openIcon?: React.ComponentType<{ className?: string }>;
+  /** If true, renders as just the toggle button without full-width trigger */
+  asToggleButton?: boolean;
+  /** Custom href for when the heading should be a link */
+  href?: string;
+  /** Custom padding classes to apply to the container */
+  padding?: string;
 }
 
 /**
  * Trigger button for the collapsible panel.
- * 
+ *
  * Based on Base UI's Collapsible.Trigger, providing an accessible button
  * that toggles the visibility of the collapsible content. Features animated
  * icon transitions and proper hover/focus states.
  *
  * @param closedIcon - Icon component to show when closed (defaults to ChevronsUpDown)
  * @param openIcon - Icon component to show when open (defaults to ChevronsDownUp)
+ * @param asToggleButton - If true, renders as just the toggle button
+ * @param href - If provided, makes the heading portion a link
  *
  * @example
  * ```tsx
+ * // Traditional full-width trigger
  * <CollapsibleTrigger>
  *   Click to expand
  * </CollapsibleTrigger>
- * 
- * // With custom icons
- * <CollapsibleTrigger 
- *   closedIcon={ChevronRight} 
- *   openIcon={ChevronDown}
- * >
- *   Custom trigger
+ *
+ * // Separate heading and toggle button
+ * <div className="flex items-center justify-between">
+ *   <a href="/components" className="flex-1">UI Components</a>
+ *   <CollapsibleTrigger asToggleButton />
+ * </div>
+ *
+ * // Heading with link and separate toggle
+ * <CollapsibleTrigger href="/components">
+ *   UI Components
  * </CollapsibleTrigger>
  * ```
  *
@@ -65,55 +79,143 @@ const CollapsibleTrigger = React.forwardRef<
     {
       className,
       children,
-      closedIcon: ClosedIcon = ChevronsUpDown,
-      openIcon: OpenIcon = ChevronsDownUp,
+      closedIcon: ClosedIcon = ChevronDown,
+      openIcon: OpenIcon = ChevronUp,
+      asToggleButton = false,
+      href,
+      padding,
       ...props
     },
     ref
-  ) => (
-    <BaseCollapsible.Trigger
-      ref={ref}
-      className={cx(
-        // base
-        "group flex w-full items-center justify-between py-2 text-left text-sm font-medium transition-colors",
-        // text color
-        "text-zinc-900 dark:text-zinc-50",
-        // hover state (no background)
-        "hover:text-zinc-700 dark:hover:text-zinc-300",
-        // disabled
-        "data-disabled:cursor-not-allowed data-disabled:opacity-50",
-        "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
-        // focus
-        focusRing,
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <div className="relative min-w-4 w-4 h-4 shrink-0">
+  ) => {
+    // Dynamic icon component that switches based on collapsible state
+    const DynamicIcon = ({
+      className: iconClassName,
+    }: {
+      className?: string;
+    }) => (
+      <div className="relative">
         <ClosedIcon
           className={cx(
-            "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
-            "text-zinc-400 dark:text-zinc-500",
+            iconClassName,
+            "absolute inset-0 transition-opacity duration-200 ease-out",
             "group-data-[panel-open]:opacity-0"
           )}
         />
         <OpenIcon
           className={cx(
-            "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
-            "text-zinc-400 dark:text-zinc-500",
-            "group-data-[panel-open]:opacity-100 opacity-0"
+            iconClassName,
+            "absolute inset-0 transition-opacity duration-200 ease-out",
+            "opacity-0 group-data-[panel-open]:opacity-100"
           )}
         />
       </div>
-    </BaseCollapsible.Trigger>
-  )
+    );
+
+    // If asToggleButton is true, render just the icon button
+    if (asToggleButton) {
+      return (
+        <BaseCollapsible.Trigger
+          ref={ref}
+          className={cx("group", className)}
+          {...props}
+          render={
+            <Button variant="ghost" size="icon-sm" leftIcon={DynamicIcon} />
+          }
+        />
+      );
+    }
+
+    // If href is provided, render heading as link with separate toggle button
+    if (href && children) {
+      return (
+        <div
+          className={cx("flex items-center justify-between py-2 px-4", padding)}
+        >
+          <Link
+            href={href}
+            className={cx(
+              "flex-1 text-left text-sm font-medium transition-colors",
+              "text-zinc-900 dark:text-zinc-50",
+              "hover:text-zinc-700 dark:hover:text-zinc-300",
+              focusRing
+            )}
+          >
+            {children}
+          </Link>
+          <BaseCollapsible.Trigger
+            ref={ref}
+            className={cx("group", className)}
+            {...props}
+          >
+            <div className="relative min-w-4 w-4 h-4 shrink-0">
+              <ClosedIcon
+                className={cx(
+                  "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
+                  "text-zinc-400 dark:text-zinc-500",
+                  "group-data-[panel-open]:opacity-0"
+                )}
+              />
+              <OpenIcon
+                className={cx(
+                  "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
+                  "text-zinc-400 dark:text-zinc-500",
+                  "opacity-0 group-data-[panel-open]:opacity-100"
+                )}
+              />
+            </div>
+          </BaseCollapsible.Trigger>
+        </div>
+      );
+    }
+
+    // Default: full-width trigger (original behavior)
+    return (
+      <BaseCollapsible.Trigger
+        ref={ref}
+        className={cx(
+          // base
+          "group flex w-full items-center justify-between py-2 text-left text-sm font-medium transition-colors",
+          // text color
+          "text-zinc-900 dark:text-zinc-50",
+          // hover state (no background)
+          "hover:text-zinc-700 dark:hover:text-zinc-300",
+          // disabled
+          "data-disabled:cursor-not-allowed data-disabled:opacity-50",
+          "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
+          // focus
+          focusRing,
+          padding,
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <div className="relative min-w-4 w-4 h-4 shrink-0">
+          <ClosedIcon
+            className={cx(
+              "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
+              "text-zinc-400 dark:text-zinc-500",
+              "group-data-[panel-open]:opacity-0"
+            )}
+          />
+          <OpenIcon
+            className={cx(
+              "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
+              "text-zinc-400 dark:text-zinc-500",
+              "group-data-[panel-open]:opacity-100 opacity-0"
+            )}
+          />
+        </div>
+      </BaseCollapsible.Trigger>
+    );
+  }
 );
 CollapsibleTrigger.displayName = "CollapsibleTrigger";
 
 /**
  * Collapsible panel content that expands and collapses.
- * 
+ *
  * Based on Base UI's Collapsible.Panel, providing smooth height-based
  * animations when showing and hiding content. Uses CSS variables for
  * precise height calculations and smooth transitions.
@@ -161,7 +263,7 @@ CollapsibleContent.displayName = "CollapsibleContent";
 
 /**
  * Simple chevron icon for collapsible components.
- * 
+ *
  * Provides a basic right-pointing chevron that can be used as an alternative
  * to the default Lucide icons for simpler visual designs.
  *

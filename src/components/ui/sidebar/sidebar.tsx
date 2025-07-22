@@ -43,7 +43,7 @@ export function Sidebar({
           className={clsx(
             "absolute top-0 z-10 group",
             isCollapsed
-              ? "inset-x-2 h-12 flex items-center justify-center opacity-0 hover:opacity-100 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-md transition-opacity duration-200"
+              ? "inset-x-2 h-12 flex items-center justify-center opacity-0 hover:opacity-100 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-md transition-opacity duration-200"
               : "right-2 top-2"
           )}
         >
@@ -163,12 +163,14 @@ export function SidebarContent({
 export function SidebarSection({
   className,
   title,
+  href,
   defaultOpen = true,
   isCollapsed,
   children,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & {
   title?: React.ReactNode;
+  href?: string;
   defaultOpen?: boolean;
   isCollapsed?: boolean;
 }) {
@@ -199,10 +201,9 @@ export function SidebarSection({
       >
         <Collapsible defaultOpen={defaultOpen}>
           <CollapsibleTrigger
-            className={clsx(
-              "transition-all duration-200",
-              isCollapsed ? "px-2" : "px-4"
-            )}
+            href={href}
+            className={clsx("transition-all duration-200")}
+            padding={clsx(isCollapsed ? "px-2" : "px-4")}
           >
             <SidebarHeading isCollapsed={isCollapsed}>{title}</SidebarHeading>
           </CollapsibleTrigger>
@@ -285,7 +286,7 @@ export const SidebarItem = forwardRef(function SidebarItem(
 ) {
   const classes = clsx(
     // Base
-    "flex w-full px-2 items-center gap-3 rounded-md text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 transition-all duration-200",
+    "flex w-full px-2 items-center gap-3 rounded-md text-left text-base/6  text-zinc-950 sm:text-sm/5 transition-all duration-200",
     isCollapsed ? "px-1 py-2 justify-center" : "py-2.5 sm:py-2",
     // Leading icon/icon-only
     "*:data-[slot=icon]:size-6 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:fill-zinc-500 sm:*:data-[slot=icon]:size-5",
