@@ -32,6 +32,16 @@ import {
 import { cx } from "@/lib/utils";
 
 //#region Shape
+/**
+ * Performs deep equality comparison between two objects.
+ * 
+ * Recursively compares objects to determine if they have identical
+ * structure and values. Handles nested objects, arrays, and primitive values.
+ *
+ * @param obj1 - First object to compare
+ * @param obj2 - Second object to compare
+ * @returns True if objects are deeply equal, false otherwise
+ */
 function deepEqual<T>(obj1: T, obj2: T): boolean {
   if (obj1 === obj2) return true;
 
@@ -56,6 +66,17 @@ function deepEqual<T>(obj1: T, obj2: T): boolean {
   return true;
 }
 
+/**
+ * Renders customized bar shapes with hover and selection states.
+ * 
+ * Creates interactive bar elements with visual feedback for active states.
+ * Handles opacity changes based on legend interactions and active selections.
+ *
+ * @param props - Recharts bar shape properties
+ * @param activeBar - Currently active bar data
+ * @param activeLegend - Currently active legend category
+ * @returns Custom bar shape element
+ */
 const renderShape = (
   props: any,
   activeBar: any | undefined,
@@ -88,14 +109,37 @@ const renderShape = (
 
 //#region Legend
 
+/**
+ * Props for individual legend items in the chart legend.
+ * 
+ * Configuration for legend item display including category information,
+ * color, interaction handlers, and visual state.
+ */
 interface LegendItemProps {
+  /** Category name for the legend item */
   name: string;
+  /** Color theme for the visual indicator */
   color: AvailableChartColorsKeys;
+  /** Click handler for legend interactions */
   onClick?: (name: string, color: AvailableChartColorsKeys) => void;
+  /** Currently active legend category */
   activeLegend?: string;
+  /** Chart type for styling the indicator */
   chartType: "bar" | "line";
 }
 
+/**
+ * Individual legend item component for chart legends.
+ * 
+ * Renders clickable legend items with color indicators and category labels.
+ * Supports hover effects and selection states for filtering chart data.
+ *
+ * @param name - Category name for the legend item
+ * @param color - Color theme for the visual indicator
+ * @param onClick - Click handler for legend interactions
+ * @param activeLegend - Currently active legend category
+ * @param chartType - Chart type for styling the indicator
+ */
 const LegendItem = ({
   name,
   color,
@@ -384,6 +428,24 @@ const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
 
 Legend.displayName = "Legend";
 
+/**
+ * Main legend component for combo charts.
+ * 
+ * Renders interactive legend with support for filtering chart data by category.
+ * Handles both bar and line series with appropriate color coding and positioning.
+ *
+ * @param payload - Legend item data from Recharts
+ * @param barCategoryColors - Color mapping for bar series
+ * @param lineCategoryColors - Color mapping for line series  
+ * @param setLegendHeight - Callback to set legend container height
+ * @param activeLegend - Currently active legend category
+ * @param onClick - Click handler for legend item interactions
+ * @param enableLegendSlider - Whether to enable legend scrolling
+ * @param legendPosition - Legend positioning (left, center, right)
+ * @param barYAxisWidth - Width of bar chart Y-axis
+ * @param lineYAxisWidth - Width of line chart Y-axis
+ * @returns Legend component element
+ */
 const ChartLegend = (
   { payload }: any,
   barCategoryColors: Map<string, AvailableChartColorsKeys>,
@@ -446,25 +508,61 @@ const ChartLegend = (
 
 type TooltipProps = Pick<ChartTooltipProps, "active" | "payload" | "label">;
 
+/**
+ * Individual payload item for chart tooltips.
+ * 
+ * Represents data for a single chart element in tooltip display.
+ */
 type PayloadItem = {
+  /** Category name for the data point */
   category: string;
+  /** Numeric value of the data point */
   value: number;
+  /** Index value from the chart data */
   index: string;
+  /** Color theme for bar chart elements */
   barColor: AvailableChartColorsKeys;
+  /** Color theme for line chart elements */
   lineColor: AvailableChartColorsKeys;
+  /** Chart type for the data point */
   chartType: "bar" | "line";
+  /** Data type from Recharts */
   type: string;
+  /** Raw payload data from Recharts */
   payload: any;
 };
 
+/**
+ * Props for chart tooltip components.
+ * 
+ * Configuration for tooltip display including payload data,
+ * formatting options, and interaction state.
+ */
 interface ChartTooltipProps {
+  /** Whether tooltip should be visible */
   active: boolean | undefined;
+  /** Array of data items to display */
   payload: PayloadItem[];
+  /** X-axis label for the tooltip */
   label: string;
+  /** Formatter function for bar values */
   barValueFormatter?: (value: number) => string;
+  /** Formatter function for line values */
   lineValueFormatter?: (value: number) => string;
 }
 
+/**
+ * Default tooltip component for combo charts.
+ * 
+ * Displays data values for hovered chart elements with proper formatting
+ * and color coding. Supports both bar and line series data.
+ *
+ * @param active - Whether tooltip should be visible
+ * @param payload - Array of data items to display
+ * @param label - X-axis label for the tooltip
+ * @param barValueFormatter - Formatter function for bar values
+ * @param lineValueFormatter - Formatter function for line values
+ */
 const ChartTooltip = ({
   active,
   payload,
@@ -566,6 +664,12 @@ type BaseEventProps = {
   [key: string]: number | string;
 };
 
+/**
+ * Event handler props for combo chart interactions.
+ * 
+ * Configuration for chart interaction callbacks including clicks,
+ * hovers, and tooltip events.
+ */
 type ComboChartEventProps = BaseEventProps | null | undefined;
 
 type ChartSeries = {
@@ -581,31 +685,169 @@ type ChartSeries = {
   maxValue?: number;
 };
 
+/**
+ * Props for the ComboChart component.
+ * 
+ * Configuration for combination charts that display both bar and line series
+ * on the same visualization. Supports biaxial charts, customization options,
+ * and extensive interaction capabilities.
+ * 
+ * @interface ComboChartProps
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ */
 interface ComboChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Array of data objects for chart rendering */
   data: Record<string, any>[];
+  /** Key name for X-axis values */
   index: string;
+  /** Whether to show only start/end X-axis labels */
   startEndOnly?: boolean;
+  /** Whether to show X-axis */
   showXAxis?: boolean;
+  /** Label for X-axis */
   xAxisLabel?: string;
+  /** Whether to display grid lines */
   showGridLines?: boolean;
+  /** Interval type for X-axis ticks */
   intervalType?: "preserveStartEnd" | "equidistantPreserveStart";
+  /** Whether to display interactive legend */
   showLegend?: boolean;
+  /** Whether to show tooltips on hover */
   showTooltip?: boolean;
+  /** Callback for chart interactions */
   onValueChange?: (value: ComboChartEventProps) => void;
+  /** Whether to enable legend scrolling */
   enableLegendSlider?: boolean;
+  /** Legend positioning */
   legendPosition?: "left" | "center" | "right";
+  /** Minimum gap between X-axis ticks */
   tickGap?: number;
+  /** Whether to enable biaxial chart with separate Y-axes */
   enableBiaxial?: boolean;
+  /** Callback for tooltip events */
   tooltipCallback?: (tooltipCallbackContent: TooltipProps) => void;
+  /** Custom tooltip component */
   customTooltip?: React.ComponentType<TooltipProps>;
+  /** Configuration for bar chart series */
   barSeries: ChartSeries & {
+    /** Bar chart type (default or stacked) */
     type?: "default" | "stacked";
   };
+  /** Configuration for line chart series */
   lineSeries?: ChartSeries & {
+    /** Whether to connect null values */
     connectNulls?: boolean;
   };
 }
 
+/**
+ * A combination chart component that displays both bar and line series.
+ * 
+ * Built on Recharts (https://recharts.org/), this component combines bar charts
+ * and line charts in a single visualization. Supports biaxial charts with separate
+ * Y-axes, interactive legends, customizable tooltips, and extensive styling options.
+ * Perfect for displaying related metrics with different scales or units.
+ *
+ * @param data - Array of data objects for chart rendering
+ * @param index - Key name for X-axis values
+ * @param barSeries - Configuration for bar chart series
+ * @param lineSeries - Configuration for line chart series
+ * @param showLegend - Whether to display interactive legend
+ * @param showTooltip - Whether to show tooltips on hover
+ * @param showGridLines - Whether to display grid lines
+ * @param showXAxis - Whether to show X-axis
+ * @param startEndOnly - Whether to show only start/end X-axis labels
+ * @param tickGap - Minimum gap between X-axis ticks
+ * @param xAxisLabel - Label for X-axis
+ * @param intervalType - Interval type for X-axis ticks
+ * @param enableBiaxial - Whether to enable biaxial chart with separate Y-axes
+ * @param onValueChange - Callback for chart interactions
+ * @param enableLegendSlider - Whether to enable legend scrolling
+ * @param customTooltip - Custom tooltip component
+ * @param tooltipCallback - Callback for tooltip events
+ * @param legendPosition - Legend positioning (left, center, right)
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic combo chart with bars and lines
+ * <ComboChart
+ *   data={[
+ *     { month: "Jan", sales: 1200, visitors: 800 },
+ *     { month: "Feb", sales: 1800, visitors: 1200 },
+ *     { month: "Mar", sales: 1600, visitors: 1000 }
+ *   ]}
+ *   index="month"
+ *   barSeries={{
+ *     categories: ["sales"],
+ *     valueFormatter: (value) => `$${value}`
+ *   }}
+ *   lineSeries={{
+ *     categories: ["visitors"],
+ *     valueFormatter: (value) => `${value} visitors`
+ *   }}
+ * />
+ *
+ * // Biaxial chart with different Y-axes
+ * <ComboChart
+ *   data={salesAndConversionData}
+ *   index="date"
+ *   barSeries={{
+ *     categories: ["revenue"],
+ *     valueFormatter: (value) => `$${value.toLocaleString()}`,
+ *     yAxisLabel: "Revenue ($)"
+ *   }}
+ *   lineSeries={{
+ *     categories: ["conversionRate"],
+ *     valueFormatter: (value) => `${value}%`,
+ *     yAxisLabel: "Conversion Rate (%)"
+ *   }}
+ *   enableBiaxial
+ *   showLegend
+ *   xAxisLabel="Date"
+ * />
+ *
+ * // Interactive chart with custom tooltip
+ * <ComboChart
+ *   data={performanceData}
+ *   index="quarter"
+ *   barSeries={{
+ *     categories: ["orders", "returns"],
+ *     valueFormatter: (value) => value.toLocaleString()
+ *   }}
+ *   lineSeries={{
+ *     categories: ["satisfaction"],
+ *     valueFormatter: (value) => `${value}/5`
+ *   }}
+ *   onValueChange={(value) => {
+ *     console.log('Selected:', value);
+ *   }}
+ *   customTooltip={CustomTooltip}
+ *   enableLegendSlider
+ *   showGridLines
+ * />
+ *
+ * // Stacked bars with trend line
+ * <ComboChart
+ *   data={budgetData}
+ *   index="category"
+ *   barSeries={{
+ *     categories: ["planned", "actual"],
+ *     valueFormatter: (value) => `$${value}K`,
+ *     yAxisLabel: "Budget ($K)",
+ *     type: "stacked"
+ *   }}
+ *   lineSeries={{
+ *     categories: ["efficiency"],
+ *     valueFormatter: (value) => `${value}%`
+ *   }}
+ *   showLegend
+ *   className="h-96"
+ * />
+ * ```
+ *
+ * @see https://recharts.org/ - Recharts charting library documentation
+ */
 const ComboChart = React.forwardRef<HTMLDivElement, ComboChartProps>(
   (props, forwardedRef) => {
     const defaultSeries = {

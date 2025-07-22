@@ -3,33 +3,79 @@
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
 import { LayoutGroup, motion } from "framer-motion";
+import { PanelLeftClose } from "lucide-react";
 import Link from "next/link";
 import React, { forwardRef, useId } from "react";
+import { Button } from "../button";
 import { ScrollArea } from "../scroll-area";
 import { TouchTarget } from "../touch-target";
 
 export function Sidebar({
   className,
+  children,
+  isCollapsed = false,
   ...props
-}: React.ComponentPropsWithoutRef<"nav">) {
+}: React.ComponentPropsWithoutRef<"nav"> & {
+  isCollapsed?: boolean;
+}) {
   return (
-    <nav
+    <motion.nav
       {...props}
-      className={clsx(className, "flex h-full min-h-0 flex-col")}
-    />
+      className={clsx(
+        className,
+        "flex h-full min-h-0 flex-col transition-all duration-200"
+      )}
+      animate={{ width: isCollapsed ? "3rem" : "16rem" }}
+      initial={false}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+    >
+      {children}
+    </motion.nav>
+  );
+}
+
+export function SidebarToggle({
+  className,
+  isCollapsed,
+  onToggle,
+  ...props
+}: React.ComponentPropsWithoutRef<"button"> & {
+  isCollapsed?: boolean;
+  onToggle?: () => void;
+}) {
+  return (
+    <Button
+      {...props}
+      onClick={onToggle}
+      variant="ghost"
+      size="icon-sm"
+      className={clsx(className)}
+      aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+    >
+      <PanelLeftClose
+        size={16}
+        className={clsx("transition-transform duration-200", {
+          "rotate-180": isCollapsed,
+        })}
+      />
+    </Button>
   );
 }
 
 export function SidebarHeader({
   className,
+  isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  isCollapsed?: boolean;
+}) {
   return (
     <div
       {...props}
       className={clsx(
         className,
-        "flex flex-col border-b border-zinc-950/5 p-4 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5"
+        "flex flex-col border-b border-zinc-950/5 dark:border-white/5 transition-all duration-200",
+        "[&>[data-slot=section]+[data-slot=section]]:mt-2.5"
       )}
     />
   );
@@ -37,12 +83,18 @@ export function SidebarHeader({
 
 export function SidebarBody({
   className,
+  isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  isCollapsed?: boolean;
+}) {
   return (
     <ScrollArea
       className={clsx(className, "flex-1")}
-      viewportClassName="p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8"
+      viewportClassName={clsx(
+        "transition-all duration-200 [&>[data-slot=section]+[data-slot=section]]:mt-8",
+        isCollapsed ? "p-2" : "p-4"
+      )}
       {...props}
     />
   );
@@ -50,14 +102,19 @@ export function SidebarBody({
 
 export function SidebarFooter({
   className,
+  isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  isCollapsed?: boolean;
+}) {
   return (
     <div
       {...props}
       className={clsx(
         className,
-        "flex flex-col border-t border-zinc-950/5 p-4 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5"
+        "flex flex-col border-t border-zinc-950/5 dark:border-white/5 transition-all duration-200",
+        isCollapsed ? "p-2" : "p-4",
+        "[&>[data-slot=section]+[data-slot=section]]:mt-2.5"
       )}
     />
   );
@@ -82,8 +139,13 @@ export function SidebarSection({
 
 export function SidebarDivider({
   className,
+  isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"hr">) {
+}: React.ComponentPropsWithoutRef<"hr"> & {
+  isCollapsed?: boolean;
+}) {
+  if (isCollapsed) return null;
+
   return (
     <hr
       {...props}
@@ -110,8 +172,13 @@ export function SidebarSpacer({
 
 export function SidebarHeading({
   className,
+  isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"h3">) {
+}: React.ComponentPropsWithoutRef<"h3"> & {
+  isCollapsed?: boolean;
+}) {
+  if (isCollapsed) return null;
+
   return (
     <h3
       {...props}
@@ -128,8 +195,14 @@ export const SidebarItem = forwardRef(function SidebarItem(
     current,
     className,
     children,
+    isCollapsed,
     ...props
-  }: { current?: boolean; className?: string; children: React.ReactNode } & (
+  }: {
+    current?: boolean;
+    className?: string;
+    children: React.ReactNode;
+    isCollapsed?: boolean;
+  } & (
     | Omit<Headless.ButtonProps, "as" | "className">
     | Omit<Headless.ButtonProps<typeof Link>, "as" | "className">
   ),
@@ -137,7 +210,8 @@ export const SidebarItem = forwardRef(function SidebarItem(
 ) {
   const classes = clsx(
     // Base
-    "flex w-full items-center gap-3 rounded-lg px-2 py-2.5 text-left text-base/6 font-medium text-zinc-950 sm:py-2 sm:text-sm/5",
+    "flex w-full items-center gap-3 rounded-lg text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 transition-all duration-200",
+    isCollapsed ? "px-2 py-2 justify-center" : "px-2 py-2.5 sm:py-2",
     // Leading icon/icon-only
     "*:data-[slot=icon]:size-6 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:fill-zinc-500 sm:*:data-[slot=icon]:size-5",
     // Trailing icon (down chevron or similar)
@@ -159,7 +233,7 @@ export const SidebarItem = forwardRef(function SidebarItem(
 
   return (
     <span className={clsx(className, "relative")}>
-      {current && (
+      {current && !isCollapsed && (
         <motion.span
           layoutId="current-indicator"
           className="absolute inset-y-2 -left-4 w-0.5 rounded-full bg-zinc-950 dark:bg-white"
@@ -172,6 +246,9 @@ export const SidebarItem = forwardRef(function SidebarItem(
           className={classes}
           data-current={current ? "true" : undefined}
           ref={ref}
+          title={
+            isCollapsed && typeof children === "string" ? children : undefined
+          }
         >
           <TouchTarget>{children}</TouchTarget>
         </Headless.CloseButton>
@@ -181,6 +258,9 @@ export const SidebarItem = forwardRef(function SidebarItem(
           className={clsx("cursor-default", classes)}
           data-current={current ? "true" : undefined}
           ref={ref}
+          title={
+            isCollapsed && typeof children === "string" ? children : undefined
+          }
         >
           <TouchTarget>{children}</TouchTarget>
         </Headless.Button>
@@ -191,7 +271,19 @@ export const SidebarItem = forwardRef(function SidebarItem(
 
 export function SidebarLabel({
   className,
+  isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"span">) {
-  return <span {...props} className={clsx(className, "truncate")} />;
+}: React.ComponentPropsWithoutRef<"span"> & {
+  isCollapsed?: boolean;
+}) {
+  return (
+    <span
+      {...props}
+      className={clsx(
+        className,
+        "truncate transition-opacity duration-200",
+        isCollapsed && "opacity-0 w-0 overflow-hidden"
+      )}
+    />
+  );
 }
