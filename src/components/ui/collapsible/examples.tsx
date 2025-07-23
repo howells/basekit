@@ -7,9 +7,9 @@ import { ChevronDown, ChevronRight, Info, Settings, HelpCircle } from "lucide-re
 // Default collapsible
 export const DefaultExample = () => (
   <Collapsible>
-    <CollapsibleTrigger>What is StencilUI?</CollapsibleTrigger>
+    <CollapsibleTrigger>What is PatternMode?</CollapsibleTrigger>
     <CollapsibleContent>
-      StencilUI is a modern React component library built on Base UI primitives with Tremor-inspired styling.
+      PatternMode is a modern React component library built on Base UI primitives with Tremor-inspired styling.
     </CollapsibleContent>
   </Collapsible>
 );
@@ -44,13 +44,13 @@ export const NestedContentExample = () => (
     <CollapsibleTrigger>Installation Guide</CollapsibleTrigger>
     <CollapsibleContent>
       <div className="space-y-3">
-        <p>Install StencilUI in your project:</p>
+        <p>Install PatternMode in your project:</p>
         <code className="block bg-zinc-100 dark:bg-zinc-800 p-2 rounded text-sm">
-          pnpm add stencilui
+          pnpm add patternmode
         </code>
         <p>Then import components as needed:</p>
         <code className="block bg-zinc-100 dark:bg-zinc-800 p-2 rounded text-sm">
-          {`import { Button } from "stencilui"`}
+          {`import { Button } from "patternmode"}`}
         </code>
       </div>
     </CollapsibleContent>
@@ -95,7 +95,7 @@ export const FaqExample = () => (
       <CollapsibleTrigger className="text-left w-full">
         <div className="flex items-center gap-2">
           <HelpCircle className="h-4 w-4" />
-          How do I get started with StencilUI?
+          How do I get started with PatternMode?
         </div>
       </CollapsibleTrigger>
       <CollapsibleContent>
@@ -110,7 +110,7 @@ export const FaqExample = () => (
       <CollapsibleTrigger className="text-left w-full">
         <div className="flex items-center gap-2">
           <HelpCircle className="h-4 w-4" />
-          Is StencilUI accessible?
+          Is PatternMode accessible?
         </div>
       </CollapsibleTrigger>
       <CollapsibleContent>
@@ -130,7 +130,7 @@ export const FaqExample = () => (
       </CollapsibleTrigger>
       <CollapsibleContent>
         <p className="pl-6 text-sm text-zinc-600 dark:text-zinc-400">
-          Absolutely! StencilUI uses Tailwind CSS and supports full customization through 
+          Absolutely! PatternMode uses Tailwind CSS and supports full customization through
           className props, CSS variables, and theme configuration.
         </p>
       </CollapsibleContent>

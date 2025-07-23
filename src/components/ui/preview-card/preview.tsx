@@ -17,12 +17,12 @@ export function Example() {
     <div className="flex justify-center p-8">
       <PreviewCard>
         <PreviewCardTrigger>
-          @stencilui
+          @patternmode
         </PreviewCardTrigger>
         <PreviewCardContent>
           <PreviewCardArrow />
           <PreviewCardHeader>
-            <PreviewCardTitle>StencilUI Component Library</PreviewCardTitle>
+            <PreviewCardTitle>PatternMode Component Library</PreviewCardTitle>
             <PreviewCardDescription>
               A modern React component library built with Tailwind CSS and Base UI primitives.
               Features accessible components with beautiful designs and smooth animations.

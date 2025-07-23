@@ -91,7 +91,7 @@ interface CodeBlockProps {
  *
  * // Shell commands
  * <CodeBlock language="bash">
- *   {`npm install @stencilui/react
+ *   {`npm install @patternmode/react
  * npm run dev
  * npm run build`}
  * </CodeBlock>

@@ -21,7 +21,7 @@
  * 
  * // Custom labels and icons
  * <CopyButton
- *   text="npm install @stencilui/react"
+ *   text="npm install @patternmode/react"
  *   copyLabel="Copy Command"
  *   copiedLabel="Command Copied!"
  *   copyIcon={Terminal}
@@ -100,7 +100,7 @@ interface CopyButtonProps
  * 
  * // Custom labels and icons
  * <CopyButton
- *   text="npm install @stencilui/react"
+ *   text="npm install @patternmode/react"
  *   copyLabel="Copy Command"
  *   copiedLabel="Command Copied!"
  *   copyIcon={Terminal}
