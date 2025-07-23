@@ -1,26 +1,32 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import { TabNavigation, TabNavigationLink } from "./tab-navigation";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { Basic,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "tab-navigation",
-  name: "TabNavigation",
-  description:
-    "A navigation component for switching between different views or sections.",
-  category: "ui",
-  importStatement:
-    'import { TabNavigation } from "@/components/ui/tab-navigation"',
-  componentId: "TabNavigation",
-  props: [],
+  name: "Tab Navigation",
+  description: "A navigation component for switching between different views or sections.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { TabNavigation, TabNavigationLink } from "@/components/ui/tab-navigation/tab-navigation";`,
+  componentId: "TabNavigationExample",
+  props: [
+    {
+      name: "className",
+      type: "string",
+      description: "Additional CSS classes.",
+    },
+  ],
   examples: [
     {
-      id: "basic",
+      id: "tab-navigation",
       title: "Basic Tab Navigation",
-      description: "Simple tab navigation with links",
-      code: `<TabNavigation>
-  <TabNavigationLink href="#home" current>Home</TabNavigationLink>
-  <TabNavigationLink href="#about">About</TabNavigationLink>
-  <TabNavigationLink href="#contact">Contact</TabNavigationLink>
-</TabNavigation>`,
+      description: "A navigation component for switching between different views or sections.",
+      code: jsxToString(<Basic />),
+      render: Basic,
     },
   ],
 };

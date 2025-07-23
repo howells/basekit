@@ -11,7 +11,8 @@ export interface ComponentExample {
   title: string;
   description: string;
   code: string;
-  // Examples are handled by separate example.tsx files
+  // Optional render function for live preview
+  render?: () => React.ReactElement;
 }
 
 /**

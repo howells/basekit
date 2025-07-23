@@ -1,48 +1,57 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import {
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { Basic,  } from "./examples";
+
+export const componentConfig: ComponentConfig = {
+  id: "table",
+  name: "Table",
+  description: "A data table component for displaying tabular data with headers and rows.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeaderCell,
   TableRow,
-} from "./table";
-
-export const componentConfig: ComponentConfig = {
-  id: "table",
-  name: "Table",
-  description:
-    "A data table component for displaying tabular data with headers and rows.",
-  category: "ui",
-  importStatement: 'import { Table } from "@/components/ui/table"',
-  componentId: "Table",
-  props: [],
+} from "@/components/ui/table/table";`,
+  componentId: "TableExample",
+  props: [
+    {
+      name: "bleed",
+      type: "boolean",
+      defaultValue: false,
+      description: "Remove padding from table cells.",
+    },
+    {
+      name: "dense",
+      type: "boolean", 
+      defaultValue: false,
+      description: "Use a more compact table layout.",
+    },
+    {
+      name: "striped",
+      type: "boolean",
+      defaultValue: false,
+      description: "Add alternating row colors.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Additional CSS classes.",
+    },
+  ],
   examples: [
     {
-      id: "basic",
+      id: "table",
       title: "Basic Table",
-      description: "A simple data table",
-      code: `<Table>
-  <TableHead>
-    <TableRow>
-      <TableHeaderCell>Name</TableHeaderCell>
-      <TableHeaderCell>Email</TableHeaderCell>
-      <TableHeaderCell>Role</TableHeaderCell>
-    </TableRow>
-  </TableHead>
-  <TableBody>
-    <TableRow>
-      <TableCell>John Doe</TableCell>
-      <TableCell>john@example.com</TableCell>
-      <TableCell>Admin</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>Jane Smith</TableCell>
-      <TableCell>jane@example.com</TableCell>
-      <TableCell>User</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>`,
+      description: "A data table component for displaying tabular data with headers and rows.",
+      code: jsxToString(<Basic />),
+      render: Basic,
     },
   ],
 };

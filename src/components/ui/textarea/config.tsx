@@ -3,114 +3,137 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "textarea",
   name: "Textarea",
-  description: "A textarea component for multi-line text input with error state support and accessible styling.",
+  description: "Displays a form textarea or a component that looks like a textarea.",
   category: "inputs" as const,
-  badge: "Input",
-  importStatement: `import { Textarea } from "@/components/ui/textarea";`,
+  badge: "Inputs",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Textarea } from "@/components/ui/textarea/textarea";`,
   componentId: "TextareaExample",
   props: [
     {
       name: "placeholder",
       type: "string",
-      defaultValue: "Enter your text here...",
-      description: "Placeholder text for the textarea.",
-    },
-    {
-      name: "rows",
-      type: "number",
-      defaultValue: 3,
-      description: "Number of visible text lines.",
+      description: "Placeholder text",
+      defaultValue: "Type your message here.",
     },
     {
       name: "disabled",
       type: "boolean",
+      description: "Whether the textarea is disabled",
       defaultValue: false,
-      description: "Whether the textarea is disabled.",
     },
     {
-      name: "hasError",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the textarea has an error state.",
-    },
-    {
-      name: "resize",
-      type: "select",
-      options: ["none", "both", "horizontal", "vertical"],
-      defaultValue: "vertical",
-      description: "Controls how the textarea can be resized.",
+      name: "rows",
+      type: "number",
+      description: "Number of visible text lines",
+      defaultValue: 4,
     },
   ],
   examples: [
     {
       id: "default",
-      title: "Default",
-      description: "Basic textarea for multi-line text input.",
-      code: `<Textarea placeholder="Enter your message..." />`,
-    },
-    {
-      id: "with-rows",
-      title: "With Rows",
-      description: "Textarea with specific number of visible rows.",
-      code: `<Textarea
-  placeholder="Write a detailed description..."
-  rows={5}
-/>`,
-    },
-    {
-      id: "disabled",
-      title: "Disabled",
-      description: "Disabled textarea that cannot be edited.",
-      code: `<Textarea
-  placeholder="This field is disabled"
-  disabled
-  defaultValue="This content cannot be edited"
-/>`,
-    },
-    {
-      id: "error-state",
-      title: "Error State",
-      description: "Textarea with error styling.",
-      code: `<Textarea
-  placeholder="This field has an error"
-  hasError
-  defaultValue="Invalid content"
-/>`,
-    },
-    {
-      id: "resize-options",
-      title: "Resize Control",
-      description: "Textarea with different resize behaviors.",
-      code: `<div className="space-y-4">
-  <Textarea
-    placeholder="Cannot be resized"
-    className="resize-none"
-  />
-  <Textarea
-    placeholder="Resize horizontally only"
-    className="resize-x"
-  />
-  <Textarea
-    placeholder="Resize vertically only (default)"
-    className="resize-y"
-  />
-</div>`,
+      title: "Basic Textarea",
+      description: "A simple textarea input",
+      code: `<Textarea placeholder="Type your message here." />`,
     },
     {
       id: "with-label",
-      title: "With Label",
-      description: "Textarea with associated label and description.",
+      title: "Textarea with Label",
+      description: "Textarea with a form label",
       code: `<div className="space-y-2">
-  <label htmlFor="feedback" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-    Feedback
+  <label htmlFor="message" className="text-sm font-medium">
+    Message
   </label>
-  <Textarea
-    id="feedback"
-    placeholder="Please share your thoughts..."
+  <Textarea 
+    id="message" 
+    placeholder="Enter your message" 
+    rows={6}
+  />
+</div>`,
+    },
+    {
+      id: "disabled",
+      title: "Disabled Textarea",
+      description: "Textarea in disabled state",
+      code: `<Textarea 
+  placeholder="This textarea is disabled" 
+  disabled 
+  defaultValue="You cannot edit this content."
+/>`,
+    },
+    {
+      id: "with-hint",
+      title: "Textarea with Hint Text",
+      description: "Textarea with helper text below",
+      code: `<div className="space-y-2">
+  <label htmlFor="bio" className="text-sm font-medium">
+    Bio
+  </label>
+  <Textarea 
+    id="bio" 
+    placeholder="Tell us about yourself"
     rows={4}
   />
-  <p className="text-xs text-zinc-500">Your feedback helps us improve our service.</p>
+  <p className="text-sm text-gray-600">
+    Write a short bio. This will be displayed on your profile.
+  </p>
 </div>`,
+    },
+    {
+      id: "character-count",
+      title: "With Character Count",
+      description: "Textarea with character limit indicator",
+      code: `<div className="space-y-2">
+  <label htmlFor="tweet" className="text-sm font-medium">
+    Compose Tweet
+  </label>
+  <Textarea 
+    id="tweet" 
+    placeholder="What's happening?"
+    rows={3}
+    maxLength={280}
+  />
+  <div className="flex justify-between text-sm">
+    <span className="text-gray-600">Max 280 characters</span>
+    <span className="text-gray-600">0/280</span>
+  </div>
+</div>`,
+    },
+    {
+      id: "form-example",
+      title: "In a Form",
+      description: "Textarea as part of a complete form",
+      code: `<form className="space-y-4">
+  <div className="space-y-2">
+    <label htmlFor="name" className="text-sm font-medium">
+      Name
+    </label>
+    <input 
+      id="name" 
+      type="text" 
+      placeholder="Your name"
+      className="w-full rounded-md border border-gray-300 px-3 py-2"
+    />
+  </div>
+  <div className="space-y-2">
+    <label htmlFor="feedback" className="text-sm font-medium">
+      Feedback
+    </label>
+    <Textarea 
+      id="feedback" 
+      placeholder="Share your thoughts..."
+      rows={5}
+    />
+  </div>
+  <button 
+    type="submit"
+    className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+  >
+    Submit Feedback
+  </button>
+</form>`,
     },
   ],
 };

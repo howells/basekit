@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithTitleExample, CompactExample, NoPaddingExample, CustomStylingExample } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "card",
@@ -49,48 +51,37 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic card with default styling.",
-      code: `<Card>
-  <p>This is a simple card with some content.</p>
-</Card>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-title",
       title: "With Title",
       description: "Card with a title and content.",
-      code: `<Card>
-  <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-  <p>This card includes a title and descriptive content below it.</p>
-</Card>`,
+      code: jsxToString(<WithTitleExample />),
+      render: WithTitleExample,
     },
     {
       id: "compact",
       title: "Compact",
       description: "Card with reduced padding using the padding prop.",
-      code: `<Card padding={4}>
-  <p>This is a more compact card with less padding.</p>
-</Card>`,
+      code: jsxToString(<CompactExample />),
+      render: CompactExample,
     },
     {
       id: "no-padding",
       title: "No Padding",
       description:
         "Card with no internal padding, useful for full-width content.",
-      code: `<Card padding={0}>
-  <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
-    <h3 className="font-semibold">Header</h3>
-  </div>
-  <div className="p-6">
-    <p>Content with custom padding structure.</p>
-  </div>
-</Card>`,
+      code: jsxToString(<NoPaddingExample />),
+      render: NoPaddingExample,
     },
     {
       id: "custom-styling",
       title: "Custom Styling",
       description: "Card with custom background and border.",
-      code: `<Card className="bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800">
-  <p>This card has custom styling with a blue theme.</p>
-</Card>`,
+      code: jsxToString(<CustomStylingExample />),
+      render: CustomStylingExample,
     },
   ],
 };

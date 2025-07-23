@@ -1,32 +1,57 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import { Progress } from "./progress";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { BasicProgress,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "progress",
   name: "Progress",
   description: "A progress bar component showing completion status.",
-  category: "ui",
-  importStatement: 'import { Progress } from "@/components/ui/progress"',
-  componentId: "Progress",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Progress } from "@/components/ui/progress/progress";`,
+  componentId: "ProgressExample",
   props: [
     {
       name: "value",
       type: "number",
       defaultValue: 50,
-      description: "The progress value as a percentage (0-100)",
+      description: "The progress value (0-100).",
+    },
+    {
+      name: "variant",
+      type: "select",
+      options: ["default", "success", "warning", "error"],
+      defaultValue: "default",
+      description: "The visual style variant.",
+    },
+    {
+      name: "showAnimation",
+      type: "boolean",
+      defaultValue: true,
+      description: "Show animation on progress change.",
+    },
+    {
+      name: "showValue",
+      type: "boolean",
+      defaultValue: false,
+      description: "Show the progress value as text.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Additional CSS classes.",
     },
   ],
   examples: [
     {
-      id: "basic",
+      id: "progress",
       title: "Basic Progress",
-      description: "Simple progress bars with different values",
-      code: `<div className="space-y-2">
-  <Progress value={25} />
-  <Progress value={50} />
-  <Progress value={75} />
-  <Progress value={100} />
-</div>`,
+      description: "A progress bar component showing completion status.",
+      code: jsxToString(<BasicProgress />),
+      render: BasicProgress,
     },
   ],
 };

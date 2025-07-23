@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, PieVariantExample, WithLabelExample, CustomColorsExample, InteractiveExample, SmallSizeExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "donut-chart",

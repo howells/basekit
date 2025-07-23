@@ -1,4 +1,5 @@
 // Tremor Tabs [v1.0.0] - Base UI
+"use client";
 
 import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
 import React from "react";
@@ -35,7 +36,7 @@ const tabsVariants = tv({
       solid: {
         list: [
           // base - button collection style
-          "flex items-center justify-start gap-2",
+          "inline-flex items-center justify-start bg-zinc-100 dark:bg-zinc-900 p-1 rounded-lg",
         ],
         tab: [
           // For solid variant, we'll use Button component instead of these styles
@@ -50,13 +51,13 @@ const tabsVariants = tv({
       line: {
         list: [
           // base - Geist/line style with bottom border
-          "relative flex items-center justify-start",
+          "relative flex items-center justify-start gap-x-4",
           // bottom border (divider)
           "border-b border-zinc-200 dark:border-zinc-800",
         ],
         tab: [
           // base
-          "relative inline-flex h-12 items-center justify-center border-0 px-4 text-sm font-medium whitespace-nowrap transition-all",
+          "relative inline-flex h-12 items-center justify-center border-0 text-sm font-medium whitespace-nowrap transition-all",
           // text color
           "text-zinc-600 dark:text-zinc-400",
           // hover
@@ -70,8 +71,8 @@ const tabsVariants = tv({
           "focus-visible:text-zinc-900 dark:focus-visible:text-zinc-50",
         ],
         indicator: [
-          // line indicator - bottom line
-          "bottom-0 left-0 h-0.5 w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)]",
+          // line indicator - bottom line that sits on the divider
+          "-bottom-px left-0 h-px w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] z-10",
           "bg-zinc-900 dark:bg-zinc-50",
         ],
       },
@@ -211,11 +212,14 @@ const TabsList = React.forwardRef<
       >
         <TabsListVariantContext.Provider value={variant}>
           {children}
-          <BaseTabs.Indicator
-            className={cx(
-              tabsVariants({ variant, hideDivider, hideBorder }).indicator()
-            )}
-          />
+          {variant === "line" && (
+            <BaseTabs.Indicator
+              key={`${variant}-indicator`}
+              className={cx(
+                tabsVariants({ variant, hideDivider, hideBorder }).indicator()
+              )}
+            />
+          )}
         </TabsListVariantContext.Provider>
       </BaseTabs.List>
     );
@@ -255,9 +259,16 @@ const TabsTrigger = React.forwardRef<
         render={(tabProps, state) => (
           <Button
             {...tabProps}
-            variant={state.selected ? "default" : "secondary"}
-            size="sm"
-            className={cx("data-[disabled]:pointer-events-none", className)}
+            variant={state.selected ? "outline" : "ghost"}
+            className={cx(
+              "data-[disabled]:pointer-events-none",
+              "inset-ring-0 shadow-none",
+              state.selected && "hover:bg-white dark:hover:bg-zinc-950",
+              className,
+              {
+                "opacity-50 hover:opacity-100": !state.selected,
+              }
+            )}
           >
             {children}
           </Button>

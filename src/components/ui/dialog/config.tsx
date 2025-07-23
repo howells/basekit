@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithFormExample, ConfirmationExample, ControlledExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "dialog",
@@ -71,103 +73,51 @@ export const componentConfig: ComponentConfig = {
       id: "with-form",
       title: "With Form",
       description: "Dialog containing a form with input fields.",
-      code: `<Dialog>
-  <DialogTrigger render={<Button />}>
-    Edit Profile
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Edit Profile</DialogTitle>
-      <DialogDescription>
-        Make changes to your profile here. Click save when you're done.
-      </DialogDescription>
-    </DialogHeader>
-    <div className="grid gap-4 py-4">
-      <div className="grid grid-cols-4 items-center gap-4">
-        <label htmlFor="name" className="text-right">
-          Name
-        </label>
-        <Input
-          id="name"
-          defaultValue="John Doe"
-          className="col-span-3"
-        />
-      </div>
-      <div className="grid grid-cols-4 items-center gap-4">
-        <label htmlFor="email" className="text-right">
-          Email
-        </label>
-        <Input
-          id="email"
-          defaultValue="john@example.com"
-          className="col-span-3"
-        />
-      </div>
-    </div>
-    <DialogFooter>
-      <DialogClose render={<Button variant="secondary" />}>
-        Cancel
-      </DialogClose>
-      <Button>Save changes</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+      code: jsxToString(<WithFormExample />),
+      render: WithFormExample,
     },
     {
       id: "confirmation",
       title: "Confirmation",
       description: "Dialog for confirming destructive actions.",
-      code: `<Dialog>
-  <DialogTrigger render={<Button variant="destructive" />}>
-    Delete Account
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Are you absolutely sure?</DialogTitle>
-      <DialogDescription>
-        This action cannot be undone. This will permanently delete your
-        account and remove your data from our servers.
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <DialogClose render={<Button variant="secondary" />}>
-        Cancel
-      </DialogClose>
-      <Button variant="destructive">Delete Account</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+      code: jsxToString(<ConfirmationExample />),
+      render: ConfirmationExample,
     },
     {
       id: "controlled",
       title: "Controlled",
       description: "Dialog with controlled open state.",
-      code: `const [open, setOpen] = useState(false);
+      code: `const ControlledExample = () => {
+  const [open, setOpen] = useState(false);
 
-<Dialog open={open} onOpenChange={setOpen}>
-  <DialogTrigger render={<Button />}>
-    Open Controlled Dialog
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Controlled Dialog</DialogTitle>
-      <DialogDescription>
-        This dialog's open state is controlled externally.
-      </DialogDescription>
-    </DialogHeader>
-    <div className="py-4">
-      <p>Current state: {open ? 'Open' : 'Closed'}</p>
-      <Button onClick={() => setOpen(false)}>
-        Close from inside
-      </Button>
-    </div>
-    <DialogFooter>
-      <DialogClose render={<Button variant="secondary" />}>
-        Close
-      </DialogClose>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger render={<Button />}>
+        Open Controlled Dialog
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Controlled Dialog</DialogTitle>
+          <DialogDescription>
+            This dialog's open state is controlled externally.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <p>Current state: {open ? 'Open' : 'Closed'}</p>
+          <Button onClick={() => setOpen(false)}>
+            Close from inside
+          </Button>
+        </div>
+        <DialogFooter>
+          <DialogClose render={<Button variant="secondary" />}>
+            Close
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};`,
+      render: ControlledExample,
     },
   ],
 };

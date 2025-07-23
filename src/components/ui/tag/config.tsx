@@ -1,155 +1,121 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import { Tag } from "./tag";
+import type { ComponentConfig } from "@/lib/component-config-types";
 
 export const componentConfig: ComponentConfig = {
   id: "tag",
   name: "Tag",
-  description:
-    "A compact element for displaying labels, categories, or metadata with optional avatar, count, and remove functionality.",
-  category: "ui",
-  importStatement: 'import { Tag } from "@/components/ui/tag"',
+  description: "A label or keyword used to categorize or describe content.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Tag } from "@/components/ui/tag/tag";`,
   componentId: "TagExample",
   props: [
     {
-      name: "value",
-      type: "string",
-      required: true,
-      description: "The main text content of the tag",
-      defaultValue: "Value",
+      name: "variant",
+      type: "select",
+      description: "Tag variant",
+      options: ["default", "primary", "secondary", "success", "warning", "error"],
+      defaultValue: "default",
     },
     {
-      name: "label",
-      type: "string",
-      required: false,
-      description:
-        "Optional label text displayed before the value (e.g., 'Department', 'Location')",
-      defaultValue: "Label",
-    },
-    {
-      name: "count",
-      type: "string",
-      required: false,
-      description: "Optional count or secondary text displayed after the value",
-      defaultValue: "",
-    },
-    {
-      name: "countClassName",
-      type: "string",
-      required: false,
-      description: "Custom CSS classes for the count element",
-      defaultValue: "",
+      name: "size",
+      type: "select",
+      description: "Tag size",
+      options: ["sm", "md", "lg"],
+      defaultValue: "md",
     },
     {
       name: "removable",
       type: "boolean",
-      required: false,
-      description: "Whether the tag can be removed with a close button",
-      defaultValue: true,
-    },
-    {
-      name: "avatarSrc",
-      type: "select",
-      required: false,
-      description: "Avatar image source URL",
-      defaultValue: "",
-      options: [
-        "",
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=face",
-      ],
-    },
-    {
-      name: "avatarAlt",
-      type: "string",
-      required: false,
-      description: "Avatar image alt text",
-      defaultValue: "Avatar",
-    },
-    {
-      name: "avatarInitials",
-      type: "string",
-      required: false,
-      description: "Avatar initials to display when no image is provided",
-      defaultValue: "JD",
-    },
-    {
-      name: "removeAriaLabel",
-      type: "string",
-      required: false,
-      description: "Aria label for the remove button (defaults to 'Remove')",
-      defaultValue: "Remove",
+      description: "Whether the tag can be removed",
+      defaultValue: false,
     },
   ],
   examples: [
     {
-      id: "basic",
+      id: "default",
       title: "Basic Tags",
-      description: "Simple tags with just values",
-      code: `<div className="flex gap-2">
-  <Tag value="Design" />
-  <Tag value="Development" />
-  <Tag value="Marketing" />
+      description: "Simple tags in different variants",
+      code: `<div className="flex flex-wrap gap-2">
+  <Tag>Default</Tag>
+  <Tag variant="primary">Primary</Tag>
+  <Tag variant="secondary">Secondary</Tag>
+  <Tag variant="success">Success</Tag>
+  <Tag variant="warning">Warning</Tag>
+  <Tag variant="error">Error</Tag>
 </div>`,
     },
     {
-      id: "with-labels",
-      title: "Tags with Labels",
-      description: "Tags with label and value pairs",
-      code: `<div className="flex gap-2">
-  <Tag label="Department" value="Engineering" />
-  <Tag label="Location" value="San Francisco" />
-  <Tag label="Team" value="Frontend" />
-</div>`,
-    },
-    {
-      id: "with-counts",
-      title: "Tags with Counts",
-      description: "Tags displaying counts or additional information",
-      code: `<div className="flex gap-2">
-  <Tag value="Issues" count={12} />
-  <Tag value="Pull Requests" count="3 open" />
-  <Tag value="Contributors" count={45} />
+      id: "sizes",
+      title: "Different Sizes",
+      description: "Tags in various sizes",
+      code: `<div className="flex items-center gap-2">
+  <Tag size="sm">Small</Tag>
+  <Tag size="md">Medium</Tag>
+  <Tag size="lg">Large</Tag>
 </div>`,
     },
     {
       id: "removable",
       title: "Removable Tags",
-      description: "Tags that can be removed with a close button",
-      code: `<div className="flex gap-2">
-  <Tag value="React" removable onRemove={() => console.log('Removed React')} />
-  <Tag value="TypeScript" removable onRemove={() => console.log('Removed TypeScript')} />
-  <Tag value="Next.js" removable onRemove={() => console.log('Removed Next.js')} />
+      description: "Tags with remove functionality",
+      code: `<div className="flex flex-wrap gap-2">
+  <Tag removable onRemove={() => console.log('Tag removed')}>
+    JavaScript
+  </Tag>
+  <Tag removable variant="primary">
+    React
+  </Tag>
+  <Tag removable variant="secondary">
+    TypeScript
+  </Tag>
 </div>`,
     },
     {
-      id: "with-avatars",
-      title: "Tags with Avatars",
-      description: "User tags with avatar images or initials",
-      code: `<div className="flex gap-2">
-  <Tag value="John Doe" avatar={{ initials: "JD" }} />
-  <Tag value="Jane Smith" avatar={{ initials: "JS" }} removable />
-  <Tag value="Alex Johnson" avatar={{ initials: "AJ" }} count="Admin" />
+      id: "with-icons",
+      title: "Tags with Icons",
+      description: "Tags containing icons",
+      code: `<div className="flex flex-wrap gap-2">
+  <Tag>
+    <Hash className="mr-1 h-3 w-3" />
+    trending
+  </Tag>
+  <Tag variant="primary">
+    <Star className="mr-1 h-3 w-3" />
+    featured
+  </Tag>
+  <Tag variant="success">
+    <Check className="mr-1 h-3 w-3" />
+    verified
+  </Tag>
 </div>`,
     },
     {
-      id: "complex",
-      title: "Complex Tags",
-      description: "Tags combining multiple features",
-      code: `<div className="flex gap-2">
-  <Tag
-    label="Assignee"
-    value="Sarah Wilson"
-    avatar={{ initials: "SW" }}
-    removable
-    onRemove={() => console.log('Removed assignee')}
-  />
-  <Tag
-    label="Priority"
-    value="High"
-    count="3 days left"
-    removable
-  />
+      id: "category-tags",
+      title: "Category Tags",
+      description: "Tags used for categorization",
+      code: `<div className="space-y-4">
+  <div>
+    <h4 className="mb-2 text-sm font-medium">Article Tags</h4>
+    <div className="flex flex-wrap gap-2">
+      <Tag variant="secondary">Technology</Tag>
+      <Tag variant="secondary">Web Development</Tag>
+      <Tag variant="secondary">Tutorial</Tag>
+      <Tag variant="secondary">Best Practices</Tag>
+    </div>
+  </div>
+  <div>
+    <h4 className="mb-2 text-sm font-medium">Skills</h4>
+    <div className="flex flex-wrap gap-2">
+      <Tag>React</Tag>
+      <Tag>Node.js</Tag>
+      <Tag>GraphQL</Tag>
+      <Tag>Docker</Tag>
+      <Tag>AWS</Tag>
+    </div>
+  </div>
 </div>`,
     },
   ],

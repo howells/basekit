@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithMarkerExample, NoLabelsExample, UnevenDistributionExample, ManyCategoriesExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "category-bar",
@@ -55,38 +57,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic category bar with labels.",
-      code: `<CategoryBar values={[40, 30, 20, 10]} />`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-marker",
       title: "With Marker",
       description: "Category bar with a target marker.",
-      code: `<CategoryBar
-  values={[40, 30, 20, 10]}
-  marker={{
-    value: 50,
-    tooltip: "Target: 50",
-    showAnimation: true
-  }}
-/>`,
+      code: jsxToString(<WithMarkerExample />),
+      render: WithMarkerExample,
     },
     {
       id: "no-labels",
       title: "No Labels",
       description: "Category bar without numeric labels.",
-      code: `<CategoryBar values={[25, 35, 25, 15]} showLabels={false} />`,
+      code: jsxToString(<NoLabelsExample />),
+      render: NoLabelsExample,
     },
     {
       id: "uneven-distribution",
       title: "Uneven Distribution",
       description: "Category bar with varying segment sizes.",
-      code: `<CategoryBar values={[60, 15, 15, 10]} />`,
+      code: jsxToString(<UnevenDistributionExample />),
+      render: UnevenDistributionExample,
     },
     {
       id: "many-categories",
       title: "Many Categories",
       description: "Category bar with multiple small segments.",
-      code: `<CategoryBar values={[20, 18, 16, 14, 12, 10, 8, 2]} />`,
+      code: jsxToString(<ManyCategoriesExample />),
+      render: ManyCategoriesExample,
     },
   ],
 };

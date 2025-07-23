@@ -1,5 +1,7 @@
 // Configuration data - no React imports or JSX
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, MultipleSeriesExample, StackedExample, PercentExample, VerticalExample, WithLabelsExample,  } from "./examples";
 
 // Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
@@ -114,69 +116,43 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic bar chart with sample data.",
-      code: `<BarChart
-  data={chartData}
-  index="month"
-  categories={["sales"]}
-  valueFormatter={(value) => \`$\${value.toLocaleString()}\`}
-/>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "multiple-series",
       title: "Multiple Series",
       description: "Bar chart with multiple data series.",
-      code: `<BarChart
-  data={chartData}
-  index="month"
-  categories={["sales", "profit"]}
-  valueFormatter={(value) => \`$\${value.toLocaleString()}\`}
-/>`,
+      code: jsxToString(<MultipleSeriesExample />),
+      render: MultipleSeriesExample,
     },
     {
       id: "stacked",
       title: "Stacked Bars",
       description: "Bar chart with stacked data series.",
-      code: `<BarChart
-  data={chartData}
-  index="month"
-  categories={["desktop", "mobile", "tablet"]}
-  type="stacked"
-/>`,
+      code: jsxToString(<StackedExample />),
+      render: StackedExample,
     },
     {
       id: "percent",
       title: "Percentage Chart",
       description: "Bar chart showing percentage distribution.",
-      code: `<BarChart
-  data={chartData}
-  index="month"
-  categories={["category1", "category2", "category3"]}
-  type="percent"
-/>`,
+      code: jsxToString(<PercentExample />),
+      render: PercentExample,
     },
     {
       id: "vertical",
       title: "Vertical Layout",
       description: "Bar chart with vertical orientation.",
-      code: `<BarChart
-  data={chartData}
-  index="month"
-  categories={["sales"]}
-  layout="vertical"
-  valueFormatter={(value) => \`$\${value.toLocaleString()}\`}
-/>`,
+      code: jsxToString(<VerticalExample />),
+      render: VerticalExample,
     },
     {
       id: "with-labels",
       title: "With Axis Labels",
       description: "Bar chart with custom axis labels.",
-      code: `<BarChart
-  data={chartData}
-  index="month"
-  categories={["revenue"]}
-  xAxisLabel="Time Period"
-  yAxisLabel="Revenue ($)"
-/>`,
+      code: jsxToString(<WithLabelsExample />),
+      render: WithLabelsExample,
     },
   ],
 

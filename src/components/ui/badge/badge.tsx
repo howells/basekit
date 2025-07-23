@@ -37,16 +37,21 @@ const badgeVariantsDefinition = {
       base: "px-2 py-1 text-xs",
       lg: "px-2.5 py-1.5 text-sm",
     },
+    bordered: {
+      true: "ring-1 ring-inset",
+      false: "",
+    },
   },
   defaultVariants: {
     variant: "default",
     size: "base",
+    bordered: true,
   },
 } as const;
 
 const badgeVariants = tv({
   base: cx(
-    "inline-flex items-center gap-x-1.5 whitespace-nowrap rounded-md font-medium ring-1 ring-inset"
+    "inline-flex items-center gap-x-1.5 whitespace-nowrap rounded-md font-medium"
   ),
   ...badgeVariantsDefinition,
 });
@@ -95,6 +100,10 @@ interface BadgeProps
  * // Different sizes
  * <Badge size="sm">Small</Badge>
  * <Badge size="lg">Large</Badge>
+ *
+ * // With or without border
+ * <Badge bordered={false}>No Border</Badge>
+ * <Badge bordered={true}>With Border</Badge>
  * ```
  */
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
@@ -103,6 +112,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       render = <span />,
       variant,
       size = "base",
+      bordered,
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
       children,
@@ -130,7 +140,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     };
 
     const defaultProps: useRender.ElementProps<"span"> = {
-      className: cx(badgeVariants({ variant, size })),
+      className: cx(badgeVariants({ variant, size, bordered })),
       children: renderBadgeContent(),
     };
 

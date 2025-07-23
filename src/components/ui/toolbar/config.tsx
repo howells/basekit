@@ -1,4 +1,6 @@
-import { ComponentConfig } from "@/lib/component-config-types";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { Basic,  } from "./examples";
 import {
   Toolbar,
   ToolbarButton,
@@ -10,27 +12,39 @@ export const componentConfig: ComponentConfig = {
   id: "toolbar",
   name: "Toolbar",
   description: "A container for grouping a set of controls or actions.",
-  category: "ui",
-  importStatement: 'import { Toolbar } from "@/components/ui/toolbar"',
-  componentId: "Toolbar",
-  props: [],
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import {
+  Toolbar,
+  ToolbarButton,
+  ToolbarGroup,
+  ToolbarSeparator,
+} from "@/components/ui/toolbar/toolbar";`,
+  componentId: "ToolbarExample",
+  props: [
+    {
+      name: "orientation",
+      type: "select",
+      options: ["horizontal", "vertical"],
+      defaultValue: "horizontal",
+      description: "The orientation of the toolbar.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Additional CSS classes.",
+    },
+  ],
   examples: [
     {
-      id: "basic",
+      id: "toolbar",
       title: "Basic Toolbar",
-      description: "A simple toolbar with buttons and separators",
-      code: `<Toolbar>
-  <ToolbarGroup>
-    <ToolbarButton>Cut</ToolbarButton>
-    <ToolbarButton>Copy</ToolbarButton>
-    <ToolbarButton>Paste</ToolbarButton>
-  </ToolbarGroup>
-  <ToolbarSeparator />
-  <ToolbarGroup>
-    <ToolbarButton>Undo</ToolbarButton>
-    <ToolbarButton>Redo</ToolbarButton>
-  </ToolbarGroup>
-</Toolbar>`,
+      description: "A container for grouping a set of controls or actions.",
+      code: jsxToString(<Basic />),
+      render: Basic,
     },
   ],
 };

@@ -1,8 +1,10 @@
+import { ComponentExamples } from "@/components/component-examples";
 import { ComponentHeader } from "@/components/component-header";
 import { ComponentPreview } from "@/components/component-preview";
 import { PropExplorerProvider } from "@/components/prop-explorer-context";
 import { PropExplorerContent } from "@/components/prop-explorer-controls";
 import { Inspector, InspectorBody } from "@/components/ui/inspector";
+import { Subheading } from "@/components/ui/subheading/subheading";
 import { COMPONENT_LIST, getComponentConfig } from "@/lib/component-registry";
 import { createComponentConfig } from "@/lib/config-helpers";
 import { PropMetadata } from "@/lib/prop-explorer";
@@ -27,24 +29,8 @@ async function loadComponentConfig(componentId: string, category: string) {
 
   // If no config exists, try to load from component file
   try {
-    let componentModule;
-
-    switch (category) {
-      case "ui":
-        componentModule = await import(`@/components/ui/${componentId}`);
-        break;
-      case "inputs":
-        componentModule = await import(`@/components/inputs/${componentId}`);
-        break;
-      case "forms":
-        componentModule = await import(`@/components/forms/${componentId}`);
-        break;
-      case "charts":
-        componentModule = await import(`@/components/charts/${componentId}`);
-        break;
-      default:
-        throw new Error(`Unknown category: ${category}`);
-    }
+    // All components are in the ui directory regardless of category
+    const componentModule = await import(`@/components/ui/${componentId}`);
 
     // Check if component exports a config
     if (componentModule.componentConfig) {
@@ -164,26 +150,41 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     return defaultProps;
   };
 
+  // Create a serializable version of the config without render functions
+  const serializableConfig = {
+    ...config,
+    examples:
+      config.examples?.map((example: (typeof config.examples)[number]) => ({
+        ...example,
+        // Remove render function to avoid serialization issues
+        render: undefined,
+      })) || [],
+  };
+
   return (
     <div className="h-screen flex flex-col">
       {/* Header */}
-      <ComponentHeader config={config} />
+      <ComponentHeader config={serializableConfig} />
 
       {/* Main Content - Always use Inspector layout */}
       <PropExplorerProvider defaultProps={getDefaultProps()}>
         <div className="flex flex-1 h-0">
-          {/* Main content - Live preview */}
-          <div className="flex-1 p-6">
-            <ComponentPreview
-              componentId={config.componentId || component}
-              category={category}
-            />
+          {/* Main content - Live preview and examples */}
+          <div className="flex-1">
+            <div className="space-y-8">
+              <ComponentPreview
+                componentId={config.componentId || component}
+                category={category}
+              />
+
+              <ComponentExamples componentId={component} />
+            </div>
           </div>
 
           {/* Right sidebar - Inspector */}
           <Inspector>
             <InspectorBody>
-              <PropExplorerContent config={config} />
+              <PropExplorerContent config={serializableConfig} />
             </InspectorBody>
           </Inspector>
         </div>

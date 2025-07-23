@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, CheckedExample, IndeterminateExample, DisabledExample, WithLabelExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "checkbox",
@@ -38,38 +40,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic checkbox with default styling.",
-      code: `<Checkbox />`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "checked",
       title: "Checked",
       description: "Checkbox in checked state.",
-      code: `<Checkbox checked={true} />`,
+      code: jsxToString(<CheckedExample />),
+      render: CheckedExample,
     },
     {
       id: "indeterminate",
       title: "Indeterminate",
       description: "Checkbox in indeterminate state.",
-      code: `<Checkbox checked="indeterminate" />`,
+      code: jsxToString(<IndeterminateExample />),
+      render: IndeterminateExample,
     },
     {
       id: "disabled",
       title: "Disabled",
       description: "Disabled checkbox in various states.",
-      code: `<div className="space-x-4 flex items-center">
-  <Checkbox disabled />
-  <Checkbox checked={true} disabled />
-  <Checkbox checked="indeterminate" disabled />
-</div>`,
+      code: jsxToString(<DisabledExample />),
+      render: DisabledExample,
     },
     {
       id: "with-label",
       title: "With Label",
       description: "Checkbox with associated label.",
-      code: `<label className="flex items-center gap-2 cursor-pointer">
-  <Checkbox />
-  <span className="text-sm font-medium">Accept terms and conditions</span>
-</label>`,
+      code: jsxToString(<WithLabelExample />),
+      render: WithLabelExample,
     },
   ],
 };

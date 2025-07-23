@@ -3,224 +3,82 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "select-native",
   name: "Select Native",
-  description:
-    "A native HTML select element with enhanced styling and consistent theming.",
+  description: "A native HTML select element with custom styling.",
   category: "inputs" as const,
-  badge: "Input",
-  importStatement: `import { SelectNative } from "@/components/ui/select-native";`,
+  badge: "Inputs",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { SelectNative } from "@/components/ui/select-native/select-native";`,
   componentId: "SelectNativeExample",
   props: [
     {
-      name: "hasError",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the select field has an error state.",
+      name: "value",
+      type: "string",
+      description: "Selected value",
+      defaultValue: "",
     },
     {
       name: "disabled",
       type: "boolean",
+      description: "Whether the select is disabled",
       defaultValue: false,
-      description: "Whether the select is disabled.",
-    },
-    {
-      name: "multiple",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether multiple options can be selected.",
     },
     {
       name: "size",
-      type: "number",
-      defaultValue: 1,
-      description: "Number of visible options (for multiple selects).",
-    },
-    {
-      name: "value",
-      type: "string",
-      defaultValue: "",
-      description: "The controlled value of the select.",
-    },
-    {
-      name: "defaultValue",
-      type: "string",
-      defaultValue: "",
-      description: "The default selected value (uncontrolled).",
-    },
-    {
-      name: "placeholder",
-      type: "string",
-      defaultValue: "Choose an option",
-      description: "Placeholder text for the first option.",
-    },
-    {
-      name: "required",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the select is required in a form.",
-    },
-    {
-      name: "name",
-      type: "string",
-      defaultValue: "",
-      description: "The name attribute for form submission.",
+      type: "select",
+      description: "Size of the select",
+      options: ["sm", "md", "lg"],
+      defaultValue: "md",
     },
   ],
   examples: [
     {
       id: "default",
-      title: "Default",
-      description: "Basic native select element.",
-      code: `const [value, setValue] = useState("");
-
-<SelectNative
-  value={value}
-  onChange={(e) => setValue(e.target.value)}
->
-  <option value="">Choose an option</option>
+      title: "Basic Native Select",
+      description: "A styled native select element",
+      code: `<SelectNative>
+  <option value="">Select an option</option>
   <option value="option1">Option 1</option>
   <option value="option2">Option 2</option>
   <option value="option3">Option 3</option>
 </SelectNative>`,
     },
     {
-      id: "with-label",
-      title: "With Label",
-      description: "Native select with a label.",
-      code: `const [country, setCountry] = useState("");
-
-<div className="space-y-2">
-  <label htmlFor="country" className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-    Country
-  </label>
-  <SelectNative
-    id="country"
-    value={country}
-    onChange={(e) => setCountry(e.target.value)}
-  >
-    <option value="">Select a country</option>
-    <option value="us">United States</option>
-    <option value="ca">Canada</option>
-    <option value="uk">United Kingdom</option>
-    <option value="de">Germany</option>
-    <option value="fr">France</option>
-  </SelectNative>
-</div>`,
+      id: "with-groups",
+      title: "Select with Option Groups",
+      description: "Native select with grouped options",
+      code: `<SelectNative defaultValue="apple">
+  <option value="">Choose a fruit</option>
+  <optgroup label="Citrus">
+    <option value="orange">Orange</option>
+    <option value="lemon">Lemon</option>
+    <option value="grapefruit">Grapefruit</option>
+  </optgroup>
+  <optgroup label="Other">
+    <option value="apple">Apple</option>
+    <option value="banana">Banana</option>
+    <option value="grape">Grape</option>
+  </optgroup>
+</SelectNative>`,
     },
     {
-      id: "grouped-options",
-      title: "Grouped Options",
-      description: "Native select with option groups.",
-      code: `const [product, setProduct] = useState("");
-
-<div className="space-y-2">
-  <label htmlFor="product" className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-    Product
-  </label>
-  <SelectNative
-    id="product"
-    value={product}
-    onChange={(e) => setProduct(e.target.value)}
-  >
-    <option value="">Choose a product</option>
-    <optgroup label="Software">
-      <option value="web-app">Web Application</option>
-      <option value="mobile-app">Mobile App</option>
-      <option value="desktop-app">Desktop Software</option>
-    </optgroup>
-    <optgroup label="Services">
-      <option value="consulting">Consulting</option>
-      <option value="support">Support</option>
-      <option value="training">Training</option>
-    </optgroup>
-  </SelectNative>
-</div>`,
-    },
-    {
-      id: "error-state",
-      title: "Error State",
-      description: "Native select with error styling.",
-      code: `const [value, setValue] = useState("");
-const hasError = !value;
-
-<div className="space-y-2">
-  <label htmlFor="required-select" className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-    Required Field *
-  </label>
-  <SelectNative
-    id="required-select"
-    value={value}
-    onChange={(e) => setValue(e.target.value)}
-    hasError={hasError}
-  >
-    <option value="">Please select an option</option>
-    <option value="option1">Option 1</option>
-    <option value="option2">Option 2</option>
-    <option value="option3">Option 3</option>
-  </SelectNative>
-  {hasError && (
-    <p className="text-sm text-red-600">This field is required.</p>
-  )}
-</div>`,
-    },
-    {
-      id: "disabled",
-      title: "Disabled",
-      description: "Native select in disabled state.",
+      id: "sizes",
+      title: "Different Sizes",
+      description: "Native select in different sizes",
       code: `<div className="space-y-4">
-  <div className="space-y-2">
-    <label className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-      Disabled (no value)
-    </label>
-    <SelectNative disabled>
-      <option value="">Choose an option</option>
-      <option value="option1">Option 1</option>
-      <option value="option2">Option 2</option>
-    </SelectNative>
-  </div>
-
-  <div className="space-y-2">
-    <label className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-      Disabled (with value)
-    </label>
-    <SelectNative disabled value="option1">
-      <option value="">Choose an option</option>
-      <option value="option1">Option 1</option>
-      <option value="option2">Option 2</option>
-    </SelectNative>
-  </div>
-</div>`,
-    },
-    {
-      id: "multiple",
-      title: "Multiple",
-      description: "Native select with multiple selection.",
-      code: `const [selected, setSelected] = useState<string[]>([]);
-
-<div className="space-y-2">
-  <label htmlFor="multiple-select" className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-    Multiple Selection
-  </label>
-  <SelectNative
-    id="multiple-select"
-    multiple
-    size={4}
-    value={selected}
-    onChange={(e) => {
-      const values = Array.from(e.target.selectedOptions, option => option.value);
-      setSelected(values);
-    }}
-    className="h-auto py-1"
-  >
-    <option value="javascript">JavaScript</option>
-    <option value="typescript">TypeScript</option>
-    <option value="python">Python</option>
-    <option value="java">Java</option>
-    <option value="csharp">C#</option>
-    <option value="go">Go</option>
+  <SelectNative size="sm">
+    <option>Small select</option>
+    <option>Option 2</option>
   </SelectNative>
-  <p className="text-sm text-zinc-600">
-    Selected: {selected.length > 0 ? selected.join(', ') : 'None'}
-  </p>
+  <SelectNative size="md">
+    <option>Medium select</option>
+    <option>Option 2</option>
+  </SelectNative>
+  <SelectNative size="lg">
+    <option>Large select</option>
+    <option>Option 2</option>
+  </SelectNative>
 </div>`,
     },
   ],

@@ -12,7 +12,7 @@ import { cx, focusRing } from "@/lib/utils";
  * @extends React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root>
  */
 interface CheckboxProps
-  extends React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root> {
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root>, "checked"> {
   /** Checked state, including indeterminate for partial selection */
   checked?: boolean | "indeterminate";
 }

@@ -45,8 +45,9 @@ export function SliderExample({
     controlledValue !== undefined ? controlledValue : internalValue;
 
   // Always allow the slider to be moved - update internal state for demo purposes
-  const handleChange = (value: number[]) => {
-    setInternalValue(value);
+  const handleChange = (value: number | readonly number[]) => {
+    const valueArray = Array.isArray(value) ? value : [value];
+    setInternalValue(valueArray);
   };
 
   if (orientation === "vertical") {

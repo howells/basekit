@@ -5,6 +5,7 @@ import { Badge } from "./badge";
 export const BadgeExample = ({
   variant = "default",
   size = "base",
+  bordered,
   leftIcon,
   rightIcon,
   children = "Badge",
@@ -12,6 +13,7 @@ export const BadgeExample = ({
 }: {
   variant?: "default" | "neutral" | "success" | "error" | "warning";
   size?: "sm" | "base" | "lg";
+  bordered?: boolean;
   leftIcon?: React.ComponentType<{ className?: string }>;
   rightIcon?: React.ComponentType<{ className?: string }>;
   children?: string;
@@ -23,6 +25,7 @@ export const BadgeExample = ({
     <Badge
       variant={variant}
       size={size}
+      bordered={bordered}
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       {...props}

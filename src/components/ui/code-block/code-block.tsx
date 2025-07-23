@@ -150,7 +150,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
       <div
         ref={ref}
         className={cx(
-          "relative rounded-lg border border-zinc-200 dark:border-zinc-800",
+          "relative rounded-lg border border-zinc-200 dark:border-zinc-800 w-full overflow-hidden",
           className
         )}
       >
@@ -169,7 +169,10 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
             background: "transparent",
             fontSize: "0.875rem",
             lineHeight: "1.25rem",
+            maxWidth: "100%",
+            overflowX: "auto",
           }}
+          wrapLongLines={true}
           codeTagProps={{
             style: {
               fontSize: "0.875rem",

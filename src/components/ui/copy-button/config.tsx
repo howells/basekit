@@ -1,5 +1,7 @@
 // Configuration data - no React imports or JSX
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, CustomLabelsExample, LongTextExample,  } from "./examples";
 
 // Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
@@ -48,27 +50,22 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic copy button with default styling.",
-      code: `<CopyButton text="Hello, World!" />`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "custom-labels",
       title: "Custom Labels",
       description: "Copy button with custom labels.",
-      code: `<CopyButton
-  text="console.log('Hello, World!');"
-  copyLabel="Copy Code"
-  copiedLabel="Code Copied!"
-/>`,
+      code: jsxToString(<CustomLabelsExample />),
+      render: CustomLabelsExample,
     },
     {
       id: "long-text",
       title: "Long Text",
       description: "Copy button with longer text content.",
-      code: `<CopyButton
-  text="This is a longer piece of text that demonstrates how the copy button works with more substantial content that users might want to copy to their clipboard."
-  copyLabel="Copy Text"
-  copiedLabel="Text Copied!"
-/>`,
+      code: jsxToString(<LongTextExample />),
+      render: LongTextExample,
     },
   ],
 };

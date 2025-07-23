@@ -2,104 +2,97 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 
 export const componentConfig: ComponentConfig = {
   id: "spark-chart",
-  name: "Spark Chart", 
-  description: "A compact line chart for displaying trends and patterns in small spaces, perfect for dashboard widgets.",
+  name: "Spark Chart",
+  description: "A minimalist chart for displaying trends and patterns in data.",
   category: "charts" as const,
-  badge: "Chart",
-  importStatement: `import { SparkChart } from "@/components/ui/spark-chart";`,
+  badge: "Charts",
+  installation: {
+    npm: "recharts",
+    dependencies: ["recharts"],
+  },
+  importStatement: `import { SparkChart } from "@/components/ui/spark-chart/spark-chart";`,
   componentId: "SparkChartExample",
   props: [
     {
-      name: "type",
-      type: "select",
-      options: ["line", "bar"],
-      defaultValue: "line",
-      description: "The type of spark chart to display.",
+      name: "data",
+      type: "array",
+      description: "Array of data points",
+      defaultValue: [],
     },
     {
-      name: "showTooltip",
-      type: "boolean",
-      defaultValue: true,
-      description: "Whether to show tooltips on hover.",
+      name: "categories",
+      type: "array",
+      description: "Array of category names",
+      defaultValue: ["value"],
+    },
+    {
+      name: "index",
+      type: "string",
+      description: "Key to use for x-axis values",
+      defaultValue: "date",
+    },
+    {
+      name: "type",
+      type: "select",
+      description: "Type of spark chart",
+      options: ["line", "area", "bar"],
+      defaultValue: "line",
     },
   ],
   examples: [
     {
       id: "default",
-      title: "Default",
-      description: "Basic spark line chart showing a trend.",
-      code: `const data = [
-  { day: 1, value: 10 },
-  { day: 2, value: 25 },
-  { day: 3, value: 15 },
-  { day: 4, value: 30 },
-  { day: 5, value: 20 },
-  { day: 6, value: 35 },
-  { day: 7, value: 28 },
-];
-
-<SparkChart
-  data={data}
-  index="day"
+      title: "Basic Spark Chart",
+      description: "A simple line spark chart",
+      code: `<SparkChart
+  data={[
+    { date: "Jan", value: 400 },
+    { date: "Feb", value: 300 },
+    { date: "Mar", value: 600 },
+    { date: "Apr", value: 800 },
+    { date: "May", value: 500 },
+    { date: "Jun", value: 900 },
+  ]}
   categories={["value"]}
-  colors={["blue"]}
+  index="date"
 />`,
     },
     {
-      id: "bar-variant",
-      title: "Bar Variant",
-      description: "Spark chart displayed as bars instead of lines.",
-      code: `const data = [
-  { month: "Jan", sales: 400 },
-  { month: "Feb", sales: 300 },
-  { month: "Mar", sales: 600 },
-  { month: "Apr", sales: 350 },
-  { month: "May", sales: 700 },
-];
-
-<SparkChart
-  data={data}
+      id: "area",
+      title: "Area Spark Chart",
+      description: "Spark chart with filled area",
+      code: `<SparkChart
+  data={[
+    { month: "Jan", revenue: 2100 },
+    { month: "Feb", revenue: 2400 },
+    { month: "Mar", revenue: 1800 },
+    { month: "Apr", revenue: 2800 },
+    { month: "May", revenue: 3200 },
+    { month: "Jun", revenue: 2900 },
+  ]}
+  categories={["revenue"]}
   index="month"
-  categories={["sales"]}
-  colors={["emerald"]}
+  type="area"
+/>`,
+    },
+    {
+      id: "bar",
+      title: "Bar Spark Chart",
+      description: "Spark chart using bars",
+      code: `<SparkChart
+  data={[
+    { day: "Mon", visits: 120 },
+    { day: "Tue", visits: 140 },
+    { day: "Wed", visits: 100 },
+    { day: "Thu", visits: 160 },
+    { day: "Fri", visits: 180 },
+    { day: "Sat", visits: 140 },
+    { day: "Sun", visits: 100 },
+  ]}
+  categories={["visits"]}
+  index="day"
   type="bar"
 />`,
-    },
-    {
-      id: "different-colors",
-      title: "Different Colors",
-      description: "Spark charts with various color themes.",
-      code: `const data = [
-  { x: 1, y: 20 },
-  { x: 2, y: 35 },
-  { x: 3, y: 25 },
-  { x: 4, y: 40 },
-  { x: 5, y: 30 },
-];
-
-<div className="flex gap-4">
-  <SparkChart
-    data={data}
-    index="x"
-    categories={["y"]}
-    colors={["red"]}
-    className="h-12 w-20"
-  />
-  <SparkChart
-    data={data}
-    index="x"
-    categories={["y"]}
-    colors={["emerald"]}
-    className="h-12 w-20"
-  />
-  <SparkChart
-    data={data}
-    index="x"
-    categories={["y"]}
-    colors={["amber"]}
-    className="h-12 w-20"
-  />
-</div>`,
     },
   ],
 };

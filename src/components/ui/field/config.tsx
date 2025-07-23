@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithDescriptionExample, WithErrorExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "field",
@@ -36,21 +38,15 @@ export const componentConfig: ComponentConfig = {
       id: "with-description",
       title: "With Description",
       description: "Field with helpful description text.",
-      code: `<Field>
-  <FieldLabel>Username</FieldLabel>
-  <Input placeholder="Enter username" />
-  <FieldDescription>Must be at least 3 characters long</FieldDescription>
-</Field>`,
+      code: jsxToString(<WithDescriptionExample />),
+      render: WithDescriptionExample,
     },
     {
       id: "with-error",
       title: "With Error",
       description: "Field showing validation error state.",
-      code: `<Field invalid>
-  <FieldLabel>Password</FieldLabel>
-  <Input type="password" placeholder="Enter password" />
-  <FieldError>Password must be at least 8 characters</FieldError>
-</Field>`,
+      code: jsxToString(<WithErrorExample />),
+      render: WithErrorExample,
     },
   ],
 };

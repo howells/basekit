@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "drawer",
@@ -22,15 +24,8 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic drawer sliding from the right.",
-      code: `<Drawer>
-  <DrawerTrigger>Open Drawer</DrawerTrigger>
-  <DrawerContent>
-    <div className="p-4">
-      <h3>Drawer Content</h3>
-      <p>This is the drawer content.</p>
-    </div>
-  </DrawerContent>
-</Drawer>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
   ],
 };

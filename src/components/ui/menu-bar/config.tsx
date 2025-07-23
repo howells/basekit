@@ -1,40 +1,43 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import {
+import type { ComponentConfig } from "@/lib/component-config-types";
+
+export const componentConfig: ComponentConfig = {
+  id: "menu-bar",
+  name: "Menu Bar",
+  description: "A horizontal menu bar containing multiple dropdown menus.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import {
   MenuBar,
   MenuBarContent,
   MenuBarItem,
   MenuBarMenu,
   MenuBarTrigger,
-} from "./menu-bar";
-
-export const componentConfig: ComponentConfig = {
-  id: "menu-bar",
-  name: "MenuBar",
-  description: "A horizontal menu bar containing multiple dropdown menus.",
-  category: "ui",
-  importStatement: 'import { MenuBar } from "@/components/ui/menu-bar"',
-  componentId: "MenuBar",
+} from "@/components/ui/menu-bar/menu-bar";`,
+  componentId: "MenuBarExample",
   props: [],
   examples: [
     {
-      id: "basic",
+      id: "default",
       title: "Basic Menu Bar",
-      description: "A simple menu bar with dropdown menus",
+      description: "A horizontal menu bar containing multiple dropdown menus.",
       code: `<MenuBar>
   <MenuBarMenu>
     <MenuBarTrigger>File</MenuBarTrigger>
     <MenuBarContent>
-      <MenuBarItem>New</MenuBarItem>
-      <MenuBarItem>Open</MenuBarItem>
+      <MenuBarItem>New File</MenuBarItem>
+      <MenuBarItem>Open...</MenuBarItem>
       <MenuBarItem>Save</MenuBarItem>
     </MenuBarContent>
   </MenuBarMenu>
   <MenuBarMenu>
     <MenuBarTrigger>Edit</MenuBarTrigger>
     <MenuBarContent>
+      <MenuBarItem>Undo</MenuBarItem>
+      <MenuBarItem>Redo</MenuBarItem>
       <MenuBarItem>Cut</MenuBarItem>
-      <MenuBarItem>Copy</MenuBarItem>
-      <MenuBarItem>Paste</MenuBarItem>
     </MenuBarContent>
   </MenuBarMenu>
 </MenuBar>`,
@@ -45,19 +48,19 @@ export const componentConfig: ComponentConfig = {
       description: "Menu bar with icons in menu items",
       code: `<MenuBar>
   <MenuBarMenu>
-    <MenuBarTrigger>Actions</MenuBarTrigger>
+    <MenuBarTrigger>File</MenuBarTrigger>
     <MenuBarContent>
       <MenuBarItem>
-        <Icon name="plus" />
-        New Item
+        <FileText className="mr-2 h-4 w-4" />
+        New File
       </MenuBarItem>
       <MenuBarItem>
-        <Icon name="edit" />
-        Edit Item
+        <FolderOpen className="mr-2 h-4 w-4" />
+        Open...
       </MenuBarItem>
       <MenuBarItem>
-        <Icon name="trash" />
-        Delete Item
+        <Save className="mr-2 h-4 w-4" />
+        Save
       </MenuBarItem>
     </MenuBarContent>
   </MenuBarMenu>

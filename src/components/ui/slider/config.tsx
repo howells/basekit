@@ -3,150 +3,97 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "slider",
   name: "Slider",
-  description:
-    "An input component that allows users to select a single value or range from a continuous set of values.",
+  description: "An input where the user selects a value from within a given range.",
   category: "inputs" as const,
-  badge: "Input",
-  importStatement: `import { Slider } from "@/components/ui/slider";`,
+  badge: "Inputs",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Slider } from "@/components/ui/slider/slider";`,
   componentId: "SliderExample",
   props: [
     {
-      name: "showValue",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether to display the current value above the slider.",
-    },
-    {
-      name: "orientation",
-      type: "select",
-      options: ["horizontal", "vertical"],
-      defaultValue: "horizontal",
-      description: "The orientation of the slider.",
-    },
-    {
-      name: "disabled",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the slider is disabled.",
+      name: "value",
+      type: "number",
+      description: "The controlled value of the slider",
+      defaultValue: 50,
     },
     {
       name: "min",
       type: "number",
+      description: "The minimum value",
       defaultValue: 0,
-      description: "The minimum value of the slider.",
     },
     {
       name: "max",
       type: "number",
+      description: "The maximum value",
       defaultValue: 100,
-      description: "The maximum value of the slider.",
     },
     {
       name: "step",
       type: "number",
+      description: "The step value",
       defaultValue: 1,
-      description: "The step increment for the slider values.",
     },
     {
-      name: "defaultValue",
-      type: "text",
-      defaultValue: "[50]",
-      description: "The default value(s) of the slider (as JSON array).",
+      name: "disabled",
+      type: "boolean",
+      description: "Whether the slider is disabled",
+      defaultValue: false,
     },
   ],
   examples: [
     {
       id: "default",
-      title: "Default",
-      description: "Basic slider component.",
-      code: `const [value, setValue] = useState([50]);
-
-<Slider
-  value={value}
-  onValueChange={setValue}
-  min={0}
-  max={100}
-  step={1}
-/>`,
-    },
-    {
-      id: "with-value",
-      title: "With Value",
-      description: "Slider that displays its current value.",
-      code: `const [value, setValue] = useState([25]);
-
-<Slider
-  value={value}
-  onValueChange={setValue}
-  min={0}
-  max={100}
-  step={1}
-  showValue
-/>`,
+      title: "Basic Slider",
+      description: "A simple slider with default settings",
+      code: `<Slider defaultValue={[50]} max={100} step={1} />`,
     },
     {
       id: "range",
       title: "Range Slider",
-      description: "Slider with two handles for selecting a range.",
-      code: `const [range, setRange] = useState([20, 80]);
-
-<Slider
-  value={range}
-  onValueChange={setRange}
-  min={0}
-  max={100}
-  step={1}
-  showValue
-/>`,
+      description: "A slider with two handles for selecting a range",
+      code: `<Slider defaultValue={[25, 75]} max={100} step={1} />`,
     },
     {
-      id: "custom-step",
-      title: "Custom Step",
-      description: "Slider with a custom step increment.",
-      code: `const [value, setValue] = useState([25]);
-
-<Slider
-  value={value}
-  onValueChange={setValue}
-  min={0}
-  max={100}
-  step={5}
-  showValue
-  valueFormatter={(val) => \`$\${val}\`}
-/>`,
+      id: "steps",
+      title: "Slider with Steps",
+      description: "A slider with custom step increments",
+      code: `<div className="space-y-4">
+  <div>
+    <label className="text-sm font-medium">Volume: {value}%</label>
+    <Slider 
+      defaultValue={[50]} 
+      max={100} 
+      step={10}
+      onValueChange={setValue}
+    />
+  </div>
+</div>`,
     },
     {
-      id: "vertical",
-      title: "Vertical",
-      description: "Slider with vertical orientation.",
-      code: `const [value, setValue] = useState([40]);
-
-<div className="h-64 flex items-center">
-  <Slider
-    value={value}
-    onValueChange={setValue}
-    min={0}
-    max={100}
-    step={1}
-    orientation="vertical"
-    showValue
-  />
+      id: "custom-range",
+      title: "Custom Range",
+      description: "A slider with custom min and max values",
+      code: `<div className="space-y-4">
+  <div>
+    <label className="text-sm font-medium">Temperature: {value}°C</label>
+    <Slider 
+      defaultValue={[20]} 
+      min={-10} 
+      max={40} 
+      step={1}
+      onValueChange={setValue}
+    />
+  </div>
 </div>`,
     },
     {
       id: "disabled",
-      title: "Disabled",
-      description: "Slider in disabled state.",
-      code: `const [value] = useState([60]);
-
-<Slider
-  value={value}
-  min={0}
-  max={100}
-  step={1}
-  disabled
-  showValue
-/>`,
+      title: "Disabled Slider",
+      description: "A slider in disabled state",
+      code: `<Slider defaultValue={[30]} max={100} disabled />`,
     },
   ],
 };

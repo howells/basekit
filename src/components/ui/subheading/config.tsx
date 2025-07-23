@@ -3,36 +3,64 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "subheading",
   name: "Subheading",
-  description:
-    "A semantic subheading component with consistent typography and hierarchy levels.",
+  description: "A styled subheading component for section titles and content organization.",
   category: "ui" as const,
   badge: "UI",
-  importStatement: `import { Subheading } from "@/components/ui/subheading";`,
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Subheading } from "@/components/ui/subheading/subheading";`,
   componentId: "SubheadingExample",
   props: [
     {
       name: "level",
       type: "select",
+      description: "Heading level",
       options: ["1", "2", "3", "4", "5", "6"],
-      defaultValue: "2",
-      description: "The heading level (h1-h6).",
+      defaultValue: "3",
+    },
+    {
+      name: "children",
+      type: "string",
+      description: "Subheading text",
+      defaultValue: "Section Title",
     },
   ],
   examples: [
     {
       id: "default",
-      title: "Default",
-      description: "Basic subheading component.",
-      code: `<Subheading level="2">Section Title</Subheading>`,
+      title: "Basic Subheading",
+      description: "A simple subheading component",
+      code: `<Subheading>Getting Started</Subheading>`,
     },
     {
       id: "levels",
       title: "Different Levels",
-      description: "Subheading component with different hierarchy levels.",
+      description: "Subheadings at different hierarchy levels",
       code: `<div className="space-y-4">
-  <Subheading level="2">Subheading 2</Subheading>
-  <Subheading level="3">Subheading 3</Subheading>
-  <Subheading level="4">Subheading 4</Subheading>
+  <Subheading level={1}>Level 1 Subheading</Subheading>
+  <Subheading level={2}>Level 2 Subheading</Subheading>
+  <Subheading level={3}>Level 3 Subheading</Subheading>
+  <Subheading level={4}>Level 4 Subheading</Subheading>
+</div>`,
+    },
+    {
+      id: "with-content",
+      title: "Subheading with Content",
+      description: "Subheading used to organize content sections",
+      code: `<div className="space-y-4">
+  <Subheading>Introduction</Subheading>
+  <p className="text-gray-600">
+    This is the introduction paragraph that follows the subheading. 
+    It provides context and information about the section.
+  </p>
+  
+  <Subheading>Key Features</Subheading>
+  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+    <li>Feature one description</li>
+    <li>Feature two description</li>
+    <li>Feature three description</li>
+  </ul>
 </div>`,
     },
   ],

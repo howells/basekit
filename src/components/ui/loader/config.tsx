@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultLoaderExample, SizesExample, WithTextExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "loader",
@@ -6,50 +8,46 @@ export const componentConfig: ComponentConfig = {
   description: "A spinning loader indicator with configurable size.",
   category: "ui" as const,
   badge: "UI",
-  importStatement: `import { Loader } from "@/components/ui/loader";`,
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Loader } from "@/components/ui/loader/loader";`,
   componentId: "LoaderExample",
   props: [
     {
       name: "size",
       type: "select",
-      options: ["xs", "sm", "base", "lg", "xl"],
-      defaultValue: "base",
-      description: "The size of the loader spinner.",
+      options: ["sm", "md", "lg"],
+      defaultValue: "md",
+      description: "The size of the loader.",
     },
     {
-      name: "aria-label",
+      name: "className",
       type: "string",
-      defaultValue: "Loading",
-      description: "Accessible label for screen readers.",
+      description: "Additional CSS classes.",
     },
   ],
   examples: [
     {
-      id: "default",
+      id: "loader",
       title: "Default",
-      description: "Basic loader with default size.",
-      code: `<Loader aria-label="Loading" />`,
+      description: "A spinning loader indicator with configurable size.",
+      code: jsxToString(<DefaultLoaderExample />),
+      render: DefaultLoaderExample,
     },
     {
       id: "sizes",
       title: "Sizes",
       description: "Loader in different sizes.",
-      code: `<div className="flex items-center gap-4">
-  <Loader size="xs" aria-label="Loading" />
-  <Loader size="sm" aria-label="Loading" />
-  <Loader size="base" aria-label="Loading" />
-  <Loader size="lg" aria-label="Loading" />
-  <Loader size="xl" aria-label="Loading" />
-</div>`,
+      code: jsxToString(<SizesExample />),
+      render: SizesExample,
     },
     {
       id: "with-text",
       title: "With Text",
       description: "Loader with accompanying text.",
-      code: `<div className="flex items-center gap-2">
-  <Loader size="sm" aria-label="Loading content" />
-  <span className="text-sm text-zinc-600">Loading...</span>
-</div>`,
+      code: jsxToString(<WithTextExample />),
+      render: WithTextExample,
     },
   ],
 };

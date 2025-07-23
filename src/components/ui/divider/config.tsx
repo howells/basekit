@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithTextExample, VerticalExample, SpacingExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "divider",
@@ -40,31 +42,22 @@ export const componentConfig: ComponentConfig = {
       id: "with-text",
       title: "With Text",
       description: "Divider with text label in the center.",
-      code: `<Divider>or</Divider>`,
+      code: jsxToString(<WithTextExample />),
+      render: WithTextExample,
     },
     {
       id: "vertical",
       title: "Vertical",
       description: "Vertical divider for separating inline content.",
-      code: `<div className="flex items-center h-8">
-  <span>Left content</span>
-  <Divider orientation="vertical" />
-  <span>Right content</span>
-</div>`,
+      code: jsxToString(<VerticalExample />),
+      render: VerticalExample,
     },
     {
       id: "spacing",
       title: "Spacing",
       description: "Different spacing options.",
-      code: `<div>
-  <div>Content</div>
-  <Divider spacing="sm">Small spacing</Divider>
-  <div>Content</div>
-  <Divider spacing="md">Medium spacing</Divider>
-  <div>Content</div>
-  <Divider spacing="lg">Large spacing</Divider>
-  <div>Content</div>
-</div>`,
+      code: jsxToString(<SpacingExample />),
+      render: SpacingExample,
     },
   ],
 };

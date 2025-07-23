@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, VerticalExample, MultipleItemsExample, NoNavigationExample, ImageCarouselExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "carousel",
@@ -40,115 +42,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic horizontal carousel with navigation.",
-      code: `<Carousel className="w-full max-w-xs">
-  <CarouselContent>
-    <CarouselItem>
-      <Card>
-        <CardContent className="flex aspect-square items-center justify-center p-6">
-          <span className="text-4xl font-semibold">1</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-    <CarouselItem>
-      <Card>
-        <CardContent className="flex aspect-square items-center justify-center p-6">
-          <span className="text-4xl font-semibold">2</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-    <CarouselItem>
-      <Card>
-        <CardContent className="flex aspect-square items-center justify-center p-6">
-          <span className="text-4xl font-semibold">3</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "vertical",
       title: "Vertical",
       description: "Vertical carousel orientation.",
-      code: `<Carousel orientation="vertical" className="w-full max-w-xs">
-  <CarouselContent className="-mt-1 h-[200px]">
-    <CarouselItem className="pt-1 md:basis-1/2">
-      <Card>
-        <CardContent className="flex items-center justify-center p-6">
-          <span className="text-3xl font-semibold">1</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-    <CarouselItem className="pt-1 md:basis-1/2">
-      <Card>
-        <CardContent className="flex items-center justify-center p-6">
-          <span className="text-3xl font-semibold">2</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-    <CarouselItem className="pt-1 md:basis-1/2">
-      <Card>
-        <CardContent className="flex items-center justify-center p-6">
-          <span className="text-3xl font-semibold">3</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>`,
+      code: jsxToString(<VerticalExample />),
+      render: VerticalExample,
     },
     {
       id: "multiple-items",
       title: "Multiple Items",
       description: "Carousel showing multiple items at once.",
-      code: `<Carousel className="w-full max-w-sm">
-  <CarouselContent className="-ml-1">
-    {Array.from({ length: 5 }).map((_, index) => (
-      <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
-        <Card>
-          <CardContent className="flex aspect-square items-center justify-center p-6">
-            <span className="text-2xl font-semibold">{index + 1}</span>
-          </CardContent>
-        </Card>
-      </CarouselItem>
-    ))}
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>`,
+      code: jsxToString(<MultipleItemsExample />),
+      render: MultipleItemsExample,
     },
     {
       id: "no-navigation",
       title: "No Navigation",
       description: "Carousel without navigation arrows.",
-      code: `<Carousel className="w-full max-w-xs">
-  <CarouselContent>
-    <CarouselItem>
-      <Card>
-        <CardContent className="flex aspect-square items-center justify-center p-6">
-          <span className="text-4xl font-semibold">1</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-    <CarouselItem>
-      <Card>
-        <CardContent className="flex aspect-square items-center justify-center p-6">
-          <span className="text-4xl font-semibold">2</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-    <CarouselItem>
-      <Card>
-        <CardContent className="flex aspect-square items-center justify-center p-6">
-          <span className="text-4xl font-semibold">3</span>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-  </CarouselContent>
-</Carousel>`,
+      code: jsxToString(<NoNavigationExample />),
+      render: NoNavigationExample,
+    },
+    {
+      id: "image-carousel",
+      title: "Image Carousel",
+      description: "Carousel displaying images.",
+      code: jsxToString(<ImageCarouselExample />),
+      render: ImageCarouselExample,
     },
   ],
 };

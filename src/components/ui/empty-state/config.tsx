@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, MinimalExample, WithBothActionsExample, LargeSizeExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "empty-state",
@@ -88,45 +90,22 @@ export const componentConfig: ComponentConfig = {
       id: "minimal",
       title: "Minimal",
       description: "Clean empty state with minimal styling.",
-      code: `<EmptyState
-  variant="minimal"
-  title="Nothing here"
-  description="This space is waiting for content."
-  icon={Inbox}
-/>`,
+      code: jsxToString(<MinimalExample />),
+      render: MinimalExample,
     },
     {
       id: "with-both-actions",
       title: "With Both Actions",
       description: "Empty state with both primary and secondary actions.",
-      code: `<EmptyState
-  title="No data available"
-  description="Connect your data source to see insights and analytics here."
-  icon={Database}
-  primaryAction={{
-    label: "Connect Data",
-    onClick: () => console.log("Connect clicked")
-  }}
-  secondaryAction={{
-    label: "View Documentation",
-    href: "/docs"
-  }}
-/>`,
+      code: jsxToString(<WithBothActionsExample />),
+      render: WithBothActionsExample,
     },
     {
       id: "large-size",
       title: "Large Size",
       description: "Larger empty state for prominent placement.",
-      code: `<EmptyState
-  size="lg"
-  title="Welcome to your dashboard"
-  description="This is where you'll see all your important metrics and data once you get started."
-  icon={BarChart3}
-  primaryAction={{
-    label: "Get Started",
-    onClick: () => console.log("Get started clicked")
-  }}
-/>`,
+      code: jsxToString(<LargeSizeExample />),
+      render: LargeSizeExample,
     },
   ],
 };

@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithShortcutsExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "context-menu",
@@ -21,37 +23,15 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic context menu with simple menu items.",
-      code: `<ContextMenu>
-  <ContextMenuTrigger className="p-8 border rounded-lg text-center">
-    Right-click me
-  </ContextMenuTrigger>
-  <ContextMenuContent>
-    <ContextMenuItem>Copy</ContextMenuItem>
-    <ContextMenuItem>Paste</ContextMenuItem>
-    <ContextMenuItem>Delete</ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-shortcuts",
       title: "With Shortcuts",
       description: "Context menu items with keyboard shortcuts displayed.",
-      code: `<ContextMenu>
-  <ContextMenuTrigger className="p-8 border rounded-lg text-center">
-    Right-click for shortcuts
-  </ContextMenuTrigger>
-  <ContextMenuContent>
-    <ContextMenuItem>
-      Copy <span className="ml-auto text-xs text-zinc-500">⌘C</span>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      Paste <span className="ml-auto text-xs text-zinc-500">⌘V</span>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      Delete <span className="ml-auto text-xs text-zinc-500">⌫</span>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>`,
+      code: jsxToString(<WithShortcutsExample />),
+      render: WithShortcutsExample,
     },
   ],
 };

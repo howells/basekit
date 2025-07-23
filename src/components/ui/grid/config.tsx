@@ -1,285 +1,125 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { BasicGridExample, ResponsiveGridExample, SpanningCellsExample, SolidCellsExample, OverlayCellsExample, GuideControlExample, AutoGridExample, CustomLayoutExample, DashboardLayoutExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "grid",
   name: "Grid",
-  description:
-    "A sophisticated grid layout component with visual guides, responsive columns/rows, cell overlays, and guide clipping features. Perfect for complex layouts and design systems.",
+  description: "A sophisticated grid layout component with visual guides, responsive columns/rows, cell overlays, and guide clipping features. Perfect for complex layouts and design systems.",
   category: "ui" as const,
-  badge: "Layout",
-  importStatement: `import { Grid, GridCell, GridAuto } from "@/components/ui/grid";`,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Grid, GridCell, GridAuto } from "@/components/ui/grid/grid";`,
   componentId: "GridExample",
   props: [
     {
       name: "columns",
-      type: "number",
-      defaultValue: 3,
-      min: 1,
-      max: 12,
-      description:
-        "Number of columns. Can be responsive object: { sm: 2, lg: 6 }",
+      type: "string",
+      defaultValue: "12",
+      description: "Number of columns or custom grid-template-columns value.",
     },
     {
       name: "rows",
-      type: "number",
-      defaultValue: 3,
-      min: 1,
-      max: 10,
-      description:
-        "Number of rows. Can be responsive object. Auto if not specified.",
+      type: "string",
+      description: "Number of rows or custom grid-template-rows value.",
     },
     {
       name: "gap",
-      type: "number",
-      defaultValue: 4,
-      min: 0,
-      max: 12,
-      description: "Gap between grid items using Tailwind spacing scale.",
+      type: "select",
+      options: ["none", "xs", "sm", "base", "md", "lg", "xl"],
+      defaultValue: "base",
+      description: "Gap between grid cells.",
     },
     {
       name: "showColumnGuides",
       type: "boolean",
-      defaultValue: true,
-      description: "Whether to show vertical column guide lines.",
+      defaultValue: false,
+      description: "Show column guide lines.",
     },
     {
       name: "showRowGuides",
       type: "boolean",
-      defaultValue: true,
-      description: "Whether to show horizontal row guide lines.",
+      defaultValue: false,
+      description: "Show row guide lines.",
     },
     {
-      name: "minHeight",
-      type: "select",
-      defaultValue: "md",
-      options: ["none", "sm", "md", "lg", "xl"],
-      description: "Minimum height of the grid container.",
-    },
-    {
-      name: "cellBordered",
+      name: "clipGuides",
       type: "boolean",
       defaultValue: true,
-      description:
-        "Whether grid cells should have borders (for demo visibility).",
+      description: "Clip guide lines within grid bounds.",
     },
     {
-      name: "cellSolid",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether grid cells should have solid backgrounds.",
-    },
-    {
-      name: "cellOverlay",
-      type: "boolean",
-      defaultValue: false,
-      description:
-        "Whether grid cells should have overlay styling with elevation.",
+      name: "children",
+      type: "string",
+      defaultValue: "Grid content",
+      description: "Grid cell content.",
     },
   ],
   examples: [
     {
-      id: "basic",
+      id: "grid",
       title: "Basic Grid",
-      description: "Simple 6-column grid with visual guides.",
-      code: `<Grid columns={6} gap={4}>
-  <GridCell>1</GridCell>
-  <GridCell>2</GridCell>
-  <GridCell>3</GridCell>
-  <GridCell>4</GridCell>
-  <GridCell>5</GridCell>
-  <GridCell>6</GridCell>
-</Grid>`,
+      description: "A sophisticated grid layout component with visual guides, responsive columns/rows, cell overlays, and guide clipping features. Perfect for complex layouts and design systems.",
+      code: jsxToString(<BasicGridExample />),
+      render: BasicGridExample,
     },
     {
       id: "responsive",
       title: "Responsive Grid",
       description: "Grid that adapts columns at different breakpoints.",
-      code: `<Grid
-  columns={{ sm: 2, md: 4, lg: 6 }}
-  gap={4}
->
-  <GridCell>1</GridCell>
-  <GridCell>2</GridCell>
-  <GridCell>3</GridCell>
-  <GridCell>4</GridCell>
-  <GridCell>5</GridCell>
-  <GridCell>6</GridCell>
-  <GridCell>7</GridCell>
-  <GridCell>8</GridCell>
-</Grid>`,
+      code: jsxToString(<ResponsiveGridExample />),
+      render: ResponsiveGridExample,
     },
     {
       id: "spanning-cells",
       title: "Spanning Cells",
       description: "Cells that span multiple columns or rows.",
-      code: `<Grid columns={6} rows={3} gap={4}>
-  <GridCell colSpan={2}>Span 2 cols</GridCell>
-  <GridCell>3</GridCell>
-  <GridCell>4</GridCell>
-  <GridCell rowSpan={2}>Span 2 rows</GridCell>
-  <GridCell>6</GridCell>
-
-  <GridCell>7</GridCell>
-  <GridCell colSpan={3}>Span 3 cols</GridCell>
-
-  <GridCell colStart={2} colSpan={2}>Start col 2</GridCell>
-  <GridCell>Last</GridCell>
-</Grid>`,
+      code: jsxToString(<SpanningCellsExample />),
+      render: SpanningCellsExample,
     },
     {
       id: "solid-cells",
       title: "Solid Cells",
       description: "Cells with solid backgrounds that occlude grid guides.",
-      code: `<Grid columns={4} gap={4}>
-  <GridCell solid>Solid 1</GridCell>
-  <GridCell>Regular 2</GridCell>
-  <GridCell solid>Solid 3</GridCell>
-  <GridCell>Regular 4</GridCell>
-
-  <GridCell>Regular 5</GridCell>
-  <GridCell solid colSpan={2}>Solid Spanning</GridCell>
-  <GridCell>Regular 8</GridCell>
-</Grid>`,
+      code: jsxToString(<SolidCellsExample />),
+      render: SolidCellsExample,
     },
     {
       id: "overlay-cells",
       title: "Overlay Cells",
       description: "Cells that overlay other cells with elevated styling.",
-      code: `<Grid columns={4} gap={4}>
-  <GridCell>1</GridCell>
-  <GridCell overlay>Overlay</GridCell>
-  <GridCell>3</GridCell>
-  <GridCell>4</GridCell>
-
-  <GridCell>5</GridCell>
-  <GridCell>6</GridCell>
-  <GridCell overlay solid colSpan={2}>
-    Overlay + Solid
-  </GridCell>
-</Grid>`,
+      code: jsxToString(<OverlayCellsExample />),
+      render: OverlayCellsExample,
     },
     {
       id: "guide-control",
       title: "Guide Control",
       description: "Control visibility of column and row guides.",
-      code: `<div className="space-y-6">
-  <Grid columns={4} showColumnGuides={true} showRowGuides={false} gap={4}>
-    <GridCell>Columns only</GridCell>
-    <GridCell>2</GridCell>
-    <GridCell>3</GridCell>
-    <GridCell>4</GridCell>
-  </Grid>
-
-  <Grid columns={4} showColumnGuides={false} showRowGuides={true} gap={4}>
-    <GridCell>Rows only</GridCell>
-    <GridCell>2</GridCell>
-    <GridCell>3</GridCell>
-    <GridCell>4</GridCell>
-  </Grid>
-
-  <Grid columns={4} showColumnGuides={false} showRowGuides={false} gap={4}>
-    <GridCell solid>No guides</GridCell>
-    <GridCell solid>2</GridCell>
-    <GridCell solid>3</GridCell>
-    <GridCell solid>4</GridCell>
-  </Grid>
-</div>`,
+      code: jsxToString(<GuideControlExample />),
+      render: GuideControlExample,
     },
     {
       id: "auto-grid",
       title: "Auto Grid",
       description: "Automatically generate numbered cells with GridAuto.",
-      code: `<GridAuto
-  columns={5}
-  cellCount={10}
-  gap={4}
-  solidCells={true}
-/>`,
+      code: jsxToString(<AutoGridExample />),
+      render: AutoGridExample,
     },
     {
       id: "custom-layout",
       title: "Custom Layout",
       description: "Complex grid layout with mixed cell types.",
-      code: `<Grid columns={6} rows={4} gap={3}>
-  {/* Header */}
-  <GridCell solid colSpan={6} className="bg-blue-100 dark:bg-blue-900">
-    Header
-  </GridCell>
-
-  {/* Sidebar */}
-  <GridCell solid rowSpan={2} className="bg-green-100 dark:bg-green-900">
-    Sidebar
-  </GridCell>
-
-  {/* Main content */}
-  <GridCell overlay colSpan={4} className="bg-white dark:bg-zinc-800">
-    Main Content
-  </GridCell>
-
-  <GridCell solid className="bg-purple-100 dark:bg-purple-900">
-    Widget
-  </GridCell>
-
-  {/* Cards */}
-  <GridCell colSpan={2}>Card 1</GridCell>
-  <GridCell colSpan={2}>Card 2</GridCell>
-  <GridCell>Extra</GridCell>
-
-  {/* Footer */}
-  <GridCell solid colSpan={6} className="bg-gray-100 dark:bg-gray-800">
-    Footer
-  </GridCell>
-</Grid>`,
+      code: jsxToString(<CustomLayoutExample />),
+      render: CustomLayoutExample,
     },
     {
       id: "dashboard",
       title: "Dashboard Layout",
       description: "Real-world dashboard layout example.",
-      code: `<Grid columns={12} rows={6} gap={4} className="h-[400px]">
-  {/* Top metrics */}
-  <GridCell solid colSpan={3} className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800">
-    <div className="text-center">
-      <div className="text-2xl font-bold">1,234</div>
-      <div className="text-xs opacity-75">Users</div>
-    </div>
-  </GridCell>
-  <GridCell solid colSpan={3} className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900 dark:to-green-800">
-    <div className="text-center">
-      <div className="text-2xl font-bold">$12.3K</div>
-      <div className="text-xs opacity-75">Revenue</div>
-    </div>
-  </GridCell>
-  <GridCell solid colSpan={3} className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800">
-    <div className="text-center">
-      <div className="text-2xl font-bold">98.5%</div>
-      <div className="text-xs opacity-75">Uptime</div>
-    </div>
-  </GridCell>
-  <GridCell solid colSpan={3} className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800">
-    <div className="text-center">
-      <div className="text-2xl font-bold">156</div>
-      <div className="text-xs opacity-75">Orders</div>
-    </div>
-  </GridCell>
-
-  {/* Main chart */}
-  <GridCell overlay colSpan={8} rowSpan={3} className="bg-white dark:bg-zinc-900">
-    Analytics Chart
-  </GridCell>
-
-  {/* Side widgets */}
-  <GridCell solid colSpan={4} rowSpan={2} className="bg-gray-50 dark:bg-gray-800">
-    Recent Activity
-  </GridCell>
-  <GridCell solid colSpan={4} className="bg-yellow-50 dark:bg-yellow-900">
-    Notifications
-  </GridCell>
-
-  {/* Bottom section */}
-  <GridCell colSpan={4}>Tasks</GridCell>
-  <GridCell colSpan={4}>Performance</GridCell>
-  <GridCell colSpan={4}>Settings</GridCell>
-</Grid>`,
+      code: jsxToString(<DashboardLayoutExample />),
+      render: DashboardLayoutExample,
     },
   ],
 };

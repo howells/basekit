@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithTimeExample, WithPresetsExample, DisabledExample, ErrorStateExample, ControlledExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "date-picker",
@@ -52,68 +54,73 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic date picker for single date selection.",
-      code: `<DatePicker placeholder="Select a date" />`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-time",
       title: "With Time Picker",
       description: "Date picker with time selection.",
-      code: `<DatePicker
-  placeholder="Select date and time"
-  showTimePicker
-/>`,
+      code: jsxToString(<WithTimeExample />),
+      render: WithTimeExample,
     },
     {
       id: "with-presets",
       title: "With Presets",
       description: "Date picker with common date presets.",
-      code: `const presets = [
-  { label: "Today", date: new Date() },
-  { label: "Tomorrow", date: new Date(Date.now() + 24 * 60 * 60 * 1000) },
-  { label: "In a week", date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
-];
+      code: `const WithPresetsExample = () => {
+  const presets = [
+    { label: "Today", date: new Date() },
+    { label: "Tomorrow", date: new Date(Date.now() + 24 * 60 * 60 * 1000) },
+    { label: "In a week", date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
+  ];
 
-<DatePicker
-  placeholder="Select or choose preset"
-  presets={presets}
-/>`,
+  return (
+    <DatePicker
+      placeholder="Select or choose preset"
+      presets={presets}
+    />
+  );
+};`,
+      render: WithPresetsExample,
     },
     {
       id: "disabled",
       title: "Disabled",
       description: "Disabled date picker.",
-      code: `<DatePicker
-  placeholder="Cannot select date"
-  disabled
-/>`,
+      code: jsxToString(<DisabledExample />),
+      render: DisabledExample,
     },
     {
       id: "error-state",
       title: "Error State",
       description: "Date picker with error styling.",
-      code: `<DatePicker
-  placeholder="Date required"
-  hasError
-/>`,
+      code: jsxToString(<ErrorStateExample />),
+      render: ErrorStateExample,
     },
     {
       id: "controlled",
       title: "Controlled",
       description: "Controlled date picker with external state.",
-      code: `const [date, setDate] = useState<Date | undefined>();
+      code: `const ControlledExample = () => {
+  const [date, setDate] = useState<Date | undefined>();
 
-<div className="space-y-2">
-  <DatePicker
-    placeholder="Pick a date"
-    value={date}
-    onChange={setDate}
-  />
-  {date && (
-    <p className="text-sm text-zinc-600">
-      Selected: {date.toLocaleDateString()}
-    </p>
-  )}
-</div>`,
+  return (
+    <div className="space-y-2">
+      <DatePicker
+        placeholder="Pick a date"
+        value={date}
+        onChange={setDate}
+      />
+      {date && (
+        <p className="text-sm text-zinc-600">
+          Selected: {date.toLocaleDateString()}
+        </p>
+      )}
+    </div>
+  );
+};`,
+      render: ControlledExample,
     },
   ],
 };

@@ -1,8 +1,16 @@
 "use client";
 
 import { Card } from "@/components/ui/card/card";
+import { CodeBlock } from "@/components/ui/code-block/code-block";
 import { getIconByName } from "@/components/ui/icon-select";
 import { Loader } from "@/components/ui/loader/loader";
+import { VStack } from "@/components/ui/stack";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs/tabs";
 import dynamic from "next/dynamic";
 import React from "react";
 import { usePropExplorer } from "./prop-explorer-context";
@@ -11,7 +19,6 @@ interface ComponentPreviewProps {
   componentId: string;
   category?: string;
   componentPath?: string;
-  className?: string;
 }
 
 // Map componentId to import path
@@ -34,8 +41,8 @@ const getComponentImportPath = (
       .replace(/([a-z])([A-Z])/g, "$1-$2")
       .toLowerCase();
 
-    // All examples are in component/example.tsx
-    return `@/components/ui/${kebabCase}/example`;
+    // All examples are in component/preview.tsx
+    return `@/components/ui/${kebabCase}/preview`;
   }
 
   // Convert componentId to kebab-case for directory structure
@@ -59,6 +66,41 @@ const getExportedComponentName = (componentId: string): string => {
 
   // Handle already PascalCase names
   return componentId.charAt(0).toUpperCase() + componentId.slice(1);
+};
+
+// Generate JSX code from component props for the Code tab
+const generateLiveCode = (
+  componentName: string,
+  props: Record<string, unknown>
+): string => {
+  const { children, ...otherProps } = props;
+
+  const propsArray = Object.entries(otherProps)
+    .filter(
+      ([, value]) => value !== "" && value !== false && value !== undefined
+    )
+    .map(([key, value]) => {
+      if (value === true) return key;
+      if (typeof value === "string") return `${key}="${value}"`;
+      if (key.includes("Icon") && typeof value === "string")
+        return `${key}={${value}Icon}`;
+      return `${key}={${JSON.stringify(value)}}`;
+    });
+
+  const propsString = propsArray.length > 0 ? " " + propsArray.join(" ") : "";
+
+  if (children && children !== "") {
+    return `<${componentName}${propsString}>\n  ${children}\n</${componentName}>`;
+  } else {
+    return `<${componentName}${propsString} />`;
+  }
+};
+
+// Extract component name from componentId
+const getComponentName = (componentId: string): string => {
+  // Remove "Example" suffix if present
+  const baseComponent = componentId.replace(/Example$/, "");
+  return getExportedComponentName(baseComponent);
 };
 
 // Create dynamic component based on componentId and category
@@ -229,7 +271,6 @@ export function ComponentPreview({
   componentId,
   category,
   componentPath,
-  className,
 }: ComponentPreviewProps) {
   const { props } = usePropExplorer();
 
@@ -288,10 +329,23 @@ export function ComponentPreview({
   };
 
   return (
-    <Card>
-      <div className="flex items-center justify-center min-h-[120px]">
-        {renderComponent()}
-      </div>
-    </Card>
+    <Tabs defaultValue="preview">
+      <VStack>
+        <TabsList className="px-8">
+          <TabsTrigger value="preview">Preview</TabsTrigger>
+          <TabsTrigger value="code">Code</TabsTrigger>
+        </TabsList>
+        <TabsContent value="preview">
+          <div className="flex justify-center">{renderComponent()}</div>
+        </TabsContent>
+        <TabsContent value="code">
+          <div className="px-8">
+            <CodeBlock language="tsx">
+              {generateLiveCode(getComponentName(componentId), componentProps)}
+            </CodeBlock>
+          </div>
+        </TabsContent>
+      </VStack>
+    </Tabs>
   );
 }

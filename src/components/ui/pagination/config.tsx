@@ -1,95 +1,71 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import { PaginationExample } from "./example";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { BasicPagination, PaginationWithEllipsis,  } from "./examples";
+import { PaginationExample } from "./preview";
 
 export const componentConfig: ComponentConfig = {
   id: "pagination",
   name: "Pagination",
-  description:
-    "A pagination component for navigating through multiple pages of content.",
-  category: "ui",
-  importStatement: 'import { Pagination } from "@/components/ui/pagination"',
+  description: "A pagination component for navigating through multiple pages of content.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination/pagination";`,
   componentId: "PaginationExample",
-  component: PaginationExample,
   props: [
     {
       name: "currentPage",
       type: "number",
-      defaultValue: 3,
-      description: "The currently active page number",
-      control: "NumberField",
-      min: 1,
-      max: 50,
+      defaultValue: 1,
+      description: "The current active page.",
     },
     {
       name: "totalPages",
       type: "number",
       defaultValue: 10,
-      description: "Total number of pages",
-      control: "NumberField",
-      min: 1,
-      max: 100,
+      description: "The total number of pages.",
     },
     {
-      name: "maxVisible",
-      type: "number",
-      defaultValue: 7,
-      description: "Maximum number of page numbers to show before using gaps",
-      control: "NumberField",
-      min: 3,
-      max: 15,
+      name: "onPageChange",
+      type: "function",
+      defaultValue: undefined,
+      description: "Callback when page changes.",
     },
     {
-      name: "showPreviousNext",
+      name: "showEllipsis",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show Previous/Next navigation buttons",
-      control: "boolean",
+      description: "Whether to show ellipsis for page ranges.",
     },
     {
-      name: "previousLabel",
-      type: "string",
-      defaultValue: "Previous",
-      description: "Text label for the previous button",
-      control: "text",
+      name: "siblingCount",
+      type: "number",
+      defaultValue: 1,
+      description: "Number of sibling pages to show on each side of current page.",
     },
     {
-      name: "nextLabel",
-      type: "string",
-      defaultValue: "Next",
-      description: "Text label for the next button",
-      control: "text",
+      name: "boundaryCount",
+      type: "number",
+      defaultValue: 1,
+      description: "Number of pages to show at the start and end.",
     },
   ],
   examples: [
     {
-      id: "basic",
+      id: "pagination",
       title: "Basic Pagination",
-      description: "Simple pagination with previous/next navigation",
-      code: `<Pagination>
-  <PaginationPrevious href="#prev" />
-  <PaginationList>
-    <PaginationPage href="#1" current>1</PaginationPage>
-    <PaginationPage href="#2">2</PaginationPage>
-    <PaginationPage href="#3">3</PaginationPage>
-  </PaginationList>
-  <PaginationNext href="#next" />
-</Pagination>`,
+      description: "A pagination component for navigating through multiple pages of content.",
+      code: jsxToString(<BasicPagination />),
+      render: BasicPagination,
     },
     {
       id: "with-ellipsis",
       title: "Pagination with Ellipsis",
       description: "Pagination showing ellipsis for large page counts",
-      code: `<Pagination>
-  <PaginationPrevious href="#prev" />
-  <PaginationList>
-    <PaginationPage href="#1">1</PaginationPage>
-    <PaginationPage href="#2">2</PaginationPage>
-    <PaginationPage href="#3" current>3</PaginationPage>
-    <span>...</span>
-    <PaginationPage href="#10">10</PaginationPage>
-  </PaginationList>
-  <PaginationNext href="#next" />
-</Pagination>`,
+      code: jsxToString(<PaginationWithEllipsis />),
+      render: PaginationWithEllipsis,
     },
   ],
 };

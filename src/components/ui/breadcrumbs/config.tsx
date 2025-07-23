@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithEllipsisExample, CustomSeparatorExample, SingleLevelExample, DeepNavigationExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "breadcrumbs",
@@ -32,105 +34,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic breadcrumb navigation.",
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Breadcrumbs</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-ellipsis",
       title: "With Ellipsis",
       description: "Breadcrumbs with collapsed items.",
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbEllipsis />
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Breadcrumbs</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
+      code: jsxToString(<WithEllipsisExample />),
+      render: WithEllipsisExample,
     },
     {
       id: "custom-separator",
       title: "Custom Separator",
       description: "Breadcrumbs with custom separator.",
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator>/</BreadcrumbSeparator>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator>/</BreadcrumbSeparator>
-    <BreadcrumbItem>
-      <BreadcrumbPage>Components</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
+      code: jsxToString(<CustomSeparatorExample />),
+      render: CustomSeparatorExample,
     },
     {
       id: "single-level",
       title: "Single Level",
       description: "Breadcrumbs with just current page.",
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbPage>Current Page</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
+      code: jsxToString(<SingleLevelExample />),
+      render: SingleLevelExample,
     },
     {
       id: "deep-navigation",
       title: "Deep Navigation",
       description: "Breadcrumbs showing deep navigation hierarchy.",
-      code: `<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/products/electronics">Electronics</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/products/electronics/phones">Phones</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>iPhone 15</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>`,
+      code: jsxToString(<DeepNavigationExample />),
+      render: DeepNavigationExample,
     },
   ],
 };

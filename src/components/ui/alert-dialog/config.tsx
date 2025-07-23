@@ -1,5 +1,7 @@
 // Configuration data - no React imports or JSX
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, DestructiveExample } from "./examples";
 
 // Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
@@ -64,39 +66,15 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic alert dialog with default styling.",
-      code: `<AlertDialog>
-  <AlertDialogTrigger>Delete Account</AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-    <AlertDialogDescription>
-      This action cannot be undone. This will permanently delete your account
-      and remove your data from our servers.
-    </AlertDialogDescription>
-    <div className="flex justify-end space-x-2">
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction>Continue</AlertDialogAction>
-    </div>
-  </AlertDialogContent>
-</AlertDialog>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "destructive",
       title: "Destructive",
       description: "Alert dialog with destructive action styling.",
-      code: `<AlertDialog>
-  <AlertDialogTrigger variant="destructive">Delete Account</AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogTitle>Delete Account</AlertDialogTitle>
-    <AlertDialogDescription>
-      This will permanently delete your account and all associated data.
-      This action cannot be undone.
-    </AlertDialogDescription>
-    <div className="flex justify-end space-x-2">
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction variant="destructive">Delete Account</AlertDialogAction>
-    </div>
-  </AlertDialogContent>
-</AlertDialog>`,
+      code: jsxToString(<DestructiveExample />),
+      render: DestructiveExample,
     },
   ],
 };

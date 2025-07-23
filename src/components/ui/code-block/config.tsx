@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, JavascriptExample, CssExample, JsonExample, BashExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "code-block",
@@ -36,41 +38,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic code block with TypeScript syntax.",
-      code: `<CodeBlock>
-{\`const greeting = "Hello, World!";\nconsole.log(greeting);\`}
-</CodeBlock>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "javascript",
       title: "JavaScript",
       description: "Code block displaying JavaScript code.",
-      code: `<CodeBlock language="javascript">
-{\`function calculateSum(a, b) {\n  return a + b;\n}\n\nconst result = calculateSum(5, 3);\nconsole.log(result);\`}
-</CodeBlock>`,
+      code: jsxToString(<JavascriptExample />),
+      render: JavascriptExample,
     },
     {
       id: "css",
       title: "CSS",
       description: "Code block showing CSS styles.",
-      code: `<CodeBlock language="css">
-{\`.button {\n  background-color: #3b82f6;\n  color: white;\n  padding: 0.5rem 1rem;\n  border-radius: 0.25rem;\n  border: none;\n  cursor: pointer;\n}\n\n.button:hover {\n  background-color: #2563eb;\n}\`}
-</CodeBlock>`,
+      code: jsxToString(<CssExample />),
+      render: CssExample,
     },
     {
       id: "json",
       title: "JSON",
       description: "Code block for JSON configuration.",
-      code: `<CodeBlock language="json">
-{\`{\n  "name": "my-project",\n  "version": "1.0.0",\n  "dependencies": {\n    "react": "^18.0.0",\n    "typescript": "^4.9.0"\n  }\n}\`}
-</CodeBlock>`,
+      code: jsxToString(<JsonExample />),
+      render: JsonExample,
     },
     {
       id: "bash",
       title: "Bash",
       description: "Code block for shell commands.",
-      code: `<CodeBlock language="bash">
-{\`npm install\nnpm run dev\n\n# Start the development server\nnpm start\`}
-</CodeBlock>`,
+      code: jsxToString(<BashExample />),
+      render: BashExample,
     },
   ],
 };

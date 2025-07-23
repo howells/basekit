@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithImageExample, SquareExample } from "./examples";
 
 // Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
@@ -52,26 +54,22 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic avatar with initials.",
-      code: `<Avatar initials="JD" alt="John Doe" />`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-image",
       title: "With Image",
       description: "Avatar with a profile image.",
-      code: `<Avatar
-  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face"
-  alt="Profile picture"
-/>`,
+      code: jsxToString(<WithImageExample />),
+      render: WithImageExample,
     },
     {
       id: "square",
       title: "Square",
       description: "Square-shaped avatar.",
-      code: `<Avatar
-  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face"
-  square
-  alt="Square avatar"
-/>`,
+      code: jsxToString(<SquareExample />),
+      render: SquareExample,
     },
   ],
 };

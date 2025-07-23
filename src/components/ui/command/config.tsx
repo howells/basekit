@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithShortcutsExample, WithIconsExample, DialogModeExample, SizesExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "command",
@@ -45,101 +47,22 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic command palette with search and items.",
-      code: `<Command className="rounded-lg border shadow-md max-w-md">
-  <CommandInput placeholder="Type a command or search..." />
-  <CommandList>
-    <CommandEmpty>No results found.</CommandEmpty>
-    <CommandGroup heading="Suggestions">
-      <CommandItem>New File</CommandItem>
-      <CommandItem>Open File</CommandItem>
-      <CommandItem>Save File</CommandItem>
-    </CommandGroup>
-    <CommandSeparator />
-    <CommandGroup heading="Settings">
-      <CommandItem>Preferences</CommandItem>
-      <CommandItem>Keyboard Shortcuts</CommandItem>
-      <CommandItem>Extensions</CommandItem>
-    </CommandGroup>
-  </CommandList>
-</Command>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-shortcuts",
       title: "With Shortcuts",
       description: "Command items with keyboard shortcuts.",
-      code: `<Command className="rounded-lg border shadow-md max-w-md">
-  <CommandInput placeholder="Type a command or search..." />
-  <CommandList>
-    <CommandEmpty>No results found.</CommandEmpty>
-    <CommandGroup heading="File">
-      <CommandItem>
-        New File
-        <CommandShortcut>⌘N</CommandShortcut>
-      </CommandItem>
-      <CommandItem>
-        Open File
-        <CommandShortcut>⌘O</CommandShortcut>
-      </CommandItem>
-      <CommandItem>
-        Save File
-        <CommandShortcut>⌘S</CommandShortcut>
-      </CommandItem>
-    </CommandGroup>
-    <CommandSeparator />
-    <CommandGroup heading="Edit">
-      <CommandItem>
-        Copy
-        <CommandShortcut>⌘C</CommandShortcut>
-      </CommandItem>
-      <CommandItem>
-        Paste
-        <CommandShortcut>⌘V</CommandShortcut>
-      </CommandItem>
-      <CommandItem>
-        Find
-        <CommandShortcut>⌘F</CommandShortcut>
-      </CommandItem>
-    </CommandGroup>
-  </CommandList>
-</Command>`,
+      code: jsxToString(<WithShortcutsExample />),
+      render: WithShortcutsExample,
     },
     {
       id: "with-icons",
       title: "With Icons",
       description: "Command items with icons and actions.",
-      code: `<Command className="rounded-lg border shadow-md max-w-md">
-  <CommandInput placeholder="Search commands..." />
-  <CommandList>
-    <CommandEmpty>No results found.</CommandEmpty>
-    <CommandGroup heading="Actions">
-      <CommandItem>
-        <FileIcon className="mr-2 h-4 w-4" />
-        New Document
-      </CommandItem>
-      <CommandItem>
-        <FolderIcon className="mr-2 h-4 w-4" />
-        Open Folder
-      </CommandItem>
-      <CommandItem>
-        <SaveIcon className="mr-2 h-4 w-4" />
-        Save Changes
-      </CommandItem>
-    </CommandGroup>
-    <CommandSeparator />
-    <CommandGroup heading="Navigation">
-      <CommandItem>
-        <SearchIcon className="mr-2 h-4 w-4" />
-        Go to File
-        <CommandShortcut>⌘P</CommandShortcut>
-      </CommandItem>
-      <CommandItem>
-        <CommandIcon className="mr-2 h-4 w-4" />
-        Command Palette
-        <CommandShortcut>⌘K</CommandShortcut>
-      </CommandItem>
-    </CommandGroup>
-  </CommandList>
-</Command>`,
+      code: jsxToString(<WithIconsExample />),
+      render: WithIconsExample,
     },
     {
       id: "dialog-mode",
@@ -160,77 +83,57 @@ useEffect(() => {
   return () => document.removeEventListener("keydown", down);
 }, []);
 
-<>
-  <Button
-    variant="outline"
-    onClick={() => setOpen(true)}
-  >
-    Open Command Palette
-    <CommandShortcut className="ml-2">⌘K</CommandShortcut>
-  </Button>
+return (
+  <>
+    <Button
+      variant="outline"
+      onClick={() => setOpen(true)}
+    >
+      Open Command Palette
+      <CommandShortcut className="ml-2">⌘K</CommandShortcut>
+    </Button>
 
-  <CommandDialog open={open} onOpenChange={setOpen}>
-    <CommandInput placeholder="Type a command or search..." />
-    <CommandList>
-      <CommandEmpty>No results found.</CommandEmpty>
+    <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandInput placeholder="Type a command or search..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
 
-      <CommandGroup heading="Quick Actions">
-        <CommandItem onSelect={() => {
-          setOpen(false);
-          // Handle new file action
-        }}>
-          New File
-          <CommandShortcut>⌘N</CommandShortcut>
-        </CommandItem>
-        <CommandItem onSelect={() => {
-          setOpen(false);
-          // Handle open action
-        }}>
-          Open File
-          <CommandShortcut>⌘O</CommandShortcut>
-        </CommandItem>
-      </CommandGroup>
+        <CommandGroup heading="Quick Actions">
+          <CommandItem onSelect={() => {
+            setOpen(false);
+            // Handle new file action
+          }}>
+            New File
+            <CommandShortcut>⌘N</CommandShortcut>
+          </CommandItem>
+          <CommandItem onSelect={() => {
+            setOpen(false);
+            // Handle open action
+          }}>
+            Open File
+            <CommandShortcut>⌘O</CommandShortcut>
+          </CommandItem>
+        </CommandGroup>
 
-      <CommandSeparator />
+        <CommandSeparator />
 
-      <CommandGroup heading="Settings">
-        <CommandItem>Preferences</CommandItem>
-        <CommandItem>Extensions</CommandItem>
-        <CommandItem>About</CommandItem>
-      </CommandGroup>
-    </CommandList>
-  </CommandDialog>
-</>`,
+        <CommandGroup heading="Settings">
+          <CommandItem>Preferences</CommandItem>
+          <CommandItem>Extensions</CommandItem>
+          <CommandItem>About</CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </CommandDialog>
+  </>
+);`,
+      render: DialogModeExample,
     },
     {
       id: "sizes",
       title: "Sizes",
       description: "Different size variants of the command palette.",
-      code: `<div className="space-y-4">
-  <Command className="rounded-lg border shadow-md max-w-sm" size="sm">
-    <CommandInput placeholder="Small command..." />
-    <CommandList>
-      <CommandItem>Small Item 1</CommandItem>
-      <CommandItem>Small Item 2</CommandItem>
-    </CommandList>
-  </Command>
-
-  <Command className="rounded-lg border shadow-md max-w-md" size="default">
-    <CommandInput placeholder="Default command..." />
-    <CommandList>
-      <CommandItem>Default Item 1</CommandItem>
-      <CommandItem>Default Item 2</CommandItem>
-    </CommandList>
-  </Command>
-
-  <Command className="rounded-lg border shadow-md max-w-lg" size="lg">
-    <CommandInput placeholder="Large command..." />
-    <CommandList>
-      <CommandItem>Large Item 1</CommandItem>
-      <CommandItem>Large Item 2</CommandItem>
-    </CommandList>
-  </Command>
-</div>`,
+      code: jsxToString(<SizesExample />),
+      render: SizesExample,
     },
   ],
 };

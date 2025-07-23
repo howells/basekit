@@ -1,36 +1,37 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import {
-  Navbar,
-  NavbarDivider,
-  NavbarItem,
-  NavbarLabel,
-  NavbarSection,
-} from "./navbar";
+import type { ComponentConfig } from "@/lib/component-config-types";
 
 export const componentConfig: ComponentConfig = {
   id: "navbar",
   name: "Navbar",
   description: "A navigation bar component with branding, sections, and items.",
-  category: "ui",
-  importStatement: 'import { Navbar } from "@/components/ui/navbar"',
-  componentId: "Navbar",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import {
+  Navbar,
+  NavbarDivider,
+  NavbarItem,
+  NavbarLabel,
+  NavbarSection,
+} from "@/components/ui/navbar/navbar";`,
+  componentId: "NavbarExample",
   props: [],
   examples: [
     {
-      id: "basic",
+      id: "default",
       title: "Basic Navbar",
-      description: "A simple navigation bar",
+      description: "A navigation bar component with branding, sections, and items.",
       code: `<Navbar>
   <NavbarSection>
-    <NavbarItem href="#home">
-      <NavbarLabel>Home</NavbarLabel>
-    </NavbarItem>
-    <NavbarItem href="#about">
-      <NavbarLabel>About</NavbarLabel>
-    </NavbarItem>
-    <NavbarItem href="#contact">
-      <NavbarLabel>Contact</NavbarLabel>
-    </NavbarItem>
+    <NavbarLabel>Brand</NavbarLabel>
+  </NavbarSection>
+  <NavbarSection>
+    <NavbarItem href="/">Home</NavbarItem>
+    <NavbarItem href="/about">About</NavbarItem>
+    <NavbarItem href="/services">Services</NavbarItem>
+    <NavbarItem href="/contact">Contact</NavbarItem>
   </NavbarSection>
 </Navbar>`,
     },
@@ -40,21 +41,17 @@ export const componentConfig: ComponentConfig = {
       description: "Navigation bar with sections separated by dividers",
       code: `<Navbar>
   <NavbarSection>
-    <NavbarItem href="#home">
-      <NavbarLabel>Home</NavbarLabel>
-    </NavbarItem>
-    <NavbarItem href="#about">
-      <NavbarLabel>About</NavbarLabel>
-    </NavbarItem>
+    <NavbarLabel>Brand</NavbarLabel>
   </NavbarSection>
   <NavbarDivider />
   <NavbarSection>
-    <NavbarItem href="#login">
-      <NavbarLabel>Login</NavbarLabel>
-    </NavbarItem>
-    <NavbarItem href="#signup">
-      <NavbarLabel>Sign Up</NavbarLabel>
-    </NavbarItem>
+    <NavbarItem href="/">Home</NavbarItem>
+    <NavbarItem href="/products">Products</NavbarItem>
+  </NavbarSection>
+  <NavbarDivider />
+  <NavbarSection>
+    <NavbarItem href="/account">Account</NavbarItem>
+    <NavbarItem href="/settings">Settings</NavbarItem>
   </NavbarSection>
 </Navbar>`,
     },

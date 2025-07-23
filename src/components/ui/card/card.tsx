@@ -97,7 +97,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const defaultProps: useRender.ElementProps<"div"> = {
       className: cx(
         // base
-        "relative w-full rounded-lg text-left text-sm shadow-xs",
+        "relative w-full rounded-lg text-left text-sm shadow-xs inset-ring-1 inset-ring-black/10 dark:inset-ring-white/10",
         // padding
         padding === 0 && "p-0",
         padding === 0.5 && "p-0.5",

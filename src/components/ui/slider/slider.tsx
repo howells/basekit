@@ -184,7 +184,7 @@ const Slider = React.forwardRef<
       return (
         <div className="flex flex-col items-center h-full">
           <BaseSlider.Root
-            ref={forwardedRef}
+            ref={forwardedRef as any}
             className={cx(root(), "flex flex-col items-center", className)}
             {...props}
           >
@@ -229,7 +229,7 @@ const Slider = React.forwardRef<
     return (
       <div className="w-full">
         <BaseSlider.Root
-          ref={forwardedRef}
+          ref={forwardedRef as any}
           className={cx(root(), className)}
           {...props}
         >

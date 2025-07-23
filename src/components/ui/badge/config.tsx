@@ -1,5 +1,13 @@
 // Configuration data - no React imports or JSX
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import {
+  BorderedExample,
+  DefaultExample,
+  SizesExample,
+  VariantsExample,
+  WithIconsExample,
+} from "./examples";
 
 // Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
@@ -31,6 +39,12 @@ export const componentConfig: ComponentConfig = {
       options: ["sm", "base", "lg"],
     },
     {
+      name: "bordered",
+      type: "boolean",
+      description: "Whether to display a border around the badge.",
+      defaultValue: true,
+    },
+    {
       name: "leftIcon",
       type: "icon",
       description: "Icon component to display on the left side.",
@@ -53,37 +67,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic badge with default styling.",
-      code: `<Badge>Badge</Badge>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-icons",
       title: "With Icons",
       description: "Badge with left and right icons.",
-      code: `<Badge leftIcon={CheckIcon} rightIcon={ArrowIcon} variant="success">
-  Success
-</Badge>`,
+      code: jsxToString(<WithIconsExample />),
+      render: WithIconsExample,
     },
     {
       id: "variants",
       title: "Variants",
       description: "Different badge variants for various states.",
-      code: `<div className="flex gap-2">
-  <Badge variant="default">Default</Badge>
-  <Badge variant="success">Success</Badge>
-  <Badge variant="error">Error</Badge>
-  <Badge variant="warning">Warning</Badge>
-  <Badge variant="neutral">Neutral</Badge>
-</div>`,
+      code: jsxToString(<VariantsExample />),
+      render: VariantsExample,
     },
     {
       id: "sizes",
       title: "Sizes",
       description: "Different badge sizes.",
-      code: `<div className="flex items-center gap-2">
-  <Badge size="sm">Small</Badge>
-  <Badge size="base">Base</Badge>
-  <Badge size="lg">Large</Badge>
-</div>`,
+      code: jsxToString(<SizesExample />),
+      render: SizesExample,
+    },
+    {
+      id: "bordered",
+      title: "Bordered",
+      description: "Badge with and without borders.",
+      code: jsxToString(<BorderedExample />),
+      render: BorderedExample,
     },
   ],
 };

@@ -11,7 +11,6 @@ import * as React from "react";
 import {
   DayPicker,
   useDayPicker,
-  useDayRender,
   useNavigation,
   type DayPickerRangeProps,
   type DayPickerSingleProps,
@@ -166,7 +165,7 @@ const Calendar = ({
       classNames={{
         months: "flex space-y-0",
         month: "space-y-4 p-3",
-        nav: "gap-1 flex items-center rounded-full size-full justify-between p-4",
+        nav: "hidden",
         table: "w-full border-collapse space-y-1",
         head_cell:
           "w-9 font-medium text-sm sm:text-xs text-center text-zinc-400 dark:text-zinc-600 pb-2",
@@ -313,50 +312,6 @@ const Calendar = ({
                 )}
               </div>
             </div>
-          );
-        },
-        Day: ({ date, displayMonth }: DayProps) => {
-          const buttonRef = React.useRef<HTMLButtonElement>(null);
-          const { activeModifiers, buttonProps, divProps, isButton, isHidden } =
-            useDayRender(
-              date,
-              displayMonth,
-              buttonRef as React.RefObject<HTMLButtonElement>
-            );
-
-          const { selected, today, disabled, range_middle } = activeModifiers;
-
-          if (isHidden) {
-            return <></>;
-          }
-
-          if (!isButton) {
-            return (
-              <div
-                {...divProps}
-                className={cx(
-                  "flex items-center justify-center",
-                  divProps.className
-                )}
-              />
-            );
-          }
-
-          const {
-            children: buttonChildren,
-            className: buttonClassName,
-            ...buttonPropsRest
-          } = buttonProps;
-
-          return (
-            <button
-              ref={buttonRef}
-              {...buttonPropsRest}
-              type="button"
-              className={cx("relative", buttonClassName)}
-            >
-              {buttonChildren}
-            </button>
           );
         },
       }}

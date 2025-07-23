@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, SecondaryExample, DestructiveExample, OutlineExample, GhostExample, LinkExample, WithIconsExample, LoadingExample, SizesExample, FullWidthExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "button",
@@ -93,69 +95,71 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic button with default styling.",
-      code: `<Button>Click me</Button>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "secondary",
       title: "Secondary",
       description: "Button with secondary styling.",
-      code: `<Button variant="secondary">Secondary</Button>`,
+      code: jsxToString(<SecondaryExample />),
+      render: SecondaryExample,
     },
     {
       id: "destructive",
       title: "Destructive",
       description: "Button for destructive actions.",
-      code: `<Button variant="destructive">Delete</Button>`,
+      code: jsxToString(<DestructiveExample />),
+      render: DestructiveExample,
     },
     {
       id: "outline",
       title: "Outline",
       description: "Button with outline styling.",
-      code: `<Button variant="outline">Outline</Button>`,
+      code: jsxToString(<OutlineExample />),
+      render: OutlineExample,
     },
     {
       id: "ghost",
       title: "Ghost",
       description: "Button with ghost styling.",
-      code: `<Button variant="ghost">Ghost</Button>`,
+      code: jsxToString(<GhostExample />),
+      render: GhostExample,
     },
     {
       id: "link",
       title: "Link",
       description: "Button styled as a link.",
-      code: `<Button variant="link">Link</Button>`,
+      code: jsxToString(<LinkExample />),
+      render: LinkExample,
     },
     {
       id: "with-icons",
       title: "With Icons",
       description: "Button with left and right icons.",
-      code: `<Button leftIcon={PlusIcon} rightIcon={ArrowRightIcon}>
-  With Icons
-</Button>`,
+      code: jsxToString(<WithIconsExample />),
+      render: WithIconsExample,
     },
     {
       id: "loading",
       title: "Loading State",
       description: "Button in loading state.",
-      code: `<Button isLoading>Loading...</Button>`,
+      code: jsxToString(<LoadingExample />),
+      render: LoadingExample,
     },
     {
       id: "sizes",
       title: "Sizes",
       description: "Different button sizes.",
-      code: `<div className="flex items-center gap-2">
-  <Button size="sm">Small</Button>
-  <Button size="default">Default</Button>
-  <Button size="icon">
-    <PlusIcon />
-  </Button>
-</div>`,
+      code: jsxToString(<SizesExample />),
+      render: SizesExample,
     },
     {
       id: "full-width",
       title: "Full Width",
       description: "Button that spans the full width.",
-      code: `<Button fullWidth>Full Width Button</Button>`,
+      code: jsxToString(<FullWidthExample />),
+      render: FullWidthExample,
     },
   ],
 };

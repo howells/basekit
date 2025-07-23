@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultNumberFieldExample, WithConstraintsExample, WithoutSteppersExample, DisabledScrubAreaExample, FullWidthExample, DisabledExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "number-field",
@@ -6,40 +8,59 @@ export const componentConfig: ComponentConfig = {
   description: "A number input field built on Base UI with stepper controls, scrubbing functionality, and full keyboard navigation.",
   category: "inputs" as const,
   badge: "Input",
-  importStatement: `import { NumberField } from "@/components/ui/number-field";`,
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { NumberField } from "@/components/ui/number-field/number-field";`,
   componentId: "NumberFieldExample",
   props: [
     {
-      name: "label",
-      type: "string",
-      description: "Label text for the number field.",
-    },
-    {
-      name: "placeholder",
-      type: "string",
-      defaultValue: "Enter number...",
-      description: "Placeholder text for the input.",
+      name: "value",
+      type: "number",
+      defaultValue: 0,
+      description: "The current value of the number field.",
     },
     {
       name: "defaultValue",
       type: "number",
-      description: "Default value for the number field.",
+      defaultValue: 0,
+      description: "The default value of the number field.",
     },
     {
       name: "min",
       type: "number",
-      description: "Minimum allowed value.",
+      defaultValue: undefined,
+      description: "The minimum allowed value.",
     },
     {
       name: "max",
       type: "number",
-      description: "Maximum allowed value.",
+      defaultValue: undefined,
+      description: "The maximum allowed value.",
     },
     {
       name: "step",
       type: "number",
       defaultValue: 1,
-      description: "Step increment for stepper controls.",
+      description: "The step increment when using arrow keys or steppers.",
+    },
+    {
+      name: "largeStep",
+      type: "number",
+      defaultValue: 10,
+      description: "The large step increment when holding shift.",
+    },
+    {
+      name: "showSteppers",
+      type: "boolean",
+      defaultValue: true,
+      description: "Whether to show the stepper buttons.",
+    },
+    {
+      name: "allowScrub",
+      type: "boolean",
+      defaultValue: true,
+      description: "Whether to enable mouse scrubbing on the label.",
     },
     {
       name: "disabled",
@@ -48,88 +69,54 @@ export const componentConfig: ComponentConfig = {
       description: "Whether the number field is disabled.",
     },
     {
-      name: "showSteppers",
-      type: "boolean",
-      defaultValue: true,
-      description: "Whether to show increment/decrement buttons.",
-    },
-    {
-      name: "showScrubArea",
-      type: "boolean",
-      defaultValue: true,
-      description: "Whether the label acts as a scrub area for mouse dragging.",
-    },
-    {
       name: "fullWidth",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the number field should span full width.",
+      description: "Whether the number field spans full width.",
     },
   ],
   examples: [
     {
       id: "default",
       title: "Default",
-      description: "Basic number field with steppers and scrub area.",
-      code: `<NumberField label="Quantity" placeholder="Enter quantity" />`,
+      description: "A number input field built on Base UI with stepper controls, scrubbing functionality, and full keyboard navigation.",
+      code: jsxToString(<DefaultNumberFieldExample />),
+      render: DefaultNumberFieldExample,
     },
     {
       id: "with-constraints",
       title: "With Constraints",
       description: "Number field with min, max, and step constraints.",
-      code: `<NumberField
-  label="Price"
-  placeholder="$0.00"
-  min={0}
-  max={1000}
-  step={0.01}
-  defaultValue={29.99}
-/>`,
+      code: jsxToString(<WithConstraintsExample />),
+      render: WithConstraintsExample,
     },
     {
       id: "without-steppers",
       title: "Without Steppers",
       description: "Clean number input without visible stepper controls.",
-      code: `<NumberField
-  label="Age"
-  placeholder="Enter age"
-  showSteppers={false}
-  min={0}
-  max={120}
-/>`,
+      code: jsxToString(<WithoutSteppersExample />),
+      render: WithoutSteppersExample,
     },
     {
       id: "disabled-scrub-area",
       title: "Without Scrub Area",
       description: "Number field with regular label (no mouse scrubbing).",
-      code: `<NumberField
-  label="Score"
-  placeholder="Enter score"
-  showScrubArea={false}
-  min={0}
-  max={100}
-/>`,
+      code: jsxToString(<DisabledScrubAreaExample />),
+      render: DisabledScrubAreaExample,
     },
     {
       id: "full-width",
       title: "Full Width",
       description: "Number field that spans the full width of its container.",
-      code: `<NumberField
-  label="Amount"
-  placeholder="Enter amount"
-  fullWidth
-  defaultValue={500}
-/>`,
+      code: jsxToString(<FullWidthExample />),
+      render: FullWidthExample,
     },
     {
       id: "disabled",
       title: "Disabled",
       description: "Disabled number field that cannot be interacted with.",
-      code: `<NumberField
-  label="Read Only"
-  defaultValue={42}
-  disabled
-/>`,
+      code: jsxToString(<DisabledExample />),
+      render: DisabledExample,
     },
   ],
 };

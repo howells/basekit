@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, DefaultOpenExample, DisabledExample, NestedContentExample, WithIconsExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "collapsible",
@@ -44,58 +46,29 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic collapsible with trigger and content.",
-      code: `<Collapsible>
-  <CollapsibleTrigger>What is StencilUI?</CollapsibleTrigger>
-  <CollapsibleContent>
-    StencilUI is a modern React component library built on Base UI primitives with Tremor-inspired styling.
-  </CollapsibleContent>
-</Collapsible>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "default-open",
       title: "Default Open",
       description: "Collapsible that is open by default.",
-      code: `<Collapsible defaultOpen>
-  <CollapsibleTrigger>System Requirements</CollapsibleTrigger>
-  <CollapsibleContent>
-    <ul className="space-y-1 ml-4">
-      <li>• React 18 or higher</li>
-      <li>• Node.js 16 or higher</li>
-      <li>• TypeScript 4.9 or higher</li>
-    </ul>
-  </CollapsibleContent>
-</Collapsible>`,
+      code: jsxToString(<DefaultOpenExample />),
+      render: DefaultOpenExample,
     },
     {
       id: "disabled",
       title: "Disabled",
       description: "Disabled collapsible that cannot be interacted with.",
-      code: `<Collapsible disabled>
-  <CollapsibleTrigger>Coming Soon</CollapsibleTrigger>
-  <CollapsibleContent>
-    This feature is currently under development.
-  </CollapsibleContent>
-</Collapsible>`,
+      code: jsxToString(<DisabledExample />),
+      render: DisabledExample,
     },
     {
       id: "nested-content",
       title: "Rich Content",
       description: "Collapsible with complex nested content.",
-      code: `<Collapsible>
-  <CollapsibleTrigger>Installation Guide</CollapsibleTrigger>
-  <CollapsibleContent>
-    <div className="space-y-3">
-      <p>Install StencilUI in your project:</p>
-      <code className="block bg-zinc-100 dark:bg-zinc-800 p-2 rounded text-sm">
-        pnpm add stencilui
-      </code>
-      <p>Then import components as needed:</p>
-      <code className="block bg-zinc-100 dark:bg-zinc-800 p-2 rounded text-sm">
-        import {"{"}Button{"}"}  from "stencilui"
-      </code>
-    </div>
-  </CollapsibleContent>
-</Collapsible>`,
+      code: jsxToString(<NestedContentExample />),
+      render: NestedContentExample,
     },
   ],
 };

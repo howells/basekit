@@ -1,9 +1,8 @@
 "use client";
 
-import * as Headless from "@headlessui/react";
 import clsx from "clsx";
 import { LayoutGroup, motion } from "framer-motion";
-import { PanelLeftClose } from "lucide-react";
+import { PanelLeft, PanelLeftDashed } from "lucide-react";
 import Link from "next/link";
 import React, { forwardRef, useId } from "react";
 import { Button } from "../button";
@@ -71,14 +70,8 @@ export function SidebarToggle({
       size="icon-sm"
       className={clsx(className)}
       aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-    >
-      <PanelLeftClose
-        size={16}
-        className={clsx("transition-transform duration-200", {
-          "rotate-180": isCollapsed,
-        })}
-      />
-    </Button>
+      leftIcon={isCollapsed ? PanelLeft : PanelLeftDashed}
+    ></Button>
   );
 }
 
@@ -104,6 +97,7 @@ export function SidebarHeader({
 export function SidebarBody({
   className,
   isCollapsed,
+  children,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & {
   isCollapsed?: boolean;
@@ -113,7 +107,9 @@ export function SidebarBody({
       className={clsx(className, "flex-1")}
       viewportClassName="[&>[data-slot=section]+[data-slot=section]]:mt-8"
       {...props}
-    />
+    >
+      {children}
+    </ScrollArea>
   );
 }
 
@@ -278,8 +274,10 @@ export const SidebarItem = forwardRef(function SidebarItem(
     children: React.ReactNode;
     isCollapsed?: boolean;
   } & (
-    | Omit<Headless.ButtonProps, "as" | "className">
-    | Omit<Headless.ButtonProps<typeof Link>, "as" | "className">
+    | (Omit<React.ComponentPropsWithoutRef<"a">, "className"> & {
+        href: string;
+      })
+    | Omit<React.ComponentPropsWithoutRef<"button">, "className">
   ),
   ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
 ) {
@@ -315,30 +313,29 @@ export const SidebarItem = forwardRef(function SidebarItem(
         />
       )}
       {"href" in props ? (
-        <Headless.CloseButton
-          as={Link}
-          {...props}
+        <Link
+          href={props.href}
           className={classes}
           data-current={current ? "true" : undefined}
-          ref={ref}
+          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
           title={
             isCollapsed && typeof children === "string" ? children : undefined
           }
         >
           <TouchTarget>{children}</TouchTarget>
-        </Headless.CloseButton>
+        </Link>
       ) : (
-        <Headless.Button
-          {...props}
+        <Button
           className={clsx("cursor-default", classes)}
           data-current={current ? "true" : undefined}
-          ref={ref}
+          ref={ref as React.ForwardedRef<HTMLButtonElement>}
           title={
             isCollapsed && typeof children === "string" ? children : undefined
           }
+          variant="ghost"
         >
           <TouchTarget>{children}</TouchTarget>
-        </Headless.Button>
+        </Button>
       )}
     </span>
   );

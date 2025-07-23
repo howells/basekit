@@ -1,6 +1,7 @@
 "use client";
 
 import { ComponentConfig } from "@/lib/component-configs";
+import { Subheading } from "./ui/subheading/subheading";
 import { Text } from "./ui/text";
 
 interface ComponentSectionsProps {
@@ -14,9 +15,7 @@ export function ComponentSections({ sections }: ComponentSectionsProps) {
     <>
       {sections.map((section, index) => (
         <div key={index} className="space-y-4">
-          <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-            {section.title}
-          </h2>
+          <Subheading level={2}>{section.title}</Subheading>
           {typeof section.content === "string" ? (
             <Text>{section.content}</Text>
           ) : (

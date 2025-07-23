@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, WithFormatterExample, InteractiveExample, WithLinksExample, AnimatedExample, AscendingExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "bar-list",
@@ -52,79 +54,43 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic bar list with default settings.",
-      code: `<BarList 
-  data={[
-    { name: "New York", value: 400 },
-    { name: "London", value: 300 },
-    { name: "Tokyo", value: 200 },
-    { name: "Paris", value: 100 },
-  ]} 
-/>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "with-formatter",
       title: "With Value Formatter",
       description: "Bar list with custom value formatting.",
-      code: `<BarList 
-  data={[
-    { name: "Revenue", value: 125000 },
-    { name: "Expenses", value: 75000 },
-    { name: "Profit", value: 50000 },
-  ]}
-  valueFormatter={(value) => \`$\${value.toLocaleString()}\`}
-/>`,
+      code: jsxToString(<WithFormatterExample />),
+      render: WithFormatterExample,
     },
     {
       id: "interactive",
       title: "Interactive",
       description: "Clickable bars with hover effects.",
-      code: `<BarList 
-  data={[
-    { name: "Product A", value: 85 },
-    { name: "Product B", value: 70 },
-    { name: "Product C", value: 45 },
-  ]}
-  onValueChange={(item) => console.log(item)}
-/>`,
+      code: jsxToString(<InteractiveExample />),
+      render: InteractiveExample,
     },
     {
       id: "with-links",
       title: "With Links",
       description: "Bar list items with external links.",
-      code: `<BarList 
-  data={[
-    { name: "Documentation", value: 95, href: "https://docs.example.com" },
-    { name: "GitHub", value: 80, href: "https://github.com/example" },
-    { name: "Website", value: 60, href: "https://example.com" },
-  ]}
-/>`,
+      code: jsxToString(<WithLinksExample />),
+      render: WithLinksExample,
     },
     {
       id: "animated",
       title: "Animated",
       description: "Bar list with smooth animations.",
-      code: `<BarList 
-  data={[
-    { name: "Q1", value: 100 },
-    { name: "Q2", value: 150 },
-    { name: "Q3", value: 125 },
-    { name: "Q4", value: 175 },
-  ]}
-  showAnimation={true}
-/>`,
+      code: jsxToString(<AnimatedExample />),
+      render: AnimatedExample,
     },
     {
       id: "ascending",
       title: "Ascending Order",
       description: "Bars sorted in ascending order by value.",
-      code: `<BarList 
-  data={[
-    { name: "Small", value: 25 },
-    { name: "Large", value: 100 },
-    { name: "Medium", value: 60 },
-  ]}
-  sortOrder="ascending"
-/>`,
+      code: jsxToString(<AscendingExample />),
+      render: AscendingExample,
     },
   ],
 };

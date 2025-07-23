@@ -1,5 +1,7 @@
 // Configuration data - no React imports or JSX
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, StackedExample, PercentExample, SolidFillExample, WithLabelsExample,  } from "./examples";
 
 // Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
@@ -115,56 +117,36 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic area chart with sample data.",
-      code: `<AreaChart
-  data={chartData}
-  index="date"
-  categories={["sales", "profit"]}
-/>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "stacked",
       title: "Stacked Areas",
       description: "Area chart with stacked data series.",
-      code: `<AreaChart
-  data={chartData}
-  index="date"
-  categories={["desktop", "mobile", "tablet"]}
-  type="stacked"
-/>`,
+      code: jsxToString(<StackedExample />),
+      render: StackedExample,
     },
     {
       id: "percent",
       title: "Percentage Chart",
       description: "Area chart showing percentage distribution.",
-      code: `<AreaChart
-  data={chartData}
-  index="date"
-  categories={["category1", "category2", "category3"]}
-  type="percent"
-/>`,
+      code: jsxToString(<PercentExample />),
+      render: PercentExample,
     },
     {
       id: "solid-fill",
       title: "Solid Fill",
       description: "Area chart with solid color fills.",
-      code: `<AreaChart
-  data={chartData}
-  index="date"
-  categories={["revenue", "expenses"]}
-  fill="solid"
-/>`,
+      code: jsxToString(<SolidFillExample />),
+      render: SolidFillExample,
     },
     {
       id: "with-labels",
       title: "With Axis Labels",
       description: "Area chart with custom axis labels.",
-      code: `<AreaChart
-  data={chartData}
-  index="date"
-  categories={["value"]}
-  xAxisLabel="Time Period"
-  yAxisLabel="Amount ($)"
-/>`,
+      code: jsxToString(<WithLabelsExample />),
+      render: WithLabelsExample,
     },
   ],
 

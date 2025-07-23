@@ -2,8 +2,8 @@
 
 import {
   getComponentsByCategory,
-  type ComponentInfo,
 } from "@/lib/component-registry";
+import { type ComponentConfig } from "@/lib/component-config-types";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -56,7 +56,7 @@ export function ComponentSearch({
     }
     groups[category].push(component);
     return groups;
-  }, {} as Record<string, ComponentInfo[]>);
+  }, {} as Record<string, ComponentConfig[]>);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -103,7 +103,7 @@ export function ComponentSearch({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleSelect = (component: ComponentInfo) => {
+  const handleSelect = (component: ComponentConfig) => {
     const url = `/${component.category}/${component.id}`;
     router.push(url);
     setIsOpen(false);
@@ -170,7 +170,7 @@ export function ComponentSearch({
                                     {component.name}
                                   </Subheading>
                                   <Badge
-                                    variant="secondary"
+                                    variant="neutral"
                                     className="text-xs"
                                   >
                                     {component.badge ||

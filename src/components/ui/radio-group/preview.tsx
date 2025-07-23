@@ -33,7 +33,7 @@ export function RadioGroupExample({
   const handleChange =
     controlledValue !== undefined
       ? () => {} // No-op for controlled mode
-      : setInternalValue;
+      : (value: unknown) => setInternalValue(value as string);
 
   return (
     <RadioGroup

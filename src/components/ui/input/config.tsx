@@ -1,183 +1,165 @@
-import { ComponentConfig } from "@/lib/component-config-types";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultInputExample, SizesExample, InputTypesExample, StatesExample, SearchInputExample, PasswordInputExample, NumberInputExample, FileInputExample, PrefixSuffixTextExample, PrefixSuffixIconsExample, MixedPrefixSuffixExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "input",
   name: "Input",
-  description:
-    "A versatile input field component with various types, sizes, and states including search and password inputs.",
-  category: "inputs",
-  badge: "INPUTS",
+  description: "A versatile input field component with various types, sizes, and states including search and password inputs.",
+  category: "inputs" as const,
+  badge: "Inputs",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
   importStatement: `import { Input } from "@/components/ui/input/input";`,
   componentId: "InputExample",
   props: [
+    {
+      name: "placeholder",
+      type: "string",
+      defaultValue: "Enter text...",
+      description: "Placeholder text for the input.",
+    },
+    {
+      name: "type",
+      type: "select",
+      options: ["text", "password", "email", "number", "search", "tel", "url", "date", "time", "file"],
+      defaultValue: "text",
+      description: "The type of input.",
+    },
     {
       name: "size",
       type: "select",
       options: ["sm", "base", "lg"],
       defaultValue: "base",
-      description: "The size of the input field.",
+      description: "The size of the input.",
     },
     {
-      name: "type",
+      name: "variant",
       type: "select",
-      options: [
-        "text",
-        "email",
-        "password",
-        "search",
-        "number",
-        "tel",
-        "url",
-        "file",
-      ],
-      defaultValue: "text",
-      description: "The type of input field.",
+      options: ["default", "filled"],
+      defaultValue: "default",
+      description: "The visual style variant.",
     },
     {
-      name: "placeholder",
+      name: "value",
       type: "string",
-      defaultValue: "Enter text...",
-      description: "Placeholder text for the input field.",
+      description: "The controlled value of the input.",
     },
     {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the input is disabled.",
+      description: "Disable the input.",
     },
     {
-      name: "hasError",
+      name: "error",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the input has an error state.",
-    },
-    {
-      name: "required",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the input is required.",
-    },
-    {
-      name: "enableStepper",
-      type: "boolean",
-      defaultValue: true,
-      description: "Whether to show stepper controls for number inputs.",
+      description: "Show error state.",
     },
     {
       name: "prefixText",
       type: "string",
-      defaultValue: "",
-      description: "Text to display before the input.",
-    },
-    {
-      name: "prefixIcon",
-      type: "icon",
-      defaultValue: "",
-      description: "Icon to display before the input.",
+      description: "Text to show before the input.",
     },
     {
       name: "suffixText",
       type: "string",
-      defaultValue: "",
-      description: "Text to display after the input.",
+      description: "Text to show after the input.",
+    },
+    {
+      name: "prefixIcon",
+      type: "icon",
+      description: "Icon to show before the input.",
     },
     {
       name: "suffixIcon",
       type: "icon",
-      defaultValue: "",
-      description: "Icon to display after the input.",
+      description: "Icon to show after the input.",
     },
     {
       name: "prefixStyling",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to apply default styling to the prefix.",
+      description: "Apply styling to prefix.",
     },
     {
       name: "suffixStyling",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to apply default styling to the suffix.",
+      description: "Apply styling to suffix.",
+    },
+    {
+      name: "enableStepper",
+      type: "boolean",
+      defaultValue: true,
+      description: "Show stepper controls for number inputs.",
     },
   ],
   examples: [
     {
-      id: "default",
+      id: "input",
       title: "Default",
-      description: "Basic text input",
-      code: `<Input placeholder="Enter text..." />`,
+      description: "A versatile input field component with various types, sizes, and states including search and password inputs.",
+      code: jsxToString(<DefaultInputExample />),
+      render: DefaultInputExample,
     },
     {
       id: "sizes",
       title: "Sizes",
       description: "Different input sizes",
-      code: `<div className="space-y-4">
-  <Input size="sm" placeholder="Small input" />
-  <Input size="base" placeholder="Base input" />
-  <Input size="lg" placeholder="Large input" />
-</div>`,
+      code: jsxToString(<SizesExample />),
+      render: SizesExample,
     },
     {
       id: "types",
       title: "Input Types",
       description: "Various input types",
-      code: `<div className="space-y-4">
-  <Input type="text" placeholder="Text input" />
-  <Input type="email" placeholder="Email input" />
-  <Input type="password" placeholder="Password input" />
-  <Input type="search" placeholder="Search input" />
-  <Input type="number" placeholder="Number input" />
-  <Input type="tel" placeholder="Phone input" />
-  <Input type="url" placeholder="URL input" />
-</div>`,
+      code: jsxToString(<InputTypesExample />),
+      render: InputTypesExample,
     },
     {
       id: "states",
       title: "States",
       description: "Different input states",
-      code: `<div className="space-y-4">
-  <Input placeholder="Normal input" />
-  <Input placeholder="Disabled input" disabled />
-  <Input placeholder="Error input" hasError />
-  <Input placeholder="Required input" required />
-</div>`,
+      code: jsxToString(<StatesExample />),
+      render: StatesExample,
     },
     {
       id: "search",
       title: "Search Input",
       description: "Search input with icon",
-      code: `<Input type="search" placeholder="Search components..." />`,
+      code: jsxToString(<SearchInputExample />),
+      render: SearchInputExample,
     },
     {
       id: "password",
       title: "Password Input",
       description: "Password input with visibility toggle",
-      code: `<Input type="password" placeholder="Enter password" />`,
+      code: jsxToString(<PasswordInputExample />),
+      render: PasswordInputExample,
     },
     {
       id: "number",
       title: "Number Input",
       description: "Number input with and without stepper",
-      code: `<div className="space-y-4">
-  <Input type="number" placeholder="With stepper" />
-  <Input type="number" placeholder="Without stepper" enableStepper={false} />
-</div>`,
+      code: jsxToString(<NumberInputExample />),
+      render: NumberInputExample,
     },
     {
       id: "file",
       title: "File Input",
       description: "File input for uploads",
-      code: `<Input type="file" />`,
+      code: jsxToString(<FileInputExample />),
+      render: FileInputExample,
     },
     {
       id: "prefix-suffix-text",
       title: "Text Prefix & Suffix",
       description: "Input with text prefix and suffix",
-      code: `<div className="space-y-4">
-  <Input placeholder="Enter domain" prefixText="https://" />
-  <Input placeholder="Enter username" suffixText="@company.com" />
-  <Input placeholder="Website" prefixText="https://" suffixText=".com" />
-</div>`,
+      code: jsxToString(<PrefixSuffixTextExample />),
+      render: PrefixSuffixTextExample,
     },
     {
       id: "prefix-suffix-styling",
@@ -192,17 +174,15 @@ export const componentConfig: ComponentConfig = {
       id: "prefix-suffix-icons",
       title: "Icon Prefix & Suffix",
       description: "Input with icon prefix and suffix (use prop explorer)",
-      code: `// Use the prop explorer to set:
-// prefixIcon: "Search", suffixIcon: "ArrowRight"
-<Input placeholder="Search and submit..." />`,
+      code: jsxToString(<PrefixSuffixIconsExample />),
+      render: PrefixSuffixIconsExample,
     },
     {
       id: "mixed-prefix-suffix",
       title: "Mixed Prefix & Suffix",
       description: "Combine text and icons (use prop explorer)",
-      code: `// Use the prop explorer to set:
-// prefixText: "@", suffixIcon: "Mail"
-<Input placeholder="Enter your email" />`,
+      code: jsxToString(<MixedPrefixSuffixExample />),
+      render: MixedPrefixSuffixExample,
     },
   ],
 };

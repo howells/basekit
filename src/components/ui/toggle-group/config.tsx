@@ -1,41 +1,53 @@
-import { ComponentConfig } from "@/lib/component-config-types";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { Single, Multiple,  } from "./examples";
 import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 
 export const componentConfig: ComponentConfig = {
   id: "toggle-group",
-  name: "ToggleGroup",
+  name: "Toggle Group",
   description: "A group of toggle buttons where one or more can be selected.",
-  category: "ui",
-  importStatement: 'import { ToggleGroup } from "@/components/ui/toggle-group"',
-  componentId: "ToggleGroup",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group/toggle-group";`,
+  componentId: "ToggleGroupExample",
   props: [
     {
       name: "type",
-      type: '"single" | "multiple"',
+      type: "select",
+      options: ["single", "multiple"],
       defaultValue: "single",
-      description: "Whether single or multiple items can be selected",
+      description: "Selection mode - single or multiple.",
+    },
+    {
+      name: "defaultValue",
+      type: "string",
+      description: "The default selected value(s).",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      defaultValue: false,
+      description: "Disable all toggle items.",
     },
   ],
   examples: [
     {
-      id: "single",
+      id: "toggle-group",
       title: "Single Selection",
-      description: "Toggle group with single selection",
-      code: `<ToggleGroup type="single" defaultValue={["center"]}>
-  <ToggleGroupItem value="left">Left</ToggleGroupItem>
-  <ToggleGroupItem value="center">Center</ToggleGroupItem>
-  <ToggleGroupItem value="right">Right</ToggleGroupItem>
-</ToggleGroup>`,
+      description: "A group of toggle buttons where one or more can be selected.",
+      code: jsxToString(<Single />),
+      render: Single,
     },
     {
       id: "multiple",
       title: "Multiple Selection",
       description: "Toggle group with multiple selection",
-      code: `<ToggleGroup type="multiple" defaultValue={["bold"]}>
-  <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
-  <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
-  <ToggleGroupItem value="underline">Underline</ToggleGroupItem>
-</ToggleGroup>`,
+      code: jsxToString(<Multiple />),
+      render: Multiple,
     },
   ],
 };

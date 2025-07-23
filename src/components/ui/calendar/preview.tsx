@@ -44,11 +44,10 @@ export const CalendarExample = ({
         {...calendarProps}
         mode="range"
         selected={
-          selected?.from && selected?.to
-            ? { from: selected.from, to: selected.to }
+          selected && typeof selected === 'object' && 'from' in selected
+            ? { from: (selected as any).from, to: (selected as any).to }
             : undefined
         }
-        defaultSelected={defaultSelected as { from?: Date; to?: Date }}
       />
     );
   }

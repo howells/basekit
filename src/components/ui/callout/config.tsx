@@ -1,4 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { DefaultExample, SuccessExample, ErrorExample, WarningExample, NeutralExample, WithIconExample,  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "callout",
@@ -44,49 +46,43 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic callout with default styling.",
-      code: `<Callout title="Information">
-  This is important information you should know about.
-</Callout>`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "success",
       title: "Success",
       description: "Success callout for positive feedback.",
-      code: `<Callout title="Success" variant="success">
-  Your operation completed successfully!
-</Callout>`,
+      code: jsxToString(<SuccessExample />),
+      render: SuccessExample,
     },
     {
       id: "error",
       title: "Error",
       description: "Error callout for warnings or errors.",
-      code: `<Callout title="Error" variant="error">
-  Something went wrong. Please try again.
-</Callout>`,
+      code: jsxToString(<ErrorExample />),
+      render: ErrorExample,
     },
     {
       id: "warning",
       title: "Warning",
       description: "Warning callout for important notices.",
-      code: `<Callout title="Warning" variant="warning">
-  Please review this information carefully.
-</Callout>`,
+      code: jsxToString(<WarningExample />),
+      render: WarningExample,
     },
     {
       id: "neutral",
       title: "Neutral",
       description: "Neutral callout for general information.",
-      code: `<Callout title="Note" variant="neutral">
-  This is a neutral callout for general information.
-</Callout>`,
+      code: jsxToString(<NeutralExample />),
+      render: NeutralExample,
     },
     {
       id: "with-icon",
       title: "With Icon",
       description: "Callout with an icon.",
-      code: `<Callout title="Alert" variant="warning" icon={AlertTriangle}>
-  This callout includes an icon for better visual communication.
-</Callout>`,
+      code: jsxToString(<WithIconExample />),
+      render: WithIconExample,
     },
   ],
 };

@@ -3,120 +3,113 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "select",
   name: "Select",
-  description: "A select component built on Base UI with comprehensive dropdown functionality and keyboard navigation.",
+  description: "Displays a list of options for the user to pick from—triggered by a button.",
   category: "inputs" as const,
-  badge: "Input",
-  importStatement: `import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";`,
+  badge: "Inputs",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select/select";`,
   componentId: "SelectExample",
   props: [
     {
+      name: "value",
+      type: "string",
+      description: "Selected value",
+      defaultValue: "",
+    },
+    {
       name: "placeholder",
       type: "string",
-      defaultValue: "Select an option...",
-      description: "Placeholder text when no value is selected.",
+      description: "Placeholder text",
+      defaultValue: "Select an option",
     },
     {
       name: "disabled",
       type: "boolean",
+      description: "Whether the select is disabled",
       defaultValue: false,
-      description: "Whether the select is disabled.",
-    },
-    {
-      name: "hasError",
-      type: "boolean",
-      defaultValue: false,
-      description: "Whether the select has an error state.",
-    },
-    {
-      name: "defaultValue",
-      type: "string",
-      description: "Default selected value.",
     },
   ],
   examples: [
     {
       id: "default",
-      title: "Default",
-      description: "Basic select with options.",
+      title: "Basic Select",
+      description: "A simple select dropdown",
       code: `<Select>
-  <SelectTrigger>
+  <SelectTrigger className="w-[180px]">
     <SelectValue placeholder="Select a fruit" />
   </SelectTrigger>
   <SelectContent>
     <SelectItem value="apple">Apple</SelectItem>
     <SelectItem value="banana">Banana</SelectItem>
-    <SelectItem value="cherry">Cherry</SelectItem>
-    <SelectItem value="date">Date</SelectItem>
+    <SelectItem value="orange">Orange</SelectItem>
+    <SelectItem value="grape">Grape</SelectItem>
   </SelectContent>
 </Select>`,
     },
     {
       id: "with-groups",
-      title: "With Groups",
-      description: "Select with grouped options.",
+      title: "Select with Groups",
+      description: "Select with grouped options",
       code: `<Select>
-  <SelectTrigger>
-    <SelectValue placeholder="Select a color" />
+  <SelectTrigger className="w-[280px]">
+    <SelectValue placeholder="Select a timezone" />
   </SelectTrigger>
   <SelectContent>
     <SelectGroup>
-      <SelectGroupLabel>Primary Colors</SelectGroupLabel>
-      <SelectItem value="red">Red</SelectItem>
-      <SelectItem value="blue">Blue</SelectItem>
-      <SelectItem value="yellow">Yellow</SelectItem>
+      <SelectLabel>North America</SelectLabel>
+      <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+      <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
+      <SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
+      <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
     </SelectGroup>
-    <SelectSeparator />
     <SelectGroup>
-      <SelectGroupLabel>Secondary Colors</SelectGroupLabel>
-      <SelectItem value="green">Green</SelectItem>
-      <SelectItem value="orange">Orange</SelectItem>
-      <SelectItem value="purple">Purple</SelectItem>
+      <SelectLabel>Europe & Africa</SelectLabel>
+      <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
+      <SelectItem value="cet">Central European Time (CET)</SelectItem>
+      <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
     </SelectGroup>
   </SelectContent>
 </Select>`,
     },
     {
-      id: "disabled",
-      title: "Disabled",
-      description: "Disabled select that cannot be interacted with.",
-      code: `<Select disabled>
-  <SelectTrigger>
-    <SelectValue placeholder="Cannot select" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="option1">Option 1</SelectItem>
-    <SelectItem value="option2">Option 2</SelectItem>
-  </SelectContent>
-</Select>`,
-    },
-    {
-      id: "error-state",
-      title: "Error State",
-      description: "Select with error styling.",
-      code: `<Select>
-  <SelectTrigger hasError>
-    <SelectValue placeholder="Select with error" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="option1">Option 1</SelectItem>
-    <SelectItem value="option2">Option 2</SelectItem>
-  </SelectContent>
-</Select>`,
-    },
-    {
-      id: "with-default-value",
-      title: "With Default Value",
-      description: "Select with a pre-selected value.",
-      code: `<Select defaultValue="medium">
-  <SelectTrigger>
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="small">Small</SelectItem>
-    <SelectItem value="medium">Medium</SelectItem>
-    <SelectItem value="large">Large</SelectItem>
-  </SelectContent>
-</Select>`,
+      id: "form-select",
+      title: "Form Select",
+      description: "Select integrated in a form",
+      code: `<form className="space-y-4">
+  <div className="space-y-2">
+    <label htmlFor="email" className="text-sm font-medium">Email</label>
+    <input
+      id="email"
+      type="email"
+      placeholder="Enter your email"
+      className="w-full rounded-md border border-gray-300 px-3 py-2"
+    />
+  </div>
+  <div className="space-y-2">
+    <label className="text-sm font-medium">Country</label>
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select your country" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="us">United States</SelectItem>
+        <SelectItem value="uk">United Kingdom</SelectItem>
+        <SelectItem value="ca">Canada</SelectItem>
+        <SelectItem value="au">Australia</SelectItem>
+      </SelectContent>
+    </Select>
+  </div>
+</form>`,
     },
   ],
 };

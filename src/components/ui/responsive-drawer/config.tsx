@@ -1,58 +1,50 @@
-import { ComponentConfig } from "@/lib/component-config-types";
-import {
-  ResponsiveDrawer,
-  ResponsiveDrawerBody,
-  ResponsiveDrawerClose,
-  ResponsiveDrawerContent,
-  ResponsiveDrawerDescription,
-  ResponsiveDrawerFooter,
-  ResponsiveDrawerHeader,
-  ResponsiveDrawerTitle,
-  ResponsiveDrawerTrigger,
-} from "./responsive-drawer";
+import type { ComponentConfig } from "@/lib/component-config-types";
 
 export const componentConfig: ComponentConfig = {
   id: "responsive-drawer",
-  name: "ResponsiveDrawer",
-  description:
-    "A responsive drawer that displays as a sheet on desktop and a drawer on mobile.",
-  category: "ui",
-  importStatement:
-    'import { ResponsiveDrawer } from "@/components/ui/responsive-drawer"',
-  componentId: "ResponsiveDrawer",
+  name: "Responsive Drawer",
+  description: "A drawer component that adapts to different screen sizes, showing as a sheet on mobile and a dialog on desktop.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import {
+  ResponsiveDrawer,
+  ResponsiveDrawerContent,
+  ResponsiveDrawerDescription,
+  ResponsiveDrawerHeader,
+  ResponsiveDrawerTitle,
+  ResponsiveDrawerTrigger,
+} from "@/components/ui/responsive-drawer/responsive-drawer";`,
+  componentId: "ResponsiveDrawerExample",
   props: [
     {
       name: "open",
       type: "boolean",
+      description: "Whether the drawer is open",
       defaultValue: false,
-      description: "Controls the open state of the drawer",
     },
   ],
   examples: [
     {
-      id: "basic",
+      id: "default",
       title: "Basic Responsive Drawer",
-      description:
-        "A basic responsive drawer that adapts to mobile and desktop",
+      description: "A drawer that adapts to screen size",
       code: `<ResponsiveDrawer>
-  <ResponsiveDrawerTrigger>
-    <button>Open Drawer</button>
+  <ResponsiveDrawerTrigger asChild>
+    <Button variant="outline">Open Drawer</Button>
   </ResponsiveDrawerTrigger>
   <ResponsiveDrawerContent>
     <ResponsiveDrawerHeader>
-      <ResponsiveDrawerTitle>Drawer Title</ResponsiveDrawerTitle>
+      <ResponsiveDrawerTitle>Edit Profile</ResponsiveDrawerTitle>
       <ResponsiveDrawerDescription>
-        This drawer adapts to mobile and desktop.
+        Make changes to your profile here. Click save when you're done.
       </ResponsiveDrawerDescription>
     </ResponsiveDrawerHeader>
-    <ResponsiveDrawerBody>
-      <p>Drawer content goes here.</p>
-    </ResponsiveDrawerBody>
-    <ResponsiveDrawerFooter>
-      <ResponsiveDrawerClose>
-        <button>Cancel</button>
-      </ResponsiveDrawerClose>
-    </ResponsiveDrawerFooter>
+    <div className="p-4">
+      <p>Your content here...</p>
+    </div>
   </ResponsiveDrawerContent>
 </ResponsiveDrawer>`,
     },
@@ -61,34 +53,27 @@ export const componentConfig: ComponentConfig = {
       title: "Responsive Drawer with Form",
       description: "A responsive drawer containing a form",
       code: `<ResponsiveDrawer>
-  <ResponsiveDrawerTrigger>
-    <button>Add Item</button>
+  <ResponsiveDrawerTrigger asChild>
+    <Button>Edit Settings</Button>
   </ResponsiveDrawerTrigger>
   <ResponsiveDrawerContent>
     <ResponsiveDrawerHeader>
-      <ResponsiveDrawerTitle>Add New Item</ResponsiveDrawerTitle>
+      <ResponsiveDrawerTitle>Account Settings</ResponsiveDrawerTitle>
       <ResponsiveDrawerDescription>
-        Fill out the form below to add a new item.
+        Update your account settings below.
       </ResponsiveDrawerDescription>
     </ResponsiveDrawerHeader>
-    <ResponsiveDrawerBody>
-      <form className="space-y-4">
-        <div>
-          <label>Name</label>
-          <input type="text" placeholder="Enter item name" />
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea rows={3} placeholder="Enter description" />
-        </div>
-      </form>
-    </ResponsiveDrawerBody>
-    <ResponsiveDrawerFooter>
-      <button>Save</button>
-      <ResponsiveDrawerClose>
-        <button>Cancel</button>
-      </ResponsiveDrawerClose>
-    </ResponsiveDrawerFooter>
+    <div className="p-4 space-y-4">
+      <div>
+        <label htmlFor="name" className="text-sm font-medium">Name</label>
+        <input id="name" type="text" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+      </div>
+      <div>
+        <label htmlFor="email" className="text-sm font-medium">Email</label>
+        <input id="email" type="email" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+      </div>
+      <Button className="w-full">Save Changes</Button>
+    </div>
   </ResponsiveDrawerContent>
 </ResponsiveDrawer>`,
     },

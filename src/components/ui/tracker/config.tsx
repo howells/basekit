@@ -1,32 +1,39 @@
-import { ComponentConfig } from "@/lib/component-config-types";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { Basic,  } from "./examples";
 import { Tracker } from "./tracker";
 
 export const componentConfig: ComponentConfig = {
   id: "tracker",
   name: "Tracker",
-  description:
-    "A visual progress tracker showing steps or stages in a process.",
-  category: "ui",
-  importStatement: 'import { Tracker } from "@/components/ui/tracker"',
-  componentId: "Tracker",
+  description: "A visual progress tracker showing steps or stages in a process.",
+  category: "ui" as const,
+  badge: "UI",
+  installation: {
+    npm: "@base-ui-components/react",
+  },
+  importStatement: `import { Tracker } from "@/components/ui/tracker/tracker";`,
+  componentId: "TrackerExample",
   props: [
     {
       name: "data",
-      type: "array",
-      defaultValue: [],
-      description: "Array of tracker data items",
+      type: "string",
+      defaultValue: "[]",
+      description: "The tracker data array.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Additional CSS classes.",
     },
   ],
   examples: [
     {
-      id: "basic",
+      id: "tracker",
       title: "Basic Tracker",
-      description: "A simple progress tracker",
-      code: `<Tracker data={[
-  { label: "Step 1", status: "completed" },
-  { label: "Step 2", status: "current" },
-  { label: "Step 3", status: "pending" }
-]} />`,
+      description: "A visual progress tracker showing steps or stages in a process.",
+      code: jsxToString(<Basic />),
+      render: Basic,
     },
   ],
 };

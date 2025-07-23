@@ -1,4 +1,23 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import { Calendar } from "./calendar";
+import {
+  CompactExample,
+  ControlledRangeExample,
+  ControlledSingleExample,
+  DefaultExample,
+  DisabledNavigationExample,
+  MultipleMonthsExample,
+  RangeModeExample,
+  RangeWithMultipleMonthsExample,
+  SpecificDefaultDateExample,
+  ThreeMonthsExample,
+  WeekStartsOnExample,
+  WeekStartsSundayExample,
+  WithDisabledDatesExample,
+  WithPreselectedExample,
+  WithYearNavigationExample,
+} from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "calendar",
@@ -63,49 +82,58 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic calendar with single date selection.",
-      code: `<Calendar />`,
+      code: jsxToString(<DefaultExample />),
+      render: DefaultExample,
     },
     {
       id: "range-mode",
       title: "Range Selection",
       description: "Calendar with date range selection.",
-      code: `<Calendar mode="range" />`,
+      code: jsxToString(<RangeModeExample />),
+      render: RangeModeExample,
     },
     {
       id: "multiple-months",
       title: "Multiple Months",
       description: "Calendar showing multiple months at once.",
-      code: `<Calendar numberOfMonths={2} />`,
+      code: jsxToString(<MultipleMonthsExample />),
+      render: MultipleMonthsExample,
     },
     {
       id: "with-year-navigation",
       title: "With Year Navigation",
       description: "Calendar with year navigation buttons.",
-      code: `<Calendar enableYearNavigation />`,
+      code: jsxToString(<WithYearNavigationExample />),
+      render: WithYearNavigationExample,
     },
     {
       id: "week-starts-sunday",
       title: "Week Starts Sunday",
       description: "Calendar starting week on Sunday.",
-      code: `<Calendar weekStartsOn={0} />`,
+      code: jsxToString(<WeekStartsSundayExample />),
+      render: WeekStartsSundayExample,
     },
     {
       id: "disabled-navigation",
       title: "Disabled Navigation",
       description: "Calendar with navigation disabled.",
-      code: `<Calendar disableNavigation />`,
+      code: jsxToString(<DisabledNavigationExample />),
+      render: DisabledNavigationExample,
     },
     {
       id: "with-preselected",
       title: "With Pre-selected Date",
       description: "Calendar with a pre-selected date.",
-      code: `<Calendar defaultSelected={new Date()} />`,
+      code: `const [selected, setSelected] = React.useState<Date | undefined>(new Date());
+return <Calendar mode="single" selected={selected} onSelect={setSelected} />;`,
+      render: WithPreselectedExample,
     },
     {
       id: "range-with-multiple-months",
       title: "Range with Multiple Months",
       description: "Range selection with multiple months displayed.",
-      code: `<Calendar mode="range" numberOfMonths={2} />`,
+      code: jsxToString(<RangeWithMultipleMonthsExample />),
+      render: RangeWithMultipleMonthsExample,
     },
   ],
 };

@@ -2,11 +2,10 @@
 
 "use client";
 
-import logo from "@/images/logo.png";
 import { getComponentsByCategory } from "@/lib/component-registry";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { Pilcrow } from "lucide-react";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React, { createContext, useContext, useState } from "react";
 import { ComponentSearch } from "./component-search";
@@ -71,16 +70,15 @@ function SidebarContent() {
   return (
     <>
       <SidebarHeader isCollapsed={isCollapsed}>
-        <div className="relative h-11 w-full p-2">
+        <div className="relative h-11 w-full">
           {/* Logo */}
-          <div className={clsx("absolute", "left-2 top-2")}>
-            <Image
-              src={logo}
-              alt="Patternmode"
-              width={32}
-              height={32}
-              className="shrink-0"
-            />
+          <div
+            className={clsx(
+              "absolute top-2",
+              isCollapsed ? "left-2" : "left-4"
+            )}
+          >
+            <Pilcrow className="h-6 w-6 text-zinc-600 dark:text-zinc-400 scale-x-[-1]" />
           </div>
         </div>
       </SidebarHeader>
@@ -138,12 +136,14 @@ function SidebarContent() {
         {allInputComponents.length > 0 && (
           <SidebarSection
             title={
-              <div className="flex items-center gap-2">
-                <span>Input Components</span>
-                <Badge variant="neutral" size="sm">
-                  {allInputComponents.length}
-                </Badge>
-              </div>
+              (
+                <div className="flex items-center gap-2">
+                  <span>Input Components</span>
+                  <Badge variant="neutral" size="sm">
+                    {allInputComponents.length}
+                  </Badge>
+                </div>
+              ) as any
             }
             href="/inputs"
             defaultOpen={true}
@@ -173,12 +173,14 @@ function SidebarContent() {
         {allFormComponents.length > 0 && (
           <SidebarSection
             title={
-              <div className="flex items-center gap-2">
-                <span>Form Components</span>
-                <Badge variant="neutral" size="sm">
-                  {allFormComponents.length}
-                </Badge>
-              </div>
+              (
+                <div className="flex items-center gap-2">
+                  <span>Form Components</span>
+                  <Badge variant="neutral" size="sm">
+                    {allFormComponents.length}
+                  </Badge>
+                </div>
+              ) as any
             }
             href="/forms"
             defaultOpen={true}
@@ -208,12 +210,14 @@ function SidebarContent() {
         {allChartComponents.length > 0 && (
           <SidebarSection
             title={
-              <div className="flex items-center gap-2">
-                <span>Chart Components</span>
-                <Badge variant="neutral" size="sm">
-                  {allChartComponents.length}
-                </Badge>
-              </div>
+              (
+                <div className="flex items-center gap-2">
+                  <span>Chart Components</span>
+                  <Badge variant="neutral" size="sm">
+                    {allChartComponents.length}
+                  </Badge>
+                </div>
+              ) as any
             }
             href="/charts"
             defaultOpen={true}
@@ -290,7 +294,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
         }}
       >
         {/* Sidebar */}
-        <div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-zinc-200 lg:bg-zinc-50 lg:dark:border-zinc-800 lg:dark:bg-zinc-900 transition-all duration-200">
+        <div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:bg-zinc-100 lg:dark:border-zinc-800 lg:dark:bg-zinc-900 transition-all duration-200">
           <Sidebar
             isCollapsed={isCollapsed}
             onToggle={toggleCollapsed}
