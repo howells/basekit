@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../button/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,14 +9,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./alert-dialog";
-import { Button } from "../button/button";
 
 // Default alert dialog
 export const DefaultExample = () => (
   <AlertDialog>
-    <AlertDialogTrigger>
-      <Button>Delete Account</Button>
-    </AlertDialogTrigger>
+    <AlertDialogTrigger render={<Button />}>Delete Account</AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
       <AlertDialogDescription>
@@ -33,18 +31,20 @@ export const DefaultExample = () => (
 // Destructive alert dialog
 export const DestructiveExample = () => (
   <AlertDialog>
-    <AlertDialogTrigger>
-      <Button variant="destructive">Delete Account</Button>
+    <AlertDialogTrigger render={<Button variant="destructive" />}>
+      Delete Account
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogTitle>Delete Account</AlertDialogTitle>
       <AlertDialogDescription>
-        This will permanently delete your account and all associated data.
-        This action cannot be undone.
+        This will permanently delete your account and all associated data. This
+        action cannot be undone.
       </AlertDialogDescription>
       <div className="flex justify-end space-x-2">
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction variant="destructive">Delete Account</AlertDialogAction>
+        <AlertDialogAction variant="destructive">
+          Delete Account
+        </AlertDialogAction>
       </div>
     </AlertDialogContent>
   </AlertDialog>

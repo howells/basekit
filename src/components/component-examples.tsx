@@ -1,7 +1,9 @@
 "use client";
 
+import { Card, CardContent, CardHeader } from "@/components/ui/card/card";
 import { CodeBlock } from "@/components/ui/code-block/code-block";
 import { Divider } from "@/components/ui/divider/divider";
+import { VStack } from "@/components/ui/stack";
 import {
   Tabs,
   TabsContent,
@@ -38,35 +40,22 @@ export function ComponentExamples({ componentId }: ComponentExamplesProps) {
   }
 
   return (
-    <div className="space-y-8">
+    <VStack className="p-8">
       {config.examples.map((example, index) => (
-        <React.Fragment key={example.id}>
-          {index > 0 && <Divider />}
-          <div className="space-y-4">
-            <div>
-              <Subheading level={3}>{example.title}</Subheading>
-              <Text>{example.description}</Text>
-            </div>
-            <Tabs defaultValue="preview">
-              <TabsList>
-                <TabsTrigger value="preview">Preview</TabsTrigger>
-                <TabsTrigger value="code">Code</TabsTrigger>
-              </TabsList>
-              <TabsContent value="preview">
-                <div className="flex justify-center">
-                  <ComponentExampleRenderer
-                    componentId={componentId}
-                    exampleId={example.id}
-                  />
-                </div>
-              </TabsContent>
-              <TabsContent value="code">
-                <CodeBlock language="tsx">{example.code}</CodeBlock>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </React.Fragment>
+        <Card key={example.id} padding={0}>
+          <CardHeader border>
+            <Subheading level={3}>{example.title}</Subheading>
+            <Text>{example.description}</Text>
+          </CardHeader>
+
+          <CardContent>
+            <ComponentExampleRenderer
+              componentId={componentId}
+              exampleId={example.id}
+            />
+          </CardContent>
+        </Card>
       ))}
-    </div>
+    </VStack>
   );
 }

@@ -6,8 +6,8 @@ import * as React from "react";
 
 /**
  * A dialog that requires user response to proceed, built on Base UI's AlertDialog primitive.
- * 
- * Based on Base UI's AlertDialog (https://base-ui.com/react/components/alert-dialog), 
+ *
+ * Based on Base UI's AlertDialog (https://base-ui.com/react/components/alert-dialog),
  * providing accessible modal dialogs for critical user confirmations and actions.
  * Features Tremor-inspired styling with proper focus management and keyboard navigation.
  *
@@ -37,31 +37,41 @@ const AlertDialog = BaseAlertDialog.Root;
 
 /**
  * Trigger button that opens the alert dialog.
- * 
- * Renders as a styled button with hover and focus states.
- * When clicked, opens the alert dialog for user confirmation or action.
+ *
+ * Supports Base UI's render prop pattern to avoid nested button issues.
+ * Can be used with existing Button components or render as default styled button.
  *
  * @example
  * ```tsx
+ * // Default styled trigger
  * <AlertDialogTrigger>Delete Item</AlertDialogTrigger>
+ *
+ * // With render prop to use existing Button
+ * <AlertDialogTrigger render={<Button variant="destructive" />}>
+ *   Delete Account
+ * </AlertDialogTrigger>
  * ```
  */
 const AlertDialogTrigger = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialog.Trigger>,
   React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Trigger>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <BaseAlertDialog.Trigger
     ref={ref}
     className={cx(
-      "inline-flex h-10 items-center justify-center rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium transition-colors",
-      "hover:bg-zinc-50 hover:text-zinc-900",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
-      "disabled:pointer-events-none disabled:opacity-50",
-      "dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
+      !props.render && [
+        "inline-flex h-10 items-center justify-center rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium transition-colors",
+        "hover:bg-zinc-50 hover:text-zinc-900",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+        "disabled:pointer-events-none disabled:opacity-50",
+        "dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
+      ],
       className
     )}
     {...props}
-  />
+  >
+    {children}
+  </BaseAlertDialog.Trigger>
 ));
 AlertDialogTrigger.displayName = "AlertDialogTrigger";
 
@@ -69,7 +79,7 @@ const AlertDialogPortal = BaseAlertDialog.Portal;
 
 /**
  * Semi-transparent backdrop that appears behind the alert dialog.
- * 
+ *
  * Provides visual separation between the dialog and the rest of the page.
  * Clicking the backdrop typically does not close an alert dialog (unlike regular dialogs).
  *
@@ -97,7 +107,7 @@ AlertDialogBackdrop.displayName = "AlertDialogBackdrop";
 
 /**
  * Main content container for the alert dialog.
- * 
+ *
  * Contains the dialog's title, description, and action buttons.
  * Automatically includes the portal and backdrop for proper layering.
  * Features smooth scale and opacity transitions for open/close animations.
@@ -139,7 +149,7 @@ AlertDialogContent.displayName = "AlertDialogContent";
 
 /**
  * Header container for the alert dialog title and description.
- * 
+ *
  * Provides consistent spacing and alignment for the dialog's header content.
  * Uses center alignment on mobile and left alignment on larger screens.
  *
@@ -168,7 +178,7 @@ AlertDialogHeader.displayName = "AlertDialogHeader";
 
 /**
  * Footer container for alert dialog action buttons.
- * 
+ *
  * Arranges cancel and action buttons with responsive layout.
  * On mobile, buttons stack vertically with action button on top.
  * On larger screens, buttons are arranged horizontally with action button on right.
@@ -198,7 +208,7 @@ AlertDialogFooter.displayName = "AlertDialogFooter";
 
 /**
  * Title heading for the alert dialog.
- * 
+ *
  * Provides semantic heading markup for screen readers and proper visual hierarchy.
  * Uses prominent typography to clearly communicate the dialog's purpose.
  *
@@ -224,7 +234,7 @@ AlertDialogTitle.displayName = "AlertDialogTitle";
 
 /**
  * Description text that provides additional context for the alert dialog.
- * 
+ *
  * Offers detailed information about the action or confirmation being requested.
  * Uses muted text color to establish proper visual hierarchy with the title.
  *
@@ -250,13 +260,13 @@ AlertDialogDescription.displayName = "AlertDialogDescription";
 
 /**
  * Primary action button that closes the dialog and performs the main action.
- * 
+ *
  * Supports "default" and "destructive" variants for different action types.
  * When clicked, closes the dialog and typically performs the confirmed action.
  * Use "destructive" variant for dangerous actions like deleting data.
  *
  * @param variant - Visual style variant ("default" | "destructive")
- * 
+ *
  * @example
  * ```tsx
  * <AlertDialogAction>Continue</AlertDialogAction>
@@ -292,7 +302,7 @@ AlertDialogAction.displayName = "AlertDialogAction";
 
 /**
  * Cancel button that closes the dialog without performing any action.
- * 
+ *
  * Provides users a way to exit the dialog without proceeding with the main action.
  * Styled as a secondary button with outline appearance to de-emphasize it
  * compared to the primary action button.
