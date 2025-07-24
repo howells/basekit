@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   name: "Tracker",
   description: "A visual progress tracker showing steps or stages in a process.",
   category: "utility" as const,
+  icon: "GitCommitHorizontal",
 
   installation: {
     npm: "@base-ui-components/react"

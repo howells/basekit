@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Progress Circle",
   description: "A circular progress indicator showing completion percentage.",
   category: "ui" as const,
+  icon: "Loader",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -10,6 +10,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A chart component for displaying categorical data as bars, supporting multiple series, stacking, and interactive features.",
   category: "charts" as const,
+  icon: "BarChart3",
 
   installation: {
     npm: "recharts"

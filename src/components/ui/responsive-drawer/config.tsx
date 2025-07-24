@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A drawer component that adapts to different screen sizes, showing as a sheet on mobile and a dialog on desktop.",
   category: "overlay" as const,
+  icon: "PanelLeft",
 
   installation: {
     npm: "@base-ui-components/react"

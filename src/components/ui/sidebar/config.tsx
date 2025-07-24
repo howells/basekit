@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A versatile sidebar component for navigation and content organization.",
   category: "navigation" as const,
+  icon: "PanelLeft",
 
   installation: {
     npm: "@base-ui-components/react"

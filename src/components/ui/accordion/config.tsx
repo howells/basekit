@@ -10,6 +10,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A vertically stacked set of interactive headings that each control a panel of content.",
   category: "data" as const,
+  icon: "ChevronDown",
 
   installation: {
     npm: "@base-ui-components/react"

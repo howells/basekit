@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A list component that displays items in a vertically stacked layout with dividers.",
   category: "data" as const,
+  icon: "List",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -14,6 +14,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A visual separator component with optional text labels, built on Base UI's accessible Separator primitive.",
   category: "layout" as const,
+  icon: "Separator",
 
   installation: {
     npm: "@base-ui-components/react"

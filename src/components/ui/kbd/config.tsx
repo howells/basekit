@@ -4,7 +4,8 @@ export const kbdConfig: ComponentConfig = {
   name: "Kbd",
   id: "kbd",
   description: "Display keyboard shortcuts in a consistent, styled format",
-  category: "text",
+  category: "text" as const,
+  icon: "Keyboard",
 
   componentId: "kbd",
   importStatement: 'import { Kbd } from "@/components/ui/kbd/kbd";',

@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Skeleton",
   description: "Use to show a placeholder while content is loading.",
   category: "feedback" as const,
+  icon: "Loader",
 
   installation: {
     npm: "@base-ui-components/react"

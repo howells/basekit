@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "Command palette component built on cmdk with search, keyboard navigation, and grouping features.",
   category: "ui" as const,
+  icon: "Terminal",
 
   importStatement: `import {
   Command,

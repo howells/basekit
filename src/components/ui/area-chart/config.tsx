@@ -10,6 +10,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A chart component for displaying data as filled areas, supporting multiple series, stacking, and interactive features.",
   category: "charts" as const,
+  icon: "AreaChart",
 
   installation: {
     npm: "recharts"

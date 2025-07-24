@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Status Dot",
   description: "A small dot indicator to show status or state.",
   category: "feedback" as const,
+  icon: "Circle",
 
   installation: {
     npm: "@base-ui-components/react"

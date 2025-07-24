@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Preview Card",
   description: "A card component that shows a preview or summary of content.",
   category: "ui" as const,
+  icon: "Eye",
 
   installation: {
     npm: "@base-ui-components/react"

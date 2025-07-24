@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Select Native",
   description: "A native HTML select element with custom styling.",
   category: "inputs" as const,
+  icon: "ChevronDown",
 
   installation: {
     npm: "@base-ui-components/react"

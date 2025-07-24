@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Spark Chart",
   description: "A minimalist chart for displaying trends and patterns in data.",
   category: "charts" as const,
+  icon: "Zap",
 
   installation: {
     npm: "recharts",

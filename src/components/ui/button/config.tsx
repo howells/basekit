@@ -20,6 +20,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A clickable button component with multiple variants and states.",
   category: "inputs" as const,
+  icon: "MousePointer",
 
   installation: {
     npm: "@base-ui-components/react"

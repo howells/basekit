@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Split Button",
   description: "A button with a dropdown menu for secondary actions.",
   category: "inputs" as const,
+  icon: "Split",
 
   installation: {
     npm: "@base-ui-components/react"

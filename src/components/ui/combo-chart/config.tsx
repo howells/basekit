@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Combo Chart",
   description: "A combination chart that displays both bar and line charts in a single visualization with shared or separate Y-axes.",
   category: "charts" as const,
+  icon: "TrendingUp",
 
   importStatement: `import { ComboChart } from "@/components/ui/combo-chart";`,
   componentId: "ComboChartExample",

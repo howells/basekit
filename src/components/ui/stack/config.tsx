@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A layout component that arranges its children vertically or horizontally with consistent spacing.",
   category: "layout" as const,
+  icon: "Layers",
 
   installation: {
     npm: "@base-ui-components/react"

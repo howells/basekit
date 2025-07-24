@@ -6,9 +6,10 @@ export const componentConfig: ComponentConfig = {
   description:
     "Displays a list of options for the user to pick from—triggered by a button.",
   category: "inputs" as const,
+  icon: "ChevronUpDown",
 
   installation: {
-    npm: "@base-ui-components/react"
+    npm: "@base-ui-components/react",
   },
   importStatement: `import {
   Select,
@@ -25,19 +26,26 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "string",
       description: "Selected value",
-      defaultValue: ""
+      defaultValue: "",
     },
     {
       name: "placeholder",
       type: "string",
       description: "Placeholder text",
-      defaultValue: "Select an option"
+      defaultValue: "Select an option",
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the select is disabled",
-      defaultValue: false
+      defaultValue: false,
+    },
+    {
+      name: "size",
+      type: "select",
+      options: ["default", "sm"],
+      defaultValue: "default",
+      description: "Size variant of the select trigger",
     },
   ],
   examples: [
@@ -55,7 +63,7 @@ export const componentConfig: ComponentConfig = {
     <SelectItem value="orange">Orange</SelectItem>
     <SelectItem value="grape">Grape</SelectItem>
   </SelectContent>
-</Select>`
+</Select>`,
     },
     {
       id: "with-groups",
@@ -80,7 +88,22 @@ export const componentConfig: ComponentConfig = {
       <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
     </SelectGroup>
   </SelectContent>
-</Select>`
+</Select>`,
+    },
+    {
+      id: "small-size",
+      title: "Small Select",
+      description: "Select with small size variant",
+      code: `<Select>
+  <SelectTrigger size="sm" className="w-[150px]">
+    <SelectValue placeholder="Small select" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option1">Option 1</SelectItem>
+    <SelectItem value="option2">Option 2</SelectItem>
+    <SelectItem value="option3">Option 3</SelectItem>
+  </SelectContent>
+</Select>`,
     },
     {
       id: "form-select",
@@ -110,7 +133,7 @@ export const componentConfig: ComponentConfig = {
       </SelectContent>
     </Select>
   </div>
-</form>`
+</form>`,
     },
-  ]
+  ],
 };

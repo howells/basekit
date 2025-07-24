@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Meter",
   description: "A meter component built on Base UI for displaying progress or measurements with customizable styling and value formatting.",
   category: "feedback" as const,
+  icon: "Gauge",
 
   installation: {
     npm: "@base-ui-components/react"

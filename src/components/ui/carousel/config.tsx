@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A responsive carousel component built on Embla Carousel with navigation controls and keyboard support.",
   category: "media" as const,
+  icon: "Images",
 
   installation: {
     npm: "embla-carousel-react"

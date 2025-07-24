@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A flexible container component with subtle styling and shadow for grouping related content.",
   category: "layout" as const,
+  icon: "RectangleHorizontal",
 
   importStatement: `import { Card } from "@/components/ui/card";`,
   componentId: "CardExample",

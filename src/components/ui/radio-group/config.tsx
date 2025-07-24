@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Radio Group",
   description: "A set of radio buttons where only one option can be selected at a time.",
   category: "inputs" as const,
+  icon: "Circle",
 
   installation: {
     npm: "@base-ui-components/react"

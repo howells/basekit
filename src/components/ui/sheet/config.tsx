@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "Extends the Dialog component to display content that complements the main content of the screen.",
   category: "overlay" as const,
+  icon: "Sheet",
 
   installation: {
     npm: "@base-ui-components/react"

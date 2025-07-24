@@ -12,10 +12,13 @@ import {
   SelectValue,
 } from "./select";
 
-export function DefaultSelect() {
+export function DefaultSelect({
+  size,
+  ...props
+}: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
   return (
-    <Select>
-      <SelectTrigger>
+    <Select {...props}>
+      <SelectTrigger size={size}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -28,10 +31,13 @@ export function DefaultSelect() {
   );
 }
 
-export function SelectWithGroups() {
+export function SelectWithGroups({
+  size,
+  ...props
+}: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
   return (
-    <Select>
-      <SelectTrigger>
+    <Select {...props}>
+      <SelectTrigger size={size}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -53,10 +59,13 @@ export function SelectWithGroups() {
   );
 }
 
-export function DisabledSelect() {
+export function DisabledSelect({
+  size,
+  ...props
+}: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
   return (
-    <Select disabled>
-      <SelectTrigger>
+    <Select disabled {...props}>
+      <SelectTrigger size={size}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -67,10 +76,13 @@ export function DisabledSelect() {
   );
 }
 
-export function SelectErrorState() {
+export function SelectErrorState({
+  size,
+  ...props
+}: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
   return (
-    <Select>
-      <SelectTrigger hasError>
+    <Select {...props}>
+      <SelectTrigger hasError size={size}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -81,10 +93,13 @@ export function SelectErrorState() {
   );
 }
 
-export function SelectWithDefaultValue() {
+export function SelectWithDefaultValue({
+  size,
+  ...props
+}: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
   return (
-    <Select defaultValue="medium">
-      <SelectTrigger>
+    <Select defaultValue="medium" {...props}>
+      <SelectTrigger size={size}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -96,7 +111,28 @@ export function SelectWithDefaultValue() {
   );
 }
 
+export function SmallSizeExample({
+  size = "sm",
+  ...props
+}: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
+  return (
+    <Select {...props}>
+      <SelectTrigger size={size} className="w-[150px]">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="option1">Option 1</SelectItem>
+        <SelectItem value="option2">Option 2</SelectItem>
+        <SelectItem value="option3">Option 3</SelectItem>
+      </SelectContent>
+    </Select>
+  );
+}
+
 // Export with the expected naming convention
 export const DefaultExample = DefaultSelect;
 export const WithGroupsExample = SelectWithGroups;
 export const FormSelectExample = DisabledSelect; // Using DisabledSelect as a placeholder for form example
+
+// Main component for the component explorer
+export const SelectExample = DefaultSelect;

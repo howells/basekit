@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A control that allows the user to toggle between checked and not checked.",
   category: "inputs" as const,
+  icon: "ToggleLeft",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "An alert component that displays important information with optional icon and variant styling.",
   category: "feedback" as const,
+  icon: "MessageCircle",
 
   importStatement: `import { Callout } from "@/components/ui/callout";`,
   componentId: "CalloutExample",

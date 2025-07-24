@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Tag",
   description: "A label or keyword used to categorize or describe content.",
   category: "feedback" as const,
+  icon: "Tag",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -102,3 +102,57 @@ export const WeekStartsOnExample = () => (
 export const CompactExample = () => (
   <Calendar className="rounded-md border shadow-sm" />
 );
+
+// Calendar with today highlighting disabled
+export const WithoutTodayHighlightExample = () => (
+  <div className="grid grid-cols-2 gap-4">
+    <div>
+      <p className="text-sm font-medium mb-2">With today highlight (default)</p>
+      <Calendar showToday={true} />
+    </div>
+    <div>
+      <p className="text-sm font-medium mb-2">Without today highlight</p>
+      <Calendar showToday={false} />
+    </div>
+  </div>
+);
+
+// Calendar with "Go to Today" button
+export const WithTodayButtonExample = () => (
+  <div className="grid grid-cols-2 gap-4">
+    <div>
+      <p className="text-sm font-medium mb-2">Without today button (default)</p>
+      <Calendar />
+    </div>
+    <div>
+      <p className="text-sm font-medium mb-2">With today button</p>
+      <Calendar showTodayButton={true} />
+    </div>
+  </div>
+);
+
+// Calendar with fixed weeks
+export const FixedWeeksExample = () => (
+  <div className="grid grid-cols-2 gap-4">
+    <div>
+      <p className="text-sm font-medium mb-2">Variable weeks (default)</p>
+      <Calendar />
+    </div>
+    <div>
+      <p className="text-sm font-medium mb-2">Fixed 6 weeks</p>
+      <Calendar fixedWeeks={true} />
+    </div>
+  </div>
+);
+
+// Calendar with week numbers
+export const WithWeekNumbersExample = () => <Calendar showWeekNumber={true} />;
+
+// Calendar with dropdown caption
+export const DropdownCaptionExample = () => (
+  <Calendar
+    captionLayout="dropdown"
+    startMonth={new Date(2020, 0)}
+    endMonth={new Date(2030, 11)}
+  />
+);

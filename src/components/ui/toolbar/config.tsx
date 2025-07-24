@@ -13,6 +13,7 @@ export const componentConfig: ComponentConfig = {
   name: "Toolbar",
   description: "A container for grouping a set of controls or actions.",
   category: "navigation" as const,
+  icon: "Wrench",
 
   installation: {
     npm: "@base-ui-components/react"

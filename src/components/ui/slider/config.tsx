@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Slider",
   description: "An input where the user selects a value from within a given range.",
   category: "inputs" as const,
+  icon: "SlidersHorizontal",
 
   installation: {
     npm: "@base-ui-components/react"

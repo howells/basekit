@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Tab Navigation",
   description: "A navigation component for switching between different views or sections.",
   category: "navigation" as const,
+  icon: "Tabs",
 
   installation: {
     npm: "@base-ui-components/react"

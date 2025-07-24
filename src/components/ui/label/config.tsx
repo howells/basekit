@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Label",
   description: "A label component for form inputs and interactive elements with proper accessibility support.",
   category: "forms" as const,
+  icon: "Tag",
 
   installation: {
     npm: "@base-ui-components/react"

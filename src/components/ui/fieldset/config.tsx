@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Fieldset",
   description: "A fieldset component that groups related form controls with an optional legend.",
   category: "forms" as const,
+  icon: "Group",
 
   importStatement: `import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset";`,
   componentId: "FieldsetExample",

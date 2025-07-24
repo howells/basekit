@@ -15,6 +15,7 @@ export const componentConfig: ComponentConfig = {
   name: "Badge",
   description: "A label used to show a status or category.",
   category: "feedback" as const,
+  icon: "Award",
 
   installation: {
     npm: "@base-ui-components/react"

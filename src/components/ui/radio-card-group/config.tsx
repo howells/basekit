@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Radio Card Group",
   description: "A group of selectable cards that behave like radio buttons.",
   category: "inputs" as const,
+  icon: "Circle",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -3,6 +3,7 @@ import { cx, focusInput, hasErrorInput } from "@/lib/utils";
 import { Select as BaseSelect } from "@base-ui-components/react/select";
 import { Check, ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
 import * as React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
 /**
  * A select dropdown component built on Base UI's Select primitive.
@@ -36,10 +37,10 @@ const SelectGroup = BaseSelect.Group;
  */
 const SelectValue = BaseSelect.Value;
 
-const selectTriggerStyles = [
-  cx(
+const selectTriggerVariants = tv({
+  base: [
     // base
-    "group/trigger flex w-full select-none items-center justify-between gap-2 truncate rounded-md border px-3 py-2 shadow-xs outline-hidden transition sm:text-sm",
+    "group/trigger flex w-full select-none items-center justify-between gap-2 truncate rounded-md border shadow-xs outline-hidden transition",
     // border color
     "border-zinc-200 dark:border-zinc-800",
     // text color
@@ -53,11 +54,18 @@ const selectTriggerStyles = [
     // disabled
     "data-[disabled]:bg-zinc-100 data-[disabled]:text-zinc-400",
     "dark:data-[disabled]:border-zinc-700 dark:data-[disabled]:bg-zinc-800 dark:data-[disabled]:text-zinc-500",
-    focusInput
-    // invalid (optional)
-    // "dark:aria-invalid:ring-red-400/20 aria-invalid:ring-2 aria-invalid:ring-red-200 aria-invalid:border-red-500 invalid:ring-2 invalid:ring-red-200 invalid:border-red-500"
-  ),
-];
+    focusInput,
+  ],
+  variants: {
+    size: {
+      default: "px-3 py-2 text-sm",
+      sm: "px-2.5 py-1.5 text-xs",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
 
 /**
  * Trigger button that opens the select dropdown.
@@ -77,16 +85,17 @@ const selectTriggerStyles = [
  */
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof BaseSelect.Trigger>,
-  React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> & {
-    /** Whether to display error styling */
-    hasError?: boolean;
-  }
->(({ className, hasError, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> &
+    VariantProps<typeof selectTriggerVariants> & {
+      /** Whether to display error styling */
+      hasError?: boolean;
+    }
+>(({ className, hasError, size, children, ...props }, ref) => {
   return (
     <BaseSelect.Trigger
       ref={ref}
       className={cx(
-        selectTriggerStyles,
+        selectTriggerVariants({ size }),
         hasError ? hasErrorInput : "",
         className
       )}
@@ -97,7 +106,9 @@ const SelectTrigger = React.forwardRef<
         <ChevronsUpDown
           className={cx(
             // base
-            "size-4 shrink-0",
+            "shrink-0",
+            // size based on trigger size
+            size === "sm" ? "size-3" : "size-4",
             // text color
             "text-zinc-400 dark:text-zinc-600",
             // disabled
@@ -445,5 +456,6 @@ export {
   SelectPositioner,
   SelectSeparator,
   SelectTrigger,
+  selectTriggerVariants,
   SelectValue,
 };

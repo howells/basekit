@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Donut Chart",
   description: "A circular chart that displays data as segments of a donut or pie, perfect for showing proportional data.",
   category: "charts" as const,
+  icon: "PieChart",
 
   importStatement: `import { DonutChart } from "@/components/ui/donut-chart";`,
   componentId: "DonutChartExample",

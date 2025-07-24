@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Menu Bar",
   description: "A horizontal menu bar containing multiple dropdown menus.",
   category: "ui" as const,
+  icon: "Menu",
 
   installation: {
     npm: "@base-ui-components/react"

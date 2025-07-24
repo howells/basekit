@@ -10,6 +10,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A modal dialog that interrupts the user with important content and expects a response.",
   category: "overlay" as const,
+  icon: "AlertTriangle",
 
   installation: {
     npm: "@base-ui-components/react"

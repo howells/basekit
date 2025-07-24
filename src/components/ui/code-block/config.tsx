@@ -14,6 +14,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A code block component with syntax highlighting, language display, and copy functionality.",
   category: "text" as const,
+  icon: "Code",
   importStatement: `import { CodeBlock } from "@/components/ui/code-block";`,
   componentId: "CodeBlockExample",
   props: [

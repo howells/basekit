@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "BarList",
   description: "A horizontal bar chart component for displaying comparative data with optional interactivity.",
   category: "charts" as const,
+  icon: "BarChart",
 
   installation: {
     npm: "@base-ui-components/react"

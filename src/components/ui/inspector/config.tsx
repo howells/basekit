@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Inspector",
   description: "A component for inspecting and debugging component properties and state.",
   category: "ui" as const,
+  icon: "Search",
 
   installation: {
     npm: "@base-ui-components/react"

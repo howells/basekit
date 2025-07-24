@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Menu",
   description: "Dropdown menu component built on Base UI with support for nested submenus, radio groups, checkboxes, and keyboard navigation.",
   category: "ui" as const,
+  icon: "Menu",
 
   installation: {
     npm: "@base-ui-components/react"

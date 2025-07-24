@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "Augments native scroll functionality for custom, cross-browser styling.",
   category: "utility" as const,
+  icon: "ScrollText",
 
   installation: {
     npm: "@base-ui-components/react"

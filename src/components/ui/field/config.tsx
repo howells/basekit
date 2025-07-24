@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Field",
   description: "A form field wrapper that combines label, input, and error/help text into a cohesive form element.",
   category: "forms" as const,
+  icon: "Square",
 
   importStatement: `import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field";`,
   componentId: "FieldExample",

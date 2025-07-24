@@ -5,6 +5,7 @@ export const componentConfig: ComponentConfig = {
   name: "Navbar",
   description: "A navigation bar component with branding, sections, and items.",
   category: "ui" as const,
+  icon: "Navigation",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   name: "Pagination",
   description: "A pagination component for navigating through multiple pages of content.",
   category: "navigation" as const,
+  icon: "MoreHorizontal",
 
   installation: {
     npm: "@base-ui-components/react"

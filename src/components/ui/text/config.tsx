@@ -14,6 +14,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A flexible text component with typography variants and semantic elements that inherits color from its parent.",
   category: "text" as const,
+  icon: "Type",
 
   installation: {
     npm: "@base-ui-components/react"

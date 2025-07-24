@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Divider",
   description: "A divider component that visually separates content with optional text label.",
   category: "layout" as const,
+  icon: "Minus",
 
   importStatement: `import { Divider } from "@/components/ui/divider";`,
   componentId: "DividerExample",

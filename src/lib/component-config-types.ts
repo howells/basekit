@@ -80,6 +80,7 @@ export interface ComponentConfig {
   name: string;
   description: string;
   category: "text" | "layout" | "navigation" | "feedback" | "overlay" | "data" | "media" | "utility" | "inputs" | "forms" | "charts";
+  icon?: string;
   badge?: string;
 
   // Installation info

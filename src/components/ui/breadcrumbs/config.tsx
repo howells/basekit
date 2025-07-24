@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Breadcrumbs",
   description: "A navigation component that shows the current page's location within a navigational hierarchy.",
   category: "navigation" as const,
+  icon: "ChevronRight",
 
   installation: {
     npm: "@base-ui-components/react"

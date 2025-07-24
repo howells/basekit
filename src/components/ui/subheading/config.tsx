@@ -6,6 +6,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A styled subheading component for section titles and content organization.",
   category: "text" as const,
+  icon: "Heading2",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Popover",
   description: "Popover component built on Base UI with customizable positioning and rich content support.",
   category: "overlay" as const,
+  icon: "MessageCircle",
 
   installation: {
     npm: "@base-ui-components/react"

@@ -7,6 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Line Chart",
   description: "A line chart for displaying trends and changes over time with multiple data series support.",
   category: "charts" as const,
+  icon: "TrendingUp",
 
   installation: {
     npm: "recharts"

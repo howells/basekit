@@ -9,6 +9,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A circular or square avatar component with support for images and initials fallback.",
   category: "media" as const,
+  icon: "User",
 
   installation: {
     npm: "@base-ui-components/react"

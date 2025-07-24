@@ -8,6 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A tree-shakable searchable icon picker with access to all 3,644+ Lucide React icons using dynamic loading.",
   category: "inputs" as const,
+  icon: "Smile",
 
   installation: {
     npm: "@base-ui-components/react"
