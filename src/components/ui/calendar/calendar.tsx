@@ -376,14 +376,19 @@ const Calendar = ({
           month_grid: "w-full border-collapse space-y-1",
           weekdays: cx("grid", showWeekNumber ? "grid-cols-8" : "grid-cols-7"),
           weekday: cx(
-            "w-9 font-medium text-sm text-center",
+            "w-9 h-9 font-medium text-sm text-center flex items-center justify-center",
             "text-gray-400 dark:text-gray-600 pb-2"
           ),
           week: cx(
-            "grid w-full mt-0.5",
+            "grid w-full mt-0.5 grid-rows-1",
             showWeekNumber ? "grid-cols-8" : "grid-cols-7"
           ),
-          day: "relative p-0 text-center focus-within:relative",
+          day: cx(
+            "relative p-0 text-center focus-within:relative",
+            // Ensure consistent sizing for both interactive and non-interactive modes
+            "h-9 w-9 inline-flex items-center justify-center",
+            "text-sm font-normal text-gray-900 dark:text-gray-50"
+          ),
           today: cx(showToday && "bg-gray-100 dark:bg-gray-800 font-semibold"),
           week_number: cx(
             "h-9 w-9 p-0 font-normal text-sm",

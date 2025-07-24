@@ -5,7 +5,7 @@ import React from "react";
 import { Calendar } from "./calendar";
 
 // Default calendar
-export const DefaultExample = () => <Calendar />;
+export const DefaultExample = () => <Calendar mode="single" />;
 
 // Range selection calendar
 export const RangeModeExample = () => <Calendar mode="range" />;
