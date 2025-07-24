@@ -15,11 +15,6 @@ export const componentConfig: ComponentConfig = {
   importStatement: `import { TabNavigation, TabNavigationLink } from "@/components/ui/tab-navigation/tab-navigation";`,
   componentId: "TabNavigationExample",
   props: [
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

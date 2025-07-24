@@ -36,7 +36,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       defaultValue:
         "This callout contains important information that requires your attention. It can include multiple sentences and longer content to demonstrate how the component handles extended text. The callout will automatically adjust its height to accommodate the content while maintaining proper styling and readability.",
       description: "The content displayed below the title."

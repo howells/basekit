@@ -24,7 +24,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       defaultValue: "Heading Text",
       description: "The heading content."
     }

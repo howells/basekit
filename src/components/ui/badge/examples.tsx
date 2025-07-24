@@ -5,6 +5,7 @@ import {
   Clock,
   Info,
   Star,
+  Trash2,
   TrendingUp,
   X,
 } from "lucide-react";
@@ -19,6 +20,71 @@ export const WithIconsExample = () => (
   <Badge leftIcon={Check} rightIcon={ArrowRight} variant="success">
     Success
   </Badge>
+);
+
+// Badge with dismiss button
+export const DismissExample = () => (
+  <div className="flex flex-wrap gap-2">
+    <Badge onDismiss={() => console.log("Default dismissed")}>Removable</Badge>
+    <Badge
+      variant="success"
+      leftIcon={Check}
+      onDismiss={() => console.log("Success dismissed")}
+    >
+      Completed
+    </Badge>
+    <Badge
+      variant="error"
+      onDismiss={() => console.log("Error dismissed")}
+      dismissIcon={Trash2}
+    >
+      Delete me
+    </Badge>
+  </div>
+);
+
+// Rounded (pill-shaped) badges
+export const RoundedExample = () => (
+  <div className="flex flex-wrap gap-2">
+    <Badge rounded>Pill</Badge>
+    <Badge rounded variant="success" leftIcon={Check}>
+      Verified
+    </Badge>
+    <Badge rounded variant="error" size="sm">
+      Error
+    </Badge>
+    <Badge rounded variant="warning" size="lg" rightIcon={TrendingUp}>
+      Trending
+    </Badge>
+    <Badge rounded bordered variant="neutral">
+      Bordered Pill
+    </Badge>
+  </div>
+);
+
+// Status dot badges
+export const StatusDotExample = () => (
+  <div className="flex flex-wrap gap-2">
+    <Badge status="ready">Ready</Badge>
+    <Badge status="building" statusAnimated>
+      Building
+    </Badge>
+    <Badge status="queued" variant="warning">
+      Queued
+    </Badge>
+    <Badge status="error" variant="error">
+      Error
+    </Badge>
+    <Badge status="pending" statusAnimated size="sm">
+      Pending
+    </Badge>
+    <Badge status="canceled" variant="neutral">
+      Canceled
+    </Badge>
+    <Badge status="warning" variant="warning" rounded>
+      Warning
+    </Badge>
+  </div>
 );
 
 // All variants

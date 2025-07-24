@@ -33,11 +33,6 @@ export const componentConfig: ComponentConfig = {
       defaultValue: "horizontal",
       description: "The orientation of the toolbar."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

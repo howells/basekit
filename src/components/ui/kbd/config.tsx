@@ -38,11 +38,5 @@ export const kbdConfig: ComponentConfig = {
       description: "Key text to display for simple shortcuts",
       required: false
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes",
-      required: false
-    },
   ]
 };

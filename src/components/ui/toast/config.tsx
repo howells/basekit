@@ -23,7 +23,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "description",
-      type: "string",
+      type: "textarea",
       description: "The toast message content."
     },
     {

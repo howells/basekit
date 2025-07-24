@@ -24,7 +24,7 @@ export const componentConfig: ComponentConfig = {
   props: [
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       defaultValue: "This is a text component that inherits its color",
       description: "The text content to display."
     },
@@ -41,11 +41,6 @@ export const componentConfig: ComponentConfig = {
         { value: "lg", label: "lg (18px)" },
         { value: "xl", label: "xl (20px)" },
       ]
-    },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes for custom styling."
     },
   ],
   examples: [

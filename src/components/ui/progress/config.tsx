@@ -40,11 +40,6 @@ export const componentConfig: ComponentConfig = {
       defaultValue: false,
       description: "Show the progress value as text."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

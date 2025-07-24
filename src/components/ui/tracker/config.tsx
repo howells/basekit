@@ -22,11 +22,6 @@ export const componentConfig: ComponentConfig = {
       defaultValue: "[]",
       description: "The tracker data array."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

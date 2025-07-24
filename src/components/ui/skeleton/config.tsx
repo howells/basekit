@@ -13,12 +13,6 @@ export const componentConfig: ComponentConfig = {
   importStatement: `import { Skeleton } from "@/components/ui/skeleton/skeleton";`,
   componentId: "SkeletonExample",
   props: [
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes",
-      defaultValue: ""
-    },
   ],
   examples: [
     {

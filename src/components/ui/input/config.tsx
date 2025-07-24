@@ -17,7 +17,7 @@ export const componentConfig: ComponentConfig = {
   props: [
     {
       name: "placeholder",
-      type: "string",
+      type: "textarea",
       defaultValue: "Enter text...",
       description: "Placeholder text for the input."
     },

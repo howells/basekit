@@ -22,11 +22,6 @@ export const componentConfig: ComponentConfig = {
       defaultValue: "md",
       description: "The size of the loader."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

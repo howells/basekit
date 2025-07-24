@@ -21,11 +21,6 @@ export const componentConfig: ComponentConfig = {
 } from "@/components/ui/navigation-menu/navigation-menu";`,
   componentId: "NavigationMenuExample",
   props: [
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

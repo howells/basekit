@@ -29,12 +29,6 @@ import { z } from "zod";`,
       defaultValue: false,
       description: "Whether the form is disabled."
     },
-    {
-      name: "className",
-      type: "string",
-      defaultValue: "",
-      description: "Additional CSS classes for the form."
-    }
   ],
   examples: [
     {

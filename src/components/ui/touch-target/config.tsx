@@ -22,11 +22,6 @@ export const componentConfig: ComponentConfig = {
       defaultValue: "Interactive element",
       description: "The content to wrap with touch target."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

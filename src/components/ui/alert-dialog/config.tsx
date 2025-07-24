@@ -43,7 +43,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "description",
-      type: "string",
+      type: "textarea",
       description: "The description text of the alert dialog.",
       defaultValue:
         "This action cannot be undone. This will permanently delete your account and remove your data from our servers."

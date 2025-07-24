@@ -20,7 +20,7 @@ export const componentConfig: ComponentConfig = {
   props: [
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       defaultValue: `const greeting = "Hello, World!";\nconsole.log(greeting);`,
       description: "The code content to display.",
       required: true

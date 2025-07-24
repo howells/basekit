@@ -14,12 +14,6 @@ export const componentConfig: ComponentConfig = {
   importStatement: `import { ScrollArea } from "@/components/ui/scroll-area/scroll-area";`,
   componentId: "ScrollAreaExample",
   props: [
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes",
-      defaultValue: ""
-    },
   ],
   examples: [
     {

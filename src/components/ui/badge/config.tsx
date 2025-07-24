@@ -4,9 +4,12 @@ import { jsxToString } from "@/lib/jsx-to-string";
 import {
   BorderedExample,
   DefaultExample,
+  DismissExample,
+  RoundedExample,
   SizesExample,
+  StatusDotExample,
   VariantsExample,
-  WithIconsExample
+  WithIconsExample,
 } from "./examples";
 
 // Component configuration - single source of truth
@@ -18,7 +21,7 @@ export const componentConfig: ComponentConfig = {
   icon: "Award",
 
   installation: {
-    npm: "@base-ui-components/react"
+    npm: "@base-ui-components/react",
   },
   importStatement: `import { Badge } from "@/components/ui/badge";`,
   componentId: "BadgeExample",
@@ -30,37 +33,77 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "The visual style variant of the badge.",
       defaultValue: "default",
-      options: ["default", "neutral", "success", "error", "warning"]
+      options: ["default", "neutral", "success", "error", "warning"],
     },
     {
       name: "size",
       type: "select",
       description: "The size of the badge.",
       defaultValue: "base",
-      options: ["sm", "base", "lg"]
+      options: ["sm", "base", "lg"],
     },
     {
       name: "bordered",
       type: "boolean",
-      description: "Whether to display a border around the badge.",
-      defaultValue: true
+      description: "Whether to show a border around the badge.",
+      defaultValue: false,
+    },
+    {
+      name: "rounded",
+      type: "boolean",
+      description: "Whether to use full border radius for a pill shape.",
+      defaultValue: false,
+    },
+    {
+      name: "status",
+      type: "select",
+      description:
+        "Status type for displaying a status dot. Overrides leftIcon and rightIcon when provided.",
+      options: [
+        "default",
+        "queued",
+        "building",
+        "ready",
+        "error",
+        "canceled",
+        "warning",
+        "pending",
+      ],
+    },
+    {
+      name: "statusAnimated",
+      type: "boolean",
+      description: "Whether to animate the status dot for active statuses.",
+      defaultValue: false,
     },
     {
       name: "leftIcon",
       type: "icon",
-      description: "Icon component to display on the left side."
+      description: "Icon component to display on the left side.",
     },
     {
       name: "rightIcon",
       type: "icon",
-      description: "Icon component to display on the right side."
+      description: "Icon component to display on the right side.",
     },
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       description: "The content to display inside the badge.",
-      defaultValue: "Badge"
-    }
+      defaultValue: "Badge",
+    },
+    {
+      name: "onDismiss",
+      type: "boolean",
+      description:
+        "Whether to show a dismiss button (X) that can be clicked to remove the badge.",
+      defaultValue: false,
+    },
+    {
+      name: "dismissIcon",
+      type: "icon",
+      description: "Custom icon for the dismiss button. Defaults to X icon.",
+    },
   ],
 
   examples: [
@@ -68,26 +111,49 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic badge with default styling.",
-      code: jsxToString(<DefaultExample />)},
+      code: jsxToString(<DefaultExample />),
+    },
     {
       id: "with-icons",
       title: "With Icons",
       description: "Badge with left and right icons.",
-      code: jsxToString(<WithIconsExample />)},
+      code: jsxToString(<WithIconsExample />),
+    },
+    {
+      id: "dismiss",
+      title: "Dismissible",
+      description: "Badges with dismiss buttons for removal.",
+      code: jsxToString(<DismissExample />),
+    },
     {
       id: "variants",
       title: "Variants",
       description: "Different badge variants for various states.",
-      code: jsxToString(<VariantsExample />)},
+      code: jsxToString(<VariantsExample />),
+    },
     {
       id: "sizes",
       title: "Sizes",
       description: "Different badge sizes.",
-      code: jsxToString(<SizesExample />)},
+      code: jsxToString(<SizesExample />),
+    },
     {
       id: "bordered",
       title: "Bordered",
       description: "Badge with and without borders.",
-      code: jsxToString(<BorderedExample />)}
-  ]
+      code: jsxToString(<BorderedExample />),
+    },
+    {
+      id: "rounded",
+      title: "Rounded",
+      description: "Badge with full border radius.",
+      code: jsxToString(<RoundedExample />),
+    },
+    {
+      id: "status-dot",
+      title: "Status Dot",
+      description: "Badge with a status dot.",
+      code: jsxToString(<StatusDotExample />),
+    },
+  ],
 };

@@ -58,7 +58,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       defaultValue: "Button",
       description: "The content to display inside the button."
     },
@@ -99,7 +99,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "loadingText",
-      type: "string",
+      type: "textarea",
       description: "Text to show when loading (optional)."
     },
     {

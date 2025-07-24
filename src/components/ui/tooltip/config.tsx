@@ -17,7 +17,7 @@ export const componentConfig: ComponentConfig = {
   props: [
     {
       name: "content",
-      type: "string",
+      type: "textarea",
       defaultValue: "Tooltip content",
       description: "The tooltip content."
     },

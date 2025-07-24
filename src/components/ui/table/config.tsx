@@ -40,11 +40,6 @@ export const componentConfig: ComponentConfig = {
       defaultValue: false,
       description: "Add alternating row colors."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes."
-    }
   ],
   examples: [
     {

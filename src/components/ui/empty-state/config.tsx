@@ -21,7 +21,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "description",
-      type: "string",
+      type: "textarea",
       defaultValue:
         "There's nothing here yet. Try creating something new to get started.",
       description: "Optional description text below the title."

@@ -17,7 +17,7 @@ export const componentConfig: ComponentConfig = {
   props: [
     {
       name: "children",
-      type: "string",
+      type: "textarea",
       defaultValue: "Label text",
       description: "The label content."
     },

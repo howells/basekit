@@ -75,11 +75,6 @@ export const componentConfig: ComponentConfig = {
       description:
         "Vertical spacing around the separator (when used with text)."
     },
-    {
-      name: "className",
-      type: "string",
-      description: "Additional CSS classes to apply."
-    },
   ],
 
   // Examples showcasing different use cases
