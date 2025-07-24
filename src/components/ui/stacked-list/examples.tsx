@@ -1,3 +1,5 @@
+"use client";
+
 import { Calendar, FileText, UserPlus } from "lucide-react";
 import React from "react";
 import { Avatar } from "../avatar/avatar";
@@ -6,6 +8,7 @@ import { Button } from "../button/button";
 import { Card } from "../card/card";
 import { StackedList } from "./stacked-list";
 
+// Default example - matches config "default" id
 export function Default() {
   return (
     <StackedList>
@@ -42,6 +45,7 @@ export function Default() {
   );
 }
 
+// In card example - matches config "in-card" id
 export function InCard() {
   return (
     <Card padding={0}>
@@ -73,6 +77,7 @@ export function InCard() {
   );
 }
 
+// With icons example - matches config "with-icons" id
 export function WithIcons() {
   return (
     <StackedList>
@@ -98,6 +103,7 @@ export function WithIcons() {
   );
 }
 
+// Interactive example - matches config "interactive" id
 export function Interactive() {
   return (
     <StackedList>
@@ -127,6 +133,7 @@ export function Interactive() {
   );
 }
 
+// Empty state example - matches config "empty-state" id
 export function EmptyState() {
   return (
     <StackedList>

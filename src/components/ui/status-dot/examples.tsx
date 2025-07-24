@@ -17,7 +17,7 @@ export function DefaultExample() {
 // With labels example - matches config "with-labels" id
 export function WithLabelsExample() {
   return (
-    <div className="space-y-2">
+    <div className="space-x-6">
       <StatusDot variant="success" label="Online" />
       <StatusDot variant="warning" label="Away" />
       <StatusDot variant="error" label="Busy" />
@@ -53,7 +53,7 @@ export function SizesExample() {
 // Animated example - matches config "animated" id
 export function AnimatedExample() {
   return (
-    <div className="space-y-2">
+    <div className="space-x-6">
       <StatusDot variant="success" label="Live" animated />
       <StatusDot variant="error" label="Recording" animated />
       <StatusDot variant="info" label="Processing" animated />
@@ -64,7 +64,7 @@ export function AnimatedExample() {
 // Additional examples that were in the original file
 export function BasicExample() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <StatusDot variant="success" label="Ready" />
       <StatusDot variant="info" label="Processing" animated />
       <StatusDot variant="warning" label="Queued" />
@@ -78,7 +78,7 @@ export function BasicExample() {
 
 export function WithVariantsExample() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <StatusDot variant="success" label="Success" />
       <StatusDot variant="info" label="Info" />
       <StatusDot variant="warning" label="Warning" />
@@ -91,7 +91,7 @@ export function WithVariantsExample() {
 
 export function ColorVariantsExample() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <StatusDot variant="purple" label="Purple" />
       <StatusDot variant="pink" label="Pink" />
       <StatusDot variant="orange" label="Orange" />

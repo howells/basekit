@@ -1,121 +1,107 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import {
+  Default,
+  EmptyState,
+  InCard,
+  Interactive,
+  WithIcons,
+} from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "stacked-list",
   name: "Stacked List",
   description:
-    "A list component that displays items in a vertically stacked layout with dividers.",
+    "A list component that displays items in a vertically stacked layout with dividers and structured content.",
   category: "data" as const,
   icon: "List",
 
   installation: {
-    npm: "@base-ui-components/react"
+    npm: "@base-ui-components/react",
   },
-  importStatement: `import { StackedList, StackedListItem } from "@/components/ui/stacked-list/stacked-list";`,
+  importStatement: `import { StackedList } from "@/components/ui/stacked-list/stacked-list";`,
   componentId: "StackedListExample",
-  props: [],
+  props: [
+    {
+      name: "showDividers",
+      type: "boolean",
+      description: "Whether to show dividers between items",
+      defaultValue: true,
+    },
+    {
+      name: "gap",
+      type: "select",
+      description: "Gap between items",
+      options: [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "8",
+        "10",
+        "12",
+        "16",
+        "20",
+        "24",
+      ],
+      defaultValue: "0",
+    },
+    {
+      name: "padding",
+      type: "select",
+      description: "Padding for each item",
+      options: [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "8",
+        "10",
+        "12",
+        "16",
+        "20",
+        "24",
+      ],
+      defaultValue: "4",
+    },
+  ],
   examples: [
     {
       id: "default",
       title: "Basic Stacked List",
-      description: "A simple list with dividers between items",
-      code: `<StackedList>
-  <StackedListItem>
-    <div className="flex items-center justify-between">
-      <div>
-        <h4 className="font-medium">Item 1</h4>
-        <p className="text-sm text-zinc-600">Description for item 1</p>
-      </div>
-      <ChevronRight className="h-5 w-5 text-zinc-400" />
-    </div>
-  </StackedListItem>
-  <StackedListItem>
-    <div className="flex items-center justify-between">
-      <div>
-        <h4 className="font-medium">Item 2</h4>
-        <p className="text-sm text-zinc-600">Description for item 2</p>
-      </div>
-      <ChevronRight className="h-5 w-5 text-zinc-400" />
-    </div>
-  </StackedListItem>
-  <StackedListItem>
-    <div className="flex items-center justify-between">
-      <div>
-        <h4 className="font-medium">Item 3</h4>
-        <p className="text-sm text-zinc-600">Description for item 3</p>
-      </div>
-      <ChevronRight className="h-5 w-5 text-zinc-400" />
-    </div>
-  </StackedListItem>
-</StackedList>`
+      description:
+        "A list with team members showing avatars, names, and actions",
+      code: jsxToString(<Default />),
     },
     {
-      id: "with-avatars",
-      title: "Stacked List with Avatars",
-      description: "List items with avatar images",
-      code: `<StackedList>
-  <StackedListItem>
-    <div className="flex items-center gap-4">
-      <Avatar>
-        <AvatarImage src="/api/placeholder/32/32" alt="User 1" />
-        <AvatarFallback>U1</AvatarFallback>
-      </Avatar>
-      <div className="flex-1">
-        <h4 className="font-medium">John Doe</h4>
-        <p className="text-sm text-zinc-600">john.doe@example.com</p>
-      </div>
-      <Button size="sm" variant="ghost">
-        View
-      </Button>
-    </div>
-  </StackedListItem>
-  <StackedListItem>
-    <div className="flex items-center gap-4">
-      <Avatar>
-        <AvatarImage src="/api/placeholder/32/32" alt="User 2" />
-        <AvatarFallback>U2</AvatarFallback>
-      </Avatar>
-      <div className="flex-1">
-        <h4 className="font-medium">Jane Smith</h4>
-        <p className="text-sm text-zinc-600">jane.smith@example.com</p>
-      </div>
-      <Button size="sm" variant="ghost">
-        View
-      </Button>
-    </div>
-  </StackedListItem>
-</StackedList>`
+      id: "in-card",
+      title: "In Card Container",
+      description: "Stacked list inside a card with recent activity",
+      code: jsxToString(<InCard />),
+    },
+    {
+      id: "with-icons",
+      title: "With Icons",
+      description: "List items with icons and status badges",
+      code: jsxToString(<WithIcons />),
     },
     {
       id: "interactive",
-      title: "Interactive Stacked List",
-      description: "List items that are clickable",
-      code: `<StackedList>
-  <StackedListItem className="cursor-pointer hover:bg-zinc-50">
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <Settings className="h-5 w-5 text-zinc-500" />
-        <div>
-          <h4 className="font-medium">Account Settings</h4>
-          <p className="text-sm text-zinc-600">Manage your account preferences</p>
-        </div>
-      </div>
-      <ChevronRight className="h-5 w-5 text-zinc-400" />
-    </div>
-  </StackedListItem>
-  <StackedListItem className="cursor-pointer hover:bg-zinc-50">
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <Bell className="h-5 w-5 text-zinc-500" />
-        <div>
-          <h4 className="font-medium">Notifications</h4>
-          <p className="text-sm text-zinc-600">Configure notification preferences</p>
-        </div>
-      </div>
-      <ChevronRight className="h-5 w-5 text-zinc-400" />
-    </div>
-  </StackedListItem>
-</StackedList>`
+      title: "Interactive Items",
+      description: "Clickable list items with different interaction patterns",
+      code: jsxToString(<Interactive />),
     },
-  ]
+    {
+      id: "empty-state",
+      title: "Empty State",
+      description: "List with empty state when no items are present",
+      code: jsxToString(<EmptyState />),
+    },
+  ],
 };

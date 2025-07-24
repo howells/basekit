@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import { Tag } from "./tag";
 
-export function Basic() {
+// Basic example - matches config "Basic" id
+export function BasicExample() {
   return (
     <div className="flex gap-2">
       <Tag value="Design" />
@@ -11,7 +14,8 @@ export function Basic() {
   );
 }
 
-export function WithLabels() {
+// With labels example - matches config "WithLabels" id
+export function WithLabelsExample() {
   return (
     <div className="flex gap-2">
       <Tag label="Department" value="Engineering" />
@@ -21,7 +25,8 @@ export function WithLabels() {
   );
 }
 
-export function WithCounts() {
+// With counts example - matches config "WithCounts" id
+export function WithCountsExample() {
   return (
     <div className="flex gap-2">
       <Tag value="Issues" count={12} />
@@ -31,7 +36,8 @@ export function WithCounts() {
   );
 }
 
-export function Dismissible() {
+// Dismissible example - matches config "Dismissible" id
+export function DismissibleExample() {
   return (
     <div className="flex gap-2">
       <Tag
@@ -53,7 +59,8 @@ export function Dismissible() {
   );
 }
 
-export function WithAvatars() {
+// With avatars example - matches config "WithAvatars" id
+export function WithAvatarsExample() {
   return (
     <div className="flex gap-2">
       <Tag value="John Doe" avatar={{ initials: "JD" }} />
@@ -68,7 +75,8 @@ export function WithAvatars() {
   );
 }
 
-export function Complex() {
+// Complex example - matches config "Complex" id
+export function ComplexExample() {
   return (
     <div className="flex gap-2">
       <Tag
@@ -89,8 +97,8 @@ export function Complex() {
   );
 }
 
-// Interactive example with state management
-export function Interactive() {
+// Interactive example - matches config "Interactive" id
+export function InteractiveExample() {
   const [tags, setTags] = React.useState([
     { id: 1, label: "Skill", value: "React" },
     { id: 2, label: "Skill", value: "TypeScript" },
