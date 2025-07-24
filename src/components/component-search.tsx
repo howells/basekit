@@ -2,6 +2,7 @@
 
 import { type ComponentConfig } from "@/lib/component-config-types";
 import { getComponentsByCategory } from "@/lib/component-registry";
+import { useDebounce } from "@uidotdev/usehooks";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,6 +30,7 @@ export function ComponentSearch({
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
   // Get all components and filter them
   const allComponents = [
@@ -38,11 +40,15 @@ export function ComponentSearch({
     ...getComponentsByCategory("charts"),
   ];
 
-  const filteredComponents = searchTerm
+  const filteredComponents = debouncedSearchTerm
     ? allComponents.filter(
         (component) =>
-          component.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          component.description.toLowerCase().includes(searchTerm.toLowerCase())
+          component.name
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase()) ||
+          component.description
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase())
       )
     : allComponents;
 
@@ -86,20 +92,7 @@ export function ComponentSearch({
   // Reset selection when search changes
   useEffect(() => {
     setSelectedIndex(0);
-  }, [searchTerm]);
-
-  // Global keyboard shortcut
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setIsOpen(true);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [debouncedSearchTerm]);
 
   const handleSelect = (component: ComponentConfig) => {
     const url = `/${component.category}/${component.id}`;
@@ -116,13 +109,9 @@ export function ComponentSearch({
         onClick={() => setIsOpen(true)}
         leftIcon={Search}
         textAlign="left"
+        kbd={["mod", "K"]}
       >
-        <div className="flex items-center justify-between w-full">
-          <span>{placeholder}</span>
-          <kbd className="pointer-events-none inline-flex h-5 items-center gap-1 rounded border border-zinc-200 bg-zinc-100 px-1.5 font-mono text-[10px] font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
-            ⌘K
-          </kbd>
-        </div>
+        {placeholder}
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

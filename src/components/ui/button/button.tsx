@@ -5,6 +5,8 @@ import { useRender } from "@base-ui-components/react/use-render";
 import { MoreHorizontal } from "lucide-react";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+import { Kbd } from "../kbd/kbd";
+import { useButtonKeyboardShortcut } from "../kbd/use-keyboard-shortcut";
 import { Loader } from "../loader";
 
 const buttonVariants = tv({
@@ -161,6 +163,10 @@ interface ButtonProps
   fullWidth?: boolean;
   /** Text alignment within the button */
   textAlign?: "left" | "center" | "right";
+  /** Keyboard shortcut to display */
+  kbd?: string | string[];
+  /** Platform for keyboard shortcut display */
+  kbdPlatform?: "mac" | "pc" | "auto";
 }
 
 /**
@@ -211,6 +217,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       fullWidth,
       textAlign,
+      kbd,
+      kbdPlatform = "auto",
       ...props
     }: ButtonProps,
     forwardedRef
@@ -237,6 +245,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Check if children is a complex element (custom layout)
     const hasCustomLayout = React.isValidElement(children);
 
+    // Handle keyboard shortcuts
+    const kbdKeys = kbd ? (Array.isArray(kbd) ? kbd : [kbd]) : undefined;
+    useButtonKeyboardShortcut(
+      kbdKeys,
+      props.onClick as (() => void) | undefined
+    );
+
     // Icon size based on button size - adjusted for better proportions
     const iconSize =
       size === "sm" || size === "icon-sm"
@@ -251,8 +266,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const effectiveShouldShowChildren = shouldShowChildren;
 
     const renderButtonContent = () => {
-      // If children is a custom React element AND we don't have icon props, render it directly
-      if (hasCustomLayout && !hasLeftIcon && !hasRightIcon && !isLoading) {
+      // If children is a custom React element AND we don't have icon props AND no kbd, render it directly
+      if (
+        hasCustomLayout &&
+        !hasLeftIcon &&
+        !hasRightIcon &&
+        !isLoading &&
+        !kbd
+      ) {
         return children;
       }
 
@@ -275,13 +296,43 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
       // Normal width: simple gap layout
       if (!fullWidth) {
-        // Simple case: no icons or loading state
-        if (!hasLeftIcon && !hasRightIcon && !isLoading) {
+        // Simple case: no icons, loading state, or kbd
+        if (!hasLeftIcon && !hasRightIcon && !isLoading && !kbd) {
           // For icon buttons, return sr-only wrapped children
           if (isIconButton && hasChildren) {
             return iconButtonChildren;
           }
           return effectiveShouldShowChildren ? effectiveChildren : null;
+        }
+
+        // Simple case with just kbd and no icons/loading
+        if (!hasLeftIcon && !hasRightIcon && !isLoading && kbd) {
+          const content = effectiveShouldShowChildren
+            ? effectiveChildren
+            : null;
+          const kbdElement = (
+            <Kbd
+              keys={Array.isArray(kbd) ? kbd : [kbd]}
+              platform={kbdPlatform}
+              className="ml-auto"
+            />
+          );
+
+          if (isIconButton && hasChildren) {
+            return (
+              <span className="flex items-center justify-between w-full">
+                {iconButtonChildren}
+                {kbdElement}
+              </span>
+            );
+          }
+
+          return (
+            <span className="flex items-center justify-between w-full">
+              {content}
+              {kbdElement}
+            </span>
+          );
         }
 
         return (
@@ -341,6 +392,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               ? iconButtonChildren
               : effectiveShouldShowChildren && effectiveChildren}
 
+            {/* Keyboard shortcut */}
+            {kbd && !hasRightIcon && (
+              <Kbd
+                keys={Array.isArray(kbd) ? kbd : [kbd]}
+                platform={kbdPlatform}
+                className="ml-auto"
+              />
+            )}
+
             {/* Right icon with CSS transitions */}
             {hasRightIcon && (
               <span className="flex items-center">
@@ -349,6 +409,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     className: iconClassName,
                     strokeWidth: iconStrokeWidth,
                   })}
+                {kbd && (
+                  <Kbd
+                    keys={Array.isArray(kbd) ? kbd : [kbd]}
+                    platform={kbdPlatform}
+                    className="ml-2"
+                  />
+                )}
               </span>
             )}
           </span>

@@ -299,68 +299,53 @@ export function InspectorBody({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [showGradient, setShowGradient] = React.useState(true);
+  const viewportRef = React.useRef<HTMLDivElement>(null);
 
   // Check if content is scrollable and not at bottom
   const checkScrollable = React.useCallback(() => {
-    // Find the viewport element by class selector
-    const viewport = document.querySelector(
-      ".scroll-viewport"
-    ) as HTMLDivElement;
-    if (!viewport) {
-      console.log("Viewport not found");
-      return;
-    }
+    // Find the viewport element by class selector (fallback if ref not available)
+    const viewport =
+      viewportRef.current ||
+      (document.querySelector(".scroll-viewport") as HTMLDivElement);
+    if (!viewport) return;
 
     const { scrollTop, scrollHeight, clientHeight } = viewport;
     const isScrollable = scrollHeight > clientHeight;
     const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5; // 5px threshold
 
-    console.log("Scroll check:", {
-      scrollTop,
-      scrollHeight,
-      clientHeight,
-      isScrollable,
-      isAtBottom,
-    });
     setShowGradient(isScrollable && !isAtBottom);
   }, []);
 
+  // Manual scroll event handling since we need to target a specific element
   React.useEffect(() => {
-    // Find the viewport element by class selector
     const viewport = document.querySelector(
       ".scroll-viewport"
     ) as HTMLDivElement;
-    if (!viewport) {
-      // Retry after a short delay if viewport not found
-      const timer = setTimeout(() => {
-        const retryViewport = document.querySelector(
-          ".scroll-viewport"
-        ) as HTMLDivElement;
-        if (retryViewport) {
-          checkScrollable();
-          retryViewport.addEventListener("scroll", checkScrollable);
+    if (!viewport) return;
 
-          const resizeObserver = new ResizeObserver(checkScrollable);
-          resizeObserver.observe(retryViewport);
-        }
-      }, 100);
-      return () => clearTimeout(timer);
+    viewport.addEventListener("scroll", checkScrollable);
+    return () => viewport.removeEventListener("scroll", checkScrollable);
+  }, [checkScrollable]);
+
+  React.useEffect(() => {
+    // Check initially with a small delay to ensure content is rendered
+    const timer = setTimeout(checkScrollable, 100);
+
+    // Check on resize (content changes) using ResizeObserver
+    const viewport = document.querySelector(
+      ".scroll-viewport"
+    ) as HTMLDivElement;
+    if (viewport) {
+      const resizeObserver = new ResizeObserver(checkScrollable);
+      resizeObserver.observe(viewport);
+
+      return () => {
+        clearTimeout(timer);
+        resizeObserver.disconnect();
+      };
     }
 
-    // Check initially
-    checkScrollable();
-
-    // Check on scroll
-    viewport.addEventListener("scroll", checkScrollable);
-
-    // Check on resize (content changes)
-    const resizeObserver = new ResizeObserver(checkScrollable);
-    resizeObserver.observe(viewport);
-
-    return () => {
-      viewport.removeEventListener("scroll", checkScrollable);
-      resizeObserver.disconnect();
-    };
+    return () => clearTimeout(timer);
   }, [checkScrollable]);
 
   return (

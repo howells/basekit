@@ -3,6 +3,7 @@
 "use client";
 
 import { getComponentsByCategory } from "@/lib/component-registry";
+import { useWindowSize } from "@uidotdev/usehooks";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
 import { Pilcrow } from "lucide-react";
@@ -246,17 +247,8 @@ function SidebarContent() {
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const { width } = useWindowSize();
+  const isMobile = width !== null && width < 1024;
 
   return (
     <motion.div
