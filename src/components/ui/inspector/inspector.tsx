@@ -10,7 +10,9 @@
  * - Toggleable overlay mode for mobile devices
  * - Smooth slide-in/out animations
  * - Structured header, body, and section organization
- * - Scrollable content area
+ * - Built-in ScrollArea with automatic overflow handling
+ * - Flexible height that adapts to container
+ * - Custom styled scrollbars with hover effects
  * - Responsive border and background styling
  * - Dark mode support
  * - Flexible content organization
@@ -110,6 +112,7 @@ import { config } from "@/lib/config";
 import { cx } from "@/lib/utils";
 import { Settings, X } from "lucide-react";
 import React from "react";
+import { ScrollArea } from "../scroll-area";
 
 /**
  * Root inspector component providing the main panel container.
@@ -263,29 +266,25 @@ export function InspectorHeader({
  * Inspector body component for main scrollable content.
  *
  * Provides the main content area of the inspector with automatic scrolling
- * when content overflows. Contains inspector sections and groups with
- * appropriate padding and spacing.
+ * when content overflows. Uses ScrollArea internally for consistent styling
+ * and behavior. The inspector fills its container height and scrolls when
+ * content exceeds the available space.
  *
- * @param className - Additional CSS classes
+ * @param className - Additional CSS classes for the content wrapper
  * @param props - Additional HTML div element props
  *
  * @component
  * @example
  * ```tsx
- * // Basic body
+ * // Basic body with automatic scrolling
  * <InspectorBody>
  *   <InspectorSection>
  *     Content sections here
  *   </InspectorSection>
  * </InspectorBody>
  *
- * // Body with custom padding
- * <InspectorBody className="px-4 py-2">
- *   Custom padded content
- * </InspectorBody>
- *
- * // Scrollable content
- * <InspectorBody>
+ * // Body with custom content padding
+ * <InspectorBody className="space-y-4">
  *   {longListOfItems.map(item => (
  *     <InspectorSection key={item.id}>
  *       {item.content}
@@ -299,14 +298,18 @@ export function InspectorBody({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <div
-      className={cx(
-        // Base layout - scrollable content area
-        "flex-1 overflow-y-auto px-6 py-4",
-        className
-      )}
-      {...props}
-    />
+    <div className="flex-1 min-h-0">
+      <ScrollArea className="h-full">
+        <div
+          className={cx(
+            // Content padding and spacing
+            "px-6 py-4",
+            className
+          )}
+          {...props}
+        />
+      </ScrollArea>
+    </div>
   );
 }
 

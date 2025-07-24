@@ -6,21 +6,21 @@ import React from "react";
 import { ComponentPreview } from "./component-preview";
 import { PropExplorerProvider } from "./prop-explorer-context";
 import { PropExplorerContent } from "./prop-explorer-controls";
-import { Inspector, InspectorBody, InspectorToggle } from "./ui/inspector";
+import { Inspector, InspectorBody } from "./ui/inspector";
 
 interface ComponentPropExplorerProps {
   config: ComponentConfig;
   category: string;
   component: string;
+  inspectorMaxHeight?: string;
 }
 
 export function ComponentPropExplorer({
   config,
   category,
   component,
+  inspectorMaxHeight = "max-h-[300px] lg:max-h-[400px]",
 }: ComponentPropExplorerProps) {
-  const [isInspectorOpen, setIsInspectorOpen] = React.useState(false);
-
   // Extract default values from props if available
   const getDefaultProps = () => {
     if (!config.props) return {};
@@ -61,7 +61,7 @@ export function ComponentPropExplorer({
 
   return (
     <PropExplorerProvider defaultProps={getDefaultProps()}>
-      <div className="flex flex-1 relative">
+      <div className="flex flex-1">
         {/* Main content - Live preview */}
         <div className="flex-1">
           <ComponentPreview
@@ -70,32 +70,14 @@ export function ComponentPropExplorer({
           />
         </div>
 
-        {/* Desktop Inspector - Always visible on large screens */}
-        <div className="hidden lg:block">
+        {/* Inspector - Always visible */}
+        <div className={inspectorMaxHeight}>
           <Inspector>
             <InspectorBody>
               <PropExplorerContent config={serializableConfig} />
             </InspectorBody>
           </Inspector>
         </div>
-
-        {/* Mobile Inspector - Toggleable overlay */}
-        <Inspector
-          isOpen={isInspectorOpen}
-          onToggle={() => setIsInspectorOpen(!isInspectorOpen)}
-          asOverlay
-          className="lg:hidden"
-        >
-          <InspectorBody>
-            <PropExplorerContent config={serializableConfig} />
-          </InspectorBody>
-        </Inspector>
-
-        {/* Toggle button for mobile */}
-        <InspectorToggle
-          isOpen={isInspectorOpen}
-          onToggle={() => setIsInspectorOpen(!isInspectorOpen)}
-        />
       </div>
     </PropExplorerProvider>
   );
