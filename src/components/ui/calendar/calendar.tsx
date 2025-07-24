@@ -11,9 +11,7 @@ import * as React from "react";
 import {
   DayPicker,
   useDayPicker,
-  useNavigation,
-  type DayPickerRangeProps,
-  type DayPickerSingleProps,
+  type DayPickerProps,
   type DayProps,
   type Matcher,
 } from "react-day-picker";
@@ -22,60 +20,18 @@ import { cx, focusRing } from "@/lib/utils";
 import { Button } from "../button/button";
 
 /**
- * Utility type to omit specific keys from a type.
- * 
- * Helper for creating clean interfaces by removing unwanted props
- * from react-day-picker types.
+ * Props for the Calendar component.
+ *
+ * Extends DayPicker props with additional calendar-specific options.
  */
-type OmitKeys<T, K extends keyof T> = {
-  [P in keyof T as P extends K ? never : P]: T[P];
+type CalendarProps = DayPickerProps & {
+  /** Show year navigation buttons */
+  enableYearNavigation?: boolean;
 };
 
 /**
- * Props to omit from react-day-picker interfaces.
- * 
- * These props are either handled internally or not supported
- * in this calendar implementation.
- */
-type KeysToOmit = "showWeekNumber" | "captionLayout" | "mode";
-
-/**
- * Props for single date selection mode.
- * 
- * Based on react-day-picker's single mode with custom modifications.
- */
-type SingleProps = OmitKeys<DayPickerSingleProps, KeysToOmit>;
-
-/**
- * Props for date range selection mode.
- * 
- * Based on react-day-picker's range mode with custom modifications.
- */
-type RangeProps = OmitKeys<DayPickerRangeProps, KeysToOmit>;
-
-/**
- * Props for the Calendar component.
- * 
- * Supports both single date and date range selection modes
- * with appropriate prop types for each mode.
- */
-type CalendarProps =
-  | ({
-      /** Single date selection mode */
-      mode: "single";
-    } & SingleProps)
-  | ({
-      /** Default mode (single date selection) */
-      mode?: undefined;
-    } & SingleProps)
-  | ({
-      /** Date range selection mode */
-      mode: "range";
-    } & RangeProps);
-
-/**
  * A flexible calendar component built on React Day Picker.
- * 
+ *
  * Based on React Day Picker (https://daypicker.dev/), providing accessible
  * date selection with single date and date range modes. Features custom styling,
  * localization support, navigation controls, and extensive customization options.
@@ -153,7 +109,7 @@ const Calendar = ({
   className,
   classNames,
   ...props
-}: CalendarProps & { enableYearNavigation?: boolean }) => {
+}: CalendarProps) => {
   return (
     <DayPicker
       mode={mode}
@@ -161,82 +117,101 @@ const Calendar = ({
       numberOfMonths={numberOfMonths}
       locale={locale}
       showOutsideDays={numberOfMonths === 1}
-      className={cx(className)}
+      className={cx("p-3", className)}
       classNames={{
         months: "flex space-y-0",
-        month: "space-y-4 p-3",
-        nav: "hidden",
-        table: "w-full border-collapse space-y-1",
-        head_cell:
-          "w-9 font-medium text-sm sm:text-xs text-center text-zinc-400 dark:text-zinc-600 pb-2",
-        row: "w-full mt-0.5",
-        cell: cx(
-          "relative p-0 text-center focus-within:relative",
-          "text-zinc-900 dark:text-zinc-50"
+        month: "space-y-4",
+        month_caption: "flex justify-center pt-1 relative items-center",
+        caption_label: cx(
+          "text-sm font-medium text-gray-900 dark:text-gray-50",
+          "capitalize tabular-nums"
         ),
-        day: cx(
-          "size-9 rounded-sm text-sm focus:z-10",
-          "text-zinc-900 dark:text-zinc-50",
-          "hover:bg-zinc-200 dark:hover:bg-zinc-700",
-          focusRing
+        nav: "hidden", // We'll use custom navigation
+        month_grid: "w-full border-collapse space-y-1",
+        weekdays: "flex",
+        weekday: cx(
+          "w-9 font-medium text-sm text-center",
+          "text-gray-400 dark:text-gray-600 pb-2"
         ),
-        day_today: "font-semibold bg-blue-50 dark:bg-blue-950/50",
+        week: "flex w-full mt-0.5",
+        day: "relative p-0 text-center focus-within:relative",
+        day_button: cx(
+          // Base styles
+          "h-9 w-9 p-0 font-normal text-sm",
+          "inline-flex items-center justify-center whitespace-nowrap rounded-md",
+          "transition-colors",
+          // Default state
+          "text-gray-900 dark:text-gray-50",
+          "hover:bg-gray-100 dark:hover:bg-gray-800",
+          // Focus styles
+          focusRing,
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        ),
+        day_today: cx("bg-gray-100 dark:bg-gray-800", "font-semibold"),
         day_selected: cx(
-          "rounded-sm",
-          "aria-selected:bg-blue-500 aria-selected:text-white",
-          "dark:aria-selected:bg-blue-500 dark:aria-selected:text-white"
+          "bg-gray-900 text-gray-50 hover:bg-gray-900 hover:text-gray-50",
+          "dark:bg-gray-50 dark:text-gray-900",
+          "dark:hover:bg-gray-50 dark:hover:text-gray-900",
+          "focus:bg-gray-900 focus:text-gray-50",
+          "dark:focus:bg-gray-50 dark:focus:text-gray-900"
         ),
-        day_disabled:
-          "text-zinc-300! dark:text-zinc-700! line-through disabled:hover:bg-transparent",
-        day_outside: "text-zinc-400 dark:text-zinc-600",
+        day_disabled: cx(
+          "text-gray-400 dark:text-gray-600",
+          "opacity-50 cursor-not-allowed",
+          "hover:bg-transparent dark:hover:bg-transparent"
+        ),
+        day_outside: cx("text-gray-400 dark:text-gray-600", "opacity-50"),
         day_range_middle: cx(
-          "rounded-none!",
-          "aria-selected:bg-zinc-100! aria-selected:text-zinc-900!",
-          "dark:aria-selected:bg-zinc-900! dark:aria-selected:text-zinc-50!"
+          "aria-selected:bg-gray-100 aria-selected:text-gray-900",
+          "dark:aria-selected:bg-gray-800 dark:aria-selected:text-gray-50",
+          "rounded-none"
         ),
-        day_range_start: "rounded-r-none rounded-l!",
-        day_range_end: "rounded-l-none rounded-r!",
+        day_range_start: cx("rounded-r-none"),
+        day_range_end: cx("rounded-l-none"),
         day_hidden: "invisible",
         ...classNames,
       }}
       components={{
-        IconLeft: () => <ChevronLeft aria-hidden="true" className="size-4" />,
-        IconRight: () => <ChevronRight aria-hidden="true" className="size-4" />,
-        Caption: ({ ...props }) => {
-          const {
-            goToMonth,
-            nextMonth,
-            previousMonth,
-            currentMonth,
-            displayMonths,
-          } = useNavigation();
-          const { numberOfMonths, fromDate, toDate } = useDayPicker();
-
-          const displayIndex = displayMonths.findIndex((month) =>
-            isSameMonth(props.displayMonth, month)
+        Chevron: ({ orientation, ...chevronProps }) => {
+          if (orientation === "left") {
+            return (
+              <ChevronLeft
+                aria-hidden="true"
+                className="h-4 w-4"
+                {...chevronProps}
+              />
+            );
+          }
+          return (
+            <ChevronRight
+              aria-hidden="true"
+              className="h-4 w-4"
+              {...chevronProps}
+            />
           );
+        },
+        MonthCaption: ({ ...captionProps }) => {
+          const { goToMonth, nextMonth, previousMonth, months } =
+            useDayPicker();
+
+          const currentMonth = captionProps.calendarMonth.date;
+          const displayIndex = captionProps.displayIndex;
           const isFirst = displayIndex === 0;
-          const isLast = displayIndex === displayMonths.length - 1;
+          const isLast = displayIndex === months.length - 1;
 
           const hideNextButton = numberOfMonths > 1 && (isFirst || !isLast);
           const hidePreviousButton = numberOfMonths > 1 && (isLast || !isFirst);
 
           const goToPreviousYear = () => {
             const targetMonth = addYears(currentMonth, -1);
-            if (
-              previousMonth &&
-              (!fromDate || targetMonth.getTime() >= fromDate.getTime())
-            ) {
+            if (previousMonth) {
               goToMonth(targetMonth);
             }
           };
 
           const goToNextYear = () => {
             const targetMonth = addYears(currentMonth, 1);
-            if (
-              nextMonth &&
-              (!toDate || targetMonth.getTime() <= toDate.getTime())
-            ) {
+            if (nextMonth) {
               goToMonth(targetMonth);
             }
           };
@@ -248,17 +223,16 @@ const Calendar = ({
                   <Button
                     variant="outline"
                     size="icon-sm"
-                    disabled={
-                      disableNavigation ||
-                      !previousMonth ||
-                      (fromDate &&
-                        addYears(currentMonth, -1).getTime() <
-                          fromDate.getTime())
-                    }
+                    disabled={disableNavigation || !previousMonth}
                     aria-label="Go to previous year"
                     onClick={goToPreviousYear}
+                    className={cx(
+                      "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+                      "border-gray-300 dark:border-gray-700",
+                      "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    )}
                   >
-                    <ChevronsLeft className="size-4" />
+                    <ChevronsLeft className="h-4 w-4" />
                   </Button>
                 )}
                 {!hidePreviousButton && (
@@ -268,8 +242,13 @@ const Calendar = ({
                     disabled={disableNavigation || !previousMonth}
                     aria-label="Go to previous month"
                     onClick={() => previousMonth && goToMonth(previousMonth)}
+                    className={cx(
+                      "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+                      "border-gray-300 dark:border-gray-700",
+                      "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    )}
                   >
-                    <ChevronLeft className="size-4" />
+                    <ChevronLeft className="h-4 w-4" />
                   </Button>
                 )}
               </div>
@@ -277,9 +256,12 @@ const Calendar = ({
               <div
                 role="presentation"
                 aria-live="polite"
-                className="text-sm font-medium capitalize tabular-nums text-zinc-900 dark:text-zinc-50"
+                className={cx(
+                  "text-sm font-medium capitalize tabular-nums",
+                  "text-gray-900 dark:text-gray-50"
+                )}
               >
-                {format(props.displayMonth, "LLLL yyy", { locale })}
+                {format(currentMonth, "LLLL yyy", { locale })}
               </div>
 
               <div className="flex items-center gap-1">
@@ -290,24 +272,29 @@ const Calendar = ({
                     disabled={disableNavigation || !nextMonth}
                     aria-label="Go to next month"
                     onClick={() => nextMonth && goToMonth(nextMonth)}
+                    className={cx(
+                      "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+                      "border-gray-300 dark:border-gray-700",
+                      "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    )}
                   >
-                    <ChevronRight className="size-4" />
+                    <ChevronRight className="h-4 w-4" />
                   </Button>
                 )}
                 {enableYearNavigation && !hideNextButton && (
                   <Button
                     variant="outline"
                     size="icon-sm"
-                    disabled={
-                      disableNavigation ||
-                      !nextMonth ||
-                      (toDate &&
-                        addYears(currentMonth, 1).getTime() > toDate.getTime())
-                    }
+                    disabled={disableNavigation || !nextMonth}
                     aria-label="Go to next year"
                     onClick={goToNextYear}
+                    className={cx(
+                      "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+                      "border-gray-300 dark:border-gray-700",
+                      "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    )}
                   >
-                    <ChevronsRight className="size-4" />
+                    <ChevronsRight className="h-4 w-4" />
                   </Button>
                 )}
               </div>
@@ -315,7 +302,8 @@ const Calendar = ({
           );
         },
       }}
-      {...(props as SingleProps & RangeProps)}
+      disableNavigation={disableNavigation}
+      {...props}
     />
   );
 };

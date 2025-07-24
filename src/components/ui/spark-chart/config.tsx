@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Spark Chart",
   description: "A minimalist chart for displaying trends and patterns in data.",
   category: "charts" as const,
-  badge: "Charts",
+
   installation: {
     npm: "recharts",
-    dependencies: ["recharts"],
+    dependencies: ["recharts"]
   },
   importStatement: `import { SparkChart } from "@/components/ui/spark-chart/spark-chart";`,
   componentId: "SparkChartExample",
@@ -17,26 +17,26 @@ export const componentConfig: ComponentConfig = {
       name: "data",
       type: "array",
       description: "Array of data points",
-      defaultValue: [],
+      defaultValue: []
     },
     {
       name: "categories",
       type: "array",
       description: "Array of category names",
-      defaultValue: ["value"],
+      defaultValue: ["value"]
     },
     {
       name: "index",
       type: "string",
       description: "Key to use for x-axis values",
-      defaultValue: "date",
+      defaultValue: "date"
     },
     {
       name: "type",
       type: "select",
       description: "Type of spark chart",
       options: ["line", "area", "bar"],
-      defaultValue: "line",
+      defaultValue: "line"
     },
   ],
   examples: [
@@ -55,7 +55,7 @@ export const componentConfig: ComponentConfig = {
   ]}
   categories={["value"]}
   index="date"
-/>`,
+/>`
     },
     {
       id: "area",
@@ -73,7 +73,7 @@ export const componentConfig: ComponentConfig = {
   categories={["revenue"]}
   index="month"
   type="area"
-/>`,
+/>`
     },
     {
       id: "bar",
@@ -92,7 +92,7 @@ export const componentConfig: ComponentConfig = {
   categories={["visits"]}
   index="day"
   type="bar"
-/>`,
+/>`
     },
-  ],
+  ]
 };

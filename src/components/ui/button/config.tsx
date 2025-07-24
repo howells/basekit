@@ -19,8 +19,8 @@ export const componentConfig: ComponentConfig = {
   name: "Button",
   description:
     "A clickable button component with multiple variants and states.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "inputs" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

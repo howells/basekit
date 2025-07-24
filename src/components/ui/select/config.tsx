@@ -6,9 +6,9 @@ export const componentConfig: ComponentConfig = {
   description:
     "Displays a list of options for the user to pick from—triggered by a button.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Select,
@@ -17,7 +17,7 @@ export const componentConfig: ComponentConfig = {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from "@/components/ui/select/select";`,
   componentId: "SelectExample",
   props: [
@@ -25,19 +25,19 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "string",
       description: "Selected value",
-      defaultValue: "",
+      defaultValue: ""
     },
     {
       name: "placeholder",
       type: "string",
       description: "Placeholder text",
-      defaultValue: "Select an option",
+      defaultValue: "Select an option"
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the select is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
   examples: [
@@ -55,7 +55,7 @@ export const componentConfig: ComponentConfig = {
     <SelectItem value="orange">Orange</SelectItem>
     <SelectItem value="grape">Grape</SelectItem>
   </SelectContent>
-</Select>`,
+</Select>`
     },
     {
       id: "with-groups",
@@ -80,7 +80,7 @@ export const componentConfig: ComponentConfig = {
       <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
     </SelectGroup>
   </SelectContent>
-</Select>`,
+</Select>`
     },
     {
       id: "form-select",
@@ -110,7 +110,7 @@ export const componentConfig: ComponentConfig = {
       </SelectContent>
     </Select>
   </div>
-</form>`,
+</form>`
     },
-  ],
+  ]
 };

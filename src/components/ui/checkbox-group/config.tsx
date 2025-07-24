@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Checkbox Group",
   description: "A checkbox group component built on Base UI for managing multiple checkbox selections with accessible labeling.",
   category: "inputs" as const,
-  badge: "Input",
+
   importStatement: `import { CheckboxGroup, CheckboxGroupItem } from "@/components/ui/checkbox-group";`,
   componentId: "CheckboxGroupExample",
   props: [

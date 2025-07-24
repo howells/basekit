@@ -1,13 +1,13 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample,  } from "./examples";
+import { DefaultExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "fieldset",
   name: "Fieldset",
   description: "A fieldset component that groups related form controls with an optional legend.",
   category: "forms" as const,
-  badge: "Form",
+
   importStatement: `import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset";`,
   componentId: "FieldsetExample",
   props: [
@@ -15,7 +15,7 @@ export const componentConfig: ComponentConfig = {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the fieldset is disabled.",
+      description: "Whether the fieldset is disabled."
     },
   ],
   examples: [
@@ -35,7 +35,7 @@ export const componentConfig: ComponentConfig = {
       <Input />
     </Field>
   </div>
-</Fieldset>`,
+</Fieldset>`
     },
-  ],
+  ]
 };

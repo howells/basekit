@@ -69,6 +69,30 @@ const separatorVariants = tv({
   },
 });
 
+// Container variants for text labels
+const separatorContainerVariants = tv({
+  base: [
+    "flex items-center justify-between gap-3 text-sm",
+    "text-zinc-500 dark:text-zinc-500",
+  ],
+  variants: {
+    orientation: {
+      horizontal: "flex-row w-full",
+      vertical: "flex-col h-full w-auto",
+    },
+    spacing: {
+      none: "my-0",
+      sm: "my-4",
+      md: "my-6",
+      lg: "my-8",
+    },
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+    spacing: "md",
+  },
+});
+
 /**
  * Props for the Separator component.
  *
@@ -79,44 +103,58 @@ const separatorVariants = tv({
 interface SeparatorProps
   extends React.ComponentPropsWithoutRef<typeof BaseSeparator>,
     VariantProps<typeof separatorVariants> {
+  /** Optional text content to display in the center of the separator */
+  children?: React.ReactNode;
+  /** Spacing around the separator when used with text labels */
+  spacing?: "none" | "sm" | "md" | "lg";
 }
 
 /**
  * A visual separator component built on Base UI's Separator primitive.
- * 
+ *
  * Based on Base UI's Separator (https://base-ui.com/react/components/separator),
  * providing accessible visual division elements for structuring content and interfaces.
  * Features horizontal and vertical orientations with multiple styling variants and sizes.
+ * Now supports optional text labels positioned in the center of the separator.
  *
  * @param orientation - Direction of the separator (horizontal or vertical)
  * @param variant - Visual style variant (default, subtle, strong)
  * @param size - Thickness/size of the separator (sm, md, lg)
+ * @param children - Optional text content to display in the center
+ * @param spacing - Vertical spacing around the separator (when used with text)
  *
  * @component
  * @example
  * ```tsx
  * // Basic horizontal separator
  * <Separator />
- * 
+ *
+ * // Separator with text label
+ * <Separator>or</Separator>
+ * <Separator>Continue with</Separator>
+ *
  * // Vertical separator
  * <Separator orientation="vertical" />
- * 
+ *
  * // Different variants
  * <Separator variant="subtle" />
  * <Separator variant="strong" />
- * 
+ *
  * // Different sizes
  * <Separator size="sm" />
  * <Separator size="lg" />
- * 
+ *
+ * // Custom spacing with text
+ * <Separator spacing="lg">Section Break</Separator>
+ *
  * // Vertical separator with styling
- * <Separator 
- *   orientation="vertical" 
- *   variant="strong" 
+ * <Separator
+ *   orientation="vertical"
+ *   variant="strong"
  *   size="lg"
  *   className="mx-4"
  * />
- * 
+ *
  * // In navigation menus
  * <nav className="flex items-center space-x-4">
  *   <a href="/home">Home</a>
@@ -125,7 +163,7 @@ interface SeparatorProps
  *   <Separator orientation="vertical" className="h-4" />
  *   <a href="/contact">Contact</a>
  * </nav>
- * 
+ *
  * // In content sections
  * <div>
  *   <h2>Section 1</h2>
@@ -134,6 +172,16 @@ interface SeparatorProps
  *   <h2>Section 2</h2>
  *   <p>More content...</p>
  * </div>
+ *
+ * // Between form sections
+ * <form>
+ *   <fieldset>
+ *     <input type="email" placeholder="Email" />
+ *     <input type="password" placeholder="Password" />
+ *   </fieldset>
+ *   <Separator>or</Separator>
+ *   <button>Sign in with Google</button>
+ * </form>
  * ```
  *
  * @see https://base-ui.com/react/components/separator - Base UI documentation
@@ -141,14 +189,57 @@ interface SeparatorProps
 const Separator = React.forwardRef<
   React.ElementRef<typeof BaseSeparator>,
   SeparatorProps
->(({ className, orientation = "horizontal", variant, size, ...props }, ref) => (
-  <BaseSeparator
-    ref={ref}
-    orientation={orientation}
-    className={cx(separatorVariants({ orientation, variant, size }), className)}
-    {...props}
-  />
-));
+>(
+  (
+    {
+      className,
+      orientation = "horizontal",
+      variant,
+      size,
+      children,
+      spacing,
+      ...props
+    },
+    ref
+  ) => {
+    // If children are provided, render as a container with text label
+    if (children) {
+      return (
+        <div
+          className={cx(
+            separatorContainerVariants({ orientation, spacing }),
+            className
+          )}
+        >
+          <BaseSeparator
+            ref={ref}
+            orientation={orientation}
+            className={cx(separatorVariants({ orientation, variant, size }))}
+            {...props}
+          />
+          <div className="whitespace-nowrap text-inherit">{children}</div>
+          <BaseSeparator
+            orientation={orientation}
+            className={cx(separatorVariants({ orientation, variant, size }))}
+          />
+        </div>
+      );
+    }
+
+    // Default separator without text
+    return (
+      <BaseSeparator
+        ref={ref}
+        orientation={orientation}
+        className={cx(
+          separatorVariants({ orientation, variant, size }),
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
 
 Separator.displayName = "Separator";
 

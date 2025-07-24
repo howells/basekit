@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   id: "toggle-group",
   name: "Toggle Group",
   description: "A group of toggle buttons where one or more can be selected.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "inputs" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

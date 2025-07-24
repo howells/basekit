@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   id: "toggle",
   name: "Toggle",
   description: "A two-state button that can be either on or off.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "inputs" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

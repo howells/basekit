@@ -5,9 +5,9 @@ export const componentConfig: ComponentConfig = {
   name: "Slider",
   description: "An input where the user selects a value from within a given range.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Slider } from "@/components/ui/slider/slider";`,
   componentId: "SliderExample",
@@ -16,31 +16,31 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "number",
       description: "The controlled value of the slider",
-      defaultValue: 50,
+      defaultValue: 50
     },
     {
       name: "min",
       type: "number",
       description: "The minimum value",
-      defaultValue: 0,
+      defaultValue: 0
     },
     {
       name: "max",
       type: "number",
       description: "The maximum value",
-      defaultValue: 100,
+      defaultValue: 100
     },
     {
       name: "step",
       type: "number",
       description: "The step value",
-      defaultValue: 1,
+      defaultValue: 1
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the slider is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
   examples: [
@@ -48,13 +48,13 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Basic Slider",
       description: "A simple slider with default settings",
-      code: `<Slider defaultValue={[50]} max={100} step={1} />`,
+      code: `<Slider defaultValue={[50]} max={100} step={1} />`
     },
     {
       id: "range",
       title: "Range Slider",
       description: "A slider with two handles for selecting a range",
-      code: `<Slider defaultValue={[25, 75]} max={100} step={1} />`,
+      code: `<Slider defaultValue={[25, 75]} max={100} step={1} />`
     },
     {
       id: "steps",
@@ -70,7 +70,7 @@ export const componentConfig: ComponentConfig = {
       onValueChange={setValue}
     />
   </div>
-</div>`,
+</div>`
     },
     {
       id: "custom-range",
@@ -87,13 +87,13 @@ export const componentConfig: ComponentConfig = {
       onValueChange={setValue}
     />
   </div>
-</div>`,
+</div>`
     },
     {
       id: "disabled",
       title: "Disabled Slider",
       description: "A slider in disabled state",
-      code: `<Slider defaultValue={[30]} max={100} disabled />`,
+      code: `<Slider defaultValue={[30]} max={100} disabled />`
     },
-  ],
+  ]
 };

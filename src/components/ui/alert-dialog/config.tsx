@@ -9,8 +9,8 @@ export const componentConfig: ComponentConfig = {
   name: "Alert Dialog",
   description:
     "A modal dialog that interrupts the user with important content and expects a response.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "overlay" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

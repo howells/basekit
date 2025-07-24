@@ -24,8 +24,8 @@ export const componentConfig: ComponentConfig = {
   name: "Calendar",
   description:
     "A date picker calendar component with support for single date and date range selection.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "inputs" as const,
+
   installation: {
     npm: "react-day-picker date-fns"
   },

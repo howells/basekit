@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   name: "Collapsible",
   description:
     "A collapsible component built on Base UI for expandable content sections with smooth animations.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "data" as const,
+
   importStatement: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";`,
   componentId: "CollapsibleExample",
   props: [

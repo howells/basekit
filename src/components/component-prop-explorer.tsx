@@ -19,7 +19,7 @@ export function ComponentPropExplorer({
   config,
   category,
   component,
-  inspectorMaxHeight = "max-h-[300px] lg:max-h-[400px]",
+  inspectorMaxHeight = "max-h-[400px] lg:max-h-[500px]",
 }: ComponentPropExplorerProps) {
   // Extract default values from props if available
   const getDefaultProps = () => {

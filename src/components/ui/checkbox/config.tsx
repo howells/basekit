@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Checkbox",
   description: "A checkbox input built on Base UI with indeterminate state support and accessible interactions.",
   category: "inputs" as const,
-  badge: "Input",
+
   importStatement: `import { Checkbox } from "@/components/ui/checkbox";`,
   componentId: "CheckboxExample",
   props: [

@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   name: "Callout",
   description:
     "An alert component that displays important information with optional icon and variant styling.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   importStatement: `import { Callout } from "@/components/ui/callout";`,
   componentId: "CalloutExample",
   props: [

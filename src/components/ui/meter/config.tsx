@@ -4,10 +4,10 @@ export const componentConfig: ComponentConfig = {
   id: "meter",
   name: "Meter",
   description: "A meter component built on Base UI for displaying progress or measurements with customizable styling and value formatting.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Meter } from "@/components/ui/meter/meter";`,
   componentId: "MeterExample",
@@ -16,44 +16,44 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "number",
       description: "The current value of the meter",
-      defaultValue: 50,
+      defaultValue: 50
     },
     {
       name: "min",
       type: "number",
       description: "The minimum value of the meter",
-      defaultValue: 0,
+      defaultValue: 0
     },
     {
       name: "max",
       type: "number",
       description: "The maximum value of the meter",
-      defaultValue: 100,
+      defaultValue: 100
     },
     {
       name: "label",
       type: "string",
       description: "Label for the meter",
-      defaultValue: "Progress",
+      defaultValue: "Progress"
     },
     {
       name: "showValue",
       type: "boolean",
       description: "Whether to show the value text",
-      defaultValue: true,
+      defaultValue: true
     },
     {
       name: "variant",
       type: "select",
       description: "Visual variant of the meter",
       options: ["default", "success", "warning", "danger"],
-      defaultValue: "default",
+      defaultValue: "default"
     },
     {
       name: "animate",
       type: "boolean",
       description: "Whether to animate the meter",
-      defaultValue: true,
+      defaultValue: true
     },
   ],
   examples: [
@@ -61,13 +61,13 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "A meter component built on Base UI for displaying progress or measurements with customizable styling and value formatting.",
-      code: `<Meter value={50} />`,
+      code: `<Meter value={50} />`
     },
     {
       id: "with-label",
       title: "With Label",
       description: "Meter with a descriptive label.",
-      code: `<Meter value={75} label="Storage Used" />`,
+      code: `<Meter value={75} label="Storage Used" />`
     },
     {
       id: "variants",
@@ -77,25 +77,25 @@ export const componentConfig: ComponentConfig = {
   <Meter value={90} variant="danger" label="CPU Usage" />
   <Meter value={65} variant="warning" label="Memory" />
   <Meter value={30} variant="success" label="Disk Space" />
-</div>`,
+</div>`
     },
     {
       id: "custom-range",
       title: "Custom Range",
       description: "Meter with custom min and max values.",
-      code: `<Meter value={250} min={0} max={500} label="Score" />`,
+      code: `<Meter value={250} min={0} max={500} label="Score" />`
     },
     {
       id: "no-animation",
       title: "Without Animation",
       description: "Meter without animation for static displays.",
-      code: `<Meter value={60} animate={false} />`,
+      code: `<Meter value={60} animate={false} />`
     },
     {
       id: "value-only",
       title: "Value Only",
       description: "Meter without label, showing only the value.",
-      code: `<Meter value={80} label="" />`,
+      code: `<Meter value={80} label="" />`
     },
-  ],
+  ]
 };

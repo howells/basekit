@@ -6,9 +6,9 @@ export const componentConfig: ComponentConfig = {
   description:
     "A control that allows the user to toggle between checked and not checked.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Switch } from "@/components/ui/switch/switch";`,
   componentId: "SwitchExample",
@@ -17,20 +17,20 @@ export const componentConfig: ComponentConfig = {
       name: "checked",
       type: "boolean",
       description: "Whether the switch is checked",
-      defaultValue: false,
+      defaultValue: false
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the switch is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
     {
       name: "size",
       type: "select",
       description: "Size of the switch",
       options: ["sm", "md", "lg"],
-      defaultValue: "md",
+      defaultValue: "md"
     },
   ],
   examples: [
@@ -41,7 +41,7 @@ export const componentConfig: ComponentConfig = {
       code: `<div className="flex items-center space-x-2">
   <Switch id="airplane-mode" />
   <label htmlFor="airplane-mode">Airplane Mode</label>
-</div>`,
+</div>`
     },
     {
       id: "checked",
@@ -50,7 +50,7 @@ export const componentConfig: ComponentConfig = {
       code: `<div className="flex items-center space-x-2">
   <Switch id="notifications" defaultChecked />
   <label htmlFor="notifications">Enable notifications</label>
-</div>`,
+</div>`
     },
     {
       id: "disabled",
@@ -69,7 +69,7 @@ export const componentConfig: ComponentConfig = {
       Disabled (on)
     </label>
   </div>
-</div>`,
+</div>`
     },
     {
       id: "sizes",
@@ -88,7 +88,7 @@ export const componentConfig: ComponentConfig = {
     <Switch id="large" size="lg" />
     <label htmlFor="large">Large switch</label>
   </div>
-</div>`,
+</div>`
     },
     {
       id: "form",
@@ -118,7 +118,7 @@ export const componentConfig: ComponentConfig = {
       </div>
     </div>
   </div>
-</form>`,
+</form>`
     },
-  ],
+  ]
 };

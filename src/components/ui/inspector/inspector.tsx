@@ -252,7 +252,7 @@ export function InspectorHeader({
     <div
       className={cx(
         // Base layout
-        "flex flex-shrink-0 items-center justify-between px-6 py-4",
+        "flex flex-shrink-0 items-center justify-between px-6 py-6",
         // Border
         "border-b border-zinc-200 dark:border-zinc-800",
         className
@@ -354,7 +354,7 @@ export function InspectorBody({
         <div
           className={cx(
             // Content padding and spacing
-            "px-6 py-4",
+            "px-6 py-6",
             className
           )}
           {...props}

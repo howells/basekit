@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Responsive Drawer",
   description:
     "A drawer component that adapts to different screen sizes, showing as a sheet on mobile and a dialog on desktop.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "overlay" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   ResponsiveDrawer,
@@ -16,7 +16,7 @@ export const componentConfig: ComponentConfig = {
   ResponsiveDrawerDescription,
   ResponsiveDrawerHeader,
   ResponsiveDrawerTitle,
-  ResponsiveDrawerTrigger,
+  ResponsiveDrawerTrigger
 } from "@/components/ui/responsive-drawer/responsive-drawer";`,
   componentId: "ResponsiveDrawerExample",
   props: [
@@ -24,7 +24,7 @@ export const componentConfig: ComponentConfig = {
       name: "open",
       type: "boolean",
       description: "Whether the drawer is open",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
   examples: [
@@ -47,7 +47,7 @@ export const componentConfig: ComponentConfig = {
       <p>Your content here...</p>
     </div>
   </ResponsiveDrawerContent>
-</ResponsiveDrawer>`,
+</ResponsiveDrawer>`
     },
     {
       id: "with-form",
@@ -76,7 +76,7 @@ export const componentConfig: ComponentConfig = {
       <Button className="w-full">Save Changes</Button>
     </div>
   </ResponsiveDrawerContent>
-</ResponsiveDrawer>`,
+</ResponsiveDrawer>`
     },
-  ],
+  ]
 };

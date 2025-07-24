@@ -12,8 +12,8 @@ export const componentConfig: ComponentConfig = {
   id: "toolbar",
   name: "Toolbar",
   description: "A container for grouping a set of controls or actions.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "navigation" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

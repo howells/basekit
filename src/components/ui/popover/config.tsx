@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "popover",
   name: "Popover",
   description: "Popover component built on Base UI with customizable positioning and rich content support.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "overlay" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

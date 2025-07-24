@@ -1,71 +1,111 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import {
+  DefaultExample,
+  SizesExample,
+  VerticalExample,
+  WithTextExample
+} from "./examples";
 
+// Component configuration - single source of truth
 export const componentConfig: ComponentConfig = {
   id: "separator",
   name: "Separator",
-  description: "Visually or semantically separates content.",
-  category: "ui" as const,
-  badge: "UI",
+  description:
+    "A visual separator component with optional text labels, built on Base UI's accessible Separator primitive.",
+  category: "layout" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Separator } from "@/components/ui/separator/separator";`,
   componentId: "SeparatorExample",
+
+  // Props that users can experiment with
   props: [
+    {
+      name: "children",
+      type: "string",
+      description:
+        "Optional text content to display in the center of the separator."
+    },
     {
       name: "orientation",
       type: "select",
-      description: "The orientation of the separator",
-      options: ["horizontal", "vertical"],
+      options: [
+        { value: "horizontal", label: "Horizontal" },
+        { value: "vertical", label: "Vertical" },
+      ],
       defaultValue: "horizontal",
+      description: "The orientation of the separator."
+    },
+    {
+      name: "variant",
+      type: "select",
+      options: [
+        { value: "default", label: "Default" },
+        { value: "subtle", label: "Subtle" },
+        { value: "strong", label: "Strong" },
+      ],
+      defaultValue: "default",
+      description: "The visual style variant."
+    },
+    {
+      name: "size",
+      type: "select",
+      options: [
+        { value: "sm", label: "Small" },
+        { value: "md", label: "Medium" },
+        { value: "lg", label: "Large" },
+      ],
+      defaultValue: "md",
+      description: "The thickness/size of the separator."
+    },
+    {
+      name: "spacing",
+      type: "select",
+      options: [
+        { value: "none", label: "None" },
+        { value: "sm", label: "Small" },
+        { value: "md", label: "Medium" },
+        { value: "lg", label: "Large" },
+      ],
+      defaultValue: "md",
+      description:
+        "Vertical spacing around the separator (when used with text)."
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Additional CSS classes to apply."
     },
   ],
+
+  // Examples showcasing different use cases
   examples: [
     {
       id: "default",
-      title: "Horizontal Separator",
-      description: "A horizontal line to separate content",
-      code: `<div>
-  <div className="space-y-1">
-    <h4 className="text-sm font-medium leading-none">Patternmode</h4>
-    <p className="text-sm text-zinc-600">
-      An open-source component library built with React and Tailwind CSS.
-    </p>
-  </div>
-  <Separator className="my-4" />
-  <div className="flex h-5 items-center space-x-4 text-sm">
-    <div>Blog</div>
-    <Separator orientation="vertical" />
-    <div>Docs</div>
-    <Separator orientation="vertical" />
-    <div>Source</div>
-  </div>
-</div>`,
-    },
-    {
-      id: "vertical",
-      title: "Vertical Separator",
-      description: "A vertical line to separate inline content",
-      code: `<div className="flex h-5 items-center space-x-4 text-sm">
-  <div>Item 1</div>
-  <Separator orientation="vertical" />
-  <div>Item 2</div>
-  <Separator orientation="vertical" />
-  <div>Item 3</div>
-</div>`,
+      title: "Default",
+      description: "Basic horizontal separator.",
+      code: jsxToString(<DefaultExample />)
     },
     {
       id: "with-text",
-      title: "Separator with Text",
-      description: "A separator with text in the middle",
-      code: `<div className="relative">
-  <div className="absolute inset-0 flex items-center">
-    <Separator />
-  </div>
-  <div className="relative flex justify-center text-xs uppercase">
-    <span className="bg-white px-2 text-zinc-600">Or continue with</span>
-  </div>
-</div>`,
+      title: "With Text Label",
+      description: "Separator with centered text label.",
+      code: jsxToString(<WithTextExample />)
     },
-  ],
+    {
+      id: "vertical",
+      title: "Vertical",
+      description: "Vertical separator for inline content.",
+      code: jsxToString(<VerticalExample />)
+    },
+    {
+      id: "sizes",
+      title: "Sizes & Variants",
+      description: "Different sizes and visual variants.",
+      code: jsxToString(<SizesExample />)
+    },
+  ]
 };

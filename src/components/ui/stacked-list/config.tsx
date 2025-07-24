@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Stacked List",
   description:
     "A list component that displays items in a vertically stacked layout with dividers.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "data" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { StackedList, StackedListItem } from "@/components/ui/stacked-list/stacked-list";`,
   componentId: "StackedListExample",
@@ -46,7 +46,7 @@ export const componentConfig: ComponentConfig = {
       <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
-</StackedList>`,
+</StackedList>`
     },
     {
       id: "with-avatars",
@@ -83,7 +83,7 @@ export const componentConfig: ComponentConfig = {
       </Button>
     </div>
   </StackedListItem>
-</StackedList>`,
+</StackedList>`
     },
     {
       id: "interactive",
@@ -114,7 +114,7 @@ export const componentConfig: ComponentConfig = {
       <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
-</StackedList>`,
+</StackedList>`
     },
-  ],
+  ]
 };

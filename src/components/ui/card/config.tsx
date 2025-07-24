@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   name: "Card",
   description:
     "A flexible container component with subtle styling and shadow for grouping related content.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "layout" as const,
+
   importStatement: `import { Card } from "@/components/ui/card";`,
   componentId: "CardExample",
   props: [

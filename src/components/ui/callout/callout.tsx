@@ -1,14 +1,14 @@
 // Callout Component [v1.0.0] - Pure Implementation
 
+import { cx } from "@/lib/utils";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
-
-import { cx } from "@/lib/utils";
 import { Subheading } from "../subheading";
+import { Text } from "../text";
 
 /**
  * Style variants for callout components.
- * 
+ *
  * Defines color schemes for different types of callouts including
  * informational, success, error, warning, and neutral variants.
  */
@@ -61,10 +61,10 @@ const calloutVariants = tv({
 
 /**
  * Props for the Callout component.
- * 
+ *
  * Configuration for callout notifications with optional title,
  * icon, and variant styling.
- * 
+ *
  * @interface CalloutProps
  * @extends React.ComponentPropsWithoutRef<"div">
  * @extends VariantProps<typeof calloutVariants>
@@ -80,7 +80,7 @@ interface CalloutProps
 
 /**
  * A styled callout component for important messages and notifications.
- * 
+ *
  * Provides prominent display of information, warnings, errors, or success messages
  * with optional titles, icons, and semantic color variants. Perfect for alerts,
  * tips, notices, and status communications.
@@ -146,9 +146,9 @@ const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
           <div className={cx("flex-1")}>
             {title && <Subheading level={3}>{title}</Subheading>}
             {children && (
-              <div className={cx(title ? "mt-2" : "", "overflow-y-auto")}>
+              <Text className={cx(title ? "mt-2" : "", "overflow-y-auto")}>
                 {children}
-              </div>
+              </Text>
             )}
           </div>
         </div>

@@ -6,7 +6,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Badge } from "./ui/badge/badge";
 import { Button } from "./ui/button/button";
 import {
@@ -30,25 +30,27 @@ export function ComponentSearch({
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
-  // Get all components and filter them
+  // Get all components from all categories
   const allComponents = [
-    ...getComponentsByCategory("ui"),
+    ...getComponentsByCategory("text"),
+    ...getComponentsByCategory("layout"),
+    ...getComponentsByCategory("navigation"),
+    ...getComponentsByCategory("feedback"),
+    ...getComponentsByCategory("overlay"),
+    ...getComponentsByCategory("data"),
+    ...getComponentsByCategory("media"),
+    ...getComponentsByCategory("utility"),
     ...getComponentsByCategory("inputs"),
     ...getComponentsByCategory("forms"),
     ...getComponentsByCategory("charts"),
   ];
 
   const filteredComponents = debouncedSearchTerm
-    ? allComponents.filter(
-        (component) =>
-          component.name
-            .toLowerCase()
-            .includes(debouncedSearchTerm.toLowerCase()) ||
-          component.description
-            .toLowerCase()
-            .includes(debouncedSearchTerm.toLowerCase())
+    ? allComponents.filter((component) =>
+        component.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
       )
     : allComponents;
 
@@ -62,43 +64,52 @@ export function ComponentSearch({
     return groups;
   }, {} as Record<string, ComponentConfig[]>);
 
-  // Handle keyboard navigation
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setSelectedIndex((prev) =>
-          Math.min(prev + 1, filteredComponents.length - 1)
-        );
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setSelectedIndex((prev) => Math.max(prev - 1, 0));
-      } else if (e.key === "Enter") {
-        e.preventDefault();
-        const selected = filteredComponents[selectedIndex];
-        if (selected) {
-          router.push(`/${selected.category}/${selected.id}`);
-          setIsOpen(false);
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, selectedIndex, filteredComponents]);
-
   // Reset selection when search changes
   useEffect(() => {
     setSelectedIndex(0);
   }, [debouncedSearchTerm]);
+
+  // Handle keyboard navigation with useKeyPress-style approach
+  // Note: Using manual approach since useKeyPress might need experimental version
+  // If you want to use useKeyPress, uncomment the imports and replace this with:
+  // useKeyPress("ArrowDown", () => setSelectedIndex(prev => Math.min(prev + 1, filteredComponents.length - 1)), { enabled: isOpen });
+  // useKeyPress("ArrowUp", () => setSelectedIndex(prev => Math.max(prev - 1, 0)), { enabled: isOpen });
+  // useKeyPress("Enter", () => { ... }, { enabled: isOpen });
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) =>
+        Math.min(prev + 1, filteredComponents.length - 1)
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => Math.max(prev - 1, 0));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const selected = filteredComponents[selectedIndex];
+      if (selected) {
+        router.push(`/${selected.category}/${selected.id}`);
+        setIsOpen(false);
+      }
+    }
+  };
 
   const handleSelect = (component: ComponentConfig) => {
     const url = `/${component.category}/${component.id}`;
     router.push(url);
     setIsOpen(false);
   };
+
+  // Auto-focus input when dialog opens
+  useEffect(() => {
+    if (isOpen) {
+      // Small delay to ensure dialog is fully rendered
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isOpen]);
 
   let currentIndex = 0;
 
@@ -122,9 +133,11 @@ export function ComponentSearch({
 
           <div className="space-y-4">
             <Input
+              ref={inputRef}
               placeholder={placeholder}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleInputKeyDown}
               autoFocus
               prefixIcon={Search}
               prefixStyling={false}
@@ -164,7 +177,10 @@ export function ComponentSearch({
                                   </Subheading>
                                   <Badge variant="neutral" className="text-xs">
                                     {component.badge ||
-                                      component.category.toUpperCase()}
+                                      component.category
+                                        .charAt(0)
+                                        .toUpperCase() +
+                                        component.category.slice(1)}
                                   </Badge>
                                 </div>
                               </div>

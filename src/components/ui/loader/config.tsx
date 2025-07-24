@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "loader",
   name: "Loader",
   description: "A spinning loader indicator with configurable size.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

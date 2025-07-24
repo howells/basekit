@@ -12,6 +12,7 @@ import {
   CollapsibleTrigger,
 } from "../collapsible";
 import { ScrollArea } from "../scroll-area";
+import { Separator } from "../separator/separator";
 import { Subheading } from "../subheading";
 import { TouchTarget } from "../touch-target";
 
@@ -220,20 +221,12 @@ export function SidebarDivider({
   className,
   isCollapsed,
   ...props
-}: React.ComponentPropsWithoutRef<"hr"> & {
+}: React.ComponentPropsWithoutRef<typeof Separator> & {
   isCollapsed?: boolean;
 }) {
   if (isCollapsed) return null;
 
-  return (
-    <hr
-      {...props}
-      className={clsx(
-        className,
-        "my-4 border-t border-zinc-950/5 dark:border-white/5"
-      )}
-    />
-  );
+  return <Separator {...props} className={clsx(className, "my-4")} />;
 }
 
 export function SidebarSpacer({

@@ -114,12 +114,21 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
     { className, children, keys, platform = "auto", size, variant, ...props },
     ref
   ) => {
-    // Detect platform for modifier keys
-    const isMac = React.useMemo(() => {
-      if (platform === "mac") return true;
-      if (platform === "pc") return false;
-      if (typeof window === "undefined") return false;
-      return /Mac|iPhone|iPad|iPod/.test(navigator.userAgent);
+    // Use state to handle platform detection after hydration to avoid SSR mismatch
+    const [isMac, setIsMac] = React.useState(false);
+    const [isHydrated, setIsHydrated] = React.useState(false);
+
+    React.useEffect(() => {
+      setIsHydrated(true);
+
+      if (platform === "mac") {
+        setIsMac(true);
+      } else if (platform === "pc") {
+        setIsMac(false);
+      } else if (platform === "auto") {
+        // Only detect platform after hydration to avoid SSR mismatch
+        setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.userAgent));
+      }
     }, [platform]);
 
     // Convert platform-agnostic keys to platform-specific
@@ -129,17 +138,17 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
           case "mod":
           case "cmd":
           case "command":
-            return isMac ? "⌘" : "Ctrl";
+            return isHydrated && isMac ? "⌘" : "Ctrl";
           case "ctrl":
           case "control":
-            return isMac ? "⌃" : "Ctrl";
+            return isHydrated && isMac ? "⌃" : "Ctrl";
           case "alt":
           case "option":
-            return isMac ? "⌥" : "Alt";
+            return isHydrated && isMac ? "⌥" : "Alt";
           case "shift":
-            return isMac ? "⇧" : "Shift";
+            return isHydrated && isMac ? "⇧" : "Shift";
           case "meta":
-            return isMac ? "⌘" : "Win";
+            return isHydrated && isMac ? "⌘" : "Win";
           default:
             return key;
         }

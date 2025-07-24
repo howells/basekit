@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Subheading",
   description:
     "A styled subheading component for section titles and content organization.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "text" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Subheading } from "@/components/ui/subheading/subheading";`,
   componentId: "SubheadingExample",
@@ -18,13 +18,13 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "Heading level",
       options: ["1", "2", "3", "4", "5", "6"],
-      defaultValue: "3",
+      defaultValue: "3"
     },
     {
       name: "children",
       type: "string",
       description: "Subheading text",
-      defaultValue: "Section Title",
+      defaultValue: "Section Title"
     },
   ],
   examples: [
@@ -32,7 +32,7 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Basic Subheading",
       description: "A simple subheading component",
-      code: `<Subheading>Getting Started</Subheading>`,
+      code: `<Subheading>Getting Started</Subheading>`
     },
     {
       id: "levels",
@@ -43,7 +43,7 @@ export const componentConfig: ComponentConfig = {
   <Subheading level={2}>Level 2 Subheading</Subheading>
   <Subheading level={3}>Level 3 Subheading</Subheading>
   <Subheading level={4}>Level 4 Subheading</Subheading>
-</div>`,
+</div>`
     },
     {
       id: "with-content",
@@ -62,7 +62,7 @@ export const componentConfig: ComponentConfig = {
     <li>Feature two description</li>
     <li>Feature three description</li>
   </ul>
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

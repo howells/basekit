@@ -2,9 +2,7 @@ import React from "react";
 import { Avatar } from "./avatar";
 
 // Default avatar with initials
-export const DefaultExample = () => (
-  <Avatar initials="JD" alt="John Doe" />
-);
+export const DefaultExample = () => <Avatar initials="DH" alt="John Doe" />;
 
 // Avatar with image
 export const WithImageExample = () => (
@@ -59,9 +57,7 @@ export const GroupExample = () => (
 );
 
 // Avatar with loading state
-export const LoadingExample = () => (
-  <Avatar src="" alt="Loading avatar" />
-);
+export const LoadingExample = () => <Avatar src="" alt="Loading avatar" />;
 
 // Different sizes (if supported by component)
 export const SizesExample = () => (

@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "progress",
   name: "Progress",
   description: "A progress bar component showing completion status.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

@@ -5,9 +5,9 @@ export const componentConfig: ComponentConfig = {
   name: "Select Native",
   description: "A native HTML select element with custom styling.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { SelectNative } from "@/components/ui/select-native/select-native";`,
   componentId: "SelectNativeExample",
@@ -16,20 +16,20 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "string",
       description: "Selected value",
-      defaultValue: "",
+      defaultValue: ""
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the select is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
     {
       name: "size",
       type: "select",
       description: "Size of the select",
       options: ["sm", "md", "lg"],
-      defaultValue: "md",
+      defaultValue: "md"
     },
   ],
   examples: [
@@ -42,7 +42,7 @@ export const componentConfig: ComponentConfig = {
   <option value="option1">Option 1</option>
   <option value="option2">Option 2</option>
   <option value="option3">Option 3</option>
-</SelectNative>`,
+</SelectNative>`
     },
     {
       id: "with-groups",
@@ -60,7 +60,7 @@ export const componentConfig: ComponentConfig = {
     <option value="banana">Banana</option>
     <option value="grape">Grape</option>
   </optgroup>
-</SelectNative>`,
+</SelectNative>`
     },
     {
       id: "sizes",
@@ -79,7 +79,7 @@ export const componentConfig: ComponentConfig = {
     <option>Large select</option>
     <option>Option 2</option>
   </SelectNative>
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

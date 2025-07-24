@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Heading",
   description: "A semantic heading component with consistent typography and hierarchy levels.",
   category: "ui" as const,
-  badge: "UI",
+
   installation: {
     npm: "@base-ui-components/react"
   },

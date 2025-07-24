@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Number Field",
   description: "A number input field built on Base UI with stepper controls, scrubbing functionality, and full keyboard navigation.",
   category: "inputs" as const,
-  badge: "Input",
+
   installation: {
     npm: "@base-ui-components/react"
   },

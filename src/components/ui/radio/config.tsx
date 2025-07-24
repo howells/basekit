@@ -5,9 +5,9 @@ export const componentConfig: ComponentConfig = {
   name: "Radio",
   description: "A radio button component for selecting a single option from a set.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Radio } from "@/components/ui/radio/radio";`,
   componentId: "RadioExample",
@@ -16,19 +16,19 @@ export const componentConfig: ComponentConfig = {
       name: "checked",
       type: "boolean",
       description: "Whether the radio is checked",
-      defaultValue: false,
+      defaultValue: false
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the radio is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
     {
       name: "value",
       type: "string",
       description: "The value of the radio button",
-      defaultValue: "option1",
+      defaultValue: "option1"
     },
   ],
   examples: [
@@ -39,7 +39,7 @@ export const componentConfig: ComponentConfig = {
       code: `<div className="flex items-center space-x-2">
   <Radio id="option1" name="options" value="option1" />
   <label htmlFor="option1">Option 1</label>
-</div>`,
+</div>`
     },
     {
       id: "checked",
@@ -48,7 +48,7 @@ export const componentConfig: ComponentConfig = {
       code: `<div className="flex items-center space-x-2">
   <Radio id="checked" name="options" value="checked" defaultChecked />
   <label htmlFor="checked">Checked Option</label>
-</div>`,
+</div>`
     },
     {
       id: "disabled",
@@ -63,7 +63,7 @@ export const componentConfig: ComponentConfig = {
     <Radio id="disabled2" name="disabled" value="disabled2" defaultChecked disabled />
     <label htmlFor="disabled2">Disabled Checked</label>
   </div>
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

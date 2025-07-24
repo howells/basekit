@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "grid",
   name: "Grid",
   description: "A sophisticated grid layout component with visual guides, responsive columns/rows, cell overlays, and guide clipping features. Perfect for complex layouts and design systems.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "layout" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

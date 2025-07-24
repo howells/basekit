@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Sheet",
   description:
     "Extends the Dialog component to display content that complements the main content of the screen.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "overlay" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Sheet,
@@ -18,7 +18,7 @@ export const componentConfig: ComponentConfig = {
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetTrigger
 } from "@/components/ui/sheet/sheet";`,
   componentId: "SheetExample",
   props: [
@@ -27,7 +27,7 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "The side of the screen the sheet appears from",
       options: ["top", "right", "bottom", "left"],
-      defaultValue: "right",
+      defaultValue: "right"
     },
   ],
   examples: [
@@ -74,7 +74,7 @@ export const componentConfig: ComponentConfig = {
       </SheetClose>
     </SheetFooter>
   </SheetContent>
-</Sheet>`,
+</Sheet>`
     },
     {
       id: "sides",
@@ -121,7 +121,7 @@ export const componentConfig: ComponentConfig = {
       </SheetHeader>
     </SheetContent>
   </Sheet>
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

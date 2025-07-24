@@ -2,7 +2,11 @@
 
 "use client";
 
-import { getComponentsByCategory } from "@/lib/component-registry";
+import type { ComponentConfig } from "@/lib/component-config-types";
+import {
+  COMPONENT_LIST,
+  getComponentsByCategory,
+} from "@/lib/component-registry";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
@@ -45,19 +49,20 @@ function SidebarContent() {
   const segments = useSelectedLayoutSegments();
   const { isCollapsed, toggleCollapsed } = useSidebar();
 
-  // Get components by category from the registry
-  const allUiComponents = getComponentsByCategory("ui").sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-  const allInputComponents = getComponentsByCategory("inputs").sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-  const allFormComponents = getComponentsByCategory("forms").sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-  const allChartComponents = getComponentsByCategory("charts").sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  // Category display names and order
+  const categoryConfig = [
+    { key: "text", name: "Text" },
+    { key: "layout", name: "Layout" },
+    { key: "navigation", name: "Navigation" },
+    { key: "feedback", name: "Feedback" },
+    { key: "overlay", name: "Overlay" },
+    { key: "data", name: "Data" },
+    { key: "media", name: "Media" },
+    { key: "utility", name: "Utility" },
+    { key: "inputs", name: "Inputs" },
+    { key: "forms", name: "Forms" },
+    { key: "charts", name: "Charts" },
+  ] as const;
 
   // Check if current path matches a component using segments
   const isCurrentComponent = (category: string, componentId: string) => {
@@ -65,6 +70,43 @@ function SidebarContent() {
       segments.length >= 2 &&
       segments[0] === category &&
       segments[1] === componentId
+    );
+  };
+
+  // Helper function to render a category section
+  const renderCategorySection = (
+    categoryName: string,
+    categoryPath: string,
+    components: ComponentConfig[],
+    showDivider: boolean = true
+  ) => {
+    if (components.length === 0) return null;
+
+    return (
+      <>
+        <SidebarSection
+          title={categoryName}
+          href={`/${categoryPath}`}
+          defaultOpen={true}
+          isCollapsed={isCollapsed}
+        >
+          {components.map((config) => (
+            <SidebarItem
+              key={config.id}
+              href={`/${categoryPath}/${config.id}`}
+              current={isCurrentComponent(categoryPath, config.id)}
+              isCollapsed={isCollapsed}
+            >
+              <SidebarLabel isCollapsed={isCollapsed}>
+                {config.name}
+              </SidebarLabel>
+            </SidebarItem>
+          ))}
+        </SidebarSection>
+        {showDivider && components.length > 0 && (
+          <SidebarDivider isCollapsed={isCollapsed} />
+        )}
+      </>
     );
   };
 
@@ -99,147 +141,18 @@ function SidebarContent() {
 
         <SidebarDivider isCollapsed={isCollapsed} />
 
-        {allUiComponents.length > 0 && (
-          <SidebarSection
-            title={
-              <div className="flex items-center gap-2">
-                <span>UI Components</span>
-                <Badge variant="neutral" size="sm">
-                  {allUiComponents.length}
-                </Badge>
-              </div>
-            }
-            href="/ui"
-            defaultOpen={true}
-            isCollapsed={isCollapsed}
-          >
-            {allUiComponents.map((config) => {
-              return (
-                <SidebarItem
-                  key={config.id}
-                  href={`/ui/${config.id}`}
-                  current={isCurrentComponent("ui", config.id)}
-                  isCollapsed={isCollapsed}
-                >
-                  <SidebarLabel isCollapsed={isCollapsed}>
-                    {config.name}
-                  </SidebarLabel>
-                </SidebarItem>
-              );
-            })}
-          </SidebarSection>
-        )}
-
-        {allUiComponents.length > 0 && (
-          <SidebarDivider isCollapsed={isCollapsed} />
-        )}
-
-        {allInputComponents.length > 0 && (
-          <SidebarSection
-            title={
-              (
-                <div className="flex items-center gap-2">
-                  <span>Input Components</span>
-                  <Badge variant="neutral" size="sm">
-                    {allInputComponents.length}
-                  </Badge>
-                </div>
-              ) as any
-            }
-            href="/inputs"
-            defaultOpen={true}
-            isCollapsed={isCollapsed}
-          >
-            {allInputComponents.map((config) => {
-              return (
-                <SidebarItem
-                  key={config.id}
-                  href={`/inputs/${config.id}`}
-                  current={isCurrentComponent("inputs", config.id)}
-                  isCollapsed={isCollapsed}
-                >
-                  <SidebarLabel isCollapsed={isCollapsed}>
-                    {config.name}
-                  </SidebarLabel>
-                </SidebarItem>
-              );
-            })}
-          </SidebarSection>
-        )}
-
-        {allInputComponents.length > 0 && (
-          <SidebarDivider isCollapsed={isCollapsed} />
-        )}
-
-        {allFormComponents.length > 0 && (
-          <SidebarSection
-            title={
-              (
-                <div className="flex items-center gap-2">
-                  <span>Form Components</span>
-                  <Badge variant="neutral" size="sm">
-                    {allFormComponents.length}
-                  </Badge>
-                </div>
-              ) as any
-            }
-            href="/forms"
-            defaultOpen={true}
-            isCollapsed={isCollapsed}
-          >
-            {allFormComponents.map((config) => {
-              return (
-                <SidebarItem
-                  key={config.id}
-                  href={`/forms/${config.id}`}
-                  current={isCurrentComponent("forms", config.id)}
-                  isCollapsed={isCollapsed}
-                >
-                  <SidebarLabel isCollapsed={isCollapsed}>
-                    {config.name}
-                  </SidebarLabel>
-                </SidebarItem>
-              );
-            })}
-          </SidebarSection>
-        )}
-
-        {allFormComponents.length > 0 && (
-          <SidebarDivider isCollapsed={isCollapsed} />
-        )}
-
-        {allChartComponents.length > 0 && (
-          <SidebarSection
-            title={
-              (
-                <div className="flex items-center gap-2">
-                  <span>Chart Components</span>
-                  <Badge variant="neutral" size="sm">
-                    {allChartComponents.length}
-                  </Badge>
-                </div>
-              ) as any
-            }
-            href="/charts"
-            defaultOpen={true}
-            isCollapsed={isCollapsed}
-          >
-            {allChartComponents.map((config) => {
-              return (
-                <SidebarItem
-                  key={config.id}
-                  href={`/charts/${config.id}`}
-                  current={isCurrentComponent("charts", config.id)}
-                  isCollapsed={isCollapsed}
-                >
-                  <SidebarLabel isCollapsed={isCollapsed}>
-                    {config.name}
-                  </SidebarLabel>
-                </SidebarItem>
-              );
-            })}
-          </SidebarSection>
-        )}
+        {categoryConfig.map((category, index) => {
+          const components = getComponentsByCategory(
+            category.key as keyof typeof COMPONENT_LIST
+          ).sort((a, b) => a.name.localeCompare(b.name));
+          const isLastCategory = index === categoryConfig.length - 1;
+          return renderCategorySection(
+            category.name,
+            category.key,
+            components,
+            !isLastCategory
+          );
+        })}
       </SidebarBody>
     </>
   );

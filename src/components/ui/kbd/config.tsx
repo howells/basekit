@@ -4,8 +4,8 @@ export const kbdConfig: ComponentConfig = {
   name: "Kbd",
   id: "kbd",
   description: "Display keyboard shortcuts in a consistent, styled format",
-  category: "ui",
-  badge: "New",
+  category: "text",
+
   componentId: "kbd",
   importStatement: 'import { Kbd } from "@/components/ui/kbd/kbd";',
   examples: [],
@@ -14,14 +14,14 @@ export const kbdConfig: ComponentConfig = {
       name: "keys",
       type: "string[]",
       description: "Array of keys to display for complex combinations",
-      required: false,
+      required: false
     },
     {
       name: "platform",
       type: '"mac" | "pc" | "auto"',
       description: "Platform for modifier key display",
       required: false,
-      defaultValue: "auto",
+      defaultValue: "auto"
     },
     {
       name: "size",
@@ -29,19 +29,19 @@ export const kbdConfig: ComponentConfig = {
       description: "Size variant of the keyboard shortcut",
       required: false,
       defaultValue: "sm",
-      options: ["xs", "sm", "base", "lg"],
+      options: ["xs", "sm", "base", "lg"]
     },
     {
       name: "children",
       type: "React.ReactNode",
       description: "Key text to display for simple shortcuts",
-      required: false,
+      required: false
     },
     {
       name: "className",
       type: "string",
       description: "Additional CSS classes",
-      required: false,
+      required: false
     },
-  ],
+  ]
 };

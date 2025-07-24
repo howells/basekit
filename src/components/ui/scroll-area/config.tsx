@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Scroll Area",
   description:
     "Augments native scroll functionality for custom, cross-browser styling.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "utility" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { ScrollArea } from "@/components/ui/scroll-area/scroll-area";`,
   componentId: "ScrollAreaExample",
@@ -17,7 +17,7 @@ export const componentConfig: ComponentConfig = {
       name: "className",
       type: "string",
       description: "Additional CSS classes",
-      defaultValue: "",
+      defaultValue: ""
     },
   ],
   examples: [
@@ -35,7 +35,7 @@ export const componentConfig: ComponentConfig = {
       </React.Fragment>
     ))}
   </div>
-</ScrollArea>`,
+</ScrollArea>`
     },
     {
       id: "horizontal",
@@ -60,7 +60,7 @@ export const componentConfig: ComponentConfig = {
       </figure>
     ))}
   </div>
-</ScrollArea>`,
+</ScrollArea>`
     },
-  ],
+  ]
 };

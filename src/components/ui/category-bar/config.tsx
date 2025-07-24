@@ -8,7 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A category bar chart component for displaying segmented data with optional labels and markers.",
   category: "charts" as const,
-  badge: "Chart",
+
   importStatement: `import { CategoryBar } from "@/components/ui/category-bar";`,
   componentId: "CategoryBarExample",
   props: [

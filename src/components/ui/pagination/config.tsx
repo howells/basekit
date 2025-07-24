@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   id: "pagination",
   name: "Pagination",
   description: "A pagination component for navigating through multiple pages of content.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "navigation" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

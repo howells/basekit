@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "toast",
   name: "Toast",
   description: "A toast notification component for displaying brief messages to users.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

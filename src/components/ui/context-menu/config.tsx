@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Context Menu",
   description: "A context menu component that appears on right-click, providing contextual actions and options.",
   category: "ui" as const,
-  badge: "UI",
+
   importStatement: `import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";`,
   componentId: "ContextMenuExample",
   props: [

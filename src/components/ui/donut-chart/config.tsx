@@ -1,13 +1,13 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, PieVariantExample, WithLabelExample, CustomColorsExample, InteractiveExample, SmallSizeExample,  } from "./examples";
+import { DefaultExample, PieVariantExample, WithLabelExample, CustomColorsExample, InteractiveExample, SmallSizeExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "donut-chart",
   name: "Donut Chart",
   description: "A circular chart that displays data as segments of a donut or pie, perfect for showing proportional data.",
   category: "charts" as const,
-  badge: "Chart",
+
   importStatement: `import { DonutChart } from "@/components/ui/donut-chart";`,
   componentId: "DonutChartExample",
   props: [
@@ -16,19 +16,19 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["donut", "pie"],
       defaultValue: "donut",
-      description: "The chart variant - donut has a hollow center, pie is solid.",
+      description: "The chart variant - donut has a hollow center, pie is solid."
     },
     {
       name: "showLabel",
       type: "boolean",
       defaultValue: false,
-      description: "Whether to show the total value label in the center of donut charts.",
+      description: "Whether to show the total value label in the center of donut charts."
     },
     {
       name: "showTooltip",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show tooltips on hover.",
+      description: "Whether to show tooltips on hover."
     },
   ],
   examples: [
@@ -49,7 +49,7 @@ export const componentConfig: ComponentConfig = {
   category="name"
   value="value"
   valueFormatter={(value) => \`\${value}%\`}
-/>`,
+/>`
     },
     {
       id: "pie-variant",
@@ -68,7 +68,7 @@ export const componentConfig: ComponentConfig = {
   variant="pie"
   colors={["blue", "emerald", "amber"]}
   valueFormatter={(value) => \`\${value.toLocaleString()} users\`}
-/>`,
+/>`
     },
     {
       id: "with-label",
@@ -86,7 +86,7 @@ export const componentConfig: ComponentConfig = {
   value="amount"
   showLabel
   valueFormatter={(value) => \`$\${(value / 1000).toFixed(0)}K\`}
-/>`,
+/>`
     },
     {
       id: "custom-colors",
@@ -105,7 +105,7 @@ export const componentConfig: ComponentConfig = {
   value="count"
   colors={["emerald", "blue", "amber", "red"]}
   valueFormatter={(value) => \`\${value} tasks\`}
-/>`,
+/>`
     },
     {
       id: "interactive",
@@ -134,7 +134,7 @@ const data = [
       $\{(selectedSegment.budget / 1000).toFixed(0)}K
     </div>
   )}
-</div>`,
+</div>`
     },
     {
       id: "small-size",
@@ -154,7 +154,7 @@ const data = [
   showLabel
   colors={["emerald", "amber", "red"]}
   valueFormatter={(value) => \`\${value}%\`}
-/>`,
+/>`
     },
-  ],
+  ]
 };

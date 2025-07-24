@@ -9,8 +9,8 @@ export const componentConfig: ComponentConfig = {
   name: "Copy Button",
   description:
     "A button component that copies text to the clipboard with customizable labels and icons.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "utility" as const,
+
   installation: {
     npm: "lucide-react"
   },

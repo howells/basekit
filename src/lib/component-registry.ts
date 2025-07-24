@@ -25,6 +25,7 @@ import { componentConfig as donutChartConfig } from "@/components/ui/donut-chart
 import { componentConfig as emptyStateConfig } from "@/components/ui/empty-state/config";
 import { componentConfig as fieldConfig } from "@/components/ui/field/config";
 import { componentConfig as gridConfig } from "@/components/ui/grid/config";
+import { componentConfig as iconSelectConfig } from "@/components/ui/icon-select/config";
 import { componentConfig as inputConfig } from "@/components/ui/input/config";
 import { componentConfig as lineChartConfig } from "@/components/ui/line-chart/config";
 import { componentConfig as loaderConfig } from "@/components/ui/loader/config";
@@ -46,6 +47,7 @@ import { componentConfig as statusDotConfig } from "@/components/ui/status-dot/c
 import { componentConfig as switchConfig } from "@/components/ui/switch/config";
 import { componentConfig as tabsConfig } from "@/components/ui/tabs/config";
 import { componentConfig as tagConfig } from "@/components/ui/tag/config";
+import { componentConfig as textConfig } from "@/components/ui/text/config";
 
 // TODO: Update these components to use new ComponentConfig structure
 import {
@@ -57,13 +59,24 @@ import {
 const createPlaceholderConfig = (
   id: string,
   name: string,
-  category: "ui" | "inputs" | "forms" | "charts" = "ui"
+  category:
+    | "text"
+    | "layout"
+    | "navigation"
+    | "feedback"
+    | "overlay"
+    | "data"
+    | "media"
+    | "utility"
+    | "inputs"
+    | "forms"
+    | "charts" = "utility"
 ): ComponentConfig => ({
   id,
   name,
   description: `${name} component - conversion to new structure pending`,
   category,
-  badge: category.toUpperCase(),
+  badge: category.charAt(0).toUpperCase() + category.slice(1),
   importStatement: `// TODO: Convert to new structure`,
   componentId: `${name.replace(/\s+/g, "")}Example`,
   props: [],
@@ -122,7 +135,7 @@ const tabNavigationConfig = createPlaceholderConfig(
   "Tab Navigation"
 );
 const tableConfig = createPlaceholderConfig("table", "Table");
-const textConfig = createPlaceholderConfig("text", "Text");
+
 const toastConfig = createPlaceholderConfig("toast", "Toast");
 const toggleConfig = createPlaceholderConfig("toggle", "Toggle");
 const toggleGroupConfig = createPlaceholderConfig(
@@ -136,6 +149,19 @@ const touchTargetConfig = createPlaceholderConfig(
   "Touch Target"
 );
 const trackerConfig = createPlaceholderConfig("tracker", "Tracker");
+
+// Missing components that need placeholders
+const headingElementConfig = createPlaceholderConfig(
+  "heading-element",
+  "Heading Element",
+  "text"
+);
+const inspectorConfig = createPlaceholderConfig(
+  "inspector",
+  "Inspector",
+  "utility"
+);
+const kbdConfig = createPlaceholderConfig("kbd", "Kbd", "text");
 
 // Placeholder configurations for inputs category
 const datePickerConfig = createPlaceholderConfig(
@@ -218,6 +244,9 @@ export const componentRegistry: ComponentConfigRegistry = {
   dialog: dialogConfig,
   drawer: drawerConfig,
   heading: headingConfig,
+  "heading-element": headingElementConfig,
+  inspector: inspectorConfig,
+  kbd: kbdConfig,
   subheading: subheadingConfig,
   label: labelConfig,
   menu: menuConfig,
@@ -250,6 +279,7 @@ export const componentRegistry: ComponentConfigRegistry = {
   // Input Components (placeholders)
   "date-picker": datePickerConfig,
   "date-range-picker": dateRangePickerConfig,
+  "icon-select": iconSelectConfig,
   input: inputConfig,
   "number-field": numberFieldConfig,
   select: selectConfig,
@@ -285,68 +315,77 @@ export function getAllComponents() {
 
 // List of all components by category for reference
 export const COMPONENT_LIST = {
-  ui: [
-    "accordion",
-    "alert-dialog",
-    "avatar",
-    "badge",
-    "breadcrumbs",
-    "button",
-    "calendar",
-    "callout",
-    "card",
-    "carousel",
+  text: [
     "code-block",
-    "collapsible",
-    "combobox",
-    "command",
-    "context-menu",
-    "description-list",
-    "dialog",
-    "divider",
-    "drawer",
-    "grid",
     "heading",
-    "subheading",
+    "heading-element",
+    "kbd",
     "label",
+    "subheading",
+    "text",
+  ],
+  layout: ["card", "grid", "separator", "stack"],
+  navigation: [
+    "breadcrumbs",
+    "command",
     "menu",
     "menu-bar",
-    "meter",
     "navbar",
     "navigation-menu",
     "pagination",
-    "popover",
-    "preview-card",
+    "sidebar",
+    "tab-navigation",
+    "tabs",
+    "toolbar",
+  ],
+  feedback: [
+    "badge",
+    "callout",
+    "loader",
+    "meter",
     "progress",
     "progress-circle",
-    "responsive-drawer",
-    "scroll-area",
-    "separator",
-    "sheet",
-    "sidebar",
     "skeleton",
-    "split-button",
-    "stack",
-    "stacked-list",
     "status-dot",
-    "tab-navigation",
-    "table",
-    "tabs",
     "tag",
-    "text",
     "toast",
-    "toggle",
-    "toggle-group",
-    "toolbar",
+  ],
+  overlay: [
+    "alert-dialog",
+    "context-menu",
+    "dialog",
+    "drawer",
+    "popover",
+    "responsive-drawer",
+    "sheet",
     "tooltip",
+  ],
+  data: [
+    "accordion",
+    "collapsible",
+    "description-list",
+    "preview-card",
+    "stacked-list",
+    "table",
+  ],
+  media: ["avatar", "carousel"],
+  utility: [
+    "copy-button",
+    "empty-state",
+    "inspector",
+    "scroll-area",
     "touch-target",
     "tracker",
   ],
   inputs: [
+    "button",
+    "calendar",
     "checkbox",
     "checkbox-group",
+    "combobox",
     "date-picker",
     "date-range-picker",
+    "icon-select",
     "input",
     "number-field",
     "radio",
@@ -355,8 +394,11 @@ export const COMPONENT_LIST = {
     "select",
     "select-native",
     "slider",
+    "split-button",
     "switch",
     "textarea",
+    "toggle",
+    "toggle-group",
   ],
   forms: ["field", "fieldset", "form"],
   charts: [
@@ -373,7 +415,14 @@ export const COMPONENT_LIST = {
 
 // Type for component IDs
 export type ComponentId =
-  | (typeof COMPONENT_LIST.ui)[number]
+  | (typeof COMPONENT_LIST.text)[number]
+  | (typeof COMPONENT_LIST.layout)[number]
+  | (typeof COMPONENT_LIST.navigation)[number]
+  | (typeof COMPONENT_LIST.feedback)[number]
+  | (typeof COMPONENT_LIST.overlay)[number]
+  | (typeof COMPONENT_LIST.data)[number]
+  | (typeof COMPONENT_LIST.media)[number]
+  | (typeof COMPONENT_LIST.utility)[number]
   | (typeof COMPONENT_LIST.inputs)[number]
   | (typeof COMPONENT_LIST.forms)[number]
   | (typeof COMPONENT_LIST.charts)[number];

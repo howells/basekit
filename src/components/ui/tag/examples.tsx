@@ -34,9 +34,21 @@ export function WithCounts() {
 export function Removable() {
   return (
     <div className="flex gap-2">
-      <Tag value="React" removable onRemove={() => console.log('Removed React')} />
-      <Tag value="TypeScript" removable onRemove={() => console.log('Removed TypeScript')} />
-      <Tag value="Next.js" removable onRemove={() => console.log('Removed Next.js')} />
+      <Tag
+        value="React"
+        removable
+        onRemove={() => console.log("Removed React")}
+      />
+      <Tag
+        value="TypeScript"
+        removable
+        onRemove={() => console.log("Removed TypeScript")}
+      />
+      <Tag
+        value="Next.js"
+        removable
+        onRemove={() => console.log("Removed Next.js")}
+      />
     </div>
   );
 }
@@ -44,7 +56,7 @@ export function Removable() {
 export function WithAvatars() {
   return (
     <div className="flex gap-2">
-      <Tag value="John Doe" avatar={{ initials: "JD" }} />
+      <Tag value="John Doe" avatar={{ initials: "DH" }} />
       <Tag value="Jane Smith" avatar={{ initials: "JS" }} removable />
       <Tag value="Alex Johnson" avatar={{ initials: "AJ" }} count="Admin" />
     </div>
@@ -59,14 +71,9 @@ export function Complex() {
         value="Sarah Wilson"
         avatar={{ initials: "SW" }}
         removable
-        onRemove={() => console.log('Removed assignee')}
+        onRemove={() => console.log("Removed assignee")}
       />
-      <Tag
-        label="Priority"
-        value="High"
-        count="3 days left"
-        removable
-      />
+      <Tag label="Priority" value="High" count="3 days left" removable />
     </div>
   );
 }

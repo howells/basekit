@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Stack",
   description:
     "A layout component that arranges its children vertically or horizontally with consistent spacing.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "layout" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Stack } from "@/components/ui/stack/stack";`,
   componentId: "StackExample",
@@ -18,21 +18,21 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "Stack direction",
       options: ["vertical", "horizontal"],
-      defaultValue: "vertical",
+      defaultValue: "vertical"
     },
     {
       name: "spacing",
       type: "select",
       description: "Spacing between items",
       options: ["xs", "sm", "md", "lg", "xl"],
-      defaultValue: "md",
+      defaultValue: "md"
     },
     {
       name: "align",
       type: "select",
       description: "Alignment of items",
       options: ["start", "center", "end", "stretch"],
-      defaultValue: "stretch",
+      defaultValue: "stretch"
     },
   ],
   examples: [
@@ -44,7 +44,7 @@ export const componentConfig: ComponentConfig = {
   <div className="rounded-lg bg-zinc-100 p-4">Item 1</div>
   <div className="rounded-lg bg-zinc-100 p-4">Item 2</div>
   <div className="rounded-lg bg-zinc-100 p-4">Item 3</div>
-</Stack>`,
+</Stack>`
     },
     {
       id: "horizontal",
@@ -54,7 +54,7 @@ export const componentConfig: ComponentConfig = {
   <Button>Button 1</Button>
   <Button variant="outline">Button 2</Button>
   <Button variant="ghost">Button 3</Button>
-</Stack>`,
+</Stack>`
     },
     {
       id: "custom-spacing",
@@ -69,7 +69,7 @@ export const componentConfig: ComponentConfig = {
     <div className="rounded bg-green-100 p-2">Large Spacing</div>
     <div className="rounded bg-green-100 p-2">Large Spacing</div>
   </Stack>
-</div>`,
+</div>`
     },
     {
       id: "alignment",
@@ -79,7 +79,7 @@ export const componentConfig: ComponentConfig = {
   <div className="rounded bg-purple-100 px-4 py-2">Centered Item 1</div>
   <div className="rounded bg-purple-100 px-6 py-2">Centered Item 2</div>
   <div className="rounded bg-purple-100 px-12 py-2">Centered Item 3</div>
-</Stack>`,
+</Stack>`
     },
-  ],
+  ]
 };

@@ -9,16 +9,16 @@ export const componentConfig: ComponentConfig = {
   name: "Accordion",
   description:
     "A vertically stacked set of interactive headings that each control a panel of content.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "data" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger
 } from "@/components/ui/accordion/accordion";`,
   componentId: "AccordionExample",
 
@@ -29,7 +29,7 @@ export const componentConfig: ComponentConfig = {
       type: "boolean",
       description:
         "If true, multiple accordion items can be open at the same time.",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
 
@@ -38,13 +38,13 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic accordion with default settings.",
-      code: jsxToString(<DefaultExample />),
+      code: jsxToString(<DefaultExample />)
     },
     {
       id: "multiple-open",
       title: "Multiple Open",
       description: "Accordion allowing multiple items to be open.",
-      code: jsxToString(<MultipleOpenExample />),
+      code: jsxToString(<MultipleOpenExample />)
     },
-  ],
+  ]
 };

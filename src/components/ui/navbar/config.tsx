@@ -5,16 +5,16 @@ export const componentConfig: ComponentConfig = {
   name: "Navbar",
   description: "A navigation bar component with branding, sections, and items.",
   category: "ui" as const,
-  badge: "UI",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Navbar,
   NavbarDivider,
   NavbarItem,
   NavbarLabel,
-  NavbarSection,
+  NavbarSection
 } from "@/components/ui/navbar/navbar";`,
   componentId: "NavbarExample",
   props: [],
@@ -33,7 +33,7 @@ export const componentConfig: ComponentConfig = {
     <NavbarItem href="/services">Services</NavbarItem>
     <NavbarItem href="/contact">Contact</NavbarItem>
   </NavbarSection>
-</Navbar>`,
+</Navbar>`
     },
     {
       id: "with-divider",
@@ -53,7 +53,7 @@ export const componentConfig: ComponentConfig = {
     <NavbarItem href="/account">Account</NavbarItem>
     <NavbarItem href="/settings">Settings</NavbarItem>
   </NavbarSection>
-</Navbar>`,
+</Navbar>`
     },
-  ],
+  ]
 };

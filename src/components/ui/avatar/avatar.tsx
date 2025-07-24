@@ -40,7 +40,7 @@ interface AvatarProps {
  * <Avatar src="/profile.jpg" alt="John Doe" />
  *
  * // With initials fallback
- * <Avatar initials="JD" alt="John Doe" />
+ * <Avatar initials="DH" alt="John Doe" />
  *
  * // Square variant
  * <Avatar src="/profile.jpg" square alt="John Doe" />
@@ -134,7 +134,7 @@ Avatar.displayName = "Avatar";
  * ```tsx
  * <AvatarWithFallback>
  *   <AvatarImage src="/profile.jpg" alt="John Doe" />
- *   <AvatarFallback>JD</AvatarFallback>
+ *   <AvatarFallback>DH</AvatarFallback>
  * </AvatarWithFallback>
  * ```
  *
@@ -189,7 +189,7 @@ AvatarImage.displayName = "AvatarImage";
  *
  * @example
  * ```tsx
- * <AvatarFallback>JD</AvatarFallback>
+ * <AvatarFallback>DH</AvatarFallback>
  * <AvatarFallback>
  *   <UserIcon className="h-4 w-4" />
  * </AvatarFallback>

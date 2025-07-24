@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   id: "tabs",
   name: "Tabs",
   description: "A set of layered sections of content—known as tab panels—that are displayed one at a time. Features Geist-style design with clean line indicators.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "navigation" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

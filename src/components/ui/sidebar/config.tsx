@@ -5,10 +5,10 @@ export const componentConfig: ComponentConfig = {
   name: "Sidebar",
   description:
     "A versatile sidebar component for navigation and content organization.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "navigation" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Sidebar,
@@ -26,7 +26,7 @@ export const componentConfig: ComponentConfig = {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarProvider,
-  SidebarTrigger,
+  SidebarTrigger
 } from "@/components/ui/sidebar/sidebar";`,
   componentId: "SidebarExample",
   props: [],
@@ -82,7 +82,7 @@ export const componentConfig: ComponentConfig = {
       </main>
     </div>
   </SidebarInset>
-</SidebarProvider>`,
+</SidebarProvider>`
     },
     {
       id: "with-submenu",
@@ -117,7 +117,7 @@ export const componentConfig: ComponentConfig = {
       </SidebarGroup>
     </SidebarContent>
   </Sidebar>
-</SidebarProvider>`,
+</SidebarProvider>`
     },
-  ],
+  ]
 };

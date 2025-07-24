@@ -4,10 +4,10 @@ export const componentConfig: ComponentConfig = {
   id: "tag",
   name: "Tag",
   description: "A label or keyword used to categorize or describe content.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Tag } from "@/components/ui/tag/tag";`,
   componentId: "TagExample",
@@ -17,20 +17,20 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "Tag variant",
       options: ["default", "primary", "secondary", "success", "warning", "error"],
-      defaultValue: "default",
+      defaultValue: "default"
     },
     {
       name: "size",
       type: "select",
       description: "Tag size",
       options: ["sm", "md", "lg"],
-      defaultValue: "md",
+      defaultValue: "md"
     },
     {
       name: "removable",
       type: "boolean",
       description: "Whether the tag can be removed",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
   examples: [
@@ -45,7 +45,7 @@ export const componentConfig: ComponentConfig = {
   <Tag variant="success">Success</Tag>
   <Tag variant="warning">Warning</Tag>
   <Tag variant="error">Error</Tag>
-</div>`,
+</div>`
     },
     {
       id: "sizes",
@@ -55,7 +55,7 @@ export const componentConfig: ComponentConfig = {
   <Tag size="sm">Small</Tag>
   <Tag size="md">Medium</Tag>
   <Tag size="lg">Large</Tag>
-</div>`,
+</div>`
     },
     {
       id: "removable",
@@ -71,7 +71,7 @@ export const componentConfig: ComponentConfig = {
   <Tag removable variant="secondary">
     TypeScript
   </Tag>
-</div>`,
+</div>`
     },
     {
       id: "with-icons",
@@ -90,7 +90,7 @@ export const componentConfig: ComponentConfig = {
     <Check className="mr-1 h-3 w-3" />
     verified
   </Tag>
-</div>`,
+</div>`
     },
     {
       id: "category-tags",
@@ -116,7 +116,7 @@ export const componentConfig: ComponentConfig = {
       <Tag>AWS</Tag>
     </div>
   </div>
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

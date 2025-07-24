@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   id: "tracker",
   name: "Tracker",
   description: "A visual progress tracker showing steps or stages in a process.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "utility" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

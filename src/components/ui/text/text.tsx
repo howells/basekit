@@ -3,18 +3,19 @@ import Link from "next/link";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const textVariants = tv({
-  base: "m-0 text-zinc-500 dark:text-zinc-400",
+  base: "m-0 text-current",
   variants: {
     size: {
+      "2xs": "text-2xs/3",
       xs: "text-xs/4",
       sm: "text-sm/5",
-      base: "text-base/6 sm:text-sm/6",
+      base: "text-base/6",
       lg: "text-lg/7",
       xl: "text-xl/8",
     },
   },
   defaultVariants: {
-    size: "base",
+    size: "sm",
   },
 });
 
@@ -41,7 +42,7 @@ export function TextLink({
       {...props}
       className={clsx(
         className,
-        "text-zinc-950 underline decoration-zinc-950/50 data-hover:decoration-zinc-950 dark:text-white dark:decoration-white/50 dark:data-hover:decoration-white"
+        "text-current underline decoration-current/50 data-hover:decoration-current"
       )}
     />
   );
@@ -54,7 +55,7 @@ export function Strong({
   return (
     <strong
       {...props}
-      className={clsx(className, "font-medium text-zinc-950 dark:text-white")}
+      className={clsx(className, "font-medium text-current")}
     />
   );
 }
@@ -68,7 +69,7 @@ export function Code({
       {...props}
       className={clsx(
         className,
-        "rounded-sm border border-zinc-950/10 bg-zinc-950/2.5 px-0.5 text-sm font-medium text-zinc-950 sm:text-[0.8125rem] dark:border-white/20 dark:bg-white/5 dark:text-white"
+        "rounded-sm border border-current/10 bg-current/5 px-0.5 text-sm font-medium text-current sm:text-[0.8125rem]"
       )}
     />
   );

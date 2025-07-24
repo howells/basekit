@@ -8,7 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "A modern form component that integrates Base UI Form with Zod validation for type-safe, accessible forms.",
   category: "forms" as const,
-  badge: "Form",
+
   importStatement: `import {
   Form,
   FormField,

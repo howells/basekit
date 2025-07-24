@@ -4,10 +4,10 @@ export const componentConfig: ComponentConfig = {
   id: "status-dot",
   name: "Status Dot",
   description: "A small dot indicator to show status or state.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { StatusDot } from "@/components/ui/status-dot/status-dot";`,
   componentId: "StatusDotExample",
@@ -17,20 +17,20 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "Status variant",
       options: ["default", "success", "warning", "error", "info"],
-      defaultValue: "default",
+      defaultValue: "default"
     },
     {
       name: "size",
       type: "select",
       description: "Size of the status dot",
       options: ["sm", "md", "lg"],
-      defaultValue: "md",
+      defaultValue: "md"
     },
     {
       name: "pulse",
       type: "boolean",
       description: "Whether the dot should pulse",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
   examples: [
@@ -44,7 +44,7 @@ export const componentConfig: ComponentConfig = {
   <StatusDot variant="warning" />
   <StatusDot variant="error" />
   <StatusDot variant="info" />
-</div>`,
+</div>`
     },
     {
       id: "with-labels",
@@ -67,7 +67,7 @@ export const componentConfig: ComponentConfig = {
     <StatusDot variant="default" />
     <span className="text-sm">Offline</span>
   </div>
-</div>`,
+</div>`
     },
     {
       id: "sizes",
@@ -77,7 +77,7 @@ export const componentConfig: ComponentConfig = {
   <StatusDot size="sm" variant="success" />
   <StatusDot size="md" variant="success" />
   <StatusDot size="lg" variant="success" />
-</div>`,
+</div>`
     },
     {
       id: "pulsing",
@@ -92,7 +92,7 @@ export const componentConfig: ComponentConfig = {
     <StatusDot variant="error" pulse />
     <span className="text-sm">Recording</span>
   </div>
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

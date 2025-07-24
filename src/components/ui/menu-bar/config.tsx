@@ -5,16 +5,16 @@ export const componentConfig: ComponentConfig = {
   name: "Menu Bar",
   description: "A horizontal menu bar containing multiple dropdown menus.",
   category: "ui" as const,
-  badge: "UI",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   MenuBar,
   MenuBarContent,
   MenuBarItem,
   MenuBarMenu,
-  MenuBarTrigger,
+  MenuBarTrigger
 } from "@/components/ui/menu-bar/menu-bar";`,
   componentId: "MenuBarExample",
   props: [],
@@ -40,7 +40,7 @@ export const componentConfig: ComponentConfig = {
       <MenuBarItem>Cut</MenuBarItem>
     </MenuBarContent>
   </MenuBarMenu>
-</MenuBar>`,
+</MenuBar>`
     },
     {
       id: "with-icons",
@@ -64,7 +64,7 @@ export const componentConfig: ComponentConfig = {
       </MenuBarItem>
     </MenuBarContent>
   </MenuBarMenu>
-</MenuBar>`,
+</MenuBar>`
     },
-  ],
+  ]
 };

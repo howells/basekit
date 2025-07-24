@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Input",
   description: "A versatile input field component with various types, sizes, and states including search and password inputs.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
     npm: "@base-ui-components/react"
   },

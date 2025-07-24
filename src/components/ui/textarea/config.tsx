@@ -6,9 +6,9 @@ export const componentConfig: ComponentConfig = {
   description:
     "Displays a form textarea or a component that looks like a textarea.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Textarea } from "@/components/ui/textarea/textarea";`,
   componentId: "TextareaExample",
@@ -17,19 +17,19 @@ export const componentConfig: ComponentConfig = {
       name: "placeholder",
       type: "string",
       description: "Placeholder text",
-      defaultValue: "Type your message here.",
+      defaultValue: "Type your message here."
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the textarea is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
     {
       name: "rows",
       type: "number",
       description: "Number of visible text lines",
-      defaultValue: 4,
+      defaultValue: 4
     },
   ],
   examples: [
@@ -37,7 +37,7 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Basic Textarea",
       description: "A simple textarea input",
-      code: `<Textarea placeholder="Type your message here." />`,
+      code: `<Textarea placeholder="Type your message here." />`
     },
     {
       id: "with-label",
@@ -52,7 +52,7 @@ export const componentConfig: ComponentConfig = {
     placeholder="Enter your message"
     rows={6}
   />
-</div>`,
+</div>`
     },
     {
       id: "disabled",
@@ -62,7 +62,7 @@ export const componentConfig: ComponentConfig = {
   placeholder="This textarea is disabled"
   disabled
   defaultValue="You cannot edit this content."
-/>`,
+/>`
     },
     {
       id: "with-hint",
@@ -80,7 +80,7 @@ export const componentConfig: ComponentConfig = {
   <p className="text-sm text-zinc-600">
     Write a short bio. This will be displayed on your profile.
   </p>
-</div>`,
+</div>`
     },
     {
       id: "character-count",
@@ -100,7 +100,7 @@ export const componentConfig: ComponentConfig = {
     <span className="text-zinc-600">Max 280 characters</span>
     <span className="text-zinc-600">0/280</span>
   </div>
-</div>`,
+</div>`
     },
     {
       id: "form-example",
@@ -134,7 +134,7 @@ export const componentConfig: ComponentConfig = {
   >
     Submit Feedback
   </button>
-</form>`,
+</form>`
     },
-  ],
+  ]
 };

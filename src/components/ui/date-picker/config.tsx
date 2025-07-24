@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Date Picker",
   description: "A comprehensive date picker component with time selection, presets, and range support built on React Aria.",
   category: "inputs" as const,
-  badge: "Input",
+
   importStatement: `import { DatePicker } from "@/components/ui/date-picker";`,
   componentId: "DatePickerExample",
   props: [

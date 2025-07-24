@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   id: "touch-target",
   name: "Touch Target",
   description: "A component that ensures touch targets meet accessibility guidelines for minimum size.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "utility" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

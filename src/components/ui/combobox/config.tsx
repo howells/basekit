@@ -13,8 +13,8 @@ export const componentConfig: ComponentConfig = {
   id: "combobox",
   name: "Combobox",
   description: "Searchable select component built with Command and Popover, combining text input with dropdown selection.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "inputs" as const,
+
   importStatement: `import { Combobox, type ComboboxOption } from "@/components/ui/combobox";`,
   componentId: "ComboboxExample",
   props: [

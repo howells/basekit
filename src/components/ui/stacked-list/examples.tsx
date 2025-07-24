@@ -1,14 +1,10 @@
+import { Calendar, FileText, UserPlus } from "lucide-react";
 import React from "react";
-import { StackedList } from "./stacked-list";
-import { Button } from "../button/button";
 import { Avatar } from "../avatar/avatar";
 import { Badge } from "../badge/badge";
+import { Button } from "../button/button";
 import { Card } from "../card/card";
-import { 
-  FileText,
-  Calendar,
-  UserPlus
-} from "lucide-react";
+import { StackedList } from "./stacked-list";
 
 export function Default() {
   return (
@@ -16,25 +12,31 @@ export function Default() {
       <StackedList.Header
         title="Team Members"
         description="Manage your team and their permissions."
-        actions={<Button size="sm" variant="outline">Add Member</Button>}
+        actions={
+          <Button size="sm" variant="outline">
+            Add Member
+          </Button>
+        }
       />
       <StackedList.Item
-        left={<Avatar initials="JD" alt="John Doe" />}
-        right={<Button size="sm" variant="outline">Edit</Button>}
+        left={<Avatar initials="DH" alt="John Doe" />}
+        right={
+          <Button size="sm" variant="outline">
+            Edit
+          </Button>
+        }
       >
-        <StackedList.Content
-          title="John Doe"
-          description="Software Engineer"
-        />
+        <StackedList.Content title="John Doe" description="Software Engineer" />
       </StackedList.Item>
       <StackedList.Item
         left={<Avatar initials="JS" alt="Jane Smith" />}
-        right={<Button size="sm" variant="outline">Edit</Button>}
+        right={
+          <Button size="sm" variant="outline">
+            Edit
+          </Button>
+        }
       >
-        <StackedList.Content
-          title="Jane Smith"
-          description="Product Manager"
-        />
+        <StackedList.Content title="Jane Smith" description="Product Manager" />
       </StackedList.Item>
     </StackedList>
   );

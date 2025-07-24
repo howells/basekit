@@ -5,9 +5,9 @@ export const componentConfig: ComponentConfig = {
   name: "Radio Group",
   description: "A set of radio buttons where only one option can be selected at a time.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group/radio-group";`,
   componentId: "RadioGroupExample",
@@ -16,20 +16,20 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "string",
       description: "Selected value",
-      defaultValue: "option1",
+      defaultValue: "option1"
     },
     {
       name: "orientation",
       type: "select",
       description: "Layout orientation",
       options: ["horizontal", "vertical"],
-      defaultValue: "vertical",
+      defaultValue: "vertical"
     },
     {
       name: "disabled",
       type: "boolean",
       description: "Whether the radio group is disabled",
-      defaultValue: false,
+      defaultValue: false
     },
   ],
   examples: [
@@ -50,7 +50,7 @@ export const componentConfig: ComponentConfig = {
     <RadioGroupItem value="compact" id="r3" />
     <label htmlFor="r3">Compact</label>
   </div>
-</RadioGroup>`,
+</RadioGroup>`
     },
     {
       id: "horizontal",
@@ -71,7 +71,7 @@ export const componentConfig: ComponentConfig = {
       <label htmlFor="option3">Option 3</label>
     </div>
   </div>
-</RadioGroup>`,
+</RadioGroup>`
     },
     {
       id: "disabled",
@@ -86,7 +86,7 @@ export const componentConfig: ComponentConfig = {
     <RadioGroupItem value="option2" id="d2" />
     <label htmlFor="d2">Disabled Option 2</label>
   </div>
-</RadioGroup>`,
+</RadioGroup>`
     },
-  ],
+  ]
 };

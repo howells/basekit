@@ -4,10 +4,10 @@ export const componentConfig: ComponentConfig = {
   id: "skeleton",
   name: "Skeleton",
   description: "Use to show a placeholder while content is loading.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "feedback" as const,
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Skeleton } from "@/components/ui/skeleton/skeleton";`,
   componentId: "SkeletonExample",
@@ -16,7 +16,7 @@ export const componentConfig: ComponentConfig = {
       name: "className",
       type: "string",
       description: "Additional CSS classes",
-      defaultValue: "",
+      defaultValue: ""
     },
   ],
   examples: [
@@ -30,7 +30,7 @@ export const componentConfig: ComponentConfig = {
     <Skeleton className="h-4 w-[250px]" />
     <Skeleton className="h-4 w-[200px]" />
   </div>
-</div>`,
+</div>`
     },
     {
       id: "card",
@@ -49,7 +49,7 @@ export const componentConfig: ComponentConfig = {
     <Skeleton className="h-4 w-full" />
     <Skeleton className="h-4 w-3/4" />
   </div>
-</div>`,
+</div>`
     },
     {
       id: "list",
@@ -65,7 +65,7 @@ export const componentConfig: ComponentConfig = {
       </div>
     </div>
   ))}
-</div>`,
+</div>`
     },
-  ],
+  ]
 };

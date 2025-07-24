@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "tooltip",
   name: "Tooltip",
   description: "Tooltip component built on Base UI with customizable positioning and styling variants.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "overlay" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

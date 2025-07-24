@@ -6,8 +6,8 @@ export const componentConfig: ComponentConfig = {
   id: "table",
   name: "Table",
   description: "A data table component for displaying tabular data with headers and rows.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "data" as const,
+
   installation: {
     npm: "@base-ui-components/react"
   },

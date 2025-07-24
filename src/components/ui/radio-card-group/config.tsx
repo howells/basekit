@@ -5,9 +5,9 @@ export const componentConfig: ComponentConfig = {
   name: "Radio Card Group",
   description: "A group of selectable cards that behave like radio buttons.",
   category: "inputs" as const,
-  badge: "Inputs",
+
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { RadioCardGroup, RadioCard } from "@/components/ui/radio-card-group/radio-card-group";`,
   componentId: "RadioCardGroupExample",
@@ -16,14 +16,14 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "string",
       description: "Selected value",
-      defaultValue: "option1",
+      defaultValue: "option1"
     },
     {
       name: "orientation",
       type: "select",
       description: "Layout orientation",
       options: ["horizontal", "vertical"],
-      defaultValue: "vertical",
+      defaultValue: "vertical"
     },
   ],
   examples: [
@@ -44,7 +44,7 @@ export const componentConfig: ComponentConfig = {
     <h3 className="font-semibold">Enterprise</h3>
     <p className="text-sm text-zinc-600">For large teams and organizations</p>
   </RadioCard>
-</RadioCardGroup>`,
+</RadioCardGroup>`
     },
     {
       id: "horizontal",
@@ -59,7 +59,7 @@ export const componentConfig: ComponentConfig = {
     <span className="font-medium">Yearly</span>
     <span className="text-sm text-zinc-600">$90/yr</span>
   </RadioCard>
-</RadioCardGroup>`,
+</RadioCardGroup>`
     },
-  ],
+  ]
 };

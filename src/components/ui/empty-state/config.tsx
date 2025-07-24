@@ -7,8 +7,8 @@ export const componentConfig: ComponentConfig = {
   name: "Empty State",
   description:
     "A component to display when there's no content to show, with optional actions to guide users.",
-  category: "ui" as const,
-  badge: "UI",
+  category: "utility" as const,
+
   importStatement: `import { EmptyState } from "@/components/ui/empty-state/empty-state";`,
   componentId: "EmptyStateExample",
   props: [

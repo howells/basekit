@@ -8,7 +8,7 @@ export const componentConfig: ComponentConfig = {
   description:
     "Modal dialog component built on Base UI with overlay and focus management.",
   category: "ui" as const,
-  badge: "UI",
+
   importStatement: `import {
   Dialog,
   DialogTrigger,

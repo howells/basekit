@@ -5,7 +5,7 @@ import { Avatar } from "./avatar";
 export const AvatarExample = ({
   src,
   square = false,
-  initials = "JD",
+  initials = "DH",
   alt = "Avatar",
   dynamicBackground = true,
   ...props
