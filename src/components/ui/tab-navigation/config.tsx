@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { Basic,  } from "./examples";
+import { Basic  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "tab-navigation",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { TabNavigation, TabNavigationLink } from "@/components/ui/tab-navigation/tab-navigation";`,
   componentId: "TabNavigationExample",
@@ -17,16 +17,14 @@ export const componentConfig: ComponentConfig = {
     {
       name: "className",
       type: "string",
-      description: "Additional CSS classes.",
-    },
+      description: "Additional CSS classes."
+    }
   ],
   examples: [
     {
       id: "tab-navigation",
       title: "Basic Tab Navigation",
       description: "A navigation component for switching between different views or sections.",
-      code: jsxToString(<Basic />),
-      render: Basic,
-    },
-  ],
+      code: jsxToString(<Basic />)}
+  ]
 };

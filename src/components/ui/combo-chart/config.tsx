@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, BiaxialExample, StackedBarsExample, MultipleLinesExample, InteractiveExample, CustomFormattingExample,  } from "./examples";
+import { DefaultExample, BiaxialExample, StackedBarsExample, MultipleLinesExample, InteractiveExample, CustomFormattingExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "combo-chart",
@@ -15,68 +15,60 @@ export const componentConfig: ComponentConfig = {
       name: "showXAxis",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show the X-axis.",
+      description: "Whether to show the X-axis."
     },
     {
       name: "showLegend",
       type: "boolean", 
       defaultValue: true,
-      description: "Whether to show the legend.",
+      description: "Whether to show the legend."
     },
     {
       name: "showTooltip",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show tooltips on hover.",
+      description: "Whether to show tooltips on hover."
     },
     {
       name: "showGridLines",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show grid lines.",
+      description: "Whether to show grid lines."
     },
     {
       name: "enableBiaxial",
       type: "boolean", 
       defaultValue: false,
-      description: "Whether to enable separate Y-axes for bar and line series.",
+      description: "Whether to enable separate Y-axes for bar and line series."
     },
     {
       name: "enableLegendSlider",
       type: "boolean",
       defaultValue: false,
-      description: "Whether to enable scrollable legend for many categories.",
-    },
+      description: "Whether to enable scrollable legend for many categories."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic combo chart with bars and lines sharing the same Y-axis.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "biaxial",
       title: "Biaxial (Dual Y-Axis)",
       description: "Combo chart with separate Y-axes for different data scales.",
-      code: jsxToString(<BiaxialExample />),
-      render: BiaxialExample,
-    },
+      code: jsxToString(<BiaxialExample />)},
     {
       id: "stacked-bars",
       title: "Stacked Bars with Line",
       description: "Combo chart with stacked bars and line overlay.",
-      code: jsxToString(<StackedBarsExample />),
-      render: StackedBarsExample,
-    },
+      code: jsxToString(<StackedBarsExample />)},
     {
       id: "multiple-lines",
       title: "Multiple Lines with Bar",
       description: "Single bar series with multiple line series.",
-      code: jsxToString(<MultipleLinesExample />),
-      render: MultipleLinesExample,
-    },
+      code: jsxToString(<MultipleLinesExample />)},
     {
       id: "interactive",
       title: "Interactive",
@@ -94,15 +86,11 @@ return (
     }
     onValueChange={(v) => setValue(v)}
   />
-);`,
-      render: InteractiveExample,
-    },
+);`},
     {
       id: "custom-formatting",
       title: "Custom Formatting",
       description: "Combo chart with custom value formatters and labels.",
-      code: jsxToString(<CustomFormattingExample />),
-      render: CustomFormattingExample,
-    },
-  ],
+      code: jsxToString(<CustomFormattingExample />)}
+  ]
 };

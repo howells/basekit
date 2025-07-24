@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { Basic,  } from "./examples";
+import { Basic  } from "./examples";
 import { Tracker } from "./tracker";
 
 export const componentConfig: ComponentConfig = {
@@ -10,7 +10,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Tracker } from "@/components/ui/tracker/tracker";`,
   componentId: "TrackerExample",
@@ -19,21 +19,19 @@ export const componentConfig: ComponentConfig = {
       name: "data",
       type: "string",
       defaultValue: "[]",
-      description: "The tracker data array.",
+      description: "The tracker data array."
     },
     {
       name: "className",
       type: "string",
-      description: "Additional CSS classes.",
-    },
+      description: "Additional CSS classes."
+    }
   ],
   examples: [
     {
       id: "tracker",
       title: "Basic Tracker",
       description: "A visual progress tracker showing steps or stages in a process.",
-      code: jsxToString(<Basic />),
-      render: Basic,
-    },
-  ],
+      code: jsxToString(<Basic />)}
+  ]
 };

@@ -32,56 +32,46 @@ export const componentConfig: ComponentConfig = {
         "9",
         "10",
         "11",
-        "12",
+        "12"
       ],
       defaultValue: "6",
       description:
-        "Padding for the card (Tailwind scale). Use 0 for no padding.",
+        "Padding for the card (Tailwind scale). Use 0 for no padding."
     },
     {
       name: "children",
       type: "string",
       defaultValue:
         "This is a card component with some example content. It provides a clean container with subtle styling and shadow.",
-      description: "The content to display inside the card.",
-    },
+      description: "The content to display inside the card."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic card with default styling.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "with-title",
       title: "With Title",
       description: "Card with a title and content.",
-      code: jsxToString(<WithTitleExample />),
-      render: WithTitleExample,
-    },
+      code: jsxToString(<WithTitleExample />)},
     {
       id: "compact",
       title: "Compact",
       description: "Card with reduced padding using the padding prop.",
-      code: jsxToString(<CompactExample />),
-      render: CompactExample,
-    },
+      code: jsxToString(<CompactExample />)},
     {
       id: "no-padding",
       title: "No Padding",
       description:
         "Card with no internal padding, useful for full-width content.",
-      code: jsxToString(<NoPaddingExample />),
-      render: NoPaddingExample,
-    },
+      code: jsxToString(<NoPaddingExample />)},
     {
       id: "custom-styling",
       title: "Custom Styling",
       description: "Card with custom background and border.",
-      code: jsxToString(<CustomStylingExample />),
-      render: CustomStylingExample,
-    },
-  ],
+      code: jsxToString(<CustomStylingExample />)}
+  ]
 };

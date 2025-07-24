@@ -6,7 +6,7 @@ import {
   WithDisabledOptionsExample,
   CustomRenderExample,
   ControlledStateExample,
-  WithHookExample,
+  WithHookExample
 } from "./examples";
 
 export const componentConfig: ComponentConfig = {
@@ -22,26 +22,26 @@ export const componentConfig: ComponentConfig = {
       name: "placeholder",
       type: "string",
       defaultValue: "Select option...",
-      description: "Placeholder text for the trigger button.",
+      description: "Placeholder text for the trigger button."
     },
     {
       name: "searchPlaceholder",
       type: "string",
       defaultValue: "Search options...",
-      description: "Placeholder text for the search input.",
+      description: "Placeholder text for the search input."
     },
     {
       name: "emptyMessage",
       type: "string",
       defaultValue: "No options found.",
-      description: "Message to show when no options match the search.",
+      description: "Message to show when no options match the search."
     },
     {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the combobox is disabled.",
-    },
+      description: "Whether the combobox is disabled."
+    }
   ],
   examples: [
     {
@@ -56,7 +56,7 @@ export const componentConfig: ComponentConfig = {
     { value: "banana", label: "Banana" },
     { value: "cherry", label: "Cherry" },
     { value: "grape", label: "Grape" },
-    { value: "orange", label: "Orange" },
+    { value: "orange", label: "Orange" }
   ];
 
   return (
@@ -68,9 +68,7 @@ export const componentConfig: ComponentConfig = {
       searchPlaceholder="Search fruits..."
     />
   );
-};`,
-      render: DefaultExample,
-    },
+};`},
     {
       id: "with-icons",
       title: "With Icons",
@@ -98,7 +96,7 @@ export const componentConfig: ComponentConfig = {
       value: "help", 
       label: "Help", 
       leftIcon: ({ className }) => <HelpCircle className={className} />
-    },
+    }
   ];
 
   return (
@@ -110,9 +108,7 @@ export const componentConfig: ComponentConfig = {
       searchPlaceholder="Search pages..."
     />
   );
-};`,
-      render: WithIconsExample,
-    },
+};`},
     {
       id: "with-disabled-options",
       title: "With Disabled Options",
@@ -125,7 +121,7 @@ export const componentConfig: ComponentConfig = {
     { value: "option2", label: "Available Option 2" },
     { value: "option3", label: "Disabled Option", disabled: true },
     { value: "option4", label: "Available Option 3" },
-    { value: "option5", label: "Another Disabled Option", disabled: true },
+    { value: "option5", label: "Another Disabled Option", disabled: true }
   ];
 
   return (
@@ -137,9 +133,7 @@ export const componentConfig: ComponentConfig = {
       searchPlaceholder="Search options..."
     />
   );
-};`,
-      render: WithDisabledOptionsExample,
-    },
+};`},
     {
       id: "custom-render",
       title: "Custom Render",
@@ -162,7 +156,7 @@ export const componentConfig: ComponentConfig = {
       value: "bob", 
       label: "Bob Johnson", 
       leftIcon: ({ className }) => <User className={className} />
-    },
+    }
   ];
 
   return (
@@ -195,9 +189,7 @@ export const componentConfig: ComponentConfig = {
       )}
     />
   );
-};`,
-      render: CustomRenderExample,
-    },
+};`},
     {
       id: "controlled-state",
       title: "Controlled State",
@@ -211,7 +203,7 @@ export const componentConfig: ComponentConfig = {
     { value: "banana", label: "Banana" },
     { value: "cherry", label: "Cherry" },
     { value: "grape", label: "Grape" },
-    { value: "orange", label: "Orange" },
+    { value: "orange", label: "Orange" }
   ];
 
   const filteredOptions = allOptions.filter(option =>
@@ -250,9 +242,7 @@ export const componentConfig: ComponentConfig = {
       </div>
     </div>
   );
-};`,
-      render: ControlledStateExample,
-    },
+};`},
     {
       id: "with-hook",
       title: "With useCombobox Hook",
@@ -265,7 +255,7 @@ export const componentConfig: ComponentConfig = {
     { value: "banana", label: "Banana" },
     { value: "cherry", label: "Cherry" },
     { value: "grape", label: "Grape" },
-    { value: "orange", label: "Orange" },
+    { value: "orange", label: "Orange" }
   ];
 
   return (
@@ -283,8 +273,6 @@ export const componentConfig: ComponentConfig = {
       />
     </div>
   );
-};`,
-      render: WithHookExample,
-    },
-  ],
+};`}
+  ]
 };

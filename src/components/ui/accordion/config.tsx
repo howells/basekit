@@ -39,14 +39,12 @@ export const componentConfig: ComponentConfig = {
       title: "Default",
       description: "Basic accordion with default settings.",
       code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
     },
     {
       id: "multiple-open",
       title: "Multiple Open",
       description: "Accordion allowing multiple items to be open.",
       code: jsxToString(<MultipleOpenExample />),
-      render: MultipleOpenExample,
     },
   ],
 };

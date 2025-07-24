@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, VerticalExample, MultipleItemsExample, NoNavigationExample, ImageCarouselExample,  } from "./examples";
+import { DefaultExample, VerticalExample, MultipleItemsExample, NoNavigationExample, ImageCarouselExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "carousel",
@@ -10,7 +10,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "embla-carousel-react",
+    npm: "embla-carousel-react"
   },
   importStatement: `import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";`,
   componentId: "CarouselExample",
@@ -20,13 +20,13 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["horizontal", "vertical"],
       defaultValue: "horizontal",
-      description: "The orientation of the carousel.",
+      description: "The orientation of the carousel."
     },
     {
       name: "showNavigation",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show navigation arrows.",
+      description: "Whether to show navigation arrows."
     },
     {
       name: "itemCount",
@@ -34,44 +34,34 @@ export const componentConfig: ComponentConfig = {
       defaultValue: 5,
       min: 1,
       max: 10,
-      description: "Number of carousel items to display.",
-    },
+      description: "Number of carousel items to display."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic horizontal carousel with navigation.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "vertical",
       title: "Vertical",
       description: "Vertical carousel orientation.",
-      code: jsxToString(<VerticalExample />),
-      render: VerticalExample,
-    },
+      code: jsxToString(<VerticalExample />)},
     {
       id: "multiple-items",
       title: "Multiple Items",
       description: "Carousel showing multiple items at once.",
-      code: jsxToString(<MultipleItemsExample />),
-      render: MultipleItemsExample,
-    },
+      code: jsxToString(<MultipleItemsExample />)},
     {
       id: "no-navigation",
       title: "No Navigation",
       description: "Carousel without navigation arrows.",
-      code: jsxToString(<NoNavigationExample />),
-      render: NoNavigationExample,
-    },
+      code: jsxToString(<NoNavigationExample />)},
     {
       id: "image-carousel",
       title: "Image Carousel",
       description: "Carousel displaying images.",
-      code: jsxToString(<ImageCarouselExample />),
-      render: ImageCarouselExample,
-    },
-  ],
+      code: jsxToString(<ImageCarouselExample />)}
+  ]
 };

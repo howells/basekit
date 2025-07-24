@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultNumberFieldExample, WithConstraintsExample, WithoutSteppersExample, DisabledScrubAreaExample, FullWidthExample, DisabledExample,  } from "./examples";
+import { DefaultNumberFieldExample, WithConstraintsExample, WithoutSteppersExample, DisabledScrubAreaExample, FullWidthExample, DisabledExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "number-field",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "inputs" as const,
   badge: "Input",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { NumberField } from "@/components/ui/number-field/number-field";`,
   componentId: "NumberFieldExample",
@@ -18,105 +18,93 @@ export const componentConfig: ComponentConfig = {
       name: "value",
       type: "number",
       defaultValue: 0,
-      description: "The current value of the number field.",
+      description: "The current value of the number field."
     },
     {
       name: "defaultValue",
       type: "number",
       defaultValue: 0,
-      description: "The default value of the number field.",
+      description: "The default value of the number field."
     },
     {
       name: "min",
       type: "number",
       defaultValue: undefined,
-      description: "The minimum allowed value.",
+      description: "The minimum allowed value."
     },
     {
       name: "max",
       type: "number",
       defaultValue: undefined,
-      description: "The maximum allowed value.",
+      description: "The maximum allowed value."
     },
     {
       name: "step",
       type: "number",
       defaultValue: 1,
-      description: "The step increment when using arrow keys or steppers.",
+      description: "The step increment when using arrow keys or steppers."
     },
     {
       name: "largeStep",
       type: "number",
       defaultValue: 10,
-      description: "The large step increment when holding shift.",
+      description: "The large step increment when holding shift."
     },
     {
       name: "showSteppers",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show the stepper buttons.",
+      description: "Whether to show the stepper buttons."
     },
     {
       name: "allowScrub",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to enable mouse scrubbing on the label.",
+      description: "Whether to enable mouse scrubbing on the label."
     },
     {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the number field is disabled.",
+      description: "Whether the number field is disabled."
     },
     {
       name: "fullWidth",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the number field spans full width.",
-    },
+      description: "Whether the number field spans full width."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "A number input field built on Base UI with stepper controls, scrubbing functionality, and full keyboard navigation.",
-      code: jsxToString(<DefaultNumberFieldExample />),
-      render: DefaultNumberFieldExample,
-    },
+      code: jsxToString(<DefaultNumberFieldExample />)},
     {
       id: "with-constraints",
       title: "With Constraints",
       description: "Number field with min, max, and step constraints.",
-      code: jsxToString(<WithConstraintsExample />),
-      render: WithConstraintsExample,
-    },
+      code: jsxToString(<WithConstraintsExample />)},
     {
       id: "without-steppers",
       title: "Without Steppers",
       description: "Clean number input without visible stepper controls.",
-      code: jsxToString(<WithoutSteppersExample />),
-      render: WithoutSteppersExample,
-    },
+      code: jsxToString(<WithoutSteppersExample />)},
     {
       id: "disabled-scrub-area",
       title: "Without Scrub Area",
       description: "Number field with regular label (no mouse scrubbing).",
-      code: jsxToString(<DisabledScrubAreaExample />),
-      render: DisabledScrubAreaExample,
-    },
+      code: jsxToString(<DisabledScrubAreaExample />)},
     {
       id: "full-width",
       title: "Full Width",
       description: "Number field that spans the full width of its container.",
-      code: jsxToString(<FullWidthExample />),
-      render: FullWidthExample,
-    },
+      code: jsxToString(<FullWidthExample />)},
     {
       id: "disabled",
       title: "Disabled",
       description: "Disabled number field that cannot be interacted with.",
-      code: jsxToString(<DisabledExample />),
-      render: DisabledExample,
-    },
-  ],
+      code: jsxToString(<DisabledExample />)}
+  ]
 };

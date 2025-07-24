@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, WithFormExample, ConfirmationExample, ControlledExample,  } from "./examples";
+import { DefaultExample, WithFormExample, ConfirmationExample, ControlledExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "dialog",
@@ -26,20 +26,20 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["sm", "md", "lg", "xl"],
       defaultValue: "md",
-      description: "Size of the dialog content.",
+      description: "Size of the dialog content."
     },
     {
       name: "showCloseButton",
       type: "boolean",
       defaultValue: true,
-      description: "Whether to show the close button in the header.",
+      description: "Whether to show the close button in the header."
     },
     {
       name: "closeOnOverlayClick",
       type: "boolean",
       defaultValue: true,
-      description: "Whether clicking the overlay closes the dialog.",
-    },
+      description: "Whether clicking the overlay closes the dialog."
+    }
   ],
   examples: [
     {
@@ -67,22 +67,18 @@ export const componentConfig: ComponentConfig = {
       <Button>Confirm</Button>
     </DialogFooter>
   </DialogContent>
-</Dialog>`,
+</Dialog>`
     },
     {
       id: "with-form",
       title: "With Form",
       description: "Dialog containing a form with input fields.",
-      code: jsxToString(<WithFormExample />),
-      render: WithFormExample,
-    },
+      code: jsxToString(<WithFormExample />)},
     {
       id: "confirmation",
       title: "Confirmation",
       description: "Dialog for confirming destructive actions.",
-      code: jsxToString(<ConfirmationExample />),
-      render: ConfirmationExample,
-    },
+      code: jsxToString(<ConfirmationExample />)},
     {
       id: "controlled",
       title: "Controlled",
@@ -116,8 +112,6 @@ export const componentConfig: ComponentConfig = {
       </DialogContent>
     </Dialog>
   );
-};`,
-      render: ControlledExample,
-    },
-  ],
+};`}
+  ]
 };

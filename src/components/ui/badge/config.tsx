@@ -6,7 +6,7 @@ import {
   DefaultExample,
   SizesExample,
   VariantsExample,
-  WithIconsExample,
+  WithIconsExample
 } from "./examples";
 
 // Component configuration - single source of truth
@@ -17,7 +17,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Badge } from "@/components/ui/badge";`,
   componentId: "BadgeExample",
@@ -29,37 +29,37 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "The visual style variant of the badge.",
       defaultValue: "default",
-      options: ["default", "neutral", "success", "error", "warning"],
+      options: ["default", "neutral", "success", "error", "warning"]
     },
     {
       name: "size",
       type: "select",
       description: "The size of the badge.",
       defaultValue: "base",
-      options: ["sm", "base", "lg"],
+      options: ["sm", "base", "lg"]
     },
     {
       name: "bordered",
       type: "boolean",
       description: "Whether to display a border around the badge.",
-      defaultValue: true,
+      defaultValue: true
     },
     {
       name: "leftIcon",
       type: "icon",
-      description: "Icon component to display on the left side.",
+      description: "Icon component to display on the left side."
     },
     {
       name: "rightIcon",
       type: "icon",
-      description: "Icon component to display on the right side.",
+      description: "Icon component to display on the right side."
     },
     {
       name: "children",
       type: "string",
       description: "The content to display inside the badge.",
-      defaultValue: "Badge",
-    },
+      defaultValue: "Badge"
+    }
   ],
 
   examples: [
@@ -67,36 +67,26 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic badge with default styling.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "with-icons",
       title: "With Icons",
       description: "Badge with left and right icons.",
-      code: jsxToString(<WithIconsExample />),
-      render: WithIconsExample,
-    },
+      code: jsxToString(<WithIconsExample />)},
     {
       id: "variants",
       title: "Variants",
       description: "Different badge variants for various states.",
-      code: jsxToString(<VariantsExample />),
-      render: VariantsExample,
-    },
+      code: jsxToString(<VariantsExample />)},
     {
       id: "sizes",
       title: "Sizes",
       description: "Different badge sizes.",
-      code: jsxToString(<SizesExample />),
-      render: SizesExample,
-    },
+      code: jsxToString(<SizesExample />)},
     {
       id: "bordered",
       title: "Bordered",
       description: "Badge with and without borders.",
-      code: jsxToString(<BorderedExample />),
-      render: BorderedExample,
-    },
-  ],
+      code: jsxToString(<BorderedExample />)}
+  ]
 };

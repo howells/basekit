@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { BasicGridExample, ResponsiveGridExample, SpanningCellsExample, SolidCellsExample, OverlayCellsExample, GuideControlExample, AutoGridExample, CustomLayoutExample, DashboardLayoutExample,  } from "./examples";
+import { BasicGridExample, ResponsiveGridExample, SpanningCellsExample, SolidCellsExample, OverlayCellsExample, GuideControlExample, AutoGridExample, CustomLayoutExample, DashboardLayoutExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "grid",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Grid, GridCell, GridAuto } from "@/components/ui/grid/grid";`,
   componentId: "GridExample",
@@ -18,108 +18,90 @@ export const componentConfig: ComponentConfig = {
       name: "columns",
       type: "string",
       defaultValue: "12",
-      description: "Number of columns or custom grid-template-columns value.",
+      description: "Number of columns or custom grid-template-columns value."
     },
     {
       name: "rows",
       type: "string",
-      description: "Number of rows or custom grid-template-rows value.",
+      description: "Number of rows or custom grid-template-rows value."
     },
     {
       name: "gap",
       type: "select",
       options: ["none", "xs", "sm", "base", "md", "lg", "xl"],
       defaultValue: "base",
-      description: "Gap between grid cells.",
+      description: "Gap between grid cells."
     },
     {
       name: "showColumnGuides",
       type: "boolean",
       defaultValue: false,
-      description: "Show column guide lines.",
+      description: "Show column guide lines."
     },
     {
       name: "showRowGuides",
       type: "boolean",
       defaultValue: false,
-      description: "Show row guide lines.",
+      description: "Show row guide lines."
     },
     {
       name: "clipGuides",
       type: "boolean",
       defaultValue: true,
-      description: "Clip guide lines within grid bounds.",
+      description: "Clip guide lines within grid bounds."
     },
     {
       name: "children",
       type: "string",
       defaultValue: "Grid content",
-      description: "Grid cell content.",
-    },
+      description: "Grid cell content."
+    }
   ],
   examples: [
     {
       id: "grid",
       title: "Basic Grid",
       description: "A sophisticated grid layout component with visual guides, responsive columns/rows, cell overlays, and guide clipping features. Perfect for complex layouts and design systems.",
-      code: jsxToString(<BasicGridExample />),
-      render: BasicGridExample,
-    },
+      code: jsxToString(<BasicGridExample />)},
     {
       id: "responsive",
       title: "Responsive Grid",
       description: "Grid that adapts columns at different breakpoints.",
-      code: jsxToString(<ResponsiveGridExample />),
-      render: ResponsiveGridExample,
-    },
+      code: jsxToString(<ResponsiveGridExample />)},
     {
       id: "spanning-cells",
       title: "Spanning Cells",
       description: "Cells that span multiple columns or rows.",
-      code: jsxToString(<SpanningCellsExample />),
-      render: SpanningCellsExample,
-    },
+      code: jsxToString(<SpanningCellsExample />)},
     {
       id: "solid-cells",
       title: "Solid Cells",
       description: "Cells with solid backgrounds that occlude grid guides.",
-      code: jsxToString(<SolidCellsExample />),
-      render: SolidCellsExample,
-    },
+      code: jsxToString(<SolidCellsExample />)},
     {
       id: "overlay-cells",
       title: "Overlay Cells",
       description: "Cells that overlay other cells with elevated styling.",
-      code: jsxToString(<OverlayCellsExample />),
-      render: OverlayCellsExample,
-    },
+      code: jsxToString(<OverlayCellsExample />)},
     {
       id: "guide-control",
       title: "Guide Control",
       description: "Control visibility of column and row guides.",
-      code: jsxToString(<GuideControlExample />),
-      render: GuideControlExample,
-    },
+      code: jsxToString(<GuideControlExample />)},
     {
       id: "auto-grid",
       title: "Auto Grid",
       description: "Automatically generate numbered cells with GridAuto.",
-      code: jsxToString(<AutoGridExample />),
-      render: AutoGridExample,
-    },
+      code: jsxToString(<AutoGridExample />)},
     {
       id: "custom-layout",
       title: "Custom Layout",
       description: "Complex grid layout with mixed cell types.",
-      code: jsxToString(<CustomLayoutExample />),
-      render: CustomLayoutExample,
-    },
+      code: jsxToString(<CustomLayoutExample />)},
     {
       id: "dashboard",
       title: "Dashboard Layout",
       description: "Real-world dashboard layout example.",
-      code: jsxToString(<DashboardLayoutExample />),
-      render: DashboardLayoutExample,
-    },
-  ],
+      code: jsxToString(<DashboardLayoutExample />)}
+  ]
 };

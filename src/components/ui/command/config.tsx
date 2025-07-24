@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, WithShortcutsExample, WithIconsExample, DialogModeExample, SizesExample,  } from "./examples";
+import { DefaultExample, WithShortcutsExample, WithIconsExample, DialogModeExample, SizesExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "command",
@@ -27,43 +27,37 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["sm", "default", "lg"],
       defaultValue: "default",
-      description: "Size variant of the command palette.",
+      description: "Size variant of the command palette."
     },
     {
       name: "placeholder",
       type: "string",
       defaultValue: "Type a command or search...",
-      description: "Placeholder text for the search input.",
+      description: "Placeholder text for the search input."
     },
     {
       name: "emptyMessage",
       type: "string",
       defaultValue: "No results found.",
-      description: "Message to show when no results are found.",
-    },
+      description: "Message to show when no results are found."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic command palette with search and items.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "with-shortcuts",
       title: "With Shortcuts",
       description: "Command items with keyboard shortcuts.",
-      code: jsxToString(<WithShortcutsExample />),
-      render: WithShortcutsExample,
-    },
+      code: jsxToString(<WithShortcutsExample />)},
     {
       id: "with-icons",
       title: "With Icons",
       description: "Command items with icons and actions.",
-      code: jsxToString(<WithIconsExample />),
-      render: WithIconsExample,
-    },
+      code: jsxToString(<WithIconsExample />)},
     {
       id: "dialog-mode",
       title: "Dialog Mode",
@@ -125,15 +119,11 @@ return (
       </CommandList>
     </CommandDialog>
   </>
-);`,
-      render: DialogModeExample,
-    },
+);`},
     {
       id: "sizes",
       title: "Sizes",
       description: "Different size variants of the command palette.",
-      code: jsxToString(<SizesExample />),
-      render: SizesExample,
-    },
-  ],
+      code: jsxToString(<SizesExample />)}
+  ]
 };

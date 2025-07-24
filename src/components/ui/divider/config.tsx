@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, WithTextExample, VerticalExample, SpacingExample,  } from "./examples";
+import { DefaultExample, WithTextExample, VerticalExample, SpacingExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "divider",
@@ -16,48 +16,42 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["horizontal", "vertical"],
       defaultValue: "horizontal",
-      description: "The orientation of the divider.",
+      description: "The orientation of the divider."
     },
     {
       name: "spacing",
       type: "select",
       options: ["sm", "md", "lg"],
       defaultValue: "md",
-      description: "The spacing around the divider.",
+      description: "The spacing around the divider."
     },
     {
       name: "children",
       type: "string",
-      description: "Optional text label to display in the center of the divider.",
-    },
+      description: "Optional text label to display in the center of the divider."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic horizontal divider.",
-      code: `<Divider />`,
+      code: `<Divider />`
     },
     {
       id: "with-text",
       title: "With Text",
       description: "Divider with text label in the center.",
-      code: jsxToString(<WithTextExample />),
-      render: WithTextExample,
-    },
+      code: jsxToString(<WithTextExample />)},
     {
       id: "vertical",
       title: "Vertical",
       description: "Vertical divider for separating inline content.",
-      code: jsxToString(<VerticalExample />),
-      render: VerticalExample,
-    },
+      code: jsxToString(<VerticalExample />)},
     {
       id: "spacing",
       title: "Spacing",
       description: "Different spacing options.",
-      code: jsxToString(<SpacingExample />),
-      render: SpacingExample,
-    },
-  ],
+      code: jsxToString(<SpacingExample />)}
+  ]
 };

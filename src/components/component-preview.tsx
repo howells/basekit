@@ -330,22 +330,22 @@ export function ComponentPreview({
 
   return (
     <Tabs defaultValue="preview">
-      <VStack>
-        <TabsList className="px-6">
-          <TabsTrigger value="preview">Preview</TabsTrigger>
-          <TabsTrigger value="code">Code</TabsTrigger>
-        </TabsList>
-        <TabsContent value="preview">
-          <div className="flex justify-center">{renderComponent()}</div>
-        </TabsContent>
-        <TabsContent value="code">
-          <div className="px-6">
-            <CodeBlock language="tsx">
-              {generateLiveCode(getComponentName(componentId), componentProps)}
-            </CodeBlock>
-          </div>
-        </TabsContent>
-      </VStack>
+      <TabsList className="px-6">
+        <TabsTrigger value="preview">Preview</TabsTrigger>
+        <TabsTrigger value="code">Code</TabsTrigger>
+      </TabsList>
+      <TabsContent value="preview">
+        <div className="flex justify-center px-6 py-12">
+          {renderComponent()}
+        </div>
+      </TabsContent>
+      <TabsContent value="code">
+        <div className="px-6 py-12">
+          <CodeBlock language="tsx">
+            {generateLiveCode(getComponentName(componentId), componentProps)}
+          </CodeBlock>
+        </div>
+      </TabsContent>
     </Tabs>
   );
 }

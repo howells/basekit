@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, WithShortcutsExample,  } from "./examples";
+import { DefaultExample, WithShortcutsExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "context-menu",
@@ -15,23 +15,19 @@ export const componentConfig: ComponentConfig = {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the context menu is disabled.",
-    },
+      description: "Whether the context menu is disabled."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic context menu with simple menu items.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "with-shortcuts",
       title: "With Shortcuts",
       description: "Context menu items with keyboard shortcuts displayed.",
-      code: jsxToString(<WithShortcutsExample />),
-      render: WithShortcutsExample,
-    },
-  ],
+      code: jsxToString(<WithShortcutsExample />)}
+  ]
 };

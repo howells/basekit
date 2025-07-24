@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, WithTimeExample, WithPresetsExample, DisabledExample, ErrorStateExample, ControlledExample,  } from "./examples";
+import { DefaultExample, WithTimeExample, WithPresetsExample, DisabledExample, ErrorStateExample, ControlledExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "date-picker",
@@ -15,55 +15,51 @@ export const componentConfig: ComponentConfig = {
       name: "placeholder",
       type: "string",
       defaultValue: "Select date",
-      description: "Placeholder text for the date picker.",
+      description: "Placeholder text for the date picker."
     },
     {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the date picker is disabled.",
+      description: "Whether the date picker is disabled."
     },
     {
       name: "hasError",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the date picker has an error state.",
+      description: "Whether the date picker has an error state."
     },
     {
       name: "showTimePicker",
       type: "boolean",
       defaultValue: false,
-      description: "Whether to show time selection controls.",
+      description: "Whether to show time selection controls."
     },
     {
       name: "enableYearNavigation",
       type: "boolean",
       defaultValue: false,
-      description: "Whether to enable year navigation in the calendar.",
+      description: "Whether to enable year navigation in the calendar."
     },
     {
       name: "align",
       type: "select",
       options: ["start", "center", "end"],
       defaultValue: "center",
-      description: "Alignment of the popover relative to the trigger.",
-    },
+      description: "Alignment of the popover relative to the trigger."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic date picker for single date selection.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "with-time",
       title: "With Time Picker",
       description: "Date picker with time selection.",
-      code: jsxToString(<WithTimeExample />),
-      render: WithTimeExample,
-    },
+      code: jsxToString(<WithTimeExample />)},
     {
       id: "with-presets",
       title: "With Presets",
@@ -72,7 +68,7 @@ export const componentConfig: ComponentConfig = {
   const presets = [
     { label: "Today", date: new Date() },
     { label: "Tomorrow", date: new Date(Date.now() + 24 * 60 * 60 * 1000) },
-    { label: "In a week", date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
+    { label: "In a week", date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }
   ];
 
   return (
@@ -81,23 +77,17 @@ export const componentConfig: ComponentConfig = {
       presets={presets}
     />
   );
-};`,
-      render: WithPresetsExample,
-    },
+};`},
     {
       id: "disabled",
       title: "Disabled",
       description: "Disabled date picker.",
-      code: jsxToString(<DisabledExample />),
-      render: DisabledExample,
-    },
+      code: jsxToString(<DisabledExample />)},
     {
       id: "error-state",
       title: "Error State",
       description: "Date picker with error styling.",
-      code: jsxToString(<ErrorStateExample />),
-      render: ErrorStateExample,
-    },
+      code: jsxToString(<ErrorStateExample />)},
     {
       id: "controlled",
       title: "Controlled",
@@ -119,8 +109,6 @@ export const componentConfig: ComponentConfig = {
       )}
     </div>
   );
-};`,
-      render: ControlledExample,
-    },
-  ],
+};`}
+  ]
 };

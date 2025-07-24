@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { Single, Multiple,  } from "./examples";
+import { Single, Multiple  } from "./examples";
 import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 
 export const componentConfig: ComponentConfig = {
@@ -10,7 +10,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group/toggle-group";`,
   componentId: "ToggleGroupExample",
@@ -20,34 +20,30 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["single", "multiple"],
       defaultValue: "single",
-      description: "Selection mode - single or multiple.",
+      description: "Selection mode - single or multiple."
     },
     {
       name: "defaultValue",
       type: "string",
-      description: "The default selected value(s).",
+      description: "The default selected value(s)."
     },
     {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Disable all toggle items.",
-    },
+      description: "Disable all toggle items."
+    }
   ],
   examples: [
     {
       id: "toggle-group",
       title: "Single Selection",
       description: "A group of toggle buttons where one or more can be selected.",
-      code: jsxToString(<Single />),
-      render: Single,
-    },
+      code: jsxToString(<Single />)},
     {
       id: "multiple",
       title: "Multiple Selection",
       description: "Toggle group with multiple selection",
-      code: jsxToString(<Multiple />),
-      render: Multiple,
-    },
-  ],
+      code: jsxToString(<Multiple />)}
+  ]
 };

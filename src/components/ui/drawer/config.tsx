@@ -16,16 +16,14 @@ export const componentConfig: ComponentConfig = {
       type: "select", 
       options: ["left", "right", "top", "bottom"],
       defaultValue: "right",
-      description: "Direction from which the drawer slides in.",
-    },
+      description: "Direction from which the drawer slides in."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic drawer sliding from the right.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
-  ],
+      code: jsxToString(<DefaultExample />)}
+  ]
 };

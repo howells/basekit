@@ -2,18 +2,18 @@
 
 /**
  * Fieldset Components
- * 
+ *
  * Components for grouping related form fields with semantic HTML structure.
  * Built on Base UI Fieldset (https://base-ui.com/react/components/fieldset)
  * using native fieldset elements for accessibility and proper form organization.
- * 
+ *
  * Features:
  * - Semantic HTML fieldset structure
  * - Accessible form field grouping
  * - Styled legend with border separator
  * - Disabled state support
  * - Flexible layout and spacing
- * 
+ *
  * @example
  * ```tsx
  * // Basic fieldset
@@ -28,7 +28,7 @@
  *     <FieldControl placeholder="Enter your last name" />
  *   </Field>
  * </Fieldset>
- * 
+ *
  * // Contact information group
  * <Fieldset>
  *   <FieldsetLegend>Contact Details</FieldsetLegend>
@@ -45,7 +45,7 @@
  *     <FieldControl placeholder="Street address" />
  *   </Field>
  * </Fieldset>
- * 
+ *
  * // Settings form section
  * <Fieldset>
  *   <FieldsetLegend>Notification Preferences</FieldsetLegend>
@@ -64,7 +64,7 @@
  *     </FieldDescription>
  *   </Field>
  * </Fieldset>
- * 
+ *
  * // Disabled fieldset
  * <Fieldset disabled>
  *   <FieldsetLegend>Billing Information</FieldsetLegend>
@@ -87,7 +87,7 @@ import { Subheading } from "../subheading/subheading";
 
 /**
  * Root fieldset component for grouping related form fields.
- * 
+ *
  * Based on Base UI Fieldset (https://base-ui.com/react/components/fieldset),
  * provides semantic HTML fieldset structure for accessible form organization.
  * Groups related form controls with proper semantic meaning.
@@ -130,7 +130,7 @@ Fieldset.displayName = "Fieldset";
 
 /**
  * Fieldset legend component for labeling field groups.
- * 
+ *
  * Provides an accessible label for the fieldset group using semantic HTML.
  * Styled as a section heading with border separator and disabled state support.
  *

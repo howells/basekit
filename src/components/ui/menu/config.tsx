@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultMenuExample, WithIconsExample, WithCheckboxesExample, WithRadioGroupExample, WithSubmenuExample, ComplexMenuExample,  } from "./examples";
+import { DefaultMenuExample, WithIconsExample, WithCheckboxesExample, WithRadioGroupExample, WithSubmenuExample, ComplexMenuExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "menu",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Menu,
@@ -25,7 +25,7 @@ export const componentConfig: ComponentConfig = {
   MenuSub,
   MenuSubContent,
   MenuSubTrigger,
-  MenuTrigger,
+  MenuTrigger
 } from "@/components/ui/menu/menu";`,
   componentId: "MenuExample",
   props: [
@@ -33,37 +33,33 @@ export const componentConfig: ComponentConfig = {
       name: "children",
       type: "string",
       defaultValue: "Menu",
-      description: "The trigger button content.",
+      description: "The trigger button content."
     },
     {
       name: "align",
       type: "select",
       options: ["start", "center", "end"],
       defaultValue: "start",
-      description: "Menu alignment relative to trigger.",
+      description: "Menu alignment relative to trigger."
     },
     {
       name: "sideOffset",
       type: "number",
       defaultValue: 5,
-      description: "Distance in pixels from the trigger.",
-    },
+      description: "Distance in pixels from the trigger."
+    }
   ],
   examples: [
     {
       id: "menu",
       title: "Default",
       description: "Dropdown menu component built on Base UI with support for nested submenus, radio groups, checkboxes, and keyboard navigation.",
-      code: jsxToString(<DefaultMenuExample />),
-      render: DefaultMenuExample,
-    },
+      code: jsxToString(<DefaultMenuExample />)},
     {
       id: "with-icons",
       title: "With Icons",
       description: "Menu items with icons and shortcuts.",
-      code: jsxToString(<WithIconsExample />),
-      render: WithIconsExample,
-    },
+      code: jsxToString(<WithIconsExample />)},
     {
       id: "with-checkboxes",
       title: "With Checkboxes",
@@ -92,9 +88,7 @@ return (
       <MenuItem>Reset Layout</MenuItem>
     </MenuContent>
   </Menu>
-);`,
-      render: WithCheckboxesExample,
-    },
+);`},
     {
       id: "with-radio-group",
       title: "With Radio Group",
@@ -113,16 +107,12 @@ return (
       </MenuRadioGroup>
     </MenuContent>
   </Menu>
-);`,
-      render: WithRadioGroupExample,
-    },
+);`},
     {
       id: "with-submenu",
       title: "With Submenu",
       description: "Menu with nested submenu items.",
-      code: jsxToString(<WithSubmenuExample />),
-      render: WithSubmenuExample,
-    },
+      code: jsxToString(<WithSubmenuExample />)},
     {
       id: "complex-menu",
       title: "Complex Menu",
@@ -173,8 +163,6 @@ return (
       <MenuItem>About</MenuItem>
     </MenuContent>
   </Menu>
-);`,
-      render: ComplexMenuExample,
-    },
-  ],
+);`}
+  ]
 };

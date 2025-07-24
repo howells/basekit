@@ -12,7 +12,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   AlertDialog,
@@ -21,7 +21,7 @@ export const componentConfig: ComponentConfig = {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialogTrigger
 } from "@/components/ui/alert-dialog/alert-dialog";`,
   componentId: "AlertDialogExample",
 
@@ -32,33 +32,33 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "The visual style variant of the alert dialog.",
       defaultValue: "default",
-      options: ["default", "destructive"],
+      options: ["default", "destructive"]
     },
     {
       name: "title",
       type: "string",
       description: "The title of the alert dialog.",
-      defaultValue: "Are you absolutely sure?",
+      defaultValue: "Are you absolutely sure?"
     },
     {
       name: "description",
       type: "string",
       description: "The description text of the alert dialog.",
       defaultValue:
-        "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+        "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
     },
     {
       name: "cancelText",
       type: "string",
       description: "Text for the cancel button.",
-      defaultValue: "Cancel",
+      defaultValue: "Cancel"
     },
     {
       name: "actionText",
       type: "string",
       description: "Text for the action button.",
-      defaultValue: "Continue",
-    },
+      defaultValue: "Continue"
+    }
   ],
 
   examples: [
@@ -66,15 +66,11 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Default",
       description: "Basic alert dialog with default styling.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "destructive",
       title: "Destructive",
       description: "Alert dialog with destructive action styling.",
-      code: jsxToString(<DestructiveExample />),
-      render: DestructiveExample,
-    },
-  ],
+      code: jsxToString(<DestructiveExample />)}
+  ]
 };

@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultLoaderExample, SizesExample, WithTextExample,  } from "./examples";
+import { DefaultLoaderExample, SizesExample, WithTextExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "loader",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Loader } from "@/components/ui/loader/loader";`,
   componentId: "LoaderExample",
@@ -19,35 +19,29 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["sm", "md", "lg"],
       defaultValue: "md",
-      description: "The size of the loader.",
+      description: "The size of the loader."
     },
     {
       name: "className",
       type: "string",
-      description: "Additional CSS classes.",
-    },
+      description: "Additional CSS classes."
+    }
   ],
   examples: [
     {
       id: "loader",
       title: "Default",
       description: "A spinning loader indicator with configurable size.",
-      code: jsxToString(<DefaultLoaderExample />),
-      render: DefaultLoaderExample,
-    },
+      code: jsxToString(<DefaultLoaderExample />)},
     {
       id: "sizes",
       title: "Sizes",
       description: "Loader in different sizes.",
-      code: jsxToString(<SizesExample />),
-      render: SizesExample,
-    },
+      code: jsxToString(<SizesExample />)},
     {
       id: "with-text",
       title: "With Text",
       description: "Loader with accompanying text.",
-      code: jsxToString(<WithTextExample />),
-      render: WithTextExample,
-    },
-  ],
+      code: jsxToString(<WithTextExample />)}
+  ]
 };

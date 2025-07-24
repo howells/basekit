@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { BasicInspectorExample, NestedDataInspectorExample,  } from "./examples";
+import { BasicInspectorExample, NestedDataInspectorExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "inspector",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Inspector } from "@/components/ui/inspector/inspector";`,
   componentId: "InspectorExample",
@@ -18,29 +18,25 @@ export const componentConfig: ComponentConfig = {
       name: "data",
       type: "string",
       defaultValue: "{}",
-      description: "The data object to inspect.",
+      description: "The data object to inspect."
     },
     {
       name: "expanded",
       type: "boolean",
       defaultValue: true,
-      description: "Whether the inspector is expanded by default.",
-    },
+      description: "Whether the inspector is expanded by default."
+    }
   ],
   examples: [
     {
       id: "inspector",
       title: "Basic Inspector",
       description: "A component for inspecting and debugging component properties and state.",
-      code: jsxToString(<BasicInspectorExample />),
-      render: BasicInspectorExample,
-    },
+      code: jsxToString(<BasicInspectorExample />)},
     {
       id: "nested",
       title: "Nested Data Inspector",
       description: "Inspector with nested object data",
-      code: jsxToString(<NestedDataInspectorExample />),
-      render: NestedDataInspectorExample,
-    },
-  ],
+      code: jsxToString(<NestedDataInspectorExample />)}
+  ]
 };

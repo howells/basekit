@@ -10,7 +10,7 @@ export const componentConfig: ComponentConfig = {
   category: "inputs" as const,
   badge: "Inputs",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { IconSelect } from "@/components/ui/icon-select";`,
   componentId: "IconSelectExample",
@@ -19,25 +19,25 @@ export const componentConfig: ComponentConfig = {
       name: "placeholder",
       type: "string",
       defaultValue: "Select an icon",
-      description: "Placeholder text when no icon is selected.",
+      description: "Placeholder text when no icon is selected."
     },
     {
       name: "value",
       type: "string",
-      description: "The selected icon name.",
+      description: "The selected icon name."
     },
     {
       name: "onValueChange",
       type: "function",
-      description: "Callback when icon selection changes.",
+      description: "Callback when icon selection changes."
     },
     {
       name: "iconStrokeWidth",
       type: "number",
       defaultValue: "1",
       description:
-        "Stroke width for icons (uses centralized config by default).",
-    },
+        "Stroke width for icons (uses centralized config by default)."
+    }
   ],
   examples: [
     {
@@ -45,8 +45,6 @@ export const componentConfig: ComponentConfig = {
       title: "Default",
       description:
         "A tree-shakable icon picker with access to all Lucide React icons via dynamic loading.",
-      code: jsxToString(<DefaultIconSelectExample />),
-      render: DefaultIconSelectExample,
-    },
-  ],
+      code: jsxToString(<DefaultIconSelectExample />)}
+  ]
 };

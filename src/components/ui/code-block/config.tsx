@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, JavascriptExample, CssExample, JsonExample, BashExample,  } from "./examples";
+import { DefaultExample, JavascriptExample, CssExample, JsonExample, BashExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "code-block",
@@ -16,58 +16,48 @@ export const componentConfig: ComponentConfig = {
       type: "string",
       defaultValue: `const greeting = "Hello, World!";\nconsole.log(greeting);`,
       description: "The code content to display.",
-      required: true,
+      required: true
     },
     {
       name: "language",
       type: "select",
       options: ["tsx", "javascript", "typescript", "jsx", "css", "html", "json", "bash", "python"],
       defaultValue: "tsx",
-      description: "The programming language for the code block header.",
+      description: "The programming language for the code block header."
     },
     {
       name: "theme",
       type: "select",
       options: ["auto", "light", "dark"],
       defaultValue: "auto",
-      description: "The color theme for syntax highlighting.",
-    },
+      description: "The color theme for syntax highlighting."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic code block with TypeScript syntax.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "javascript",
       title: "JavaScript",
       description: "Code block displaying JavaScript code.",
-      code: jsxToString(<JavascriptExample />),
-      render: JavascriptExample,
-    },
+      code: jsxToString(<JavascriptExample />)},
     {
       id: "css",
       title: "CSS",
       description: "Code block showing CSS styles.",
-      code: jsxToString(<CssExample />),
-      render: CssExample,
-    },
+      code: jsxToString(<CssExample />)},
     {
       id: "json",
       title: "JSON",
       description: "Code block for JSON configuration.",
-      code: jsxToString(<JsonExample />),
-      render: JsonExample,
-    },
+      code: jsxToString(<JsonExample />)},
     {
       id: "bash",
       title: "Bash",
       description: "Code block for shell commands.",
-      code: jsxToString(<BashExample />),
-      render: BashExample,
-    },
-  ],
+      code: jsxToString(<BashExample />)}
+  ]
 };

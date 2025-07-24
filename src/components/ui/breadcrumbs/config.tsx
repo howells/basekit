@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, WithEllipsisExample, CustomSeparatorExample, SingleLevelExample, DeepNavigationExample,  } from "./examples";
+import { DefaultExample, WithEllipsisExample, CustomSeparatorExample, SingleLevelExample, DeepNavigationExample  } from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "breadcrumbs",
@@ -9,7 +9,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Breadcrumb,
@@ -26,44 +26,34 @@ export const componentConfig: ComponentConfig = {
       name: "showEllipsis",
       type: "boolean",
       defaultValue: false,
-      description: "Whether to show ellipsis for collapsed items.",
-    },
+      description: "Whether to show ellipsis for collapsed items."
+    }
   ],
   examples: [
     {
       id: "default",
       title: "Default",
       description: "Basic breadcrumb navigation.",
-      code: jsxToString(<DefaultExample />),
-      render: DefaultExample,
-    },
+      code: jsxToString(<DefaultExample />)},
     {
       id: "with-ellipsis",
       title: "With Ellipsis",
       description: "Breadcrumbs with collapsed items.",
-      code: jsxToString(<WithEllipsisExample />),
-      render: WithEllipsisExample,
-    },
+      code: jsxToString(<WithEllipsisExample />)},
     {
       id: "custom-separator",
       title: "Custom Separator",
       description: "Breadcrumbs with custom separator.",
-      code: jsxToString(<CustomSeparatorExample />),
-      render: CustomSeparatorExample,
-    },
+      code: jsxToString(<CustomSeparatorExample />)},
     {
       id: "single-level",
       title: "Single Level",
       description: "Breadcrumbs with just current page.",
-      code: jsxToString(<SingleLevelExample />),
-      render: SingleLevelExample,
-    },
+      code: jsxToString(<SingleLevelExample />)},
     {
       id: "deep-navigation",
       title: "Deep Navigation",
       description: "Breadcrumbs showing deep navigation hierarchy.",
-      code: jsxToString(<DeepNavigationExample />),
-      render: DeepNavigationExample,
-    },
-  ],
+      code: jsxToString(<DeepNavigationExample />)}
+  ]
 };

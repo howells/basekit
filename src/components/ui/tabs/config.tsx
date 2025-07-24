@@ -10,7 +10,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs/tabs";`,
   componentId: "TabsExample",
@@ -20,42 +20,36 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["line", "solid"],
       defaultValue: "line",
-      description: "The visual style of the tabs.",
+      description: "The visual style of the tabs."
     },
     {
       name: "hideDivider",
       type: "boolean",
       defaultValue: false,
-      description: "Hide the bottom divider line (line variant only).",
+      description: "Hide the bottom divider line (line variant only)."
     },
     {
       name: "defaultValue",
       type: "string",
       defaultValue: "tab1",
-      description: "The default active tab.",
-    },
+      description: "The default active tab."
+    }
   ],
   examples: [
     {
       id: "tabs",
       title: "Line Style (Default)",
       description: "A set of layered sections of content—known as tab panels—that are displayed one at a time. Features Geist-style design with clean line indicators.",
-      code: jsxToString(<TabsExample />),
-      render: TabsExample,
-    },
+      code: jsxToString(<TabsExample />)},
     {
       id: "line-no-divider",
       title: "Line Without Divider", 
       description: "Clean tabs without the bottom divider line",
-      code: jsxToString(<LineNoDividerExample />),
-      render: LineNoDividerExample,
-    },
+      code: jsxToString(<LineNoDividerExample />)},
     {
       id: "solid",
       title: "Solid Variant",
       description: "Traditional tabs with solid background and rounded indicator",
-      code: jsxToString(<SolidExample />),
-      render: SolidExample,
-    },
-  ],
+      code: jsxToString(<SolidExample />)}
+  ]
 };

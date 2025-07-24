@@ -1,11 +1,11 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { Basic,  } from "./examples";
+import { Basic  } from "./examples";
 import {
   Toolbar,
   ToolbarButton,
   ToolbarGroup,
-  ToolbarSeparator,
+  ToolbarSeparator
 } from "./toolbar";
 
 export const componentConfig: ComponentConfig = {
@@ -15,13 +15,13 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import {
   Toolbar,
   ToolbarButton,
   ToolbarGroup,
-  ToolbarSeparator,
+  ToolbarSeparator
 } from "@/components/ui/toolbar/toolbar";`,
   componentId: "ToolbarExample",
   props: [
@@ -30,21 +30,19 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       options: ["horizontal", "vertical"],
       defaultValue: "horizontal",
-      description: "The orientation of the toolbar.",
+      description: "The orientation of the toolbar."
     },
     {
       name: "className",
       type: "string",
-      description: "Additional CSS classes.",
-    },
+      description: "Additional CSS classes."
+    }
   ],
   examples: [
     {
       id: "toolbar",
       title: "Basic Toolbar",
       description: "A container for grouping a set of controls or actions.",
-      code: jsxToString(<Basic />),
-      render: Basic,
-    },
-  ],
+      code: jsxToString(<Basic />)}
+  ]
 };

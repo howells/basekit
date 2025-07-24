@@ -1,6 +1,6 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { Basic, WithIcon,  } from "./examples";
+import { Basic, WithIcon  } from "./examples";
 import { Toggle } from "./toggle";
 
 export const componentConfig: ComponentConfig = {
@@ -10,7 +10,7 @@ export const componentConfig: ComponentConfig = {
   category: "ui" as const,
   badge: "UI",
   installation: {
-    npm: "@base-ui-components/react",
+    npm: "@base-ui-components/react"
   },
   importStatement: `import { Toggle } from "@/components/ui/toggle/toggle";`,
   componentId: "ToggleExample",
@@ -19,49 +19,45 @@ export const componentConfig: ComponentConfig = {
       name: "children",
       type: "string",
       defaultValue: "Toggle",
-      description: "The toggle button content.",
+      description: "The toggle button content."
     },
     {
       name: "pressed",
       type: "boolean",
       defaultValue: false,
-      description: "The pressed state of the toggle.",
+      description: "The pressed state of the toggle."
     },
     {
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Disable the toggle.",
+      description: "Disable the toggle."
     },
     {
       name: "variant",
       type: "select",
       options: ["default", "outline"],
       defaultValue: "default",
-      description: "The visual style variant.",
+      description: "The visual style variant."
     },
     {
       name: "size",
       type: "select",
       options: ["default", "sm", "icon", "icon-sm"],
       defaultValue: "default",
-      description: "The size of the toggle.",
-    },
+      description: "The size of the toggle."
+    }
   ],
   examples: [
     {
       id: "toggle",
       title: "Basic Toggle",
       description: "A two-state button that can be either on or off.",
-      code: jsxToString(<Basic />),
-      render: Basic,
-    },
+      code: jsxToString(<Basic />)},
     {
       id: "with-icon",
       title: "Toggle with Icon",
       description: "A toggle button with an icon",
-      code: jsxToString(<WithIcon />),
-      render: WithIcon,
-    },
-  ],
+      code: jsxToString(<WithIcon />)}
+  ]
 };

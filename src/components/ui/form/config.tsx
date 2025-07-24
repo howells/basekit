@@ -26,14 +26,14 @@ import { z } from "zod";`,
       name: "disabled",
       type: "boolean",
       defaultValue: false,
-      description: "Whether the form is disabled.",
+      description: "Whether the form is disabled."
     },
     {
       name: "className",
       type: "string",
       defaultValue: "",
-      description: "Additional CSS classes for the form.",
-    },
+      description: "Additional CSS classes for the form."
+    }
   ],
   examples: [
     {
@@ -41,8 +41,6 @@ import { z } from "zod";`,
       title: "Contact Form",
       description:
         "A complete form with Zod validation, including text inputs and textarea.",
-      code: jsxToString(<ContactFormExample />),
-      render: ContactFormExample,
-    },
-  ],
+      code: jsxToString(<ContactFormExample />)}
+  ]
 };

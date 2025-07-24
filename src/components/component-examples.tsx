@@ -40,7 +40,8 @@ export function ComponentExamples({ componentId }: ComponentExamplesProps) {
   }
 
   return (
-    <VStack className="p-8">
+    <VStack className="p-6">
+      <Subheading level={2}>Examples</Subheading>
       {config.examples.map((example, index) => (
         <Card key={example.id} padding={0}>
           <CardHeader border>

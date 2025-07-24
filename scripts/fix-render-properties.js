@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
+const fs = require("fs");
+const path = require("path");
 
 // Function to convert camelCase to PascalCase
 function toPascalCase(str) {
@@ -9,21 +10,31 @@ function toPascalCase(str) {
 
 // Function to process a single config file
 function processConfigFile(filePath) {
-  const content = fs.readFileSync(filePath, 'utf8');
+  const content = fs.readFileSync(filePath, "utf8");
   let updatedContent = content;
   let hasChanges = false;
-  
-  // Update render properties - convert camelCase references to PascalCase
+
+  // Remove render properties entirely to fix Next.js 15 server/client component issues
   updatedContent = updatedContent.replace(
-    /render:\s*([a-z][a-zA-Z0-9]*),/g,
-    (match, varName) => {
-      const pascalCase = toPascalCase(varName);
-      console.log(`${filePath}: render: ${varName} → render: ${pascalCase}`);
+    /,?\s*render:\s*[a-zA-Z0-9_]+,?\s*/g,
+    (match) => {
+      console.log(`${filePath}: Removing render property: ${match.trim()}`);
       hasChanges = true;
-      return `render: ${pascalCase},`;
+      // If the match starts with a comma, keep it for the next property
+      // If it ends with a comma, remove it entirely
+      if (match.startsWith(",")) {
+        return ",";
+      }
+      return "";
     }
   );
-  
+
+  // Clean up any double commas that might result from the removal
+  updatedContent = updatedContent.replace(/,\s*,/g, ",");
+
+  // Clean up trailing commas before closing braces/brackets
+  updatedContent = updatedContent.replace(/,(\s*[\]}])/g, "$1");
+
   // Write the updated content if changes were made
   if (hasChanges) {
     fs.writeFileSync(filePath, updatedContent);
@@ -32,21 +43,51 @@ function processConfigFile(filePath) {
   return false;
 }
 
-// Find all config files
-const { execSync } = require('child_process');
-const configFiles = execSync('find src/components/ui -name "config.tsx"', { encoding: 'utf8' })
-  .trim()
-  .split('\n')
-  .filter(file => file.length > 0);
+// Function to recursively find all config.tsx files
+function findConfigFiles(dir) {
+  const configFiles = [];
 
-console.log(`Found ${configFiles.length} config files to check:\n`);
+  function traverse(currentDir) {
+    const items = fs.readdirSync(currentDir);
 
-let updatedCount = 0;
-configFiles.forEach(file => {
-  console.log(`Checking: ${file}`);
-  if (processConfigFile(file)) {
-    updatedCount++;
+    for (const item of items) {
+      const fullPath = path.join(currentDir, item);
+      const stat = fs.statSync(fullPath);
+
+      if (stat.isDirectory()) {
+        traverse(fullPath);
+      } else if (item === "config.tsx") {
+        configFiles.push(fullPath);
+      }
+    }
+  }
+
+  traverse(dir);
+  return configFiles;
+}
+
+// Main execution
+const uiComponentsDir = path.join(__dirname, "..", "src", "components", "ui");
+
+if (!fs.existsSync(uiComponentsDir)) {
+  console.error("UI components directory not found:", uiComponentsDir);
+  process.exit(1);
+}
+
+const configFiles = findConfigFiles(uiComponentsDir);
+console.log(`Found ${configFiles.length} config files`);
+
+let processedCount = 0;
+
+configFiles.forEach((filePath) => {
+  if (processConfigFile(filePath)) {
+    processedCount++;
   }
 });
 
-console.log(`\nSummary: Updated ${updatedCount} config files with render property fixes.`);
+console.log(
+  `\nProcessed ${processedCount} files with render property removals`
+);
+console.log(
+  "All render properties have been removed to fix Next.js 15 server/client component issues"
+);
