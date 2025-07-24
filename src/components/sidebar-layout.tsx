@@ -246,6 +246,17 @@ function SidebarContent() {
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <motion.div
@@ -259,7 +270,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         ease: [0.32, 0.72, 0, 1], // Custom easing for smoother animation
       }}
       style={{
-        marginLeft: "var(--sidebar-width)",
+        marginLeft: isMobile ? "0" : "var(--sidebar-width)",
       }}
     >
       <div className="flex flex-col min-h-0 flex-1">
