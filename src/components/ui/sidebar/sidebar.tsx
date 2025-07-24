@@ -43,7 +43,7 @@ export function Sidebar({
             "absolute top-0 z-10 group",
             isCollapsed
               ? "inset-x-2 h-12 flex items-center justify-center opacity-0 hover:opacity-100 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-md transition-opacity duration-200"
-              : "right-2 top-2"
+              : "right-3.5 top-3"
           )}
         >
           <SidebarToggle isCollapsed={isCollapsed} onToggle={onToggle} />
@@ -68,7 +68,7 @@ export function SidebarToggle({
       {...props}
       onClick={onToggle}
       variant="ghost"
-      size="icon-sm"
+      size="icon"
       className={clsx(className)}
       aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       leftIcon={isCollapsed ? PanelLeft : PanelLeftDashed}
@@ -226,7 +226,7 @@ export function SidebarDivider({
 }) {
   if (isCollapsed) return null;
 
-  return <Separator {...props} className={clsx(className, "my-4")} />;
+  return <Separator {...props} className={clsx(className, "")} />;
 }
 
 export function SidebarSpacer({

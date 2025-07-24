@@ -112,26 +112,6 @@ export const componentConfig: ComponentConfig = {
       ],
     },
     {
-      name: "colorShade",
-      type: "select",
-      description:
-        "Custom shade for the color (50-950). Only used with color prop.",
-      defaultValue: "500",
-      options: [
-        "50",
-        "100",
-        "200",
-        "300",
-        "400",
-        "500",
-        "600",
-        "700",
-        "800",
-        "900",
-        "950",
-      ],
-    },
-    {
       name: "statusDot",
       type: "boolean",
       description:

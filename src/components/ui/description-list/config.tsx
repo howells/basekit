@@ -6,7 +6,7 @@ export const componentConfig: ComponentConfig = {
   id: "description-list",
   name: "Description List",
   description: "A component for displaying key-value pairs in a structured list format, ideal for metadata and property displays.",
-  category: "ui" as const,
+  category: "data" as const,
   icon: "List",
 
   importStatement: `import { DescriptionList, DescriptionListItem, DescriptionListTerm, DescriptionListDetails } from "@/components/ui/description-list";`,

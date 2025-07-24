@@ -4,7 +4,7 @@ export const componentConfig: ComponentConfig = {
   id: "preview-card",
   name: "Preview Card",
   description: "A card component that shows a preview or summary of content.",
-  category: "ui" as const,
+  category: "layout" as const,
   icon: "Eye",
 
   installation: {

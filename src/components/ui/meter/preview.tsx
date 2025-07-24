@@ -17,7 +17,16 @@ export const MeterExample = ({
   value?: number;
   min?: number;
   max?: number;
-  variant?: "default" | "neutral" | "warning" | "error" | "success";
+  variant?:
+    | "default"
+    | "neutral"
+    | "success"
+    | "info"
+    | "warning"
+    | "error"
+    | "critical"
+    | "positive"
+    | "negative";
   showAnimation?: boolean;
   showValue?: boolean;
   label?: string;

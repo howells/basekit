@@ -77,6 +77,11 @@ const tabsVariants = tv({
         ],
       },
     },
+    size: {
+      default: {},
+      sm: {},
+      lg: {},
+    },
     hideDivider: {
       true: {},
     },
@@ -85,6 +90,21 @@ const tabsVariants = tv({
     },
   },
   compoundVariants: [
+    // Size adjustments for solid variant
+    {
+      variant: "solid",
+      size: "sm",
+      class: {
+        list: "p-0.5 rounded-md",
+      },
+    },
+    {
+      variant: "solid",
+      size: "lg",
+      class: {
+        list: "p-1.5 rounded-lg",
+      },
+    },
     {
       variant: "line",
       hideDivider: true,
@@ -103,6 +123,7 @@ const tabsVariants = tv({
   ],
   defaultVariants: {
     variant: "line",
+    size: "default",
     hideDivider: false,
     hideBorder: false,
   },
@@ -111,6 +132,9 @@ const tabsVariants = tv({
 type TabsListVariant = "solid" | "line";
 
 const TabsListVariantContext = React.createContext<TabsListVariant>("line");
+const TabsListSizeContext = React.createContext<"default" | "sm" | "lg">(
+  "default"
+);
 
 /**
  * Root tabs component built on Base UI's Tabs primitive.
@@ -164,6 +188,8 @@ interface TabsListProps
   hideDivider?: boolean;
   /** Hide the active tab border/indicator */
   hideBorder?: boolean;
+  /** Size for solid variant buttons */
+  size?: "default" | "sm" | "lg";
 }
 
 /**
@@ -176,12 +202,18 @@ interface TabsListProps
  * @param variant - Style variant (solid, geist, or line)
  * @param hideDivider - Hide the bottom divider line (Geist variant only)
  * @param hideBorder - Hide the active tab indicator
+ * @param size - Size for solid variant buttons (default, sm, lg)
  *
  * @example
  * ```tsx
  * <TabsList variant="geist" hideDivider={false}>
  *   <TabsTrigger value="overview">Overview</TabsTrigger>
  *   <TabsTrigger value="details">Details</TabsTrigger>
+ * </TabsList>
+ *
+ * <TabsList variant="solid" size="sm">
+ *   <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+ *   <TabsTrigger value="tab2">Tab 2</TabsTrigger>
  * </TabsList>
  * ```
  *
@@ -197,12 +229,13 @@ const TabsList = React.forwardRef<
       variant = "line",
       hideDivider = false,
       hideBorder = false,
+      size = "default",
       children,
       ...props
     },
     forwardedRef
   ) => {
-    const { list } = tabsVariants({ variant, hideDivider, hideBorder });
+    const { list } = tabsVariants({ variant, size, hideDivider, hideBorder });
 
     return (
       <BaseTabs.List
@@ -211,15 +244,22 @@ const TabsList = React.forwardRef<
         {...props}
       >
         <TabsListVariantContext.Provider value={variant}>
-          {children}
-          {variant === "line" && (
-            <BaseTabs.Indicator
-              key={`${variant}-indicator`}
-              className={cx(
-                tabsVariants({ variant, hideDivider, hideBorder }).indicator()
-              )}
-            />
-          )}
+          <TabsListSizeContext.Provider value={size}>
+            {children}
+            {variant === "line" && (
+              <BaseTabs.Indicator
+                key={`${variant}-indicator`}
+                className={cx(
+                  tabsVariants({
+                    variant,
+                    size,
+                    hideDivider,
+                    hideBorder,
+                  }).indicator()
+                )}
+              />
+            )}
+          </TabsListSizeContext.Provider>
         </TabsListVariantContext.Provider>
       </BaseTabs.List>
     );
@@ -249,6 +289,7 @@ const TabsTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof BaseTabs.Tab>
 >(({ className, children, ...props }, forwardedRef) => {
   const variant = React.useContext(TabsListVariantContext);
+  const size = React.useContext(TabsListSizeContext);
 
   // For solid variant, use Button component with render prop to get selected state
   if (variant === "solid") {
@@ -260,6 +301,7 @@ const TabsTrigger = React.forwardRef<
           <Button
             {...tabProps}
             variant={state.selected ? "outline" : "ghost"}
+            size={size}
             className={cx(
               "data-[disabled]:pointer-events-none",
               "inset-ring-0 shadow-none",

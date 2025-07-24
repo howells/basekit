@@ -1,4 +1,11 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
+import { jsxToString } from "@/lib/jsx-to-string";
+import {
+  AlignmentExample,
+  CustomSpacingExample,
+  DefaultExample,
+  HorizontalExample,
+} from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "stack",
@@ -9,7 +16,7 @@ export const componentConfig: ComponentConfig = {
   icon: "Layers",
 
   installation: {
-    npm: "@base-ui-components/react"
+    npm: "@base-ui-components/react",
   },
   importStatement: `import { Stack } from "@/components/ui/stack/stack";`,
   componentId: "StackExample",
@@ -19,21 +26,21 @@ export const componentConfig: ComponentConfig = {
       type: "select",
       description: "Stack direction",
       options: ["vertical", "horizontal"],
-      defaultValue: "vertical"
+      defaultValue: "vertical",
     },
     {
       name: "spacing",
       type: "select",
       description: "Spacing between items",
       options: ["xs", "sm", "md", "lg", "xl"],
-      defaultValue: "md"
+      defaultValue: "md",
     },
     {
       name: "align",
       type: "select",
       description: "Alignment of items",
       options: ["start", "center", "end", "stretch"],
-      defaultValue: "stretch"
+      defaultValue: "stretch",
     },
   ],
   examples: [
@@ -41,46 +48,25 @@ export const componentConfig: ComponentConfig = {
       id: "default",
       title: "Vertical Stack",
       description: "Items stacked vertically with spacing",
-      code: `<Stack>
-  <div className="rounded-lg bg-zinc-100 p-4">Item 1</div>
-  <div className="rounded-lg bg-zinc-100 p-4">Item 2</div>
-  <div className="rounded-lg bg-zinc-100 p-4">Item 3</div>
-</Stack>`
+      code: jsxToString(<DefaultExample />),
     },
     {
       id: "horizontal",
       title: "Horizontal Stack",
       description: "Items arranged horizontally",
-      code: `<Stack direction="horizontal">
-  <Button>Button 1</Button>
-  <Button variant="outline">Button 2</Button>
-  <Button variant="ghost">Button 3</Button>
-</Stack>`
+      code: jsxToString(<HorizontalExample />),
     },
     {
       id: "custom-spacing",
       title: "Custom Spacing",
       description: "Stack with different spacing options",
-      code: `<div className="space-y-8">
-  <Stack spacing="xs">
-    <div className="rounded bg-blue-100 p-2">Extra Small Spacing</div>
-    <div className="rounded bg-blue-100 p-2">Extra Small Spacing</div>
-  </Stack>
-  <Stack spacing="lg">
-    <div className="rounded bg-green-100 p-2">Large Spacing</div>
-    <div className="rounded bg-green-100 p-2">Large Spacing</div>
-  </Stack>
-</div>`
+      code: jsxToString(<CustomSpacingExample />),
     },
     {
       id: "alignment",
       title: "Different Alignments",
       description: "Stack with various alignment options",
-      code: `<Stack align="center" className="h-32 bg-zinc-50">
-  <div className="rounded bg-purple-100 px-4 py-2">Centered Item 1</div>
-  <div className="rounded bg-purple-100 px-6 py-2">Centered Item 2</div>
-  <div className="rounded bg-purple-100 px-12 py-2">Centered Item 3</div>
-</Stack>`
+      code: jsxToString(<AlignmentExample />),
     },
-  ]
+  ],
 };

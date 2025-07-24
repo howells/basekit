@@ -5,37 +5,37 @@ import { componentVariants, type BadgeVariant } from "@/lib/variants";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
-// Create StatusDot variant system using badge variants
+// StatusDot variants with text colors only (no backgrounds)
 const statusDotVariantsDefinition = {
   variants: {
     variant: {
-      // Global semantic variants
-      default: componentVariants.badge.default,
-      neutral: componentVariants.badge.neutral,
-      success: componentVariants.badge.success,
-      info: componentVariants.badge.info,
-      warning: componentVariants.badge.warning,
-      error: componentVariants.badge.error,
-      critical: componentVariants.badge.critical,
-      positive: componentVariants.badge.positive,
-      negative: componentVariants.badge.negative,
-      // Color variants
-      purple: componentVariants.badge.purple,
-      pink: componentVariants.badge.pink,
-      rose: componentVariants.badge.rose,
-      orange: componentVariants.badge.orange,
-      amber: componentVariants.badge.amber,
-      yellow: componentVariants.badge.yellow,
-      lime: componentVariants.badge.lime,
-      green: componentVariants.badge.green,
-      emerald: componentVariants.badge.emerald,
-      teal: componentVariants.badge.teal,
-      cyan: componentVariants.badge.cyan,
-      sky: componentVariants.badge.sky,
-      blue: componentVariants.badge.blue,
-      indigo: componentVariants.badge.indigo,
-      violet: componentVariants.badge.violet,
-      fuchsia: componentVariants.badge.fuchsia,
+      // Global semantic variants - text colors only
+      default: ["text-blue-900", "dark:text-blue-400"],
+      neutral: ["text-slate-900", "dark:text-slate-100"],
+      success: ["text-emerald-900", "dark:text-emerald-400"],
+      info: ["text-sky-900", "dark:text-sky-400"],
+      warning: ["text-amber-900", "dark:text-amber-400"],
+      error: ["text-red-900", "dark:text-red-400"],
+      critical: ["text-rose-900", "dark:text-rose-400"],
+      positive: ["text-teal-900", "dark:text-teal-400"],
+      negative: ["text-rose-900", "dark:text-rose-400"],
+      // Color variants - text colors only
+      purple: ["text-purple-900", "dark:text-purple-400"],
+      pink: ["text-pink-900", "dark:text-pink-400"],
+      rose: ["text-rose-900", "dark:text-rose-400"],
+      orange: ["text-orange-900", "dark:text-orange-400"],
+      amber: ["text-amber-900", "dark:text-amber-400"],
+      yellow: ["text-yellow-900", "dark:text-yellow-400"],
+      lime: ["text-lime-900", "dark:text-lime-400"],
+      green: ["text-green-900", "dark:text-green-400"],
+      emerald: ["text-emerald-900", "dark:text-emerald-400"],
+      teal: ["text-teal-900", "dark:text-teal-400"],
+      cyan: ["text-cyan-900", "dark:text-cyan-400"],
+      sky: ["text-sky-900", "dark:text-sky-400"],
+      blue: ["text-blue-900", "dark:text-blue-400"],
+      indigo: ["text-indigo-900", "dark:text-indigo-400"],
+      violet: ["text-violet-900", "dark:text-violet-400"],
+      fuchsia: ["text-fuchsia-900", "dark:text-fuchsia-400"],
     },
     size: {
       sm: "text-xs",

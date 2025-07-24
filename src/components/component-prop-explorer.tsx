@@ -63,7 +63,7 @@ export function ComponentPropExplorer({
     <PropExplorerProvider defaultProps={getDefaultProps()}>
       <div className="flex flex-1">
         {/* Main content - Live preview */}
-        <div className="flex-1">
+        <div className="flex-1 p-6">
           <ComponentPreview
             componentId={config.componentId || component}
             category={category}

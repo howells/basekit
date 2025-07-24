@@ -6,7 +6,7 @@ export const componentConfig: ComponentConfig = {
   id: "heading",
   name: "Heading",
   description: "A semantic heading component with consistent typography and hierarchy levels.",
-  category: "ui" as const,
+  category: "text" as const,
   icon: "Type",
 
   installation: {
@@ -24,7 +24,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "children",
-      type: "textarea",
+      type: "string",
       defaultValue: "Heading Text",
       description: "The heading content."
     }

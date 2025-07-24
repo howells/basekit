@@ -7,7 +7,7 @@ export const componentConfig: ComponentConfig = {
   name: "Dialog",
   description:
     "Modal dialog component built on Base UI with overlay and focus management.",
-  category: "ui" as const,
+  category: "overlay" as const,
   icon: "MessageSquare",
 
   importStatement: `import {

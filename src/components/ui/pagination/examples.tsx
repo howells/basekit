@@ -9,7 +9,8 @@ import {
   PaginationPrevious,
 } from "./pagination";
 
-export function BasicPagination() {
+// Basic pagination example - matches config "pagination" id
+export function PaginationExample() {
   return (
     <Pagination>
       <PaginationPrevious href="#prev" />
@@ -25,7 +26,8 @@ export function BasicPagination() {
   );
 }
 
-export function PaginationWithEllipsis() {
+// Pagination with ellipsis example - matches config "with-ellipsis" id
+export function WithEllipsisExample() {
   return (
     <Pagination>
       <PaginationPrevious href="#prev" />

@@ -117,11 +117,14 @@ function SidebarContent() {
           {/* Logo */}
           <div
             className={clsx(
-              "absolute top-2",
-              isCollapsed ? "left-2" : "left-4"
+              "absolute top-4.5",
+              isCollapsed ? "left-2" : "left-3"
             )}
           >
-            <Pilcrow className="h-6 w-6 text-zinc-600 dark:text-zinc-400 scale-x-[-1]" />
+            <Pilcrow
+              className="size-7 text-zinc-600 dark:text-zinc-400 scale-x-[-1]"
+              strokeWidth={1.5}
+            />
           </div>
         </div>
       </SidebarHeader>
@@ -146,11 +149,15 @@ function SidebarContent() {
             category.key as keyof typeof COMPONENT_LIST
           ).sort((a, b) => a.name.localeCompare(b.name));
           const isLastCategory = index === categoryConfig.length - 1;
-          return renderCategorySection(
-            category.name,
-            category.key,
-            components,
-            !isLastCategory
+          return (
+            <React.Fragment key={category.key}>
+              {renderCategorySection(
+                category.name,
+                category.key,
+                components,
+                !isLastCategory
+              )}
+            </React.Fragment>
           );
         })}
       </SidebarBody>

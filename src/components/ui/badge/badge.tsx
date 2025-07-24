@@ -9,6 +9,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { config } from "@/lib/config";
 import { cx, iconUtils, type ComponentWithIconsProps } from "@/lib/utils";
 import { componentVariants, type BadgeVariant } from "@/lib/variants";
+import { DismissButton } from "../dismiss-button/dismiss-button";
 import { StatusDot } from "../status-dot/status-dot";
 
 // Define variants structure using centralized system
@@ -39,11 +40,27 @@ const badgeVariantsDefinition = {
   },
 } as const;
 
+// Update badge variants to handle dismiss button padding like Tag does
 const badgeVariants = tv({
   base: cx(
     "inline-flex items-center gap-x-1.5 whitespace-nowrap rounded-md font-medium"
   ),
   ...badgeVariantsDefinition,
+  compoundVariants: [
+    // Adjust right padding when dismiss button is present
+    {
+      size: "sm",
+      class: "has-[button]:pr-1",
+    },
+    {
+      size: "base",
+      class: "has-[button]:pr-1",
+    },
+    {
+      size: "lg",
+      class: "has-[button]:pr-1.5",
+    },
+  ],
 });
 
 // Map badge sizes to icon sizes
@@ -51,13 +68,6 @@ const badgeToIconSizeMap = {
   sm: "xs",
   base: "sm",
   lg: "base",
-} as const;
-
-// Map badge sizes to dismiss button icon sizes (slightly smaller)
-const badgeToDismissIconSizeMap = {
-  sm: "xs",
-  base: "xs",
-  lg: "sm",
 } as const;
 
 /**
@@ -91,8 +101,12 @@ interface BadgeProps
    */
   statusAnimated?: boolean;
   /**
+   * Whether the badge can be dismissed.
+   * When true, a dismiss button (X) will be shown.
+   */
+  dismissible?: boolean;
+  /**
    * Callback function called when the dismiss button is clicked.
-   * When provided, a dismiss button (X) will be shown.
    */
   onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
@@ -148,12 +162,13 @@ interface BadgeProps
  * <Badge variant="pink" rounded>Pink Pill</Badge>
  *
  * // With dismiss button
- * <Badge onDismiss={() => handleRemove()}>Removable</Badge>
- * <Badge onDismiss={handleRemove} dismissIcon={TrashIcon}>Custom Dismiss</Badge>
+ * <Badge dismissible onDismiss={() => handleRemove()}>Dismissible</Badge>
+ * <Badge dismissible onDismiss={handleRemove} dismissIcon={TrashIcon}>Custom Dismiss</Badge>
  *
  * // Combination with icons and dismiss
  * <Badge
  *   leftIcon={UserIcon}
+ *   dismissible
  *   onDismiss={handleRemoveUser}
  *   variant="neutral"
  * >
@@ -173,6 +188,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       rightIcon: RightIcon,
       iconStrokeWidth = config.getIconStrokeWidth(),
       children,
+      dismissible = false,
       onDismiss,
       dismissIcon: DismissIcon = X,
       statusDot,
@@ -185,17 +201,12 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const hasChildren = children != null && children !== "";
     const hasLeftIcon = LeftIcon != null;
     const hasRightIcon = RightIcon != null;
-    const hasDismissButton = onDismiss != null;
+    const hasDismissButton = dismissible && onDismiss != null;
 
     // Get appropriate icon size for badge size
     const iconSize = badgeToIconSizeMap[size];
     const iconSizeClass = iconUtils.getIconSize(iconSize);
     const iconClassName = `${iconSizeClass} shrink-0`;
-
-    // Get appropriate icon size for dismiss button
-    const dismissIconSize = badgeToDismissIconSizeMap[size];
-    const dismissIconSizeClass = iconUtils.getIconSize(dismissIconSize);
-    const dismissIconClassName = `${dismissIconSizeClass} shrink-0`;
 
     // Use default variant when statusDot is true (unless custom color or variant provided)
     const effectiveVariant = variant;
@@ -206,9 +217,9 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       const hasDismissButton = Boolean(onDismiss);
       const hasStatusDot = Boolean(statusDot);
 
-      // Status dot size mapping to match badge sizes
+      // Status dot size mapping - one size smaller than badge for better balance
       const statusDotSize =
-        size === "sm" ? "sm" : size === "lg" ? "lg" : "default";
+        size === "sm" ? "sm" : size === "base" ? "sm" : "default";
 
       // Use statusAnimated prop directly since statusDot is just boolean
       const shouldAnimate = statusAnimated;
@@ -233,21 +244,18 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
             />
           )}
           {hasDismissButton && (
-            <button
+            <DismissButton
               onClick={onDismiss}
+              icon={DismissIcon}
+              iconStrokeWidth={iconStrokeWidth}
+              size={size}
               className={cx(
-                "ml-1 -mr-1 p-0.5 rounded-full transition-colors",
-                "hover:bg-black/10 dark:hover:bg-white/10",
-                "focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-current"
+                // Negative margin to pull closer like Tag does
+                size === "sm" && "-ml-1",
+                size === "base" && "-ml-1",
+                size === "lg" && "-ml-1.5"
               )}
-              aria-label="Remove"
-              type="button"
-            >
-              <DismissIcon
-                className={dismissIconClassName}
-                strokeWidth={iconStrokeWidth}
-              />
-            </button>
+            />
           )}
         </>
       );

@@ -6,7 +6,7 @@ export const componentConfig: ComponentConfig = {
   id: "menu",
   name: "Menu",
   description: "Dropdown menu component built on Base UI with support for nested submenus, radio groups, checkboxes, and keyboard navigation.",
-  category: "ui" as const,
+  category: "overlay" as const,
   icon: "Menu",
 
   installation: {

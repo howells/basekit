@@ -1,9 +1,50 @@
 // Meter Component [v1.0.0] - Base UI Implementation
 
 import { cx } from "@/lib/utils";
+import { type GlobalSemanticVariant } from "@/lib/variants";
 import { Meter as BaseMeter } from "@base-ui-components/react/meter";
 import * as React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+
+// Meter-specific color mappings that work well for progress indicators
+const meterColorMap = {
+  default: {
+    track: "bg-blue-200 dark:bg-blue-500/30",
+    indicator: "bg-blue-500 dark:bg-blue-500",
+  },
+  neutral: {
+    track: "bg-zinc-200 dark:bg-zinc-500/40",
+    indicator: "bg-zinc-500 dark:bg-zinc-500",
+  },
+  success: {
+    track: "bg-emerald-200 dark:bg-emerald-500/30",
+    indicator: "bg-emerald-500 dark:bg-emerald-500",
+  },
+  info: {
+    track: "bg-sky-200 dark:bg-sky-500/30",
+    indicator: "bg-sky-500 dark:bg-sky-500",
+  },
+  warning: {
+    track: "bg-yellow-200 dark:bg-yellow-500/30",
+    indicator: "bg-yellow-500 dark:bg-yellow-500",
+  },
+  error: {
+    track: "bg-red-200 dark:bg-red-500/30",
+    indicator: "bg-red-500 dark:bg-red-500",
+  },
+  critical: {
+    track: "bg-rose-200 dark:bg-rose-500/30",
+    indicator: "bg-rose-500 dark:bg-rose-500",
+  },
+  positive: {
+    track: "bg-teal-200 dark:bg-teal-500/30",
+    indicator: "bg-teal-500 dark:bg-teal-500",
+  },
+  negative: {
+    track: "bg-rose-200 dark:bg-rose-500/30",
+    indicator: "bg-rose-500 dark:bg-rose-500",
+  },
+} as const;
 
 const meterVariants = tv({
   slots: {
@@ -11,28 +52,7 @@ const meterVariants = tv({
     indicator: "",
   },
   variants: {
-    variant: {
-      default: {
-        track: "bg-blue-200 dark:bg-blue-500/30",
-        indicator: "bg-blue-500 dark:bg-blue-500",
-      },
-      neutral: {
-        track: "bg-zinc-200 dark:bg-zinc-500/40",
-        indicator: "bg-zinc-500 dark:bg-zinc-500",
-      },
-      warning: {
-        track: "bg-yellow-200 dark:bg-yellow-500/30",
-        indicator: "bg-yellow-500 dark:bg-yellow-500",
-      },
-      error: {
-        track: "bg-red-200 dark:bg-red-500/30",
-        indicator: "bg-red-500 dark:bg-red-500",
-      },
-      success: {
-        track: "bg-emerald-200 dark:bg-emerald-500/30",
-        indicator: "bg-emerald-500 dark:bg-emerald-500",
-      },
-    },
+    variant: meterColorMap,
   },
   defaultVariants: {
     variant: "default",
@@ -63,11 +83,13 @@ interface MeterProps
   label?: string;
   /** Custom function to format the displayed value */
   formatValue?: (value: number, min: number, max: number) => string;
+  /** Color variant using the global semantic variant system */
+  variant?: GlobalSemanticVariant;
 }
 
 /**
  * A graphical meter component built on Base UI's Meter primitive.
- * 
+ *
  * Based on Base UI's Meter (https://base-ui.com/react/components/meter),
  * providing accessible visual representation of numeric values within a range.
  * Features optional labels, value display, animations, and multiple color variants
@@ -87,7 +109,7 @@ interface MeterProps
  * ```tsx
  * // Basic meter
  * <Meter value={75} />
- * 
+ *
  * // With label and custom formatting
  * <Meter
  *   value={24}
@@ -96,16 +118,16 @@ interface MeterProps
  *   showValue
  *   formatValue={(value, min, max) => `${value}GB of ${max}GB`}
  * />
- * 
+ *
  * // Different variants for different states
  * <Meter value={90} variant="success" label="Upload Complete" />
  * <Meter value={45} variant="warning" label="Disk Usage" />
  * <Meter value={95} variant="error" label="Memory Usage" />
  * <Meter value={60} variant="neutral" label="Progress" />
- * 
+ *
  * // Without animation
  * <Meter value={30} showAnimation={false} />
- * 
+ *
  * // Custom range
  * <Meter
  *   value={150}
@@ -114,7 +136,7 @@ interface MeterProps
  *   label="Custom Scale"
  *   showValue
  * />
- * 
+ *
  * // Multiple meters for comparison
  * <div className="space-y-4">
  *   <Meter value={85} variant="success" label="CPU Usage" />
@@ -201,7 +223,7 @@ const Meter = React.forwardRef<
           <BaseMeter.Track
             className={cx(
               // base
-              "relative h-2 w-full overflow-hidden rounded-full",
+              "relative h-1.5 w-full overflow-hidden rounded-full",
               // background
               track(),
               // border

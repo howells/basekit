@@ -1,7 +1,8 @@
 import React from "react";
 import { HStack, Stack, VStack } from "./stack";
 
-export function Vertical() {
+// Default example - matches config "default" id
+export function DefaultExample() {
   return (
     <Stack direction="vertical" gap={4}>
       <div className="p-4 bg-blue-100 rounded">Item 1</div>
@@ -11,7 +12,8 @@ export function Vertical() {
   );
 }
 
-export function Horizontal() {
+// Horizontal example - matches config "horizontal" id
+export function HorizontalExample() {
   return (
     <Stack direction="horizontal" gap={6}>
       <div className="p-4 bg-blue-100 rounded">Item 1</div>
@@ -21,7 +23,35 @@ export function Horizontal() {
   );
 }
 
-export function ResponsiveDirection() {
+// Custom spacing example - matches config "custom-spacing" id
+export function CustomSpacingExample() {
+  return (
+    <div className="space-y-8">
+      <Stack gap={1}>
+        <div className="rounded bg-blue-100 p-2">Small Spacing (gap-1)</div>
+        <div className="rounded bg-blue-100 p-2">Small Spacing (gap-1)</div>
+      </Stack>
+      <Stack gap={8}>
+        <div className="rounded bg-green-100 p-2">Large Spacing (gap-8)</div>
+        <div className="rounded bg-green-100 p-2">Large Spacing (gap-8)</div>
+      </Stack>
+    </div>
+  );
+}
+
+// Alignment example - matches config "alignment" id
+export function AlignmentExample() {
+  return (
+    <Stack align="center" className="h-32 bg-zinc-50">
+      <div className="rounded bg-purple-100 px-4 py-2">Centered Item 1</div>
+      <div className="rounded bg-purple-100 px-6 py-2">Centered Item 2</div>
+      <div className="rounded bg-purple-100 px-12 py-2">Centered Item 3</div>
+    </Stack>
+  );
+}
+
+// Additional examples that were in the original file
+export function ResponsiveDirectionExample() {
   return (
     <Stack
       direction={{ sm: "vertical", lg: "horizontal" }}
@@ -38,7 +68,7 @@ export function ResponsiveDirection() {
   );
 }
 
-export function ResponsiveGap() {
+export function ResponsiveGapExample() {
   return (
     <Stack direction="vertical" gap={{ sm: 1, md: 3, lg: 6, xl: 10 }}>
       <div className="p-3 bg-purple-100 rounded">
@@ -52,7 +82,7 @@ export function ResponsiveGap() {
   );
 }
 
-export function HelperComponents() {
+export function HelperComponentsExample() {
   return (
     <div className="space-y-6">
       <VStack gap={3}>
@@ -68,35 +98,7 @@ export function HelperComponents() {
   );
 }
 
-export function Alignment() {
-  return (
-    <div className="space-y-6">
-      <Stack
-        direction="horizontal"
-        gap={4}
-        align="center"
-        justify="center"
-        className="h-20 bg-zinc-50"
-      >
-        <div className="p-2 bg-blue-100 rounded">Centered</div>
-        <div className="p-2 bg-green-100 rounded">Items</div>
-      </Stack>
-
-      <Stack
-        direction="horizontal"
-        gap={4}
-        align="center"
-        justify="between"
-        className="h-20 bg-zinc-50"
-      >
-        <div className="p-2 bg-blue-100 rounded">Space</div>
-        <div className="p-2 bg-green-100 rounded">Between</div>
-      </Stack>
-    </div>
-  );
-}
-
-export function WithPadding() {
+export function WithPaddingExample() {
   return (
     <Stack
       direction="vertical"
@@ -111,7 +113,7 @@ export function WithPadding() {
   );
 }
 
-export function Wrapping() {
+export function WrappingExample() {
   return (
     <Stack direction="horizontal" gap={3} wrap className="max-w-md">
       <div className="p-3 bg-blue-100 rounded">Tag 1</div>
@@ -124,7 +126,7 @@ export function Wrapping() {
   );
 }
 
-export function ComplexResponsive() {
+export function ComplexResponsiveExample() {
   return (
     <Stack
       direction={{

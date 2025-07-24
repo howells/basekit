@@ -14,10 +14,13 @@ export const LoaderExample = ({
   [key: string]: unknown;
 }) => {
   return (
-    <Loader
-      size={size}
-      aria-label={ariaLabel}
-      {...props}
-    />
+    <div className="flex justify-center p-8">
+      <Loader size={size} aria-label={ariaLabel} {...props} />
+    </div>
   );
 };
+
+// Default export for the preview system
+export function Example() {
+  return <LoaderExample />;
+}

@@ -146,7 +146,7 @@ const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
           <div className={cx("flex-1")}>
             {title && <Subheading level={3}>{title}</Subheading>}
             {children && (
-              <Text className={cx(title ? "mt-2" : "", "overflow-y-auto")}>
+              <Text className={cx(title ? "mt-2 max-w-prose" : "")}>
                 {children}
               </Text>
             )}

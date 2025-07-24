@@ -1,7 +1,7 @@
-import React from "react";
 import { Loader } from "@/components/ui/loader";
+import React from "react";
 
-export function DefaultLoaderExample() {
+export function DefaultExample() {
   return <Loader aria-label="Loading" />;
 }
 

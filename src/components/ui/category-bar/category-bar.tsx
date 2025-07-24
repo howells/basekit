@@ -15,7 +15,7 @@ import { Tooltip } from "../tooltip";
 
 /**
  * Determines the background color for the marker based on its position.
- * 
+ *
  * Calculates which category segment the marker falls into and returns
  * the corresponding color class.
  *
@@ -52,7 +52,7 @@ const getMarkerBgColor = (
 
 /**
  * Calculates the left position percentage for a value.
- * 
+ *
  * Converts an absolute value to a percentage position within the total range.
  *
  * @param value - Value to position
@@ -64,7 +64,7 @@ const getPositionLeft = (value: number | undefined, maxValue: number): number =>
 
 /**
  * Sums all values in a numeric array.
- * 
+ *
  * Helper function for calculating total values in category data.
  *
  * @param arr - Array of numbers to sum
@@ -75,7 +75,7 @@ const sumNumericArray = (arr: number[]) =>
 
 /**
  * Formats numbers for display in labels.
- * 
+ *
  * Shows integers as-is and decimals rounded to one decimal place.
  *
  * @param num - Number to format
@@ -90,7 +90,7 @@ const formatNumber = (num: number): string => {
 
 /**
  * Component that renders numeric labels above the category bar.
- * 
+ *
  * Intelligently displays labels at category boundaries with logic to prevent
  * overcrowding. Shows values at 0, significant boundaries, and the maximum value.
  *
@@ -152,10 +152,10 @@ const BarLabels = ({ values }: { values: number[] }) => {
 
 /**
  * Props for the CategoryBar component.
- * 
+ *
  * Configuration for displaying proportional category data with optional
  * marker overlay and value labels.
- * 
+ *
  * @interface CategoryBarProps
  * @extends React.HTMLAttributes<HTMLDivElement>
  */
@@ -165,13 +165,13 @@ interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Color themes for each category (defaults to chart colors) */
   colors?: AvailableChartColorsKeys[];
   /** Optional marker with position, tooltip, and animation */
-  marker?: { 
+  marker?: {
     /** Position value for the marker */
-    value: number; 
+    value: number;
     /** Optional tooltip text to show on hover */
-    tooltip?: string; 
+    tooltip?: string;
     /** Whether to animate marker position changes */
-    showAnimation?: boolean 
+    showAnimation?: boolean;
   };
   /** Whether to show numeric labels above the bar */
   showLabels?: boolean;
@@ -179,7 +179,7 @@ interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * A horizontal bar component for displaying categorical data proportions.
- * 
+ *
  * Visualizes multiple category values as proportional segments in a horizontal bar.
  * Supports an optional marker overlay for indicating targets, thresholds, or current
  * values. Includes intelligent labeling and tooltip functionality.
@@ -283,7 +283,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
         {...props}
       >
         {showLabels ? <BarLabels values={values} /> : null}
-        <div className="relative flex h-2 w-full items-center">
+        <div className="relative flex h-1.5 w-full items-center">
           <div className="flex h-full flex-1 items-center gap-0.5 overflow-hidden rounded-full">
             {values.map((value, index) => {
               const barColor = colors[index] ?? "gray";

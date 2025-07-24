@@ -20,11 +20,13 @@ import { componentConfig as comboChartConfig } from "@/components/ui/combo-chart
 import { componentConfig as comboboxConfig } from "@/components/ui/combobox/config";
 import { componentConfig as commandConfig } from "@/components/ui/command/config";
 import { componentConfig as copyButtonConfig } from "@/components/ui/copy-button/config";
+import { componentConfig as dismissButtonConfig } from "@/components/ui/dismiss-button/config";
 import { componentConfig as dividerConfig } from "@/components/ui/divider/config";
 import { componentConfig as donutChartConfig } from "@/components/ui/donut-chart/config";
 import { componentConfig as emptyStateConfig } from "@/components/ui/empty-state/config";
 import { componentConfig as fieldConfig } from "@/components/ui/field/config";
 import { componentConfig as gridConfig } from "@/components/ui/grid/config";
+import { componentConfig as headingElementConfig } from "@/components/ui/heading-element/config";
 import { componentConfig as iconSelectConfig } from "@/components/ui/icon-select/config";
 import { componentConfig as inputConfig } from "@/components/ui/input/config";
 import { componentConfig as lineChartConfig } from "@/components/ui/line-chart/config";
@@ -151,11 +153,6 @@ const touchTargetConfig = createPlaceholderConfig(
 const trackerConfig = createPlaceholderConfig("tracker", "Tracker");
 
 // Missing components that need placeholders
-const headingElementConfig = createPlaceholderConfig(
-  "heading-element",
-  "Heading Element",
-  "text"
-);
 const inspectorConfig = createPlaceholderConfig(
   "inspector",
   "Inspector",
@@ -215,6 +212,7 @@ export const componentRegistry: ComponentConfigRegistry = {
   "code-block": codeBlockConfig,
   collapsible: collapsibleConfig,
   "copy-button": copyButtonConfig,
+  "dismiss-button": dismissButtonConfig,
   divider: dividerConfig,
   "empty-state": emptyStateConfig,
   grid: gridConfig,
@@ -385,6 +383,7 @@ export const COMPONENT_LIST = {
     "combobox",
     "date-picker",
     "date-range-picker",
+    "dismiss-button",
     "icon-select",
     "input",
     "number-field",

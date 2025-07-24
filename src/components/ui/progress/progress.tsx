@@ -1,10 +1,10 @@
 /**
  * Progress Components
- * 
+ *
  * A comprehensive progress indicator system built on Base UI Progress components.
  * Provides linear progress bars with configurable styling, animations, labels,
  * and value display options for tracking task completion and loading states.
- * 
+ *
  * Features:
  * - Base UI Progress integration for full accessibility
  * - Multiple color variants (default, neutral, warning, error, success)
@@ -14,23 +14,23 @@
  * - Composed ProgressBar component for easy usage
  * - Consistent styling with design system
  * - Screen reader support and ARIA attributes
- * 
+ *
  * Built on Base UI Progress documentation:
  * https://base-ui.com/react/components/progress
- * 
+ *
  * @example
  * ```tsx
  * // Simple progress bar
  * <ProgressBar value={75} />
- * 
+ *
  * // With label and value display
- * <ProgressBar 
- *   value={60} 
- *   label="Loading data" 
- *   showValue 
+ * <ProgressBar
+ *   value={60}
+ *   label="Loading data"
+ *   showValue
  *   variant="success"
  * />
- * 
+ *
  * // Custom composition
  * <Progress value={45} max={100}>
  *   <ProgressLabel>Custom Progress</ProgressLabel>
@@ -41,19 +41,19 @@
  *     {(formatted, value) => `${value}% complete`}
  *   </ProgressValue>
  * </Progress>
- * 
+ *
  * // File upload progress
  * <ProgressBar
  *   value={uploadedBytes}
  *   max={totalBytes}
  *   label="Uploading files"
  *   showValue
- *   valueFormatter={(value, max) => 
+ *   valueFormatter={(value, max) =>
  *     `${Math.round((value / max) * 100)}% (${value}/${max} bytes)`
  *   }
  *   variant="default"
  * />
- * 
+ *
  * // Task completion
  * <ProgressBar
  *   value={completedTasks}
@@ -82,7 +82,7 @@ import {
 
 /**
  * Tailwind variants for progress components.
- * 
+ *
  * Defines styling slots for different parts of the progress indicator
  * with variants for colors and animation states.
  */
@@ -91,7 +91,7 @@ const progressVariants = tv({
     /** Root container with horizontal layout */
     root: "flex w-full items-center",
     /** Track background container */
-    track: "relative flex h-2 w-full items-center rounded-full",
+    track: "relative flex h-1.5 w-full items-center rounded-full",
     /** Progress indicator fill */
     indicator: "h-full flex-col rounded-full",
     /** Label text styling */
@@ -146,7 +146,7 @@ const progressVariants = tv({
 
 /**
  * Root progress component built on Base UI's Progress primitive.
- * 
+ *
  * Based on Base UI's Progress (https://base-ui.com/react/components/progress),
  * providing accessible progress indicators that display the completion status
  * of long-running tasks. Features proper screen reader support and flexible
@@ -159,7 +159,7 @@ Progress.displayName = "Progress";
 
 /**
  * Track container for the progress indicator.
- * 
+ *
  * Based on Base UI's Progress.Track, providing the background container
  * for the progress indicator. Features variant-based styling with different
  * colors and optional animation support.
@@ -187,7 +187,7 @@ ProgressTrack.displayName = "ProgressTrack";
 
 /**
  * Visual indicator showing progress completion.
- * 
+ *
  * Based on Base UI's Progress.Indicator, providing the filled portion
  * that visualizes task completion status. Automatically sized based on
  * the progress value with smooth transitions and variant-based coloring.
@@ -215,7 +215,7 @@ ProgressIndicator.displayName = "ProgressIndicator";
 
 /**
  * Accessible label for the progress bar.
- * 
+ *
  * Based on Base UI's Progress.Label, providing semantic labeling
  * for screen readers and visual context. Essential for accessibility
  * and helps users understand what task is being tracked.
@@ -246,7 +246,7 @@ ProgressLabel.displayName = "ProgressLabel";
 
 /**
  * Displays the current progress value.
- * 
+ *
  * Based on Base UI's Progress.Value, providing formatted display
  * of current progress values. Supports custom formatting functions
  * and automatically updates as progress changes.
@@ -277,7 +277,7 @@ ProgressValue.displayName = "ProgressValue";
 
 /**
  * Props for the ProgressBar component.
- * 
+ *
  * Configuration for the composed progress bar with label and value display options.
  *
  * @interface ProgressBarProps
@@ -297,7 +297,7 @@ interface ProgressBarProps
 
 /**
  * Complete progress bar with all components composed together.
- * 
+ *
  * Pre-composed progress bar combining all progress sub-components
  * with sensible defaults. Provides easy-to-use API for common progress
  * bar use cases while maintaining full customization options.
@@ -314,7 +314,7 @@ interface ProgressBarProps
  * ```tsx
  * // Basic progress bar
  * <ProgressBar value={75} />
- * 
+ *
  * // With label and value display
  * <ProgressBar
  *   value={45}
@@ -323,7 +323,7 @@ interface ProgressBarProps
  *   showValue
  *   variant="default"
  * />
- * 
+ *
  * // Custom value formatting
  * <ProgressBar
  *   value={3}
@@ -332,7 +332,7 @@ interface ProgressBarProps
  *   showValue
  *   valueFormatter={(value, max) => `${value} of ${max} files`}
  * />
- * 
+ *
  * // Different variants
  * <ProgressBar value={85} variant="success" />
  * <ProgressBar value={25} variant="warning" />

@@ -6,7 +6,7 @@ export const componentConfig: ComponentConfig = {
   id: "navigation-menu",
   name: "Navigation Menu",
   description: "A navigation menu component with dropdown support and smooth animations.",
-  category: "ui" as const,
+  category: "navigation" as const,
   icon: "Navigation2",
 
   installation: {

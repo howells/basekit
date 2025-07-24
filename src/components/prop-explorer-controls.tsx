@@ -4,6 +4,7 @@ import { Subheading } from "@/components/ui/subheading";
 import { Text } from "@/components/ui/text/text";
 import { ComponentConfig } from "@/lib/component-config-types";
 import { PropMetadata } from "@/lib/prop-explorer";
+import { cx } from "@/lib/utils";
 import React from "react";
 import { usePropExplorer } from "./prop-explorer-context";
 import { Button } from "./ui/button/button";
@@ -24,6 +25,29 @@ import { Textarea } from "./ui/textarea";
 
 interface PropExplorerContentProps {
   config?: ComponentConfig;
+}
+
+// Reusable wrapper component to reduce duplication
+interface PropFieldProps {
+  prop: PropMetadata;
+  children: React.ReactNode;
+  className?: string;
+}
+
+function PropField({ prop, children, className }: PropFieldProps) {
+  return (
+    <div className="space-y-2">
+      <Field className={cx("gap-y-2 flex flex-col", className)}>
+        <div>
+          <FieldLabel>{prop.name}</FieldLabel>
+          {prop.description && (
+            <FieldDescription>{prop.description}</FieldDescription>
+          )}
+        </div>
+        {children}
+      </Field>
+    </div>
+  );
 }
 
 // Helper function to get string options from a prop
@@ -58,7 +82,7 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {/* Header */}
       <div className="flex items-center justify-between">
         <Subheading level={3}>Props</Subheading>
@@ -68,7 +92,7 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
       </div>
 
       {/* Content */}
-      <div className="space-y-6">
+      <div className="flex flex-col space-y-4">
         {/* Props */}
         {config.props.map((prop: PropMetadata) => {
           const currentValue = props[prop.name];
@@ -76,167 +100,106 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
           // Handle different prop types
           if (prop.type === "boolean") {
             return (
-              <div key={prop.name} className="space-y-2">
-                <Field>
-                  <FieldLabel>{prop.name}</FieldLabel>
-                  {prop.description && (
-                    <FieldDescription>{prop.description}</FieldDescription>
+              <PropField key={prop.name} prop={prop}>
+                <FieldControl
+                  render={() => (
+                    <Switch
+                      checked={currentValue === true}
+                      onCheckedChange={(checked) =>
+                        updateProp(prop.name, checked)
+                      }
+                    />
                   )}
-                  <FieldControl
-                    render={() => (
-                      <Switch
-                        checked={currentValue === true}
-                        onCheckedChange={(checked) =>
-                          updateProp(prop.name, checked)
-                        }
-                      />
-                    )}
-                  />
-                </Field>
-              </div>
+                />
+              </PropField>
             );
           }
 
           if (prop.type === "select" && prop.options) {
             const options = getStringOptions(prop);
             return (
-              <div key={prop.name} className="space-y-2">
-                <Field>
-                  <FieldLabel>{prop.name}</FieldLabel>
-                  {prop.description && (
-                    <FieldDescription>{prop.description}</FieldDescription>
+              <PropField key={prop.name} prop={prop}>
+                <FieldControl
+                  render={() => (
+                    <Select
+                      value={(currentValue as string) ?? ""}
+                      onValueChange={(value) => updateProp(prop.name, value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {options.map((option: string) => (
+                          <SelectItem key={option} value={option}>
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   )}
-                  <FieldControl
-                    render={() => (
-                      <Select
-                        value={(currentValue as string) ?? ""}
-                        onValueChange={(value) => updateProp(prop.name, value)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {options.map((option: string) => (
-                            <SelectItem key={option} value={option}>
-                              {option}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </Field>
-              </div>
+                />
+              </PropField>
             );
           }
 
           if (prop.type === "icon") {
             return (
-              <div key={prop.name} className="space-y-2">
-                <Field>
-                  <FieldLabel>{prop.name}</FieldLabel>
-                  {prop.description && (
-                    <FieldDescription>{prop.description}</FieldDescription>
+              <PropField key={prop.name} prop={prop}>
+                <FieldControl
+                  render={() => (
+                    <IconSelect
+                      value={currentValue as string}
+                      onValueChange={(value) => updateProp(prop.name, value)}
+                    />
                   )}
-                  <FieldControl
-                    render={() => (
-                      <IconSelect
-                        value={currentValue as string}
-                        onValueChange={(value) => updateProp(prop.name, value)}
-                      />
-                    )}
-                  />
-                </Field>
-              </div>
+                />
+              </PropField>
             );
           }
 
           if (prop.type === "number") {
             return (
-              <div key={prop.name} className="space-y-2">
-                <Field>
-                  <FieldLabel>{prop.name}</FieldLabel>
-                  {prop.description && (
-                    <FieldDescription>{prop.description}</FieldDescription>
+              <PropField key={prop.name} prop={prop}>
+                <FieldControl
+                  render={() => (
+                    <NumberField
+                      value={currentValue as number}
+                      onValueChange={(value) => updateProp(prop.name, value)}
+                      placeholder={String(prop.defaultValue || "")}
+                      min={prop.min}
+                      max={prop.max}
+                      fullWidth
+                    />
                   )}
-                  <FieldControl
-                    render={() => (
-                      <NumberField
-                        value={currentValue as number}
-                        onValueChange={(value) => updateProp(prop.name, value)}
-                        placeholder={String(prop.defaultValue || "")}
-                        min={prop.min}
-                        max={prop.max}
-                        fullWidth
-                      />
-                    )}
-                  />
-                </Field>
-              </div>
+                />
+              </PropField>
             );
           }
 
           if (prop.type === "date") {
             return (
-              <div key={prop.name} className="space-y-2">
-                <Field>
-                  <FieldLabel>{prop.name}</FieldLabel>
-                  {prop.description && (
-                    <FieldDescription>{prop.description}</FieldDescription>
+              <PropField key={prop.name} prop={prop}>
+                <FieldControl
+                  render={() => (
+                    <DatePicker
+                      value={currentValue as Date | undefined}
+                      onChange={(date) => updateProp(prop.name, date)}
+                      placeholder="Select date"
+                    />
                   )}
-                  <FieldControl
-                    render={() => (
-                      <DatePicker
-                        value={currentValue as Date | undefined}
-                        onChange={(date) => updateProp(prop.name, date)}
-                        placeholder="Select date"
-                      />
-                    )}
-                  />
-                </Field>
-              </div>
+                />
+              </PropField>
             );
           }
 
           if (prop.type === "textarea") {
             return (
-              <div key={prop.name} className="space-y-2">
-                <Field>
-                  <FieldLabel>{prop.name}</FieldLabel>
-                  {prop.description && (
-                    <FieldDescription>{prop.description}</FieldDescription>
-                  )}
-                  <FieldControl
-                    render={(controlProps) => {
-                      const { children, ...inputProps } = controlProps;
-                      return (
-                        <Textarea
-                          {...inputProps}
-                          value={(currentValue as string) || ""}
-                          onChange={(e) => updateProp(prop.name, e.target.value)}
-                          placeholder={prop.defaultValue as string}
-                        />
-                      );
-                    }}
-                  />
-                </Field>
-              </div>
-            );
-          }
-
-          // Default to string input
-          return (
-            <div key={prop.name} className="space-y-2">
-              <Field>
-                <FieldLabel>{prop.name}</FieldLabel>
-                {prop.description && (
-                  <FieldDescription>{prop.description}</FieldDescription>
-                )}
+              <PropField key={prop.name} prop={prop}>
                 <FieldControl
                   render={(controlProps) => {
                     const { children, ...inputProps } = controlProps;
                     return (
-                      <Input
+                      <Textarea
                         {...inputProps}
                         value={(currentValue as string) || ""}
                         onChange={(e) => updateProp(prop.name, e.target.value)}
@@ -245,8 +208,27 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
                     );
                   }}
                 />
-              </Field>
-            </div>
+              </PropField>
+            );
+          }
+
+          // Default to string input
+          return (
+            <PropField key={prop.name} prop={prop}>
+              <FieldControl
+                render={(controlProps) => {
+                  const { children, ...inputProps } = controlProps;
+                  return (
+                    <Input
+                      {...inputProps}
+                      value={(currentValue as string) || ""}
+                      onChange={(e) => updateProp(prop.name, e.target.value)}
+                      placeholder={prop.defaultValue as string}
+                    />
+                  );
+                }}
+              />
+            </PropField>
           );
         })}
       </div>

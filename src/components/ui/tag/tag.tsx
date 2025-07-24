@@ -7,20 +7,21 @@ import React from "react";
 
 import { cx } from "@/lib/utils";
 import { Avatar, type AvatarProps } from "../avatar/avatar";
+import { DismissButton } from "../dismiss-button/dismiss-button";
 
 /**
- * Get padding classes based on avatar and removable state
+ * Get padding classes based on avatar and dismissible state
  */
 function getPaddingClasses(
   avatar: TagProps["avatar"],
-  removable: boolean
+  dismissible: boolean
 ): string {
   if (avatar) {
     // With avatar: less left padding since avatar provides visual weight
-    return removable ? "pl-1 pr-1" : "pl-1 pr-3";
+    return dismissible ? "pl-1 pr-1" : "pl-1 pr-3";
   } else {
     // No avatar: standard padding
-    return removable ? "pl-2.5 pr-1" : "px-3";
+    return dismissible ? "pl-2.5 pr-1" : "px-3";
   }
 }
 
@@ -42,13 +43,13 @@ interface TagProps extends useRender.ComponentProps<"span"> {
    */
   countClassName?: string;
   /**
-   * Whether the tag can be removed
+   * Whether the tag can be dismissed
    */
-  removable?: boolean;
+  dismissible?: boolean;
   /**
-   * Callback when the remove button is clicked
+   * Callback when the dismiss button is clicked
    */
-  onRemove?: () => void;
+  onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Avatar configuration for user tags
    */
@@ -58,9 +59,9 @@ interface TagProps extends useRender.ComponentProps<"span"> {
     initials?: string;
   };
   /**
-   * Aria label for the remove button
+   * Aria label for the dismiss button
    */
-  removeAriaLabel?: string;
+  dismissAriaLabel?: string;
 }
 
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
@@ -71,11 +72,11 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       value,
       count,
       countClassName,
-      removable = false,
-      onRemove,
+      dismissible = false,
+      onDismiss,
       avatar,
       className,
-      removeAriaLabel = "Remove",
+      dismissAriaLabel = "Remove",
       ...props
     },
     forwardedRef
@@ -85,7 +86,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
         // base
         "inline-flex items-center gap-x-2 rounded-full py-1 text-xs",
         // padding logic
-        getPaddingClasses(avatar, removable),
+        getPaddingClasses(avatar, dismissible),
         // background color
         "bg-white dark:bg-[#090E1A]",
         // text color
@@ -126,25 +127,16 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
               </span>
             )}
           </span>
-          {removable && (
-            <button
-              type="button"
-              onClick={onRemove}
+          {dismissible && (
+            <DismissButton
+              onClick={onDismiss}
+              size="base"
               className={cx(
                 // base - adjust margin based on whether there's a count
-                count !== undefined && count !== "" ? "-ml-1.5" : "-ml-1",
-                "flex size-5 items-center justify-center rounded-full",
-                // text color
-                "text-zinc-500 dark:text-zinc-400",
-                // hover
-                "hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200",
-                // focus
-                "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
+                count !== undefined && count !== "" ? "-ml-1.5" : "-ml-1"
               )}
-              aria-label={removeAriaLabel}
-            >
-              <X className="size-3 shrink-0" aria-hidden="true" />
-            </button>
+              aria-label={dismissAriaLabel}
+            />
           )}
         </>
       ),

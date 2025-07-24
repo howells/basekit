@@ -5,19 +5,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 export function TabsExample({
   defaultValue = "overview",
   variant = "line",
+  size = "default",
   hideDivider = false,
   ...props
 }: {
   defaultValue?: string;
   variant?: "solid" | "line";
+  size?: "default" | "sm" | "lg";
   hideDivider?: boolean;
 } & React.ComponentProps<typeof Tabs>) {
   return (
     <Tabs defaultValue={defaultValue} {...props}>
-      <TabsList
-        variant={variant}
-        hideDivider={hideDivider}
-      >
+      <TabsList variant={variant} size={size} hideDivider={hideDivider}>
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="analytics">Analytics</TabsTrigger>
         <TabsTrigger value="reports">Reports</TabsTrigger>

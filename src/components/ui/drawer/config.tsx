@@ -6,7 +6,7 @@ export const componentConfig: ComponentConfig = {
   id: "drawer",
   name: "Drawer",
   description: "A sliding panel that appears from the edge of the screen, typically used for navigation or additional content.",
-  category: "ui" as const,
+  category: "overlay" as const,
   icon: "PanelLeftOpen",
 
   importStatement: `import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";`,

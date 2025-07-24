@@ -23,7 +23,7 @@ export const componentConfig: ComponentConfig = {
     },
     {
       name: "children",
-      type: "textarea",
+      type: "string",
       description: "Subheading text",
       defaultValue: "Section Title"
     },

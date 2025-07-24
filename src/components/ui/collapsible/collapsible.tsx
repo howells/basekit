@@ -88,34 +88,6 @@ const CollapsibleTrigger = React.forwardRef<
     },
     ref
   ) => {
-    // Dynamic icon component that switches based on collapsible state
-    const DynamicIcon = ({
-      className: iconClassName,
-      strokeWidth,
-    }: {
-      className?: string;
-      strokeWidth?: number;
-    }) => (
-      <div className="relative">
-        <ClosedIcon
-          className={cx(
-            iconClassName,
-            "absolute inset-0 transition-opacity duration-200 ease-out",
-            "group-data-[panel-open]:opacity-0"
-          )}
-          strokeWidth={strokeWidth}
-        />
-        <OpenIcon
-          className={cx(
-            iconClassName,
-            "absolute inset-0 transition-opacity duration-200 ease-out",
-            "opacity-0 group-data-[panel-open]:opacity-100"
-          )}
-          strokeWidth={strokeWidth}
-        />
-      </div>
-    );
-
     // If asToggleButton is true, render just the icon button
     if (asToggleButton) {
       return (
@@ -123,9 +95,14 @@ const CollapsibleTrigger = React.forwardRef<
           ref={ref}
           className={cx("group", className)}
           {...props}
-          render={
-            <Button variant="ghost" size="icon-sm" leftIcon={DynamicIcon} />
-          }
+          render={(props, state) => (
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              leftIcon={state.open ? OpenIcon : ClosedIcon}
+              {...props}
+            />
+          )}
         />
       );
     }
@@ -151,9 +128,14 @@ const CollapsibleTrigger = React.forwardRef<
             ref={ref}
             className={cx("group", className)}
             {...props}
-            render={
-              <Button variant="ghost" size="icon-sm" leftIcon={DynamicIcon} />
-            }
+            render={(props, state) => (
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                leftIcon={state.open ? OpenIcon : ClosedIcon}
+                {...props}
+              />
+            )}
           />
         </div>
       );
@@ -176,9 +158,14 @@ const CollapsibleTrigger = React.forwardRef<
           ref={ref}
           className={cx("group")}
           {...props}
-          render={
-            <Button variant="ghost" size="icon-sm" leftIcon={DynamicIcon} />
-          }
+          render={(props, state) => (
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              leftIcon={state.open ? OpenIcon : ClosedIcon}
+              {...props}
+            />
+          )}
         />
       </div>
     );

@@ -169,7 +169,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Icon size based on button size - adjusted for better proportions
     const iconSize =
       size === "sm" || size === "icon-sm"
-        ? "size-3" // 12px for small buttons
+        ? "size-3.5" // 12px for small buttons
         : size === "lg" || size === "icon-lg"
         ? "size-4" // 16px for large buttons
         : "size-3.5"; // 14px for default buttons (was size-4/16px)
@@ -180,15 +180,41 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const effectiveShouldShowChildren = shouldShowChildren;
 
     const renderButtonContent = () => {
-      // If children is a custom React element AND we don't have icon props AND no kbd, render it directly
+      // If children is a custom React element AND we don't have explicit icon props AND no kbd, render it directly
       if (
         hasCustomLayout &&
-        !hasLeftIcon &&
+        LeftIcon == null &&
         !hasRightIcon &&
         !isLoading &&
         !kbd
       ) {
         return children;
+      }
+
+      // For icon-only buttons with children but no explicit leftIcon, render children directly
+      if (
+        isIconButton &&
+        hasChildren &&
+        LeftIcon == null &&
+        !hasRightIcon &&
+        !isLoading &&
+        !kbd
+      ) {
+        return children;
+      }
+
+      // For icon-only buttons with leftIcon, render the icon directly without loading states
+      if (
+        isIconButton &&
+        LeftIcon != null &&
+        !hasRightIcon &&
+        !isLoading &&
+        !kbd
+      ) {
+        return React.createElement(LeftIcon, {
+          className: iconClassName,
+          strokeWidth: iconStrokeWidth,
+        });
       }
 
       // For icon buttons, wrap any text children in sr-only span

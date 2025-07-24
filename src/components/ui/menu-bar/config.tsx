@@ -4,7 +4,7 @@ export const componentConfig: ComponentConfig = {
   id: "menu-bar",
   name: "Menu Bar",
   description: "A horizontal menu bar containing multiple dropdown menus.",
-  category: "ui" as const,
+  category: "navigation" as const,
   icon: "Menu",
 
   installation: {

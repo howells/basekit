@@ -4,7 +4,7 @@ export const componentConfig: ComponentConfig = {
   id: "navbar",
   name: "Navbar",
   description: "A navigation bar component with branding, sections, and items.",
-  category: "ui" as const,
+  category: "navigation" as const,
   icon: "Navigation",
 
   installation: {
