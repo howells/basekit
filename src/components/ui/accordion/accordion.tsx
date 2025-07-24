@@ -1,5 +1,6 @@
 // Tremor Accordion [v1.0.0] - Base UI
 
+import { config } from "@/lib/config";
 import { cx } from "@/lib/utils";
 import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion";
 import { Plus } from "lucide-react";
@@ -85,6 +86,7 @@ const AccordionTrigger = React.forwardRef<
           // text color
           "text-zinc-600 dark:text-zinc-400"
         )}
+        strokeWidth={config.getIconStrokeWidth()}
         aria-hidden="true"
       />
     </BaseAccordion.Trigger>

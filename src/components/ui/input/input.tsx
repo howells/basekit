@@ -5,6 +5,7 @@ import { Eye, EyeOff, Search } from "lucide-react";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
+import { config } from "@/lib/config";
 import { cx, focusInput, focusRing, hasErrorInput } from "@/lib/utils";
 
 const inputStyles = tv({
@@ -96,15 +97,23 @@ interface InputProps
   /** Prefix text content */
   prefixText?: string;
   /** Prefix icon component */
-  prefixIcon?: React.ComponentType<{ className?: string }>;
+  prefixIcon?: React.ComponentType<{
+    className?: string;
+    strokeWidth?: number;
+  }>;
   /** Suffix text content */
   suffixText?: string;
   /** Suffix icon component */
-  suffixIcon?: React.ComponentType<{ className?: string }>;
+  suffixIcon?: React.ComponentType<{
+    className?: string;
+    strokeWidth?: number;
+  }>;
   /** Whether to apply prefix styling */
   prefixStyling?: boolean;
   /** Whether to apply suffix styling */
   suffixStyling?: boolean;
+  /** Stroke width for icons (defaults to 1) */
+  iconStrokeWidth?: number;
   /** Minimal variant for command palettes - removes border, shadow, focus ring */
   minimal?: boolean;
   /** Remove all styling and return bare input element */
@@ -170,6 +179,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
       suffixIcon: SuffixIcon,
       prefixStyling = true,
       suffixStyling = true,
+      iconStrokeWidth = config.getIconStrokeWidth(),
       minimal,
       unstyled,
       ...props
@@ -204,11 +214,16 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
     const resolvedPrefix =
       prefix || (prefixText && PrefixIcon) ? (
         <div className={cx("flex items-center", gapClassName)}>
-          {PrefixIcon && <PrefixIcon className={iconClassName} />}
+          {PrefixIcon && (
+            <PrefixIcon
+              className={iconClassName}
+              strokeWidth={iconStrokeWidth}
+            />
+          )}
           {prefixText && <span>{prefixText}</span>}
         </div>
       ) : PrefixIcon ? (
-        <PrefixIcon className={iconClassName} />
+        <PrefixIcon className={iconClassName} strokeWidth={iconStrokeWidth} />
       ) : (
         prefixText || undefined
       );
@@ -218,10 +233,15 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
       suffix || (suffixText && SuffixIcon) ? (
         <div className={cx("flex items-center", gapClassName)}>
           {suffixText && <span>{suffixText}</span>}
-          {SuffixIcon && <SuffixIcon className={iconClassName} />}
+          {SuffixIcon && (
+            <SuffixIcon
+              className={iconClassName}
+              strokeWidth={iconStrokeWidth}
+            />
+          )}
         </div>
       ) : SuffixIcon ? (
-        <SuffixIcon className={iconClassName} />
+        <SuffixIcon className={iconClassName} strokeWidth={iconStrokeWidth} />
       ) : (
         suffixText || undefined
       );

@@ -1,3 +1,4 @@
+import { config } from "@/lib/config";
 import { cx, focusInput, hasErrorInput } from "@/lib/utils";
 import { Select as BaseSelect } from "@base-ui-components/react/select";
 import { Check, ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
@@ -5,7 +6,7 @@ import * as React from "react";
 
 /**
  * A select dropdown component built on Base UI's Select primitive.
- * 
+ *
  * Based on Base UI's Select (https://base-ui.com/react/components/select),
  * providing accessible dropdown selection with keyboard navigation, search,
  * and proper focus management. Features Tremor-inspired styling and validation states.
@@ -60,7 +61,7 @@ const selectTriggerStyles = [
 
 /**
  * Trigger button that opens the select dropdown.
- * 
+ *
  * Displays the selected value and dropdown indicator icon.
  * Supports error states for form validation feedback.
  * Features hover and focus states with proper accessibility.
@@ -112,7 +113,7 @@ SelectTrigger.displayName = "SelectTrigger";
 
 /**
  * Scroll up button that appears when there are more options above the visible area.
- * 
+ *
  * Automatically shows/hides based on scroll position in long option lists.
  * Provides visual indication and click handler for scrolling upward.
  */
@@ -135,7 +136,7 @@ SelectScrollUpButton.displayName = "SelectScrollUpButton";
 
 /**
  * Scroll down button that appears when there are more options below the visible area.
- * 
+ *
  * Automatically shows/hides based on scroll position in long option lists.
  * Provides visual indication and click handler for scrolling downward.
  */
@@ -151,14 +152,18 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <ChevronDown className="size-3 shrink-0" aria-hidden="true" />
+    <ChevronDown
+      className="size-3 shrink-0"
+      strokeWidth={config.getIconStrokeWidth()}
+      aria-hidden="true"
+    />
   </BaseSelect.ScrollDownArrow>
 ));
 SelectScrollDownButton.displayName = "SelectScrollDownButton";
 
 /**
  * Optional backdrop that appears behind the select dropdown.
- * 
+ *
  * Provides subtle background overlay and can close the dropdown when clicked.
  * Less prominent than modal backdrops, suitable for dropdown interactions.
  */
@@ -187,7 +192,7 @@ const SelectPortal = BaseSelect.Portal;
 
 /**
  * Positioner component that handles dropdown placement and collision detection.
- * 
+ *
  * Automatically positions the dropdown relative to the trigger with collision avoidance.
  * Typically used internally by SelectContent.
  */
@@ -206,7 +211,7 @@ SelectPositioner.displayName = "SelectPositioner";
 
 /**
  * Dropdown content container that holds the select options.
- * 
+ *
  * Automatically positions relative to the trigger with smart collision detection.
  * Includes built-in scroll buttons for long option lists and smooth animations.
  * Features portal rendering for proper layering.
@@ -295,7 +300,7 @@ SelectContent.displayName = "SelectContent";
 
 /**
  * Label component for grouping related select options.
- * 
+ *
  * Provides semantic labeling and visual separation for option groups.
  * Uses muted styling to distinguish from selectable items.
  *
@@ -328,7 +333,7 @@ SelectGroupLabel.displayName = "SelectGroupLabel";
 
 /**
  * Individual selectable option within the dropdown.
- * 
+ *
  * Displays option content with selection indicator and proper hover/focus states.
  * Supports keyboard navigation and shows selected state with checkmark icon.
  * Features disabled state styling for non-selectable options.

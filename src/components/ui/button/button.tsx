@@ -1,3 +1,4 @@
+import { config } from "@/lib/config";
 import { cx, focusRing } from "@/lib/utils";
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
@@ -9,13 +10,15 @@ import { Loader } from "../loader";
 const buttonVariants = tv({
   base: [
     // base
-    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-center text-sm font-medium shadow-xs outline-hidden",
+    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-center text-sm shadow-xs outline-hidden",
+    // cursor - explicit hand pointer for all interactive buttons
+    "cursor-pointer",
     // add transparent border to match input height
     "border border-transparent",
     // background transition with Apple easing - only animate colors and shadows, not position
     "transition-[background-color,border-color,box-shadow,color] duration-150 ease-[cubic-bezier(0,0,0.58,1)]",
     // disabled
-    "disabled:pointer-events-none disabled:shadow-none",
+    "disabled:pointer-events-none disabled:shadow-none disabled:cursor-not-allowed",
     // focus
     focusRing,
   ],
@@ -149,9 +152,11 @@ interface ButtonProps
   /** Text to display when loading (defaults to children) */
   loadingText?: string;
   /** Icon component to display on the left side */
-  leftIcon?: React.ComponentType<{ className?: string }>;
+  leftIcon?: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   /** Icon component to display on the right side */
-  rightIcon?: React.ComponentType<{ className?: string }>;
+  rightIcon?: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  /** Stroke width for icons (defaults to 1) */
+  iconStrokeWidth?: number;
   /** Whether the button should take full width */
   fullWidth?: boolean;
   /** Text alignment within the button */
@@ -202,6 +207,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       rounded,
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
+      iconStrokeWidth = config.getIconStrokeWidth(),
       children,
       fullWidth,
       textAlign,
@@ -231,13 +237,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Check if children is a complex element (custom layout)
     const hasCustomLayout = React.isValidElement(children);
 
-    // Icon size based on button size
+    // Icon size based on button size - adjusted for better proportions
     const iconSize =
       size === "sm" || size === "icon-sm"
-        ? "size-3.5"
+        ? "size-3" // 12px for small buttons
         : size === "lg" || size === "icon-lg"
-        ? "size-5"
-        : "size-4";
+        ? "size-4" // 16px for large buttons
+        : "size-3.5"; // 14px for default buttons (was size-4/16px)
     const iconClassName = `${iconSize} shrink-0`;
 
     // When loading, Loader replaces leftIcon, and we show loadingText or original children
@@ -323,6 +329,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       {effectiveLeftIcon &&
                         React.createElement(effectiveLeftIcon, {
                           className: iconClassName,
+                          strokeWidth: iconStrokeWidth,
                         })}
                     </div>
                   )}
@@ -338,7 +345,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {hasRightIcon && (
               <span className="flex items-center">
                 {RightIcon &&
-                  React.createElement(RightIcon, { className: iconClassName })}
+                  React.createElement(RightIcon, {
+                    className: iconClassName,
+                    strokeWidth: iconStrokeWidth,
+                  })}
               </span>
             )}
           </span>
@@ -382,6 +392,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       {effectiveLeftIcon &&
                         React.createElement(effectiveLeftIcon, {
                           className: iconClassName,
+                          strokeWidth: iconStrokeWidth,
                         })}
                     </div>
                   )}
@@ -398,7 +409,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {/* Right icon */}
             <span className="flex items-center">
               {RightIcon &&
-                React.createElement(RightIcon, { className: iconClassName })}
+                React.createElement(RightIcon, {
+                  className: iconClassName,
+                  strokeWidth: iconStrokeWidth,
+                })}
             </span>
           </span>
         );
@@ -435,6 +449,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                       {effectiveLeftIcon &&
                         React.createElement(effectiveLeftIcon, {
                           className: iconClassName,
+                          strokeWidth: iconStrokeWidth,
                         })}
                     </div>
                   )}
@@ -450,7 +465,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {/* Right icon with ml-auto to push to right */}
             <span className={`flex items-center ${fullWidth ? "ml-auto" : ""}`}>
               {RightIcon &&
-                React.createElement(RightIcon, { className: iconClassName })}
+                React.createElement(RightIcon, {
+                  className: iconClassName,
+                  strokeWidth: iconStrokeWidth,
+                })}
             </span>
           </span>
         );
@@ -486,6 +504,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     {effectiveLeftIcon &&
                       React.createElement(effectiveLeftIcon, {
                         className: iconClassName,
+                        strokeWidth: iconStrokeWidth,
                       })}
                   </div>
                 )}

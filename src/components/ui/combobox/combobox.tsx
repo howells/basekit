@@ -1,5 +1,6 @@
 "use client";
 
+import { config } from "@/lib/config";
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 
@@ -35,9 +36,9 @@ export interface ComboboxOption {
   /** Whether the option is disabled */
   disabled?: boolean;
   /** Icon to display on the left side */
-  leftIcon?: React.ComponentType<{ className?: string }>;
+  leftIcon?: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   /** Icon to display on the right side */
-  rightIcon?: React.ComponentType<{ className?: string }>;
+  rightIcon?: React.ComponentType<{ className?: string; strokeWidth?: number }>;
 }
 
 /**
@@ -75,6 +76,8 @@ export interface ComboboxProps {
   renderTrigger?: (selectedOption: ComboboxOption | null) => React.ReactNode;
   /** Custom render function for option items */
   renderItem?: (option: ComboboxOption) => React.ReactNode;
+  /** Stroke width for icons (defaults to 1) */
+  iconStrokeWidth?: number;
 }
 
 /**
@@ -156,6 +159,7 @@ export function Combobox({
   triggerFullWidth = true,
   renderTrigger,
   renderItem,
+  iconStrokeWidth = config.getIconStrokeWidth(),
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
 
@@ -170,7 +174,10 @@ export function Combobox({
       return (
         <>
           {selectedOption.leftIcon && (
-            <selectedOption.leftIcon className="size-4 shrink-0" />
+            <selectedOption.leftIcon
+              className="size-4 shrink-0"
+              strokeWidth={iconStrokeWidth}
+            />
           )}
           <span className="truncate">{selectedOption.label}</span>
         </>
@@ -188,7 +195,12 @@ export function Combobox({
     return (
       <>
         <div className="flex items-center gap-2 flex-1">
-          {option.leftIcon && <option.leftIcon className="size-4 shrink-0" />}
+          {option.leftIcon && (
+            <option.leftIcon
+              className="size-4 shrink-0"
+              strokeWidth={iconStrokeWidth}
+            />
+          )}
           <span className="truncate">{option.label}</span>
         </div>
         <Check

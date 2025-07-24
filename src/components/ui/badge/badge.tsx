@@ -5,6 +5,7 @@ import { useRender } from "@base-ui-components/react/use-render";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
+import { config } from "@/lib/config";
 import { cx, iconUtils, type ComponentWithIconsProps } from "@/lib/utils";
 
 // Define variants structure once - single source of truth
@@ -115,6 +116,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       bordered,
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
+      iconStrokeWidth = config.getIconStrokeWidth(),
       children,
       ...otherProps
     }: BadgeProps,
@@ -132,9 +134,16 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const renderBadgeContent = () => {
       return (
         <>
-          {hasLeftIcon && <LeftIcon className={iconClassName} />}
+          {hasLeftIcon && (
+            <LeftIcon className={iconClassName} strokeWidth={iconStrokeWidth} />
+          )}
           {hasChildren && children}
-          {hasRightIcon && <RightIcon className={iconClassName} />}
+          {hasRightIcon && (
+            <RightIcon
+              className={iconClassName}
+              strokeWidth={iconStrokeWidth}
+            />
+          )}
         </>
       );
     };

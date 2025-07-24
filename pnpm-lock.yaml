@@ -80,9 +80,6 @@ importers:
       '@react-stately/datepicker':
         specifier: ^3.15.0
         version: 3.15.0(react@19.1.0)
-      '@remixicon/react':
-        specifier: ^4.6.0
-        version: 4.6.0(react@19.1.0)
       '@types/react-syntax-highlighter':
         specifier: ^15.5.13
         version: 15.5.13
@@ -1270,11 +1267,6 @@ packages:
         optional: true
       react-redux:
         optional: true
-
-  '@remixicon/react@4.6.0':
-    resolution: {integrity: sha512-bY56maEgT5IYUSRotqy9h03IAKJC85vlKtWFg2FKzfs8JPrkdBAYSa9dxoUSKFwGzup8Ux6vjShs9Aec3jvr2w==}
-    peerDependencies:
-      react: '>=18.2.0'
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -4341,10 +4333,6 @@ snapshots:
     optionalDependencies:
       react: 19.1.0
       react-redux: 9.2.0(@types/react@19.1.8)(react@19.1.0)(redux@5.0.1)
-
-  '@remixicon/react@4.6.0(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
 
   '@rtsao/scc@1.1.0': {}
 

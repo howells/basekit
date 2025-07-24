@@ -1,10 +1,10 @@
 /**
  * Icon Select Component
- * 
+ *
  * A searchable icon picker component built on Combobox for selecting from
  * a curated collection of Lucide React icons. Provides visual icon previews,
  * search functionality, and easy integration with forms and settings.
- * 
+ *
  * Features:
  * - Curated collection of 75+ commonly used icons
  * - Searchable dropdown with icon previews
@@ -12,7 +12,7 @@
  * - Custom hook for state management
  * - Utility functions for icon retrieval
  * - Built on Combobox for consistent UX
- * 
+ *
  * @example
  * ```tsx
  * // Basic icon select
@@ -21,11 +21,11 @@
  *   onValueChange={setSelectedIcon}
  *   placeholder="Choose an icon..."
  * />
- * 
+ *
  * // With custom hook
  * function MyComponent() {
  *   const { value, setValue, IconComponent } = useIconSelect('Star');
- *   
+ *
  *   return (
  *     <div>
  *       <IconSelect value={value} onValueChange={setValue} />
@@ -33,7 +33,7 @@
  *     </div>
  *   );
  * }
- * 
+ *
  * // Form integration
  * <form>
  *   <label htmlFor="icon">Button Icon</label>
@@ -43,7 +43,7 @@
  *     placeholder="Select button icon"
  *   />
  * </form>
- * 
+ *
  * // Settings panel
  * <div className="space-y-4">
  *   <div>
@@ -53,7 +53,7 @@
  *       onValueChange={(icon) => updateSetting('notificationIcon', icon)}
  *     />
  *   </div>
- *   
+ *
  *   <div>
  *     <label>Status Icon</label>
  *     <IconSelect
@@ -63,11 +63,11 @@
  *     />
  *   </div>
  * </div>
- * 
+ *
  * // Dynamic icon rendering
  * function IconDisplay({ iconName }: { iconName: string }) {
  *   const IconComponent = getIconByName(iconName);
- *   
+ *
  *   return IconComponent ? (
  *     <IconComponent className="w-8 h-8 text-blue-500" />
  *   ) : (
@@ -80,6 +80,7 @@
 "use client";
 
 import { Combobox, ComboboxOption } from "@/components/ui/combobox";
+import { config } from "@/lib/config";
 import { cx } from "@/lib/utils";
 import {
   AlertCircle,
@@ -164,19 +165,21 @@ import React from "react";
 
 /**
  * Type definition for Lucide React icon components.
- * 
+ *
  * Defines the interface for Lucide icon components with common props.
  */
-type LucideIcon = React.ComponentType<{ 
+type LucideIcon = React.ComponentType<{
   /** Icon size in pixels */
-  size?: number; 
+  size?: number;
   /** CSS classes for styling */
-  className?: string; 
+  className?: string;
+  /** Stroke width for consistent styling */
+  strokeWidth?: number;
 }>;
 
 /**
  * Curated collection of commonly used Lucide React icons.
- * 
+ *
  * Hand-picked selection of 75+ icons covering common use cases
  * including navigation, actions, status, media, and system icons.
  */
@@ -262,7 +265,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 /**
  * Pre-formatted options for the combobox component.
- * 
+ *
  * Converts the icon map into ComboboxOption format with icon previews.
  */
 const iconOptions: ComboboxOption[] = Object.entries(iconMap).map(
@@ -275,7 +278,7 @@ const iconOptions: ComboboxOption[] = Object.entries(iconMap).map(
 
 /**
  * Props for the IconSelect component.
- * 
+ *
  * Configuration for icon selection behavior and appearance.
  */
 export interface IconSelectProps {
@@ -289,11 +292,13 @@ export interface IconSelectProps {
   disabled?: boolean;
   /** Additional CSS classes */
   className?: string;
+  /** Stroke width for icons (defaults to 1) */
+  iconStrokeWidth?: number;
 }
 
 /**
  * Icon selection component with searchable dropdown interface.
- * 
+ *
  * Provides a user-friendly icon picker built on the Combobox component.
  * Features visual icon previews, search functionality, and type-safe selection
  * from a curated collection of 75+ Lucide React icons.
@@ -313,7 +318,7 @@ export interface IconSelectProps {
  *   onValueChange={setSelectedIcon}
  *   placeholder="Choose an icon..."
  * />
- * 
+ *
  * // Disabled state
  * <IconSelect
  *   value="Star"
@@ -328,6 +333,7 @@ export function IconSelect({
   placeholder = "Select an icon...",
   disabled = false,
   className,
+  iconStrokeWidth = config.getIconStrokeWidth(),
 }: IconSelectProps) {
   const renderItem = (option: ComboboxOption) => {
     const IconComponent = option.leftIcon;
@@ -336,7 +342,12 @@ export function IconSelect({
     return (
       <>
         <div className="flex items-center gap-2 flex-1">
-          {IconComponent && <IconComponent className="size-4 shrink-0" />}
+          {IconComponent && (
+            <IconComponent
+              className="size-4 shrink-0"
+              strokeWidth={iconStrokeWidth}
+            />
+          )}
           <span className="truncate">{option.label}</span>
         </div>
         <Check
@@ -361,13 +372,14 @@ export function IconSelect({
       className={className}
       buttonClassName="justify-start"
       renderItem={renderItem}
+      iconStrokeWidth={iconStrokeWidth}
     />
   );
 }
 
 /**
  * Custom hook for managing icon selection state.
- * 
+ *
  * Provides convenient state management for icon selection with automatic
  * icon component resolution. Returns the current value, setter function,
  * and the resolved icon component for rendering.
@@ -380,7 +392,7 @@ export function IconSelect({
  * ```tsx
  * function MyComponent() {
  *   const { value, setValue, IconComponent } = useIconSelect('Star');
- *   
+ *
  *   return (
  *     <div>
  *       <IconSelect value={value} onValueChange={setValue} />
@@ -390,11 +402,11 @@ export function IconSelect({
  *     </div>
  *   );
  * }
- * 
+ *
  * // With dynamic icon display
  * function IconPreview() {
  *   const { value, setValue, IconComponent } = useIconSelect();
- *   
+ *
  *   return (
  *     <div className="space-y-4">
  *       <IconSelect value={value} onValueChange={setValue} />
@@ -419,7 +431,7 @@ export function useIconSelect(initialValue?: string) {
 
 /**
  * Utility function to retrieve an icon component by name.
- * 
+ *
  * Looks up an icon component from the curated icon map by its string name.
  * Returns null if the icon name is not found in the available collection.
  *
@@ -432,7 +444,7 @@ export function useIconSelect(initialValue?: string) {
  * // Dynamic icon rendering
  * function IconDisplay({ iconName }: { iconName: string }) {
  *   const IconComponent = getIconByName(iconName);
- *   
+ *
  *   return IconComponent ? (
  *     <IconComponent className="w-8 h-8 text-blue-500" />
  *   ) : (
@@ -441,17 +453,17 @@ export function useIconSelect(initialValue?: string) {
  *     </div>
  *   );
  * }
- * 
+ *
  * // Conditional icon rendering
  * function NotificationIcon({ type }: { type: string }) {
  *   const iconName = type === 'success' ? 'Check' : 'AlertCircle';
  *   const IconComponent = getIconByName(iconName);
- *   
+ *
  *   return IconComponent ? (
  *     <IconComponent className="w-5 h-5" />
  *   ) : null;
  * }
- * 
+ *
  * // Safe icon lookup
  * const maybeIcon = getIconByName('NonExistentIcon'); // returns null
  * const validIcon = getIconByName('Star'); // returns Star component
@@ -463,7 +475,7 @@ export function getIconByName(name: string): LucideIcon | null {
 
 /**
  * Array of all available icon names in the collection.
- * 
+ *
  * Provides a list of all icon names that can be used with the IconSelect
  * component and related utilities. Useful for validation, documentation,
  * and building icon galleries.
@@ -487,12 +499,12 @@ export function getIconByName(name: string): LucideIcon | null {
  *     </div>
  *   );
  * }
- * 
+ *
  * // Validation
  * function isValidIcon(iconName: string): boolean {
  *   return availableIcons.includes(iconName);
  * }
- * 
+ *
  * // Random icon picker
  * function getRandomIcon(): string {
  *   const randomIndex = Math.floor(Math.random() * availableIcons.length);
