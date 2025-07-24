@@ -87,7 +87,7 @@ export function SidebarHeader({
       {...props}
       className={clsx(
         className,
-        "flex flex-col border-b border-zinc-950/5 dark:border-white/5 transition-all duration-200",
+        "h-16 flex flex-col border-b border-zinc-950/5 dark:border-white/5 transition-all duration-200",
         "[&>[data-slot=section]+[data-slot=section]]:mt-2.5"
       )}
     />

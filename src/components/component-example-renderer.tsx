@@ -85,7 +85,11 @@ export function ComponentExampleRenderer({
   }
 
   try {
-    return <ExampleComponent />;
+    return (
+      <div className="flex items-center justify-center min-h-[80px] p-4">
+        <ExampleComponent />
+      </div>
+    );
   } catch (renderError) {
     return (
       <div className="text-red-500 text-sm p-4 border border-red-200 rounded bg-red-50 dark:bg-red-950/20">

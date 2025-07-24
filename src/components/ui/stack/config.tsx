@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "stack",
   name: "Stack",
-  description: "A layout component that arranges its children vertically or horizontally with consistent spacing.",
+  description:
+    "A layout component that arranges its children vertically or horizontally with consistent spacing.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -76,7 +77,7 @@ export const componentConfig: ComponentConfig = {
       description: "Stack with various alignment options",
       code: `<Stack align="center" className="h-32 bg-gray-50">
   <div className="rounded bg-purple-100 px-4 py-2">Centered Item 1</div>
-  <div className="rounded bg-purple-100 px-8 py-2">Centered Item 2</div>
+  <div className="rounded bg-purple-100 px-6 py-2">Centered Item 2</div>
   <div className="rounded bg-purple-100 px-12 py-2">Centered Item 3</div>
 </Stack>`,
     },

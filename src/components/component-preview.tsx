@@ -331,7 +331,7 @@ export function ComponentPreview({
   return (
     <Tabs defaultValue="preview">
       <VStack>
-        <TabsList className="px-8">
+        <TabsList className="px-6">
           <TabsTrigger value="preview">Preview</TabsTrigger>
           <TabsTrigger value="code">Code</TabsTrigger>
         </TabsList>
@@ -339,7 +339,7 @@ export function ComponentPreview({
           <div className="flex justify-center">{renderComponent()}</div>
         </TabsContent>
         <TabsContent value="code">
-          <div className="px-8">
+          <div className="px-6">
             <CodeBlock language="tsx">
               {generateLiveCode(getComponentName(componentId), componentProps)}
             </CodeBlock>

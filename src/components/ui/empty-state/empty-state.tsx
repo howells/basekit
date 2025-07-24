@@ -1,10 +1,10 @@
 /**
  * Empty State Component
- * 
+ *
  * A component for displaying empty states when there's no content to show.
  * Provides a structured layout with optional icon, title, description, and
  * action buttons to guide users toward taking action.
- * 
+ *
  * Features:
  * - Multiple size variants (sm, default, lg)
  * - Visual variants (default, minimal)
@@ -12,7 +12,7 @@
  * - Primary and secondary action buttons
  * - Link and button action support
  * - Responsive design
- * 
+ *
  * @example
  * ```tsx
  * // Basic empty state
@@ -20,7 +20,7 @@
  *   title="No items found"
  *   description="Get started by creating your first item."
  * />
- * 
+ *
  * // With icon and actions
  * <EmptyState
  *   icon={Plus}
@@ -35,7 +35,7 @@
  *     onClick: () => openImport()
  *   }}
  * />
- * 
+ *
  * // Large variant with link actions
  * <EmptyState
  *   size="lg"
@@ -51,7 +51,7 @@
  *     href: "/docs"
  *   }}
  * />
- * 
+ *
  * // Minimal variant
  * <EmptyState
  *   variant="minimal"
@@ -59,7 +59,7 @@
  *   title="No notifications"
  *   description="You're all caught up!"
  * />
- * 
+ *
  * // Search results empty state
  * <EmptyState
  *   icon={Search}
@@ -82,10 +82,10 @@ import { Text } from "../text";
 
 /**
  * Props for the EmptyState component.
- * 
+ *
  * Configuration for empty state display including content, actions,
  * and visual appearance options.
- * 
+ *
  * @interface EmptyStateProps
  * @extends React.HTMLAttributes<HTMLDivElement>
  */
@@ -124,7 +124,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * A component for displaying empty states when there's no content to show.
- * 
+ *
  * Provides a structured layout with optional icon, title, description, and
  * action buttons to guide users toward taking action. Supports multiple
  * size and visual variants for different contexts.
@@ -146,7 +146,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
  *   title="No items found"
  *   description="Get started by creating your first item."
  * />
- * 
+ *
  * // With icon and actions
  * <EmptyState
  *   icon={Plus}
@@ -161,7 +161,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
  *     onClick: () => openImport()
  *   }}
  * />
- * 
+ *
  * // Large variant with link actions
  * <EmptyState
  *   size="lg"
@@ -177,7 +177,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
  *     href: "/docs"
  *   }}
  * />
- * 
+ *
  * // Minimal variant
  * <EmptyState
  *   variant="minimal"
@@ -185,7 +185,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
  *   title="No notifications"
  *   description="You're all caught up!"
  * />
- * 
+ *
  * // Search results empty state
  * <EmptyState
  *   icon={Search}
@@ -196,7 +196,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
  *     onClick: () => clearSearch()
  *   }}
  * />
- * 
+ *
  * // Error empty state
  * <EmptyState
  *   icon={AlertCircle}
@@ -235,8 +235,8 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
           // Base styles
           "flex flex-col items-center justify-center text-center",
           // Spacing based on size
-          size === "sm" && "gap-3 py-8 px-6",
-          size === "default" && "gap-4 py-12 px-8",
+          size === "sm" && "gap-3 py-8 px-4",
+          size === "default" && "gap-4 py-12 px-6",
           size === "lg" && "gap-6 py-16 px-12",
           // Max width
           "max-w-md mx-auto",

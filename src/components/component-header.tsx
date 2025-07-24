@@ -11,7 +11,7 @@ interface ComponentHeaderProps {
 
 export function ComponentHeader({ config }: ComponentHeaderProps) {
   return (
-    <div className="space-y-2 px-8 py-8 border-b">
+    <div className="space-y-2 px-6 py-6 border-b">
       <div className="flex items-center gap-3">
         <Heading level={1}>{config.name}</Heading>
         {config.badge && <Badge variant="neutral">{config.badge}</Badge>}

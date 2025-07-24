@@ -101,7 +101,7 @@ export const AsLinkExample = () => (
 
 // Keyboard shortcuts
 export const KeyboardShortcutsExample = () => (
-  <div className="flex flex-col gap-3 items-start">
+  <div className="flex gap-3 items-start">
     <Button kbd={["mod", "K"]} leftIcon={Plus}>
       Search
     </Button>
