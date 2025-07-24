@@ -86,7 +86,7 @@ export const WithDisabledDatesExample = () => {
 
 // Week starts on different days
 export const WeekStartsOnExample = () => (
-  <div className="grid grid-cols-2 gap-4">
+  <div className="space-y-6">
     <div>
       <p className="text-sm font-medium mb-2">Monday start</p>
       <Calendar weekStartsOn={1} />
@@ -105,7 +105,7 @@ export const CompactExample = () => (
 
 // Calendar with today highlighting disabled
 export const WithoutTodayHighlightExample = () => (
-  <div className="grid grid-cols-2 gap-4">
+  <div className="space-y-6">
     <div>
       <p className="text-sm font-medium mb-2">With today highlight (default)</p>
       <Calendar showToday={true} />
@@ -119,7 +119,7 @@ export const WithoutTodayHighlightExample = () => (
 
 // Calendar with "Go to Today" button
 export const WithTodayButtonExample = () => (
-  <div className="grid grid-cols-2 gap-4">
+  <div className="space-y-6">
     <div>
       <p className="text-sm font-medium mb-2">Without today button (default)</p>
       <Calendar />
@@ -133,7 +133,7 @@ export const WithTodayButtonExample = () => (
 
 // Calendar with fixed weeks
 export const FixedWeeksExample = () => (
-  <div className="grid grid-cols-2 gap-4">
+  <div className="space-y-6">
     <div>
       <p className="text-sm font-medium mb-2">Variable weeks (default)</p>
       <Calendar />

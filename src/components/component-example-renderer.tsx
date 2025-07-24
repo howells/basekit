@@ -86,7 +86,7 @@ export function ComponentExampleRenderer({
 
   try {
     return (
-      <div className="flex items-center justify-center min-h-[80px] p-4">
+      <div className="flex justify-center">
         <ExampleComponent />
       </div>
     );

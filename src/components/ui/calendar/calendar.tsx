@@ -372,7 +372,7 @@ const Calendar = ({
             "text-sm font-medium text-gray-900 dark:text-gray-50",
             "capitalize tabular-nums"
           ),
-          nav: captionLayout === "label" ? "hidden" : undefined, // Only hide nav for label layout
+          nav: "hidden", // Always hide native nav since we provide custom navigation
           month_grid: "w-full border-collapse space-y-1",
           weekdays: cx("grid", showWeekNumber ? "grid-cols-8" : "grid-cols-7"),
           weekday: cx(

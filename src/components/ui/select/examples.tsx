@@ -117,7 +117,7 @@ export function SmallSizeExample({
 }: { size?: "default" | "sm" } & React.ComponentProps<typeof Select>) {
   return (
     <Select {...props}>
-      <SelectTrigger size={size} className="w-[150px]">
+      <SelectTrigger size={size}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

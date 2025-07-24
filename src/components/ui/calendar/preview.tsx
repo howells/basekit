@@ -36,22 +36,34 @@ export const CalendarExample = ({
   // Add mode-specific props
   if (mode === "single") {
     return (
-      <Calendar {...calendarProps} mode="single" selected={selected as Date} />
+      <div className="w-fit">
+        <Calendar
+          {...calendarProps}
+          mode="single"
+          selected={selected as Date}
+        />
+      </div>
     );
   } else if (mode === "range") {
     return (
-      <Calendar
-        {...calendarProps}
-        mode="range"
-        selected={
-          selected && typeof selected === 'object' && 'from' in selected
-            ? { from: (selected as any).from, to: (selected as any).to }
-            : undefined
-        }
-      />
+      <div className="w-fit">
+        <Calendar
+          {...calendarProps}
+          mode="range"
+          selected={
+            selected && typeof selected === "object" && "from" in selected
+              ? { from: (selected as any).from, to: (selected as any).to }
+              : undefined
+          }
+        />
+      </div>
     );
   }
 
   // Default case
-  return <Calendar {...calendarProps} />;
+  return (
+    <div className="w-fit">
+      <Calendar {...calendarProps} />
+    </div>
+  );
 };
