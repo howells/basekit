@@ -1,13 +1,9 @@
 import { ComponentExamples } from "@/components/component-examples";
 import { ComponentHeader } from "@/components/component-header";
-import { ComponentPreview } from "@/components/component-preview";
-import { PropExplorerProvider } from "@/components/prop-explorer-context";
-import { PropExplorerContent } from "@/components/prop-explorer-controls";
-import { Inspector, InspectorBody } from "@/components/ui/inspector";
-import { Subheading } from "@/components/ui/subheading/subheading";
+import { ComponentPropExplorer } from "@/components/component-prop-explorer";
+import { Separator } from "@/components/ui/separator";
 import { COMPONENT_LIST, getComponentConfig } from "@/lib/component-registry";
 import { createComponentConfig } from "@/lib/config-helpers";
-import { PropMetadata } from "@/lib/prop-explorer";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -123,72 +119,22 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     notFound();
   }
 
-  // Extract default values from props if available
-  const getDefaultProps = () => {
-    if (!config.props) return {};
-
-    const defaultProps: Record<string, unknown> = {};
-
-    // Extract default values from props
-    config.props.forEach((prop: PropMetadata) => {
-      if (prop.defaultValue !== undefined) {
-        defaultProps[prop.name] = prop.defaultValue;
-      }
-    });
-
-    // Add default children if the component supports it
-    const childrenProp = config.props.find(
-      (prop: PropMetadata) => prop.name === "children"
-    );
-    if (childrenProp && childrenProp.defaultValue !== undefined) {
-      defaultProps.children = childrenProp.defaultValue;
-    } else if (childrenProp) {
-      // Fallback to component name if no defaultValue is specified
-      defaultProps.children = config.name;
-    }
-
-    return defaultProps;
-  };
-
-  // Create a serializable version of the config without render functions
-  const serializableConfig = {
-    ...config,
-    examples:
-      config.examples?.map((example: (typeof config.examples)[number]) => ({
-        ...example,
-        // Remove render function to avoid serialization issues
-        render: undefined,
-      })) || [],
-  };
-
   return (
-    <div className="h-screen flex flex-col">
+    <div>
       {/* Header */}
-      <ComponentHeader config={serializableConfig} />
+      <ComponentHeader config={config} />
 
-      {/* Main Content - Always use Inspector layout */}
-      <PropExplorerProvider defaultProps={getDefaultProps()}>
-        <div className="flex flex-1 h-0">
-          {/* Main content - Live preview and examples */}
-          <div className="flex-1">
-            <div className="space-y-8">
-              <ComponentPreview
-                componentId={config.componentId || component}
-                category={category}
-              />
+      {/* Main Content - Use ComponentPropExplorer */}
+      <ComponentPropExplorer
+        config={config}
+        category={category}
+        component={component}
+      />
 
-              <ComponentExamples componentId={component} />
-            </div>
-          </div>
+      <Separator />
 
-          {/* Right sidebar - Inspector */}
-          <Inspector>
-            <InspectorBody>
-              <PropExplorerContent config={serializableConfig} />
-            </InspectorBody>
-          </Inspector>
-        </div>
-      </PropExplorerProvider>
+      {/* Examples */}
+      <ComponentExamples componentId={component} />
     </div>
   );
 }

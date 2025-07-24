@@ -23,9 +23,21 @@ export const CollapsibleExample = ({
   openIcon?: React.ComponentType<{ className?: string }>;
   [key: string]: unknown;
 }) => {
+  const [open, setOpen] = React.useState(defaultOpen);
+
+  // Update state when defaultOpen prop changes
+  React.useEffect(() => {
+    setOpen(defaultOpen);
+  }, [defaultOpen]);
+
   return (
     <div className="w-full max-w-md">
-      <Collapsible defaultOpen={defaultOpen} disabled={disabled} {...props}>
+      <Collapsible
+        open={open}
+        onOpenChange={setOpen}
+        disabled={disabled}
+        {...props}
+      >
         <CollapsibleTrigger closedIcon={closedIcon} openIcon={openIcon}>
           {title}
         </CollapsibleTrigger>

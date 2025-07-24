@@ -1,4 +1,5 @@
 import { SidebarLayout } from "@/components/sidebar-layout";
+import { ReactQueryProvider } from "@/lib/react-query";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -23,9 +24,11 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </head>
       <body>
-        <div className="isolate">
-          <SidebarLayout>{children}</SidebarLayout>
-        </div>
+        <ReactQueryProvider>
+          <div className="isolate">
+            <SidebarLayout>{children}</SidebarLayout>
+          </div>
+        </ReactQueryProvider>
       </body>
     </html>
   );

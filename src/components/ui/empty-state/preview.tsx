@@ -1,5 +1,5 @@
 import React from "react";
-import { getIconByName } from "../icon-select";
+import { getDynamicIconByName } from "../icon-select";
 import { EmptyState } from "./empty-state";
 
 export const EmptyStateExample = ({
@@ -25,7 +25,8 @@ export const EmptyStateExample = ({
   secondaryActionLabel?: string;
   [key: string]: unknown;
 }) => {
-  const IconComponent = typeof icon === "string" ? getIconByName(icon) : null;
+  const IconComponent =
+    typeof icon === "string" ? getDynamicIconByName(icon) : null;
 
   return (
     <EmptyState

@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card/card";
 import { CodeBlock } from "@/components/ui/code-block/code-block";
-import { getIconByName } from "@/components/ui/icon-select";
+import { getDynamicIconByName } from "@/components/ui/icon-select";
 import { Loader } from "@/components/ui/loader/loader";
 import { VStack } from "@/components/ui/stack";
 import {
@@ -290,7 +290,7 @@ export function ComponentPreview({
       const isIconProp = key === "icon" || key.endsWith("Icon");
 
       if (isIconProp && typeof value === "string" && value.trim() !== "") {
-        const iconComponent = getIconByName(value);
+        const iconComponent = getDynamicIconByName(value);
         if (iconComponent) {
           finalProps[key] = iconComponent;
         }

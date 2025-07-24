@@ -1,25 +1,27 @@
 /**
  * Inspector Components
- * 
+ *
  * A side panel component system for displaying detailed information, properties,
  * or controls related to selected content. Similar to sidebar components but
  * specifically designed for inspection and detail views.
- * 
+ *
  * Features:
  * - Fixed-width side panel layout
+ * - Toggleable overlay mode for mobile devices
+ * - Smooth slide-in/out animations
  * - Structured header, body, and section organization
  * - Scrollable content area
  * - Responsive border and background styling
  * - Dark mode support
  * - Flexible content organization
- * 
+ * - Floating toggle button with customizable positioning
+ *
  * @example
  * ```tsx
- * // Basic inspector panel
+ * // Static inspector panel (desktop)
  * <Inspector>
  *   <InspectorHeader>
  *     <h2>Properties</h2>
- *     <button>Close</button>
  *   </InspectorHeader>
  *   <InspectorBody>
  *     <InspectorSection>
@@ -27,14 +29,28 @@
  *         <label>Width</label>
  *         <input type="number" value={width} />
  *       </InspectorGroup>
- *       <InspectorGroup>
- *         <label>Height</label>
- *         <input type="number" value={height} />
- *       </InspectorGroup>
  *     </InspectorSection>
  *   </InspectorBody>
  * </Inspector>
- * 
+ *
+ * // Toggleable inspector with responsive behavior
+ * const [isOpen, setIsOpen] = useState(false);
+ *
+ * // Desktop: Static sidebar
+ * <div className="hidden lg:block">
+ *   <Inspector>
+ *     <InspectorBody>Content</InspectorBody>
+ *   </Inspector>
+ * </div>
+ *
+ * // Mobile: Toggleable overlay
+ * <Inspector isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)} asOverlay>
+ *   <InspectorBody>Content</InspectorBody>
+ * </Inspector>
+ *
+ * // Toggle button
+ * <InspectorToggle isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)} />
+ *
  * // Design tool inspector
  * <Inspector>
  *   <InspectorHeader>
@@ -54,7 +70,7 @@
  *         </select>
  *       </InspectorGroup>
  *     </InspectorSection>
- *     
+ *
  *     <InspectorSection>
  *       <h3>Typography</h3>
  *       <InspectorGroup>
@@ -64,7 +80,7 @@
  *     </InspectorSection>
  *   </InspectorBody>
  * </Inspector>
- * 
+ *
  * // File properties inspector
  * <Inspector>
  *   <InspectorHeader>
@@ -90,57 +106,109 @@
  * ```
  */
 
+import { config } from "@/lib/config";
 import { cx } from "@/lib/utils";
+import { Settings, X } from "lucide-react";
 import React from "react";
 
 /**
  * Root inspector component providing the main panel container.
- * 
- * Creates a fixed-width side panel with proper borders and background styling.
- * Typically positioned on the right side of the interface for detailed views
- * and property editing.
+ *
+ * Creates a toggleable side panel that slides in from the right with proper borders
+ * and background styling. Can be used as a static panel or as a toggleable overlay.
  *
  * @param className - Additional CSS classes
+ * @param isOpen - Whether the inspector is open (for toggleable mode)
+ * @param onToggle - Callback to toggle the inspector state
+ * @param asOverlay - Whether to render as an overlay that slides over content
  * @param props - Additional HTML aside element props
  *
  * @component
  * @example
  * ```tsx
- * // Basic inspector
+ * // Static inspector (original behavior)
  * <Inspector>
  *   <InspectorHeader>Inspector Title</InspectorHeader>
  *   <InspectorBody>Inspector content here</InspectorBody>
  * </Inspector>
- * 
- * // Custom styling
- * <Inspector className="w-96 border-blue-200">
- *   <InspectorHeader>Custom Inspector</InspectorHeader>
+ *
+ * // Toggleable overlay inspector
+ * <Inspector
+ *   isOpen={isInspectorOpen}
+ *   onToggle={setIsInspectorOpen}
+ *   asOverlay
+ * >
+ *   <InspectorHeader>Toggleable Inspector</InspectorHeader>
  *   <InspectorBody>Content</InspectorBody>
  * </Inspector>
  * ```
  */
 export function Inspector({
   className,
+  isOpen,
+  onToggle,
+  asOverlay = false,
   ...props
-}: React.ComponentPropsWithoutRef<"aside">) {
+}: React.ComponentPropsWithoutRef<"aside"> & {
+  isOpen?: boolean;
+  onToggle?: () => void;
+  asOverlay?: boolean;
+}) {
+  // If not toggleable, render as static panel (original behavior)
+  if (!asOverlay && isOpen === undefined) {
+    return (
+      <aside
+        className={cx(
+          // Base layout
+          "flex h-full w-80 flex-shrink-0 flex-col",
+          // Border and background
+          "border-l border-zinc-200 bg-zinc-50/50",
+          "dark:border-zinc-800 dark:bg-zinc-900/50",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+
+  // Toggleable overlay mode
   return (
-    <aside
-      className={cx(
-        // Base layout
-        "flex h-full w-80 flex-shrink-0 flex-col",
-        // Border and background
-        "border-l border-zinc-200 bg-zinc-50/50",
-        "dark:border-zinc-800 dark:bg-zinc-900/50",
-        className
+    <>
+      {/* Backdrop */}
+      {asOverlay && isOpen && (
+        <div
+          className="fixed inset-0 bg-black/20 dark:bg-black/40 z-40 lg:hidden"
+          onClick={onToggle}
+        />
       )}
-      {...props}
-    />
+
+      {/* Inspector Panel */}
+      <aside
+        className={cx(
+          // Base layout
+          "flex h-full w-80 flex-shrink-0 flex-col",
+          // Border and background
+          "border-l border-zinc-200 bg-zinc-50/50",
+          "dark:border-zinc-800 dark:bg-zinc-900/50",
+          // Overlay positioning and animation
+          asOverlay && [
+            "fixed right-0 top-0 z-50 shadow-xl",
+            "transform transition-transform duration-300 ease-in-out",
+            isOpen ? "translate-x-0" : "translate-x-full",
+            // On larger screens, show as static sidebar
+            "lg:relative lg:translate-x-0 lg:shadow-none",
+          ],
+          className
+        )}
+        {...props}
+      />
+    </>
   );
 }
 
 /**
  * Inspector header component for titles and controls.
- * 
+ *
  * Provides a fixed header area at the top of the inspector panel.
  * Typically contains titles, close buttons, or other header controls
  * with proper spacing and border separation.
@@ -155,7 +223,7 @@ export function Inspector({
  * <InspectorHeader>
  *   <h2>Properties</h2>
  * </InspectorHeader>
- * 
+ *
  * // Header with controls
  * <InspectorHeader>
  *   <div className="flex items-center justify-between">
@@ -163,7 +231,7 @@ export function Inspector({
  *     <button>✕</button>
  *   </div>
  * </InspectorHeader>
- * 
+ *
  * // Header with icon
  * <InspectorHeader>
  *   <div className="flex items-center gap-2">
@@ -193,7 +261,7 @@ export function InspectorHeader({
 
 /**
  * Inspector body component for main scrollable content.
- * 
+ *
  * Provides the main content area of the inspector with automatic scrolling
  * when content overflows. Contains inspector sections and groups with
  * appropriate padding and spacing.
@@ -210,12 +278,12 @@ export function InspectorHeader({
  *     Content sections here
  *   </InspectorSection>
  * </InspectorBody>
- * 
+ *
  * // Body with custom padding
  * <InspectorBody className="px-4 py-2">
  *   Custom padded content
  * </InspectorBody>
- * 
+ *
  * // Scrollable content
  * <InspectorBody>
  *   {longListOfItems.map(item => (
@@ -244,7 +312,7 @@ export function InspectorBody({
 
 /**
  * Inspector section component for organizing related content.
- * 
+ *
  * Groups related inspector content with consistent vertical spacing.
  * Typically contains multiple inspector groups or related form controls
  * with semantic organization.
@@ -263,7 +331,7 @@ export function InspectorBody({
  *     <input type="number" />
  *   </InspectorGroup>
  * </InspectorSection>
- * 
+ *
  * // Multiple sections
  * <InspectorBody>
  *   <InspectorSection>
@@ -275,7 +343,7 @@ export function InspectorBody({
  *     <!-- appearance controls -->
  *   </InspectorSection>
  * </InspectorBody>
- * 
+ *
  * // Section with custom spacing
  * <InspectorSection className="space-y-4">
  *   Content with larger spacing
@@ -300,7 +368,7 @@ export function InspectorSection({
 
 /**
  * Inspector group component for form control groupings.
- * 
+ *
  * Provides tight spacing for related form elements like labels and inputs.
  * Used within inspector sections to create logical groupings of controls
  * with consistent vertical rhythm.
@@ -316,7 +384,7 @@ export function InspectorSection({
  *   <label>Button Text</label>
  *   <input type="text" value={buttonText} />
  * </InspectorGroup>
- * 
+ *
  * // Multiple groups
  * <InspectorSection>
  *   <InspectorGroup>
@@ -328,13 +396,13 @@ export function InspectorSection({
  *     <input type="number" value={height} />
  *   </InspectorGroup>
  * </InspectorSection>
- * 
+ *
  * // Group with description list
  * <InspectorGroup>
  *   <dt className="font-medium">File Size</dt>
  *   <dd className="text-sm text-gray-600">2.4 MB</dd>
  * </InspectorGroup>
- * 
+ *
  * // Group with complex controls
  * <InspectorGroup>
  *   <label>Color</label>
@@ -358,5 +426,91 @@ export function InspectorGroup({
       )}
       {...props}
     />
+  );
+}
+
+/**
+ * Toggle button for opening/closing the inspector panel.
+ *
+ * Provides a floating action button that can be positioned anywhere to trigger
+ * the inspector panel. Shows different icons based on the inspector state.
+ *
+ * @param isOpen - Whether the inspector is currently open
+ * @param onToggle - Callback to toggle the inspector state
+ * @param className - Additional CSS classes
+ * @param position - Positioning classes (defaults to fixed bottom-right)
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Default floating toggle button
+ * <InspectorToggle
+ *   isOpen={isInspectorOpen}
+ *   onToggle={() => setIsInspectorOpen(!isInspectorOpen)}
+ * />
+ *
+ * // Custom positioned toggle
+ * <InspectorToggle
+ *   isOpen={isInspectorOpen}
+ *   onToggle={() => setIsInspectorOpen(!isInspectorOpen)}
+ *   position="fixed top-4 right-4"
+ * />
+ *
+ * // Inline toggle button
+ * <InspectorToggle
+ *   isOpen={isInspectorOpen}
+ *   onToggle={() => setIsInspectorOpen(!isInspectorOpen)}
+ *   position="relative"
+ * />
+ * ```
+ */
+export function InspectorToggle({
+  isOpen,
+  onToggle,
+  className,
+  position = "fixed bottom-6 right-6 lg:hidden",
+  ...props
+}: {
+  isOpen: boolean;
+  onToggle: () => void;
+  className?: string;
+  position?: string;
+} & React.ComponentPropsWithoutRef<"button">) {
+  return (
+    <button
+      onClick={onToggle}
+      className={cx(
+        // Base button styling
+        "flex items-center justify-center w-12 h-12 rounded-full",
+        "bg-white dark:bg-zinc-800 shadow-lg border border-zinc-200 dark:border-zinc-700",
+        // Hover and focus states
+        "hover:bg-zinc-50 dark:hover:bg-zinc-700",
+        "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+        "dark:focus:ring-offset-zinc-900",
+        // Transitions
+        "transition-all duration-200 ease-in-out",
+        // Active state
+        "active:scale-95",
+        // Positioning
+        position,
+        // Z-index to appear above content
+        "z-30",
+        className
+      )}
+      aria-label={isOpen ? "Close inspector" : "Open inspector"}
+      {...props}
+    >
+      {isOpen ? (
+        <X
+          className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
+          strokeWidth={config.getIconStrokeWidth()}
+        />
+      ) : (
+        <Settings
+          className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
+          strokeWidth={config.getIconStrokeWidth()}
+        />
+      )}
+    </button>
   );
 }
