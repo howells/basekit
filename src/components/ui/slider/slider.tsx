@@ -27,7 +27,7 @@ const sliderVariants = tv({
     ],
     track: [
       // base
-      "relative grow rounded-full bg-gray-200 dark:bg-gray-800",
+      "relative grow rounded-full bg-zinc-200 dark:bg-zinc-800",
       // orientation
       "data-[orientation='horizontal']:h-1.5 data-[orientation='horizontal']:w-full",
       "data-[orientation='vertical']:h-full data-[orientation='vertical']:w-1.5",
@@ -39,24 +39,24 @@ const sliderVariants = tv({
       "data-[orientation='horizontal']:h-full",
       "data-[orientation='vertical']:w-full",
       // disabled
-      "data-[disabled]:bg-gray-300 dark:data-[disabled]:bg-gray-700",
+      "data-[disabled]:bg-zinc-300 dark:data-[disabled]:bg-zinc-700",
     ],
     thumb: [
       // base
       "block size-4 shrink-0 rounded-full border shadow-sm",
       // border color
-      "border-gray-400 dark:border-gray-500",
+      "border-zinc-400 dark:border-zinc-500",
       // background color
       "bg-white dark:bg-white",
       // disabled
-      "data-[disabled]:pointer-events-none data-[disabled]:bg-gray-200 dark:data-[disabled]:border-gray-800 dark:data-[disabled]:bg-gray-600",
+      "data-[disabled]:pointer-events-none data-[disabled]:bg-zinc-200 dark:data-[disabled]:border-zinc-800 dark:data-[disabled]:bg-zinc-600",
       // focus
       focusRing,
       "outline-offset-0",
     ],
     value: [
       // base
-      "text-sm font-medium text-gray-900 dark:text-gray-50",
+      "text-sm font-medium text-zinc-900 dark:text-zinc-50",
       // spacing
       "mb-2",
     ],
@@ -203,7 +203,7 @@ const Slider = React.forwardRef<
               </BaseSlider.Track>
             </BaseSlider.Control>
             {showValue && (
-              <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+              <div className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">
                 <BaseSlider.Value>
                   {(formattedValues, values) =>
                     values.length === 1 ? (
@@ -248,7 +248,7 @@ const Slider = React.forwardRef<
             </BaseSlider.Track>
           </BaseSlider.Control>
           {showValue && (
-            <div className="ml-2 text-xs text-gray-500 dark:text-gray-400">
+            <div className="ml-2 text-xs text-zinc-500 dark:text-zinc-400">
               <BaseSlider.Value>
                 {(formattedValues, values) =>
                   values.length === 1 ? (

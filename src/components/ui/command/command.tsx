@@ -313,9 +313,9 @@ CommandList.displayName = CommandPrimitive.List.displayName;
  * // Custom empty state
  * <CommandEmpty>
  *   <div className="text-center py-8">
- *     <SearchIcon className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+ *     <SearchIcon className="h-12 w-12 mx-auto mb-4 text-zinc-400" />
  *     <p className="text-lg font-medium">No commands found</p>
- *     <p className="text-gray-500">Try searching for something else</p>
+ *     <p className="text-zinc-500">Try searching for something else</p>
  *   </div>
  * </CommandEmpty>
  * ```

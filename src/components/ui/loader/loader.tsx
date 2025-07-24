@@ -1,10 +1,10 @@
 /**
  * Loader Component
- * 
+ *
  * A spinning loader component for indicating loading states and async operations.
  * Built with Lucide React's Loader2 icon and tailwind-variants for consistent
  * sizing and styling across different contexts.
- * 
+ *
  * Features:
  * - Multiple size variants (xs, sm, base, lg, xl)
  * - Smooth CSS animation with spin effect
@@ -12,36 +12,36 @@
  * - Inherits text color from parent context
  * - Consistent styling with tailwind-variants
  * - Centered alignment with flexbox
- * 
+ *
  * @example
  * ```tsx
  * // Basic loader
  * <Loader aria-label="Loading..." />
- * 
+ *
  * // Different sizes
  * <Loader size="xs" aria-label="Small loader" />
  * <Loader size="lg" aria-label="Large loader" />
  * <Loader size="xl" aria-label="Extra large loader" />
- * 
+ *
  * // With custom styling
- * <Loader 
- *   size="lg" 
- *   className="text-blue-500" 
+ * <Loader
+ *   size="lg"
+ *   className="text-blue-500"
  *   aria-label="Loading data"
  * />
- * 
+ *
  * // In button context
  * <button disabled className="flex items-center gap-2">
  *   <Loader size="sm" aria-label="Submitting" />
  *   <span>Submitting...</span>
  * </button>
- * 
+ *
  * // Loading state indicator
  * <div className="text-center py-8">
  *   <Loader size="lg" aria-label="Loading content" />
- *   <p className="mt-2 text-gray-600">Please wait...</p>
+ *   <p className="mt-2 text-zinc-600">Please wait...</p>
  * </div>
- * 
+ *
  * // Card loading state
  * <div className="bg-white rounded-lg p-6 shadow">
  *   <div className="flex justify-center">
@@ -59,7 +59,7 @@ import { cx } from "@/lib/utils";
 
 /**
  * Tailwind variants for the loader component.
- * 
+ *
  * Defines size variants and base styling for the spinning loader icon.
  * Uses CSS animation for smooth rotation and inherits color from parent.
  */
@@ -91,9 +91,9 @@ const loaderVariants = tv({
 
 /**
  * Props for the Loader component.
- * 
+ *
  * Extends HTML div props with size variants and accessibility support.
- * 
+ *
  * @interface LoaderProps
  * @extends React.ComponentPropsWithoutRef<"div">
  * @extends VariantProps<typeof loaderVariants>
@@ -107,7 +107,7 @@ interface LoaderProps
 
 /**
  * A spinning loader component for indicating loading states.
- * 
+ *
  * Displays a rotating icon to indicate that content is loading or an
  * operation is in progress. Provides visual feedback to users during
  * async operations with accessible screen reader support.
@@ -122,13 +122,13 @@ interface LoaderProps
  * ```tsx
  * // Basic usage
  * <Loader aria-label="Loading..." />
- * 
+ *
  * // Large loader
  * <Loader size="lg" aria-label="Loading data" />
- * 
+ *
  * // Custom color
  * <Loader className="text-blue-500" aria-label="Processing" />
- * 
+ *
  * // In button
  * <button disabled>
  *   <Loader size="sm" aria-label="Submitting" />

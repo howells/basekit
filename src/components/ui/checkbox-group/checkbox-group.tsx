@@ -25,7 +25,7 @@ interface CheckboxGroupProps
 
 /**
  * A checkbox group component built on Base UI's CheckboxGroup primitive.
- * 
+ *
  * Based on Base UI's CheckboxGroup (https://base-ui.com/react/components/checkbox-group),
  * providing shared state management for multiple checkboxes. Features proper accessibility
  * attributes, optional labeling, and support for controlled and uncontrolled modes.
@@ -46,7 +46,7 @@ interface CheckboxGroupProps
  *   <CheckboxGroupItem value="updates">Product Updates</CheckboxGroupItem>
  *   <CheckboxGroupItem value="marketing">Marketing Emails</CheckboxGroupItem>
  * </CheckboxGroup>
- * 
+ *
  * // Controlled checkbox group
  * <CheckboxGroup
  *   label="Features"
@@ -57,7 +57,7 @@ interface CheckboxGroupProps
  *   <CheckboxGroupItem value="feature2">Feature 2</CheckboxGroupItem>
  *   <CheckboxGroupItem value="feature3">Feature 3</CheckboxGroupItem>
  * </CheckboxGroup>
- * 
+ *
  * // With default values
  * <CheckboxGroup
  *   label="Default Selections"
@@ -67,7 +67,7 @@ interface CheckboxGroupProps
  *   <CheckboxGroupItem value="option2">Option 2</CheckboxGroupItem>
  *   <CheckboxGroupItem value="option3">Option 3</CheckboxGroupItem>
  * </CheckboxGroup>
- * 
+ *
  * // Disabled group
  * <CheckboxGroup label="Disabled Options" disabled>
  *   <CheckboxGroupItem value="disabled1">Disabled 1</CheckboxGroupItem>
@@ -123,7 +123,7 @@ interface CheckboxGroupItemProps {
 
 /**
  * Individual checkbox item within a CheckboxGroup.
- * 
+ *
  * Provides a complete checkbox with label that integrates with the parent
  * CheckboxGroup's state management. Features proper accessibility attributes,
  * disabled state styling, and consistent visual design.
@@ -140,7 +140,7 @@ interface CheckboxGroupItemProps {
  * <CheckboxGroupItem value="marketing">
  *   <div>
  *     <span>Marketing emails</span>
- *     <span className="text-xs text-gray-500">Weekly promotions</span>
+ *     <span className="text-xs text-zinc-500">Weekly promotions</span>
  *   </div>
  * </CheckboxGroupItem>
  * ```

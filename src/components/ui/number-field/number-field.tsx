@@ -31,7 +31,7 @@ interface NumberFieldProps
 
 /**
  * A numeric input field built on Base UI's NumberField primitive.
- * 
+ *
  * Based on Base UI's NumberField (https://base-ui.com/react/components/number-field),
  * providing advanced numeric input with increment/decrement buttons and interactive
  * scrub area for precise value manipulation. Features locale-aware formatting,
@@ -54,7 +54,7 @@ interface NumberFieldProps
  * ```tsx
  * // Basic number field
  * <NumberField label="Quantity" defaultValue={1} min={0} max={100} />
- * 
+ *
  * // With custom step and range
  * <NumberField
  *   label="Price"
@@ -63,14 +63,14 @@ interface NumberFieldProps
  *   step={0.01}
  *   placeholder="0.00"
  * />
- * 
+ *
  * // Without steppers (input only)
  * <NumberField
  *   label="ID Number"
  *   showSteppers={false}
  *   placeholder="Enter ID"
  * />
- * 
+ *
  * // Full width with scrub area disabled
  * <NumberField
  *   label="Amount"
@@ -78,7 +78,7 @@ interface NumberFieldProps
  *   showScrubArea={false}
  *   defaultValue={50}
  * />
- * 
+ *
  * // Controlled with validation
  * <NumberField
  *   label="Age"
@@ -88,7 +88,7 @@ interface NumberFieldProps
  *   max={120}
  *   step={1}
  * />
- * 
+ *
  * // Disabled state
  * <NumberField
  *   label="Read Only"
@@ -160,7 +160,7 @@ NumberField.displayName = "NumberField";
 
 /**
  * Label component for NumberField with optional interactive scrub area.
- * 
+ *
  * Based on Base UI's NumberField.ScrubArea, allowing users to click and drag
  * on the label to adjust the numeric value. Features visual cursor feedback
  * and smooth value changes using the Pointer Lock API.
@@ -171,7 +171,7 @@ NumberField.displayName = "NumberField";
  * ```tsx
  * // Interactive label (default)
  * <NumberFieldLabel htmlFor="field-id">Draggable Value</NumberFieldLabel>
- * 
+ *
  * // Static label
  * <NumberFieldLabel showScrubArea={false}>Static Label</NumberFieldLabel>
  * ```
@@ -224,7 +224,7 @@ NumberFieldLabel.displayName = "NumberFieldLabel";
 
 /**
  * Custom cursor that appears during scrub area interactions.
- * 
+ *
  * Based on Base UI's NumberField.ScrubAreaCursor, providing visual feedback
  * when users are actively dragging to change values. Shows a resize cursor
  * with arrow indicators.
@@ -247,7 +247,7 @@ NumberFieldScrubCursor.displayName = "NumberFieldScrubCursor";
 
 /**
  * Container group for NumberField input and stepper buttons.
- * 
+ *
  * Based on Base UI's NumberField.Group, providing layout structure
  * for the decrement button, input field, and increment button as
  * a cohesive unit with connected borders.
@@ -268,7 +268,7 @@ NumberFieldGroup.displayName = "NumberFieldGroup";
 
 /**
  * The numeric input element with tabular number formatting.
- * 
+ *
  * Based on Base UI's NumberField.Input, providing a styled numeric input
  * with proper focus states, validation styling, and group integration.
  * Features center-aligned text and monospace numbers for consistency.
@@ -285,7 +285,7 @@ const NumberFieldInput = React.forwardRef<
       // base
       "py-2 w-24 border text-center text-sm tabular-nums transition-colors",
       // border color
-      "border-zinc-300 dark:border-zinc-700",
+      "border-zinc-200 dark:border-zinc-700",
       // background color
       "bg-white dark:bg-zinc-950",
       // text color
@@ -307,7 +307,7 @@ NumberFieldInput.displayName = "NumberFieldInput";
 
 /**
  * Increment button to increase the numeric value.
- * 
+ *
  * Based on Base UI's NumberField.Increment, providing an accessible button
  * to increase the field value by the specified step amount. Features proper
  * hover states, keyboard navigation, and disabled state handling.
@@ -326,7 +326,7 @@ const NumberFieldIncrement = React.forwardRef<
       // base
       "flex py-2 w-10 items-center justify-center rounded-tr-md rounded-br-md border border-l-0 bg-clip-padding text-sm font-medium transition-colors",
       // border color
-      "border-zinc-300 dark:border-zinc-700",
+      "border-zinc-200 dark:border-zinc-700",
       // background color
       "bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:bg-zinc-700",
       // text color
@@ -346,7 +346,7 @@ NumberFieldIncrement.displayName = "NumberFieldIncrement";
 
 /**
  * Decrement button to decrease the numeric value.
- * 
+ *
  * Based on Base UI's NumberField.Decrement, providing an accessible button
  * to decrease the field value by the specified step amount. Features proper
  * hover states, keyboard navigation, and disabled state handling.
@@ -365,7 +365,7 @@ const NumberFieldDecrement = React.forwardRef<
       // base
       "flex py-2 w-10 items-center justify-center rounded-tl-md rounded-bl-md border border-r-0 bg-clip-padding text-sm font-medium transition-colors",
       // border color
-      "border-zinc-300 dark:border-zinc-700",
+      "border-zinc-200 dark:border-zinc-700",
       // background color
       "bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:bg-zinc-700",
       // text color
@@ -385,7 +385,7 @@ NumberFieldDecrement.displayName = "NumberFieldDecrement";
 
 /**
  * Cursor icon with grow arrows for scrub area interactions.
- * 
+ *
  * Provides visual feedback during drag operations, showing horizontal
  * resize arrows to indicate the interactive nature of the scrub area.
  *

@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "sheet",
   name: "Sheet",
-  description: "Extends the Dialog component to display content that complements the main content of the screen.",
+  description:
+    "Extends the Dialog component to display content that complements the main content of the screen.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -53,7 +54,7 @@ export const componentConfig: ComponentConfig = {
         <input
           id="name"
           value="Pedro Duarte"
-          className="col-span-3 rounded-md border border-gray-300 px-3 py-2"
+          className="col-span-3 rounded-md border border-zinc-300 px-3 py-2"
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
@@ -63,7 +64,7 @@ export const componentConfig: ComponentConfig = {
         <input
           id="username"
           value="@peduarte"
-          className="col-span-3 rounded-md border border-gray-300 px-3 py-2"
+          className="col-span-3 rounded-md border border-zinc-300 px-3 py-2"
         />
       </div>
     </div>

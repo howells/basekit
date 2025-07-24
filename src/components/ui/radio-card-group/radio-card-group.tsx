@@ -7,7 +7,7 @@ import { RadioGroup } from "../radio-group";
 
 /**
  * A radio group component with card-style presentation.
- * 
+ *
  * Based on Base UI's RadioGroup with styled card containers for each option.
  * Provides the same functionality as RadioGroup but with enhanced visual
  * presentation using card layouts for better prominence and selection clarity.
@@ -27,7 +27,7 @@ import { RadioGroup } from "../radio-group";
  *     <div className="flex items-center justify-between">
  *       <div>
  *         <div className="font-medium">Basic Plan</div>
- *         <div className="text-sm text-gray-500">$10/month</div>
+ *         <div className="text-sm text-zinc-500">$10/month</div>
  *       </div>
  *       <RadioCardIndicator />
  *     </div>
@@ -36,7 +36,7 @@ import { RadioGroup } from "../radio-group";
  *     <div className="flex items-center justify-between">
  *       <div>
  *         <div className="font-medium">Pro Plan</div>
- *         <div className="text-sm text-gray-500">$25/month</div>
+ *         <div className="text-sm text-zinc-500">$25/month</div>
  *       </div>
  *       <RadioCardIndicator />
  *     </div>
@@ -44,9 +44,9 @@ import { RadioGroup } from "../radio-group";
  * </RadioCardGroup>
  *
  * // Horizontal layout
- * <RadioCardGroup 
- *   orientation="horizontal" 
- *   value={size} 
+ * <RadioCardGroup
+ *   orientation="horizontal"
+ *   value={size}
  *   onValueChange={setSize}
  * >
  *   <RadioCardItem value="sm">Small</RadioCardItem>
@@ -67,7 +67,7 @@ RadioCardGroup.displayName = "RadioCardGroup";
 
 /**
  * Individual radio card item with enhanced styling.
- * 
+ *
  * Based on Base UI's Radio component with card-style presentation including
  * padding, borders, shadows, and visual states. Provides a prominent,
  * clickable area for radio selections with clear visual feedback.
@@ -89,7 +89,7 @@ RadioCardGroup.displayName = "RadioCardGroup";
  *   <div className="flex items-start gap-3">
  *     <div className="flex-1">
  *       <div className="font-semibold">Premium Plan</div>
- *       <div className="text-sm text-gray-600 mt-1">
+ *       <div className="text-sm text-zinc-600 mt-1">
  *         Advanced features, priority support
  *       </div>
  *       <div className="text-lg font-bold mt-2">$29/mo</div>
@@ -120,7 +120,7 @@ const RadioCardItem = React.forwardRef<
       // background color
       "bg-white dark:bg-zinc-950",
       // border color
-      "border-zinc-300 dark:border-zinc-800",
+      "border-zinc-200 dark:border-zinc-800",
       // checked
       "data-[checked]:border-blue-500 dark:data-[checked]:border-blue-500",
       // disabled
@@ -140,7 +140,7 @@ RadioCardItem.displayName = "RadioCardItem";
 
 /**
  * Visual indicator for radio card selection state.
- * 
+ *
  * Based on Base UI's RadioIndicator with enhanced styling for card layouts.
  * Shows a circular radio button indicator that displays selection state
  * with proper hover, focus, and disabled styling.
@@ -173,13 +173,13 @@ const RadioCardIndicator = React.forwardRef<
       // base
       "relative flex size-4 shrink-0 appearance-none items-center justify-center rounded-full border shadow-xs outline-hidden",
       // border color
-      "border-zinc-300 dark:border-zinc-800",
+      "border-zinc-200 dark:border-zinc-800",
       // background color
       "bg-white dark:bg-zinc-950",
       // checked
       "group-data-[checked]:border-0 group-data-[checked]:border-transparent group-data-[checked]:bg-blue-500",
       // disabled
-      "group-data-[disabled]:border-zinc-300 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
+      "group-data-[disabled]:border-zinc-200 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
       "dark:group-data-[disabled]:border-zinc-700 dark:group-data-[disabled]:bg-zinc-800",
       // focus
       focusRing,

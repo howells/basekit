@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "select",
   name: "Select",
-  description: "Displays a list of options for the user to pick from—triggered by a button.",
+  description:
+    "Displays a list of options for the user to pick from—triggered by a button.",
   category: "inputs" as const,
   badge: "Inputs",
   installation: {
@@ -92,7 +93,7 @@ export const componentConfig: ComponentConfig = {
       id="email"
       type="email"
       placeholder="Enter your email"
-      className="w-full rounded-md border border-gray-300 px-3 py-2"
+      className="w-full rounded-md border border-zinc-300 px-3 py-2"
     />
   </div>
   <div className="space-y-2">

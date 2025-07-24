@@ -476,7 +476,7 @@ export function InspectorSection({
  * // Group with description list
  * <InspectorGroup>
  *   <dt className="font-medium">File Size</dt>
- *   <dd className="text-sm text-gray-600">2.4 MB</dd>
+ *   <dd className="text-sm text-zinc-600">2.4 MB</dd>
  * </InspectorGroup>
  *
  * // Group with complex controls

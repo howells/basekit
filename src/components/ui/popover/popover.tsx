@@ -1,10 +1,10 @@
 /**
  * Popover Components
- * 
+ *
  * A comprehensive popover system built on Base UI Popover for creating
  * contextual overlays, tooltips, and dropdown content. Features smart
  * positioning, collision detection, and smooth animations.
- * 
+ *
  * Features:
  * - Base UI Popover integration for full accessibility
  * - Smart positioning with collision detection
@@ -15,10 +15,10 @@
  * - Backdrop support for modal-like behavior
  * - Dark mode compatible styling
  * - Customizable positioning and alignment
- * 
+ *
  * Built on Base UI Popover documentation:
  * https://base-ui.com/react/components/popover
- * 
+ *
  * @example
  * ```tsx
  * // Basic popover
@@ -30,7 +30,7 @@
  *     <PopoverClose>Close</PopoverClose>
  *   </PopoverContent>
  * </Popover>
- * 
+ *
  * // Advanced popover with arrow and positioning
  * <Popover>
  *   <PopoverTrigger className="px-4 py-2 bg-blue-500 text-white rounded">
@@ -52,7 +52,7 @@
  *     </div>
  *   </PopoverContent>
  * </Popover>
- * 
+ *
  * // Popover with backdrop
  * <Popover>
  *   <PopoverTrigger>Open Modal-like Popover</PopoverTrigger>
@@ -66,19 +66,19 @@
  *     </PopoverContent>
  *   </PopoverPortal>
  * </Popover>
- * 
+ *
  * // Custom positioned popover
  * <Popover>
  *   <PopoverTrigger>Show Menu</PopoverTrigger>
  *   <PopoverContent side="right" align="center" collisionPadding={20}>
  *     <div className="space-y-2">
- *       <button className="block w-full text-left px-3 py-1 hover:bg-gray-100">
+ *       <button className="block w-full text-left px-3 py-1 hover:bg-zinc-100">
  *         Edit
  *       </button>
- *       <button className="block w-full text-left px-3 py-1 hover:bg-gray-100">
+ *       <button className="block w-full text-left px-3 py-1 hover:bg-zinc-100">
  *         Duplicate
  *       </button>
- *       <button className="block w-full text-left px-3 py-1 hover:bg-gray-100 text-red-600">
+ *       <button className="block w-full text-left px-3 py-1 hover:bg-zinc-100 text-red-600">
  *         Delete
  *       </button>
  *     </div>
@@ -93,7 +93,7 @@ import React from "react";
 
 /**
  * An accessible popup anchored to a button, built on Base UI's Popover primitive.
- * 
+ *
  * Based on Base UI's Popover (https://base-ui.com/react/components/popover),
  * providing flexible contextual information displays with positioning, arrows,
  * and proper focus management. Perfect for tooltips, menus, and content overlays.
@@ -117,7 +117,7 @@ const Popover = BasePopover.Root;
 
 /**
  * Trigger element that opens the popover when activated.
- * 
+ *
  * Can be any interactive element like a button or link. Provides focus management
  * and proper ARIA attributes for accessibility.
  *
@@ -128,7 +128,7 @@ const Popover = BasePopover.Root;
  */
 /**
  * Popover trigger component that opens the popover when activated.
- * 
+ *
  * Interactive element that toggles the popover visibility. Features
  * proper focus states and accessibility attributes. Can be styled
  * as any type of interactive element.
@@ -140,11 +140,11 @@ const Popover = BasePopover.Root;
  * @example
  * ```tsx
  * <PopoverTrigger>Click to open</PopoverTrigger>
- * 
+ *
  * <PopoverTrigger className="px-4 py-2 bg-blue-500 text-white rounded">
  *   Show Information
  * </PopoverTrigger>
- * 
+ *
  * <PopoverTrigger asChild>
  *   <button className="custom-button">Custom Button</button>
  * </PopoverTrigger>
@@ -172,7 +172,7 @@ PopoverTrigger.displayName = "PopoverTrigger";
 
 /**
  * Portal component for rendering popover content in a different DOM location.
- * 
+ *
  * Renders popover content outside the normal DOM tree to avoid z-index
  * issues and ensure proper layering. Used internally by PopoverContent.
  *
@@ -188,7 +188,7 @@ const PopoverPortal = BasePopover.Portal;
 
 /**
  * Optional backdrop that appears behind the popover.
- * 
+ *
  * Provides subtle background overlay and can be configured to close
  * the popover when clicked. Less prominent than dialog backdrops.
  *
@@ -199,7 +199,7 @@ const PopoverPortal = BasePopover.Portal;
  */
 /**
  * Optional backdrop that appears behind the popover.
- * 
+ *
  * Provides subtle background overlay for modal-like behavior.
  * Can be configured to close the popover when clicked and includes
  * smooth fade animations.
@@ -214,7 +214,7 @@ const PopoverPortal = BasePopover.Portal;
  *   <PopoverBackdrop />
  *   <PopoverContent>Modal-like popover content</PopoverContent>
  * </PopoverPortal>
- * 
+ *
  * <PopoverBackdrop className="bg-red-500/20" />
  * ```
  */
@@ -241,7 +241,7 @@ PopoverBackdrop.displayName = "PopoverBackdrop";
 
 /**
  * Positioner component that handles popover placement and collision detection.
- * 
+ *
  * Automatically positions the popover relative to its trigger with smart
  * collision avoidance. Typically used internally by PopoverContent but
  * can be used directly for custom positioning logic.
@@ -273,7 +273,7 @@ PopoverPositioner.displayName = "PopoverPositioner";
 
 /**
  * Main popover content container with automatic positioning.
- * 
+ *
  * The primary container for popover content with smart positioning,
  * collision detection, smooth animations, and portal rendering.
  * Features comprehensive styling and wheel event handling.
@@ -293,12 +293,12 @@ PopoverPositioner.displayName = "PopoverPositioner";
  *   <PopoverTitle>Title</PopoverTitle>
  *   <PopoverDescription>Description text</PopoverDescription>
  * </PopoverContent>
- * 
+ *
  * // Positioned content
  * <PopoverContent side="top" align="start" sideOffset={15}>
  *   Content positioned above trigger
  * </PopoverContent>
- * 
+ *
  * // Custom styled content
  * <PopoverContent className="w-80 p-4 bg-blue-50">
  *   Custom styled popover content
@@ -382,7 +382,7 @@ PopoverContent.displayName = "PopoverContent";
 
 /**
  * Arrow component that points from the popover to its trigger.
- * 
+ *
  * Provides visual connection between the trigger and popover content.
  * Automatically rotates and positions based on the popover's placement side.
  * Features layered SVG styling for proper contrast in light and dark themes.
@@ -432,7 +432,7 @@ PopoverArrow.displayName = "PopoverArrow";
 
 /**
  * Title heading for the popover content.
- * 
+ *
  * Provides semantic heading structure and prominent typography.
  * Use to establish clear hierarchy within popover content.
  *
@@ -443,7 +443,7 @@ PopoverArrow.displayName = "PopoverArrow";
  */
 /**
  * Title heading component for popover content.
- * 
+ *
  * Semantic heading that establishes content hierarchy within the popover.
  * Features prominent typography and proper spacing for visual organization.
  *
@@ -454,7 +454,7 @@ PopoverArrow.displayName = "PopoverArrow";
  * @example
  * ```tsx
  * <PopoverTitle>Settings Panel</PopoverTitle>
- * 
+ *
  * <PopoverTitle className="text-xl font-bold text-blue-600">
  *   Custom Styled Title
  * </PopoverTitle>
@@ -482,7 +482,7 @@ PopoverTitle.displayName = "PopoverTitle";
 
 /**
  * Description text that provides additional context for the popover.
- * 
+ *
  * Uses muted text styling to create proper visual hierarchy with the title.
  * Ideal for explanatory content or additional details.
  *
@@ -495,7 +495,7 @@ PopoverTitle.displayName = "PopoverTitle";
  */
 /**
  * Description component for explanatory popover text.
- * 
+ *
  * Provides additional context and information with muted styling
  * that creates proper visual hierarchy with the title.
  *
@@ -508,7 +508,7 @@ PopoverTitle.displayName = "PopoverTitle";
  * <PopoverDescription>
  *   Adjust your account preferences and notification settings.
  * </PopoverDescription>
- * 
+ *
  * <PopoverDescription className="text-red-600">
  *   Warning: This action cannot be undone.
  * </PopoverDescription>
@@ -534,7 +534,7 @@ PopoverDescription.displayName = "PopoverDescription";
 
 /**
  * Close button that dismisses the popover.
- * 
+ *
  * Typically styled as a small icon button and positioned in the top-right corner.
  * Automatically handles focus management when the popover closes.
  *
@@ -547,7 +547,7 @@ PopoverDescription.displayName = "PopoverDescription";
  */
 /**
  * Close button component for dismissing the popover.
- * 
+ *
  * Interactive element that closes the popover and returns focus
  * to the trigger. Features subtle styling and hover effects.
  *
@@ -558,11 +558,11 @@ PopoverDescription.displayName = "PopoverDescription";
  * @example
  * ```tsx
  * <PopoverClose>Close</PopoverClose>
- * 
+ *
  * <PopoverClose className="absolute top-2 right-2">
  *   <X className="h-4 w-4" />
  * </PopoverClose>
- * 
+ *
  * <PopoverClose asChild>
  *   <button className="custom-close-button">Done</button>
  * </PopoverClose>
@@ -594,7 +594,7 @@ PopoverClose.displayName = "PopoverClose";
 
 /**
  * Legacy alias for PopoverTrigger (backward compatibility).
- * 
+ *
  * @deprecated Use PopoverTrigger instead
  */
 const PopoverAnchor = PopoverTrigger;

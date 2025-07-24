@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  StatusDot,
-  StatusQueued,
   StatusBuilding,
-  StatusReady,
+  StatusCanceled,
+  StatusDot,
   StatusError,
-  StatusCanceled
+  StatusQueued,
+  StatusReady,
 } from "./status-dot";
 
 export function Basic() {
@@ -94,7 +94,7 @@ export function DeploymentStatus() {
   return (
     <div className="space-y-4">
       <div className="border rounded-lg p-4 space-y-3">
-        <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+        <h3 className="font-semibold text-sm text-zinc-900 dark:text-zinc-100">
           Recent Deployments
         </h3>
 
@@ -104,7 +104,7 @@ export function DeploymentStatus() {
               <StatusReady size="sm" />
               <span className="font-medium">main branch</span>
             </div>
-            <span className="text-gray-500 text-xs">2 minutes ago</span>
+            <span className="text-zinc-500 text-xs">2 minutes ago</span>
           </div>
 
           <div className="flex items-center justify-between">
@@ -112,7 +112,7 @@ export function DeploymentStatus() {
               <StatusBuilding size="sm" />
               <span className="font-medium">feature/new-ui</span>
             </div>
-            <span className="text-gray-500 text-xs">Building...</span>
+            <span className="text-zinc-500 text-xs">Building...</span>
           </div>
 
           <div className="flex items-center justify-between">
@@ -120,7 +120,7 @@ export function DeploymentStatus() {
               <StatusQueued size="sm" />
               <span className="font-medium">hotfix/critical-bug</span>
             </div>
-            <span className="text-gray-500 text-xs">In queue</span>
+            <span className="text-zinc-500 text-xs">In queue</span>
           </div>
 
           <div className="flex items-center justify-between">
@@ -128,7 +128,7 @@ export function DeploymentStatus() {
               <StatusError size="sm" />
               <span className="font-medium">develop</span>
             </div>
-            <span className="text-gray-500 text-xs">Failed 1 hour ago</span>
+            <span className="text-zinc-500 text-xs">Failed 1 hour ago</span>
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ export function SystemHealth() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="border rounded-lg p-4">
-        <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-3">
+        <h3 className="font-semibold text-sm text-zinc-900 dark:text-zinc-100 mb-3">
           Services
         </h3>
         <div className="space-y-2">
@@ -164,21 +164,21 @@ export function SystemHealth() {
       </div>
 
       <div className="border rounded-lg p-4">
-        <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-3">
+        <h3 className="font-semibold text-sm text-zinc-900 dark:text-zinc-100 mb-3">
           Environments
         </h3>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <StatusDot status="ready" label="Production" size="sm" />
-            <span className="text-xs text-gray-500">v2.1.0</span>
+            <span className="text-xs text-zinc-500">v2.1.0</span>
           </div>
           <div className="flex items-center justify-between">
             <StatusDot status="ready" label="Staging" size="sm" />
-            <span className="text-xs text-gray-500">v2.2.0-beta</span>
+            <span className="text-xs text-zinc-500">v2.2.0-beta</span>
           </div>
           <div className="flex items-center justify-between">
             <StatusDot status="pending" label="Development" size="sm" />
-            <span className="text-xs text-gray-500">Pending deploy</span>
+            <span className="text-xs text-zinc-500">Pending deploy</span>
           </div>
         </div>
       </div>

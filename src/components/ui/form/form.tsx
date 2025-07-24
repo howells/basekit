@@ -2,11 +2,11 @@
 
 /**
  * Form Components
- * 
+ *
  * A modern form system that integrates Base UI Form components with Zod validation
  * for type-safe, accessible forms. Provides comprehensive form building blocks
  * with automatic validation, error handling, and accessibility features.
- * 
+ *
  * Features:
  * - Zod schema validation integration
  * - Base UI accessibility support
@@ -14,7 +14,7 @@
  * - Type-safe form data
  * - HTML5 validation fallback
  * - Consistent styling and theming
- * 
+ *
  * @example
  * ```tsx
  * // Basic form with Zod validation
@@ -23,7 +23,7 @@
  *   email: z.string().email("Invalid email address"),
  *   age: z.coerce.number().min(18, "Must be 18 or older")
  * });
- * 
+ *
  * <Form
  *   schema={schema}
  *   onValidSubmit={(data) => {
@@ -33,42 +33,42 @@
  *   <FormField name="name" label="Full Name" required>
  *     <FormControl placeholder="Enter your name" />
  *   </FormField>
- *   
- *   <FormField 
- *     name="email" 
- *     label="Email" 
+ *
+ *   <FormField
+ *     name="email"
+ *     label="Email"
  *     description="We'll never share your email"
  *     required
  *   >
  *     <FormControl type="email" placeholder="your@email.com" />
  *   </FormField>
- *   
+ *
  *   <FormField name="age" label="Age" required>
  *     <FormControl type="number" placeholder="18" />
  *   </FormField>
- *   
+ *
  *   <button type="submit">Submit</button>
  * </Form>
- * 
+ *
  * // Native HTML5 validation
  * <Form>
  *   <FormField name="website" label="Website" required>
- *     <FormControl 
- *       type="url" 
+ *     <FormControl
+ *       type="url"
  *       placeholder="https://example.com"
  *       pattern="https?://.*"
  *     />
  *   </FormField>
- *   
+ *
  *   <FormField name="phone" label="Phone">
- *     <FormControl 
- *       type="tel" 
+ *     <FormControl
+ *       type="tel"
  *       placeholder="(555) 123-4567"
  *       pattern="[0-9\s\-\(\)]+"
  *     />
  *   </FormField>
  * </Form>
- * 
+ *
  * // Custom form layout
  * <Form schema={registrationSchema} onValidSubmit={handleRegistration}>
  *   <div className="grid grid-cols-2 gap-4">
@@ -79,14 +79,14 @@
  *       <FormControl />
  *     </FormField>
  *   </div>
- *   
+ *
  *   <FormField name="email" label="Email" required>
  *     <FormControl type="email" />
  *   </FormField>
- *   
- *   <FormField 
- *     name="password" 
- *     label="Password" 
+ *
+ *   <FormField
+ *     name="password"
+ *     label="Password"
  *     description="Must be at least 8 characters"
  *     required
  *   >
@@ -104,10 +104,10 @@ import { z } from "zod";
 
 /**
  * Props for the Form component.
- * 
+ *
  * Configuration for form validation, submission handling, and behavior.
  * Integrates Base UI Form with optional Zod validation.
- * 
+ *
  * @interface FormProps
  * @extends React.ComponentPropsWithoutRef<typeof BaseForm>
  */
@@ -122,7 +122,7 @@ interface FormProps extends React.ComponentPropsWithoutRef<typeof BaseForm> {
 
 /**
  * Root form component with integrated Zod validation.
- * 
+ *
  * Combines Base UI Form with Zod schema validation for type-safe forms.
  * Handles form submission, validation, and error management automatically.
  * Falls back to HTML5 validation when no schema is provided.
@@ -139,9 +139,9 @@ interface FormProps extends React.ComponentPropsWithoutRef<typeof BaseForm> {
  *   email: z.string().email(),
  *   password: z.string().min(8)
  * });
- * 
- * <Form 
- *   schema={schema} 
+ *
+ * <Form
+ *   schema={schema}
  *   onValidSubmit={(data) => login(data)}
  * >
  *   <FormField name="email" label="Email" required>
@@ -203,7 +203,7 @@ Form.displayName = "Form";
 
 /**
  * Form item container for grouping field components.
- * 
+ *
  * Provides consistent spacing and layout for form field groups.
  * Used internally by FormField but can be used standalone for custom layouts.
  *
@@ -219,7 +219,7 @@ FormItem.displayName = "FormItem";
 
 /**
  * Form label component with consistent styling.
- * 
+ *
  * Accessible label that associates with form controls using Base UI Field.
  * Includes disabled state support and proper typography.
  *
@@ -249,7 +249,7 @@ FormLabel.displayName = "FormLabel";
 
 /**
  * Form control component with styling and validation states.
- * 
+ *
  * Styled wrapper for form inputs with focus, disabled, and error states.
  * Integrates with Base UI Field for proper accessibility and validation.
  *
@@ -266,7 +266,7 @@ const FormControl = React.forwardRef<
         // base
         "block w-full rounded-md border px-3 py-2 text-sm transition-colors",
         // border
-        "border-zinc-300 dark:border-zinc-600",
+        "border-zinc-200 dark:border-zinc-600",
         // background
         "bg-white dark:bg-zinc-800",
         // text
@@ -289,7 +289,7 @@ FormControl.displayName = "FormControl";
 
 /**
  * Form description component for help text.
- * 
+ *
  * Provides additional context and instructions for form fields.
  * Properly associated with controls for screen reader accessibility.
  *
@@ -317,7 +317,7 @@ FormDescription.displayName = "FormDescription";
 
 /**
  * Form error message component.
- * 
+ *
  * Displays validation errors with proper styling and accessibility.
  * Automatically shows errors from Zod validation or HTML5 constraints.
  *
@@ -345,7 +345,7 @@ FormError.displayName = "FormError";
 
 /**
  * Props for the FormField component.
- * 
+ *
  * Configuration for complete form fields with all associated elements.
  */
 interface FormFieldProps {
@@ -365,7 +365,7 @@ interface FormFieldProps {
 
 /**
  * Complete form field with label, control, description, and error.
- * 
+ *
  * Combines all form field components into a single, easy-to-use component.
  * Automatically handles accessibility associations and validation display.
  *
@@ -379,9 +379,9 @@ interface FormFieldProps {
  * @component
  * @example
  * ```tsx
- * <FormField 
- *   name="email" 
- *   label="Email Address" 
+ * <FormField
+ *   name="email"
+ *   label="Email Address"
  *   description="We'll never share your email"
  *   required
  * >

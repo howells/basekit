@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "textarea",
   name: "Textarea",
-  description: "Displays a form textarea or a component that looks like a textarea.",
+  description:
+    "Displays a form textarea or a component that looks like a textarea.",
   category: "inputs" as const,
   badge: "Inputs",
   installation: {
@@ -46,9 +47,9 @@ export const componentConfig: ComponentConfig = {
   <label htmlFor="message" className="text-sm font-medium">
     Message
   </label>
-  <Textarea 
-    id="message" 
-    placeholder="Enter your message" 
+  <Textarea
+    id="message"
+    placeholder="Enter your message"
     rows={6}
   />
 </div>`,
@@ -57,9 +58,9 @@ export const componentConfig: ComponentConfig = {
       id: "disabled",
       title: "Disabled Textarea",
       description: "Textarea in disabled state",
-      code: `<Textarea 
-  placeholder="This textarea is disabled" 
-  disabled 
+      code: `<Textarea
+  placeholder="This textarea is disabled"
+  disabled
   defaultValue="You cannot edit this content."
 />`,
     },
@@ -71,12 +72,12 @@ export const componentConfig: ComponentConfig = {
   <label htmlFor="bio" className="text-sm font-medium">
     Bio
   </label>
-  <Textarea 
-    id="bio" 
+  <Textarea
+    id="bio"
     placeholder="Tell us about yourself"
     rows={4}
   />
-  <p className="text-sm text-gray-600">
+  <p className="text-sm text-zinc-600">
     Write a short bio. This will be displayed on your profile.
   </p>
 </div>`,
@@ -89,15 +90,15 @@ export const componentConfig: ComponentConfig = {
   <label htmlFor="tweet" className="text-sm font-medium">
     Compose Tweet
   </label>
-  <Textarea 
-    id="tweet" 
+  <Textarea
+    id="tweet"
     placeholder="What's happening?"
     rows={3}
     maxLength={280}
   />
   <div className="flex justify-between text-sm">
-    <span className="text-gray-600">Max 280 characters</span>
-    <span className="text-gray-600">0/280</span>
+    <span className="text-zinc-600">Max 280 characters</span>
+    <span className="text-zinc-600">0/280</span>
   </div>
 </div>`,
     },
@@ -110,24 +111,24 @@ export const componentConfig: ComponentConfig = {
     <label htmlFor="name" className="text-sm font-medium">
       Name
     </label>
-    <input 
-      id="name" 
-      type="text" 
+    <input
+      id="name"
+      type="text"
       placeholder="Your name"
-      className="w-full rounded-md border border-gray-300 px-3 py-2"
+      className="w-full rounded-md border border-zinc-300 px-3 py-2"
     />
   </div>
   <div className="space-y-2">
     <label htmlFor="feedback" className="text-sm font-medium">
       Feedback
     </label>
-    <Textarea 
-      id="feedback" 
+    <Textarea
+      id="feedback"
       placeholder="Share your thoughts..."
       rows={5}
     />
   </div>
-  <button 
+  <button
     type="submit"
     className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
   >

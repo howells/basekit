@@ -8,7 +8,7 @@ export function BasicPreviewCard() {
     <PreviewCard>
       <div className="p-4">
         <h3 className="font-semibold">Preview Title</h3>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-zinc-600">
           This is a preview of some content that might be shown in a card
           format.
         </p>
@@ -27,7 +27,7 @@ export function PreviewCardWithImage() {
       />
       <div className="p-4">
         <h3 className="font-semibold">Card with Image</h3>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-zinc-600">
           A preview card that includes an image at the top.
         </p>
       </div>

@@ -41,7 +41,7 @@ const selectTriggerStyles = [
     // base
     "group/trigger flex w-full select-none items-center justify-between gap-2 truncate rounded-md border px-3 py-2 shadow-xs outline-hidden transition sm:text-sm",
     // border color
-    "border-zinc-300 dark:border-zinc-800",
+    "border-zinc-200 dark:border-zinc-800",
     // text color
     "text-zinc-900 dark:text-zinc-50",
     // placeholder

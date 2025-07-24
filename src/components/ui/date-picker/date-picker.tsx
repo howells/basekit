@@ -23,7 +23,10 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cx, focusInput, focusRing, hasErrorInput } from "@/lib/utils";
 
 import { Button } from "../button/button";
-import { Calendar as CalendarPrimitive, type Matcher } from "../calendar/calendar";
+import {
+  Calendar as CalendarPrimitive,
+  type Matcher,
+} from "../calendar/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 
 //#region TimeInput
@@ -66,7 +69,7 @@ const TimeSegment = ({ segment, state }: TimeSegmentProps) => {
         // base
         "relative block w-full appearance-none rounded-md border px-2.5 py-1.5 text-left uppercase tabular-nums shadow-xs outline-hidden transition sm:text-sm",
         // border color
-        "border-zinc-300 dark:border-zinc-800",
+        "border-zinc-200 dark:border-zinc-800",
         // text color
         "text-zinc-900 dark:text-zinc-50",
         // background color
@@ -78,7 +81,7 @@ const TimeSegment = ({ segment, state }: TimeSegmentProps) => {
         {
           "w-fit! border-none bg-transparent px-0 text-zinc-400 shadow-none":
             segment.type === "literal",
-          "border-zinc-300 bg-zinc-100 text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-500":
+          "border-zinc-200 bg-zinc-100 text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-500":
             state.isDisabled && segment.text !== ":",
         }
       )}
@@ -95,7 +98,7 @@ type TimeInputProps = Omit<
 
 /**
  * Time input component with segmented time entry.
- * 
+ *
  * Built using React Aria's time field functionality, providing accessible
  * time input with separate segments for hours, minutes, and AM/PM. Features
  * automatic locale detection and format enforcement.
@@ -160,7 +163,7 @@ const triggerStyles = tv({
     // background color
     "bg-white dark:bg-zinc-950",
     // border color
-    "border-zinc-300 dark:border-zinc-800",
+    "border-zinc-200 dark:border-zinc-800",
     // text color
     "text-zinc-900 dark:text-zinc-50",
     // placeholder color
@@ -199,7 +202,7 @@ interface TriggerProps
 
 /**
  * Trigger button that opens the date picker popover.
- * 
+ *
  * Features a calendar icon and displays the selected date or placeholder text.
  * Integrates with the Popover component to show/hide the date picker interface.
  *
@@ -469,7 +472,7 @@ type CalendarProps = {
 
 /**
  * Translations for date picker text labels.
- * 
+ *
  * Used to customize the text displayed in date picker buttons and labels
  * for different languages and locales.
  */
@@ -488,10 +491,10 @@ type Translations = {
 
 /**
  * Base props interface for date picker components.
- * 
+ *
  * Extends CalendarProps from react-day-picker with additional
  * date picker-specific configuration options.
- * 
+ *
  * @interface PickerProps
  * @extends CalendarProps
  */
@@ -535,10 +538,10 @@ interface PickerProps extends CalendarProps {
 
 /**
  * Props for the single date picker component.
- * 
+ *
  * Extends PickerProps with single-date specific options including
  * presets, value handling, and change callbacks.
- * 
+ *
  * @interface SingleProps
  * @extends Omit<PickerProps, "translations">
  */
@@ -557,11 +560,11 @@ interface SingleProps extends Omit<PickerProps, "translations"> {
 
 /**
  * Internal single date picker component.
- * 
+ *
  * Handles single date selection with optional time picker and presets.
  * Manages internal state for date, time, and popover visibility.
  * Provides smooth animations and proper keyboard navigation.
- * 
+ *
  * @param defaultValue - Default date for uncontrolled mode
  * @param value - Current date for controlled mode
  * @param onChange - Callback when date changes
@@ -790,10 +793,10 @@ const SingleDatePicker = ({
 
 /**
  * Props for the range date picker component.
- * 
+ *
  * Extends PickerProps with range-specific options including
  * date range presets, value handling, and change callbacks.
- * 
+ *
  * @interface RangeProps
  * @extends PickerProps
  */
@@ -810,11 +813,11 @@ interface RangeProps extends PickerProps {
 
 /**
  * Internal range date picker component.
- * 
+ *
  * Handles date range selection with optional time picker and presets.
  * Manages internal state for start/end dates, times, and popover visibility.
  * Provides smooth animations and proper keyboard navigation for range selection.
- * 
+ *
  * @param defaultValue - Default date range for uncontrolled mode
  * @param value - Current date range for controlled mode
  * @param onChange - Callback when date range changes
@@ -1144,11 +1147,11 @@ const RangeDatePicker = ({
 
 /**
  * Validates that preset dates/ranges fall within the configured date constraints.
- * 
+ *
  * Checks all provided presets against the picker's date range limits (fromYear,
  * toYear, fromMonth, toMonth, fromDay, toDay) and throws descriptive errors
  * if any presets fall outside the allowed range.
- * 
+ *
  * @param presets - Array of date or date range presets to validate
  * @param rules - Picker configuration with date constraints
  * @throws {Error} When presets violate date range constraints
@@ -1299,7 +1302,7 @@ const validatePresets = (
 
 /**
  * Props for the SingleDatePicker component.
- * 
+ *
  * Combines single date specific props with base picker configuration.
  * Used for selecting individual dates with optional presets and time selection.
  */
@@ -1316,7 +1319,7 @@ type SingleDatePickerProps = {
 
 /**
  * A comprehensive single date picker component with optional time selection.
- * 
+ *
  * Features include calendar navigation, preset date options, time picker integration,
  * localization support, and comprehensive date validation. Built with accessibility
  * in mind and supports both controlled and uncontrolled modes.
@@ -1343,7 +1346,7 @@ type SingleDatePickerProps = {
  * ```tsx
  * // Basic date picker
  * <DatePicker placeholder="Select date" onChange={setSelectedDate} />
- * 
+ *
  * // With presets and time picker
  * <DatePicker
  *   showTimePicker
@@ -1354,7 +1357,7 @@ type SingleDatePickerProps = {
  *   ]}
  *   onChange={setSelectedDate}
  * />
- * 
+ *
  * // Controlled with validation
  * <DatePicker
  *   value={selectedDate}
@@ -1364,7 +1367,7 @@ type SingleDatePickerProps = {
  *   hasError={!!dateError}
  *   required
  * />
- * 
+ *
  * // With custom locale and translations
  * <DatePicker
  *   locale={es}
@@ -1385,7 +1388,7 @@ DatePicker.displayName = "DatePicker";
 
 /**
  * Props for the DateRangePicker component.
- * 
+ *
  * Combines date range specific props with base picker configuration.
  * Used for selecting date ranges with optional presets and time selection.
  */
@@ -1402,7 +1405,7 @@ type RangeDatePickerProps = {
 
 /**
  * A comprehensive date range picker component with optional time selection.
- * 
+ *
  * Features include dual calendar navigation, preset date range options, time picker
  * integration for both start and end dates, localization support, and comprehensive
  * validation. Perfect for booking systems, analytics dashboards, and date filtering.
@@ -1424,25 +1427,25 @@ type RangeDatePickerProps = {
  * @example
  * ```tsx
  * // Basic date range picker
- * <DateRangePicker 
- *   placeholder="Select date range" 
- *   onChange={setDateRange} 
+ * <DateRangePicker
+ *   placeholder="Select date range"
+ *   onChange={setDateRange}
  * />
- * 
+ *
  * // With presets and time picker
  * <DateRangePicker
  *   showTimePicker
  *   presets={[
- *     { label: "Last 7 days", dateRange: { 
+ *     { label: "Last 7 days", dateRange: {
  *       from: subDays(new Date(), 7), to: new Date() } },
- *     { label: "Last 30 days", dateRange: { 
+ *     { label: "Last 30 days", dateRange: {
  *       from: subDays(new Date(), 30), to: new Date() } },
- *     { label: "This month", dateRange: { 
+ *     { label: "This month", dateRange: {
  *       from: startOfMonth(new Date()), to: endOfMonth(new Date()) } }
  *   ]}
  *   onChange={setDateRange}
  * />
- * 
+ *
  * // Controlled with validation
  * <DateRangePicker
  *   value={selectedRange}
@@ -1452,12 +1455,12 @@ type RangeDatePickerProps = {
  *   hasError={!!rangeError}
  *   required
  * />
- * 
+ *
  * // Custom translations
  * <DateRangePicker
- *   translations={{ 
- *     cancel: "Cancel", 
- *     apply: "Apply", 
+ *   translations={{
+ *     cancel: "Cancel",
+ *     apply: "Apply",
  *     start: "Check-in",
  *     end: "Check-out",
  *     range: "Stay Duration"

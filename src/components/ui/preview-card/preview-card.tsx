@@ -1,10 +1,10 @@
 /**
  * Preview Card Components
- * 
+ *
  * A comprehensive preview card system for displaying rich content previews
  * with hover interactions. Built on Base UI PreviewCard for creating
  * link previews, content cards, and contextual information displays.
- * 
+ *
  * Features:
  * - Base UI PreviewCard integration for accessibility
  * - Hover-triggered content previews
@@ -15,10 +15,10 @@
  * - Structured content layout with image, header, body, footer
  * - Dark mode compatible styling
  * - Link-like trigger styling
- * 
+ *
  * Built on Base UI PreviewCard documentation:
  * https://base-ui.com/react/components/preview-card
- * 
+ *
  * @example
  * ```tsx
  * // Basic preview card
@@ -32,7 +32,7 @@
  *     </PreviewCardHeader>
  *   </PreviewCardContent>
  * </PreviewCard>
- * 
+ *
  * // Rich content preview
  * <PreviewCard>
  *   <PreviewCardTrigger>
@@ -42,8 +42,8 @@
  *   </PreviewCardTrigger>
  *   <PreviewCardContent side="top" align="start">
  *     <PreviewCardArrow />
- *     <PreviewCardImage 
- *       src="/article-preview.jpg" 
+ *     <PreviewCardImage
+ *       src="/article-preview.jpg"
  *       alt="Article preview"
  *     />
  *     <PreviewCardHeader>
@@ -54,19 +54,19 @@
  *     </PreviewCardHeader>
  *     <PreviewCardBody>
  *       <div className="space-y-2">
- *         <p className="text-xs text-gray-500">Published: March 15, 2024</p>
- *         <p className="text-xs text-gray-500">Reading time: 5 minutes</p>
+ *         <p className="text-xs text-zinc-500">Published: March 15, 2024</p>
+ *         <p className="text-xs text-zinc-500">Reading time: 5 minutes</p>
  *       </div>
  *     </PreviewCardBody>
  *     <PreviewCardFooter>
- *       <span className="text-xs text-gray-500">TechBlog.com</span>
+ *       <span className="text-xs text-zinc-500">TechBlog.com</span>
  *       <button className="text-xs text-blue-600 hover:underline">
  *         Read more
  *       </button>
  *     </PreviewCardFooter>
  *   </PreviewCardContent>
  * </PreviewCard>
- * 
+ *
  * // User profile preview
  * <PreviewCard>
  *   <PreviewCardTrigger>
@@ -77,9 +77,9 @@
  *   <PreviewCardContent>
  *     <PreviewCardHeader>
  *       <div className="flex items-center gap-3">
- *         <img 
- *           src="/avatar.jpg" 
- *           alt="John Doe" 
+ *         <img
+ *           src="/avatar.jpg"
+ *           alt="John Doe"
  *           className="w-12 h-12 rounded-full"
  *         />
  *         <div>
@@ -92,7 +92,7 @@
  *       <p className="text-sm">Building amazing web experiences with React and TypeScript.</p>
  *     </PreviewCardBody>
  *     <PreviewCardFooter>
- *       <span className="text-xs text-gray-500">Joined March 2022</span>
+ *       <span className="text-xs text-zinc-500">Joined March 2022</span>
  *       <button className="text-xs bg-blue-500 text-white px-2 py-1 rounded">
  *         Follow
  *       </button>
@@ -108,7 +108,7 @@ import React from "react";
 
 /**
  * Root preview card component.
- * 
+ *
  * Container for preview card trigger and content with hover interaction management.
  * Built on Base UI PreviewCard.Root for accessibility and state management.
  *
@@ -125,7 +125,7 @@ const PreviewCard = BasePreviewCard.Root;
 
 /**
  * Preview card trigger component that shows preview on hover.
- * 
+ *
  * Interactive element that reveals preview content on hover or focus.
  * Features link-like styling with smooth transitions and accessibility support.
  *
@@ -136,7 +136,7 @@ const PreviewCard = BasePreviewCard.Root;
  * @example
  * ```tsx
  * <PreviewCardTrigger>Hover for preview</PreviewCardTrigger>
- * 
+ *
  * <PreviewCardTrigger className="font-bold">
  *   <a href="/link">Custom styled trigger</a>
  * </PreviewCardTrigger>
@@ -170,7 +170,7 @@ const PreviewCardTrigger = React.forwardRef<
 
 /**
  * Portal component for rendering preview card content outside normal DOM flow.
- * 
+ *
  * Ensures preview content is rendered at the document root to avoid z-index
  * conflicts and enable proper layering.
  *
@@ -186,10 +186,10 @@ const PreviewCardPortal = BasePreviewCard.Portal;
 
 /**
  * Positioner component for smart preview card placement.
- * 
+ *
  * Handles automatic positioning relative to trigger with collision detection
  * and boundary awareness. Used internally by PreviewCardContent.
-*
+ *
  * @param sideOffset - Distance from trigger element
  * @param collisionPadding - Padding for collision detection
  * @param props - Additional Base UI Positioner props
@@ -216,7 +216,7 @@ const PreviewCardPositioner = React.forwardRef<
 
 /**
  * Main preview card content container with automatic positioning.
- * 
+ *
  * Primary container for preview card content with smart positioning,
  * portal rendering, and smooth animations. Includes collision detection
  * and responsive behavior.
@@ -236,7 +236,7 @@ const PreviewCardPositioner = React.forwardRef<
  *     <PreviewCardTitle>Title</PreviewCardTitle>
  *   </PreviewCardHeader>
  * </PreviewCardContent>
- * 
+ *
  * <PreviewCardContent side="top" align="start" sideOffset={12}>
  *   Positioned preview content
  * </PreviewCardContent>
@@ -299,7 +299,7 @@ const PreviewCardContent = React.forwardRef<
 
 /**
  * Arrow component pointing from preview card to trigger.
- * 
+ *
  * Visual indicator that connects the preview content to its trigger.
  * Automatically rotates and positions based on the card's placement.
  *
@@ -353,23 +353,23 @@ const PreviewCardArrow = React.forwardRef<
 
 /**
  * Image component for preview card headers.
- * 
+ *
  * Displays preview images with consistent aspect ratio and styling.
  * Automatically rounds top corners to match card design.
-*
+ *
  * @param className - Additional CSS classes
  * @param props - Standard HTML img props
  *
  * @component
  * @example
  * ```tsx
- * <PreviewCardImage 
- *   src="/preview.jpg" 
+ * <PreviewCardImage
+ *   src="/preview.jpg"
  *   alt="Preview image"
  * />
- * 
- * <PreviewCardImage 
- *   src="/thumbnail.jpg" 
+ *
+ * <PreviewCardImage
+ *   src="/thumbnail.jpg"
  *   alt="Thumbnail"
  *   className="h-32 object-contain"
  * />
@@ -394,10 +394,10 @@ const PreviewCardImage = React.forwardRef<
 
 /**
  * Header section for preview card title and description.
- * 
+ *
  * Container for preview card title, description, and other header content
  * with consistent padding and spacing.
-*
+ *
  * @param className - Additional CSS classes
  * @param props - Standard HTML div props
  *
@@ -427,10 +427,10 @@ const PreviewCardHeader = React.forwardRef<
 
 /**
  * Title heading component for preview cards.
- * 
+ *
  * Semantic heading that provides the main title for preview content
  * with prominent typography and proper hierarchy.
-*
+ *
  * @param className - Additional CSS classes
  * @param props - Standard HTML h3 props
  *
@@ -438,7 +438,7 @@ const PreviewCardHeader = React.forwardRef<
  * @example
  * ```tsx
  * <PreviewCardTitle>Article Title</PreviewCardTitle>
- * 
+ *
  * <PreviewCardTitle className="text-xl text-blue-600">
  *   Custom Styled Title
  * </PreviewCardTitle>
@@ -463,10 +463,10 @@ const PreviewCardTitle = React.forwardRef<
 
 /**
  * Description component for preview card content.
- * 
+ *
  * Provides additional context and information with muted styling
  * that complements the title hierarchy.
-*
+ *
  * @param className - Additional CSS classes
  * @param props - Standard HTML p props
  *
@@ -476,7 +476,7 @@ const PreviewCardTitle = React.forwardRef<
  * <PreviewCardDescription>
  *   Brief description of the preview content.
  * </PreviewCardDescription>
- * 
+ *
  * <PreviewCardDescription className="text-xs italic">
  *   Custom styled description
  * </PreviewCardDescription>
@@ -501,10 +501,10 @@ const PreviewCardDescription = React.forwardRef<
 
 /**
  * Body section for preview card main content.
- * 
+ *
  * Container for the main content area between header and footer
  * with consistent padding and spacing.
-*
+ *
  * @param className - Additional CSS classes
  * @param props - Standard HTML div props
  *
@@ -534,10 +534,10 @@ const PreviewCardBody = React.forwardRef<
 
 /**
  * Footer section for preview card actions and metadata.
- * 
+ *
  * Bottom section typically containing actions, timestamps, or metadata
  * with subtle background and border separation.
-*
+ *
  * @param className - Additional CSS classes
  * @param props - Standard HTML div props
  *
@@ -545,7 +545,7 @@ const PreviewCardBody = React.forwardRef<
  * @example
  * ```tsx
  * <PreviewCardFooter>
- *   <span className="text-sm text-gray-500">Published: March 2024</span>
+ *   <span className="text-sm text-zinc-500">Published: March 2024</span>
  *   <button className="text-blue-600 hover:underline">Read more</button>
  * </PreviewCardFooter>
  * ```

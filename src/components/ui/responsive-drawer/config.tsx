@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "responsive-drawer",
   name: "Responsive Drawer",
-  description: "A drawer component that adapts to different screen sizes, showing as a sheet on mobile and a dialog on desktop.",
+  description:
+    "A drawer component that adapts to different screen sizes, showing as a sheet on mobile and a dialog on desktop.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -66,11 +67,11 @@ export const componentConfig: ComponentConfig = {
     <div className="p-4 space-y-4">
       <div>
         <label htmlFor="name" className="text-sm font-medium">Name</label>
-        <input id="name" type="text" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+        <input id="name" type="text" className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2" />
       </div>
       <div>
         <label htmlFor="email" className="text-sm font-medium">Email</label>
-        <input id="email" type="email" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+        <input id="email" type="email" className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2" />
       </div>
       <Button className="w-full">Save Changes</Button>
     </div>

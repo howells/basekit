@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "stacked-list",
   name: "Stacked List",
-  description: "A list component that displays items in a vertically stacked layout with dividers.",
+  description:
+    "A list component that displays items in a vertically stacked layout with dividers.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -22,27 +23,27 @@ export const componentConfig: ComponentConfig = {
     <div className="flex items-center justify-between">
       <div>
         <h4 className="font-medium">Item 1</h4>
-        <p className="text-sm text-gray-600">Description for item 1</p>
+        <p className="text-sm text-zinc-600">Description for item 1</p>
       </div>
-      <ChevronRight className="h-5 w-5 text-gray-400" />
+      <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
   <StackedListItem>
     <div className="flex items-center justify-between">
       <div>
         <h4 className="font-medium">Item 2</h4>
-        <p className="text-sm text-gray-600">Description for item 2</p>
+        <p className="text-sm text-zinc-600">Description for item 2</p>
       </div>
-      <ChevronRight className="h-5 w-5 text-gray-400" />
+      <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
   <StackedListItem>
     <div className="flex items-center justify-between">
       <div>
         <h4 className="font-medium">Item 3</h4>
-        <p className="text-sm text-gray-600">Description for item 3</p>
+        <p className="text-sm text-zinc-600">Description for item 3</p>
       </div>
-      <ChevronRight className="h-5 w-5 text-gray-400" />
+      <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
 </StackedList>`,
@@ -60,7 +61,7 @@ export const componentConfig: ComponentConfig = {
       </Avatar>
       <div className="flex-1">
         <h4 className="font-medium">John Doe</h4>
-        <p className="text-sm text-gray-600">john.doe@example.com</p>
+        <p className="text-sm text-zinc-600">john.doe@example.com</p>
       </div>
       <Button size="sm" variant="ghost">
         View
@@ -75,7 +76,7 @@ export const componentConfig: ComponentConfig = {
       </Avatar>
       <div className="flex-1">
         <h4 className="font-medium">Jane Smith</h4>
-        <p className="text-sm text-gray-600">jane.smith@example.com</p>
+        <p className="text-sm text-zinc-600">jane.smith@example.com</p>
       </div>
       <Button size="sm" variant="ghost">
         View
@@ -89,28 +90,28 @@ export const componentConfig: ComponentConfig = {
       title: "Interactive Stacked List",
       description: "List items that are clickable",
       code: `<StackedList>
-  <StackedListItem className="cursor-pointer hover:bg-gray-50">
+  <StackedListItem className="cursor-pointer hover:bg-zinc-50">
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <Settings className="h-5 w-5 text-gray-500" />
+        <Settings className="h-5 w-5 text-zinc-500" />
         <div>
           <h4 className="font-medium">Account Settings</h4>
-          <p className="text-sm text-gray-600">Manage your account preferences</p>
+          <p className="text-sm text-zinc-600">Manage your account preferences</p>
         </div>
       </div>
-      <ChevronRight className="h-5 w-5 text-gray-400" />
+      <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
-  <StackedListItem className="cursor-pointer hover:bg-gray-50">
+  <StackedListItem className="cursor-pointer hover:bg-zinc-50">
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <Bell className="h-5 w-5 text-gray-500" />
+        <Bell className="h-5 w-5 text-zinc-500" />
         <div>
           <h4 className="font-medium">Notifications</h4>
-          <p className="text-sm text-gray-600">Configure notification preferences</p>
+          <p className="text-sm text-zinc-600">Configure notification preferences</p>
         </div>
       </div>
-      <ChevronRight className="h-5 w-5 text-gray-400" />
+      <ChevronRight className="h-5 w-5 text-zinc-400" />
     </div>
   </StackedListItem>
 </StackedList>`,

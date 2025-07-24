@@ -138,7 +138,7 @@ export interface ComboboxProps {
  *       <Avatar size="xs" src={option.avatar} />
  *       <div>
  *         <div className="font-medium">{option.name}</div>
- *         <div className="text-sm text-gray-500">{option.email}</div>
+ *         <div className="text-sm text-zinc-500">{option.email}</div>
  *       </div>
  *     </div>
  *   )}

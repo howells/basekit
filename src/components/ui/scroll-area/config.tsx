@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "scroll-area",
   name: "Scroll Area",
-  description: "Augments native scroll functionality for custom, cross-browser styling.",
+  description:
+    "Augments native scroll functionality for custom, cross-browser styling.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -53,7 +54,7 @@ export const componentConfig: ComponentConfig = {
             height={400}
           />
         </div>
-        <figcaption className="pt-2 text-xs text-gray-600">
+        <figcaption className="pt-2 text-xs text-zinc-600">
           Photo {i + 1}
         </figcaption>
       </figure>

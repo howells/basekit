@@ -1,10 +1,10 @@
 /**
  * Sheet Components (Desktop Drawer)
- * 
+ *
  * A desktop-optimized drawer/sheet implementation built on Base UI Dialog.
  * Provides side panel overlays that slide in from the right side of the screen,
  * perfect for detailed forms, settings panels, and navigation menus on desktop.
- * 
+ *
  * Features:
  * - Base UI Dialog integration for full accessibility
  * - Slides in from the right side of the screen
@@ -15,10 +15,10 @@
  * - Flexible layout with header, body, and footer sections
  * - Dark mode support
  * - Responsive sizing and positioning
- * 
+ *
  * Built on Base UI Dialog documentation:
  * https://base-ui.com/react/components/dialog
- * 
+ *
  * @example
  * ```tsx
  * // Basic sheet
@@ -45,10 +45,10 @@
  *     </DrawerFooter>
  *   </DrawerContent>
  * </Drawer>
- * 
+ *
  * // Controlled sheet
  * const [open, setOpen] = useState(false);
- * 
+ *
  * <Drawer open={open} onOpenChange={setOpen}>
  *   <DrawerTrigger>
  *     <button>Open Form</button>
@@ -73,7 +73,7 @@
  *     </DrawerFooter>
  *   </DrawerContent>
  * </Drawer>
- * 
+ *
  * // Navigation sheet
  * <Drawer>
  *   <DrawerTrigger>
@@ -85,13 +85,13 @@
  *     </DrawerHeader>
  *     <DrawerBody>
  *       <nav className="space-y-2">
- *         <a href="/dashboard" className="block p-2 hover:bg-gray-100">
+ *         <a href="/dashboard" className="block p-2 hover:bg-zinc-100">
  *           Dashboard
  *         </a>
- *         <a href="/projects" className="block p-2 hover:bg-gray-100">
+ *         <a href="/projects" className="block p-2 hover:bg-zinc-100">
  *           Projects
  *         </a>
- *         <a href="/settings" className="block p-2 hover:bg-gray-100">
+ *         <a href="/settings" className="block p-2 hover:bg-zinc-100">
  *           Settings
  *         </a>
  *       </nav>
@@ -111,7 +111,7 @@ import { Button } from "../button/button";
 
 /**
  * Root sheet/drawer component for desktop side panels.
- * 
+ *
  * Container component that manages the sheet's open state and provides
  * context for all child components. Built on Base UI Dialog.Root for
  * full accessibility support.
@@ -126,7 +126,7 @@ import { Button } from "../button/button";
  *   <DrawerTrigger>Open</DrawerTrigger>
  *   <DrawerContent>Content</DrawerContent>
  * </Drawer>
- * 
+ *
  * // Controlled sheet
  * <Drawer open={isOpen} onOpenChange={setIsOpen}>
  *   <DrawerTrigger>Toggle</DrawerTrigger>
@@ -141,7 +141,7 @@ Drawer.displayName = "Drawer";
 
 /**
  * Sheet trigger component that opens the sheet when activated.
- * 
+ *
  * Interactive element that opens the sheet panel. Can be any clickable
  * element like a button, link, or custom component with proper event handling.
  *
@@ -156,7 +156,7 @@ Drawer.displayName = "Drawer";
  *     Open Panel
  *   </button>
  * </DrawerTrigger>
- * 
+ *
  * <DrawerTrigger asChild>
  *   <div className="cursor-pointer">Custom trigger</div>
  * </DrawerTrigger>
@@ -172,7 +172,7 @@ DrawerTrigger.displayName = "Drawer.Trigger";
 
 /**
  * Sheet close component for dismissing the sheet.
- * 
+ *
  * Interactive element that closes the sheet when activated. Automatically
  * handles focus return to the trigger element upon closure.
  *
@@ -185,7 +185,7 @@ DrawerTrigger.displayName = "Drawer.Trigger";
  * <DrawerClose>
  *   <button className="px-3 py-1 border rounded">Cancel</button>
  * </DrawerClose>
- * 
+ *
  * <DrawerClose asChild>
  *   <button className="custom-close-button">Done</button>
  * </DrawerClose>
@@ -201,7 +201,7 @@ DrawerClose.displayName = "Drawer.Close";
 
 /**
  * Portal component for rendering sheet content outside normal DOM flow.
- * 
+ *
  * Ensures sheet content is rendered at the document root to avoid z-index
  * conflicts and enable proper layering. Used internally by DrawerContent.
  *
@@ -219,7 +219,7 @@ const DrawerPortal = Dialog.Portal;
 
 /**
  * Overlay/backdrop component that appears behind the sheet.
- * 
+ *
  * Semi-transparent backdrop that covers the entire viewport when the sheet
  * is open. Provides visual focus and can close the sheet when clicked.
  * Features smooth fade animations.
@@ -232,7 +232,7 @@ const DrawerPortal = Dialog.Portal;
  * ```tsx
  * // Used internally by DrawerContent
  * <DrawerOverlay />
- * 
+ *
  * // Custom overlay styling
  * <DrawerOverlay className="bg-blue-500/20" />
  * ```
@@ -266,7 +266,7 @@ DrawerOverlay.displayName = "DrawerOverlay";
 
 /**
  * Main sheet content container with positioning and animations.
- * 
+ *
  * Primary container for sheet content that slides in from the right side
  * of the screen. Includes backdrop overlay, smooth animations, responsive
  * sizing, and proper focus management.
@@ -285,7 +285,7 @@ DrawerOverlay.displayName = "DrawerOverlay";
  *     Sheet content here
  *   </DrawerBody>
  * </DrawerContent>
- * 
+ *
  * // Custom width
  * <DrawerContent className="sm:max-w-xl">
  *   Wider sheet content
@@ -323,7 +323,7 @@ DrawerContent.displayName = "DrawerContent";
 
 /**
  * Sheet header component with title, description, and close button.
- * 
+ *
  * Header section that typically contains the sheet title and description,
  * along with an automatic close button. Features bottom border separation
  * and responsive layout.
@@ -339,7 +339,7 @@ DrawerContent.displayName = "DrawerContent";
  *   <DrawerTitle>User Settings</DrawerTitle>
  *   <DrawerDescription>Manage your account preferences</DrawerDescription>
  * </DrawerHeader>
- * 
+ *
  * <DrawerHeader className="text-center">
  *   <DrawerTitle>Confirmation</DrawerTitle>
  *   <DrawerDescription>This action cannot be undone</DrawerDescription>
@@ -377,7 +377,7 @@ DrawerHeader.displayName = "Drawer.Header";
 
 /**
  * Sheet title component for the main heading.
- * 
+ *
  * Semantic heading element that provides the primary title for the sheet
  * content. Essential for accessibility and screen reader support.
  *
@@ -388,7 +388,7 @@ DrawerHeader.displayName = "Drawer.Header";
  * @example
  * ```tsx
  * <DrawerTitle>Account Settings</DrawerTitle>
- * 
+ *
  * <DrawerTitle className="text-lg text-blue-600">
  *   Custom Styled Title
  * </DrawerTitle>
@@ -415,7 +415,7 @@ DrawerTitle.displayName = "DrawerTitle";
 
 /**
  * Sheet body component for the main scrollable content area.
- * 
+ *
  * Flexible container that holds the primary sheet content with automatic
  * vertical scrolling when content exceeds the available space.
  *
@@ -431,7 +431,7 @@ DrawerTitle.displayName = "DrawerTitle";
  *     <input type="email" placeholder="Email" />
  *   </form>
  * </DrawerBody>
- * 
+ *
  * <DrawerBody className="p-0">
  *   <nav className="space-y-1">
  *     <a href="/dashboard">Dashboard</a>
@@ -450,7 +450,7 @@ DrawerBody.displayName = "Drawer.Body";
 
 /**
  * Sheet description component for explanatory text.
- * 
+ *
  * Provides additional context and information about the sheet's purpose
  * or content. Features muted styling to create visual hierarchy with the title.
  *
@@ -463,7 +463,7 @@ DrawerBody.displayName = "Drawer.Body";
  * <DrawerDescription>
  *   Update your profile information and account settings
  * </DrawerDescription>
- * 
+ *
  * <DrawerDescription className="text-red-500">
  *   Warning: This action cannot be undone
  * </DrawerDescription>
@@ -486,7 +486,7 @@ DrawerDescription.displayName = "DrawerDescription";
 
 /**
  * Sheet footer component for action buttons and controls.
- * 
+ *
  * Footer section typically containing action buttons like Save, Cancel, etc.
  * Features top border separation and responsive layout that stacks on mobile
  * and displays horizontally on desktop.
@@ -505,7 +505,7 @@ DrawerDescription.displayName = "DrawerDescription";
  *     Save Changes
  *   </button>
  * </DrawerFooter>
- * 
+ *
  * <DrawerFooter className="justify-center">
  *   <button>Single Action</button>
  * </DrawerFooter>

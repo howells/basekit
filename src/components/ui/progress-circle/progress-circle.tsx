@@ -1,10 +1,10 @@
 /**
  * Progress Circle Component
- * 
+ *
  * A circular progress indicator for displaying completion status, loading states,
  * and quantitative data visualization. Features customizable styling, animations,
  * and accessibility support.
- * 
+ *
  * Features:
  * - Circular SVG-based progress visualization
  * - Multiple size variants (xs, sm, md, lg, xl)
@@ -15,48 +15,48 @@
  * - Full accessibility support with ARIA attributes
  * - Custom content support
  * - Value formatting functions
- * 
+ *
  * @example
  * ```tsx
  * // Basic progress circle
  * <ProgressCircle value={75} />
- * 
+ *
  * // With label and value display
- * <ProgressCircle 
- *   value={60} 
- *   label="Completion" 
- *   showValue 
+ * <ProgressCircle
+ *   value={60}
+ *   label="Completion"
+ *   showValue
  *   variant="success"
  * />
- * 
+ *
  * // Custom size and styling
- * <ProgressCircle 
- *   value={45} 
- *   size="lg" 
+ * <ProgressCircle
+ *   value={45}
+ *   size="lg"
  *   variant="warning"
  *   valueFormatter={(val, max) => `${val}/${max} tasks`}
  * />
- * 
+ *
  * // Loading state
- * <ProgressCircle 
- *   value={null} 
+ * <ProgressCircle
+ *   value={null}
  *   variant="neutral"
  *   showAnimation={false}
  * />
- * 
+ *
  * // Custom content
  * <ProgressCircle value={90} variant="success">
  *   <div className="text-center">
  *     <CheckIcon className="w-6 h-6 text-green-500" />
- *     <span className="text-sm text-gray-600">Complete</span>
+ *     <span className="text-sm text-zinc-600">Complete</span>
  *   </div>
  * </ProgressCircle>
- * 
+ *
  * // Data visualization
- * <ProgressCircle 
- *   value={2.5} 
- *   max={5} 
- *   label="Rating" 
+ * <ProgressCircle
+ *   value={2.5}
+ *   max={5}
+ *   label="Rating"
  *   showValue
  *   valueFormatter={(val, max) => `${val?.toFixed(1) || 0}⭐`}
  *   className="mx-auto"
@@ -80,7 +80,7 @@ import {
 
 /**
  * Tailwind variants for the progress circle component.
- * 
+ *
  * Defines styling slots for different parts of the circular progress indicator
  * with variants for colors, animation states, and sizes.
  */
@@ -161,10 +161,10 @@ const progressCircleVariants = tv({
 
 /**
  * Props for the ProgressCircle component.
- * 
+ *
  * Configuration for circular progress indicators with styling, behavior,
  * and accessibility options.
- * 
+ *
  * @interface ProgressCircleProps
  * @extends Omit<React.HTMLAttributes<HTMLDivElement>, "value">
  * @extends VariantProps<typeof progressCircleVariants>
@@ -196,7 +196,7 @@ interface ProgressCircleProps
 
 /**
  * Circular progress indicator component for visualizing completion status.
- * 
+ *
  * Displays progress as a circular arc with customizable styling, animations,
  * and content. Perfect for dashboards, loading states, and data visualization.
  *
@@ -217,22 +217,22 @@ interface ProgressCircleProps
  * ```tsx
  * // Basic usage
  * <ProgressCircle value={75} />
- * 
+ *
  * // With label and value
- * <ProgressCircle 
- *   value={60} 
- *   label="Progress" 
- *   showValue 
+ * <ProgressCircle
+ *   value={60}
+ *   label="Progress"
+ *   showValue
  *   variant="success"
  * />
- * 
+ *
  * // Custom formatting
- * <ProgressCircle 
- *   value={8} 
- *   max={10} 
+ * <ProgressCircle
+ *   value={8}
+ *   max={10}
  *   valueFormatter={(val, max) => `${val}/${max} complete`}
  * />
- * 
+ *
  * // Large size with custom content
  * <ProgressCircle value={90} size="lg">
  *   <CheckIcon className="w-8 h-8 text-green-500" />

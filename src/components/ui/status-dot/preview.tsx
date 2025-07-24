@@ -52,7 +52,7 @@ export const StatusDotExample = ({
     return (
       <div className="space-y-4" {...props}>
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <h4 className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
             With Labels
           </h4>
           <div className="flex items-center gap-6">
@@ -63,7 +63,7 @@ export const StatusDotExample = ({
         </div>
 
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <h4 className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
             Dots Only
           </h4>
           <div className="flex items-center gap-6">

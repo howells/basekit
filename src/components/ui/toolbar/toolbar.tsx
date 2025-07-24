@@ -53,7 +53,7 @@ const toolbarVariants = tv({
       // colors
       "text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-950",
       // border
-      "border border-zinc-300 dark:border-zinc-600",
+      "border border-zinc-200 dark:border-zinc-600",
       // hover
       "hover:border-zinc-400 dark:hover:border-zinc-500",
       // highlighted
@@ -80,7 +80,7 @@ const toolbarVariants = tv({
         root: "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800",
       },
       outline: {
-        root: "border-zinc-300 bg-transparent dark:border-zinc-600",
+        root: "border-zinc-200 bg-transparent dark:border-zinc-600",
       },
       ghost: {
         root: "border-transparent bg-transparent",

@@ -13,7 +13,7 @@ const inputStyles = tv({
     // base
     "relative block w-full appearance-none rounded-md border shadow-xs outline-hidden transition",
     // border color
-    "border-zinc-300 dark:border-zinc-800",
+    "border-zinc-200 dark:border-zinc-800",
     // text color
     "text-zinc-900 dark:text-zinc-50",
     // placeholder color
@@ -21,7 +21,7 @@ const inputStyles = tv({
     // background color
     "bg-white dark:bg-zinc-950",
     // disabled
-    "data-disabled:border-zinc-300 data-disabled:bg-zinc-100 data-disabled:text-zinc-400",
+    "data-disabled:border-zinc-200 data-disabled:bg-zinc-100 data-disabled:text-zinc-400",
     "dark:data-disabled:border-zinc-700 dark:data-disabled:bg-zinc-800 dark:data-disabled:text-zinc-500",
     // focus
     focusInput,
@@ -65,7 +65,7 @@ const inputStyles = tv({
     {
       class: [
         "file:cursor-pointer file:rounded-l-[5px] file:rounded-r-none file:border-0 file:outline-hidden focus:outline-hidden data-disabled:pointer-events-none file:data-disabled:pointer-events-none",
-        "file:border-solid file:border-zinc-300 file:bg-zinc-50 file:text-zinc-500 file:hover:bg-zinc-100 dark:file:border-zinc-800 dark:file:bg-zinc-950 dark:file:hover:bg-zinc-900/20 dark:file:data-disabled:border-zinc-700",
+        "file:border-solid file:border-zinc-200 file:bg-zinc-50 file:text-zinc-500 file:hover:bg-zinc-100 dark:file:border-zinc-800 dark:file:bg-zinc-950 dark:file:hover:bg-zinc-900/20 dark:file:data-disabled:border-zinc-700",
         "file:[border-inline-end-width:1px]",
         "file:data-disabled:bg-zinc-100 file:data-disabled:text-zinc-500 dark:file:data-disabled:bg-zinc-800",
       ],
@@ -374,7 +374,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
         className={cx(
           "relative flex items-stretch w-full rounded-md border shadow-xs transition",
           // Border and background colors
-          "border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-950",
+          "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
           // Error states
           hasError && "border-red-500 dark:border-red-500",
           // Focus-within for container focus
@@ -437,7 +437,7 @@ const Input = React.forwardRef<React.ElementRef<typeof BaseInput>, InputProps>(
             // Disabled states
             "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-500",
             // File input styles
-            "file:-my-2 file:-ml-2.5 file:px-3 file:py-2 file:[margin-inline-end:0.75rem] file:cursor-pointer file:rounded-l-[5px] file:rounded-r-none file:border-0 file:outline-hidden focus:outline-hidden data-disabled:pointer-events-none file:data-disabled:pointer-events-none file:border-solid file:border-zinc-300 file:bg-zinc-50 file:text-zinc-500 file:hover:bg-zinc-100 dark:file:border-zinc-800 dark:file:bg-zinc-950 dark:file:hover:bg-zinc-900/20 dark:file:data-disabled:border-zinc-700 file:[border-inline-end-width:1px] file:data-disabled:bg-zinc-100 file:data-disabled:text-zinc-500 dark:file:data-disabled:bg-zinc-800",
+            "file:-my-2 file:-ml-2.5 file:px-3 file:py-2 file:[margin-inline-end:0.75rem] file:cursor-pointer file:rounded-l-[5px] file:rounded-r-none file:border-0 file:outline-hidden focus:outline-hidden data-disabled:pointer-events-none file:data-disabled:pointer-events-none file:border-solid file:border-zinc-200 file:bg-zinc-50 file:text-zinc-500 file:hover:bg-zinc-100 dark:file:border-zinc-800 dark:file:bg-zinc-950 dark:file:hover:bg-zinc-900/20 dark:file:data-disabled:border-zinc-700 file:[border-inline-end-width:1px] file:data-disabled:bg-zinc-100 file:data-disabled:text-zinc-500 dark:file:data-disabled:bg-zinc-800",
             inputClassName
           )}
           {...props}

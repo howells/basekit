@@ -17,7 +17,7 @@ import {
 
 export function NavigationMenuExample() {
   return (
-    <NavigationMenu className="min-w-max rounded-lg bg-gray-50 p-1 text-gray-900">
+    <NavigationMenu className="min-w-max rounded-lg bg-zinc-50 p-1 text-zinc-900">
       <NavigationMenuList className="relative flex">
         <NavigationMenuItem>
           <NavigationMenuTrigger>Overview</NavigationMenuTrigger>

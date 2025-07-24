@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "switch",
   name: "Switch",
-  description: "A control that allows the user to toggle between checked and not checked.",
+  description:
+    "A control that allows the user to toggle between checked and not checked.",
   category: "inputs" as const,
   badge: "Inputs",
   installation: {
@@ -58,13 +59,13 @@ export const componentConfig: ComponentConfig = {
       code: `<div className="space-y-4">
   <div className="flex items-center space-x-2">
     <Switch id="disabled-off" disabled />
-    <label htmlFor="disabled-off" className="text-gray-500">
+    <label htmlFor="disabled-off" className="text-zinc-500">
       Disabled (off)
     </label>
   </div>
   <div className="flex items-center space-x-2">
     <Switch id="disabled-on" defaultChecked disabled />
-    <label htmlFor="disabled-on" className="text-gray-500">
+    <label htmlFor="disabled-on" className="text-zinc-500">
       Disabled (on)
     </label>
   </div>

@@ -1,10 +1,10 @@
 /**
  * Responsive Drawer Components
- * 
+ *
  * An adaptive drawer system that automatically switches between mobile drawer
  * (bottom sheet) and desktop sheet (side panel) based on screen size. Provides
  * consistent API across different device types while optimizing UX for each.
- * 
+ *
  * Features:
  * - Automatic mobile/desktop detection
  * - Mobile: Bottom drawer using Vaul library
@@ -13,17 +13,17 @@
  * - Touch gestures on mobile, click interactions on desktop
  * - Proper accessibility support on both platforms
  * - Responsive behavior with screen size changes
- * 
+ *
  * Mobile Implementation:
  * - Uses Vaul drawer library for bottom sheet behavior
  * - Touch-friendly gestures and animations
  * - Optimized for thumb navigation
- * 
+ *
  * Desktop Implementation:
  * - Uses Base UI Dialog as side sheet
  * - Keyboard navigation support
  * - Optimized for mouse interactions
- * 
+ *
  * @example
  * ```tsx
  * // Basic responsive drawer
@@ -51,10 +51,10 @@
  *     </ResponsiveDrawerFooter>
  *   </ResponsiveDrawerContent>
  * </ResponsiveDrawer>
- * 
+ *
  * // Controlled state
  * const [open, setOpen] = useState(false);
- * 
+ *
  * <ResponsiveDrawer open={open} onOpenChange={setOpen}>
  *   <ResponsiveDrawerTrigger>
  *     <button>Open Navigation</button>
@@ -108,7 +108,7 @@ import {
 
 /**
  * Props for the ResponsiveDrawer root component.
- * 
+ *
  * Configuration for the adaptive drawer container.
  */
 interface ResponsiveDrawerProps {
@@ -122,7 +122,7 @@ interface ResponsiveDrawerProps {
 
 /**
  * Props for the ResponsiveDrawerTrigger component.
- * 
+ *
  * Configuration for the element that opens the drawer.
  */
 interface ResponsiveDrawerTriggerProps {
@@ -134,7 +134,7 @@ interface ResponsiveDrawerTriggerProps {
 
 /**
  * Props for the ResponsiveDrawerContent component.
- * 
+ *
  * Configuration for the main drawer content container.
  */
 interface ResponsiveDrawerContentProps {
@@ -146,7 +146,7 @@ interface ResponsiveDrawerContentProps {
 
 /**
  * Props for the ResponsiveDrawerHeader component.
- * 
+ *
  * Configuration for the drawer header section.
  */
 interface ResponsiveDrawerHeaderProps {
@@ -158,7 +158,7 @@ interface ResponsiveDrawerHeaderProps {
 
 /**
  * Props for the ResponsiveDrawerTitle component.
- * 
+ *
  * Configuration for the drawer title text.
  */
 interface ResponsiveDrawerTitleProps {
@@ -170,7 +170,7 @@ interface ResponsiveDrawerTitleProps {
 
 /**
  * Props for the ResponsiveDrawerDescription component.
- * 
+ *
  * Configuration for the drawer description text.
  */
 interface ResponsiveDrawerDescriptionProps {
@@ -182,7 +182,7 @@ interface ResponsiveDrawerDescriptionProps {
 
 /**
  * Props for the ResponsiveDrawerBody component.
- * 
+ *
  * Configuration for the main scrollable content area.
  */
 interface ResponsiveDrawerBodyProps {
@@ -194,7 +194,7 @@ interface ResponsiveDrawerBodyProps {
 
 /**
  * Props for the ResponsiveDrawerFooter component.
- * 
+ *
  * Configuration for the drawer footer section.
  */
 interface ResponsiveDrawerFooterProps {
@@ -206,7 +206,7 @@ interface ResponsiveDrawerFooterProps {
 
 /**
  * Props for the ResponsiveDrawerClose component.
- * 
+ *
  * Configuration for elements that close the drawer.
  */
 interface ResponsiveDrawerCloseProps {
@@ -218,7 +218,7 @@ interface ResponsiveDrawerCloseProps {
 
 /**
  * Root responsive drawer component that adapts to screen size.
- * 
+ *
  * Automatically renders either a mobile bottom drawer or desktop side sheet
  * based on the current viewport size. Provides consistent API while optimizing
  * UX for each platform.
@@ -239,7 +239,7 @@ interface ResponsiveDrawerCloseProps {
  *     Content here
  *   </ResponsiveDrawerContent>
  * </ResponsiveDrawer>
- * 
+ *
  * // Controlled drawer
  * <ResponsiveDrawer open={isOpen} onOpenChange={setIsOpen}>
  *   <ResponsiveDrawerTrigger>
@@ -266,7 +266,7 @@ const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = ({
 
 /**
  * Responsive drawer trigger component.
- * 
+ *
  * Renders the appropriate trigger element based on screen size.
  * On mobile uses drawer trigger, on desktop uses sheet trigger.
  *
@@ -281,7 +281,7 @@ const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = ({
  *     Open Menu
  *   </button>
  * </ResponsiveDrawerTrigger>
- * 
+ *
  * <ResponsiveDrawerTrigger className="custom-trigger-class">
  *   <div>Custom trigger</div>
  * </ResponsiveDrawerTrigger>
@@ -302,7 +302,7 @@ const ResponsiveDrawerTrigger: React.FC<ResponsiveDrawerTriggerProps> = ({
 
 /**
  * Responsive drawer content container component.
- * 
+ *
  * Renders the main content area with appropriate styling for each platform.
  * Mobile version slides up from bottom, desktop version slides in from side.
  *
@@ -337,7 +337,7 @@ const ResponsiveDrawerContent: React.FC<ResponsiveDrawerContentProps> = ({
 
 /**
  * Responsive drawer header component.
- * 
+ *
  * Renders the header section with title and description.
  * Provides consistent styling across mobile and desktop implementations.
  *
@@ -370,7 +370,7 @@ const ResponsiveDrawerHeader: React.FC<ResponsiveDrawerHeaderProps> = ({
 
 /**
  * Responsive drawer title component.
- * 
+ *
  * Renders the title text with appropriate typography and accessibility attributes.
  * Essential for screen reader support and semantic structure.
  *
@@ -383,7 +383,7 @@ const ResponsiveDrawerHeader: React.FC<ResponsiveDrawerHeaderProps> = ({
  * <ResponsiveDrawerTitle>
  *   User Settings
  * </ResponsiveDrawerTitle>
- * 
+ *
  * <ResponsiveDrawerTitle className="text-lg font-bold">
  *   Custom Styled Title
  * </ResponsiveDrawerTitle>
@@ -404,7 +404,7 @@ const ResponsiveDrawerTitle: React.FC<ResponsiveDrawerTitleProps> = ({
 
 /**
  * Responsive drawer description component.
- * 
+ *
  * Renders descriptive text below the title with proper accessibility attributes.
  * Provides additional context about the drawer's purpose or content.
  *
@@ -417,8 +417,8 @@ const ResponsiveDrawerTitle: React.FC<ResponsiveDrawerTitleProps> = ({
  * <ResponsiveDrawerDescription>
  *   Configure your account settings and preferences
  * </ResponsiveDrawerDescription>
- * 
- * <ResponsiveDrawerDescription className="text-sm text-gray-600">
+ *
+ * <ResponsiveDrawerDescription className="text-sm text-zinc-600">
  *   This action cannot be undone
  * </ResponsiveDrawerDescription>
  * ```
@@ -437,7 +437,7 @@ const ResponsiveDrawerDescription: React.FC<
 
 /**
  * Responsive drawer body component.
- * 
+ *
  * Renders the main scrollable content area of the drawer.
  * On mobile uses a padded div, on desktop uses the sheet body component.
  *
@@ -454,7 +454,7 @@ const ResponsiveDrawerDescription: React.FC<
  *     <div>Content item 3</div>
  *   </div>
  * </ResponsiveDrawerBody>
- * 
+ *
  * <ResponsiveDrawerBody className="custom-scrollbar">
  *   <nav>
  *     <a href="/dashboard">Dashboard</a>
@@ -483,7 +483,7 @@ const ResponsiveDrawerBody: React.FC<ResponsiveDrawerBodyProps> = ({
 
 /**
  * Responsive drawer footer component.
- * 
+ *
  * Renders the footer section typically containing action buttons.
  * Provides consistent spacing and layout across implementations.
  *
@@ -495,11 +495,11 @@ const ResponsiveDrawerBody: React.FC<ResponsiveDrawerBodyProps> = ({
  * ```tsx
  * <ResponsiveDrawerFooter>
  *   <div className="flex gap-2">
- *     <button className="flex-1 bg-gray-200">Cancel</button>
+ *     <button className="flex-1 bg-zinc-200">Cancel</button>
  *     <button className="flex-1 bg-blue-500 text-white">Save</button>
  *   </div>
  * </ResponsiveDrawerFooter>
- * 
+ *
  * <ResponsiveDrawerFooter>
  *   <ResponsiveDrawerClose>
  *     <button>Close</button>
@@ -522,7 +522,7 @@ const ResponsiveDrawerFooter: React.FC<ResponsiveDrawerFooterProps> = ({
 
 /**
  * Responsive drawer close component.
- * 
+ *
  * Renders elements that close the drawer when activated.
  * Automatically handles the appropriate close mechanism for each platform.
  *
@@ -537,9 +537,9 @@ const ResponsiveDrawerFooter: React.FC<ResponsiveDrawerFooterProps> = ({
  *     Close
  *   </button>
  * </ResponsiveDrawerClose>
- * 
+ *
  * <ResponsiveDrawerClose>
- *   <button className="p-2 rounded-full hover:bg-gray-100">
+ *   <button className="p-2 rounded-full hover:bg-zinc-100">
  *     <X className="w-4 h-4" />
  *   </button>
  * </ResponsiveDrawerClose>

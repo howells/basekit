@@ -18,7 +18,7 @@ return (
       selected={selected}
       onSelect={setSelected}
     />
-    <p className="text-sm text-gray-600">
+    <p className="text-sm text-zinc-600">
       Selected date: {selected ? selected.toDateString() : "None"}
     </p>
   </div>
@@ -54,7 +54,7 @@ return (
 return (
   <div className="space-y-4">
     <DatePicker value={date} onChange={setDate} />
-    <p className="text-sm text-gray-600">
+    <p className="text-sm text-zinc-600">
       Selected: {date ? date.toLocaleDateString() : "None"}
     </p>
   </div>
@@ -108,7 +108,7 @@ return (
 return (
   <div className="space-y-4">
     <DateRangePicker value={range} onChange={setRange} />
-    <p className="text-sm text-gray-600">
+    <p className="text-sm text-zinc-600">
       Selected: {range.from?.toLocaleDateString()} - {range.to?.toLocaleDateString()}
     </p>
   </div>

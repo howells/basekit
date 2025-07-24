@@ -41,9 +41,9 @@ export const componentConfig: ComponentConfig = {
       title: "Vertical Stack",
       description: "Items stacked vertically with spacing",
       code: `<Stack>
-  <div className="rounded-lg bg-gray-100 p-4">Item 1</div>
-  <div className="rounded-lg bg-gray-100 p-4">Item 2</div>
-  <div className="rounded-lg bg-gray-100 p-4">Item 3</div>
+  <div className="rounded-lg bg-zinc-100 p-4">Item 1</div>
+  <div className="rounded-lg bg-zinc-100 p-4">Item 2</div>
+  <div className="rounded-lg bg-zinc-100 p-4">Item 3</div>
 </Stack>`,
     },
     {
@@ -75,7 +75,7 @@ export const componentConfig: ComponentConfig = {
       id: "alignment",
       title: "Different Alignments",
       description: "Stack with various alignment options",
-      code: `<Stack align="center" className="h-32 bg-gray-50">
+      code: `<Stack align="center" className="h-32 bg-zinc-50">
   <div className="rounded bg-purple-100 px-4 py-2">Centered Item 1</div>
   <div className="rounded bg-purple-100 px-6 py-2">Centered Item 2</div>
   <div className="rounded bg-purple-100 px-12 py-2">Centered Item 3</div>

@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "subheading",
   name: "Subheading",
-  description: "A styled subheading component for section titles and content organization.",
+  description:
+    "A styled subheading component for section titles and content organization.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -50,13 +51,13 @@ export const componentConfig: ComponentConfig = {
       description: "Subheading used to organize content sections",
       code: `<div className="space-y-4">
   <Subheading>Introduction</Subheading>
-  <p className="text-gray-600">
-    This is the introduction paragraph that follows the subheading. 
+  <p className="text-zinc-600">
+    This is the introduction paragraph that follows the subheading.
     It provides context and information about the section.
   </p>
-  
+
   <Subheading>Key Features</Subheading>
-  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+  <ul className="list-disc pl-5 space-y-1 text-zinc-600">
     <li>Feature one description</li>
     <li>Feature two description</li>
     <li>Feature three description</li>

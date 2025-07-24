@@ -33,7 +33,7 @@ export function ComponentExamples({ componentId }: ComponentExamplesProps) {
 
   if (!config.examples || config.examples.length === 0) {
     return (
-      <div className="text-gray-500 p-4">
+      <div className="text-zinc-500 p-4">
         No examples available for {config.name}
       </div>
     );

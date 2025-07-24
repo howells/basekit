@@ -7,7 +7,7 @@ import { cx, focusInput, hasErrorInput } from "@/lib/utils";
 
 /**
  * Style variants for native HTML select elements.
- * 
+ *
  * Provides consistent styling for native select dropdowns with
  * Tremor design system colors, hover states, focus rings,
  * and error handling.
@@ -19,7 +19,7 @@ const selectNativeStyles = tv({
     // background color
     "bg-white dark:bg-zinc-950",
     // border color
-    "border-zinc-300 dark:border-zinc-800",
+    "border-zinc-200 dark:border-zinc-800",
     // text color
     "text-zinc-900 dark:text-zinc-50",
     // placeholder color
@@ -45,10 +45,10 @@ const selectNativeStyles = tv({
 
 /**
  * Props for the SelectNative component.
- * 
+ *
  * Extends standard HTML select attributes with styling variants
  * for consistent appearance across the design system.
- * 
+ *
  * @interface SelectNativeProps
  * @extends React.InputHTMLAttributes<HTMLSelectElement>
  * @extends VariantProps<typeof selectNativeStyles>
@@ -59,7 +59,7 @@ interface SelectNativeProps
 
 /**
  * A styled native HTML select component.
- * 
+ *
  * Provides a consistent, accessible select dropdown using the native HTML
  * select element with Tremor design system styling. Ideal when you need
  * platform-native behavior, mobile optimization, or simpler dropdown needs
@@ -85,9 +85,9 @@ interface SelectNativeProps
  * </SelectNative>
  *
  * // With error state
- * <SelectNative 
- *   hasError 
- *   value={country} 
+ * <SelectNative
+ *   hasError
+ *   value={country}
  *   onChange={(e) => setCountry(e.target.value)}
  *   aria-invalid
  * >

@@ -28,7 +28,7 @@ export const componentConfig: ComponentConfig = {
       code: `<div>
   <div className="space-y-1">
     <h4 className="text-sm font-medium leading-none">Patternmode</h4>
-    <p className="text-sm text-gray-600">
+    <p className="text-sm text-zinc-600">
       An open-source component library built with React and Tailwind CSS.
     </p>
   </div>
@@ -63,7 +63,7 @@ export const componentConfig: ComponentConfig = {
     <Separator />
   </div>
   <div className="relative flex justify-center text-xs uppercase">
-    <span className="bg-white px-2 text-gray-600">Or continue with</span>
+    <span className="bg-white px-2 text-zinc-600">Or continue with</span>
   </div>
 </div>`,
     },

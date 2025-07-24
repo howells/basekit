@@ -1,10 +1,10 @@
 /**
  * Scroll Area Components
- * 
+ *
  * Custom scrollable areas with styled scrollbars built on Base UI ScrollArea.
  * Provides cross-browser consistent scrolling behavior with customizable
  * appearance and smooth interactions.
- * 
+ *
  * Features:
  * - Base UI ScrollArea integration for accessibility
  * - Custom styled scrollbars with hover effects
@@ -14,10 +14,10 @@
  * - Customizable scrollbar and thumb styling
  * - Cross-platform consistent appearance
  * - Touch-friendly interactions
- * 
+ *
  * Built on Base UI ScrollArea documentation:
  * https://base-ui.com/react/components/scroll-area
- * 
+ *
  * @example
  * ```tsx
  * // Basic vertical scroll area
@@ -28,10 +28,10 @@
  *     <p>Even more content...</p>
  *   </div>
  * </ScrollArea>
- * 
+ *
  * // Horizontal scroll area
- * <ScrollArea 
- *   orientation="horizontal" 
+ * <ScrollArea
+ *   orientation="horizontal"
  *   className="w-full whitespace-nowrap"
  * >
  *   <div className="flex gap-4 p-4">
@@ -40,33 +40,33 @@
  *     <div className="w-32 h-32 bg-red-200 flex-shrink-0">Item 3</div>
  *   </div>
  * </ScrollArea>
- * 
+ *
  * // Both orientations
- * <ScrollArea 
- *   orientation="both" 
+ * <ScrollArea
+ *   orientation="both"
  *   className="h-64 w-64 border"
  * >
  *   <div className="w-[500px] h-[500px] p-4">
  *     <p>Content that scrolls both ways...</p>
  *   </div>
  * </ScrollArea>
- * 
+ *
  * // Custom styled scrollbars
- * <ScrollArea 
+ * <ScrollArea
  *   className="h-48 w-full"
- *   scrollbarClassName="w-3 bg-gray-100"
+ *   scrollbarClassName="w-3 bg-zinc-100"
  *   thumbClassName="bg-blue-500 hover:bg-blue-600"
  * >
  *   <div className="p-4">
  *     Content with custom scrollbar
  *   </div>
  * </ScrollArea>
- * 
+ *
  * // Chat message area
  * <ScrollArea className="h-96 w-full border rounded-lg">
  *   <div className="space-y-2 p-4">
  *     {messages.map(message => (
- *       <div key={message.id} className="p-2 bg-gray-100 rounded">
+ *       <div key={message.id} className="p-2 bg-zinc-100 rounded">
  *         {message.text}
  *       </div>
  *     ))}
@@ -81,9 +81,9 @@ import * as React from "react";
 
 /**
  * Props for the ScrollArea component.
- * 
+ *
  * Configuration for scrollable areas with custom styling options.
- * 
+ *
  * @interface ScrollAreaProps
  * @extends React.ComponentPropsWithoutRef<"div">
  */
@@ -102,7 +102,7 @@ interface ScrollAreaProps extends React.ComponentPropsWithoutRef<"div"> {
 
 /**
  * Custom scrollable area with styled scrollbars.
- * 
+ *
  * Provides a scrollable container with custom-styled scrollbars that work
  * consistently across browsers. Supports vertical, horizontal, or both
  * scroll orientations with smooth hover effects.
@@ -123,7 +123,7 @@ interface ScrollAreaProps extends React.ComponentPropsWithoutRef<"div"> {
  *     {items.map(item => <div key={item.id}>{item.content}</div>)}
  *   </div>
  * </ScrollArea>
- * 
+ *
  * // Horizontal scrolling
  * <ScrollArea orientation="horizontal" className="w-full">
  *   <div className="flex gap-4 p-4">
@@ -134,9 +134,9 @@ interface ScrollAreaProps extends React.ComponentPropsWithoutRef<"div"> {
  *     ))}
  *   </div>
  * </ScrollArea>
- * 
+ *
  * // Custom scrollbar styling
- * <ScrollArea 
+ * <ScrollArea
  *   scrollbarClassName="w-4 bg-blue-100"
  *   thumbClassName="bg-blue-500"
  * >
@@ -214,7 +214,7 @@ ScrollArea.displayName = "ScrollArea";
 
 /**
  * Standalone scrollbar component for custom scroll areas.
- * 
+ *
  * A reusable scrollbar component that can be used independently
  * or with other scroll area implementations. Provides consistent
  * styling and behavior.
@@ -234,9 +234,9 @@ ScrollArea.displayName = "ScrollArea";
  *   <ScrollBar orientation="vertical" />
  *   <ScrollBar orientation="horizontal" />
  * </div>
- * 
+ *
  * // Custom styled scrollbar
- * <ScrollBar 
+ * <ScrollBar
  *   orientation="vertical"
  *   className="w-3 bg-red-100"
  * />

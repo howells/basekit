@@ -41,7 +41,7 @@ const toggleGroupVariants = tv({
         item: "",
       },
       outline: {
-        root: "border-zinc-300 bg-transparent dark:border-zinc-600",
+        root: "border-zinc-200 bg-transparent dark:border-zinc-600",
         item: "border border-transparent data-[pressed]:border-blue-500 dark:data-[pressed]:border-blue-400",
       },
       ghost: {

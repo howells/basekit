@@ -1,10 +1,10 @@
 /**
  * Grid Components
- * 
+ *
  * A flexible grid system for creating responsive layouts with visual guides.
  * Provides CSS Grid-based components with support for responsive breakpoints,
  * customizable spacing, and optional visual guides for design alignment.
- * 
+ *
  * Features:
  * - Responsive grid columns and rows
  * - Visual column and row guides
@@ -12,7 +12,7 @@
  * - Auto-generated numbered cells
  * - Customizable styling variants
  * - TypeScript support for responsive values
- * 
+ *
  * @example
  * ```tsx
  * // Basic responsive grid
@@ -22,12 +22,12 @@
  *   <GridCell colSpan={2}>Wide Item</GridCell>
  *   <GridCell>Item 4</GridCell>
  * </Grid>
- * 
+ *
  * // Grid with visual guides
- * <Grid 
- *   columns={6} 
- *   rows={4} 
- *   showColumnGuides 
+ * <Grid
+ *   columns={6}
+ *   rows={4}
+ *   showColumnGuides
  *   showRowGuides
  *   minHeight="lg"
  * >
@@ -35,31 +35,31 @@
  *   <GridCell colSpan={4} rowSpan={2}>Main Content</GridCell>
  *   <GridCell overlay>Overlay</GridCell>
  * </Grid>
- * 
+ *
  * // Auto-generated grid
- * <GridAuto 
- *   columns={5} 
- *   cellCount={10} 
- *   solidCells 
+ * <GridAuto
+ *   columns={5}
+ *   cellCount={10}
+ *   solidCells
  *   borderedCells
  *   renderCell={(index) => `Cell ${index + 1}`}
  * />
- * 
+ *
  * // Layout grid
  * <Grid columns={12} gap={2} showColumnGuides={false}>
  *   <GridCell colSpan={3} solid>Sidebar</GridCell>
  *   <GridCell colSpan={9} solid>Main Content</GridCell>
  *   <GridCell colSpan={12} solid>Footer</GridCell>
  * </Grid>
- * 
+ *
  * // Design system grid
- * <Grid 
- *   columns={8} 
- *   rows={6} 
+ * <Grid
+ *   columns={8}
+ *   rows={6}
  *   gap={3}
  *   showColumnGuides
  *   showRowGuides
- *   className="bg-gray-50"
+ *   className="bg-zinc-50"
  * >
  *   <GridCell colStart={2} colSpan={2} rowStart={2}>Component A</GridCell>
  *   <GridCell colStart={5} colSpan={3} rowStart={1} rowSpan={3}>Component B</GridCell>
@@ -76,7 +76,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 /**
  * Responsive value type for grid properties.
- * 
+ *
  * Allows specifying different values for different screen sizes.
  * Can be a single value or an object with breakpoint-specific values.
  */
@@ -245,9 +245,9 @@ const getBaseValue = <T,>(
 
 /**
  * Props for the Grid component.
- * 
+ *
  * Configuration for responsive grid layouts with visual guides and spacing.
- * 
+ *
  * @interface GridProps
  * @extends React.HTMLAttributes<HTMLDivElement>
  */
@@ -270,7 +270,7 @@ interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Root grid component for creating responsive CSS Grid layouts.
- * 
+ *
  * Provides a flexible grid system with optional visual guides for design alignment.
  * Supports responsive column and row configurations with customizable spacing.
  *
@@ -292,12 +292,12 @@ interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
  *   <GridCell colSpan={2}>Wide Item</GridCell>
  *   <GridCell>Item 3</GridCell>
  * </Grid>
- * 
+ *
  * // Design system grid with guides
- * <Grid 
- *   columns={12} 
- *   rows={8} 
- *   showColumnGuides 
+ * <Grid
+ *   columns={12}
+ *   rows={8}
+ *   showColumnGuides
  *   showRowGuides
  *   minHeight="lg"
  * >
@@ -349,9 +349,9 @@ Grid.displayName = "Grid";
 
 /**
  * Props for the GridCell component.
- * 
+ *
  * Configuration for individual grid cell positioning, spanning, and styling.
- * 
+ *
  * @interface GridCellProps
  * @extends React.HTMLAttributes<HTMLDivElement>
  */
@@ -376,7 +376,7 @@ interface GridCellProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Grid cell component for positioning content within a grid.
- * 
+ *
  * Provides flexible grid cell positioning with spanning, styling variants,
  * and responsive behavior. Used within Grid components for layout control.
  *
@@ -395,13 +395,13 @@ interface GridCellProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```tsx
  * // Basic grid cell
  * <GridCell>Content</GridCell>
- * 
+ *
  * // Spanning cell
  * <GridCell colSpan={2} rowSpan={3}>Large Content</GridCell>
- * 
+ *
  * // Positioned cell
  * <GridCell colStart={3} rowStart={2}>Positioned</GridCell>
- * 
+ *
  * // Styled cell
  * <GridCell solid bordered overlay>Highlighted</GridCell>
  * ```
@@ -455,10 +455,10 @@ GridCell.displayName = "GridCell";
 
 /**
  * Props for the GridAuto component.
- * 
+ *
  * Configuration for auto-generated grid cells with optional customization.
  * Extends GridProps but replaces children with auto-generation options.
- * 
+ *
  * @interface GridAutoProps
  * @extends Omit<GridProps, "children">
  */
@@ -475,7 +475,7 @@ interface GridAutoProps extends Omit<GridProps, "children"> {
 
 /**
  * Auto-generating grid component for rapid prototyping.
- * 
+ *
  * Creates a grid with automatically generated numbered cells or custom content.
  * Useful for design system documentation, prototyping, and testing layouts.
  *
@@ -490,10 +490,10 @@ interface GridAutoProps extends Omit<GridProps, "children"> {
  * ```tsx
  * // Auto-numbered cells
  * <GridAuto columns={6} cellCount={12} solidCells borderedCells />
- * 
+ *
  * // Custom cell content
- * <GridAuto 
- *   columns={4} 
+ * <GridAuto
+ *   columns={4}
  *   cellCount={8}
  *   renderCell={(index) => (
  *     <div className="p-2">
@@ -502,10 +502,10 @@ interface GridAutoProps extends Omit<GridProps, "children"> {
  *     </div>
  *   )}
  * />
- * 
+ *
  * // Design system grid
- * <GridAuto 
- *   columns={8} 
+ * <GridAuto
+ *   columns={8}
  *   cellCount={24}
  *   showColumnGuides
  *   showRowGuides

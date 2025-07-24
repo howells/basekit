@@ -56,7 +56,7 @@
  *   return DynamicIconComponent ? (
  *     <DynamicIconComponent className="w-8 h-8 text-blue-500" />
  *   ) : (
- *     <div className="w-8 h-8 bg-gray-200 rounded" />
+ *     <div className="w-8 h-8 bg-zinc-200 rounded" />
  *   );
  * }
  * ```
@@ -190,7 +190,7 @@ const SafeDynamicIcon = React.memo(function SafeDynamicIcon({
     () =>
       fallback || (
         <div
-          className={`${className} flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded text-xs text-gray-500 dark:text-gray-400 shrink-0`}
+          className={`${className} flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 rounded text-xs text-zinc-500 dark:text-zinc-400 shrink-0`}
         >
           ?
         </div>
@@ -201,9 +201,9 @@ const SafeDynamicIcon = React.memo(function SafeDynamicIcon({
   const loadingElement = React.useMemo(
     () => (
       <div
-        className={`${className} flex items-center justify-center bg-gray-50 dark:bg-gray-900 rounded shrink-0 animate-pulse`}
+        className={`${className} flex items-center justify-center bg-zinc-50 dark:bg-zinc-900 rounded shrink-0 animate-pulse`}
       >
-        <div className="w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded" />
+        <div className="w-2 h-2 bg-zinc-300 dark:bg-zinc-600 rounded" />
       </div>
     ),
     [className]
@@ -278,7 +278,7 @@ class IconErrorBoundary extends React.Component<
       return (
         this.props.fallback || (
           <div
-            className={`${this.props.className} flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded text-xs text-gray-500 dark:text-gray-400 shrink-0`}
+            className={`${this.props.className} flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 rounded text-xs text-zinc-500 dark:text-zinc-400 shrink-0`}
           >
             ?
           </div>

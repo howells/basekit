@@ -34,7 +34,7 @@ export const StackExample = ({
   if (showResponsive) {
     return (
       <div className="space-y-6">
-        <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <div className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
           <strong>Responsive Example:</strong> This stack changes direction and
           gap at different breakpoints.
           <br />
@@ -46,7 +46,7 @@ export const StackExample = ({
         <Stack
           direction={{ sm: "vertical", lg: "horizontal" }}
           gap={{ sm: 2, md: 4, lg: 6 }}
-          className="min-h-[200px] border border-dashed border-zinc-300 dark:border-zinc-600 p-4"
+          className="min-h-[200px] border border-dashed border-zinc-200 dark:border-zinc-600 p-4"
         >
           <div className="p-4 bg-blue-100 dark:bg-blue-900 rounded text-blue-900 dark:text-blue-100 text-center flex-1">
             <div className="font-medium">Responsive Item 1</div>
@@ -74,7 +74,7 @@ export const StackExample = ({
           </div>
         </Stack>
 
-        <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+        <div className="text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
           <div>
             <strong>sm:</strong> direction=&quot;vertical&quot;, gap=2 (8px)
           </div>
@@ -100,7 +100,7 @@ export const StackExample = ({
       justify={justify}
       wrap={wrap}
       as={as as React.ElementType}
-      className="min-h-[200px] border border-dashed border-zinc-300 dark:border-zinc-600"
+      className="min-h-[200px] border border-dashed border-zinc-200 dark:border-zinc-600"
       {...props}
     >
       <div className="p-4 bg-blue-100 dark:bg-blue-900 rounded text-blue-900 dark:text-blue-100 text-center">

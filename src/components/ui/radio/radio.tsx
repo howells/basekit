@@ -22,7 +22,7 @@ const radioVariants = tv({
       // base
       "flex shrink-0 items-center justify-center rounded-full border shadow-xs",
       // border color
-      "border-zinc-300 dark:border-zinc-800",
+      "border-zinc-200 dark:border-zinc-800",
       // background color
       "bg-white dark:bg-zinc-950",
     ],
@@ -57,7 +57,7 @@ const radioVariants = tv({
           // checked
           "group-data-[checked]:border-0 group-data-[checked]:border-transparent group-data-[checked]:bg-blue-500",
           // disabled
-          "group-data-[disabled]:border-zinc-300 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
+          "group-data-[disabled]:border-zinc-200 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
           "dark:group-data-[disabled]:border-zinc-700 dark:group-data-[disabled]:bg-zinc-800",
         ],
         dot: [
@@ -70,7 +70,7 @@ const radioVariants = tv({
           // checked
           "group-data-[checked]:border-0 group-data-[checked]:border-transparent group-data-[checked]:bg-blue-500",
           // disabled
-          "group-data-[disabled]:border-zinc-300 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
+          "group-data-[disabled]:border-zinc-200 group-data-[disabled]:bg-zinc-100 group-data-[disabled]:text-zinc-400",
           "dark:group-data-[disabled]:border-zinc-700 dark:group-data-[disabled]:bg-zinc-800",
         ],
         dot: [
@@ -116,7 +116,7 @@ const radioCardVariants = tv({
     // background color
     "bg-white dark:bg-zinc-950",
     // border color
-    "border-zinc-300 dark:border-zinc-800",
+    "border-zinc-200 dark:border-zinc-800",
     // checked
     "data-[checked]:border-blue-500 dark:data-[checked]:border-blue-500",
     // disabled
@@ -140,7 +140,7 @@ const radioCardVariants = tv({
 
 /**
  * Root radio component built on Base UI's Radio primitive.
- * 
+ *
  * Based on Base UI's Radio, providing accessible radio button functionality
  * with proper keyboard navigation and form integration. Use with RadioGroup
  * for managing multiple radio options.
@@ -152,7 +152,7 @@ Radio.displayName = "Radio";
 
 /**
  * Indicator component that shows the selected state of a radio button.
- * 
+ *
  * Based on Base UI's Radio.Indicator, this component renders the visual indicator
  * (dot) that appears when the radio is selected. Typically used within RadioItem
  * or custom radio implementations.
@@ -173,7 +173,7 @@ RadioIndicator.displayName = "RadioIndicator";
 
 /**
  * A styled radio button component with visual indicator.
- * 
+ *
  * Pre-styled radio button built on Base UI's Radio primitive with Tremor-inspired
  * design. Features multiple sizes and variants, with a visual circle and dot indicator.
  * Use within RadioGroup for managing multiple options.
@@ -209,7 +209,7 @@ RadioItem.displayName = "RadioItem";
 
 /**
  * Label component for radio buttons with proper styling and accessibility.
- * 
+ *
  * Provides semantic labeling for radio buttons with size variants and proper
  * cursor behavior. Features disabled state styling and flexible content support.
  * Use to wrap radio buttons and their labels for better UX.
@@ -241,7 +241,7 @@ RadioLabel.displayName = "RadioLabel";
 
 /**
  * A card-style radio button component with optional indicator.
- * 
+ *
  * Expanded radio button styled as a card for better visibility and content support.
  * Features border highlighting when selected and optional radio indicator.
  * Ideal for choice cards with additional content or descriptions.
@@ -317,7 +317,7 @@ interface RadioOptionProps {
 
 /**
  * Complete radio option with label and optional description.
- * 
+ *
  * Pre-composed radio button with integrated label and description support.
  * Combines RadioItem and RadioLabel for common use cases, reducing boilerplate
  * while maintaining flexibility and proper accessibility.
@@ -386,7 +386,7 @@ interface RadioCardOptionProps {
 
 /**
  * Complete card-style radio option with title and optional description.
- * 
+ *
  * Pre-composed radio card with integrated title and description layout.
  * Combines RadioCard with structured content for rich choice presentations.
  * Ideal for feature comparisons, plan selections, or option cards.

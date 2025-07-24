@@ -3,7 +3,8 @@ import type { ComponentConfig } from "@/lib/component-config-types";
 export const componentConfig: ComponentConfig = {
   id: "sidebar",
   name: "Sidebar",
-  description: "A versatile sidebar component for navigation and content organization.",
+  description:
+    "A versatile sidebar component for navigation and content organization.",
   category: "ui" as const,
   badge: "UI",
   installation: {
@@ -67,7 +68,7 @@ export const componentConfig: ComponentConfig = {
       </SidebarGroup>
     </SidebarContent>
     <SidebarFooter>
-      <p className="text-sm text-gray-600">© 2024 My App</p>
+      <p className="text-sm text-zinc-600">© 2024 My App</p>
     </SidebarFooter>
   </Sidebar>
   <SidebarInset>

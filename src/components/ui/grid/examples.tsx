@@ -1,5 +1,5 @@
+import { Grid, GridAuto, GridCell } from "@/components/ui/grid";
 import React from "react";
-import { Grid, GridCell, GridAuto } from "@/components/ui/grid";
 
 export function BasicGridExample() {
   return (
@@ -100,12 +100,7 @@ export function GuideControlExample() {
         <GridCell>4</GridCell>
       </Grid>
 
-      <Grid
-        columns={4}
-        showColumnGuides={false}
-        showRowGuides={false}
-        gap={4}
-      >
+      <Grid columns={4} showColumnGuides={false} showRowGuides={false} gap={4}>
         <GridCell solid>No guides</GridCell>
         <GridCell solid>2</GridCell>
         <GridCell solid>3</GridCell>
@@ -147,7 +142,7 @@ export function CustomLayoutExample() {
       <GridCell>Extra</GridCell>
 
       {/* Footer */}
-      <GridCell solid colSpan={6} className="bg-gray-100 dark:bg-gray-800">
+      <GridCell solid colSpan={6} className="bg-zinc-100 dark:bg-zinc-800">
         Footer
       </GridCell>
     </Grid>
@@ -214,7 +209,7 @@ export function DashboardLayoutExample() {
         solid
         colSpan={4}
         rowSpan={2}
-        className="bg-gray-50 dark:bg-gray-800"
+        className="bg-zinc-50 dark:bg-zinc-800"
       >
         Recent Activity
       </GridCell>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, VStack, HStack } from "./stack";
+import { HStack, Stack, VStack } from "./stack";
 
 export function Vertical() {
   return (
@@ -33,34 +33,21 @@ export function ResponsiveDirection() {
       <div className="p-4 bg-green-100 rounded flex-1">
         Desktop: Side by side with gap-6
       </div>
-      <div className="p-4 bg-red-100 rounded flex-1">
-        Responsive behavior!
-      </div>
+      <div className="p-4 bg-red-100 rounded flex-1">Responsive behavior!</div>
     </Stack>
   );
 }
 
 export function ResponsiveGap() {
   return (
-    <Stack
-      direction="vertical"
-      gap={{ sm: 1, md: 3, lg: 6, xl: 10 }}
-    >
+    <Stack direction="vertical" gap={{ sm: 1, md: 3, lg: 6, xl: 10 }}>
       <div className="p-3 bg-purple-100 rounded">
         Gap increases with screen size
       </div>
-      <div className="p-3 bg-purple-100 rounded">
-        sm: gap-1 (4px)
-      </div>
-      <div className="p-3 bg-purple-100 rounded">
-        md: gap-3 (12px)
-      </div>
-      <div className="p-3 bg-purple-100 rounded">
-        lg: gap-6 (24px)
-      </div>
-      <div className="p-3 bg-purple-100 rounded">
-        xl: gap-10 (40px)
-      </div>
+      <div className="p-3 bg-purple-100 rounded">sm: gap-1 (4px)</div>
+      <div className="p-3 bg-purple-100 rounded">md: gap-3 (12px)</div>
+      <div className="p-3 bg-purple-100 rounded">lg: gap-6 (24px)</div>
+      <div className="p-3 bg-purple-100 rounded">xl: gap-10 (40px)</div>
     </Stack>
   );
 }
@@ -84,12 +71,24 @@ export function HelperComponents() {
 export function Alignment() {
   return (
     <div className="space-y-6">
-      <Stack direction="horizontal" gap={4} align="center" justify="center" className="h-20 bg-gray-50">
+      <Stack
+        direction="horizontal"
+        gap={4}
+        align="center"
+        justify="center"
+        className="h-20 bg-zinc-50"
+      >
         <div className="p-2 bg-blue-100 rounded">Centered</div>
         <div className="p-2 bg-green-100 rounded">Items</div>
       </Stack>
 
-      <Stack direction="horizontal" gap={4} align="center" justify="between" className="h-20 bg-gray-50">
+      <Stack
+        direction="horizontal"
+        gap={4}
+        align="center"
+        justify="between"
+        className="h-20 bg-zinc-50"
+      >
         <div className="p-2 bg-blue-100 rounded">Space</div>
         <div className="p-2 bg-green-100 rounded">Between</div>
       </Stack>
@@ -103,7 +102,7 @@ export function WithPadding() {
       direction="vertical"
       gap={3}
       padding={{ sm: 3, md: 6, lg: 8 }}
-      className="bg-gray-100 rounded"
+      className="bg-zinc-100 rounded"
     >
       <div className="p-3 bg-white rounded shadow">Item 1</div>
       <div className="p-3 bg-white rounded shadow">Item 2</div>
@@ -128,26 +127,29 @@ export function Wrapping() {
 export function ComplexResponsive() {
   return (
     <Stack
-      direction={{ sm: "vertical", md: "horizontal", lg: "vertical", xl: "horizontal" }}
+      direction={{
+        sm: "vertical",
+        md: "horizontal",
+        lg: "vertical",
+        xl: "horizontal",
+      }}
       gap={{ sm: 2, md: 4, lg: 6, xl: 8 }}
       padding={{ sm: 4, lg: 8 }}
       className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg"
     >
       <div className="p-4 bg-white rounded shadow flex-1">
         <h3 className="font-semibold mb-2">Responsive Card 1</h3>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-zinc-600">
           This layout adapts at multiple breakpoints
         </p>
       </div>
       <div className="p-4 bg-white rounded shadow flex-1">
         <h3 className="font-semibold mb-2">Responsive Card 2</h3>
-        <p className="text-sm text-gray-600">
-          Try resizing to see the changes
-        </p>
+        <p className="text-sm text-zinc-600">Try resizing to see the changes</p>
       </div>
       <div className="p-4 bg-white rounded shadow flex-1">
         <h3 className="font-semibold mb-2">Responsive Card 3</h3>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-zinc-600">
           sm: vertical, md: horizontal, lg: vertical, xl: horizontal
         </p>
       </div>

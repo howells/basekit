@@ -18,7 +18,7 @@ interface TextareaProps
 
 /**
  * A multi-line text input component with Tremor-inspired styling.
- * 
+ *
  * Provides a resizable textarea for longer text input with consistent styling
  * that matches the Input component. Features error states for form validation,
  * proper focus management, and dark mode support.
@@ -28,18 +28,18 @@ interface TextareaProps
  * ```tsx
  * // Basic textarea
  * <Textarea placeholder="Enter your message" />
- * 
+ *
  * // With error state
  * <Textarea hasError placeholder="Required field" />
- * 
+ *
  * // Controlled with resize constraints
- * <Textarea 
- *   value={message} 
+ * <Textarea
+ *   value={message}
  *   onChange={handleChange}
  *   rows={5}
  *   resize="vertical"
  * />
- * 
+ *
  * // Form integration
  * <Textarea
  *   name="description"
@@ -61,13 +61,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           // text color
           "text-zinc-900 dark:text-zinc-50",
           // border color
-          "border-zinc-300 dark:border-zinc-800",
+          "border-zinc-200 dark:border-zinc-800",
           // background color
           "bg-white dark:bg-zinc-950",
           // placeholder color
           "placeholder-zinc-400 dark:placeholder-zinc-500",
           // disabled
-          "disabled:border-zinc-300 disabled:bg-zinc-100 disabled:text-zinc-300",
+          "disabled:border-zinc-200 disabled:bg-zinc-100 disabled:text-zinc-300",
           "dark:disabled:border-zinc-700 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-500",
           // focus
           focusInput,
