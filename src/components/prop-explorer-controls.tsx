@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Switch } from "./ui/switch";
+import { Textarea } from "./ui/textarea";
 
 interface PropExplorerContentProps {
   config?: ComponentConfig;
@@ -191,6 +192,32 @@ export function PropExplorerContent({ config }: PropExplorerContentProps) {
                         placeholder="Select date"
                       />
                     )}
+                  />
+                </Field>
+              </div>
+            );
+          }
+
+          if (prop.type === "textarea") {
+            return (
+              <div key={prop.name} className="space-y-2">
+                <Field>
+                  <FieldLabel>{prop.name}</FieldLabel>
+                  {prop.description && (
+                    <FieldDescription>{prop.description}</FieldDescription>
+                  )}
+                  <FieldControl
+                    render={(controlProps) => {
+                      const { children, ...inputProps } = controlProps;
+                      return (
+                        <Textarea
+                          {...inputProps}
+                          value={(currentValue as string) || ""}
+                          onChange={(e) => updateProp(prop.name, e.target.value)}
+                          placeholder={prop.defaultValue as string}
+                        />
+                      );
+                    }}
                   />
                 </Field>
               </div>

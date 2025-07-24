@@ -1,22 +1,41 @@
 "use client";
 
 import { cx } from "@/lib/utils";
+import { componentVariants, type BadgeVariant } from "@/lib/variants";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
-// Status dot variants
-const statusDotVariants = tv({
-  base: ["inline-flex items-center gap-2", "text-sm font-medium"],
+// Create StatusDot variant system using badge variants
+const statusDotVariantsDefinition = {
   variants: {
-    status: {
-      default: "text-zinc-600 dark:text-zinc-400",
-      queued: "text-yellow-600 dark:text-yellow-400",
-      building: "text-blue-600 dark:text-blue-400",
-      ready: "text-green-600 dark:text-green-400",
-      error: "text-red-600 dark:text-red-400",
-      canceled: "text-zinc-600 dark:text-zinc-400",
-      warning: "text-orange-600 dark:text-orange-400",
-      pending: "text-purple-600 dark:text-purple-400",
+    variant: {
+      // Global semantic variants
+      default: componentVariants.badge.default,
+      neutral: componentVariants.badge.neutral,
+      success: componentVariants.badge.success,
+      info: componentVariants.badge.info,
+      warning: componentVariants.badge.warning,
+      error: componentVariants.badge.error,
+      critical: componentVariants.badge.critical,
+      positive: componentVariants.badge.positive,
+      negative: componentVariants.badge.negative,
+      // Color variants
+      purple: componentVariants.badge.purple,
+      pink: componentVariants.badge.pink,
+      rose: componentVariants.badge.rose,
+      orange: componentVariants.badge.orange,
+      amber: componentVariants.badge.amber,
+      yellow: componentVariants.badge.yellow,
+      lime: componentVariants.badge.lime,
+      green: componentVariants.badge.green,
+      emerald: componentVariants.badge.emerald,
+      teal: componentVariants.badge.teal,
+      cyan: componentVariants.badge.cyan,
+      sky: componentVariants.badge.sky,
+      blue: componentVariants.badge.blue,
+      indigo: componentVariants.badge.indigo,
+      violet: componentVariants.badge.violet,
+      fuchsia: componentVariants.badge.fuchsia,
     },
     size: {
       sm: "text-xs",
@@ -25,24 +44,49 @@ const statusDotVariants = tv({
     },
   },
   defaultVariants: {
-    status: "default",
+    variant: "default",
     size: "default",
   },
+} as const;
+
+// Status dot variants
+const statusDotVariants = tv({
+  base: ["inline-flex items-center gap-2", "text-sm font-medium"],
+  ...statusDotVariantsDefinition,
 });
 
-// Dot indicator variants
+// Dot indicator variants - simplified to use solid colors
 const dotVariants = tv({
   base: ["relative rounded-full", "flex-shrink-0"],
   variants: {
-    status: {
-      default: "bg-zinc-400 dark:bg-zinc-500",
-      queued: "bg-yellow-400 dark:bg-yellow-500",
-      building: "bg-blue-400 dark:bg-blue-500",
-      ready: "bg-green-400 dark:bg-green-500",
-      error: "bg-red-400 dark:bg-red-500",
-      canceled: "bg-zinc-400 dark:bg-zinc-500",
-      warning: "bg-orange-400 dark:bg-orange-500",
-      pending: "bg-purple-400 dark:bg-purple-500",
+    variant: {
+      // Use solid colors for dots
+      default: ["bg-blue-500", "dark:bg-blue-500"],
+      neutral: ["bg-zinc-400", "dark:bg-zinc-500"],
+      success: ["bg-emerald-500", "dark:bg-emerald-500"],
+      info: ["bg-sky-500", "dark:bg-sky-500"],
+      warning: ["bg-amber-500", "dark:bg-amber-500"],
+      error: ["bg-red-500", "dark:bg-red-500"],
+      critical: ["bg-rose-500", "dark:bg-rose-500"],
+      positive: ["bg-teal-500", "dark:bg-teal-500"],
+      negative: ["bg-rose-500", "dark:bg-rose-500"],
+      // Color variants
+      purple: ["bg-purple-500", "dark:bg-purple-500"],
+      pink: ["bg-pink-500", "dark:bg-pink-500"],
+      rose: ["bg-rose-500", "dark:bg-rose-500"],
+      orange: ["bg-orange-500", "dark:bg-orange-500"],
+      amber: ["bg-amber-500", "dark:bg-amber-500"],
+      yellow: ["bg-yellow-500", "dark:bg-yellow-500"],
+      lime: ["bg-lime-500", "dark:bg-lime-500"],
+      green: ["bg-green-500", "dark:bg-green-500"],
+      emerald: ["bg-emerald-500", "dark:bg-emerald-500"],
+      teal: ["bg-teal-500", "dark:bg-teal-500"],
+      cyan: ["bg-cyan-500", "dark:bg-cyan-500"],
+      sky: ["bg-sky-500", "dark:bg-sky-500"],
+      blue: ["bg-blue-500", "dark:bg-blue-500"],
+      indigo: ["bg-indigo-500", "dark:bg-indigo-500"],
+      violet: ["bg-violet-500", "dark:bg-violet-500"],
+      fuchsia: ["bg-fuchsia-500", "dark:bg-fuchsia-500"],
     },
     size: {
       sm: "w-2 h-2",
@@ -57,57 +101,44 @@ const dotVariants = tv({
   compoundVariants: [
     // Animated variants for different statuses
     {
-      status: "building",
+      variant: "info",
       animated: true,
       class: [
         "animate-pulse",
-        "before:absolute before:inset-0 before:rounded-full before:bg-blue-400 before:animate-ping before:opacity-75",
-        "dark:before:bg-blue-500",
+        "before:absolute before:inset-0 before:rounded-full before:bg-sky-500 before:animate-ping before:opacity-75",
       ],
     },
     {
-      status: "queued",
+      variant: "warning",
       animated: true,
       class: [
         "animate-pulse",
-        "before:absolute before:inset-0 before:rounded-full before:bg-yellow-400 before:animate-ping before:opacity-75",
-        "dark:before:bg-yellow-500",
+        "before:absolute before:inset-0 before:rounded-full before:bg-amber-500 before:animate-ping before:opacity-75",
       ],
     },
     {
-      status: "pending",
+      variant: "default",
       animated: true,
       class: [
         "animate-pulse",
-        "before:absolute before:inset-0 before:rounded-full before:bg-purple-400 before:animate-ping before:opacity-75",
-        "dark:before:bg-purple-500",
+        "before:absolute before:inset-0 before:rounded-full before:bg-blue-500 before:animate-ping before:opacity-75",
       ],
     },
   ],
   defaultVariants: {
-    status: "default",
+    variant: "default",
     size: "default",
     animated: false,
   },
 });
 
-type StatusType =
-  | "default"
-  | "queued"
-  | "building"
-  | "ready"
-  | "error"
-  | "canceled"
-  | "warning"
-  | "pending";
-
 interface StatusDotProps
   extends React.HTMLAttributes<HTMLSpanElement>,
-    Omit<VariantProps<typeof statusDotVariants>, "status"> {
+    Omit<VariantProps<typeof statusDotVariants>, "variant"> {
   /**
-   * The status to display
+   * The semantic variant to display
    */
-  status?: StatusType;
+  variant?: BadgeVariant;
   /**
    * Optional label to display next to the dot
    */
@@ -125,7 +156,7 @@ interface StatusDotProps
 const StatusDot = React.forwardRef<HTMLSpanElement, StatusDotProps>(
   (
     {
-      status = "default",
+      variant = "default",
       label,
       animated = false,
       size = "default",
@@ -134,19 +165,12 @@ const StatusDot = React.forwardRef<HTMLSpanElement, StatusDotProps>(
     },
     ref
   ) => {
-    // Determine if this status should be animated by default
-    const shouldAnimate =
-      animated ||
-      status === "building" ||
-      status === "queued" ||
-      status === "pending";
-
     return (
       <span
         ref={ref}
         className={cx(
           statusDotVariants({
-            status,
+            variant,
             size,
           }),
           className
@@ -154,11 +178,13 @@ const StatusDot = React.forwardRef<HTMLSpanElement, StatusDotProps>(
         {...props}
       >
         <span
-          className={dotVariants({
-            status,
-            size,
-            animated: shouldAnimate,
-          })}
+          className={cx(
+            dotVariants({
+              variant,
+              size,
+              animated,
+            })
+          )}
           aria-hidden="true"
         />
         {label && <span>{label}</span>}
@@ -169,56 +195,4 @@ const StatusDot = React.forwardRef<HTMLSpanElement, StatusDotProps>(
 
 StatusDot.displayName = "StatusDot";
 
-// Helper components for common status types
-const StatusQueued = React.forwardRef<
-  HTMLSpanElement,
-  Omit<StatusDotProps, "status">
->(({ label = "Queued", ...props }, ref) => (
-  <StatusDot ref={ref} status="queued" label={label} {...props} />
-));
-StatusQueued.displayName = "StatusQueued";
-
-const StatusBuilding = React.forwardRef<
-  HTMLSpanElement,
-  Omit<StatusDotProps, "status">
->(({ label = "Building", ...props }, ref) => (
-  <StatusDot ref={ref} status="building" label={label} {...props} />
-));
-StatusBuilding.displayName = "StatusBuilding";
-
-const StatusReady = React.forwardRef<
-  HTMLSpanElement,
-  Omit<StatusDotProps, "status">
->(({ label = "Ready", ...props }, ref) => (
-  <StatusDot ref={ref} status="ready" label={label} {...props} />
-));
-StatusReady.displayName = "StatusReady";
-
-const StatusError = React.forwardRef<
-  HTMLSpanElement,
-  Omit<StatusDotProps, "status">
->(({ label = "Error", ...props }, ref) => (
-  <StatusDot ref={ref} status="error" label={label} {...props} />
-));
-StatusError.displayName = "StatusError";
-
-const StatusCanceled = React.forwardRef<
-  HTMLSpanElement,
-  Omit<StatusDotProps, "status">
->(({ label = "Canceled", ...props }, ref) => (
-  <StatusDot ref={ref} status="canceled" label={label} {...props} />
-));
-StatusCanceled.displayName = "StatusCanceled";
-
-export {
-  dotVariants,
-  StatusBuilding,
-  StatusCanceled,
-  StatusDot,
-  statusDotVariants,
-  StatusError,
-  StatusQueued,
-  StatusReady,
-  type StatusDotProps,
-  type StatusType,
-};
+export { dotVariants, StatusDot, statusDotVariants, type StatusDotProps };

@@ -8,32 +8,14 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 import { config } from "@/lib/config";
 import { cx, iconUtils, type ComponentWithIconsProps } from "@/lib/utils";
-import { dotVariants, type StatusType } from "../status-dot/status-dot";
+import { componentVariants, type BadgeVariant } from "@/lib/variants";
+import { StatusDot } from "../status-dot/status-dot";
 
-// Define variants structure once - single source of truth
+// Define variants structure using centralized system
 const badgeVariantsDefinition = {
   variants: {
     variant: {
-      default: [
-        "bg-blue-50 text-blue-900 ring-blue-500/30",
-        "dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30",
-      ],
-      neutral: [
-        "bg-zinc-50 text-zinc-900 ring-zinc-500/30",
-        "dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/30",
-      ],
-      success: [
-        "bg-green-50 text-green-900 ring-green-600/30",
-        "dark:bg-green-400/10 dark:text-green-400 dark:ring-green-400/30",
-      ],
-      error: [
-        "bg-red-50 text-red-900 ring-red-600/30",
-        "dark:bg-red-400/10 dark:text-red-400 dark:ring-red-400/30",
-      ],
-      warning: [
-        "bg-amber-50 text-amber-900 ring-amber-600/30",
-        "dark:bg-amber-400/10 dark:text-amber-400 dark:ring-amber-400/30",
-      ],
+      ...componentVariants.badge,
     },
     size: {
       sm: "px-1.5 py-0.5 text-xs font-medium",
@@ -99,10 +81,10 @@ interface BadgeProps
    */
   rounded?: boolean;
   /**
-   * Status type for displaying a status dot instead of icons.
-   * When provided, overrides leftIcon and rightIcon.
+   * Whether to show a status dot instead of icons.
+   * @default false
    */
-  status?: StatusType;
+  statusDot?: boolean;
   /**
    * Whether to animate the status dot for active statuses.
    * @default false
@@ -156,9 +138,14 @@ interface BadgeProps
  * <Badge rounded variant="success">Success Pill</Badge>
  *
  * // With status dot (overrides icons)
- * <Badge status="ready">Ready</Badge>
- * <Badge status="building" statusAnimated>Building</Badge>
- * <Badge status="error" variant="error">Error Status</Badge>
+ * <Badge statusDot>Ready</Badge>
+ * <Badge statusDot statusAnimated>Building</Badge>
+ * <Badge statusDot variant="error">Error Status</Badge>
+ *
+ * // Color variants
+ * <Badge variant="purple">Purple Badge</Badge>
+ * <Badge variant="emerald">Emerald Badge</Badge>
+ * <Badge variant="pink" rounded>Pink Pill</Badge>
  *
  * // With dismiss button
  * <Badge onDismiss={() => handleRemove()}>Removable</Badge>
@@ -188,8 +175,9 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       children,
       onDismiss,
       dismissIcon: DismissIcon = X,
-      status,
+      statusDot,
       statusAnimated = false,
+      className,
       ...otherProps
     }: BadgeProps,
     forwardedRef
@@ -209,33 +197,29 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const dismissIconSizeClass = iconUtils.getIconSize(dismissIconSize);
     const dismissIconClassName = `${dismissIconSizeClass} shrink-0`;
 
+    // Use default variant when statusDot is true (unless custom color or variant provided)
+    const effectiveVariant = variant;
+
     const renderBadgeContent = () => {
-      const hasLeftIcon = LeftIcon && !status; // Status overrides left icon
-      const hasRightIcon = RightIcon && !status; // Status overrides right icon
+      const hasLeftIcon = LeftIcon && !statusDot; // StatusDot overrides left icon
+      const hasRightIcon = RightIcon && !statusDot; // StatusDot overrides right icon
       const hasDismissButton = Boolean(onDismiss);
-      const hasStatusDot = Boolean(status);
+      const hasStatusDot = Boolean(statusDot);
 
       // Status dot size mapping to match badge sizes
       const statusDotSize =
         size === "sm" ? "sm" : size === "lg" ? "lg" : "default";
 
-      // Determine if status should be animated
-      const shouldAnimate =
-        statusAnimated ||
-        status === "building" ||
-        status === "queued" ||
-        status === "pending";
+      // Use statusAnimated prop directly since statusDot is just boolean
+      const shouldAnimate = statusAnimated;
 
       return (
         <>
           {hasStatusDot && (
-            <span
-              className={dotVariants({
-                status,
-                size: statusDotSize,
-                animated: shouldAnimate,
-              })}
-              aria-hidden="true"
+            <StatusDot
+              variant={effectiveVariant}
+              size={statusDotSize}
+              animated={shouldAnimate}
             />
           )}
           {hasLeftIcon && (
@@ -270,7 +254,10 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     };
 
     const defaultProps: useRender.ElementProps<"span"> = {
-      className: cx(badgeVariants({ variant, size, bordered, rounded })),
+      className: cx(
+        badgeVariants({ variant: effectiveVariant, size, bordered, rounded }),
+        className
+      ),
       children: renderBadgeContent(),
     };
 

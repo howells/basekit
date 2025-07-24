@@ -1,3 +1,4 @@
+import type { TailwindShade } from "@/lib/variants";
 import React from "react";
 import { Badge } from "./badge";
 
@@ -7,6 +8,8 @@ export const BadgeExample = ({
   size = "base",
   bordered,
   rounded,
+  color,
+  colorShade,
   status,
   statusAnimated,
   leftIcon,
@@ -20,6 +23,41 @@ export const BadgeExample = ({
   size?: "sm" | "base" | "lg";
   bordered?: boolean;
   rounded?: boolean;
+  color?:
+    | "slate"
+    | "gray"
+    | "zinc"
+    | "neutral"
+    | "stone"
+    | "red"
+    | "orange"
+    | "amber"
+    | "yellow"
+    | "lime"
+    | "green"
+    | "emerald"
+    | "teal"
+    | "cyan"
+    | "sky"
+    | "blue"
+    | "indigo"
+    | "violet"
+    | "purple"
+    | "fuchsia"
+    | "pink"
+    | "rose";
+  colorShade?:
+    | "50"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900"
+    | "950";
   status?:
     | "default"
     | "queued"
@@ -48,6 +86,10 @@ export const BadgeExample = ({
       size={size}
       bordered={bordered}
       rounded={rounded}
+      color={color}
+      colorShade={
+        colorShade ? (parseInt(colorShade) as TailwindShade) : undefined
+      }
       status={status}
       statusAnimated={statusAnimated}
       leftIcon={leftIcon}

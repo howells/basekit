@@ -65,36 +65,65 @@ export const RoundedExample = () => (
 // Status dot badges
 export const StatusDotExample = () => (
   <div className="flex flex-wrap gap-2">
-    <Badge status="ready">Ready</Badge>
-    <Badge status="building" statusAnimated>
-      Building
+    <Badge statusDot variant="success">
+      Ready
     </Badge>
-    <Badge status="queued" variant="warning">
+    <Badge statusDot variant="info" statusAnimated>
+      Processing
+    </Badge>
+    <Badge statusDot variant="warning">
       Queued
     </Badge>
-    <Badge status="error" variant="error">
+    <Badge statusDot variant="error">
       Error
     </Badge>
-    <Badge status="pending" statusAnimated size="sm">
+    <Badge statusDot variant="default" statusAnimated size="sm">
       Pending
     </Badge>
-    <Badge status="canceled" variant="neutral">
+    <Badge statusDot variant="neutral">
       Canceled
     </Badge>
-    <Badge status="warning" variant="warning" rounded>
+    <Badge statusDot variant="warning" rounded>
       Warning
     </Badge>
   </div>
 );
 
-// All variants
+// Color variants
+export const CustomColorExample = () => (
+  <div className="flex flex-wrap gap-2">
+    <Badge variant="purple">Purple</Badge>
+    <Badge variant="emerald">Emerald</Badge>
+    <Badge variant="pink" rounded>
+      Pink Pill
+    </Badge>
+    <Badge variant="indigo" size="sm">
+      Small Indigo
+    </Badge>
+    <Badge variant="orange" bordered>
+      Bordered Orange
+    </Badge>
+    <Badge variant="teal" size="lg">
+      Large Teal
+    </Badge>
+    <Badge variant="violet" onDismiss={() => console.log("Dismissed")}>
+      Dismissible
+    </Badge>
+  </div>
+);
+
+// Basic variants
 export const VariantsExample = () => (
   <div className="flex flex-wrap gap-2">
     <Badge variant="default">Default</Badge>
-    <Badge variant="success">Success</Badge>
-    <Badge variant="error">Error</Badge>
-    <Badge variant="warning">Warning</Badge>
     <Badge variant="neutral">Neutral</Badge>
+    <Badge variant="success">Success</Badge>
+    <Badge variant="info">Info</Badge>
+    <Badge variant="warning">Warning</Badge>
+    <Badge variant="error">Error</Badge>
+    <Badge variant="critical">Critical</Badge>
+    <Badge variant="positive">Positive</Badge>
+    <Badge variant="negative">Negative</Badge>
   </div>
 );
 

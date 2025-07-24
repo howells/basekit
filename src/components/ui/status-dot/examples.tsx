@@ -22,6 +22,19 @@ export function Basic() {
   );
 }
 
+export function WithVariants() {
+  return (
+    <div className="space-y-3">
+      <StatusDot variant="success" label="Success" />
+      <StatusDot variant="info" label="Info" />
+      <StatusDot variant="warning" label="Warning" />
+      <StatusDot variant="error" label="Error" />
+      <StatusDot variant="neutral" label="Neutral" />
+      <StatusDot variant="default" label="Default" />
+    </div>
+  );
+}
+
 export function WithoutLabels() {
   return (
     <div className="flex items-center gap-3">

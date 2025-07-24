@@ -1,5 +1,6 @@
 import { config } from "@/lib/config";
 import { cx, focusRing } from "@/lib/utils";
+import { componentVariants } from "@/lib/variants";
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
 import { MoreHorizontal } from "lucide-react";
@@ -25,100 +26,7 @@ const buttonVariants = tv({
     focusRing,
   ],
   variants: {
-    variant: {
-      default: [
-        // inset border with normal shadow using proper Tailwind classes
-        "inset-ring-1 inset-ring-white/10 shadow-xs",
-        "dark:inset-ring-black/20",
-        // text color
-        "text-white dark:text-white",
-        // background color
-        "bg-zinc-900 dark:bg-zinc-50",
-        // hover with enhanced inset border
-        "hover:bg-zinc-800 hover:inset-ring-white/15 hover:shadow-xs",
-        "dark:hover:bg-zinc-200 dark:hover:inset-ring-black/25",
-        // disabled
-        "disabled:bg-zinc-400 disabled:text-white disabled:inset-ring-white/5 disabled:shadow-none",
-        "dark:disabled:bg-zinc-600 dark:disabled:text-zinc-300 dark:disabled:inset-ring-black/10",
-      ],
-      secondary: [
-        // clean secondary without border, just shadow
-        "shadow-xs",
-        // text color
-        "text-zinc-900 dark:text-zinc-50",
-        // background color
-        "bg-zinc-100 dark:bg-zinc-800",
-        // hover with shadow only
-        "hover:bg-zinc-200 hover:shadow-xs",
-        "dark:hover:bg-zinc-700",
-        // disabled
-        "disabled:bg-zinc-50 disabled:text-zinc-400 disabled:shadow-none",
-        "dark:disabled:bg-zinc-900 dark:disabled:text-zinc-600",
-      ],
-      destructive: [
-        // inset border with normal shadow using proper Tailwind classes
-        "inset-ring-1 inset-ring-white/20 shadow-xs",
-        "dark:inset-ring-white/10",
-        // text color
-        "text-white dark:text-white",
-        // background color
-        "bg-red-500 dark:bg-red-900",
-        // hover with enhanced inset border
-        "hover:bg-red-600 hover:inset-ring-white/25 hover:shadow-xs",
-        "dark:hover:bg-red-800 dark:hover:inset-ring-white/15",
-        // disabled
-        "disabled:bg-red-300 disabled:text-white disabled:inset-ring-white/15 disabled:shadow-none",
-        "dark:disabled:bg-red-950 dark:disabled:text-red-400 dark:disabled:inset-ring-white/5",
-      ],
-      outline: [
-        // inset border with normal shadow using proper Tailwind classes
-        "inset-ring-1 inset-ring-black/15 shadow-xs",
-        "dark:inset-ring-white/15",
-        // text color
-        "text-zinc-900 dark:text-zinc-50",
-        // background color
-        "bg-white dark:bg-zinc-950",
-        // hover with enhanced inset border
-        "hover:bg-zinc-100 hover:inset-ring-black/20 hover:shadow-xs",
-        "dark:hover:bg-zinc-800 dark:hover:inset-ring-white/20",
-        // disabled
-        "disabled:text-zinc-400 disabled:inset-ring-black/10 disabled:shadow-none",
-        "dark:disabled:text-zinc-600 dark:disabled:inset-ring-white/10",
-      ],
-      ghost: [
-        // base
-        "shadow-none",
-        // text color
-        "text-zinc-900 dark:text-zinc-50",
-        // hover with just background and shadow, no border
-        "bg-transparent hover:bg-zinc-100 hover:shadow-xs",
-        "dark:hover:bg-zinc-800",
-        // disabled
-        "disabled:text-zinc-400",
-        "dark:disabled:text-zinc-600",
-      ],
-      link: [
-        // base
-        "shadow-none",
-        // text color
-        "text-zinc-900 dark:text-zinc-50",
-        // hover color
-        "bg-transparent hover:underline hover:underline-offset-3 decoration-current/25",
-        // disabled
-        "disabled:text-zinc-400",
-        "dark:disabled:text-zinc-600",
-      ],
-      minimal: [
-        // base - completely transparent, no shadows
-        "shadow-none bg-transparent",
-        // text color
-        "text-zinc-950 dark:text-white",
-        // hover - no background change, just subtle opacity
-        "hover:text-zinc-700 dark:hover:text-zinc-300",
-        // disabled
-        "disabled:text-zinc-400 dark:disabled:text-zinc-600",
-      ],
-    },
+    variant: componentVariants.button,
     rounded: {
       true: "rounded-full",
       false: "rounded-md",
