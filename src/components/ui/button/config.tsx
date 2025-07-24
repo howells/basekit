@@ -1,6 +1,18 @@
 import type { ComponentConfig } from "@/lib/component-config-types";
 import { jsxToString } from "@/lib/jsx-to-string";
-import { DefaultExample, SecondaryExample, DestructiveExample, OutlineExample, GhostExample, LinkExample, WithIconsExample, LoadingExample, SizesExample, FullWidthExample,  } from "./examples";
+import {
+  DefaultExample,
+  DestructiveExample,
+  FullWidthExample,
+  GhostExample,
+  KeyboardShortcutsExample,
+  LinkExample,
+  LoadingExample,
+  OutlineExample,
+  SecondaryExample,
+  SizesExample,
+  WithIconsExample,
+} from "./examples";
 
 export const componentConfig: ComponentConfig = {
   id: "button",
@@ -89,6 +101,13 @@ export const componentConfig: ComponentConfig = {
       type: "string",
       description: "Text to show when loading (optional).",
     },
+    {
+      name: "kbd",
+      type: "string",
+      description:
+        "Keyboard shortcut to display and trigger the button action (e.g., 'mod+K', 'Enter').",
+      defaultValue: "",
+    },
   ],
   examples: [
     {
@@ -160,6 +179,14 @@ export const componentConfig: ComponentConfig = {
       description: "Button that spans the full width.",
       code: jsxToString(<FullWidthExample />),
       render: FullWidthExample,
+    },
+    {
+      id: "keyboard-shortcuts",
+      title: "Keyboard Shortcuts",
+      description:
+        "Buttons with keyboard shortcuts that display and trigger actions.",
+      code: jsxToString(<KeyboardShortcutsExample />),
+      render: KeyboardShortcutsExample,
     },
   ],
 };

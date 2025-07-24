@@ -48,12 +48,26 @@ const kbdVariants = tv({
   base: [
     // Base styling
     "pointer-events-none inline-flex items-center gap-1 rounded border font-mono font-medium",
-    // Light mode
-    "border-zinc-200 bg-zinc-100 text-zinc-600",
-    // Dark mode
-    "dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400",
   ],
   variants: {
+    variant: {
+      default: [
+        // Light mode
+        "border-zinc-200 bg-zinc-100 text-zinc-600",
+        // Dark mode
+        "dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400",
+      ],
+      onDarkButton: [
+        // For use on dark buttons (default, destructive)
+        "border-white/20 bg-white/10 text-white/90",
+        "dark:border-white/20 dark:bg-white/10 dark:text-white/90",
+      ],
+      onLightButton: [
+        // For use on light buttons (secondary, outline, ghost)
+        "border-zinc-900/20 bg-zinc-900/10 text-zinc-900/90",
+        "dark:border-zinc-100/20 dark:bg-zinc-100/10 dark:text-zinc-100/90",
+      ],
+    },
     size: {
       xs: "h-4 px-1 text-[9px]",
       sm: "h-5 px-1.5 text-[10px]",
@@ -62,6 +76,7 @@ const kbdVariants = tv({
     },
   },
   defaultVariants: {
+    variant: "default",
     size: "sm",
   },
 });
@@ -76,6 +91,8 @@ interface KbdProps
   keys?: string[];
   /** Whether to show platform-specific shortcuts */
   platform?: "mac" | "pc" | "auto";
+  /** Visual variant - use 'onDarkButton' or 'onLightButton' when inside buttons */
+  variant?: "default" | "onDarkButton" | "onLightButton";
 }
 
 /**
@@ -93,7 +110,10 @@ interface KbdProps
  * @param props - Additional kbd element props
  */
 const Kbd = React.forwardRef<HTMLElement, KbdProps>(
-  ({ className, children, keys, platform = "auto", size, ...props }, ref) => {
+  (
+    { className, children, keys, platform = "auto", size, variant, ...props },
+    ref
+  ) => {
     // Detect platform for modifier keys
     const isMac = React.useMemo(() => {
       if (platform === "mac") return true;
@@ -126,23 +146,32 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
       });
     };
 
-    // Render content
-    const content = keys
-      ? processKeys(keys).map((key, index) => (
-          <React.Fragment key={index}>
-            {index > 0 && <span className="text-zinc-400">+</span>}
-            <span>{key}</span>
-          </React.Fragment>
-        ))
-      : children;
+    // For multiple keys, render each as separate kbd elements
+    if (keys && keys.length > 0) {
+      const processedKeys = processKeys(keys);
+      return (
+        <span
+          className={cx("inline-flex items-center gap-1", className)}
+          {...props}
+        >
+          {processedKeys.map((key, index) => (
+            <React.Fragment key={index}>
+              {index > 0 && <span className="text-zinc-400 text-xs">+</span>}
+              <kbd className={cx(kbdVariants({ size, variant }))}>{key}</kbd>
+            </React.Fragment>
+          ))}
+        </span>
+      );
+    }
 
+    // For single keys or children, render as single kbd
     return (
       <kbd
         ref={ref}
-        className={cx(kbdVariants({ size }), className)}
+        className={cx(kbdVariants({ size, variant }), className)}
         {...props}
       >
-        {content}
+        {children}
       </kbd>
     );
   }

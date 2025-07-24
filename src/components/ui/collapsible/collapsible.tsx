@@ -91,8 +91,10 @@ const CollapsibleTrigger = React.forwardRef<
     // Dynamic icon component that switches based on collapsible state
     const DynamicIcon = ({
       className: iconClassName,
+      strokeWidth,
     }: {
       className?: string;
+      strokeWidth?: number;
     }) => (
       <div className="relative">
         <ClosedIcon
@@ -101,6 +103,7 @@ const CollapsibleTrigger = React.forwardRef<
             "absolute inset-0 transition-opacity duration-200 ease-out",
             "group-data-[panel-open]:opacity-0"
           )}
+          strokeWidth={strokeWidth}
         />
         <OpenIcon
           className={cx(
@@ -108,6 +111,7 @@ const CollapsibleTrigger = React.forwardRef<
             "absolute inset-0 transition-opacity duration-200 ease-out",
             "opacity-0 group-data-[panel-open]:opacity-100"
           )}
+          strokeWidth={strokeWidth}
         />
       </div>
     );
@@ -147,67 +151,36 @@ const CollapsibleTrigger = React.forwardRef<
             ref={ref}
             className={cx("group", className)}
             {...props}
-          >
-            <div className="relative min-w-4 w-4 h-4 shrink-0">
-              <ClosedIcon
-                className={cx(
-                  "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
-                  "text-zinc-400 dark:text-zinc-500",
-                  "group-data-[panel-open]:opacity-0"
-                )}
-              />
-              <OpenIcon
-                className={cx(
-                  "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
-                  "text-zinc-400 dark:text-zinc-500",
-                  "opacity-0 group-data-[panel-open]:opacity-100"
-                )}
-              />
-            </div>
-          </BaseCollapsible.Trigger>
+            render={
+              <Button variant="ghost" size="icon-sm" leftIcon={DynamicIcon} />
+            }
+          />
         </div>
       );
     }
 
     // Default: full-width trigger (original behavior)
     return (
-      <BaseCollapsible.Trigger
-        ref={ref}
-        className={cx(
-          // base
-          "group flex w-full items-center justify-between py-2 text-left text-sm font-medium transition-colors",
-          // text color
-          "text-zinc-900 dark:text-zinc-50",
-          // hover state (no background)
-          "hover:text-zinc-700 dark:hover:text-zinc-300",
-          // disabled
-          "data-disabled:cursor-not-allowed data-disabled:opacity-50",
-          "data-disabled:text-zinc-400 dark:data-disabled:text-zinc-600",
-          // focus
-          focusRing,
-          padding,
-          className
-        )}
-        {...props}
-      >
-        {children}
-        <div className="relative min-w-4 w-4 h-4 shrink-0">
-          <ClosedIcon
-            className={cx(
-              "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
-              "text-zinc-400 dark:text-zinc-500",
-              "group-data-[panel-open]:opacity-0"
-            )}
-          />
-          <OpenIcon
-            className={cx(
-              "size-4 absolute inset-0 transition-opacity duration-200 ease-out",
-              "text-zinc-400 dark:text-zinc-500",
-              "group-data-[panel-open]:opacity-100 opacity-0"
-            )}
-          />
+      <div className={cx("flex items-center justify-between py-2", padding)}>
+        <div
+          className={cx(
+            "flex-1 text-left text-sm font-medium transition-colors",
+            "text-zinc-900 dark:text-zinc-50",
+            "hover:text-zinc-700 dark:hover:text-zinc-300",
+            className
+          )}
+        >
+          {children}
         </div>
-      </BaseCollapsible.Trigger>
+        <BaseCollapsible.Trigger
+          ref={ref}
+          className={cx("group")}
+          {...props}
+          render={
+            <Button variant="ghost" size="icon-sm" leftIcon={DynamicIcon} />
+          }
+        />
+      </div>
     );
   }
 );

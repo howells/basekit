@@ -1,6 +1,8 @@
+"use client";
+
+import { ArrowRight, Loader2, Plus } from "lucide-react";
 import React from "react";
 import { Button } from "./button";
-import { ArrowRight, Loader2, Plus } from "lucide-react";
 
 // Default button
 export const DefaultExample = () => <Button>Click me</Button>;
@@ -73,9 +75,15 @@ export const LoadingWithTextExample = () => (
 // Text alignment
 export const TextAlignExample = () => (
   <div className="flex flex-col gap-2">
-    <Button fullWidth textAlign="left">Left Aligned</Button>
-    <Button fullWidth textAlign="center">Center Aligned</Button>
-    <Button fullWidth textAlign="right">Right Aligned</Button>
+    <Button fullWidth textAlign="left">
+      Left Aligned
+    </Button>
+    <Button fullWidth textAlign="center">
+      Center Aligned
+    </Button>
+    <Button fullWidth textAlign="right">
+      Right Aligned
+    </Button>
   </div>
 );
 
@@ -88,7 +96,27 @@ export const CustomStyleExample = () => (
 
 // As link with render prop
 export const AsLinkExample = () => (
-  <Button render={<a href="https://example.com" />}>
-    Link Button
-  </Button>
+  <Button render={<a href="https://example.com" />}>Link Button</Button>
+);
+
+// Keyboard shortcuts
+export const KeyboardShortcutsExample = () => (
+  <div className="flex flex-col gap-3 items-start">
+    <Button kbd={["mod", "K"]} leftIcon={Plus}>
+      Search
+    </Button>
+    <Button variant="secondary" kbd="Enter">
+      Submit
+    </Button>
+    <Button variant="default" kbd="Ent">
+      Button
+    </Button>
+    <Button
+      variant="outline"
+      kbd={["mod", "shift", "P"]}
+      rightIcon={ArrowRight}
+    >
+      Command Palette
+    </Button>
+  </div>
 );

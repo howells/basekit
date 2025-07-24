@@ -252,6 +252,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       props.onClick as (() => void) | undefined
     );
 
+    // Determine kbd variant based on button variant
+    const kbdVariant =
+      variant === "default" || variant === "destructive"
+        ? "onDarkButton"
+        : "onLightButton";
+
     // Icon size based on button size - adjusted for better proportions
     const iconSize =
       size === "sm" || size === "icon-sm"
@@ -291,7 +297,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           : // Full width with centered text and left elements uses space-between
           fullWidth && textAlign === "center" && (hasLeftIcon || isLoading)
           ? "justify-between"
-          : "justify-start gap-2"
+          : "justify-start gap-x-2"
       );
 
       // Normal width: simple gap layout
@@ -312,10 +318,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             : null;
           const kbdElement = (
             <Kbd
-              keys={Array.isArray(kbd) ? kbd : [kbd]}
+              keys={Array.isArray(kbd) ? kbd : undefined}
               platform={kbdPlatform}
-              className="ml-auto"
-            />
+              variant={kbdVariant}
+              className="ml-2"
+            >
+              {Array.isArray(kbd) ? undefined : kbd}
+            </Kbd>
           );
 
           if (isIconButton && hasChildren) {
@@ -395,10 +404,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {/* Keyboard shortcut */}
             {kbd && !hasRightIcon && (
               <Kbd
-                keys={Array.isArray(kbd) ? kbd : [kbd]}
+                keys={Array.isArray(kbd) ? kbd : undefined}
                 platform={kbdPlatform}
+                variant={kbdVariant}
                 className="ml-auto"
-              />
+              >
+                {Array.isArray(kbd) ? undefined : kbd}
+              </Kbd>
             )}
 
             {/* Right icon with CSS transitions */}
@@ -411,10 +423,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   })}
                 {kbd && (
                   <Kbd
-                    keys={Array.isArray(kbd) ? kbd : [kbd]}
+                    keys={Array.isArray(kbd) ? kbd : undefined}
                     platform={kbdPlatform}
+                    variant={kbdVariant}
                     className="ml-2"
-                  />
+                  >
+                    {Array.isArray(kbd) ? undefined : kbd}
+                  </Kbd>
                 )}
               </span>
             )}
@@ -488,7 +503,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Full width with left/right alignment and right icon: single flex container
       if (hasRightIcon) {
         return (
-          <span className="flex items-center gap-2 w-full transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
+          <span className="flex items-center gap-x-2 w-full transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
             {/* Left icon container */}
             {(isLoading || hasLeftIcon) && (
               <span className="flex items-center relative transition-all duration-150 ease-[cubic-bezier(0,0,0.58,1)]">
