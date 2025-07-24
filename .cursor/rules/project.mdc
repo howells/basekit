@@ -1,8 +1,8 @@
-# StencilUI Project
+# Patternmode Project
 
 ## Overview
 
-StencilUI is a modern React component library that combines the best design patterns and developer experience from leading UI libraries while building on a solid, accessible foundation. We curate and adapt components from shadcn/ui, Radix UI, Tailwind UI (Catalyst), and other excellent libraries, porting them to Base UI primitives with Tremor-inspired styling.
+Patternmode is a modern React component library that combines the best design patterns and developer experience from leading UI libraries while building on a solid, accessible foundation. We curate and adapt components from shadcn/ui, Radix UI, Tailwind UI (Catalyst), and other excellent libraries, porting them to Base UI primitives with Tremor-inspired styling.
 
 ## Core Principles
 
@@ -39,7 +39,7 @@ src/components/
 
 #### Three-File Component Architecture
 
-Every component in StencilUI follows a consistent three-file structure for optimal separation of concerns:
+Every component in Patternmode follows a consistent three-file structure for optimal separation of concerns:
 
 **1. `component.tsx` - Pure Component Implementation**
 
@@ -277,7 +277,7 @@ This project builds upon the excellent work of the open-source community. We mai
 
 ---
 
-_StencilUI: The best of the React ecosystem, unified under Base UI primitives with professional Tremor styling._
+_Patternmode: The best of the React ecosystem, unified under Base UI primitives with professional Tremor styling._
 description:
 globs:
 alwaysApply: false

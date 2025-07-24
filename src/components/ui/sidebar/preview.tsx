@@ -1,13 +1,13 @@
 "use client";
 
-import { 
+import {
   Sidebar,
-  SidebarHeader,
   SidebarBody,
   SidebarFooter,
-  SidebarSection,
+  SidebarHeader,
   SidebarItem,
-  SidebarLabel
+  SidebarLabel,
+  SidebarSection,
 } from "./sidebar";
 
 export function Example() {
@@ -16,13 +16,13 @@ export function Example() {
       <Sidebar>
         <SidebarHeader>
           <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-            StencilUI
+            Patternmode
           </div>
           <div className="text-sm text-zinc-500 dark:text-zinc-400">
             Component Library
           </div>
         </SidebarHeader>
-        
+
         <SidebarBody>
           <SidebarSection>
             <SidebarItem href="#overview" current>
@@ -35,7 +35,7 @@ export function Example() {
               <SidebarLabel>Examples</SidebarLabel>
             </SidebarItem>
           </SidebarSection>
-          
+
           <SidebarSection>
             <div className="px-2 py-1 text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
               Resources
@@ -50,7 +50,7 @@ export function Example() {
               <SidebarLabel>Changelog</SidebarLabel>
             </SidebarItem>
           </SidebarSection>
-          
+
           <SidebarSection>
             <div className="px-2 py-1 text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
               Tools
@@ -63,7 +63,7 @@ export function Example() {
             </SidebarItem>
           </SidebarSection>
         </SidebarBody>
-        
+
         <SidebarFooter>
           <SidebarSection>
             <SidebarItem href="#account">

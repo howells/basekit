@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Stencil UI",
-  description: "Stencil UI",
+  title: "Patternmode",
+  description: "Patternmode",
 };
 
 export default function RootLayout({

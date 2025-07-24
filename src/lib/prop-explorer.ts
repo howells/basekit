@@ -1,5 +1,5 @@
 // Prop Explorer System [v1.0.0]
-// Self-documenting, extensible prop exploration for StencilUI components
+// Self-documenting, extensible prop exploration for Patternmode components
 
 import { VariantProps } from "tailwind-variants";
 

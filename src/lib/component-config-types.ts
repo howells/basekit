@@ -1,4 +1,4 @@
-// Configuration Types for StencilUI Components
+// Configuration Types for Patternmode Components
 // These types ensure consistency across all component configurations
 
 import { PropMetadata } from "./prop-explorer";

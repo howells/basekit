@@ -10,17 +10,17 @@ import {
 export const DefaultExample = () => (
   <Accordion>
     <AccordionItem value="item-1">
-      <AccordionTrigger>What is StencilUI?</AccordionTrigger>
+      <AccordionTrigger>What is Patternmode?</AccordionTrigger>
       <AccordionContent>
-        StencilUI is a modern React component library that combines the best
-        design patterns and developer experience from leading UI libraries
-        while building on a solid, accessible foundation.
+        Patternmode is a modern React component library that combines the best
+        design patterns and developer experience from leading UI libraries while
+        building on a solid, accessible foundation.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2">
       <AccordionTrigger>How do I install it?</AccordionTrigger>
       <AccordionContent>
-        You can install StencilUI components using npm or pnpm. Each component
+        You can install Patternmode components using npm or pnpm. Each component
         is built on Base UI primitives for excellent accessibility and
         performance.
       </AccordionContent>
@@ -32,17 +32,17 @@ export const DefaultExample = () => (
 export const MultipleOpenExample = () => (
   <Accordion openMultiple>
     <AccordionItem value="item-1">
-      <AccordionTrigger>What is StencilUI?</AccordionTrigger>
+      <AccordionTrigger>What is Patternmode?</AccordionTrigger>
       <AccordionContent>
-        StencilUI is a modern React component library that combines the best
-        design patterns and developer experience from leading UI libraries
-        while building on a solid, accessible foundation.
+        Patternmode is a modern React component library that combines the best
+        design patterns and developer experience from leading UI libraries while
+        building on a solid, accessible foundation.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2">
       <AccordionTrigger>How do I install it?</AccordionTrigger>
       <AccordionContent>
-        You can install StencilUI components using npm or pnpm. Each component
+        You can install Patternmode components using npm or pnpm. Each component
         is built on Base UI primitives for excellent accessibility and
         performance.
       </AccordionContent>

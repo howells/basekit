@@ -1,17 +1,17 @@
 /**
  * Description List Components
- * 
+ *
  * Components for creating structured description lists using semantic HTML.
  * Provides organized display of term-definition pairs with responsive layouts
  * and consistent styling across light and dark themes.
- * 
+ *
  * Features:
  * - Responsive grid layout
  * - Semantic HTML structure (dl, dt, dd)
  * - Dark mode support
  * - Accessible design
  * - Consistent typography and spacing
- * 
+ *
  * @example
  * ```tsx
  * // Basic description list
@@ -23,7 +23,7 @@
  *   <DescriptionTerm>Role</DescriptionTerm>
  *   <DescriptionDetails>Software Engineer</DescriptionDetails>
  * </DescriptionList>
- * 
+ *
  * // User profile information
  * <DescriptionList>
  *   <DescriptionTerm>Full Name</DescriptionTerm>
@@ -35,11 +35,11 @@
  *   <DescriptionTerm>Start Date</DescriptionTerm>
  *   <DescriptionDetails>March 15, 2023</DescriptionDetails>
  * </DescriptionList>
- * 
+ *
  * // Project details
  * <DescriptionList>
  *   <DescriptionTerm>Project Name</DescriptionTerm>
- *   <DescriptionDetails>StencilUI Component Library</DescriptionDetails>
+ *   <DescriptionDetails>Patternmode Component Library</DescriptionDetails>
  *   <DescriptionTerm>Status</DescriptionTerm>
  *   <DescriptionDetails>In Development</DescriptionDetails>
  *   <DescriptionTerm>Technologies</DescriptionTerm>
@@ -50,11 +50,11 @@
  * ```
  */
 
-import clsx from 'clsx'
+import clsx from "clsx";
 
 /**
  * Root container for description lists.
- * 
+ *
  * Creates a semantic description list using the HTML `dl` element with
  * responsive grid layout. Terms and details are arranged in a two-column
  * layout on larger screens and stacked on mobile devices.
@@ -71,21 +71,24 @@ import clsx from 'clsx'
  * </DescriptionList>
  * ```
  */
-export function DescriptionList({ className, ...props }: React.ComponentPropsWithoutRef<'dl'>) {
+export function DescriptionList({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"dl">) {
   return (
     <dl
       {...props}
       className={clsx(
         className,
-        'grid grid-cols-1 text-base/6 sm:grid-cols-[min(50%,--spacing(80))_auto] sm:text-sm/6'
+        "grid grid-cols-1 text-base/6 sm:grid-cols-[min(50%,--spacing(80))_auto] sm:text-sm/6"
       )}
     />
-  )
+  );
 }
 
 /**
  * Description term component for definition lists.
- * 
+ *
  * Represents the term or name being described using the HTML `dt` element.
  * Provides consistent styling with subtle text color and proper spacing.
  * Includes border separators between items.
@@ -101,21 +104,24 @@ export function DescriptionList({ className, ...props }: React.ComponentPropsWit
  * <DescriptionTerm>Last Login</DescriptionTerm>
  * ```
  */
-export function DescriptionTerm({ className, ...props }: React.ComponentPropsWithoutRef<'dt'>) {
+export function DescriptionTerm({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"dt">) {
   return (
     <dt
       {...props}
       className={clsx(
         className,
-        'col-start-1 border-t border-zinc-950/5 pt-3 text-zinc-500 first:border-none sm:border-t sm:border-zinc-950/5 sm:py-3 dark:border-white/5 dark:text-zinc-400 sm:dark:border-white/5'
+        "col-start-1 border-t border-zinc-950/5 pt-3 text-zinc-500 first:border-none sm:border-t sm:border-zinc-950/5 sm:py-3 dark:border-white/5 dark:text-zinc-400 sm:dark:border-white/5"
       )}
     />
-  )
+  );
 }
 
 /**
  * Description details component for definition lists.
- * 
+ *
  * Represents the description or definition corresponding to a term using
  * the HTML `dd` element. Provides emphasized text styling and proper spacing
  * to create clear term-definition relationships.
@@ -129,7 +135,7 @@ export function DescriptionTerm({ className, ...props }: React.ComponentPropsWit
  * <DescriptionDetails>john.doe</DescriptionDetails>
  * <DescriptionDetails>john.doe@company.com</DescriptionDetails>
  * <DescriptionDetails>2 hours ago</DescriptionDetails>
- * 
+ *
  * // With complex content
  * <DescriptionDetails>
  *   <span className="font-semibold">Active</span>
@@ -137,14 +143,17 @@ export function DescriptionTerm({ className, ...props }: React.ComponentPropsWit
  * </DescriptionDetails>
  * ```
  */
-export function DescriptionDetails({ className, ...props }: React.ComponentPropsWithoutRef<'dd'>) {
+export function DescriptionDetails({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"dd">) {
   return (
     <dd
       {...props}
       className={clsx(
         className,
-        'pt-1 pb-3 text-zinc-950 sm:border-t sm:border-zinc-950/5 sm:py-3 sm:nth-2:border-none dark:text-white dark:sm:border-white/5'
+        "pt-1 pb-3 text-zinc-950 sm:border-t sm:border-zinc-950/5 sm:py-3 sm:nth-2:border-none dark:text-white dark:sm:border-white/5"
       )}
     />
-  )
+  );
 }

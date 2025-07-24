@@ -27,7 +27,7 @@ export const componentConfig: ComponentConfig = {
       description: "A horizontal line to separate content",
       code: `<div>
   <div className="space-y-1">
-    <h4 className="text-sm font-medium leading-none">StencilUI</h4>
+    <h4 className="text-sm font-medium leading-none">Patternmode</h4>
     <p className="text-sm text-gray-600">
       An open-source component library built with React and Tailwind CSS.
     </p>
