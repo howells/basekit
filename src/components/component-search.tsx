@@ -1,9 +1,7 @@
 "use client";
 
-import {
-  getComponentsByCategory,
-} from "@/lib/component-registry";
 import { type ComponentConfig } from "@/lib/component-config-types";
+import { getComponentsByCategory } from "@/lib/component-registry";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -113,12 +111,18 @@ export function ComponentSearch({
 
   return (
     <>
-      <Button variant="ghost" size="sm" onClick={() => setIsOpen(true)}>
-        <Search className="h-4 w-4 mr-2" />
-        {placeholder}
-        <kbd className="ml-auto pointer-events-none inline-flex h-5 items-center gap-1 rounded border border-zinc-200 bg-zinc-100 px-1.5 font-mono text-[10px] font-medium text-zinc-600">
-          ⌘K
-        </kbd>
+      <Button
+        variant="secondary"
+        onClick={() => setIsOpen(true)}
+        leftIcon={Search}
+        textAlign="left"
+      >
+        <div className="flex items-center justify-between w-full">
+          <span>{placeholder}</span>
+          <kbd className="pointer-events-none inline-flex h-5 items-center gap-1 rounded border border-zinc-200 bg-zinc-100 px-1.5 font-mono text-[10px] font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
+            ⌘K
+          </kbd>
+        </div>
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -169,10 +173,7 @@ export function ComponentSearch({
                                   <Subheading className="text-sm">
                                     {component.name}
                                   </Subheading>
-                                  <Badge
-                                    variant="neutral"
-                                    className="text-xs"
-                                  >
+                                  <Badge variant="neutral" className="text-xs">
                                     {component.badge ||
                                       component.category.toUpperCase()}
                                   </Badge>

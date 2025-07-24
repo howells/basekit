@@ -268,7 +268,8 @@ export function InspectorHeader({
  * Provides the main content area of the inspector with automatic scrolling
  * when content overflows. Uses ScrollArea internally for consistent styling
  * and behavior. The inspector fills its container height and scrolls when
- * content exceeds the available space.
+ * content exceeds the available space. Includes a gradient indicator at the
+ * bottom to show when there's more content to scroll.
  *
  * @param className - Additional CSS classes for the content wrapper
  * @param props - Additional HTML div element props
@@ -297,9 +298,74 @@ export function InspectorBody({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const [showGradient, setShowGradient] = React.useState(true);
+
+  // Check if content is scrollable and not at bottom
+  const checkScrollable = React.useCallback(() => {
+    // Find the viewport element by class selector
+    const viewport = document.querySelector(
+      ".scroll-viewport"
+    ) as HTMLDivElement;
+    if (!viewport) {
+      console.log("Viewport not found");
+      return;
+    }
+
+    const { scrollTop, scrollHeight, clientHeight } = viewport;
+    const isScrollable = scrollHeight > clientHeight;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5; // 5px threshold
+
+    console.log("Scroll check:", {
+      scrollTop,
+      scrollHeight,
+      clientHeight,
+      isScrollable,
+      isAtBottom,
+    });
+    setShowGradient(isScrollable && !isAtBottom);
+  }, []);
+
+  React.useEffect(() => {
+    // Find the viewport element by class selector
+    const viewport = document.querySelector(
+      ".scroll-viewport"
+    ) as HTMLDivElement;
+    if (!viewport) {
+      // Retry after a short delay if viewport not found
+      const timer = setTimeout(() => {
+        const retryViewport = document.querySelector(
+          ".scroll-viewport"
+        ) as HTMLDivElement;
+        if (retryViewport) {
+          checkScrollable();
+          retryViewport.addEventListener("scroll", checkScrollable);
+
+          const resizeObserver = new ResizeObserver(checkScrollable);
+          resizeObserver.observe(retryViewport);
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+
+    // Check initially
+    checkScrollable();
+
+    // Check on scroll
+    viewport.addEventListener("scroll", checkScrollable);
+
+    // Check on resize (content changes)
+    const resizeObserver = new ResizeObserver(checkScrollable);
+    resizeObserver.observe(viewport);
+
+    return () => {
+      viewport.removeEventListener("scroll", checkScrollable);
+      resizeObserver.disconnect();
+    };
+  }, [checkScrollable]);
+
   return (
-    <div className="flex-1 min-h-0">
-      <ScrollArea className="h-full">
+    <div className="flex-1 min-h-0 relative">
+      <ScrollArea className="h-full" viewportClassName="scroll-viewport">
         <div
           className={cx(
             // Content padding and spacing
@@ -309,6 +375,28 @@ export function InspectorBody({
           {...props}
         />
       </ScrollArea>
+
+      {/* Bottom gradient indicator */}
+      {showGradient && (
+        <div
+          className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(249, 250, 251, 0.5) 50%, rgba(249, 250, 251, 0.95) 100%)",
+          }}
+        />
+      )}
+
+      {/* Dark mode gradient */}
+      {showGradient && (
+        <div
+          className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none dark:block hidden z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(24, 24, 27, 0.5) 50%, rgba(24, 24, 27, 0.95) 100%)",
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -275,7 +275,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
     >
       <div className="flex flex-col min-h-0 flex-1">
         {/* Header matching sidebar header height */}
-        <header className="h-11 px-6 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center ">
+        <header className="h-16 px-8 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-end">
           <ComponentSearch />
         </header>
         <main className="flex-1 overflow-y-auto">{children}</main>
