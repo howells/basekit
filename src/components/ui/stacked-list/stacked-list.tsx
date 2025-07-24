@@ -1,6 +1,9 @@
 import { cx } from "@/lib/utils";
 import React from "react";
+import { Grid, GridCell } from "../grid/grid";
 import { HStack, Stack } from "../stack/stack";
+import { Subheading } from "../subheading/subheading";
+import { Text } from "../text/text";
 
 // Base container for the stacked list (Entity.List equivalent)
 interface StackedListProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -200,13 +203,19 @@ const StackedListContent = React.forwardRef<
       className={cx("min-w-0", fill && "flex-1", className)}
       {...props}
     >
-      <p className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-50">
+      <Text
+        size="sm"
+        className="truncate font-medium text-zinc-900 dark:text-zinc-50"
+      >
         {title}
-      </p>
+      </Text>
       {description && (
-        <p className="mt-1 truncate text-sm text-zinc-600 dark:text-zinc-400">
+        <Text
+          size="sm"
+          className="mt-1 truncate text-zinc-600 dark:text-zinc-400"
+        >
           {description}
-        </p>
+        </Text>
       )}
     </div>
   );
@@ -235,26 +244,36 @@ const StackedListHeader = React.forwardRef<
   StackedListHeaderProps
 >(({ title, description, actions, className, ...props }, ref) => {
   return (
-    <div
+    <Grid
       ref={ref}
+      columns={2}
+      rows={1}
+      gap={0}
+      showColumnGuides={false}
+      showRowGuides={false}
+      minHeight="none"
       className={cx(
-        "flex items-center justify-between border-b border-zinc-200 bg-zinc-50 px-6 py-4 dark:border-zinc-800 dark:bg-zinc-900/50",
+        "border-b border-zinc-200 bg-zinc-50 px-6 py-4 dark:border-zinc-800 dark:bg-zinc-900/50",
         className
       )}
       {...props}
     >
-      <div>
-        <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+      <GridCell className="flex flex-col">
+        <Subheading level={3} className="text-zinc-900 dark:text-zinc-50">
           {title}
-        </h3>
+        </Subheading>
         {description && (
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          <Text size="sm" className=" text-zinc-600 dark:text-zinc-400">
             {description}
-          </p>
+          </Text>
         )}
-      </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
-    </div>
+      </GridCell>
+      {actions && (
+        <GridCell className="flex items-center justify-end">
+          <div className="flex items-center gap-2">{actions}</div>
+        </GridCell>
+      )}
+    </Grid>
   );
 });
 
@@ -307,12 +326,12 @@ const StackedListEmpty = React.forwardRef<
         {icon && (
           <div className="mb-4 text-zinc-400 dark:text-zinc-600">{icon}</div>
         )}
-        <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+        <Subheading level={3} className="text-zinc-900 dark:text-zinc-50">
           {title}
-        </h3>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+        </Subheading>
+        <Text size="sm" className="mt-1 text-zinc-600 dark:text-zinc-400">
           {description}
-        </p>
+        </Text>
         {action && <div className="mt-4">{action}</div>}
       </div>
     );

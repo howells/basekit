@@ -9,7 +9,7 @@ import { Card } from "../card/card";
 import { StackedList } from "./stacked-list";
 
 // Default example - matches config "default" id
-export function Default() {
+export function DefaultExample() {
   return (
     <StackedList>
       <StackedList.Header
@@ -22,7 +22,7 @@ export function Default() {
         }
       />
       <StackedList.Item
-        left={<Avatar initials="DH" alt="John Doe" />}
+        left={<Avatar initials="JD" alt="John Doe" />}
         right={
           <Button size="sm" variant="outline">
             Edit
@@ -46,7 +46,7 @@ export function Default() {
 }
 
 // In card example - matches config "in-card" id
-export function InCard() {
+export function InCardExample() {
   return (
     <Card padding={0}>
       <StackedList>
@@ -78,7 +78,7 @@ export function InCard() {
 }
 
 // With icons example - matches config "with-icons" id
-export function WithIcons() {
+export function WithIconsExample() {
   return (
     <StackedList>
       <StackedList.Item
@@ -104,7 +104,7 @@ export function WithIcons() {
 }
 
 // Interactive example - matches config "interactive" id
-export function Interactive() {
+export function InteractiveExample() {
   return (
     <StackedList>
       <StackedList.Item
@@ -134,7 +134,7 @@ export function Interactive() {
 }
 
 // Empty state example - matches config "empty-state" id
-export function EmptyState() {
+export function EmptyStateExample() {
   return (
     <StackedList>
       <StackedList.Header
