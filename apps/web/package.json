@@ -9,7 +9,7 @@
     "dev": "node scripts/copy-registry.mjs && next dev",
     "lint": "howells-check .",
     "lint:fix": "howells-fix .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
     "@howells/site-ui": "workspace:*",
@@ -38,6 +38,6 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "6.0.3"
   }
 }

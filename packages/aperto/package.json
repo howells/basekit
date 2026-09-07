@@ -42,7 +42,7 @@
     "lint:fix": "howells-fix .",
     "prepack": "node ../../scripts/prepack-build.mjs",
     "test": "vitest run --passWithNoTests",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
@@ -65,7 +65,7 @@
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
     "tsup": "^8.5.1",
-    "typescript": "catalog:",
+    "typescript": "6.0.3",
     "vitest": "catalog:"
   },
   "peerDependencies": {

@@ -10,7 +10,7 @@
     "lint": "howells-check .",
     "lint:fix": "howells-fix .",
     "sync": "node scripts/sync-registry.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
@@ -46,6 +46,6 @@
     "@types/react-dom": "catalog:",
     "oxfmt": "^0.53.0",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "6.0.3"
   }
 }

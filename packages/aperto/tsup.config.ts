@@ -4,7 +4,8 @@ const isWatch = process.argv.includes("--watch");
 
 export default defineConfig({
   clean: !isWatch,
-  dts: true,
+  // tsup injects baseUrl for its TS6 compiler-API declaration build.
+  dts: { compilerOptions: { ignoreDeprecations: "6.0" } },
   entry: ["src/index.ts"],
   format: ["esm"],
   sourcemap: true,
