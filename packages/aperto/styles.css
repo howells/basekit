@@ -80,10 +80,8 @@
       var(--aperto-expanded-width, 76vw),
       calc(
         var(--aperto-media-max-h) *
-          (
-            var(--aperto-expanded-aspect-ratio-width, 3) /
-              var(--aperto-expanded-aspect-ratio-height, 2)
-          )
+          (var(--aperto-expanded-aspect-ratio-width, 3) /
+            var(--aperto-expanded-aspect-ratio-height, 2))
       ),
       1000px,
       90vw
@@ -216,10 +214,8 @@
         calc(100vw - 2rem),
         calc(
           var(--aperto-media-max-h) *
-            (
-              var(--aperto-expanded-aspect-ratio-width, 3) /
-                var(--aperto-expanded-aspect-ratio-height, 2)
-            )
+            (var(--aperto-expanded-aspect-ratio-width, 3) /
+              var(--aperto-expanded-aspect-ratio-height, 2))
         )
       );
     }

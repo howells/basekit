@@ -220,8 +220,8 @@ defects: reintroduce the 2.0.0 capture bug and the browser suite fails with
 **Three mechanics worth knowing before adding more.**
 
 - **The files are `src/**/_.browser.tsx`, never `_.test.tsx`.** That keeps them
-out of vitest's default include so `pnpm test`never runs them under jsdom, and
-each`tsconfig.json`excludes them so they cannot reach`dist`.
+  out of vitest's default include so `pnpm test`never runs them under jsdom, and
+  each`tsconfig.json`excludes them so they cannot reach`dist`.
 - **`scripts/build-registry.mjs` had to learn about them.** Its filter matched
   `.test.` only, so the first version of these tests was **vendored into
   `apps/preview`** and failed its Next build on a `vitest/browser` import. The

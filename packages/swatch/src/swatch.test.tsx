@@ -26,7 +26,7 @@ import {
   Swatch,
   updateDistributionSegment,
 } from "./index";
-import type { DistributionSegment, SwatchSize } from "./index";
+import type { DistributionSegment } from "./index";
 
 interface MockPanInfo {
   offset: {
@@ -222,7 +222,7 @@ describe("Swatch", () => {
       "7xl",
     ]);
 
-    render(<Swatch aria-label="Huge" color="#315c4b" size={"7xl" as SwatchSize} />);
+    render(<Swatch aria-label="Huge" color="#315c4b" size="7xl" />);
 
     expect(screen.getByLabelText("Huge")).toHaveStyle({
       "--patternmode-swatch-size": "6rem",

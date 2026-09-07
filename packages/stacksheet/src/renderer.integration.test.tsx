@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-deprecated -- Exercise the legacy API contract and complete MediaQueryList test doubles.
 // @vitest-environment jsdom
 import { setTimeout as sleep } from "node:timers/promises";
 import "@testing-library/jest-dom/vitest";

@@ -33,11 +33,11 @@
     "@howells/lint": "catalog:",
     "@howells/typescript-config": "catalog:",
     "@patternmode/theme": "workspace:*",
-    "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/postcss": "4.3.3",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "6.0.3"
+    "typescript": "catalog:"
   }
 }

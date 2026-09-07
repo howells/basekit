@@ -1,5 +1,13 @@
 # @patternmode/swatch
 
+## 4.1.3
+
+### Patch Changes
+
+- Rebuild the component packages with current native TypeScript 7, tsdown, and CSS tooling. Public exports and component behavior are preserved.
+- Updated dependencies
+  - @patternmode/system@0.7.2
+
 ## 4.1.2
 
 ### Patch Changes

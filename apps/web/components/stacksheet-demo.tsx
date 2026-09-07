@@ -151,7 +151,6 @@ export const StacksheetDemo = () => (
   <StacksheetProvider
     classNames={{
       backdrop: "stacksheet-backdrop",
-      header: "stacksheet-header",
       panel: "stacksheet-panel",
     }}
     sheets={sheets}

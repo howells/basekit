@@ -1,12 +1,12 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsdown";
 
 const isWatch = process.argv.includes("--watch");
 
 export default defineConfig({
   clean: !isWatch,
-  // tsup injects baseUrl for its TS6 compiler-API declaration build.
-  dts: { compilerOptions: { ignoreDeprecations: "6.0" } },
+  dts: true,
   entry: ["src/index.ts"],
   format: ["esm"],
+  outExtensions: () => ({ dts: ".d.ts", js: ".js" }),
   sourcemap: true,
 });

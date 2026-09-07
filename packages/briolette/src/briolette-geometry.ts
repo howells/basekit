@@ -205,10 +205,10 @@ export const BRIOLETTE_FRONT: BrioletteVec3 = { x: 0, y: 0, z: 1 };
 /** Shortest-arc quaternion rotating unit vector `from` onto unit vector `to`. */
 export const quatBetweenVecs = (from: BrioletteVec3, to: BrioletteVec3): BrioletteQuat => {
   const dot = from.x * to.x + from.y * to.y + from.z * to.z;
-  if (dot >= 0.999_999) {
+  if (dot >= 0.999999) {
     return BRIOLETTE_IDENTITY_QUAT;
   }
-  if (dot <= -0.999_999) {
+  if (dot <= -0.999999) {
     // Antipodal — rotate 180° about any axis orthogonal to `from`.
     const axis =
       Math.abs(from.x) > 0.9

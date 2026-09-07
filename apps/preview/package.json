@@ -13,13 +13,13 @@
     "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
-    "@base-ui/react": "catalog:",
+    "@base-ui/react": "^1.6.0",
     "@fontsource-variable/inter": "^5.2.8",
     "@instruments/colorscope": "^7.0.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.2.5",
     "focus-trap-react": "^12.0.2",
-    "lucide-react": "catalog:",
+    "lucide-react": "^1.17.0",
     "motion": "catalog:",
     "next": "catalog:",
     "radix-ui": "^1.6.2",
@@ -40,12 +40,12 @@
     "@patternmode/system": "workspace:*",
     "@patternmode/tags": "workspace:*",
     "@patternmode/theme": "workspace:*",
-    "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/postcss": "4.3.3",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "oxfmt": "^0.53.0",
+    "oxfmt": "0.66.0",
     "tailwindcss": "catalog:",
-    "typescript": "6.0.3"
+    "typescript": "catalog:"
   }
 }

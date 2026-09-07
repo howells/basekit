@@ -107,7 +107,7 @@ describe("briolette geometry", () => {
         expect(Math.hypot(vertex.x, vertex.y, vertex.z)).toBeCloseTo(1, 6);
         expect(
           Math.hypot(vertex.x - origin.x, vertex.y - origin.y, vertex.z - origin.z),
-        ).toBeLessThan(0.000_001);
+        ).toBeLessThan(0.000001);
       }
     }
     expect(expanded[0]?.vertices).toEqual(fine[0]?.vertices);
