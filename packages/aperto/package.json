@@ -1,6 +1,6 @@
 {
   "name": "@patternmode/aperto",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Opinionated, styled thumbnail-to-expanded media transitions for React.",
   "homepage": "https://github.com/howells/patternmode/tree/main/packages/aperto#readme",
   "bugs": {
@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "lucide-react": "^1.17.0",
-    "motion": "^12.40.0",
+    "motion": ">=12.40.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }

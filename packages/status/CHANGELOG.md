@@ -1,5 +1,11 @@
 # @patternmode/status
 
+## 0.4.3
+
+### Patch Changes
+
+- 5dde69f: Accept Motion versions from 12.40.0 onward instead of blocking newer majors at installation. The development workspace now exercises Motion 13. Consumers need no API migration.
+
 ## 0.4.2
 
 ### Patch Changes
