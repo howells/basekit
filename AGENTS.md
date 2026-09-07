@@ -92,3 +92,5 @@ A catalog of focused React interface components, each named for the interaction 
 - The two Next apps invoke the root native `tsc` explicitly. Their exact TypeScript 6.0.3 dependency is retained only for Next 16.2's compiler-API build diagnostics and editor plugin; framework error checks remain enabled.
 - Aperto retains an exact TypeScript 6.0.3 dependency for tsup's JavaScript compiler API and invokes the root native `tsc` for its typecheck. Aperto retains tsup's bundled declaration output and public packaging; other component packages emit declarations with native `tsc`.
 - Do not let a compiler-API dependency replace the native executable used by the typecheck scripts.
+
+- Shared-library peer ranges express minimum API requirements. Keep an upper bound only for a demonstrated incompatibility, rather than blocking new dependency versions by default. Lockfiles record tested versions; Motion peers use `>=12.40.0`.

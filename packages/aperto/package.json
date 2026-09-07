@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "lucide-react": "^1.17.0",
-    "motion": "^12.40.0",
+    "motion": ">=12.40.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
