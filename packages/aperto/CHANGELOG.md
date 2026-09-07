@@ -1,5 +1,13 @@
 # @patternmode/aperto
 
+## 3.0.3
+
+### Patch Changes
+
+- Rebuild the component packages with current native TypeScript 7, tsdown, and CSS tooling. Public exports and component behavior are preserved.
+- Updated dependencies
+  - @howells/motion@0.2.1
+
 ## 3.0.2
 
 ### Patch Changes

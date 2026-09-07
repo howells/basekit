@@ -1,5 +1,11 @@
 # @patternmode/halo
 
+## 0.6.2
+
+### Patch Changes
+
+- Rebuild the component packages with current native TypeScript 7, tsdown, and CSS tooling. Public exports and component behavior are preserved.
+
 ## 0.6.1
 
 ### Patch Changes

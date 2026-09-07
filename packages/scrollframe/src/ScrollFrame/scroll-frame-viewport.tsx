@@ -96,6 +96,7 @@ const useDragScrollHandlers = ({
     const onEnd = () => {
       endRef.current();
     };
+    // oxlint-disable-next-line react-doctor/effect-needs-cleanup -- detachRef removes every listener when dragging ends or the component unmounts.
     window.addEventListener("pointermove", onMove, { capture: true });
     window.addEventListener("pointerup", onEnd, { capture: true });
     window.addEventListener("pointercancel", onEnd, { capture: true });

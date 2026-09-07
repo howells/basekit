@@ -6,10 +6,10 @@ import { useEffect, useRef } from "react";
 import { quatSlerp, rotateBrioletteOrientation } from "./briolette-geometry";
 import type { BrioletteQuat } from "./briolette-geometry";
 
-const IDLE_YAW_PER_MS = 0.000_07;
-const IDLE_PITCH_PER_MS = 0.000_013;
+const IDLE_YAW_PER_MS = 0.00007;
+const IDLE_PITCH_PER_MS = 0.000013;
 const INERTIA_DECAY_PER_FRAME = 0.94;
-const INERTIA_REST_SPEED = 0.000_02;
+const INERTIA_REST_SPEED = 0.00002;
 const MAX_FRAME_MS = 64;
 
 const easeOutCubic = (t: number): number => 1 - (1 - t) ** 3;

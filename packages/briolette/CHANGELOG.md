@@ -1,5 +1,13 @@
 # @patternmode/briolette
 
+## 0.7.2
+
+### Patch Changes
+
+- Rebuild the component packages with current native TypeScript 7, tsdown, and CSS tooling. Public exports and component behavior are preserved.
+- Updated dependencies
+  - @howells/motion@0.2.1
+
 ## 0.7.1
 
 ### Patch Changes

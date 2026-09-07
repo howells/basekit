@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-deprecated -- Exercise the legacy API contract and complete MediaQueryList test doubles.
 import { describe, expect, it, vi } from "vitest";
 
 import {

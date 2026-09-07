@@ -1,6 +1,6 @@
 {
   "name": "@howells/motion",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "description": "Shared motion tokens — springs, easings, durations, scales, and semantic presets for Patternmode interfaces.",
   "keywords": [
@@ -52,8 +52,8 @@
   "devDependencies": {
     "@howells/lint": "catalog:",
     "@howells/typescript-config": "catalog:",
-    "concurrently": "^9.2.1",
-    "tsdown": "^0.22.0",
+    "concurrently": "10.0.5",
+    "tsdown": "0.23.0",
     "typescript": "catalog:"
   },
   "engines": {

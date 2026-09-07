@@ -22,17 +22,17 @@
     "version-packages": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.7",
+    "@changesets/cli": "3.0.2",
     "@howells/envy": "catalog:",
     "@howells/husky": "catalog:",
     "@howells/lint": "catalog:",
     "@howells/typescript-config": "catalog:",
     "lint-staged": "catalog:",
-    "oxlint-tsgolint": "0.23.0",
-    "postcss": "^8.5.6",
+    "oxlint-tsgolint": "7.0.2001",
+    "postcss": "8.5.28",
     "turbo": "catalog:",
     "typescript": "catalog:",
-    "yaml": "^2.8.0",
+    "yaml": "2.9.0",
     "zod": "catalog:"
   },
   "lint-staged": {
@@ -41,5 +41,5 @@
   "engines": {
     "node": ">=24.15.0 <25"
   },
-  "packageManager": "pnpm@11.5.2"
+  "packageManager": "pnpm@12.3.4"
 }

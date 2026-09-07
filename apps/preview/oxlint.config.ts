@@ -1,4 +1,4 @@
-import next from "@howells/lint/oxlint/next";
+import { compatibleNext } from "../../oxlint.compat.ts";
 
 /**
  * Mirrors the repo-root oxlint config (the Howells Next.js preset) and adds one
@@ -11,6 +11,6 @@ import next from "@howells/lint/oxlint/next";
  * generator regressions visible.
  */
 export default {
-  extends: [next],
+  extends: [compatibleNext],
   ignorePatterns: ["components/ui/**"],
 };

@@ -1,10 +1,19 @@
 import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 
 const root = process.cwd();
 const packDir = path.join(root, ".pack");
-const fixtureDir = path.join(packDir, "next-consumer");
+const fixtureDir = mkdtempSync(path.join(tmpdir(), "patternmode-next-consumer-"));
 const packages = [
   { name: "@patternmode/system", tarballPrefix: "patternmode-system-" },
   { name: "@patternmode/stacksheet", tarballPrefix: "patternmode-stacksheet-" },
@@ -78,7 +87,7 @@ writeFileSync(
     {
       dependencies: {
         ...tarballDependencies,
-        next: "^16.2.6",
+        next: "16.3.4",
         react: "^19.2.3",
         "react-dom": "^19.2.3",
       },
@@ -86,13 +95,10 @@ writeFileSync(
         "@types/node": "^24.10.3",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
-        "@typescript/native": "npm:typescript@7.0.2",
-        typescript: "npm:@typescript/typescript6@6.0.2",
+        typescript: "7.0.2",
       },
       name: "@howells/tarball-consumer",
-      pnpm: {
-        overrides: tarballDependencies,
-      },
+      packageManager: "pnpm@12.3.4",
       private: true,
       scripts: {
         build: "next build",
@@ -100,6 +106,14 @@ writeFileSync(
       },
       type: "module",
     },
+    null,
+    2,
+  ),
+);
+writeFileSync(
+  path.join(fixtureDir, "pnpm-workspace.yaml"),
+  JSON.stringify(
+    { allowBuilds: { sharp: true }, overrides: tarballDependencies, packages: [] },
     null,
     2,
   ),
@@ -123,6 +137,7 @@ writeFileSync(
         skipLibCheck: true,
         strict: true,
         target: "es2017",
+        types: ["node", "react", "react-dom"],
       },
       exclude: ["node_modules"],
       include: ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

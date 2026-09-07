@@ -21,7 +21,7 @@ A catalog of focused React interface components, each named for the interaction 
 - `pnpm dev` - web demo.
 - `pnpm check` - typecheck, lint, test, build, boundary check, and `check:tokens`.
 - `pnpm test` / `pnpm typecheck` / `pnpm lint` - individual workspace gates.
-- `pnpm publish:packages` and `pnpm version-packages` - release operations, ask first.
+- `pnpm version-packages` versions changesets locally; the GitHub Release workflow publishes reviewed versions with npm Trusted Publishing.
 - `pnpm smoke:tarballs` - package tarball smoke checks.
 - Use Arc for public API changes or component refactors. Mastra isn't relevant to this catalog.
 
@@ -34,8 +34,8 @@ A catalog of focused React interface components, each named for the interaction 
 
 ## Publishing
 
-- `pnpm publish:packages` runs `changeset publish`. **Announce version moves to the materialgraph coordination session before publishing.**
-- **`changeset publish` is idempotent on partial failure.** Just re-run it, it publishes exactly what is missing. Do not hand-publish.
+- The GitHub Release workflow runs `scripts/release.mjs`: pnpm packs in dependency order and npm publishes through OIDC Trusted Publishing. Announce version moves to the materialgraph coordination session when coordinating a release.
+- **The Release workflow is idempotent on partial failure.** Re-run it; it publishes only missing versions. Do not hand-publish.
 - **A release no longer builds inside `prepack`.** `changeset publish` runs up to ten `pnpm publish` processes at once, so `prepack` used to mean ten unordered builds racing over each other's `dist/`. `scripts/publish-packages.mjs` now builds every package through turbo in dependency order first and sets `PATTERNMODE_SKIP_PREPACK_BUILD=1`, which `scripts/prepack-build.mjs` honours. **Nothing else suppresses those builds** - `pnpm` reads `ignore-scripts` only from its own `--ignore-scripts` flag, not from an `.npmrc` (user or project) and not from `npm_config_ignore_scripts`. All three were measured.
 - **The race that fix removes does not look like a race.** `tsdown` builds with `clean: true`, so a package empties its `dist/` and rewrites `index.mjs` in milliseconds while `tsc --emitDeclarationOnly` takes seconds to put the `.d.ts` files back. A dependent compiling in that window resolves the workspace dependency to **JavaScript with no types** and infers them from the bundle, so a default like `fades = true` becomes `fades: boolean` and the dependent fails on **its own source** with a plausible type error. It builds clean in isolation, which reads as contention. Before calling any publish failure a flake, check whether the failing package depends on another package in the same release.
 - **Check `npm view <pkg> dist-tags`, not `npm view <pkg> version`** - the latter serves stale reads straight after publishing.
@@ -88,9 +88,8 @@ A catalog of focused React interface components, each named for the interaction 
 
 ## TypeScript compiler boundary
 
-- Workspace checks and separate package declaration emission use native TypeScript 7.0.2.
-- The two Next apps invoke the root native `tsc` explicitly. Their exact TypeScript 6.0.3 dependency is retained only for Next 16.2's compiler-API build diagnostics and editor plugin; framework error checks remain enabled.
-- Aperto retains an exact TypeScript 6.0.3 dependency for tsup's JavaScript compiler API and invokes the root native `tsc` for its typecheck. Aperto retains tsup's bundled declaration output and public packaging; other component packages emit declarations with native `tsc`.
-- Do not let a compiler-API dependency replace the native executable used by the typecheck scripts.
+- Workspace checks, package declaration emission, and both Next apps use native TypeScript 7.0.2.
+- Aperto uses tsdown's native declarations while preserving its public `.js` and `.d.ts` exports. Other packages continue their separate native declaration emission.
+- No JavaScript TypeScript compiler or compiler-API compatibility aliases are retained.
 
 - Shared-library peer ranges express minimum API requirements. Keep an upper bound only for a demonstrated incompatibility, rather than blocking new dependency versions by default. Lockfiles record tested versions; Motion peers use `>=12.40.0`.
