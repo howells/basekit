@@ -86,7 +86,8 @@ writeFileSync(
         "@types/node": "^24.10.3",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
-        typescript: "^6.0.3",
+        "@typescript/native": "npm:typescript@7.0.2",
+        typescript: "npm:@typescript/typescript6@6.0.2",
       },
       name: "@howells/tarball-consumer",
       pnpm: {

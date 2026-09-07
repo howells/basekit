@@ -85,3 +85,10 @@ A catalog of focused React interface components, each named for the interaction 
 - **Promotion test: duplication + divergence + a discoverable reason the shipped option was rejected.** Duplication alone finds messy repos, not under-served ones; the _reason_ something was rebuilt is the finding. Cross-repo filename frequency is a bad instrument - it can't distinguish a commodity from an unmet need, copied lineage from independent invention, or territory from difficulty. Hash files before counting them as separate.
 - **Promote the mechanism; leave the opinion in each app's tokens.** Ship a design register inside a component and consumers with a different one will fork rather than argue.
 - Components should take a **behaviour**, not a value. A consumer maintaining a lookup table keyed on its own theme tokens is a component that can't ask its environment a question it needs answered.
+
+## TypeScript compiler boundary
+
+- Workspace checks and separate package declaration emission use native TypeScript 7.0.2.
+- The two Next apps invoke the root native `tsc` explicitly. Their exact TypeScript 6.0.3 dependency is retained only for Next 16.2's compiler-API build diagnostics and editor plugin; framework error checks remain enabled.
+- Aperto retains an exact TypeScript 6.0.3 dependency for tsup's JavaScript compiler API and invokes the root native `tsc` for its typecheck. Aperto retains tsup's bundled declaration output and public packaging; other component packages emit declarations with native `tsc`.
+- Do not let a compiler-API dependency replace the native executable used by the typecheck scripts.
