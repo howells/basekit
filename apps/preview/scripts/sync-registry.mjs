@@ -35,6 +35,7 @@ const REGISTRY_BASE_URL = `http://${REGISTRY_HOST}:${REGISTRY_PORT}`;
 const REGISTRY_ITEMS = [
   "@patternmode/theme",
   "@patternmode/swatch",
+  "@patternmode/channel",
   "@patternmode/deck",
   "@patternmode/tags",
   "@patternmode/stacksheet",

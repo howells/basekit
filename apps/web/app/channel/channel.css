@@ -1,0 +1,75 @@
+.channel-demo {
+  display: grid;
+  gap: 3rem;
+  padding-block: 1.5rem;
+}
+.channel-demo h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.channel-demo p {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+.channel-demo-studio {
+  display: grid;
+  gap: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+.channel-demo-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.channel-demo-heading button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.channel-demo-row {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+}
+.channel-demo-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+.channel-demo-status label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.channel-demo-sizes {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.channel-demo-size-row {
+  display: grid;
+  grid-template-columns: 2.5rem 6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+.channel-demo-size-row code {
+  font-size: 0.75rem;
+}
+@media (max-width: 480px) {
+  .channel-demo-size-row {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+  .channel-demo-size-row > .pm-channel {
+    grid-column: 1 / -1;
+  }
+}

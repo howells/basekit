@@ -4,6 +4,13 @@ Patternmode is a catalog of focused React interface components whose names shoul
 
 ## Language
 
+### Channel
+
+**ChannelSlider**: A horizontal gradient channel for choosing one value or a range, with inset glass thumbs.
+The channel height follows the exact Swatch size scale. Colour calculation and commit side effects belong to the consumer.
+
+**Channel Range**: Two ordered values selecting an interval of the channel. Use this term rather than Aperto, which names a different Patternmode component.
+
 ### Aperto
 
 **Aperto**:

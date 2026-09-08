@@ -833,7 +833,7 @@ const checkNoLeaks = (items, failures) => {
 };
 
 /**
- * Ensure exactly the 14 expected items were emitted.
+ * Ensure exactly the configured items were emitted.
  * @param {Map<string, RegistryItem>} items Parsed items.
  * @param {string[]} failures Accumulated failure messages.
  * @returns {void}
@@ -842,7 +842,9 @@ const checkItemSet = (items, failures) => {
   const names = [...items.keys()].toSorted();
   const expected = [...EXPECTED_ITEM_NAMES].toSorted();
   if (names.length !== expected.length || names.some((name, index) => name !== expected[index])) {
-    failures.push(`expected exactly 14 items [${expected.join(", ")}], got [${names.join(", ")}]`);
+    failures.push(
+      `expected exactly ${expected.length} items [${expected.join(", ")}], got [${names.join(", ")}]`,
+    );
   }
 };
 
@@ -886,7 +888,7 @@ const main = () => {
       globalThis.process.exit(1);
     }
     console.log(
-      "Registry check passed: 14 items, cssVars canonical, no internal specifiers leaked.",
+      `Registry check passed: ${EXPECTED_ITEM_NAMES.length} items, cssVars canonical, no internal specifiers leaked.`,
     );
     return;
   }
@@ -901,7 +903,7 @@ const main = () => {
     rmSync(stagingDir, { force: true, recursive: true });
   }
   console.log(
-    `Built registry → ${path.relative(repoRoot, outputDir)} (14 items, base ${baseUrl}).`,
+    `Built registry → ${path.relative(repoRoot, outputDir)} (${EXPECTED_ITEM_NAMES.length} items, base ${baseUrl}).`,
   );
 };
 

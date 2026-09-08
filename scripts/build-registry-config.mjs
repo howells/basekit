@@ -17,6 +17,7 @@ const repoRoot = path.resolve(import.meta.dirname, "..");
 export const COMPONENT_PACKAGES = [
   "aperto",
   "briolette",
+  "channel",
   "deck",
   "halo",
   "parquet",
@@ -55,6 +56,7 @@ export const LIB_PACKAGES = [
 export const INTERNAL_REGISTRY = new Map([
   ["@howells/motion", "motion"],
   ["@patternmode/scrollframe", "scrollframe"],
+  ["@patternmode/swatch", "swatch"],
   ["@patternmode/system", "system"],
 ]);
 
@@ -85,6 +87,7 @@ for (const componentName of COMPONENT_PACKAGES) {
 export const CSS_STYLE = new Map([
   ["aperto", "B"],
   ["briolette", "A"],
+  ["channel", "B"],
   ["deck", "A"],
   ["halo", "A"],
   ["parquet", "B"],
@@ -117,6 +120,7 @@ export const STRIP_GLOBAL_DECLARATIONS = new Set(["stacksheet"]);
 
 /** Absolute path to each style-B package's source CSS file. */
 export const STYLE_B_CSS = new Map([
+  ["channel", path.join(repoRoot, "packages", "channel", "src", "styles.css")],
   ["aperto", path.join(repoRoot, "packages", "aperto", "styles.css")],
   ["parquet", path.join(repoRoot, "packages", "parquet", "src", "styles.css")],
   ["verge", path.join(repoRoot, "packages", "verge", "src", "styles.css")],

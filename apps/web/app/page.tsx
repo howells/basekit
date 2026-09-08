@@ -14,6 +14,12 @@ interface CatalogEntry {
 
 const components: CatalogEntry[] = [
   {
+    description:
+      "Gradient channels with glass thumbs, single values and ranges, sized to match Swatch.",
+    href: "/channel",
+    title: "Channel",
+  },
+  {
     description: "Typed Sheet Stacks with push, navigate, replace, and composable Sheet Parts.",
     href: "/stacksheet",
     title: "Stacksheet",

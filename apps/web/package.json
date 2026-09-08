@@ -27,7 +27,8 @@
     "@patternmode/verge": "workspace:*",
     "next": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "@patternmode/channel": "workspace:*"
   },
   "devDependencies": {
     "@howells/lint": "catalog:",
