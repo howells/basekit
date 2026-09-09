@@ -1,5 +1,14 @@
 # @patternmode/deck
 
+## 0.5.1
+
+### Patch Changes
+
+- 814cdc6: Fix stacked cards all tilting the same way. The id hash behind `rotation` was
+  signed and then `Math.abs`'d, which capped it at half its range, so every card
+  leaned left. It is now an unsigned multiplicative hash with a final mix and the
+  spread covers both directions.
+
 ## 0.5.0
 
 ### Minor Changes
