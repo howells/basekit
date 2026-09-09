@@ -20,6 +20,23 @@ export function Example() {
 
 Use `mode="cycle"` for a repeating Deck, or `mode="finite"` when advanced Cards should exhaust into `Deck.Empty`.
 
+## Cards that arrive later
+
+Deck watches its children. A `Deck.Card` that appears after the first render,
+because a fetch resolved or an agent streamed one more result, rises up into the
+stack from beneath instead of popping in. Cards present at first render and
+cards the deck has already shown never animate in. Pass `enter="none"` to place
+late cards instantly.
+
+```tsx
+<Deck mode="finite" enter="rise">
+  {results.map((result) => (
+    <Deck.Card key={result.id}>{result.title}</Deck.Card>
+  ))}
+  <Deck.Empty>Waiting for more</Deck.Empty>
+</Deck>
+```
+
 ## Optimized images
 
 Deck renders card children unchanged. If your cards contain images, compose the

@@ -8,6 +8,7 @@ export const DEFAULT_SCALE_STEP = 0.045;
 export const DEFAULT_ROTATION = 6;
 export const DEFAULT_PERSPECTIVE = 1000;
 export const DEFAULT_DRAG_ELASTIC = 0.9;
+export const DEFAULT_ENTER = "rise" as const;
 export const DEFAULT_DIRECTIONS: AdvanceDirection[] = ["left", "right"];
 
 /** Card width assumed when the active card cannot be measured (e.g. jsdom). */
@@ -19,6 +20,11 @@ export const DRAG_INFLUENCE_RAMP = 80;
 export const EXIT_ROTATION = 20;
 export const BG_RESPONSE_FACTOR = 0.4;
 export const BG_RESPONSE_RAMP = 150;
+
+/** Pixels beneath its rest pose an entering card starts from. */
+export const CARD_ENTER_OFFSET = 48;
+/** Fraction of its rest scale an entering card starts at. */
+export const CARD_ENTER_SCALE = 0.92;
 
 /*
  * Card motion springs.
