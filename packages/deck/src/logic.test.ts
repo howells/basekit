@@ -115,6 +115,15 @@ describe("resolveCardRotation", () => {
   it("returns zero when rotation spread is disabled", () => {
     expect(resolveCardRotation("ceramic-vessel", 0)).toBe(0);
   });
+
+  it("tilts cards both ways across a run of ids", () => {
+    const ids = Array.from({ length: 200 }, (_, index) => `card-${index}`);
+    const rotations = ids.map((id) => resolveCardRotation(id, 9));
+    const leaningLeft = rotations.filter((rotation) => rotation < 0).length;
+
+    expect(leaningLeft).toBeGreaterThan(60);
+    expect(leaningLeft).toBeLessThan(140);
+  });
 });
 
 describe("getVisualDepth", () => {
