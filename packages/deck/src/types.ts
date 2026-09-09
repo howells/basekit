@@ -11,6 +11,8 @@ export type DeckMode = "cycle" | "finite";
 
 export type AdvanceDirection = "left" | "right";
 
+export type DeckEnterMode = "none" | "rise";
+
 /** Normalized child item tracked by Deck's render and advance logic. */
 export interface DeckItem {
   element: DeckCardElement;
@@ -74,6 +76,15 @@ export interface DeckRootProps extends Omit<
    * Default `0.9`.
    */
   dragElastic?: number;
+  /**
+   * How a card that joins the visible stack after the deck has mounted
+   * arrives. `"rise"` settles it up from beneath the stack; `"none"` places
+   * it instantly. Cards present at first render never animate in, and a card
+   * the deck has already shown (a cycle-mode repeat) never re-enters.
+   *
+   * Default `"rise"`.
+   */
+  enter?: DeckEnterMode;
   /** Controlled index. Pair with `onIndexChange`. */
   index?: number;
   /**

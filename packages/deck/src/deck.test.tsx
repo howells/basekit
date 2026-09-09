@@ -59,6 +59,9 @@ const stripMotionProps = vi.hoisted(
 const latestExitComplete = vi.hoisted((): { current: (() => void) | undefined } => ({
   current: undefined,
 }));
+const mountedInitials = vi.hoisted((): { current: Map<string, unknown> } => ({
+  current: new Map(),
+}));
 const latestDragHandlers = vi.hoisted((): { current: TestDragHandlers } => ({ current: {} }));
 const AnimatePresence = vi.hoisted(
   () =>
@@ -71,6 +74,12 @@ const LazyMotion = vi.hoisted(() => ({ children }: { children: ReactNode }) => <
 
 vi.mock("motion/react", () => {
   const MotionDiv = ({ ref, ...props }: MotionTestProps) => {
+    const label = (Array.isArray(props.children) ? props.children : [props.children]).find(
+      (child): child is string => typeof child === "string",
+    );
+    if (label !== undefined) {
+      mountedInitials.current.set(label, props.initial);
+    }
     if (props.onDragEnd !== undefined) {
       latestDragHandlers.current = {
         onDragEnd: props.onDragEnd,
@@ -95,6 +104,7 @@ vi.mock("motion/react", () => {
 });
 
 beforeEach(() => {
+  mountedInitials.current.clear();
   latestExitComplete.current = undefined;
   latestDragHandlers.current = {};
 });
@@ -302,6 +312,44 @@ describe("Deck", () => {
     expect(error).not.toHaveBeenCalled();
 
     error.mockRestore();
+  });
+
+  it("rises a card in only when it joins a stack that has already rendered", () => {
+    const { rerender } = render(
+      <Deck aria-label="Dealt" mode="finite" visibleCount={3}>
+        <Deck.Card key="alpha">Alpha</Deck.Card>
+      </Deck>,
+    );
+
+    expect(mountedInitials.current.get("Alpha")).toBe(false);
+
+    rerender(
+      <Deck aria-label="Dealt" mode="finite" visibleCount={3}>
+        <Deck.Card key="alpha">Alpha</Deck.Card>
+        <Deck.Card key="beta">Beta</Deck.Card>
+      </Deck>,
+    );
+
+    expect(mountedInitials.current.get("Alpha")).toBe(false);
+    expect(mountedInitials.current.get("Beta")).toMatchObject({ opacity: 0 });
+    expect(mountedInitials.current.get("Beta")).toHaveProperty("y");
+  });
+
+  it("places late cards instantly when enter is none", () => {
+    const { rerender } = render(
+      <Deck aria-label="Dealt" enter="none" mode="finite" visibleCount={3}>
+        <Deck.Card key="alpha">Alpha</Deck.Card>
+      </Deck>,
+    );
+
+    rerender(
+      <Deck aria-label="Dealt" enter="none" mode="finite" visibleCount={3}>
+        <Deck.Card key="alpha">Alpha</Deck.Card>
+        <Deck.Card key="beta">Beta</Deck.Card>
+      </Deck>,
+    );
+
+    expect(mountedInitials.current.get("Beta")).toBe(false);
   });
 
   it("warns when cards are wrapped in unsupported elements", () => {

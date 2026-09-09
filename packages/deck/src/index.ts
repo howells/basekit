@@ -14,6 +14,7 @@ export type {
   DeckAdvanceEvent,
   DeckCardProps,
   DeckEmptyProps,
+  DeckEnterMode,
   DeckItem,
   DeckMode,
   DeckRenderOverlayState,
