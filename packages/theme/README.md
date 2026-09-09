@@ -1,5 +1,9 @@
 # @patternmode/theme
 
+See the [Patternmode style guide](../../docs/style.md) for typography roles and
+application recipes. Installing the theme supplies the tokens, Inter, and body
+base; heading and control recipes remain explicit application choices.
+
 Hand-authored source for the Patternmode shadcn registry theme.
 
 ## What this is

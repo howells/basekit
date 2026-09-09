@@ -57,15 +57,13 @@ const buttonVariants = ["default", "secondary", "outline", "ghost", "destructive
  */
 const Section = ({ children, eyebrow }: { children: ReactNode; eyebrow: string }) => (
   <section className="border-t border-border py-12">
-    <p className="mb-8 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-      {eyebrow}
-    </p>
+    <p className="mb-8 text-xs font-normal leading-4 text-muted-foreground">{eyebrow}</p>
     {children}
   </section>
 );
 
 const Field = ({ children, label }: { children: ReactNode; label: string }) => (
-  <label className="flex flex-col gap-2 text-sm font-medium">
+  <label className="flex flex-col gap-2 text-[13px] font-normal leading-[18px]">
     {label}
     {children}
   </label>
@@ -89,15 +87,15 @@ export default function Home() {
     <>
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-          <span className="font-mono text-sm tracking-wide">patternmode</span>
+          <span className="text-[13px] leading-[18px]">patternmode</span>
           <ThemeToggle />
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 pb-24">
         <section className="flex flex-col items-start gap-4 py-16">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Patternmode preview</h1>
-          <p className="max-w-2xl text-base text-muted-foreground">
+          <h1 className="text-sm font-normal leading-[1.5] tracking-normal">Patternmode preview</h1>
+          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Stock shadcn components and vendored patternmode components under{" "}
             <span className="text-foreground">@patternmode/theme</span>.
           </p>
@@ -110,33 +108,56 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Buttons</CardTitle>
-                <CardDescription>Every variant and size, one shared token set.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Buttons</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Every variant and size, one shared token set.
+                </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-5">
                 <div className="flex flex-wrap gap-2">
                   {buttonVariants.map((variant) => (
-                    <Button key={variant} variant={variant}>
+                    <Button
+                      className="text-[13px] font-normal leading-[18px]"
+                      key={variant}
+                      variant={variant}
+                    >
                       {variant.charAt(0).toUpperCase() + variant.slice(1)}
                     </Button>
                   ))}
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <Button size="sm">Small</Button>
-                  <Button size="default">Default</Button>
-                  <Button size="lg">Large</Button>
-                  <Button aria-label="Expand" size="icon" variant="outline">
+                  <Button className="text-[13px] font-normal leading-[18px]" size="sm">
+                    Small
+                  </Button>
+                  <Button className="text-[13px] font-normal leading-[18px]" size="default">
+                    Default
+                  </Button>
+                  <Button className="text-[13px] font-normal leading-[18px]" size="lg">
+                    Large
+                  </Button>
+                  <Button
+                    className="text-[13px] font-normal leading-[18px]"
+                    aria-label="Expand"
+                    size="icon"
+                    variant="outline"
+                  >
                     <ChevronDown aria-hidden />
                   </Button>
-                  <Button disabled>Disabled</Button>
+                  <Button className="text-[13px] font-normal leading-[18px]" disabled>
+                    Disabled
+                  </Button>
                 </div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Workspace settings</CardTitle>
-                <CardDescription>Inputs, select, switch, and checkbox.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">
+                  Workspace settings
+                </CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Inputs, select, switch, and checkbox.
+                </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-5">
                 <Field label="Workspace name">
@@ -161,8 +182,10 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Registry status</CardTitle>
-                <CardDescription>Resynced from the local registry on every build.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Registry status</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Resynced from the local registry on every build.
+                </CardDescription>
               </CardHeader>
               <CardContent className="grid grid-cols-3 gap-4">
                 {[
@@ -171,8 +194,8 @@ export default function Home() {
                   { label: "Libs", value: "2" },
                 ].map((stat) => (
                   <div className="flex flex-col gap-1" key={stat.label}>
-                    <span className="text-2xl font-semibold tracking-tight">{stat.value}</span>
-                    <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+                    <span className="text-xl font-normal leading-7">{stat.value}</span>
+                    <span className="text-xs font-normal leading-4 text-muted-foreground">
                       {stat.label}
                     </span>
                   </div>
@@ -182,8 +205,8 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Project</CardTitle>
-                <CardDescription>Tabbed detail surface.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Project</CardTitle>
+                <CardDescription className="leading-[1.5]">Tabbed detail surface.</CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="overview">
@@ -211,11 +234,13 @@ export default function Home() {
           <div className="flex flex-wrap gap-3">
             <Dialog>
               <DialogTrigger asChild>
-                <Button>Invite team</Button>
+                <Button className="text-[13px] font-normal leading-[18px]">Invite team</Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Invite a teammate</DialogTitle>
+                  <DialogTitle className="text-sm font-normal leading-[1.5]">
+                    Invite a teammate
+                  </DialogTitle>
                   <DialogDescription>
                     Send an invitation to collaborate on this workspace.
                   </DialogDescription>
@@ -230,10 +255,12 @@ export default function Home() {
                 </div>
                 <DialogFooter>
                   <DialogClose asChild>
-                    <Button variant="outline">Cancel</Button>
+                    <Button className="text-[13px] font-normal leading-[18px]" variant="outline">
+                      Cancel
+                    </Button>
                   </DialogClose>
                   <DialogClose asChild>
-                    <Button>Send invite</Button>
+                    <Button className="text-[13px] font-normal leading-[18px]">Send invite</Button>
                   </DialogClose>
                 </DialogFooter>
               </DialogContent>
@@ -241,7 +268,7 @@ export default function Home() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline">
+                <Button className="text-[13px] font-normal leading-[18px]" variant="outline">
                   Account
                   <ChevronDown aria-hidden />
                 </Button>
@@ -263,8 +290,10 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Badges</CardTitle>
-                <CardDescription>Status tokens across variants.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Badges</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Status tokens across variants.
+                </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
                 <Badge>Stable</Badge>
@@ -276,8 +305,8 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Loading</CardTitle>
-                <CardDescription>Skeleton placeholders.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Loading</CardTitle>
+                <CardDescription className="leading-[1.5]">Skeleton placeholders.</CardDescription>
               </CardHeader>
               <CardContent className="flex items-center gap-4">
                 <Skeleton className="size-12 rounded-full" />
@@ -294,8 +323,10 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Swatch</CardTitle>
-                <CardDescription>Finish picker and weighted distribution.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Swatch</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Finish picker and weighted distribution.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <SwatchPanel />
@@ -304,8 +335,10 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Deck</CardTitle>
-                <CardDescription>Cyclic card stack with drag and keyboard.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Deck</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Cyclic card stack with drag and keyboard.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <DeckPanel />
@@ -314,8 +347,10 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Tags</CardTitle>
-                <CardDescription>Command-driven tag selector.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">Tags</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Command-driven tag selector.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <TagsPanel />
@@ -324,8 +359,10 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>StackSheet</CardTitle>
-                <CardDescription>Typed, nestable sheet stack.</CardDescription>
+                <CardTitle className="text-sm font-normal leading-[1.5]">StackSheet</CardTitle>
+                <CardDescription className="leading-[1.5]">
+                  Typed, nestable sheet stack.
+                </CardDescription>
               </CardHeader>
               <CardFooter>
                 <StackSheetPanel />

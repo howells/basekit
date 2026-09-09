@@ -1,5 +1,10 @@
+@layer theme, base, components, utilities;
+
 @layer base {
   body {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
     font-feature-settings: "cpsp", "cv01", "cv02", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

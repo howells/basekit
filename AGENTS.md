@@ -1,5 +1,10 @@
 # Patternmode
 
+When asked to use the Patternmode style system, read [docs/style.md](docs/style.md)
+first. It is the canonical composition guide; `packages/theme/registry` owns the
+portable tokens and body base. Apply typography recipes in app code, not shared
+component internals.
+
 A catalog of focused React interface components, each named for the interaction pattern it implements rather than for its implementation.
 
 ## This is a shared library - other repos depend on it

@@ -4,7 +4,21 @@ import { ChannelSlider } from "@patternmode/channel";
 import { Swatch, SWATCH_SIZES } from "@patternmode/swatch";
 import { useState } from "react";
 
-const LIGHTNESS = "linear-gradient(to right, #faf5e9, #b6a180, #191a17)";
+const LIGHTNESS_COLORS = ["#faf5e9", "#b6a180", "#191a17"] as const;
+const LIGHTNESS = `linear-gradient(to right in srgb, ${LIGHTNESS_COLORS.join(", ")})`;
+
+/** Crop the same ramp to the selected interval, keeping its middle colour stop. */
+const rangeBackground = ([start, end]: readonly [number, number]) => {
+  if (start === end) {
+    const [from, to] = start <= 50 ? LIGHTNESS_COLORS : LIGHTNESS_COLORS.slice(1);
+    const progress = start <= 50 ? start * 2 : (start - 50) * 2;
+    return `color-mix(in srgb, ${from}, ${to} ${progress}%)`;
+  }
+  const stops = LIGHTNESS_COLORS.map(
+    (color, index) => `${color} ${((index * 50 - start) / (end - start)) * 100}%`,
+  );
+  return `linear-gradient(to right in srgb, ${stops.join(", ")})`;
+};
 const WARMTH = "linear-gradient(to right, #a6bdd5, #d9cbb6, #d99460)";
 const contrast = (value: number) => (value < 55 ? "#1d1d1b" : "rgba(255,255,255,0.85)");
 
@@ -77,7 +91,11 @@ export const ChannelDemo = () => {
           />
         </div>
         <div className="channel-demo-row">
-          <Swatch size="xl" background={LIGHTNESS} aria-label="Lightness range preview" />
+          <Swatch
+            size="xl"
+            background={rangeBackground(range)}
+            aria-label="Lightness range preview"
+          />
           <ChannelSlider
             label="Lightness range"
             size="xl"

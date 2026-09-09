@@ -3,5 +3,8 @@
   "buildCommand": "cd ../.. && pnpm turbo run build --filter=@howells/patternmode-web...",
   "framework": "nextjs",
   "installCommand": "cd ../.. && pnpm install",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "git": {
+    "deploymentEnabled": false
+  }
 }

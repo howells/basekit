@@ -2,6 +2,9 @@
 
 Patternmode is the catalog monorepo for Howells UI tools.
 
+For “use Patternmode style”, start with the [style guide](docs/style.md): the
+canonical typography, colour roles, spacing, and application recipes.
+
 - `@patternmode/stacksheet` lives in `packages/stacksheet`.
 - `@patternmode/aperto` lives in `packages/aperto`.
 - `@patternmode/deck` lives in `packages/deck`.

@@ -326,6 +326,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@fontsource-variable/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@howells/site-ui':
         specifier: workspace:*
         version: link:../../packages/site-ui
@@ -365,6 +368,9 @@ importers:
       '@patternmode/tags':
         specifier: workspace:*
         version: link:../../packages/tags
+      '@patternmode/thumbnail':
+        specifier: workspace:*
+        version: link:../../packages/thumbnail
       '@patternmode/verge':
         specifier: workspace:*
         version: link:../../packages/verge

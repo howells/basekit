@@ -12,10 +12,12 @@
     "typecheck": "../../node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
     "@howells/site-ui": "workspace:*",
     "@instruments/colorscope": "^7.0.0",
     "@patternmode/aperto": "workspace:*",
     "@patternmode/briolette": "workspace:*",
+    "@patternmode/channel": "workspace:*",
     "@patternmode/deck": "workspace:*",
     "@patternmode/halo": "workspace:*",
     "@patternmode/parquet": "workspace:*",
@@ -24,11 +26,11 @@
     "@patternmode/status": "workspace:*",
     "@patternmode/swatch": "workspace:*",
     "@patternmode/tags": "workspace:*",
+    "@patternmode/thumbnail": "workspace:*",
     "@patternmode/verge": "workspace:*",
     "next": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "@patternmode/channel": "workspace:*"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@howells/lint": "catalog:",

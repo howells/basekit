@@ -1,4 +1,5 @@
 import { PageShell } from "@howells/site-ui";
+import { Thumbnail } from "@patternmode/thumbnail";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -41,6 +42,11 @@ const components: CatalogEntry[] = [
       "Color, gradient, image, and weighted palette swatches with selection affordances.",
     href: "/swatch",
     title: "Swatch",
+  },
+  {
+    description: "Framed images with an inset hairline, optional lift, and flexible sizing.",
+    href: "/thumbnail",
+    title: "Thumbnail",
   },
   {
     description: "Round saturation and lightness picker with a compact hue smile arc.",
@@ -100,6 +106,20 @@ const VergePreview = () => (
 
 const CatalogPreview = ({ title }: Pick<CatalogEntry, "title">) => {
   switch (title) {
+    case "Thumbnail": {
+      return (
+        <Thumbnail aria-hidden="true" className="preview-thumbnail" radius={6} raised size={null}>
+          <svg fill="none" viewBox="0 0 160 112">
+            <rect width="160" height="112" fill="white" />
+            <circle className="preview-thumbnail-detail" cx="112" cy="32" r="10" />
+            <path
+              className="preview-thumbnail-detail"
+              d="M0 112V91L49 43L86 80L110 58L160 108V112Z"
+            />
+          </svg>
+        </Thumbnail>
+      );
+    }
     case "Stacksheet": {
       return (
         <div className="preview-stacksheet" aria-hidden="true">
