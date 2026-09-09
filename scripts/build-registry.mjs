@@ -213,7 +213,11 @@ const cssToRegistryObject = (cssText, sourceLabel) => {
 const resolveBaseUrl = () => {
   const explicit = processEnv.REGISTRY_BASE_URL;
   if (explicit !== undefined && explicit.trim() !== "") {
-    return explicit.trim().replace(/\/+$/u, "");
+    const baseUrl = explicit.trim().replace(/\/+$/u, "");
+    if (!URL.canParse(baseUrl) || !["http:", "https:"].includes(new URL(baseUrl).protocol)) {
+      throw new Error("REGISTRY_BASE_URL must be an absolute HTTP or HTTPS URL.");
+    }
+    return baseUrl;
   }
   const vercel = processEnv.VERCEL;
   if (vercel !== undefined && vercel !== "") {
